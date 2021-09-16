@@ -171,6 +171,9 @@ export class RecaptchaEnterpriseServiceClient {
       keyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/keys/{key}'
       ),
+      metricsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/keys/{key}/metrics'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -245,6 +248,8 @@ export class RecaptchaEnterpriseServiceClient {
       'getKey',
       'updateKey',
       'deleteKey',
+      'migrateKey',
+      'getMetrics',
     ];
     for (const methodName of recaptchaEnterpriseServiceStubMethods) {
       const callPromise = this.recaptchaEnterpriseServiceStub.then(
@@ -463,15 +468,19 @@ export class RecaptchaEnterpriseServiceClient {
   ): void;
   /**
    * Annotates a previously created Assessment to provide additional information
-   * on whether the event turned out to be authentic or fradulent.
+   * on whether the event turned out to be authentic or fraudulent.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Assessment, in the format
    *   "projects/{project}/assessments/{assessment}".
-   * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} request.annotation
-   *   Required. The annotation that will be assigned to the Event.
+   * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} [request.annotation]
+   *   Optional. The annotation that will be assigned to the Event. This field can be left
+   *   empty to provide reasons that apply to an event without concluding whether
+   *   the event is legitimate or fraudulent.
+   * @param {number[]} [request.reasons]
+   *   Optional. Optional reasons for the annotation that will be assigned to the Event.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -753,7 +762,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
    *   Required. The key to update.
    * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which field of the key get updated. If the mask is not
+   *   Optional. The mask to control which fields of the key get updated. If the mask is not
    *   present, all fields will be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -899,6 +908,196 @@ export class RecaptchaEnterpriseServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteKey(request, options, callback);
+  }
+  migrateKey(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  migrateKey(
+    request: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  migrateKey(
+    request: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
+   * Once a key is migrated, it can be used from either product. SiteVerify
+   * requests are billed as CreateAssessment calls. You must be
+   * authenticated as one of the current owners of the reCAPTCHA Site Key, and
+   * your user must have the reCAPTCHA Enterprise Admin IAM role in the
+   * destination project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the key to be migrated, in the format
+   *   "projects/{project}/keys/{key}".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1.Key}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.migrateKey(request);
+   */
+  migrateKey(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IKey,
+          | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      | protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IKey,
+      protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.migrateKey(request, options, callback);
+  }
+  getMetrics(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+      protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getMetrics(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMetrics(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Get some aggregated metrics for a Key. This data can be used to build
+   * dashboards.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the requested metrics, in the format
+   *   "projects/{project}/keys/{key}/metrics".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Metrics]{@link google.cloud.recaptchaenterprise.v1.Metrics}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getMetrics(request);
+   */
+  getMetrics(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IMetrics,
+      protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMetrics(request, options, callback);
   }
 
   listKeys(
@@ -1177,6 +1376,42 @@ export class RecaptchaEnterpriseServiceClient {
    */
   matchKeyFromKeyName(keyName: string) {
     return this.pathTemplates.keyPathTemplate.match(keyName).key;
+  }
+
+  /**
+   * Return a fully-qualified metrics resource name string.
+   *
+   * @param {string} project
+   * @param {string} key
+   * @returns {string} Resource name string.
+   */
+  metricsPath(project: string, key: string) {
+    return this.pathTemplates.metricsPathTemplate.render({
+      project: project,
+      key: key,
+    });
+  }
+
+  /**
+   * Parse the project from Metrics resource.
+   *
+   * @param {string} metricsName
+   *   A fully-qualified path representing Metrics resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetricsName(metricsName: string) {
+    return this.pathTemplates.metricsPathTemplate.match(metricsName).project;
+  }
+
+  /**
+   * Parse the key from Metrics resource.
+   *
+   * @param {string} metricsName
+   *   A fully-qualified path representing Metrics resource.
+   * @returns {string} A string representing the key.
+   */
+  matchKeyFromMetricsName(metricsName: string) {
+    return this.pathTemplates.metricsPathTemplate.match(metricsName).key;
   }
 
   /**

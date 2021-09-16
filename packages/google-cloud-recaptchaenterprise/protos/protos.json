@@ -137,6 +137,40 @@
                               }
                             }
                           ]
+                        },
+                        "MigrateKey": {
+                          "requestType": "MigrateKeyRequest",
+                          "responseType": "Key",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/keys/*}:migrate",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/keys/*}:migrate",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GetMetrics": {
+                          "requestType": "GetMetricsRequest",
+                          "responseType": "Metrics",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/keys/*/metrics}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/keys/*/metrics}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -173,7 +207,15 @@
                           "type": "Annotation",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reasons": {
+                          "rule": "repeated",
+                          "type": "Reason",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -185,6 +227,18 @@
                             "FRAUDULENT": 2,
                             "PASSWORD_CORRECT": 3,
                             "PASSWORD_INCORRECT": 4
+                          }
+                        },
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "CHARGEBACK": 1,
+                            "PAYMENT_HEURISTICS": 2,
+                            "INITIATED_TWO_FACTOR": 7,
+                            "PASSED_TWO_FACTOR": 3,
+                            "FAILED_TWO_FACTOR": 4,
+                            "CORRECT_PASSWORD": 5,
+                            "INCORRECT_PASSWORD": 6
                           }
                         }
                       }
@@ -320,7 +374,8 @@
                             "MALFORMED": 2,
                             "EXPIRED": 3,
                             "DUPE": 4,
-                            "MISSING": 5
+                            "MISSING": 5,
+                            "BROWSER_ERROR": 6
                           }
                         }
                       }
@@ -425,6 +480,59 @@
                         }
                       }
                     },
+                    "MigrateKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        }
+                      }
+                    },
+                    "GetMetricsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Metrics"
+                          }
+                        }
+                      }
+                    },
+                    "Metrics": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Metrics",
+                        "(google.api.resource).pattern": "projects/{project}/keys/{key}/metrics"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "scoreMetrics": {
+                          "rule": "repeated",
+                          "type": "ScoreMetrics",
+                          "id": 2
+                        },
+                        "challengeMetrics": {
+                          "rule": "repeated",
+                          "type": "ChallengeMetrics",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Key": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Key",
@@ -463,14 +571,36 @@
                         "labels": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 6
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7
+                        },
+                        "testingOptions": {
+                          "type": "TestingOptions",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "TestingOptions": {
+                      "fields": {
+                        "testingScore": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "testingChallenge": {
+                          "type": "TestingChallenge",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "TestingChallenge": {
+                          "values": {
+                            "TESTING_CHALLENGE_UNSPECIFIED": 0,
+                            "NOCAPTCHA": 1,
+                            "UNSOLVABLE_CHALLENGE": 2
+                          }
                         }
                       }
                     },
@@ -525,6 +655,10 @@
                     },
                     "AndroidKeySettings": {
                       "fields": {
+                        "allowAllPackageNames": {
+                          "type": "bool",
+                          "id": 2
+                        },
                         "allowedPackageNames": {
                           "rule": "repeated",
                           "type": "string",
@@ -534,10 +668,56 @@
                     },
                     "IOSKeySettings": {
                       "fields": {
+                        "allowAllBundleIds": {
+                          "type": "bool",
+                          "id": 2
+                        },
                         "allowedBundleIds": {
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ScoreDistribution": {
+                      "fields": {
+                        "scoreBuckets": {
+                          "keyType": "int32",
+                          "type": "int64",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ScoreMetrics": {
+                      "fields": {
+                        "overallMetrics": {
+                          "type": "ScoreDistribution",
+                          "id": 1
+                        },
+                        "actionMetrics": {
+                          "keyType": "string",
+                          "type": "ScoreDistribution",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ChallengeMetrics": {
+                      "fields": {
+                        "pageloadCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "nocaptchaCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "failedCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "passedCount": {
+                          "type": "int64",
+                          "id": 4
                         }
                       }
                     }

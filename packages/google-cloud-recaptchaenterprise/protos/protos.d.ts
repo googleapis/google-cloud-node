@@ -143,6 +143,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteKey(request: google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls MigrateKey.
+                     * @param request MigrateKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Key
+                     */
+                    public migrateKey(request: google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.MigrateKeyCallback): void;
+
+                    /**
+                     * Calls MigrateKey.
+                     * @param request MigrateKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public migrateKey(request: google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest): Promise<google.cloud.recaptchaenterprise.v1.Key>;
+
+                    /**
+                     * Calls GetMetrics.
+                     * @param request GetMetricsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Metrics
+                     */
+                    public getMetrics(request: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetMetricsCallback): void;
+
+                    /**
+                     * Calls GetMetrics.
+                     * @param request GetMetricsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMetrics(request: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest): Promise<google.cloud.recaptchaenterprise.v1.Metrics>;
                 }
 
                 namespace RecaptchaEnterpriseService {
@@ -195,6 +223,20 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteKeyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#migrateKey}.
+                     * @param error Error, if any
+                     * @param [response] Key
+                     */
+                    type MigrateKeyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.Key) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#getMetrics}.
+                     * @param error Error, if any
+                     * @param [response] Metrics
+                     */
+                    type GetMetricsCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.Metrics) => void;
                 }
 
                 /** Properties of a CreateAssessmentRequest. */
@@ -301,6 +343,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest annotation */
                     annotation?: (google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation|keyof typeof google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation|null);
+
+                    /** AnnotateAssessmentRequest reasons */
+                    reasons?: (google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[]|null);
                 }
 
                 /** Represents an AnnotateAssessmentRequest. */
@@ -317,6 +362,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest annotation. */
                     public annotation: (google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation|keyof typeof google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation);
+
+                    /** AnnotateAssessmentRequest reasons. */
+                    public reasons: google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[];
 
                     /**
                      * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -398,6 +446,18 @@ export namespace google {
                         FRAUDULENT = 2,
                         PASSWORD_CORRECT = 3,
                         PASSWORD_INCORRECT = 4
+                    }
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        CHARGEBACK = 1,
+                        PAYMENT_HEURISTICS = 2,
+                        INITIATED_TWO_FACTOR = 7,
+                        PASSED_TWO_FACTOR = 3,
+                        FAILED_TWO_FACTOR = 4,
+                        CORRECT_PASSWORD = 5,
+                        INCORRECT_PASSWORD = 6
                     }
                 }
 
@@ -939,7 +999,8 @@ export namespace google {
                         MALFORMED = 2,
                         EXPIRED = 3,
                         DUPE = 4,
-                        MISSING = 5
+                        MISSING = 5,
+                        BROWSER_ERROR = 6
                     }
                 }
 
@@ -1513,6 +1574,294 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a MigrateKeyRequest. */
+                interface IMigrateKeyRequest {
+
+                    /** MigrateKeyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a MigrateKeyRequest. */
+                class MigrateKeyRequest implements IMigrateKeyRequest {
+
+                    /**
+                     * Constructs a new MigrateKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest);
+
+                    /** MigrateKeyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new MigrateKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MigrateKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest): google.cloud.recaptchaenterprise.v1.MigrateKeyRequest;
+
+                    /**
+                     * Encodes the specified MigrateKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.MigrateKeyRequest.verify|verify} messages.
+                     * @param message MigrateKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MigrateKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.MigrateKeyRequest.verify|verify} messages.
+                     * @param message MigrateKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MigrateKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MigrateKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.MigrateKeyRequest;
+
+                    /**
+                     * Decodes a MigrateKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MigrateKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.MigrateKeyRequest;
+
+                    /**
+                     * Verifies a MigrateKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MigrateKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MigrateKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.MigrateKeyRequest;
+
+                    /**
+                     * Creates a plain object from a MigrateKeyRequest message. Also converts values to other types if specified.
+                     * @param message MigrateKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.MigrateKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MigrateKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetMetricsRequest. */
+                interface IGetMetricsRequest {
+
+                    /** GetMetricsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMetricsRequest. */
+                class GetMetricsRequest implements IGetMetricsRequest {
+
+                    /**
+                     * Constructs a new GetMetricsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest);
+
+                    /** GetMetricsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMetricsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMetricsRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest): google.cloud.recaptchaenterprise.v1.GetMetricsRequest;
+
+                    /**
+                     * Encodes the specified GetMetricsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetMetricsRequest.verify|verify} messages.
+                     * @param message GetMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMetricsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetMetricsRequest.verify|verify} messages.
+                     * @param message GetMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMetricsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.GetMetricsRequest;
+
+                    /**
+                     * Decodes a GetMetricsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.GetMetricsRequest;
+
+                    /**
+                     * Verifies a GetMetricsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMetricsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.GetMetricsRequest;
+
+                    /**
+                     * Creates a plain object from a GetMetricsRequest message. Also converts values to other types if specified.
+                     * @param message GetMetricsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.GetMetricsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMetricsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Metrics. */
+                interface IMetrics {
+
+                    /** Metrics name */
+                    name?: (string|null);
+
+                    /** Metrics startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Metrics scoreMetrics */
+                    scoreMetrics?: (google.cloud.recaptchaenterprise.v1.IScoreMetrics[]|null);
+
+                    /** Metrics challengeMetrics */
+                    challengeMetrics?: (google.cloud.recaptchaenterprise.v1.IChallengeMetrics[]|null);
+                }
+
+                /** Represents a Metrics. */
+                class Metrics implements IMetrics {
+
+                    /**
+                     * Constructs a new Metrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IMetrics);
+
+                    /** Metrics name. */
+                    public name: string;
+
+                    /** Metrics startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Metrics scoreMetrics. */
+                    public scoreMetrics: google.cloud.recaptchaenterprise.v1.IScoreMetrics[];
+
+                    /** Metrics challengeMetrics. */
+                    public challengeMetrics: google.cloud.recaptchaenterprise.v1.IChallengeMetrics[];
+
+                    /**
+                     * Creates a new Metrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Metrics instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IMetrics): google.cloud.recaptchaenterprise.v1.Metrics;
+
+                    /**
+                     * Encodes the specified Metrics message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.Metrics.verify|verify} messages.
+                     * @param message Metrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Metrics message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.Metrics.verify|verify} messages.
+                     * @param message Metrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Metrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Metrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.Metrics;
+
+                    /**
+                     * Decodes a Metrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Metrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.Metrics;
+
+                    /**
+                     * Verifies a Metrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Metrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Metrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.Metrics;
+
+                    /**
+                     * Creates a plain object from a Metrics message. Also converts values to other types if specified.
+                     * @param message Metrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.Metrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Metrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Key. */
                 interface IKey {
 
@@ -1536,6 +1885,9 @@ export namespace google {
 
                     /** Key createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Key testingOptions */
+                    testingOptions?: (google.cloud.recaptchaenterprise.v1.ITestingOptions|null);
                 }
 
                 /** Represents a Key. */
@@ -1567,6 +1919,9 @@ export namespace google {
 
                     /** Key createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Key testingOptions. */
+                    public testingOptions?: (google.cloud.recaptchaenterprise.v1.ITestingOptions|null);
 
                     /** Key platformSettings. */
                     public platformSettings?: ("webSettings"|"androidSettings"|"iosSettings");
@@ -1640,6 +1995,112 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TestingOptions. */
+                interface ITestingOptions {
+
+                    /** TestingOptions testingScore */
+                    testingScore?: (number|null);
+
+                    /** TestingOptions testingChallenge */
+                    testingChallenge?: (google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge|keyof typeof google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge|null);
+                }
+
+                /** Represents a TestingOptions. */
+                class TestingOptions implements ITestingOptions {
+
+                    /**
+                     * Constructs a new TestingOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ITestingOptions);
+
+                    /** TestingOptions testingScore. */
+                    public testingScore: number;
+
+                    /** TestingOptions testingChallenge. */
+                    public testingChallenge: (google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge|keyof typeof google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge);
+
+                    /**
+                     * Creates a new TestingOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TestingOptions instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ITestingOptions): google.cloud.recaptchaenterprise.v1.TestingOptions;
+
+                    /**
+                     * Encodes the specified TestingOptions message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TestingOptions.verify|verify} messages.
+                     * @param message TestingOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ITestingOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TestingOptions message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TestingOptions.verify|verify} messages.
+                     * @param message TestingOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ITestingOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TestingOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TestingOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.TestingOptions;
+
+                    /**
+                     * Decodes a TestingOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TestingOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.TestingOptions;
+
+                    /**
+                     * Verifies a TestingOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TestingOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TestingOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.TestingOptions;
+
+                    /**
+                     * Creates a plain object from a TestingOptions message. Also converts values to other types if specified.
+                     * @param message TestingOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.TestingOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TestingOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace TestingOptions {
+
+                    /** TestingChallenge enum. */
+                    enum TestingChallenge {
+                        TESTING_CHALLENGE_UNSPECIFIED = 0,
+                        NOCAPTCHA = 1,
+                        UNSOLVABLE_CHALLENGE = 2
+                    }
                 }
 
                 /** Properties of a WebKeySettings. */
@@ -1778,6 +2239,9 @@ export namespace google {
                 /** Properties of an AndroidKeySettings. */
                 interface IAndroidKeySettings {
 
+                    /** AndroidKeySettings allowAllPackageNames */
+                    allowAllPackageNames?: (boolean|null);
+
                     /** AndroidKeySettings allowedPackageNames */
                     allowedPackageNames?: (string[]|null);
                 }
@@ -1790,6 +2254,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.recaptchaenterprise.v1.IAndroidKeySettings);
+
+                    /** AndroidKeySettings allowAllPackageNames. */
+                    public allowAllPackageNames: boolean;
 
                     /** AndroidKeySettings allowedPackageNames. */
                     public allowedPackageNames: string[];
@@ -1868,6 +2335,9 @@ export namespace google {
                 /** Properties of a IOSKeySettings. */
                 interface IIOSKeySettings {
 
+                    /** IOSKeySettings allowAllBundleIds */
+                    allowAllBundleIds?: (boolean|null);
+
                     /** IOSKeySettings allowedBundleIds */
                     allowedBundleIds?: (string[]|null);
                 }
@@ -1880,6 +2350,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.recaptchaenterprise.v1.IIOSKeySettings);
+
+                    /** IOSKeySettings allowAllBundleIds. */
+                    public allowAllBundleIds: boolean;
 
                     /** IOSKeySettings allowedBundleIds. */
                     public allowedBundleIds: string[];
@@ -1950,6 +2423,300 @@ export namespace google {
 
                     /**
                      * Converts this IOSKeySettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ScoreDistribution. */
+                interface IScoreDistribution {
+
+                    /** ScoreDistribution scoreBuckets */
+                    scoreBuckets?: ({ [k: string]: (number|Long|string) }|null);
+                }
+
+                /** Represents a ScoreDistribution. */
+                class ScoreDistribution implements IScoreDistribution {
+
+                    /**
+                     * Constructs a new ScoreDistribution.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IScoreDistribution);
+
+                    /** ScoreDistribution scoreBuckets. */
+                    public scoreBuckets: { [k: string]: (number|Long|string) };
+
+                    /**
+                     * Creates a new ScoreDistribution instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScoreDistribution instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IScoreDistribution): google.cloud.recaptchaenterprise.v1.ScoreDistribution;
+
+                    /**
+                     * Encodes the specified ScoreDistribution message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreDistribution.verify|verify} messages.
+                     * @param message ScoreDistribution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IScoreDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScoreDistribution message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreDistribution.verify|verify} messages.
+                     * @param message ScoreDistribution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IScoreDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScoreDistribution message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScoreDistribution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ScoreDistribution;
+
+                    /**
+                     * Decodes a ScoreDistribution message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScoreDistribution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ScoreDistribution;
+
+                    /**
+                     * Verifies a ScoreDistribution message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScoreDistribution message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScoreDistribution
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ScoreDistribution;
+
+                    /**
+                     * Creates a plain object from a ScoreDistribution message. Also converts values to other types if specified.
+                     * @param message ScoreDistribution
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ScoreDistribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScoreDistribution to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ScoreMetrics. */
+                interface IScoreMetrics {
+
+                    /** ScoreMetrics overallMetrics */
+                    overallMetrics?: (google.cloud.recaptchaenterprise.v1.IScoreDistribution|null);
+
+                    /** ScoreMetrics actionMetrics */
+                    actionMetrics?: ({ [k: string]: google.cloud.recaptchaenterprise.v1.IScoreDistribution }|null);
+                }
+
+                /** Represents a ScoreMetrics. */
+                class ScoreMetrics implements IScoreMetrics {
+
+                    /**
+                     * Constructs a new ScoreMetrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IScoreMetrics);
+
+                    /** ScoreMetrics overallMetrics. */
+                    public overallMetrics?: (google.cloud.recaptchaenterprise.v1.IScoreDistribution|null);
+
+                    /** ScoreMetrics actionMetrics. */
+                    public actionMetrics: { [k: string]: google.cloud.recaptchaenterprise.v1.IScoreDistribution };
+
+                    /**
+                     * Creates a new ScoreMetrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScoreMetrics instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IScoreMetrics): google.cloud.recaptchaenterprise.v1.ScoreMetrics;
+
+                    /**
+                     * Encodes the specified ScoreMetrics message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreMetrics.verify|verify} messages.
+                     * @param message ScoreMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IScoreMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScoreMetrics message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreMetrics.verify|verify} messages.
+                     * @param message ScoreMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IScoreMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScoreMetrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScoreMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ScoreMetrics;
+
+                    /**
+                     * Decodes a ScoreMetrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScoreMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ScoreMetrics;
+
+                    /**
+                     * Verifies a ScoreMetrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScoreMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScoreMetrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ScoreMetrics;
+
+                    /**
+                     * Creates a plain object from a ScoreMetrics message. Also converts values to other types if specified.
+                     * @param message ScoreMetrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ScoreMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScoreMetrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ChallengeMetrics. */
+                interface IChallengeMetrics {
+
+                    /** ChallengeMetrics pageloadCount */
+                    pageloadCount?: (number|Long|string|null);
+
+                    /** ChallengeMetrics nocaptchaCount */
+                    nocaptchaCount?: (number|Long|string|null);
+
+                    /** ChallengeMetrics failedCount */
+                    failedCount?: (number|Long|string|null);
+
+                    /** ChallengeMetrics passedCount */
+                    passedCount?: (number|Long|string|null);
+                }
+
+                /** Represents a ChallengeMetrics. */
+                class ChallengeMetrics implements IChallengeMetrics {
+
+                    /**
+                     * Constructs a new ChallengeMetrics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IChallengeMetrics);
+
+                    /** ChallengeMetrics pageloadCount. */
+                    public pageloadCount: (number|Long|string);
+
+                    /** ChallengeMetrics nocaptchaCount. */
+                    public nocaptchaCount: (number|Long|string);
+
+                    /** ChallengeMetrics failedCount. */
+                    public failedCount: (number|Long|string);
+
+                    /** ChallengeMetrics passedCount. */
+                    public passedCount: (number|Long|string);
+
+                    /**
+                     * Creates a new ChallengeMetrics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChallengeMetrics instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IChallengeMetrics): google.cloud.recaptchaenterprise.v1.ChallengeMetrics;
+
+                    /**
+                     * Encodes the specified ChallengeMetrics message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ChallengeMetrics.verify|verify} messages.
+                     * @param message ChallengeMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IChallengeMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChallengeMetrics message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ChallengeMetrics.verify|verify} messages.
+                     * @param message ChallengeMetrics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IChallengeMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChallengeMetrics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChallengeMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ChallengeMetrics;
+
+                    /**
+                     * Decodes a ChallengeMetrics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChallengeMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ChallengeMetrics;
+
+                    /**
+                     * Verifies a ChallengeMetrics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChallengeMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChallengeMetrics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ChallengeMetrics;
+
+                    /**
+                     * Creates a plain object from a ChallengeMetrics message. Also converts values to other types if specified.
+                     * @param message ChallengeMetrics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ChallengeMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChallengeMetrics to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

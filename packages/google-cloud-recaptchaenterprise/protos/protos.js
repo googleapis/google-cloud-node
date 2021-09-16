@@ -329,6 +329,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#migrateKey}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef MigrateKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.Key} [response] Key
+                         */
+    
+                        /**
+                         * Calls MigrateKey.
+                         * @function migrateKey
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest} request MigrateKeyRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.MigrateKeyCallback} callback Node-style callback called with the error, if any, and Key
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.migrateKey = function migrateKey(request, callback) {
+                            return this.rpcCall(migrateKey, $root.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest, $root.google.cloud.recaptchaenterprise.v1.Key, request, callback);
+                        }, "name", { value: "MigrateKey" });
+    
+                        /**
+                         * Calls MigrateKey.
+                         * @function migrateKey
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest} request MigrateKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.Key>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#getMetrics}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef GetMetricsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.Metrics} [response] Metrics
+                         */
+    
+                        /**
+                         * Calls GetMetrics.
+                         * @function getMetrics
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetMetricsRequest} request GetMetricsRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetMetricsCallback} callback Node-style callback called with the error, if any, and Metrics
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.getMetrics = function getMetrics(request, callback) {
+                            return this.rpcCall(getMetrics, $root.google.cloud.recaptchaenterprise.v1.GetMetricsRequest, $root.google.cloud.recaptchaenterprise.v1.Metrics, request, callback);
+                        }, "name", { value: "GetMetrics" });
+    
+                        /**
+                         * Calls GetMetrics.
+                         * @function getMetrics
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetMetricsRequest} request GetMetricsRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.Metrics>} Promise
+                         * @variation 2
+                         */
+    
                         return RecaptchaEnterpriseService;
                     })();
     
@@ -555,6 +621,7 @@
                          * @interface IAnnotateAssessmentRequest
                          * @property {string|null} [name] AnnotateAssessmentRequest name
                          * @property {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation|null} [annotation] AnnotateAssessmentRequest annotation
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason>|null} [reasons] AnnotateAssessmentRequest reasons
                          */
     
                         /**
@@ -566,6 +633,7 @@
                          * @param {google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest=} [properties] Properties to set
                          */
                         function AnnotateAssessmentRequest(properties) {
+                            this.reasons = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -587,6 +655,14 @@
                          * @instance
                          */
                         AnnotateAssessmentRequest.prototype.annotation = 0;
+    
+                        /**
+                         * AnnotateAssessmentRequest reasons.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason>} reasons
+                         * @memberof google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest
+                         * @instance
+                         */
+                        AnnotateAssessmentRequest.prototype.reasons = $util.emptyArray;
     
                         /**
                          * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -616,6 +692,12 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.annotation != null && Object.hasOwnProperty.call(message, "annotation"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.annotation);
+                            if (message.reasons != null && message.reasons.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.reasons.length; ++i)
+                                    writer.int32(message.reasons[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -655,6 +737,16 @@
                                     break;
                                 case 2:
                                     message.annotation = reader.int32();
+                                    break;
+                                case 3:
+                                    if (!(message.reasons && message.reasons.length))
+                                        message.reasons = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.reasons.push(reader.int32());
+                                    } else
+                                        message.reasons.push(reader.int32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -705,6 +797,24 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.reasons != null && message.hasOwnProperty("reasons")) {
+                                if (!Array.isArray(message.reasons))
+                                    return "reasons: array expected";
+                                for (var i = 0; i < message.reasons.length; ++i)
+                                    switch (message.reasons[i]) {
+                                    default:
+                                        return "reasons: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 7:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -744,6 +854,47 @@
                                 message.annotation = 4;
                                 break;
                             }
+                            if (object.reasons) {
+                                if (!Array.isArray(object.reasons))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.reasons: array expected");
+                                message.reasons = [];
+                                for (var i = 0; i < object.reasons.length; ++i)
+                                    switch (object.reasons[i]) {
+                                    default:
+                                    case "REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.reasons[i] = 0;
+                                        break;
+                                    case "CHARGEBACK":
+                                    case 1:
+                                        message.reasons[i] = 1;
+                                        break;
+                                    case "PAYMENT_HEURISTICS":
+                                    case 2:
+                                        message.reasons[i] = 2;
+                                        break;
+                                    case "INITIATED_TWO_FACTOR":
+                                    case 7:
+                                        message.reasons[i] = 7;
+                                        break;
+                                    case "PASSED_TWO_FACTOR":
+                                    case 3:
+                                        message.reasons[i] = 3;
+                                        break;
+                                    case "FAILED_TWO_FACTOR":
+                                    case 4:
+                                        message.reasons[i] = 4;
+                                        break;
+                                    case "CORRECT_PASSWORD":
+                                    case 5:
+                                        message.reasons[i] = 5;
+                                        break;
+                                    case "INCORRECT_PASSWORD":
+                                    case 6:
+                                        message.reasons[i] = 6;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -760,6 +911,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.reasons = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.annotation = options.enums === String ? "ANNOTATION_UNSPECIFIED" : 0;
@@ -768,6 +921,11 @@
                                 object.name = message.name;
                             if (message.annotation != null && message.hasOwnProperty("annotation"))
                                 object.annotation = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation[message.annotation] : message.annotation;
+                            if (message.reasons && message.reasons.length) {
+                                object.reasons = [];
+                                for (var j = 0; j < message.reasons.length; ++j)
+                                    object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[message.reasons[j]] : message.reasons[j];
+                            }
                             return object;
                         };
     
@@ -799,6 +957,32 @@
                             values[valuesById[2] = "FRAUDULENT"] = 2;
                             values[valuesById[3] = "PASSWORD_CORRECT"] = 3;
                             values[valuesById[4] = "PASSWORD_INCORRECT"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} CHARGEBACK=1 CHARGEBACK value
+                         * @property {number} PAYMENT_HEURISTICS=2 PAYMENT_HEURISTICS value
+                         * @property {number} INITIATED_TWO_FACTOR=7 INITIATED_TWO_FACTOR value
+                         * @property {number} PASSED_TWO_FACTOR=3 PASSED_TWO_FACTOR value
+                         * @property {number} FAILED_TWO_FACTOR=4 FAILED_TWO_FACTOR value
+                         * @property {number} CORRECT_PASSWORD=5 CORRECT_PASSWORD value
+                         * @property {number} INCORRECT_PASSWORD=6 INCORRECT_PASSWORD value
+                         */
+                        AnnotateAssessmentRequest.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CHARGEBACK"] = 1;
+                            values[valuesById[2] = "PAYMENT_HEURISTICS"] = 2;
+                            values[valuesById[7] = "INITIATED_TWO_FACTOR"] = 7;
+                            values[valuesById[3] = "PASSED_TWO_FACTOR"] = 3;
+                            values[valuesById[4] = "FAILED_TWO_FACTOR"] = 4;
+                            values[valuesById[5] = "CORRECT_PASSWORD"] = 5;
+                            values[valuesById[6] = "INCORRECT_PASSWORD"] = 6;
                             return values;
                         })();
     
@@ -2000,6 +2184,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2054,6 +2239,10 @@
                             case "MISSING":
                             case 5:
                                 message.invalidReason = 5;
+                                break;
+                            case "BROWSER_ERROR":
+                            case 6:
+                                message.invalidReason = 6;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -2122,6 +2311,7 @@
                          * @property {number} EXPIRED=3 EXPIRED value
                          * @property {number} DUPE=4 DUPE value
                          * @property {number} MISSING=5 MISSING value
+                         * @property {number} BROWSER_ERROR=6 BROWSER_ERROR value
                          */
                         TokenProperties.InvalidReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2131,6 +2321,7 @@
                             values[valuesById[3] = "EXPIRED"] = 3;
                             values[valuesById[4] = "DUPE"] = 4;
                             values[valuesById[5] = "MISSING"] = 5;
+                            values[valuesById[6] = "BROWSER_ERROR"] = 6;
                             return values;
                         })();
     
@@ -3409,6 +3600,683 @@
                         return DeleteKeyRequest;
                     })();
     
+                    v1.MigrateKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a MigrateKeyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IMigrateKeyRequest
+                         * @property {string|null} [name] MigrateKeyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new MigrateKeyRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a MigrateKeyRequest.
+                         * @implements IMigrateKeyRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest=} [properties] Properties to set
+                         */
+                        function MigrateKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MigrateKeyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @instance
+                         */
+                        MigrateKeyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new MigrateKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.MigrateKeyRequest} MigrateKeyRequest instance
+                         */
+                        MigrateKeyRequest.create = function create(properties) {
+                            return new MigrateKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MigrateKeyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.MigrateKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest} message MigrateKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MigrateKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MigrateKeyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.MigrateKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest} message MigrateKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MigrateKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MigrateKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.MigrateKeyRequest} MigrateKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MigrateKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MigrateKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.MigrateKeyRequest} MigrateKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MigrateKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MigrateKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MigrateKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MigrateKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.MigrateKeyRequest} MigrateKeyRequest
+                         */
+                        MigrateKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MigrateKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.MigrateKeyRequest} message MigrateKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MigrateKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MigrateKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.MigrateKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MigrateKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MigrateKeyRequest;
+                    })();
+    
+                    v1.GetMetricsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMetricsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IGetMetricsRequest
+                         * @property {string|null} [name] GetMetricsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMetricsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a GetMetricsRequest.
+                         * @implements IGetMetricsRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetMetricsRequest=} [properties] Properties to set
+                         */
+                        function GetMetricsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMetricsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @instance
+                         */
+                        GetMetricsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMetricsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetMetricsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetMetricsRequest} GetMetricsRequest instance
+                         */
+                        GetMetricsRequest.create = function create(properties) {
+                            return new GetMetricsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMetricsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetMetricsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetMetricsRequest} message GetMetricsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMetricsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMetricsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetMetricsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IGetMetricsRequest} message GetMetricsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMetricsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMetricsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetMetricsRequest} GetMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMetricsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.GetMetricsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMetricsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetMetricsRequest} GetMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMetricsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMetricsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMetricsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.GetMetricsRequest} GetMetricsRequest
+                         */
+                        GetMetricsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.GetMetricsRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.GetMetricsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMetricsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.GetMetricsRequest} message GetMetricsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMetricsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMetricsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.GetMetricsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMetricsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetMetricsRequest;
+                    })();
+    
+                    v1.Metrics = (function() {
+    
+                        /**
+                         * Properties of a Metrics.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IMetrics
+                         * @property {string|null} [name] Metrics name
+                         * @property {google.protobuf.ITimestamp|null} [startTime] Metrics startTime
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IScoreMetrics>|null} [scoreMetrics] Metrics scoreMetrics
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IChallengeMetrics>|null} [challengeMetrics] Metrics challengeMetrics
+                         */
+    
+                        /**
+                         * Constructs a new Metrics.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a Metrics.
+                         * @implements IMetrics
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IMetrics=} [properties] Properties to set
+                         */
+                        function Metrics(properties) {
+                            this.scoreMetrics = [];
+                            this.challengeMetrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Metrics name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @instance
+                         */
+                        Metrics.prototype.name = "";
+    
+                        /**
+                         * Metrics startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @instance
+                         */
+                        Metrics.prototype.startTime = null;
+    
+                        /**
+                         * Metrics scoreMetrics.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IScoreMetrics>} scoreMetrics
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @instance
+                         */
+                        Metrics.prototype.scoreMetrics = $util.emptyArray;
+    
+                        /**
+                         * Metrics challengeMetrics.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IChallengeMetrics>} challengeMetrics
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @instance
+                         */
+                        Metrics.prototype.challengeMetrics = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Metrics instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IMetrics=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.Metrics} Metrics instance
+                         */
+                        Metrics.create = function create(properties) {
+                            return new Metrics(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Metrics message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.Metrics.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IMetrics} message Metrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metrics.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.scoreMetrics != null && message.scoreMetrics.length)
+                                for (var i = 0; i < message.scoreMetrics.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics.encode(message.scoreMetrics[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.challengeMetrics != null && message.challengeMetrics.length)
+                                for (var i = 0; i < message.challengeMetrics.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics.encode(message.challengeMetrics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Metrics message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.Metrics.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IMetrics} message Metrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metrics.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Metrics message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.Metrics} Metrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metrics.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.Metrics();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.name = reader.string();
+                                    break;
+                                case 1:
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    if (!(message.scoreMetrics && message.scoreMetrics.length))
+                                        message.scoreMetrics = [];
+                                    message.scoreMetrics.push($root.google.cloud.recaptchaenterprise.v1.ScoreMetrics.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.challengeMetrics && message.challengeMetrics.length))
+                                        message.challengeMetrics = [];
+                                    message.challengeMetrics.push($root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Metrics message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.Metrics} Metrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metrics.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Metrics message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Metrics.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.scoreMetrics != null && message.hasOwnProperty("scoreMetrics")) {
+                                if (!Array.isArray(message.scoreMetrics))
+                                    return "scoreMetrics: array expected";
+                                for (var i = 0; i < message.scoreMetrics.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics.verify(message.scoreMetrics[i]);
+                                    if (error)
+                                        return "scoreMetrics." + error;
+                                }
+                            }
+                            if (message.challengeMetrics != null && message.hasOwnProperty("challengeMetrics")) {
+                                if (!Array.isArray(message.challengeMetrics))
+                                    return "challengeMetrics: array expected";
+                                for (var i = 0; i < message.challengeMetrics.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics.verify(message.challengeMetrics[i]);
+                                    if (error)
+                                        return "challengeMetrics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Metrics message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.Metrics} Metrics
+                         */
+                        Metrics.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.Metrics)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.Metrics();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Metrics.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.scoreMetrics) {
+                                if (!Array.isArray(object.scoreMetrics))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Metrics.scoreMetrics: array expected");
+                                message.scoreMetrics = [];
+                                for (var i = 0; i < object.scoreMetrics.length; ++i) {
+                                    if (typeof object.scoreMetrics[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.Metrics.scoreMetrics: object expected");
+                                    message.scoreMetrics[i] = $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics.fromObject(object.scoreMetrics[i]);
+                                }
+                            }
+                            if (object.challengeMetrics) {
+                                if (!Array.isArray(object.challengeMetrics))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Metrics.challengeMetrics: array expected");
+                                message.challengeMetrics = [];
+                                for (var i = 0; i < object.challengeMetrics.length; ++i) {
+                                    if (typeof object.challengeMetrics[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.Metrics.challengeMetrics: object expected");
+                                    message.challengeMetrics[i] = $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics.fromObject(object.challengeMetrics[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Metrics message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.Metrics} message Metrics
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Metrics.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.scoreMetrics = [];
+                                object.challengeMetrics = [];
+                            }
+                            if (options.defaults) {
+                                object.startTime = null;
+                                object.name = "";
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.scoreMetrics && message.scoreMetrics.length) {
+                                object.scoreMetrics = [];
+                                for (var j = 0; j < message.scoreMetrics.length; ++j)
+                                    object.scoreMetrics[j] = $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics.toObject(message.scoreMetrics[j], options);
+                            }
+                            if (message.challengeMetrics && message.challengeMetrics.length) {
+                                object.challengeMetrics = [];
+                                for (var j = 0; j < message.challengeMetrics.length; ++j)
+                                    object.challengeMetrics[j] = $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics.toObject(message.challengeMetrics[j], options);
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Metrics to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.Metrics
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Metrics.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Metrics;
+                    })();
+    
                     v1.Key = (function() {
     
                         /**
@@ -3422,6 +4290,7 @@
                          * @property {google.cloud.recaptchaenterprise.v1.IIOSKeySettings|null} [iosSettings] Key iosSettings
                          * @property {Object.<string,string>|null} [labels] Key labels
                          * @property {google.protobuf.ITimestamp|null} [createTime] Key createTime
+                         * @property {google.cloud.recaptchaenterprise.v1.ITestingOptions|null} [testingOptions] Key testingOptions
                          */
     
                         /**
@@ -3496,6 +4365,14 @@
                          */
                         Key.prototype.createTime = null;
     
+                        /**
+                         * Key testingOptions.
+                         * @member {google.cloud.recaptchaenterprise.v1.ITestingOptions|null|undefined} testingOptions
+                         * @memberof google.cloud.recaptchaenterprise.v1.Key
+                         * @instance
+                         */
+                        Key.prototype.testingOptions = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -3549,6 +4426,8 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.testingOptions != null && Object.hasOwnProperty.call(message, "testingOptions"))
+                                $root.google.cloud.recaptchaenterprise.v1.TestingOptions.encode(message.testingOptions, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -3622,6 +4501,9 @@
                                     break;
                                 case 7:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.testingOptions = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3706,6 +4588,11 @@
                                 if (error)
                                     return "createTime." + error;
                             }
+                            if (message.testingOptions != null && message.hasOwnProperty("testingOptions")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.verify(message.testingOptions);
+                                if (error)
+                                    return "testingOptions." + error;
+                            }
                             return null;
                         };
     
@@ -3752,6 +4639,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Key.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
+                            if (object.testingOptions != null) {
+                                if (typeof object.testingOptions !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Key.testingOptions: object expected");
+                                message.testingOptions = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.fromObject(object.testingOptions);
+                            }
                             return message;
                         };
     
@@ -3774,6 +4666,7 @@
                                 object.name = "";
                                 object.displayName = "";
                                 object.createTime = null;
+                                object.testingOptions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3802,6 +4695,8 @@
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.testingOptions != null && message.hasOwnProperty("testingOptions"))
+                                object.testingOptions = $root.google.cloud.recaptchaenterprise.v1.TestingOptions.toObject(message.testingOptions, options);
                             return object;
                         };
     
@@ -3817,6 +4712,250 @@
                         };
     
                         return Key;
+                    })();
+    
+                    v1.TestingOptions = (function() {
+    
+                        /**
+                         * Properties of a TestingOptions.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface ITestingOptions
+                         * @property {number|null} [testingScore] TestingOptions testingScore
+                         * @property {google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge|null} [testingChallenge] TestingOptions testingChallenge
+                         */
+    
+                        /**
+                         * Constructs a new TestingOptions.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a TestingOptions.
+                         * @implements ITestingOptions
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.ITestingOptions=} [properties] Properties to set
+                         */
+                        function TestingOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TestingOptions testingScore.
+                         * @member {number} testingScore
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @instance
+                         */
+                        TestingOptions.prototype.testingScore = 0;
+    
+                        /**
+                         * TestingOptions testingChallenge.
+                         * @member {google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge} testingChallenge
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @instance
+                         */
+                        TestingOptions.prototype.testingChallenge = 0;
+    
+                        /**
+                         * Creates a new TestingOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ITestingOptions=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.TestingOptions} TestingOptions instance
+                         */
+                        TestingOptions.create = function create(properties) {
+                            return new TestingOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TestingOptions message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TestingOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ITestingOptions} message TestingOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TestingOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.testingScore != null && Object.hasOwnProperty.call(message, "testingScore"))
+                                writer.uint32(/* id 1, wireType 5 =*/13).float(message.testingScore);
+                            if (message.testingChallenge != null && Object.hasOwnProperty.call(message, "testingChallenge"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.testingChallenge);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TestingOptions message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.TestingOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ITestingOptions} message TestingOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TestingOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TestingOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.TestingOptions} TestingOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TestingOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.TestingOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.testingScore = reader.float();
+                                    break;
+                                case 2:
+                                    message.testingChallenge = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TestingOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.TestingOptions} TestingOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TestingOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TestingOptions message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TestingOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.testingScore != null && message.hasOwnProperty("testingScore"))
+                                if (typeof message.testingScore !== "number")
+                                    return "testingScore: number expected";
+                            if (message.testingChallenge != null && message.hasOwnProperty("testingChallenge"))
+                                switch (message.testingChallenge) {
+                                default:
+                                    return "testingChallenge: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TestingOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.TestingOptions} TestingOptions
+                         */
+                        TestingOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.TestingOptions)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.TestingOptions();
+                            if (object.testingScore != null)
+                                message.testingScore = Number(object.testingScore);
+                            switch (object.testingChallenge) {
+                            case "TESTING_CHALLENGE_UNSPECIFIED":
+                            case 0:
+                                message.testingChallenge = 0;
+                                break;
+                            case "NOCAPTCHA":
+                            case 1:
+                                message.testingChallenge = 1;
+                                break;
+                            case "UNSOLVABLE_CHALLENGE":
+                            case 2:
+                                message.testingChallenge = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TestingOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.TestingOptions} message TestingOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TestingOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.testingScore = 0;
+                                object.testingChallenge = options.enums === String ? "TESTING_CHALLENGE_UNSPECIFIED" : 0;
+                            }
+                            if (message.testingScore != null && message.hasOwnProperty("testingScore"))
+                                object.testingScore = options.json && !isFinite(message.testingScore) ? String(message.testingScore) : message.testingScore;
+                            if (message.testingChallenge != null && message.hasOwnProperty("testingChallenge"))
+                                object.testingChallenge = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge[message.testingChallenge] : message.testingChallenge;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TestingOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.TestingOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TestingOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * TestingChallenge enum.
+                         * @name google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge
+                         * @enum {number}
+                         * @property {number} TESTING_CHALLENGE_UNSPECIFIED=0 TESTING_CHALLENGE_UNSPECIFIED value
+                         * @property {number} NOCAPTCHA=1 NOCAPTCHA value
+                         * @property {number} UNSOLVABLE_CHALLENGE=2 UNSOLVABLE_CHALLENGE value
+                         */
+                        TestingOptions.TestingChallenge = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TESTING_CHALLENGE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NOCAPTCHA"] = 1;
+                            values[valuesById[2] = "UNSOLVABLE_CHALLENGE"] = 2;
+                            return values;
+                        })();
+    
+                        return TestingOptions;
                     })();
     
                     v1.WebKeySettings = (function() {
@@ -4200,6 +5339,7 @@
                          * Properties of an AndroidKeySettings.
                          * @memberof google.cloud.recaptchaenterprise.v1
                          * @interface IAndroidKeySettings
+                         * @property {boolean|null} [allowAllPackageNames] AndroidKeySettings allowAllPackageNames
                          * @property {Array.<string>|null} [allowedPackageNames] AndroidKeySettings allowedPackageNames
                          */
     
@@ -4218,6 +5358,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * AndroidKeySettings allowAllPackageNames.
+                         * @member {boolean} allowAllPackageNames
+                         * @memberof google.cloud.recaptchaenterprise.v1.AndroidKeySettings
+                         * @instance
+                         */
+                        AndroidKeySettings.prototype.allowAllPackageNames = false;
     
                         /**
                          * AndroidKeySettings allowedPackageNames.
@@ -4254,6 +5402,8 @@
                             if (message.allowedPackageNames != null && message.allowedPackageNames.length)
                                 for (var i = 0; i < message.allowedPackageNames.length; ++i)
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedPackageNames[i]);
+                            if (message.allowAllPackageNames != null && Object.hasOwnProperty.call(message, "allowAllPackageNames"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAllPackageNames);
                             return writer;
                         };
     
@@ -4288,6 +5438,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 2:
+                                    message.allowAllPackageNames = reader.bool();
+                                    break;
                                 case 1:
                                     if (!(message.allowedPackageNames && message.allowedPackageNames.length))
                                         message.allowedPackageNames = [];
@@ -4328,6 +5481,9 @@
                         AndroidKeySettings.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.allowAllPackageNames != null && message.hasOwnProperty("allowAllPackageNames"))
+                                if (typeof message.allowAllPackageNames !== "boolean")
+                                    return "allowAllPackageNames: boolean expected";
                             if (message.allowedPackageNames != null && message.hasOwnProperty("allowedPackageNames")) {
                                 if (!Array.isArray(message.allowedPackageNames))
                                     return "allowedPackageNames: array expected";
@@ -4350,6 +5506,8 @@
                             if (object instanceof $root.google.cloud.recaptchaenterprise.v1.AndroidKeySettings)
                                 return object;
                             var message = new $root.google.cloud.recaptchaenterprise.v1.AndroidKeySettings();
+                            if (object.allowAllPackageNames != null)
+                                message.allowAllPackageNames = Boolean(object.allowAllPackageNames);
                             if (object.allowedPackageNames) {
                                 if (!Array.isArray(object.allowedPackageNames))
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.AndroidKeySettings.allowedPackageNames: array expected");
@@ -4375,11 +5533,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.allowedPackageNames = [];
+                            if (options.defaults)
+                                object.allowAllPackageNames = false;
                             if (message.allowedPackageNames && message.allowedPackageNames.length) {
                                 object.allowedPackageNames = [];
                                 for (var j = 0; j < message.allowedPackageNames.length; ++j)
                                     object.allowedPackageNames[j] = message.allowedPackageNames[j];
                             }
+                            if (message.allowAllPackageNames != null && message.hasOwnProperty("allowAllPackageNames"))
+                                object.allowAllPackageNames = message.allowAllPackageNames;
                             return object;
                         };
     
@@ -4403,6 +5565,7 @@
                          * Properties of a IOSKeySettings.
                          * @memberof google.cloud.recaptchaenterprise.v1
                          * @interface IIOSKeySettings
+                         * @property {boolean|null} [allowAllBundleIds] IOSKeySettings allowAllBundleIds
                          * @property {Array.<string>|null} [allowedBundleIds] IOSKeySettings allowedBundleIds
                          */
     
@@ -4421,6 +5584,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * IOSKeySettings allowAllBundleIds.
+                         * @member {boolean} allowAllBundleIds
+                         * @memberof google.cloud.recaptchaenterprise.v1.IOSKeySettings
+                         * @instance
+                         */
+                        IOSKeySettings.prototype.allowAllBundleIds = false;
     
                         /**
                          * IOSKeySettings allowedBundleIds.
@@ -4457,6 +5628,8 @@
                             if (message.allowedBundleIds != null && message.allowedBundleIds.length)
                                 for (var i = 0; i < message.allowedBundleIds.length; ++i)
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.allowedBundleIds[i]);
+                            if (message.allowAllBundleIds != null && Object.hasOwnProperty.call(message, "allowAllBundleIds"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAllBundleIds);
                             return writer;
                         };
     
@@ -4491,6 +5664,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 2:
+                                    message.allowAllBundleIds = reader.bool();
+                                    break;
                                 case 1:
                                     if (!(message.allowedBundleIds && message.allowedBundleIds.length))
                                         message.allowedBundleIds = [];
@@ -4531,6 +5707,9 @@
                         IOSKeySettings.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.allowAllBundleIds != null && message.hasOwnProperty("allowAllBundleIds"))
+                                if (typeof message.allowAllBundleIds !== "boolean")
+                                    return "allowAllBundleIds: boolean expected";
                             if (message.allowedBundleIds != null && message.hasOwnProperty("allowedBundleIds")) {
                                 if (!Array.isArray(message.allowedBundleIds))
                                     return "allowedBundleIds: array expected";
@@ -4553,6 +5732,8 @@
                             if (object instanceof $root.google.cloud.recaptchaenterprise.v1.IOSKeySettings)
                                 return object;
                             var message = new $root.google.cloud.recaptchaenterprise.v1.IOSKeySettings();
+                            if (object.allowAllBundleIds != null)
+                                message.allowAllBundleIds = Boolean(object.allowAllBundleIds);
                             if (object.allowedBundleIds) {
                                 if (!Array.isArray(object.allowedBundleIds))
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.IOSKeySettings.allowedBundleIds: array expected");
@@ -4578,11 +5759,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.allowedBundleIds = [];
+                            if (options.defaults)
+                                object.allowAllBundleIds = false;
                             if (message.allowedBundleIds && message.allowedBundleIds.length) {
                                 object.allowedBundleIds = [];
                                 for (var j = 0; j < message.allowedBundleIds.length; ++j)
                                     object.allowedBundleIds[j] = message.allowedBundleIds[j];
                             }
+                            if (message.allowAllBundleIds != null && message.hasOwnProperty("allowAllBundleIds"))
+                                object.allowAllBundleIds = message.allowAllBundleIds;
                             return object;
                         };
     
@@ -4598,6 +5783,808 @@
                         };
     
                         return IOSKeySettings;
+                    })();
+    
+                    v1.ScoreDistribution = (function() {
+    
+                        /**
+                         * Properties of a ScoreDistribution.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IScoreDistribution
+                         * @property {Object.<string,number|Long>|null} [scoreBuckets] ScoreDistribution scoreBuckets
+                         */
+    
+                        /**
+                         * Constructs a new ScoreDistribution.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ScoreDistribution.
+                         * @implements IScoreDistribution
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreDistribution=} [properties] Properties to set
+                         */
+                        function ScoreDistribution(properties) {
+                            this.scoreBuckets = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ScoreDistribution scoreBuckets.
+                         * @member {Object.<string,number|Long>} scoreBuckets
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @instance
+                         */
+                        ScoreDistribution.prototype.scoreBuckets = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ScoreDistribution instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreDistribution=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreDistribution} ScoreDistribution instance
+                         */
+                        ScoreDistribution.create = function create(properties) {
+                            return new ScoreDistribution(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ScoreDistribution message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreDistribution.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreDistribution} message ScoreDistribution message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScoreDistribution.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scoreBuckets != null && Object.hasOwnProperty.call(message, "scoreBuckets"))
+                                for (var keys = Object.keys(message.scoreBuckets), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 0 =*/8).int32(keys[i]).uint32(/* id 2, wireType 0 =*/16).int64(message.scoreBuckets[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ScoreDistribution message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreDistribution.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreDistribution} message ScoreDistribution message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScoreDistribution.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ScoreDistribution message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreDistribution} ScoreDistribution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScoreDistribution.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (message.scoreBuckets === $util.emptyObject)
+                                        message.scoreBuckets = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = 0;
+                                    value = 0;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.int32();
+                                            break;
+                                        case 2:
+                                            value = reader.int64();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.scoreBuckets[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ScoreDistribution message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreDistribution} ScoreDistribution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScoreDistribution.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ScoreDistribution message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ScoreDistribution.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.scoreBuckets != null && message.hasOwnProperty("scoreBuckets")) {
+                                if (!$util.isObject(message.scoreBuckets))
+                                    return "scoreBuckets: object expected";
+                                var key = Object.keys(message.scoreBuckets);
+                                for (var i = 0; i < key.length; ++i) {
+                                    if (!$util.key32Re.test(key[i]))
+                                        return "scoreBuckets: integer key{k:int32} expected";
+                                    if (!$util.isInteger(message.scoreBuckets[key[i]]) && !(message.scoreBuckets[key[i]] && $util.isInteger(message.scoreBuckets[key[i]].low) && $util.isInteger(message.scoreBuckets[key[i]].high)))
+                                        return "scoreBuckets: integer|Long{k:int32} expected";
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ScoreDistribution message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreDistribution} ScoreDistribution
+                         */
+                        ScoreDistribution.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution();
+                            if (object.scoreBuckets) {
+                                if (typeof object.scoreBuckets !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.ScoreDistribution.scoreBuckets: object expected");
+                                message.scoreBuckets = {};
+                                for (var keys = Object.keys(object.scoreBuckets), i = 0; i < keys.length; ++i)
+                                    if ($util.Long)
+                                        (message.scoreBuckets[keys[i]] = $util.Long.fromValue(object.scoreBuckets[keys[i]])).unsigned = false;
+                                    else if (typeof object.scoreBuckets[keys[i]] === "string")
+                                        message.scoreBuckets[keys[i]] = parseInt(object.scoreBuckets[keys[i]], 10);
+                                    else if (typeof object.scoreBuckets[keys[i]] === "number")
+                                        message.scoreBuckets[keys[i]] = object.scoreBuckets[keys[i]];
+                                    else if (typeof object.scoreBuckets[keys[i]] === "object")
+                                        message.scoreBuckets[keys[i]] = new $util.LongBits(object.scoreBuckets[keys[i]].low >>> 0, object.scoreBuckets[keys[i]].high >>> 0).toNumber();
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ScoreDistribution message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ScoreDistribution} message ScoreDistribution
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ScoreDistribution.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.scoreBuckets = {};
+                            var keys2;
+                            if (message.scoreBuckets && (keys2 = Object.keys(message.scoreBuckets)).length) {
+                                object.scoreBuckets = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    if (typeof message.scoreBuckets[keys2[j]] === "number")
+                                        object.scoreBuckets[keys2[j]] = options.longs === String ? String(message.scoreBuckets[keys2[j]]) : message.scoreBuckets[keys2[j]];
+                                    else
+                                        object.scoreBuckets[keys2[j]] = options.longs === String ? $util.Long.prototype.toString.call(message.scoreBuckets[keys2[j]]) : options.longs === Number ? new $util.LongBits(message.scoreBuckets[keys2[j]].low >>> 0, message.scoreBuckets[keys2[j]].high >>> 0).toNumber() : message.scoreBuckets[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ScoreDistribution to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreDistribution
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ScoreDistribution.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ScoreDistribution;
+                    })();
+    
+                    v1.ScoreMetrics = (function() {
+    
+                        /**
+                         * Properties of a ScoreMetrics.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IScoreMetrics
+                         * @property {google.cloud.recaptchaenterprise.v1.IScoreDistribution|null} [overallMetrics] ScoreMetrics overallMetrics
+                         * @property {Object.<string,google.cloud.recaptchaenterprise.v1.IScoreDistribution>|null} [actionMetrics] ScoreMetrics actionMetrics
+                         */
+    
+                        /**
+                         * Constructs a new ScoreMetrics.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ScoreMetrics.
+                         * @implements IScoreMetrics
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreMetrics=} [properties] Properties to set
+                         */
+                        function ScoreMetrics(properties) {
+                            this.actionMetrics = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ScoreMetrics overallMetrics.
+                         * @member {google.cloud.recaptchaenterprise.v1.IScoreDistribution|null|undefined} overallMetrics
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @instance
+                         */
+                        ScoreMetrics.prototype.overallMetrics = null;
+    
+                        /**
+                         * ScoreMetrics actionMetrics.
+                         * @member {Object.<string,google.cloud.recaptchaenterprise.v1.IScoreDistribution>} actionMetrics
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @instance
+                         */
+                        ScoreMetrics.prototype.actionMetrics = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ScoreMetrics instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreMetrics=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreMetrics} ScoreMetrics instance
+                         */
+                        ScoreMetrics.create = function create(properties) {
+                            return new ScoreMetrics(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ScoreMetrics message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreMetrics.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreMetrics} message ScoreMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScoreMetrics.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.overallMetrics != null && Object.hasOwnProperty.call(message, "overallMetrics"))
+                                $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.encode(message.overallMetrics, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.actionMetrics != null && Object.hasOwnProperty.call(message, "actionMetrics"))
+                                for (var keys = Object.keys(message.actionMetrics), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.encode(message.actionMetrics[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ScoreMetrics message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ScoreMetrics.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IScoreMetrics} message ScoreMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ScoreMetrics.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ScoreMetrics message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreMetrics} ScoreMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScoreMetrics.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.overallMetrics = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    if (message.actionMetrics === $util.emptyObject)
+                                        message.actionMetrics = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.actionMetrics[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ScoreMetrics message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreMetrics} ScoreMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ScoreMetrics.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ScoreMetrics message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ScoreMetrics.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.overallMetrics != null && message.hasOwnProperty("overallMetrics")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.verify(message.overallMetrics);
+                                if (error)
+                                    return "overallMetrics." + error;
+                            }
+                            if (message.actionMetrics != null && message.hasOwnProperty("actionMetrics")) {
+                                if (!$util.isObject(message.actionMetrics))
+                                    return "actionMetrics: object expected";
+                                var key = Object.keys(message.actionMetrics);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.verify(message.actionMetrics[key[i]]);
+                                    if (error)
+                                        return "actionMetrics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ScoreMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ScoreMetrics} ScoreMetrics
+                         */
+                        ScoreMetrics.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ScoreMetrics();
+                            if (object.overallMetrics != null) {
+                                if (typeof object.overallMetrics !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.ScoreMetrics.overallMetrics: object expected");
+                                message.overallMetrics = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.fromObject(object.overallMetrics);
+                            }
+                            if (object.actionMetrics) {
+                                if (typeof object.actionMetrics !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.ScoreMetrics.actionMetrics: object expected");
+                                message.actionMetrics = {};
+                                for (var keys = Object.keys(object.actionMetrics), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.actionMetrics[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.ScoreMetrics.actionMetrics: object expected");
+                                    message.actionMetrics[keys[i]] = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.fromObject(object.actionMetrics[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ScoreMetrics message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ScoreMetrics} message ScoreMetrics
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ScoreMetrics.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.actionMetrics = {};
+                            if (options.defaults)
+                                object.overallMetrics = null;
+                            if (message.overallMetrics != null && message.hasOwnProperty("overallMetrics"))
+                                object.overallMetrics = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.toObject(message.overallMetrics, options);
+                            var keys2;
+                            if (message.actionMetrics && (keys2 = Object.keys(message.actionMetrics)).length) {
+                                object.actionMetrics = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.actionMetrics[keys2[j]] = $root.google.cloud.recaptchaenterprise.v1.ScoreDistribution.toObject(message.actionMetrics[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ScoreMetrics to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ScoreMetrics
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ScoreMetrics.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ScoreMetrics;
+                    })();
+    
+                    v1.ChallengeMetrics = (function() {
+    
+                        /**
+                         * Properties of a ChallengeMetrics.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IChallengeMetrics
+                         * @property {number|Long|null} [pageloadCount] ChallengeMetrics pageloadCount
+                         * @property {number|Long|null} [nocaptchaCount] ChallengeMetrics nocaptchaCount
+                         * @property {number|Long|null} [failedCount] ChallengeMetrics failedCount
+                         * @property {number|Long|null} [passedCount] ChallengeMetrics passedCount
+                         */
+    
+                        /**
+                         * Constructs a new ChallengeMetrics.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ChallengeMetrics.
+                         * @implements IChallengeMetrics
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IChallengeMetrics=} [properties] Properties to set
+                         */
+                        function ChallengeMetrics(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChallengeMetrics pageloadCount.
+                         * @member {number|Long} pageloadCount
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @instance
+                         */
+                        ChallengeMetrics.prototype.pageloadCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ChallengeMetrics nocaptchaCount.
+                         * @member {number|Long} nocaptchaCount
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @instance
+                         */
+                        ChallengeMetrics.prototype.nocaptchaCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ChallengeMetrics failedCount.
+                         * @member {number|Long} failedCount
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @instance
+                         */
+                        ChallengeMetrics.prototype.failedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * ChallengeMetrics passedCount.
+                         * @member {number|Long} passedCount
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @instance
+                         */
+                        ChallengeMetrics.prototype.passedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new ChallengeMetrics instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IChallengeMetrics=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ChallengeMetrics} ChallengeMetrics instance
+                         */
+                        ChallengeMetrics.create = function create(properties) {
+                            return new ChallengeMetrics(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChallengeMetrics message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ChallengeMetrics.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IChallengeMetrics} message ChallengeMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChallengeMetrics.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pageloadCount != null && Object.hasOwnProperty.call(message, "pageloadCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.pageloadCount);
+                            if (message.nocaptchaCount != null && Object.hasOwnProperty.call(message, "nocaptchaCount"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.nocaptchaCount);
+                            if (message.failedCount != null && Object.hasOwnProperty.call(message, "failedCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.failedCount);
+                            if (message.passedCount != null && Object.hasOwnProperty.call(message, "passedCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.passedCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChallengeMetrics message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ChallengeMetrics.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IChallengeMetrics} message ChallengeMetrics message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChallengeMetrics.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChallengeMetrics message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ChallengeMetrics} ChallengeMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChallengeMetrics.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.pageloadCount = reader.int64();
+                                    break;
+                                case 2:
+                                    message.nocaptchaCount = reader.int64();
+                                    break;
+                                case 3:
+                                    message.failedCount = reader.int64();
+                                    break;
+                                case 4:
+                                    message.passedCount = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChallengeMetrics message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ChallengeMetrics} ChallengeMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChallengeMetrics.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChallengeMetrics message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChallengeMetrics.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pageloadCount != null && message.hasOwnProperty("pageloadCount"))
+                                if (!$util.isInteger(message.pageloadCount) && !(message.pageloadCount && $util.isInteger(message.pageloadCount.low) && $util.isInteger(message.pageloadCount.high)))
+                                    return "pageloadCount: integer|Long expected";
+                            if (message.nocaptchaCount != null && message.hasOwnProperty("nocaptchaCount"))
+                                if (!$util.isInteger(message.nocaptchaCount) && !(message.nocaptchaCount && $util.isInteger(message.nocaptchaCount.low) && $util.isInteger(message.nocaptchaCount.high)))
+                                    return "nocaptchaCount: integer|Long expected";
+                            if (message.failedCount != null && message.hasOwnProperty("failedCount"))
+                                if (!$util.isInteger(message.failedCount) && !(message.failedCount && $util.isInteger(message.failedCount.low) && $util.isInteger(message.failedCount.high)))
+                                    return "failedCount: integer|Long expected";
+                            if (message.passedCount != null && message.hasOwnProperty("passedCount"))
+                                if (!$util.isInteger(message.passedCount) && !(message.passedCount && $util.isInteger(message.passedCount.low) && $util.isInteger(message.passedCount.high)))
+                                    return "passedCount: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChallengeMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ChallengeMetrics} ChallengeMetrics
+                         */
+                        ChallengeMetrics.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ChallengeMetrics();
+                            if (object.pageloadCount != null)
+                                if ($util.Long)
+                                    (message.pageloadCount = $util.Long.fromValue(object.pageloadCount)).unsigned = false;
+                                else if (typeof object.pageloadCount === "string")
+                                    message.pageloadCount = parseInt(object.pageloadCount, 10);
+                                else if (typeof object.pageloadCount === "number")
+                                    message.pageloadCount = object.pageloadCount;
+                                else if (typeof object.pageloadCount === "object")
+                                    message.pageloadCount = new $util.LongBits(object.pageloadCount.low >>> 0, object.pageloadCount.high >>> 0).toNumber();
+                            if (object.nocaptchaCount != null)
+                                if ($util.Long)
+                                    (message.nocaptchaCount = $util.Long.fromValue(object.nocaptchaCount)).unsigned = false;
+                                else if (typeof object.nocaptchaCount === "string")
+                                    message.nocaptchaCount = parseInt(object.nocaptchaCount, 10);
+                                else if (typeof object.nocaptchaCount === "number")
+                                    message.nocaptchaCount = object.nocaptchaCount;
+                                else if (typeof object.nocaptchaCount === "object")
+                                    message.nocaptchaCount = new $util.LongBits(object.nocaptchaCount.low >>> 0, object.nocaptchaCount.high >>> 0).toNumber();
+                            if (object.failedCount != null)
+                                if ($util.Long)
+                                    (message.failedCount = $util.Long.fromValue(object.failedCount)).unsigned = false;
+                                else if (typeof object.failedCount === "string")
+                                    message.failedCount = parseInt(object.failedCount, 10);
+                                else if (typeof object.failedCount === "number")
+                                    message.failedCount = object.failedCount;
+                                else if (typeof object.failedCount === "object")
+                                    message.failedCount = new $util.LongBits(object.failedCount.low >>> 0, object.failedCount.high >>> 0).toNumber();
+                            if (object.passedCount != null)
+                                if ($util.Long)
+                                    (message.passedCount = $util.Long.fromValue(object.passedCount)).unsigned = false;
+                                else if (typeof object.passedCount === "string")
+                                    message.passedCount = parseInt(object.passedCount, 10);
+                                else if (typeof object.passedCount === "number")
+                                    message.passedCount = object.passedCount;
+                                else if (typeof object.passedCount === "object")
+                                    message.passedCount = new $util.LongBits(object.passedCount.low >>> 0, object.passedCount.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChallengeMetrics message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ChallengeMetrics} message ChallengeMetrics
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChallengeMetrics.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.pageloadCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.pageloadCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.nocaptchaCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.nocaptchaCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failedCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.passedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.passedCount = options.longs === String ? "0" : 0;
+                            }
+                            if (message.pageloadCount != null && message.hasOwnProperty("pageloadCount"))
+                                if (typeof message.pageloadCount === "number")
+                                    object.pageloadCount = options.longs === String ? String(message.pageloadCount) : message.pageloadCount;
+                                else
+                                    object.pageloadCount = options.longs === String ? $util.Long.prototype.toString.call(message.pageloadCount) : options.longs === Number ? new $util.LongBits(message.pageloadCount.low >>> 0, message.pageloadCount.high >>> 0).toNumber() : message.pageloadCount;
+                            if (message.nocaptchaCount != null && message.hasOwnProperty("nocaptchaCount"))
+                                if (typeof message.nocaptchaCount === "number")
+                                    object.nocaptchaCount = options.longs === String ? String(message.nocaptchaCount) : message.nocaptchaCount;
+                                else
+                                    object.nocaptchaCount = options.longs === String ? $util.Long.prototype.toString.call(message.nocaptchaCount) : options.longs === Number ? new $util.LongBits(message.nocaptchaCount.low >>> 0, message.nocaptchaCount.high >>> 0).toNumber() : message.nocaptchaCount;
+                            if (message.failedCount != null && message.hasOwnProperty("failedCount"))
+                                if (typeof message.failedCount === "number")
+                                    object.failedCount = options.longs === String ? String(message.failedCount) : message.failedCount;
+                                else
+                                    object.failedCount = options.longs === String ? $util.Long.prototype.toString.call(message.failedCount) : options.longs === Number ? new $util.LongBits(message.failedCount.low >>> 0, message.failedCount.high >>> 0).toNumber() : message.failedCount;
+                            if (message.passedCount != null && message.hasOwnProperty("passedCount"))
+                                if (typeof message.passedCount === "number")
+                                    object.passedCount = options.longs === String ? String(message.passedCount) : message.passedCount;
+                                else
+                                    object.passedCount = options.longs === String ? $util.Long.prototype.toString.call(message.passedCount) : options.longs === Number ? new $util.LongBits(message.passedCount.low >>> 0, message.passedCount.high >>> 0).toNumber() : message.passedCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChallengeMetrics to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ChallengeMetrics
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChallengeMetrics.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ChallengeMetrics;
                     })();
     
                     return v1;

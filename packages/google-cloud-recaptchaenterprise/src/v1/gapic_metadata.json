@@ -40,6 +40,16 @@
                 "deleteKey"
               ]
             },
+            "MigrateKey": {
+              "methods": [
+                "migrateKey"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "getMetrics"
+              ]
+            },
             "ListKeys": {
               "methods": [
                 "listKeys",
@@ -80,6 +90,16 @@
             "DeleteKey": {
               "methods": [
                 "deleteKey"
+              ]
+            },
+            "MigrateKey": {
+              "methods": [
+                "migrateKey"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "getMetrics"
               ]
             },
             "ListKeys": {
