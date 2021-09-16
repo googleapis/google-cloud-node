@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.9...v1.2.0) (2021-09-16)
+
+
+### Features
+
+* add SecurityLevel option on HttpsTrigger ([#110](https://www.github.com/googleapis/nodejs-functions/issues/110)) ([13d865e](https://www.github.com/googleapis/nodejs-functions/commit/13d865e773a66213c1915ebe2dfc18688e2db300))
+* turns on self-signed JWT feature flag ([#106](https://www.github.com/googleapis/nodejs-functions/issues/106)) ([9fb2982](https://www.github.com/googleapis/nodejs-functions/commit/9fb29822945fed6f99a7aefa70bdaf88b7782489))
+
 ### [1.1.9](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.8...v1.1.9) (2021-08-17)
 
 
