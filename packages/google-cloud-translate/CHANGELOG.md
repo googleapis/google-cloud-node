@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [6.3.0](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.7...v6.3.0) (2021-09-13)
+
+
+### Features
+
+* added v3 proto for online/batch document translation and updated v3beta1 proto for format conversion ([#719](https://www.github.com/googleapis/nodejs-translate/issues/719)) ([76c9a13](https://www.github.com/googleapis/nodejs-translate/commit/76c9a13a0bb8b9dadc9f671e649af82f58c943f6))
+* turns on self-signed JWT feature flag ([#713](https://www.github.com/googleapis/nodejs-translate/issues/713)) ([41062a6](https://www.github.com/googleapis/nodejs-translate/commit/41062a675ae8bb19d921b5612ae325383d219725))
+
+
+### Bug Fixes
+
+* add missing annotation for batch document translation ([#715](https://www.github.com/googleapis/nodejs-translate/issues/715)) ([b893e3d](https://www.github.com/googleapis/nodejs-translate/commit/b893e3dcc532813d29d96950fc90962215ad6e51))
+* **build:** set default branch to main ([#722](https://www.github.com/googleapis/nodejs-translate/issues/722)) ([26b9ba7](https://www.github.com/googleapis/nodejs-translate/commit/26b9ba7850d25234e1bfb8035dd5ef7a1108b31c))
+* remove unnecessary assertion ([#721](https://www.github.com/googleapis/nodejs-translate/issues/721)) ([a5a1f82](https://www.github.com/googleapis/nodejs-translate/commit/a5a1f82b9b78f465ef6bbbfba55dda8937d90dfa))
+
 ### [6.2.7](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.6...v6.2.7) (2021-08-17)
 
 
