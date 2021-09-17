@@ -2021,7 +2021,7 @@
                               "type": "Conversation.Medium",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "deprecated": true
                               }
                             },
                             "trainingConversationsCount": {
@@ -2030,6 +2030,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -2167,6 +2171,13 @@
                         "roleMatch": {
                           "type": "ConversationParticipant.Role",
                           "id": 10
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {

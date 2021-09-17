@@ -8066,6 +8066,9 @@ export namespace google {
 
                         /** InputDataConfig trainingConversationsCount */
                         trainingConversationsCount?: (number|Long|string|null);
+
+                        /** InputDataConfig filter */
+                        filter?: (string|null);
                     }
 
                     /** Represents an InputDataConfig. */
@@ -8082,6 +8085,9 @@ export namespace google {
 
                         /** InputDataConfig trainingConversationsCount. */
                         public trainingConversationsCount: (number|Long|string);
+
+                        /** InputDataConfig filter. */
+                        public filter: string;
 
                         /**
                          * Creates a new InputDataConfig instance using the specified properties.
@@ -8506,6 +8512,9 @@ export namespace google {
 
                     /** PhraseMatcher roleMatch */
                     roleMatch?: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null);
+
+                    /** PhraseMatcher updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a PhraseMatcher. */
@@ -8546,6 +8555,9 @@ export namespace google {
 
                     /** PhraseMatcher roleMatch. */
                     public roleMatch: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role);
+
+                    /** PhraseMatcher updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new PhraseMatcher instance using the specified properties.

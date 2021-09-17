@@ -2,12 +2,6 @@
   "recurse": true,
   "skip": [
     "https://codecov.io/gh/googleapis/",
-    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/createAnalysis.js",
-    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/createConversation.js",
-    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/createConversationWithTtl.js",
-    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/enablePubSubNotifications.js",
-    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/exportToBigquery.js",
-    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/getOperation.js",
     "www.googleapis.com",
     "img.shields.io"
   ],

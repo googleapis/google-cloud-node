@@ -18777,6 +18777,7 @@
                              * @interface IInputDataConfig
                              * @property {google.cloud.contactcenterinsights.v1.Conversation.Medium|null} [medium] InputDataConfig medium
                              * @property {number|Long|null} [trainingConversationsCount] InputDataConfig trainingConversationsCount
+                             * @property {string|null} [filter] InputDataConfig filter
                              */
     
                             /**
@@ -18811,6 +18812,14 @@
                             InputDataConfig.prototype.trainingConversationsCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * InputDataConfig filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @instance
+                             */
+                            InputDataConfig.prototype.filter = "";
+    
+                            /**
                              * Creates a new InputDataConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
@@ -18838,6 +18847,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.medium);
                                 if (message.trainingConversationsCount != null && Object.hasOwnProperty.call(message, "trainingConversationsCount"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.trainingConversationsCount);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
                                 return writer;
                             };
     
@@ -18877,6 +18888,9 @@
                                         break;
                                     case 2:
                                         message.trainingConversationsCount = reader.int64();
+                                        break;
+                                    case 3:
+                                        message.filter = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -18925,6 +18939,9 @@
                                 if (message.trainingConversationsCount != null && message.hasOwnProperty("trainingConversationsCount"))
                                     if (!$util.isInteger(message.trainingConversationsCount) && !(message.trainingConversationsCount && $util.isInteger(message.trainingConversationsCount.low) && $util.isInteger(message.trainingConversationsCount.high)))
                                         return "trainingConversationsCount: integer|Long expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
                                 return null;
                             };
     
@@ -18963,6 +18980,8 @@
                                         message.trainingConversationsCount = object.trainingConversationsCount;
                                     else if (typeof object.trainingConversationsCount === "object")
                                         message.trainingConversationsCount = new $util.LongBits(object.trainingConversationsCount.low >>> 0, object.trainingConversationsCount.high >>> 0).toNumber();
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
                                 return message;
                             };
     
@@ -18986,6 +19005,7 @@
                                         object.trainingConversationsCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                     } else
                                         object.trainingConversationsCount = options.longs === String ? "0" : 0;
+                                    object.filter = "";
                                 }
                                 if (message.medium != null && message.hasOwnProperty("medium"))
                                     object.medium = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] : message.medium;
@@ -18994,6 +19014,8 @@
                                         object.trainingConversationsCount = options.longs === String ? String(message.trainingConversationsCount) : message.trainingConversationsCount;
                                     else
                                         object.trainingConversationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.trainingConversationsCount) : options.longs === Number ? new $util.LongBits(message.trainingConversationsCount.low >>> 0, message.trainingConversationsCount.high >>> 0).toNumber() : message.trainingConversationsCount;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
                                 return object;
                             };
     
@@ -19843,6 +19865,7 @@
                          * @property {Array.<google.cloud.contactcenterinsights.v1.IPhraseMatchRuleGroup>|null} [phraseMatchRuleGroups] PhraseMatcher phraseMatchRuleGroups
                          * @property {google.protobuf.ITimestamp|null} [activationUpdateTime] PhraseMatcher activationUpdateTime
                          * @property {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null} [roleMatch] PhraseMatcher roleMatch
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] PhraseMatcher updateTime
                          */
     
                         /**
@@ -19942,6 +19965,14 @@
                         PhraseMatcher.prototype.roleMatch = 0;
     
                         /**
+                         * PhraseMatcher updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.contactcenterinsights.v1.PhraseMatcher
+                         * @instance
+                         */
+                        PhraseMatcher.prototype.updateTime = null;
+    
+                        /**
                          * Creates a new PhraseMatcher instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.PhraseMatcher
@@ -19986,6 +20017,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.activationUpdateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.roleMatch != null && Object.hasOwnProperty.call(message, "roleMatch"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.roleMatch);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -20051,6 +20084,9 @@
                                     break;
                                 case 10:
                                     message.roleMatch = reader.int32();
+                                    break;
+                                case 11:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -20141,6 +20177,11 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
                             return null;
                         };
     
@@ -20222,6 +20263,11 @@
                                 message.roleMatch = 4;
                                 break;
                             }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.PhraseMatcher.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
                             return message;
                         };
     
@@ -20250,6 +20296,7 @@
                                 object.active = false;
                                 object.activationUpdateTime = null;
                                 object.roleMatch = options.enums === String ? "ROLE_UNSPECIFIED" : 0;
+                                object.updateTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20274,6 +20321,8 @@
                                 object.activationUpdateTime = $root.google.protobuf.Timestamp.toObject(message.activationUpdateTime, options);
                             if (message.roleMatch != null && message.hasOwnProperty("roleMatch"))
                                 object.roleMatch = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.roleMatch] : message.roleMatch;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
                         };
     
