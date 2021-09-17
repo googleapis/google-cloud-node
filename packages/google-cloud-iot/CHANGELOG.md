@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.4.0...v2.5.0) (2021-09-17)
+
+
+### Features
+
+* Add sample codes for cloud-iot-token-service generateAccessToken API ([#502](https://www.github.com/googleapis/nodejs-iot/issues/502)) ([21ef5c7](https://www.github.com/googleapis/nodejs-iot/commit/21ef5c7a264c01c12675e623e7c160b2e33c8072))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.6...v2.4.0) (2021-09-03)
 
 
