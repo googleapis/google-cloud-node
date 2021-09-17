@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.7.0...v1.8.0) (2021-09-17)
+
+
+### Features
+
+* assuredworkloads v1 public protos ([#108](https://www.github.com/googleapis/nodejs-assured-workloads/issues/108)) ([4e6032f](https://www.github.com/googleapis/nodejs-assured-workloads/commit/4e6032f0778c7df042035a7e19dbf17fc1c4951d))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.6.0...v1.7.0) (2021-08-27)
 
 
