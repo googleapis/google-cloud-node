@@ -100,6 +100,22 @@ describe('topics', () => {
     assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
   });
 
+  it('should publish with flow control', async () => {
+    const [subscription] = await pubsub
+      .topic(topicNameThree)
+      .subscription(subscriptionNameOne)
+      .get({autoCreate: true});
+    const output = execSync(
+      `${commandFor('publishWithFlowControl')} ${topicNameThree}`
+    );
+    const receivedMessage = await _pullOneMessage(subscription);
+    assert.strictEqual(receivedMessage.data.toString(), 'test!');
+    assert.include(output, 'Published 1000 with flow control settings');
+
+    // Junk any remaining published messages.
+    await subscription.seek(new Date());
+  });
+
   it('should publish a JSON message', async () => {
     const [subscription] = await pubsub
       .topic(topicNameThree)
