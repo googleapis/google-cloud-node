@@ -23,6 +23,1307 @@ export namespace google {
         /** Namespace assuredworkloads. */
         namespace assuredworkloads {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents an AssuredWorkloadsService */
+                class AssuredWorkloadsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AssuredWorkloadsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AssuredWorkloadsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AssuredWorkloadsService;
+
+                    /**
+                     * Calls CreateWorkload.
+                     * @param request CreateWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWorkload(request: google.cloud.assuredworkloads.v1.ICreateWorkloadRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.CreateWorkloadCallback): void;
+
+                    /**
+                     * Calls CreateWorkload.
+                     * @param request CreateWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWorkload(request: google.cloud.assuredworkloads.v1.ICreateWorkloadRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateWorkload.
+                     * @param request UpdateWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workload
+                     */
+                    public updateWorkload(request: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.UpdateWorkloadCallback): void;
+
+                    /**
+                     * Calls UpdateWorkload.
+                     * @param request UpdateWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWorkload(request: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest): Promise<google.cloud.assuredworkloads.v1.Workload>;
+
+                    /**
+                     * Calls DeleteWorkload.
+                     * @param request DeleteWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteWorkload(request: google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.DeleteWorkloadCallback): void;
+
+                    /**
+                     * Calls DeleteWorkload.
+                     * @param request DeleteWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWorkload(request: google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetWorkload.
+                     * @param request GetWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workload
+                     */
+                    public getWorkload(request: google.cloud.assuredworkloads.v1.IGetWorkloadRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.GetWorkloadCallback): void;
+
+                    /**
+                     * Calls GetWorkload.
+                     * @param request GetWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkload(request: google.cloud.assuredworkloads.v1.IGetWorkloadRequest): Promise<google.cloud.assuredworkloads.v1.Workload>;
+
+                    /**
+                     * Calls ListWorkloads.
+                     * @param request ListWorkloadsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkloadsResponse
+                     */
+                    public listWorkloads(request: google.cloud.assuredworkloads.v1.IListWorkloadsRequest, callback: google.cloud.assuredworkloads.v1.AssuredWorkloadsService.ListWorkloadsCallback): void;
+
+                    /**
+                     * Calls ListWorkloads.
+                     * @param request ListWorkloadsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkloads(request: google.cloud.assuredworkloads.v1.IListWorkloadsRequest): Promise<google.cloud.assuredworkloads.v1.ListWorkloadsResponse>;
+                }
+
+                namespace AssuredWorkloadsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService#createWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWorkloadCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService#updateWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Workload
+                     */
+                    type UpdateWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.Workload) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService#deleteWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteWorkloadCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService#getWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Workload
+                     */
+                    type GetWorkloadCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.Workload) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.assuredworkloads.v1.AssuredWorkloadsService#listWorkloads}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkloadsResponse
+                     */
+                    type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.assuredworkloads.v1.ListWorkloadsResponse) => void;
+                }
+
+                /** Properties of a CreateWorkloadRequest. */
+                interface ICreateWorkloadRequest {
+
+                    /** CreateWorkloadRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWorkloadRequest workload */
+                    workload?: (google.cloud.assuredworkloads.v1.IWorkload|null);
+
+                    /** CreateWorkloadRequest externalId */
+                    externalId?: (string|null);
+                }
+
+                /** Represents a CreateWorkloadRequest. */
+                class CreateWorkloadRequest implements ICreateWorkloadRequest {
+
+                    /**
+                     * Constructs a new CreateWorkloadRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.ICreateWorkloadRequest);
+
+                    /** CreateWorkloadRequest parent. */
+                    public parent: string;
+
+                    /** CreateWorkloadRequest workload. */
+                    public workload?: (google.cloud.assuredworkloads.v1.IWorkload|null);
+
+                    /** CreateWorkloadRequest externalId. */
+                    public externalId: string;
+
+                    /**
+                     * Creates a new CreateWorkloadRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWorkloadRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.ICreateWorkloadRequest): google.cloud.assuredworkloads.v1.CreateWorkloadRequest;
+
+                    /**
+                     * Encodes the specified CreateWorkloadRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.CreateWorkloadRequest.verify|verify} messages.
+                     * @param message CreateWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.ICreateWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWorkloadRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.CreateWorkloadRequest.verify|verify} messages.
+                     * @param message CreateWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.ICreateWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWorkloadRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.CreateWorkloadRequest;
+
+                    /**
+                     * Decodes a CreateWorkloadRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.CreateWorkloadRequest;
+
+                    /**
+                     * Verifies a CreateWorkloadRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWorkloadRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWorkloadRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.CreateWorkloadRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWorkloadRequest message. Also converts values to other types if specified.
+                     * @param message CreateWorkloadRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.CreateWorkloadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWorkloadRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateWorkloadRequest. */
+                interface IUpdateWorkloadRequest {
+
+                    /** UpdateWorkloadRequest workload */
+                    workload?: (google.cloud.assuredworkloads.v1.IWorkload|null);
+
+                    /** UpdateWorkloadRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateWorkloadRequest. */
+                class UpdateWorkloadRequest implements IUpdateWorkloadRequest {
+
+                    /**
+                     * Constructs a new UpdateWorkloadRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest);
+
+                    /** UpdateWorkloadRequest workload. */
+                    public workload?: (google.cloud.assuredworkloads.v1.IWorkload|null);
+
+                    /** UpdateWorkloadRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateWorkloadRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateWorkloadRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest): google.cloud.assuredworkloads.v1.UpdateWorkloadRequest;
+
+                    /**
+                     * Encodes the specified UpdateWorkloadRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.UpdateWorkloadRequest.verify|verify} messages.
+                     * @param message UpdateWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateWorkloadRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.UpdateWorkloadRequest.verify|verify} messages.
+                     * @param message UpdateWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IUpdateWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateWorkloadRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.UpdateWorkloadRequest;
+
+                    /**
+                     * Decodes an UpdateWorkloadRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.UpdateWorkloadRequest;
+
+                    /**
+                     * Verifies an UpdateWorkloadRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateWorkloadRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateWorkloadRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.UpdateWorkloadRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateWorkloadRequest message. Also converts values to other types if specified.
+                     * @param message UpdateWorkloadRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.UpdateWorkloadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateWorkloadRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteWorkloadRequest. */
+                interface IDeleteWorkloadRequest {
+
+                    /** DeleteWorkloadRequest name */
+                    name?: (string|null);
+
+                    /** DeleteWorkloadRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteWorkloadRequest. */
+                class DeleteWorkloadRequest implements IDeleteWorkloadRequest {
+
+                    /**
+                     * Constructs a new DeleteWorkloadRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest);
+
+                    /** DeleteWorkloadRequest name. */
+                    public name: string;
+
+                    /** DeleteWorkloadRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteWorkloadRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWorkloadRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest): google.cloud.assuredworkloads.v1.DeleteWorkloadRequest;
+
+                    /**
+                     * Encodes the specified DeleteWorkloadRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.DeleteWorkloadRequest.verify|verify} messages.
+                     * @param message DeleteWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWorkloadRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.DeleteWorkloadRequest.verify|verify} messages.
+                     * @param message DeleteWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IDeleteWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWorkloadRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.DeleteWorkloadRequest;
+
+                    /**
+                     * Decodes a DeleteWorkloadRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.DeleteWorkloadRequest;
+
+                    /**
+                     * Verifies a DeleteWorkloadRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWorkloadRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWorkloadRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.DeleteWorkloadRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWorkloadRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWorkloadRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.DeleteWorkloadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWorkloadRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetWorkloadRequest. */
+                interface IGetWorkloadRequest {
+
+                    /** GetWorkloadRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkloadRequest. */
+                class GetWorkloadRequest implements IGetWorkloadRequest {
+
+                    /**
+                     * Constructs a new GetWorkloadRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IGetWorkloadRequest);
+
+                    /** GetWorkloadRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkloadRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkloadRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IGetWorkloadRequest): google.cloud.assuredworkloads.v1.GetWorkloadRequest;
+
+                    /**
+                     * Encodes the specified GetWorkloadRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.GetWorkloadRequest.verify|verify} messages.
+                     * @param message GetWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IGetWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkloadRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.GetWorkloadRequest.verify|verify} messages.
+                     * @param message GetWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IGetWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkloadRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.GetWorkloadRequest;
+
+                    /**
+                     * Decodes a GetWorkloadRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.GetWorkloadRequest;
+
+                    /**
+                     * Verifies a GetWorkloadRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkloadRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkloadRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.GetWorkloadRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkloadRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkloadRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.GetWorkloadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkloadRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListWorkloadsRequest. */
+                interface IListWorkloadsRequest {
+
+                    /** ListWorkloadsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWorkloadsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkloadsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListWorkloadsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListWorkloadsRequest. */
+                class ListWorkloadsRequest implements IListWorkloadsRequest {
+
+                    /**
+                     * Constructs a new ListWorkloadsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IListWorkloadsRequest);
+
+                    /** ListWorkloadsRequest parent. */
+                    public parent: string;
+
+                    /** ListWorkloadsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkloadsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListWorkloadsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListWorkloadsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkloadsRequest instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IListWorkloadsRequest): google.cloud.assuredworkloads.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Encodes the specified ListWorkloadsRequest message. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListWorkloadsRequest.verify|verify} messages.
+                     * @param message ListWorkloadsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkloadsRequest message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListWorkloadsRequest.verify|verify} messages.
+                     * @param message ListWorkloadsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkloadsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkloadsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Decodes a ListWorkloadsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkloadsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Verifies a ListWorkloadsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkloadsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkloadsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkloadsRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkloadsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.ListWorkloadsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkloadsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListWorkloadsResponse. */
+                interface IListWorkloadsResponse {
+
+                    /** ListWorkloadsResponse workloads */
+                    workloads?: (google.cloud.assuredworkloads.v1.IWorkload[]|null);
+
+                    /** ListWorkloadsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkloadsResponse. */
+                class ListWorkloadsResponse implements IListWorkloadsResponse {
+
+                    /**
+                     * Constructs a new ListWorkloadsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IListWorkloadsResponse);
+
+                    /** ListWorkloadsResponse workloads. */
+                    public workloads: google.cloud.assuredworkloads.v1.IWorkload[];
+
+                    /** ListWorkloadsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListWorkloadsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkloadsResponse instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IListWorkloadsResponse): google.cloud.assuredworkloads.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Encodes the specified ListWorkloadsResponse message. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListWorkloadsResponse.verify|verify} messages.
+                     * @param message ListWorkloadsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkloadsResponse message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.ListWorkloadsResponse.verify|verify} messages.
+                     * @param message ListWorkloadsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkloadsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkloadsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Decodes a ListWorkloadsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkloadsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Verifies a ListWorkloadsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkloadsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkloadsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkloadsResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkloadsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.ListWorkloadsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkloadsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Workload. */
+                interface IWorkload {
+
+                    /** Workload name */
+                    name?: (string|null);
+
+                    /** Workload displayName */
+                    displayName?: (string|null);
+
+                    /** Workload resources */
+                    resources?: (google.cloud.assuredworkloads.v1.Workload.IResourceInfo[]|null);
+
+                    /** Workload complianceRegime */
+                    complianceRegime?: (google.cloud.assuredworkloads.v1.Workload.ComplianceRegime|keyof typeof google.cloud.assuredworkloads.v1.Workload.ComplianceRegime|null);
+
+                    /** Workload createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workload billingAccount */
+                    billingAccount?: (string|null);
+
+                    /** Workload etag */
+                    etag?: (string|null);
+
+                    /** Workload labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Workload provisionedResourcesParent */
+                    provisionedResourcesParent?: (string|null);
+
+                    /** Workload kmsSettings */
+                    kmsSettings?: (google.cloud.assuredworkloads.v1.Workload.IKMSSettings|null);
+
+                    /** Workload resourceSettings */
+                    resourceSettings?: (google.cloud.assuredworkloads.v1.Workload.IResourceSettings[]|null);
+                }
+
+                /** Represents a Workload. */
+                class Workload implements IWorkload {
+
+                    /**
+                     * Constructs a new Workload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.IWorkload);
+
+                    /** Workload name. */
+                    public name: string;
+
+                    /** Workload displayName. */
+                    public displayName: string;
+
+                    /** Workload resources. */
+                    public resources: google.cloud.assuredworkloads.v1.Workload.IResourceInfo[];
+
+                    /** Workload complianceRegime. */
+                    public complianceRegime: (google.cloud.assuredworkloads.v1.Workload.ComplianceRegime|keyof typeof google.cloud.assuredworkloads.v1.Workload.ComplianceRegime);
+
+                    /** Workload createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workload billingAccount. */
+                    public billingAccount: string;
+
+                    /** Workload etag. */
+                    public etag: string;
+
+                    /** Workload labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Workload provisionedResourcesParent. */
+                    public provisionedResourcesParent: string;
+
+                    /** Workload kmsSettings. */
+                    public kmsSettings?: (google.cloud.assuredworkloads.v1.Workload.IKMSSettings|null);
+
+                    /** Workload resourceSettings. */
+                    public resourceSettings: google.cloud.assuredworkloads.v1.Workload.IResourceSettings[];
+
+                    /**
+                     * Creates a new Workload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Workload instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.IWorkload): google.cloud.assuredworkloads.v1.Workload;
+
+                    /**
+                     * Encodes the specified Workload message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.verify|verify} messages.
+                     * @param message Workload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.IWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Workload message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.verify|verify} messages.
+                     * @param message Workload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.IWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Workload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Workload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Workload;
+
+                    /**
+                     * Decodes a Workload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Workload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Workload;
+
+                    /**
+                     * Verifies a Workload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Workload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Workload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Workload;
+
+                    /**
+                     * Creates a plain object from a Workload message. Also converts values to other types if specified.
+                     * @param message Workload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.Workload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Workload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Workload {
+
+                    /** Properties of a ResourceInfo. */
+                    interface IResourceInfo {
+
+                        /** ResourceInfo resourceId */
+                        resourceId?: (number|Long|string|null);
+
+                        /** ResourceInfo resourceType */
+                        resourceType?: (google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType|null);
+                    }
+
+                    /** Represents a ResourceInfo. */
+                    class ResourceInfo implements IResourceInfo {
+
+                        /**
+                         * Constructs a new ResourceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1.Workload.IResourceInfo);
+
+                        /** ResourceInfo resourceId. */
+                        public resourceId: (number|Long|string);
+
+                        /** ResourceInfo resourceType. */
+                        public resourceType: (google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType);
+
+                        /**
+                         * Creates a new ResourceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceInfo instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1.Workload.IResourceInfo): google.cloud.assuredworkloads.v1.Workload.ResourceInfo;
+
+                        /**
+                         * Encodes the specified ResourceInfo message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.ResourceInfo.verify|verify} messages.
+                         * @param message ResourceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1.Workload.IResourceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceInfo message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.ResourceInfo.verify|verify} messages.
+                         * @param message ResourceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Workload.IResourceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Workload.ResourceInfo;
+
+                        /**
+                         * Decodes a ResourceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Workload.ResourceInfo;
+
+                        /**
+                         * Verifies a ResourceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Workload.ResourceInfo;
+
+                        /**
+                         * Creates a plain object from a ResourceInfo message. Also converts values to other types if specified.
+                         * @param message ResourceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1.Workload.ResourceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ResourceInfo {
+
+                        /** ResourceType enum. */
+                        enum ResourceType {
+                            RESOURCE_TYPE_UNSPECIFIED = 0,
+                            CONSUMER_PROJECT = 1,
+                            ENCRYPTION_KEYS_PROJECT = 2,
+                            KEYRING = 3
+                        }
+                    }
+
+                    /** Properties of a KMSSettings. */
+                    interface IKMSSettings {
+
+                        /** KMSSettings nextRotationTime */
+                        nextRotationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** KMSSettings rotationPeriod */
+                        rotationPeriod?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a KMSSettings. */
+                    class KMSSettings implements IKMSSettings {
+
+                        /**
+                         * Constructs a new KMSSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1.Workload.IKMSSettings);
+
+                        /** KMSSettings nextRotationTime. */
+                        public nextRotationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** KMSSettings rotationPeriod. */
+                        public rotationPeriod?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new KMSSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns KMSSettings instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1.Workload.IKMSSettings): google.cloud.assuredworkloads.v1.Workload.KMSSettings;
+
+                        /**
+                         * Encodes the specified KMSSettings message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.KMSSettings.verify|verify} messages.
+                         * @param message KMSSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1.Workload.IKMSSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified KMSSettings message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.KMSSettings.verify|verify} messages.
+                         * @param message KMSSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Workload.IKMSSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a KMSSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns KMSSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Workload.KMSSettings;
+
+                        /**
+                         * Decodes a KMSSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns KMSSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Workload.KMSSettings;
+
+                        /**
+                         * Verifies a KMSSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a KMSSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns KMSSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Workload.KMSSettings;
+
+                        /**
+                         * Creates a plain object from a KMSSettings message. Also converts values to other types if specified.
+                         * @param message KMSSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1.Workload.KMSSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this KMSSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ResourceSettings. */
+                    interface IResourceSettings {
+
+                        /** ResourceSettings resourceId */
+                        resourceId?: (string|null);
+
+                        /** ResourceSettings resourceType */
+                        resourceType?: (google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType|null);
+
+                        /** ResourceSettings displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a ResourceSettings. */
+                    class ResourceSettings implements IResourceSettings {
+
+                        /**
+                         * Constructs a new ResourceSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.assuredworkloads.v1.Workload.IResourceSettings);
+
+                        /** ResourceSettings resourceId. */
+                        public resourceId: string;
+
+                        /** ResourceSettings resourceType. */
+                        public resourceType: (google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType);
+
+                        /** ResourceSettings displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new ResourceSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceSettings instance
+                         */
+                        public static create(properties?: google.cloud.assuredworkloads.v1.Workload.IResourceSettings): google.cloud.assuredworkloads.v1.Workload.ResourceSettings;
+
+                        /**
+                         * Encodes the specified ResourceSettings message. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.ResourceSettings.verify|verify} messages.
+                         * @param message ResourceSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.assuredworkloads.v1.Workload.IResourceSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceSettings message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.Workload.ResourceSettings.verify|verify} messages.
+                         * @param message ResourceSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.assuredworkloads.v1.Workload.IResourceSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.Workload.ResourceSettings;
+
+                        /**
+                         * Decodes a ResourceSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.Workload.ResourceSettings;
+
+                        /**
+                         * Verifies a ResourceSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.Workload.ResourceSettings;
+
+                        /**
+                         * Creates a plain object from a ResourceSettings message. Also converts values to other types if specified.
+                         * @param message ResourceSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.assuredworkloads.v1.Workload.ResourceSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** ComplianceRegime enum. */
+                    enum ComplianceRegime {
+                        COMPLIANCE_REGIME_UNSPECIFIED = 0,
+                        IL4 = 1,
+                        CJIS = 2,
+                        FEDRAMP_HIGH = 3,
+                        FEDRAMP_MODERATE = 4,
+                        US_REGIONAL_ACCESS = 5,
+                        HIPAA = 6,
+                        HITRUST = 7,
+                        EU_REGIONS_AND_SUPPORT = 8,
+                        CA_REGIONS_AND_SUPPORT = 9
+                    }
+                }
+
+                /** Properties of a CreateWorkloadOperationMetadata. */
+                interface ICreateWorkloadOperationMetadata {
+
+                    /** CreateWorkloadOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateWorkloadOperationMetadata displayName */
+                    displayName?: (string|null);
+
+                    /** CreateWorkloadOperationMetadata parent */
+                    parent?: (string|null);
+
+                    /** CreateWorkloadOperationMetadata complianceRegime */
+                    complianceRegime?: (google.cloud.assuredworkloads.v1.Workload.ComplianceRegime|keyof typeof google.cloud.assuredworkloads.v1.Workload.ComplianceRegime|null);
+                }
+
+                /** Represents a CreateWorkloadOperationMetadata. */
+                class CreateWorkloadOperationMetadata implements ICreateWorkloadOperationMetadata {
+
+                    /**
+                     * Constructs a new CreateWorkloadOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.assuredworkloads.v1.ICreateWorkloadOperationMetadata);
+
+                    /** CreateWorkloadOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateWorkloadOperationMetadata displayName. */
+                    public displayName: string;
+
+                    /** CreateWorkloadOperationMetadata parent. */
+                    public parent: string;
+
+                    /** CreateWorkloadOperationMetadata complianceRegime. */
+                    public complianceRegime: (google.cloud.assuredworkloads.v1.Workload.ComplianceRegime|keyof typeof google.cloud.assuredworkloads.v1.Workload.ComplianceRegime);
+
+                    /**
+                     * Creates a new CreateWorkloadOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWorkloadOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.assuredworkloads.v1.ICreateWorkloadOperationMetadata): google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata;
+
+                    /**
+                     * Encodes the specified CreateWorkloadOperationMetadata message. Does not implicitly {@link google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata.verify|verify} messages.
+                     * @param message CreateWorkloadOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.assuredworkloads.v1.ICreateWorkloadOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWorkloadOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata.verify|verify} messages.
+                     * @param message CreateWorkloadOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.assuredworkloads.v1.ICreateWorkloadOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWorkloadOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWorkloadOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata;
+
+                    /**
+                     * Decodes a CreateWorkloadOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWorkloadOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata;
+
+                    /**
+                     * Verifies a CreateWorkloadOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWorkloadOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWorkloadOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateWorkloadOperationMetadata message. Also converts values to other types if specified.
+                     * @param message CreateWorkloadOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWorkloadOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Namespace v1beta1. */
             namespace v1beta1 {
 

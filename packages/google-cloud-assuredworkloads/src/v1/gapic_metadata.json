@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.assuredworkloads.v1",
+  "libraryPackage": "@google-cloud/assuredworkloads",
+  "services": {
+    "AssuredWorkloadsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AssuredWorkloadsServiceClient",
+          "rpcs": {
+            "UpdateWorkload": {
+              "methods": [
+                "updateWorkload"
+              ]
+            },
+            "DeleteWorkload": {
+              "methods": [
+                "deleteWorkload"
+              ]
+            },
+            "GetWorkload": {
+              "methods": [
+                "getWorkload"
+              ]
+            },
+            "CreateWorkload": {
+              "methods": [
+                "createWorkload"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AssuredWorkloadsServiceClient",
+          "rpcs": {
+            "UpdateWorkload": {
+              "methods": [
+                "updateWorkload"
+              ]
+            },
+            "DeleteWorkload": {
+              "methods": [
+                "deleteWorkload"
+              ]
+            },
+            "GetWorkload": {
+              "methods": [
+                "getWorkload"
+              ]
+            },
+            "CreateWorkload": {
+              "methods": [
+                "createWorkload"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
