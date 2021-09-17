@@ -12,11 +12,12 @@
   "repository": "googleapis/nodejs-iot",
   "private": true,
   "scripts": {
-    "test": "cd manager && npm test && cd ../ && cd http_example && npm test && cd ../ && cd mqtt_example && npm test && cd ../"
+    "test": "cd manager && npm test && cd ../ && cd http_example && npm test && cd ../ && cd mqtt_example && npm test && cd ../ && cd access_token_example && npm test && cd ../"
   },
   "dependencies": {
     "@google-cloud/iot": "^2.4.0",
-    "@google-cloud/pubsub": "^2.0.0"
+    "@google-cloud/pubsub": "^2.0.0",
+    "@google-cloud/storage": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
