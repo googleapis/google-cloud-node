@@ -20,6 +20,7 @@
   * [Export To Bigquery](#export-to-bigquery)
   * [Get Operation](#get-operation)
   * [Quickstart](#quickstart)
+  * [Set Project Ttl](#set-project-ttl)
 
 ## Before you begin
 
@@ -165,6 +166,23 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Set Project Ttl
+
+View the [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/setProjectTtl.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/setProjectTtl.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setProjectTtl.js`
 
 
 

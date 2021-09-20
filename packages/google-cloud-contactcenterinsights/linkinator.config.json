@@ -9,6 +9,7 @@
     "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/enablePubSubNotifications.js",
     "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/exportToBigquery.js",
     "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/getOperation.js",
+    "https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/setProjectTtl.js",
     "www.googleapis.com",
     "img.shields.io"
   ],

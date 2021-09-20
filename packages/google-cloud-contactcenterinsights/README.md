@@ -96,6 +96,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-contact-cen
 | Export To Bigquery | [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/exportToBigquery.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/exportToBigquery.js,samples/README.md) |
 | Get Operation | [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/getOperation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/getOperation.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Set Project Ttl | [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/setProjectTtl.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/setProjectTtl.js,samples/README.md) |
 
 
 
