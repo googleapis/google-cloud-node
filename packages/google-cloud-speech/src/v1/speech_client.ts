@@ -488,6 +488,8 @@ export class SpeechClient {
    *   process the request.
    * @param {google.cloud.speech.v1.RecognitionAudio} request.audio
    *   Required. The audio data to be recognized.
+   * @param {google.cloud.speech.v1.TranscriptOutputConfig} [request.outputConfig]
+   *   Optional. Specifies an optional destination for the recognition results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

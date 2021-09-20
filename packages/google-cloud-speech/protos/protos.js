@@ -428,6 +428,7 @@
                          * @interface ILongRunningRecognizeRequest
                          * @property {google.cloud.speech.v1.IRecognitionConfig|null} [config] LongRunningRecognizeRequest config
                          * @property {google.cloud.speech.v1.IRecognitionAudio|null} [audio] LongRunningRecognizeRequest audio
+                         * @property {google.cloud.speech.v1.ITranscriptOutputConfig|null} [outputConfig] LongRunningRecognizeRequest outputConfig
                          */
     
                         /**
@@ -462,6 +463,14 @@
                         LongRunningRecognizeRequest.prototype.audio = null;
     
                         /**
+                         * LongRunningRecognizeRequest outputConfig.
+                         * @member {google.cloud.speech.v1.ITranscriptOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.speech.v1.LongRunningRecognizeRequest
+                         * @instance
+                         */
+                        LongRunningRecognizeRequest.prototype.outputConfig = null;
+    
+                        /**
                          * Creates a new LongRunningRecognizeRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1.LongRunningRecognizeRequest
@@ -489,6 +498,8 @@
                                 $root.google.cloud.speech.v1.RecognitionConfig.encode(message.config, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.audio != null && Object.hasOwnProperty.call(message, "audio"))
                                 $root.google.cloud.speech.v1.RecognitionAudio.encode(message.audio, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.speech.v1.TranscriptOutputConfig.encode(message.outputConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -528,6 +539,9 @@
                                     break;
                                 case 2:
                                     message.audio = $root.google.cloud.speech.v1.RecognitionAudio.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.outputConfig = $root.google.cloud.speech.v1.TranscriptOutputConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -574,6 +588,11 @@
                                 if (error)
                                     return "audio." + error;
                             }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.speech.v1.TranscriptOutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
                             return null;
                         };
     
@@ -599,6 +618,11 @@
                                     throw TypeError(".google.cloud.speech.v1.LongRunningRecognizeRequest.audio: object expected");
                                 message.audio = $root.google.cloud.speech.v1.RecognitionAudio.fromObject(object.audio);
                             }
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v1.LongRunningRecognizeRequest.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.speech.v1.TranscriptOutputConfig.fromObject(object.outputConfig);
+                            }
                             return message;
                         };
     
@@ -618,11 +642,14 @@
                             if (options.defaults) {
                                 object.config = null;
                                 object.audio = null;
+                                object.outputConfig = null;
                             }
                             if (message.config != null && message.hasOwnProperty("config"))
                                 object.config = $root.google.cloud.speech.v1.RecognitionConfig.toObject(message.config, options);
                             if (message.audio != null && message.hasOwnProperty("audio"))
                                 object.audio = $root.google.cloud.speech.v1.RecognitionAudio.toObject(message.audio, options);
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.speech.v1.TranscriptOutputConfig.toObject(message.outputConfig, options);
                             return object;
                         };
     
@@ -638,6 +665,211 @@
                         };
     
                         return LongRunningRecognizeRequest;
+                    })();
+    
+                    v1.TranscriptOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a TranscriptOutputConfig.
+                         * @memberof google.cloud.speech.v1
+                         * @interface ITranscriptOutputConfig
+                         * @property {string|null} [gcsUri] TranscriptOutputConfig gcsUri
+                         */
+    
+                        /**
+                         * Constructs a new TranscriptOutputConfig.
+                         * @memberof google.cloud.speech.v1
+                         * @classdesc Represents a TranscriptOutputConfig.
+                         * @implements ITranscriptOutputConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v1.ITranscriptOutputConfig=} [properties] Properties to set
+                         */
+                        function TranscriptOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranscriptOutputConfig gcsUri.
+                         * @member {string|null|undefined} gcsUri
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @instance
+                         */
+                        TranscriptOutputConfig.prototype.gcsUri = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TranscriptOutputConfig outputType.
+                         * @member {"gcsUri"|undefined} outputType
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(TranscriptOutputConfig.prototype, "outputType", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TranscriptOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v1.ITranscriptOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1.TranscriptOutputConfig} TranscriptOutputConfig instance
+                         */
+                        TranscriptOutputConfig.create = function create(properties) {
+                            return new TranscriptOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranscriptOutputConfig message. Does not implicitly {@link google.cloud.speech.v1.TranscriptOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v1.ITranscriptOutputConfig} message TranscriptOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranscriptOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsUri != null && Object.hasOwnProperty.call(message, "gcsUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcsUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranscriptOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v1.TranscriptOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v1.ITranscriptOutputConfig} message TranscriptOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranscriptOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranscriptOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1.TranscriptOutputConfig} TranscriptOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranscriptOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1.TranscriptOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranscriptOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1.TranscriptOutputConfig} TranscriptOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranscriptOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranscriptOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranscriptOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsUri != null && message.hasOwnProperty("gcsUri")) {
+                                properties.outputType = 1;
+                                if (!$util.isString(message.gcsUri))
+                                    return "gcsUri: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranscriptOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1.TranscriptOutputConfig} TranscriptOutputConfig
+                         */
+                        TranscriptOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1.TranscriptOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1.TranscriptOutputConfig();
+                            if (object.gcsUri != null)
+                                message.gcsUri = String(object.gcsUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranscriptOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @static
+                         * @param {google.cloud.speech.v1.TranscriptOutputConfig} message TranscriptOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranscriptOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsUri != null && message.hasOwnProperty("gcsUri")) {
+                                object.gcsUri = message.gcsUri;
+                                if (options.oneofs)
+                                    object.outputType = "gcsUri";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranscriptOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1.TranscriptOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranscriptOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranscriptOutputConfig;
                     })();
     
                     v1.StreamingRecognizeRequest = (function() {

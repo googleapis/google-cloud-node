@@ -111,6 +111,28 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "outputConfig": {
+                          "type": "TranscriptOutputConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TranscriptOutputConfig": {
+                      "oneofs": {
+                        "outputType": {
+                          "oneof": [
+                            "gcsUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },

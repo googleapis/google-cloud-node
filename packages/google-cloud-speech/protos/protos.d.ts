@@ -217,6 +217,9 @@ export namespace google {
 
                     /** LongRunningRecognizeRequest audio */
                     audio?: (google.cloud.speech.v1.IRecognitionAudio|null);
+
+                    /** LongRunningRecognizeRequest outputConfig */
+                    outputConfig?: (google.cloud.speech.v1.ITranscriptOutputConfig|null);
                 }
 
                 /** Represents a LongRunningRecognizeRequest. */
@@ -233,6 +236,9 @@ export namespace google {
 
                     /** LongRunningRecognizeRequest audio. */
                     public audio?: (google.cloud.speech.v1.IRecognitionAudio|null);
+
+                    /** LongRunningRecognizeRequest outputConfig. */
+                    public outputConfig?: (google.cloud.speech.v1.ITranscriptOutputConfig|null);
 
                     /**
                      * Creates a new LongRunningRecognizeRequest instance using the specified properties.
@@ -300,6 +306,99 @@ export namespace google {
 
                     /**
                      * Converts this LongRunningRecognizeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TranscriptOutputConfig. */
+                interface ITranscriptOutputConfig {
+
+                    /** TranscriptOutputConfig gcsUri */
+                    gcsUri?: (string|null);
+                }
+
+                /** Represents a TranscriptOutputConfig. */
+                class TranscriptOutputConfig implements ITranscriptOutputConfig {
+
+                    /**
+                     * Constructs a new TranscriptOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v1.ITranscriptOutputConfig);
+
+                    /** TranscriptOutputConfig gcsUri. */
+                    public gcsUri?: (string|null);
+
+                    /** TranscriptOutputConfig outputType. */
+                    public outputType?: "gcsUri";
+
+                    /**
+                     * Creates a new TranscriptOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TranscriptOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v1.ITranscriptOutputConfig): google.cloud.speech.v1.TranscriptOutputConfig;
+
+                    /**
+                     * Encodes the specified TranscriptOutputConfig message. Does not implicitly {@link google.cloud.speech.v1.TranscriptOutputConfig.verify|verify} messages.
+                     * @param message TranscriptOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v1.ITranscriptOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TranscriptOutputConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v1.TranscriptOutputConfig.verify|verify} messages.
+                     * @param message TranscriptOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v1.ITranscriptOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TranscriptOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TranscriptOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v1.TranscriptOutputConfig;
+
+                    /**
+                     * Decodes a TranscriptOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TranscriptOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v1.TranscriptOutputConfig;
+
+                    /**
+                     * Verifies a TranscriptOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TranscriptOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TranscriptOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v1.TranscriptOutputConfig;
+
+                    /**
+                     * Creates a plain object from a TranscriptOutputConfig message. Also converts values to other types if specified.
+                     * @param message TranscriptOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v1.TranscriptOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TranscriptOutputConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
