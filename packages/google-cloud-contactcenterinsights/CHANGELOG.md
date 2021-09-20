@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.4.0...v1.5.0) (2021-09-20)
+
+
+### Features
+
+* filter is used to filter conversations used for issue model training feat: update_time is used to indicate when the phrase matcher was updated ([#55](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/55)) ([08f13b4](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/08f13b4c54d18a6ea6f0f7192a75ef73583f26e8))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.3.0...v1.4.0) (2021-08-27)
 
 
