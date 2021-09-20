@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.9.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.8.1...v4.9.0) (2021-09-20)
+
+
+### Features
+
+* add output_config request field ([#801](https://www.github.com/googleapis/nodejs-speech/issues/801)) ([b4f8cbf](https://www.github.com/googleapis/nodejs-speech/commit/b4f8cbff71e3cbdce4d7fb7cbe67f7065f4c6a2b))
+
 ### [4.8.1](https://www.github.com/googleapis/nodejs-speech/compare/v4.8.0...v4.8.1) (2021-09-10)
 
 
