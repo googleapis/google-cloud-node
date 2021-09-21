@@ -53,6 +53,7 @@ guides.
   * [Publish Message With Custom Attributes](#publish-message-with-custom-attributes)
   * [Publish Ordered Message](#publish-ordered-message)
   * [Publish Protobuf Messages to a Topic](#publish-protobuf-messages-to-a-topic)
+  * [Publish with flow control](#publish-with-flow-control)
   * [Publish With Retry Settings](#publish-with-retry-settings)
   * [Quickstart](#quickstart)
   * [Remove Dead Letter Policy](#remove-dead-letter-policy)
@@ -702,6 +703,25 @@ __Usage:__
 
 
 `node publishProtobufMessages.js <topic-name>`
+
+
+-----
+
+
+
+
+### Publish with flow control
+
+Publishes to a topic using publisher-side flow control.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishWithFlowControl.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishWithFlowControl.js,samples/README.md)
+
+__Usage:__
+
+
+`node publishWithFlowControl.js <topic-name>`
 
 
 -----
