@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-network-management/compare/v1.1.1...v1.1.2) (2021-09-21)
+
+
+### Bug Fixes
+
+* upgrade module to GA ([#22](https://www.github.com/googleapis/nodejs-network-management/issues/22)) ([11d2692](https://www.github.com/googleapis/nodejs-network-management/commit/11d2692da2b02746dddc358fc1a8e68a1b4abf0a))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-network-management/compare/v1.1.0...v1.1.1) (2021-09-09)
 
 
