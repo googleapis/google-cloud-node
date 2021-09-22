@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.14.3](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.2...v5.14.3) (2021-09-22)
+
+
+### Bug Fixes
+
+* set autoretry back to instance value at end of file functions ([#1604](https://www.github.com/googleapis/nodejs-storage/issues/1604)) ([db3b59d](https://www.github.com/googleapis/nodejs-storage/commit/db3b59d731c9760d55bf112c211bdd644da911c4))
+
 ### [5.14.2](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.1...v5.14.2) (2021-09-13)
 
 
