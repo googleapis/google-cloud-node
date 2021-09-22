@@ -1792,6 +1792,7 @@ describe('File', () => {
         },
       };
       file.createResumableUpload(done);
+      assert.strictEqual(file.storage.retryOptions.autoRetry, true);
     });
 
     it('should create a resumable upload URI', done => {
@@ -4787,6 +4788,7 @@ describe('File', () => {
         };
 
         file.startResumableUpload_(dup, {retryOptions: {autoRetry: true}});
+        assert.strictEqual(file.retryOptions.autoRetry, true);
       });
     });
   });

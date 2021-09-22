@@ -1644,6 +1644,7 @@ class File extends ServiceObject<File> {
       },
       callback!
     );
+    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**
@@ -3940,6 +3941,7 @@ class File extends ServiceObject<File> {
       .on('progress', evt => dup.emit('progress', evt));
 
     dup.setWritable(uploadStream);
+    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**
