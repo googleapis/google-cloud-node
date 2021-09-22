@@ -460,6 +460,10 @@ export class FeaturestoreOnlineServingServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.readFeatureValues(request);
+   *
+   * @example <caption>include:samples/generated/v1beta1/featurestore_online_serving_service.read_feature_values.js</caption>
+   * region_tag:aiplatform_read_feature_values_sample
+   *
    */
   readFeatureValues(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
