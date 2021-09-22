@@ -56,6 +56,7 @@ applications that interact with individual Google Cloud services:
 | [Memorystore for Memcached](https://github.com/googleapis/nodejs-memcache) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/memcache)](https://npm.im/@google-cloud/memcache) |
 | [Monitoring Dashboards](https://github.com/googleapis/nodejs-monitoring-dashboards) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/monitoring-dashboards)](https://npm.im/@google-cloud/monitoring-dashboards) |
 | [Natural Language](https://github.com/googleapis/nodejs-language) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/language)](https://npm.im/@google-cloud/language) |
+| [Network Management API](https://github.com/googleapis/nodejs-network-management) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-management)](https://npm.im/@google-cloud/network-management) |
 | [Organization Policy](https://github.com/googleapis/nodejs-org-policy) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/org-policy)](https://npm.im/@google-cloud/org-policy) |
 | [OS Config API](https://github.com/googleapis/nodejs-os-config) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/os-config)](https://npm.im/@google-cloud/os-config) |
 | [OS Login](https://github.com/googleapis/nodejs-os-login) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/os-login)](https://npm.im/@google-cloud/os-login) |
@@ -85,6 +86,7 @@ applications that interact with individual Google Cloud services:
 | [TPU](https://github.com/googleapis/nodejs-cloud-tpu) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/tpu)](https://npm.im/@google-cloud/tpu) |
 | [Transcoder API](https://github.com/googleapis/nodejs-video-transcoder) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-transcoder)](https://npm.im/@google-cloud/video-transcoder) |
 | [Translation](https://github.com/googleapis/nodejs-translate) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/translate)](https://npm.im/@google-cloud/translate) |
+| [Vertex AI](https://github.com/googleapis/nodejs-ai-platform) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/aiplatform)](https://npm.im/@google-cloud/aiplatform) |
 | [Video Intelligence](https://github.com/googleapis/nodejs-video-intelligence) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-intelligence)](https://npm.im/@google-cloud/video-intelligence) |
 | [Virtual Private Cloud](https://github.com/googleapis/nodejs-vpc-access) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vpc-access)](https://npm.im/@google-cloud/vpc-access) |
 | [Vision API](https://github.com/googleapis/nodejs-vision) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vision)](https://npm.im/@google-cloud/vision) |
@@ -113,14 +115,12 @@ applications that interact with individual Google Cloud services:
 | [Life Sciences](https://github.com/googleapis/nodejs-life-sciences) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/life-sciences)](https://npm.im/@google-cloud/life-sciences) |
 | [Media Translation](https://github.com/googleapis/nodejs-media-translation) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/media-translation)](https://npm.im/@google-cloud/media-translation) |
 | [Network Connectivity Center](https://github.com/googleapis/nodejs-network-connectivity) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-connectivity)](https://npm.im/@google-cloud/network-connectivity) |
-| [Network Management API](https://github.com/googleapis/nodejs-network-management) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-management)](https://npm.im/@google-cloud/network-management) |
 | [Phishing Protection](https://github.com/googleapis/nodejs-phishing-protection) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/phishing-protection)](https://npm.im/@google-cloud/phishing-protection) |
 | [Private Catalog](https://github.com/googleapis/nodejs-private-catalog) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/private-catalog)](https://npm.im/@google-cloud/private-catalog) |
 | [Resource Manager API](https://github.com/googleapis/nodejs-resource-manager) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/resource-manager)](https://npm.im/@google-cloud/resource-manager) |
 | [Runtime Config](https://github.com/googleapis/nodejs-rcloadenv) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/rcloadenv)](https://npm.im/@google-cloud/rcloadenv) |
 | [Stackdriver Debugger](https://github.com/googleapis/cloud-debug-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/debug-agent)](https://npm.im/@google-cloud/debug-agent) |
 | [Stackdriver Trace](https://github.com/googleapis/cloud-trace-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
-| [Vertex AI](https://github.com/googleapis/nodejs-ai-platform) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/aiplatform)](https://npm.im/@google-cloud/aiplatform) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces

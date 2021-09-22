@@ -716,6 +716,21 @@
     "support_documentation": "https://cloud.google.com/natural-language/docs/getting-support"
   },
   {
+    "name": "networkmanagement",
+    "name_pretty": "Network Management API",
+    "product_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-management/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-network-management/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-network-management",
+    "distribution_name": "@google-cloud/network-management",
+    "api_id": "networkmanagement.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/"
+  },
+  {
     "language": "nodejs",
     "requires_billing": true,
     "product_documentation": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
@@ -1158,6 +1173,22 @@
   },
   {
     "language": "nodejs",
+    "issue_tracker": "https://github.com/googleapis/nodejs-ai-platform/issues",
+    "requires_billing": true,
+    "name_pretty": "Vertex AI",
+    "product_documentation": "https://cloud.google.com/vertex-ai/docs",
+    "name": "aiplatform",
+    "default_version": "v1",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
+    "release_level": "ga",
+    "api_id": "aiplatform.googleapis.com",
+    "repo": "googleapis/nodejs-ai-platform",
+    "codeowner_team": "@googleapis/ml-apis",
+    "distribution_name": "@google-cloud/aiplatform",
+    "support_documentation": "https://cloud.google.com/vertex-ai/docs"
+  },
+  {
+    "language": "nodejs",
     "repo": "googleapis/nodejs-video-intelligence",
     "name": "video",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/5084810",
@@ -1585,21 +1616,6 @@
     "support_documentation": "https://cloud.google.com/network-connectivity/docs"
   },
   {
-    "name": "networkmanagement",
-    "name_pretty": "Network Management API",
-    "product_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-management/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-network-management/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-network-management",
-    "distribution_name": "@google-cloud/network-management",
-    "api_id": "networkmanagement.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/"
-  },
-  {
     "name": "phishing-protection",
     "name_pretty": "Phishing Protection",
     "product_documentation": "https://cloud.google.com/phishing-protection/docs/",
@@ -1682,21 +1698,5 @@
     "api_id": "cloudtrace.googleapis.com",
     "codeowner_team": "@googleapis/api-trace",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "language": "nodejs",
-    "issue_tracker": "https://github.com/googleapis/nodejs-ai-platform/issues",
-    "requires_billing": true,
-    "name_pretty": "Vertex AI",
-    "product_documentation": "https://cloud.google.com/vertex-ai/docs",
-    "name": "aiplatform",
-    "default_version": "v1",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
-    "release_level": "beta",
-    "api_id": "aiplatform.googleapis.com",
-    "repo": "googleapis/nodejs-ai-platform",
-    "codeowner_team": "@googleapis/ml-apis",
-    "distribution_name": "@google-cloud/aiplatform",
-    "support_documentation": "https://cloud.google.com/vertex-ai/docs"
   }
 ]
