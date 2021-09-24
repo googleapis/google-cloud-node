@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "repository": "googleapis/nodejs-cloud-container",
   "private": true,
