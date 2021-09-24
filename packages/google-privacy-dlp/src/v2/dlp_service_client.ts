@@ -3614,7 +3614,8 @@ export class DlpServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInspectTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInspectTemplates.createStream(
       this.innerApiCalls.listInspectTemplates as gax.GaxCall,
@@ -3701,7 +3702,8 @@ export class DlpServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInspectTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInspectTemplates.asyncIterate(
       this.innerApiCalls['listInspectTemplates'] as GaxCall,
@@ -3922,7 +3924,8 @@ export class DlpServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDeidentifyTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDeidentifyTemplates.createStream(
       this.innerApiCalls.listDeidentifyTemplates as gax.GaxCall,
@@ -4009,7 +4012,8 @@ export class DlpServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDeidentifyTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDeidentifyTemplates.asyncIterate(
       this.innerApiCalls['listDeidentifyTemplates'] as GaxCall,
@@ -4265,7 +4269,8 @@ export class DlpServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobTriggers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobTriggers.createStream(
       this.innerApiCalls.listJobTriggers as gax.GaxCall,
@@ -4375,7 +4380,8 @@ export class DlpServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobTriggers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobTriggers.asyncIterate(
       this.innerApiCalls['listJobTriggers'] as GaxCall,
@@ -4634,7 +4640,8 @@ export class DlpServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDlpJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDlpJobs.createStream(
       this.innerApiCalls.listDlpJobs as gax.GaxCall,
@@ -4746,7 +4753,8 @@ export class DlpServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDlpJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDlpJobs.asyncIterate(
       this.innerApiCalls['listDlpJobs'] as GaxCall,
@@ -4965,7 +4973,8 @@ export class DlpServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listStoredInfoTypes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listStoredInfoTypes.createStream(
       this.innerApiCalls.listStoredInfoTypes as gax.GaxCall,
@@ -5053,7 +5062,8 @@ export class DlpServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listStoredInfoTypes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listStoredInfoTypes.asyncIterate(
       this.innerApiCalls['listStoredInfoTypes'] as GaxCall,

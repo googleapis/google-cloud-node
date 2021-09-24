@@ -9,7 +9,7 @@
     "*.js"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "test": "mocha system-test/*.test.js --timeout=600000"
