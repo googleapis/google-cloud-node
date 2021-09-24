@@ -1537,7 +1537,8 @@ export class GrafeasV1Beta1Client {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listOccurrences'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOccurrences.createStream(
       this.innerApiCalls.listOccurrences as gax.GaxCall,
@@ -1590,7 +1591,8 @@ export class GrafeasV1Beta1Client {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listOccurrences'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOccurrences.asyncIterate(
       this.innerApiCalls['listOccurrences'] as GaxCall,
@@ -1729,7 +1731,8 @@ export class GrafeasV1Beta1Client {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listNotes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNotes.createStream(
       this.innerApiCalls.listNotes as gax.GaxCall,
@@ -1782,7 +1785,8 @@ export class GrafeasV1Beta1Client {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listNotes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNotes.asyncIterate(
       this.innerApiCalls['listNotes'] as GaxCall,
@@ -1925,7 +1929,8 @@ export class GrafeasV1Beta1Client {
       gax.routingHeader.fromParams({
         name: request.name || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listNoteOccurrences'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNoteOccurrences.createStream(
       this.innerApiCalls.listNoteOccurrences as gax.GaxCall,
@@ -1978,7 +1983,8 @@ export class GrafeasV1Beta1Client {
         name: request.name || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listNoteOccurrences'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listNoteOccurrences.asyncIterate(
       this.innerApiCalls['listNoteOccurrences'] as GaxCall,
