@@ -626,6 +626,7 @@ class Bucket extends ServiceObject {
   signer?: URLSigner;
 
   private instanceRetryValue?: boolean;
+  private instancePreconditionOpts?: PreconditionOptions;
 
   constructor(storage: Storage, name: string, options?: BucketOptions) {
     options = options || {};
@@ -1021,6 +1022,7 @@ class Bucket extends ServiceObject {
     this.getFilesStream = paginator.streamify('getFiles');
 
     this.instanceRetryValue = storage.retryOptions.autoRetry;
+    this.instancePreconditionOpts = options?.preconditionOpts;
   }
 
   addLifecycleRule(
@@ -1409,6 +1411,7 @@ class Bucket extends ServiceObject {
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
       (options?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
@@ -1416,6 +1419,8 @@ class Bucket extends ServiceObject {
     ) {
       maxRetries = 0;
     }
+
+    Object.assign(options, this.instancePreconditionOpts, options);
 
     // Make the request from the destination File object.
     destinationFile.request(
@@ -1432,8 +1437,13 @@ class Bucket extends ServiceObject {
               name: source.name,
             } as SourceObject;
 
-            if (source.metadata && source.metadata.generation) {
-              sourceObject.generation = source.metadata.generation;
+            if (
+              source?.metadata?.generation ||
+              this.instancePreconditionOpts?.ifGenerationMatch
+            ) {
+              sourceObject.generation =
+                source?.metadata?.generation ||
+                this.instancePreconditionOpts?.ifGenerationMatch;
             }
 
             return sourceObject;
@@ -1880,6 +1890,8 @@ class Bucket extends ServiceObject {
       this.methods.delete,
       AvailableServiceObjectMethods.delete
     );
+
+    Object.assign(query, this.instancePreconditionOpts, query);
 
     const deleteFile = (file: File) => {
       return file
@@ -3908,6 +3920,7 @@ class Bucket extends ServiceObject {
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
       (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===

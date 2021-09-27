@@ -367,6 +367,10 @@ describe('File', () => {
         getMetadata: {reqOpts: {qs: options.preconditionOpts}},
         setMetadata: {reqOpts: {qs: options.preconditionOpts}},
       });
+      assert.deepStrictEqual(
+        file.instancePreconditionOpts,
+        options.preconditionOpts
+      );
     });
 
     it('should set the correct query string with ifGenerationNotMatch', () => {
@@ -382,6 +386,10 @@ describe('File', () => {
         getMetadata: {reqOpts: {qs: options.preconditionOpts}},
         setMetadata: {reqOpts: {qs: options.preconditionOpts}},
       });
+      assert.deepStrictEqual(
+        file.instancePreconditionOpts,
+        options.preconditionOpts
+      );
     });
 
     it('should set the correct query string with ifMetagenerationMatch', () => {
@@ -397,6 +405,10 @@ describe('File', () => {
         getMetadata: {reqOpts: {qs: options.preconditionOpts}},
         setMetadata: {reqOpts: {qs: options.preconditionOpts}},
       });
+      assert.deepStrictEqual(
+        file.instancePreconditionOpts,
+        options.preconditionOpts
+      );
     });
 
     it('should set the correct query string with ifMetagenerationNotMatch', () => {
@@ -412,6 +424,10 @@ describe('File', () => {
         getMetadata: {reqOpts: {qs: options.preconditionOpts}},
         setMetadata: {reqOpts: {qs: options.preconditionOpts}},
       });
+      assert.deepStrictEqual(
+        file.instancePreconditionOpts,
+        options.preconditionOpts
+      );
     });
 
     it('should not strip leading slash name in ServiceObject', () => {
@@ -682,6 +698,39 @@ describe('File', () => {
       };
 
       file.copy(newFile, options, assert.ifError);
+    });
+
+    it('should respect precondition options from constructor', done => {
+      file = new File(BUCKET, FILE_NAME, {
+        preconditionOpts: {
+          ifGenerationMatch: 200,
+          ifGenerationNotMatch: 201,
+          ifMetagenerationMatch: 202,
+          ifMetagenerationNotMatch: 203,
+        },
+      });
+      const newFile = new File(BUCKET, 'new-file');
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.qs.ifGenerationMatch,
+          file.instancePreconditionOpts.ifGenerationMatch
+        );
+        assert.strictEqual(
+          reqOpts.qs.ifGenerationNotMatch,
+          file.instancePreconditionOpts.ifGenerationNotMatch
+        );
+        assert.strictEqual(
+          reqOpts.qs.ifMetagenerationMatch,
+          file.instancePreconditionOpts.ifMetagenerationMatch
+        );
+        assert.strictEqual(
+          reqOpts.qs.ifMetagenerationNotMatch,
+          file.instancePreconditionOpts.ifMetagenerationNotMatch
+        );
+        done();
+      };
+
+      file.copy(newFile, {}, assert.ifError);
     });
 
     it('should disable autoRetry when ifGenerationMatch is undefined', done => {
@@ -1864,6 +1913,87 @@ describe('File', () => {
             options.retryOptions.totalTimeout
           );
           assert.strictEqual(opts.params, options.preconditionOpts);
+
+          callback();
+        },
+      };
+
+      file.createResumableUpload(options, done);
+    });
+
+    it('should create a resumable upload URI using precondition options from constructor', done => {
+      file = new File(BUCKET, FILE_NAME, {
+        preconditionOpts: {
+          ifGenerationMatch: 200,
+          ifGenerationNotMatch: 201,
+          ifMetagenerationMatch: 202,
+          ifMetagenerationNotMatch: 203,
+        },
+      });
+      const options = {
+        configPath: '/Users/user/.config/here',
+        metadata: {
+          contentType: 'application/json',
+        },
+        origin: '*',
+        predefinedAcl: 'predefined-acl',
+        private: 'private',
+        public: 'public',
+        userProject: 'user-project-id',
+        retryOptions: {
+          autoRetry: true,
+          maxRetries: 3,
+          maxRetryDelay: 60,
+          retryDelayMultipier: 2,
+          totalTimeout: 600,
+        },
+      };
+
+      file.generation = 3;
+      file.encryptionKey = 'encryption-key';
+      file.kmsKeyName = 'kms-key-name';
+
+      resumableUploadOverride = {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        createURI(opts: any, callback: Function) {
+          const bucket = file.bucket;
+          const storage = bucket.storage;
+
+          assert.strictEqual(opts.authClient, storage.authClient);
+          assert.strictEqual(opts.apiEndpoint, storage.apiEndpoint);
+          assert.strictEqual(opts.bucket, bucket.name);
+          assert.strictEqual(opts.configPath, options.configPath);
+          assert.strictEqual(opts.file, file.name);
+          assert.strictEqual(opts.generation, file.generation);
+          assert.strictEqual(opts.key, file.encryptionKey);
+          assert.strictEqual(opts.kmsKeyName, file.kmsKeyName);
+          assert.strictEqual(opts.metadata, options.metadata);
+          assert.strictEqual(opts.origin, options.origin);
+          assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
+          assert.strictEqual(opts.private, options.private);
+          assert.strictEqual(opts.public, options.public);
+          assert.strictEqual(opts.userProject, options.userProject);
+          assert.strictEqual(
+            opts.retryOptions.autoRetry,
+            options.retryOptions.autoRetry
+          );
+          assert.strictEqual(
+            opts.retryOptions.maxRetries,
+            options.retryOptions.maxRetries
+          );
+          assert.strictEqual(
+            opts.retryOptions.maxRetryDelay,
+            options.retryOptions.maxRetryDelay
+          );
+          assert.strictEqual(
+            opts.retryOptions.retryDelayMultipier,
+            options.retryOptions.retryDelayMultipier
+          );
+          assert.strictEqual(
+            opts.retryOptions.totalTimeout,
+            options.retryOptions.totalTimeout
+          );
+          assert.strictEqual(opts.params, file.instancePreconditionOpts);
 
           callback();
         },
