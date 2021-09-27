@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.1.1...v1.1.2) (2021-09-27)
+
+
+### Bug Fixes
+
+* flag module as GA ([#25](https://www.github.com/googleapis/nodejs-eventarc/issues/25)) ([d918ba1](https://www.github.com/googleapis/nodejs-eventarc/commit/d918ba13ae87dbfca799b6136a0c31bc4c24cb71))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.1.0...v1.1.1) (2021-09-07)
 
 
