@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.6.2...v2.7.0) (2021-09-27)
+
+
+### Features
+
+* add BigQuery Storage Write API v1 ([#209](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/209)) ([e0401d9](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/e0401d96480cd192a2fad8075884d2a8abd417ca))
+
 ### [2.6.2](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.6.1...v2.6.2) (2021-09-07)
 
 
