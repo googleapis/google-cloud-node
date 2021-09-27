@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.4.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.3.1...v4.4.0) (2021-09-21)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#867](https://www.github.com/googleapis/nodejs-dialogflow/issues/867)) ([4bc4959](https://www.github.com/googleapis/nodejs-dialogflow/commit/4bc4959a8a85f8b2f1fed8133edc461db9e0dd0f))
+
 ### [4.3.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.3.0...v4.3.1) (2021-08-17)
 
 
