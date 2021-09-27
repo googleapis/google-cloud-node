@@ -13,7 +13,7 @@
                         "csharp_namespace": "Google.Cloud.BigQuery.Storage.V1",
                         "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/storage/v1;storage",
                         "java_multiple_files": true,
-                        "java_outer_classname": "StreamProto",
+                        "java_outer_classname": "TableProto",
                         "java_package": "com.google.cloud.bigquery.storage.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\Storage\\V1",
                         "(google.api.resource_definition).type": "bigquery.googleapis.com/Table",
@@ -77,6 +77,23 @@
                             }
                           }
                         },
+                        "ProtoSchema": {
+                          "fields": {
+                            "protoDescriptor": {
+                              "type": "google.protobuf.DescriptorProto",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ProtoRows": {
+                          "fields": {
+                            "serializedRows": {
+                              "rule": "repeated",
+                              "type": "bytes",
+                              "id": 1
+                            }
+                          }
+                        },
                         "BigQueryRead": {
                           "options": {
                             "(google.api.default_host)": "bigquerystorage.googleapis.com",
@@ -133,6 +150,134 @@
                                   "(google.api.http)": {
                                     "get": "/v1/{name=projects/*/locations/*/sessions/*/streams/*}"
                                   }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "BigQueryWrite": {
+                          "options": {
+                            "(google.api.default_host)": "bigquerystorage.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/bigquery.insertdata,https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateWriteStream": {
+                              "requestType": "CreateWriteStreamRequest",
+                              "responseType": "WriteStream",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/datasets/*/tables/*}",
+                                "(google.api.http).body": "write_stream",
+                                "(google.api.method_signature)": "parent,write_stream"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/datasets/*/tables/*}",
+                                    "body": "write_stream"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,write_stream"
+                                }
+                              ]
+                            },
+                            "AppendRows": {
+                              "requestType": "AppendRowsRequest",
+                              "requestStream": true,
+                              "responseType": "AppendRowsResponse",
+                              "responseStream": true,
+                              "options": {
+                                "(google.api.http).post": "/v1/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "write_stream"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "write_stream"
+                                }
+                              ]
+                            },
+                            "GetWriteStream": {
+                              "requestType": "GetWriteStreamRequest",
+                              "responseType": "WriteStream",
+                              "options": {
+                                "(google.api.http).post": "/v1/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "FinalizeWriteStream": {
+                              "requestType": "FinalizeWriteStreamRequest",
+                              "responseType": "FinalizeWriteStreamResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "BatchCommitWriteStreams": {
+                              "requestType": "BatchCommitWriteStreamsRequest",
+                              "responseType": "BatchCommitWriteStreamsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/datasets/*/tables/*}",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/datasets/*/tables/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "FlushRows": {
+                              "requestType": "FlushRowsRequest",
+                              "responseType": "FlushRowsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v1/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "write_stream"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{write_stream=projects/*/datasets/*/tables/*/streams/*}",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "write_stream"
                                 }
                               ]
                             }
@@ -287,6 +432,222 @@
                             }
                           }
                         },
+                        "CreateWriteStreamRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                              }
+                            },
+                            "writeStream": {
+                              "type": "WriteStream",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "AppendRowsRequest": {
+                          "oneofs": {
+                            "rows": {
+                              "oneof": [
+                                "protoRows"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "writeStream": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            },
+                            "offset": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            },
+                            "protoRows": {
+                              "type": "ProtoData",
+                              "id": 4
+                            },
+                            "traceId": {
+                              "type": "string",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "ProtoData": {
+                              "fields": {
+                                "writerSchema": {
+                                  "type": "ProtoSchema",
+                                  "id": 1
+                                },
+                                "rows": {
+                                  "type": "ProtoRows",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AppendRowsResponse": {
+                          "oneofs": {
+                            "response": {
+                              "oneof": [
+                                "appendResult",
+                                "error"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "appendResult": {
+                              "type": "AppendResult",
+                              "id": 1
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            },
+                            "updatedSchema": {
+                              "type": "TableSchema",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "AppendResult": {
+                              "fields": {
+                                "offset": {
+                                  "type": "google.protobuf.Int64Value",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "GetWriteStreamRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            }
+                          }
+                        },
+                        "BatchCommitWriteStreamsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "writeStreams": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "BatchCommitWriteStreamsResponse": {
+                          "fields": {
+                            "commitTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "streamErrors": {
+                              "rule": "repeated",
+                              "type": "StorageError",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "FinalizeWriteStreamRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            }
+                          }
+                        },
+                        "FinalizeWriteStreamResponse": {
+                          "fields": {
+                            "rowCount": {
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "FlushRowsRequest": {
+                          "fields": {
+                            "writeStream": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
+                              }
+                            },
+                            "offset": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "FlushRowsResponse": {
+                          "fields": {
+                            "offset": {
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "StorageError": {
+                          "fields": {
+                            "code": {
+                              "type": "StorageErrorCode",
+                              "id": 1
+                            },
+                            "entity": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "StorageErrorCode": {
+                              "values": {
+                                "STORAGE_ERROR_CODE_UNSPECIFIED": 0,
+                                "TABLE_NOT_FOUND": 1,
+                                "STREAM_ALREADY_COMMITTED": 2,
+                                "STREAM_NOT_FOUND": 3,
+                                "INVALID_STREAM_TYPE": 4,
+                                "INVALID_STREAM_STATE": 5,
+                                "STREAM_FINALIZED": 6,
+                                "SCHEMA_MISMATCH_EXTRA_FIELDS": 7
+                              }
+                            }
+                          }
+                        },
                         "DataFormat": {
                           "values": {
                             "DATA_FORMAT_UNSPECIFIED": 0,
@@ -430,6 +791,159 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "WriteStream": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerystorage.googleapis.com/WriteStream",
+                            "(google.api.resource).pattern": "projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "commitTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "tableSchema": {
+                              "type": "TableSchema",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "COMMITTED": 1,
+                                "PENDING": 2,
+                                "BUFFERED": 3
+                              }
+                            }
+                          }
+                        },
+                        "TableSchema": {
+                          "fields": {
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "TableFieldSchema",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "TableFieldSchema": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "mode": {
+                              "type": "Mode",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "TableFieldSchema",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxLength": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "precision": {
+                              "type": "int64",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "scale": {
+                              "type": "int64",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "STRING": 1,
+                                "INT64": 2,
+                                "DOUBLE": 3,
+                                "STRUCT": 4,
+                                "BYTES": 5,
+                                "BOOL": 6,
+                                "TIMESTAMP": 7,
+                                "DATE": 8,
+                                "TIME": 9,
+                                "DATETIME": 10,
+                                "GEOGRAPHY": 11,
+                                "NUMERIC": 12,
+                                "BIGNUMERIC": 13,
+                                "INTERVAL": 14,
+                                "JSON": 15
+                              }
+                            },
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "NULLABLE": 1,
+                                "REQUIRED": 2,
+                                "REPEATED": 3
                               }
                             }
                           }
@@ -908,215 +1422,6 @@
                       }
                     }
                   }
-                }
-              }
-            }
-          }
-        },
-        "api": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
-            "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
-            "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
-          },
-          "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
                 }
               }
             }
@@ -2029,8 +2334,330 @@
                 }
               }
             },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "Empty": {
               "fields": {}
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ResourceProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
             }
           }
         }

@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as bigqueryreadModule from '../src';
+import * as bigquerywriteModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -51,7 +51,7 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubServerStreamingCall<ResponseType>(
+function stubBidiStreamingCall<ResponseType>(
   response?: ResponseType,
   error?: Error
 ) {
@@ -62,57 +62,50 @@ function stubServerStreamingCall<ResponseType>(
     objectMode: true,
     transform: transformStub,
   });
-  // write something to the stream to trigger transformStub and send the response back to the client
-  setImmediate(() => {
-    mockStream.write({});
-  });
-  setImmediate(() => {
-    mockStream.end();
-  });
   return sinon.stub().returns(mockStream);
 }
 
-describe('v1.BigQueryReadClient', () => {
+describe('v1.BigQueryWriteClient', () => {
   it('has servicePath', () => {
-    const servicePath = bigqueryreadModule.v1.BigQueryReadClient.servicePath;
+    const servicePath = bigquerywriteModule.v1.BigQueryWriteClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
-    const apiEndpoint = bigqueryreadModule.v1.BigQueryReadClient.apiEndpoint;
+    const apiEndpoint = bigquerywriteModule.v1.BigQueryWriteClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port = bigqueryreadModule.v1.BigQueryReadClient.port;
+    const port = bigquerywriteModule.v1.BigQueryWriteClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
-    const client = new bigqueryreadModule.v1.BigQueryReadClient();
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient({
       fallback: true,
     });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
-    assert.strictEqual(client.bigQueryReadStub, undefined);
+    assert.strictEqual(client.bigQueryWriteStub, undefined);
     await client.initialize();
-    assert(client.bigQueryReadStub);
+    assert(client.bigQueryWriteStub);
   });
 
   it('has close method', () => {
-    const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -121,7 +114,7 @@ describe('v1.BigQueryReadClient', () => {
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -133,7 +126,7 @@ describe('v1.BigQueryReadClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    const client = new bigquerywriteModule.v1.BigQueryWriteClient({
       credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
@@ -153,19 +146,18 @@ describe('v1.BigQueryReadClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('createReadSession', () => {
-    it('invokes createReadSession without error', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+  describe('createWriteStream', () => {
+    it('invokes createWriteStream without error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
+        new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
-      const expectedHeaderRequestParams = 'read_session.table=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -174,30 +166,29 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.ReadSession()
+        new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
-      client.innerApiCalls.createReadSession = stubSimpleCall(expectedResponse);
-      const [response] = await client.createReadSession(request);
+      client.innerApiCalls.createWriteStream = stubSimpleCall(expectedResponse);
+      const [response] = await client.createWriteStream(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createReadSession as SinonStub)
+        (client.innerApiCalls.createWriteStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes createReadSession without error using callback', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    it('invokes createWriteStream without error using callback', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
+        new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
-      const expectedHeaderRequestParams = 'read_session.table=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -206,16 +197,16 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.ReadSession()
+        new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
-      client.innerApiCalls.createReadSession =
+      client.innerApiCalls.createWriteStream =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createReadSession(
+        client.createWriteStream(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.bigquery.storage.v1.IReadSession | null
+            result?: protos.google.cloud.bigquery.storage.v1.IWriteStream | null
           ) => {
             if (err) {
               reject(err);
@@ -228,24 +219,23 @@ describe('v1.BigQueryReadClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createReadSession as SinonStub)
+        (client.innerApiCalls.createWriteStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes createReadSession with error', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    it('invokes createWriteStream with error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
+        new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
-      const expectedHeaderRequestParams = 'read_session.table=';
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -254,28 +244,28 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.createReadSession = stubSimpleCall(
+      client.innerApiCalls.createWriteStream = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createReadSession(request), expectedError);
+      await assert.rejects(client.createWriteStream(request), expectedError);
       assert(
-        (client.innerApiCalls.createReadSession as SinonStub)
+        (client.innerApiCalls.createWriteStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('splitReadStream', () => {
-    it('invokes splitReadStream without error', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+  describe('getWriteStream', () => {
+    it('invokes getWriteStream without error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
+        new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -287,26 +277,26 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.SplitReadStreamResponse()
+        new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
-      client.innerApiCalls.splitReadStream = stubSimpleCall(expectedResponse);
-      const [response] = await client.splitReadStream(request);
+      client.innerApiCalls.getWriteStream = stubSimpleCall(expectedResponse);
+      const [response] = await client.getWriteStream(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.splitReadStream as SinonStub)
+        (client.innerApiCalls.getWriteStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes splitReadStream without error using callback', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    it('invokes getWriteStream without error using callback', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
+        new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -318,16 +308,16 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.SplitReadStreamResponse()
+        new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
-      client.innerApiCalls.splitReadStream =
+      client.innerApiCalls.getWriteStream =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.splitReadStream(
+        client.getWriteStream(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse | null
+            result?: protos.google.cloud.bigquery.storage.v1.IWriteStream | null
           ) => {
             if (err) {
               reject(err);
@@ -340,20 +330,20 @@ describe('v1.BigQueryReadClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.splitReadStream as SinonStub)
+        (client.innerApiCalls.getWriteStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes splitReadStream with error', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    it('invokes getWriteStream with error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
+        new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -365,31 +355,31 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.splitReadStream = stubSimpleCall(
+      client.innerApiCalls.getWriteStream = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.splitReadStream(request), expectedError);
+      await assert.rejects(client.getWriteStream(request), expectedError);
       assert(
-        (client.innerApiCalls.splitReadStream as SinonStub)
+        (client.innerApiCalls.getWriteStream as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('readRows', () => {
-    it('invokes readRows without error', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+  describe('finalizeWriteStream', () => {
+    it('invokes finalizeWriteStream without error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.ReadRowsRequest()
+        new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
       );
-      request.readStream = '';
-      const expectedHeaderRequestParams = 'read_stream=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -398,43 +388,77 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.ReadRowsResponse()
+        new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse()
       );
-      client.innerApiCalls.readRows = stubServerStreamingCall(expectedResponse);
-      const stream = client.readRows(request);
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.bigquery.storage.v1.ReadRowsResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const response = await promise;
+      client.innerApiCalls.finalizeWriteStream =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.finalizeWriteStream(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.readRows as SinonStub)
+        (client.innerApiCalls.finalizeWriteStream as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions)
+          .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes readRows with error', async () => {
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+    it('invokes finalizeWriteStream without error using callback', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.bigquery.storage.v1.ReadRowsRequest()
+        new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
       );
-      request.readStream = '';
-      const expectedHeaderRequestParams = 'read_stream=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse()
+      );
+      client.innerApiCalls.finalizeWriteStream =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.finalizeWriteStream(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.finalizeWriteStream as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes finalizeWriteStream with error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -443,16 +467,262 @@ describe('v1.BigQueryReadClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.readRows = stubServerStreamingCall(
+      client.innerApiCalls.finalizeWriteStream = stubSimpleCall(
         undefined,
         expectedError
       );
-      const stream = client.readRows(request);
+      await assert.rejects(client.finalizeWriteStream(request), expectedError);
+      assert(
+        (client.innerApiCalls.finalizeWriteStream as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('batchCommitWriteStreams', () => {
+    it('invokes batchCommitWriteStreams without error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse()
+      );
+      client.innerApiCalls.batchCommitWriteStreams =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCommitWriteStreams(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchCommitWriteStreams as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchCommitWriteStreams without error using callback', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse()
+      );
+      client.innerApiCalls.batchCommitWriteStreams =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCommitWriteStreams(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchCommitWriteStreams as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchCommitWriteStreams with error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCommitWriteStreams = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchCommitWriteStreams(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.batchCommitWriteStreams as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('flushRows', () => {
+    it('invokes flushRows without error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
+      );
+      request.writeStream = '';
+      const expectedHeaderRequestParams = 'write_stream=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FlushRowsResponse()
+      );
+      client.innerApiCalls.flushRows = stubSimpleCall(expectedResponse);
+      const [response] = await client.flushRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.flushRows as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes flushRows without error using callback', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
+      );
+      request.writeStream = '';
+      const expectedHeaderRequestParams = 'write_stream=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FlushRowsResponse()
+      );
+      client.innerApiCalls.flushRows =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.flushRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.flushRows as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes flushRows with error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
+      );
+      request.writeStream = '';
+      const expectedHeaderRequestParams = 'write_stream=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.flushRows = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.flushRows(request), expectedError);
+      assert(
+        (client.innerApiCalls.flushRows as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('appendRows', () => {
+    it('invokes appendRows without error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.AppendRowsRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.AppendRowsResponse()
+      );
+      client.innerApiCalls.appendRows = stubBidiStreamingCall(expectedResponse);
+      const stream = client.appendRows();
       const promise = new Promise((resolve, reject) => {
         stream.on(
           'data',
           (
-            response: protos.google.cloud.bigquery.storage.v1.ReadRowsResponse
+            response: protos.google.cloud.bigquery.storage.v1.AppendRowsResponse
           ) => {
             resolve(response);
           }
@@ -460,12 +730,65 @@ describe('v1.BigQueryReadClient', () => {
         stream.on('error', (err: Error) => {
           reject(err);
         });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.appendRows as SinonStub)
+          .getCall(0)
+          .calledWithExactly(undefined)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes appendRows with error', async () => {
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.storage.v1.AppendRowsRequest()
+      );
+      request.writeStream = '';
+      const expectedHeaderRequestParams = 'write_stream=';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.appendRows = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.appendRows();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.bigquery.storage.v1.AppendRowsResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.innerApiCalls.readRows as SinonStub)
+        (client.innerApiCalls.appendRows as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions)
+          .calledWithExactly(undefined)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
       );
     });
   });
@@ -476,7 +799,7 @@ describe('v1.BigQueryReadClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -516,7 +839,7 @@ describe('v1.BigQueryReadClient', () => {
         location: 'locationValue',
         session: 'sessionValue',
       };
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -581,7 +904,7 @@ describe('v1.BigQueryReadClient', () => {
         session: 'sessionValue',
         stream: 'streamValue',
       };
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -656,7 +979,7 @@ describe('v1.BigQueryReadClient', () => {
         dataset: 'datasetValue',
         table: 'tableValue',
       };
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -721,7 +1044,7 @@ describe('v1.BigQueryReadClient', () => {
         table: 'tableValue',
         stream: 'streamValue',
       };
-      const client = new bigqueryreadModule.v1.BigQueryReadClient({
+      const client = new bigquerywriteModule.v1.BigQueryWriteClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

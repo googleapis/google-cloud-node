@@ -24,21 +24,24 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/big_query_read_client_config.json`.
+ * `src/v1/big_query_write_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './big_query_read_client_config.json';
+import * as gapicConfig from './big_query_write_client_config.json';
 
 const version = require('../../../package.json').version;
 
 /**
- *  BigQuery Read API.
+ *  BigQuery Write API.
  *
- *  The Read API can be used to read data from BigQuery.
+ *  The Write API can be used to write data to BigQuery.
+ *
+ *  For supplementary information about the Write API, see:
+ *  https://cloud.google.com/bigquery/docs/write-api
  * @class
  * @memberof v1
  */
-export class BigQueryReadClient {
+export class BigQueryWriteClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -56,10 +59,10 @@ export class BigQueryReadClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  bigQueryReadStub?: Promise<{[name: string]: Function}>;
+  bigQueryWriteStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of BigQueryReadClient.
+   * Construct an instance of BigQueryWriteClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -94,7 +97,7 @@ export class BigQueryReadClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof BigQueryReadClient;
+    const staticMembers = this.constructor as typeof BigQueryWriteClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -177,14 +180,14 @@ export class BigQueryReadClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      readRows: new this._gaxModule.StreamDescriptor(
-        gax.StreamType.SERVER_STREAMING
+      appendRows: new this._gaxModule.StreamDescriptor(
+        gax.StreamType.BIDI_STREAMING
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.bigquery.storage.v1.BigQueryRead',
+      'google.cloud.bigquery.storage.v1.BigQueryWrite',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -212,32 +215,35 @@ export class BigQueryReadClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.bigQueryReadStub) {
-      return this.bigQueryReadStub;
+    if (this.bigQueryWriteStub) {
+      return this.bigQueryWriteStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.bigquery.storage.v1.BigQueryRead.
-    this.bigQueryReadStub = this._gaxGrpc.createStub(
+    // google.cloud.bigquery.storage.v1.BigQueryWrite.
+    this.bigQueryWriteStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.bigquery.storage.v1.BigQueryRead'
+            'google.cloud.bigquery.storage.v1.BigQueryWrite'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.bigquery.storage.v1.BigQueryRead,
+          (this._protos as any).google.cloud.bigquery.storage.v1.BigQueryWrite,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const bigQueryReadStubMethods = [
-      'createReadSession',
-      'readRows',
-      'splitReadStream',
+    const bigQueryWriteStubMethods = [
+      'createWriteStream',
+      'appendRows',
+      'getWriteStream',
+      'finalizeWriteStream',
+      'batchCommitWriteStreams',
+      'flushRows',
     ];
-    for (const methodName of bigQueryReadStubMethods) {
-      const callPromise = this.bigQueryReadStub.then(
+    for (const methodName of bigQueryWriteStubMethods) {
+      const callPromise = this.bigQueryWriteStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -261,7 +267,7 @@ export class BigQueryReadClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.bigQueryReadStub;
+    return this.bigQueryWriteStub;
   }
 
   /**
@@ -297,7 +303,7 @@ export class BigQueryReadClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/bigquery',
-      'https://www.googleapis.com/auth/bigquery.readonly',
+      'https://www.googleapis.com/auth/bigquery.insertdata',
       'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
@@ -321,110 +327,88 @@ export class BigQueryReadClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  createReadSession(
-    request?: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+  createWriteStream(
+    request?: protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
       (
-        | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+        | protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
-  createReadSession(
-    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+  createWriteStream(
+    request: protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
-      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
+      | protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  createReadSession(
-    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+  createWriteStream(
+    request: protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest,
     callback: Callback<
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
-      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
+      | protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Creates a new read session. A read session divides the contents of a
-   * BigQuery table into one or more streams, which can then be used to read
-   * data from the table. The read session also specifies properties of the
-   * data to be read, such as a list of columns or a push-down filter describing
-   * the rows to be returned.
-   *
-   * A particular row can be read by at most one stream. When the caller has
-   * reached the end of each stream in the session, then all the data in the
-   * table has been read.
-   *
-   * Data is assigned to each stream such that roughly the same number of
-   * rows can be read from each stream. Because the server-side unit for
-   * assigning data is collections of rows, the API does not guarantee that
-   * each stream will return the same number or rows. Additionally, the
-   * limits are enforced based on the number of pre-filtered rows, so some
-   * filters can lead to lopsided assignments.
-   *
-   * Read sessions automatically expire 6 hours after they are created and do
-   * not require manual clean-up by the caller.
+   * Creates a write stream to the given table.
+   * Additionally, every table has a special stream named '_default'
+   * to which data can be written. This stream doesn't need to be created using
+   * CreateWriteStream. It is a stream that can be used simultaneously by any
+   * number of clients. Data written to this stream is considered committed as
+   * soon as an acknowledgement is received.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The request project that owns the session, in the form of
-   *   `projects/{project_id}`.
-   * @param {google.cloud.bigquery.storage.v1.ReadSession} request.readSession
-   *   Required. Session to be created.
-   * @param {number} request.maxStreamCount
-   *   Max initial number of streams. If unset or zero, the server will
-   *   provide a value of streams so as to produce reasonable throughput. Must be
-   *   non-negative. The number of streams may be lower than the requested number,
-   *   depending on the amount parallelism that is reasonable for the table. Error
-   *   will be returned if the max count is greater than the current system
-   *   max limit of 1,000.
-   *
-   *   Streams must be read starting from offset 0.
+   *   Required. Reference to the table to which the stream belongs, in the format
+   *   of `projects/{project}/datasets/{dataset}/tables/{table}`.
+   * @param {google.cloud.bigquery.storage.v1.WriteStream} request.writeStream
+   *   Required. Stream to be created.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReadSession]{@link google.cloud.bigquery.storage.v1.ReadSession}.
+   *   The first element of the array is an object representing [WriteStream]{@link google.cloud.bigquery.storage.v1.WriteStream}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
-   * const [response] = await client.createReadSession(request);
+   * const [response] = await client.createWriteStream(request);
    */
-  createReadSession(
-    request?: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+  createWriteStream(
+    request?: protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.bigquery.storage.v1.IReadSession,
-          | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+          protos.google.cloud.bigquery.storage.v1.IWriteStream,
+          | protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
-      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
+      | protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
       (
-        | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+        | protos.google.cloud.bigquery.storage.v1.ICreateWriteStreamRequest
         | undefined
       ),
       {} | undefined
@@ -443,104 +427,86 @@ export class BigQueryReadClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        'read_session.table': request.readSession!.table || '',
+        parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.createReadSession(request, options, callback);
+    return this.innerApiCalls.createWriteStream(request, options, callback);
   }
-  splitReadStream(
-    request?: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+  getWriteStream(
+    request?: protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
       (
-        | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+        | protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
-  splitReadStream(
-    request: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+  getWriteStream(
+    request: protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-      | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
+      | protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  splitReadStream(
-    request: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+  getWriteStream(
+    request: protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest,
     callback: Callback<
-      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-      | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
+      | protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Splits a given `ReadStream` into two `ReadStream` objects. These
-   * `ReadStream` objects are referred to as the primary and the residual
-   * streams of the split. The original `ReadStream` can still be read from in
-   * the same manner as before. Both of the returned `ReadStream` objects can
-   * also be read from, and the rows returned by both child streams will be
-   * the same as the rows read from the original stream.
-   *
-   * Moreover, the two child streams will be allocated back-to-back in the
-   * original `ReadStream`. Concretely, it is guaranteed that for streams
-   * original, primary, and residual, that original[0-j] = primary[0-j] and
-   * original[j-n] = residual[0-m] once the streams have been read to
-   * completion.
+   * Gets information about a write stream.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the stream to split.
-   * @param {number} request.fraction
-   *   A value in the range (0.0, 1.0) that specifies the fractional point at
-   *   which the original stream should be split. The actual split point is
-   *   evaluated on pre-filtered rows, so if a filter is provided, then there is
-   *   no guarantee that the division of the rows between the new child streams
-   *   will be proportional to this fractional value. Additionally, because the
-   *   server-side unit for assigning data is collections of rows, this fraction
-   *   will always map to a data storage boundary on the server side.
+   *   Required. Name of the stream to get, in the form of
+   *   `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SplitReadStreamResponse]{@link google.cloud.bigquery.storage.v1.SplitReadStreamResponse}.
+   *   The first element of the array is an object representing [WriteStream]{@link google.cloud.bigquery.storage.v1.WriteStream}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
-   * const [response] = await client.splitReadStream(request);
+   * const [response] = await client.getWriteStream(request);
    */
-  splitReadStream(
-    request?: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
+  getWriteStream(
+    request?: protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-          | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+          protos.google.cloud.bigquery.storage.v1.IWriteStream,
+          | protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
-      | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
+      | protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.bigquery.storage.v1.ISplitReadStreamResponse,
+      protos.google.cloud.bigquery.storage.v1.IWriteStream,
       (
-        | protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest
+        | protos.google.cloud.bigquery.storage.v1.IGetWriteStreamRequest
         | undefined
       ),
       {} | undefined
@@ -562,52 +528,370 @@ export class BigQueryReadClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.splitReadStream(request, options, callback);
+    return this.innerApiCalls.getWriteStream(request, options, callback);
   }
-
+  finalizeWriteStream(
+    request?: protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse,
+      (
+        | protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  finalizeWriteStream(
+    request: protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse,
+      | protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  finalizeWriteStream(
+    request: protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse,
+      | protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   /**
-   * Reads rows from the stream in the format prescribed by the ReadSession.
-   * Each response contains one or more table rows, up to a maximum of 100 MiB
-   * per response; read requests which attempt to read individual rows larger
-   * than 100 MiB will fail.
-   *
-   * Each request also returns a set of stream statistics reflecting the current
-   * state of the stream.
+   * Finalize a write stream so that no new data can be appended to the
+   * stream. Finalize is not supported on the '_default' stream.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.readStream
-   *   Required. Stream to read rows from.
-   * @param {number} request.offset
-   *   The offset requested must be less than the last row read from Read.
-   *   Requesting a larger offset is undefined. If not specified, start reading
-   *   from offset zero.
+   * @param {string} request.name
+   *   Required. Name of the stream to finalize, in the form of
+   *   `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits [ReadRowsResponse]{@link google.cloud.bigquery.storage.v1.ReadRowsResponse} on 'data' event.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FinalizeWriteStreamResponse]{@link google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
-   * const stream = client.readRows(request);
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
+   * const [response] = await client.finalizeWriteStream(request);
    */
-  readRows(
-    request?: protos.google.cloud.bigquery.storage.v1.IReadRowsRequest,
-    options?: CallOptions
-  ): gax.CancellableStream {
+  finalizeWriteStream(
+    request?: protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse,
+          | protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse,
+      | protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamResponse,
+      (
+        | protos.google.cloud.bigquery.storage.v1.IFinalizeWriteStreamRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        read_stream: request.readStream || '',
+        name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.readRows(request, options);
+    return this.innerApiCalls.finalizeWriteStream(request, options, callback);
+  }
+  batchCommitWriteStreams(
+    request?: protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse,
+      (
+        | protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchCommitWriteStreams(
+    request: protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse,
+      | protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCommitWriteStreams(
+    request: protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse,
+      | protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Atomically commits a group of `PENDING` streams that belong to the same
+   * `parent` table.
+   *
+   * Streams must be finalized before commit and cannot be committed multiple
+   * times. Once a stream is committed, data in the stream becomes available
+   * for read operations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent table that all the streams should belong to, in the form of
+   *   `projects/{project}/datasets/{dataset}/tables/{table}`.
+   * @param {string[]} request.writeStreams
+   *   Required. The group of streams that will be committed atomically.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchCommitWriteStreamsResponse]{@link google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.batchCommitWriteStreams(request);
+   */
+  batchCommitWriteStreams(
+    request?: protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse,
+          | protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse,
+      | protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsResponse,
+      (
+        | protos.google.cloud.bigquery.storage.v1.IBatchCommitWriteStreamsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCommitWriteStreams(
+      request,
+      options,
+      callback
+    );
+  }
+  flushRows(
+    request?: protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse,
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  flushRows(
+    request: protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse,
+      | protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  flushRows(
+    request: protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse,
+      | protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Flushes rows to a BUFFERED stream.
+   *
+   * If users are appending rows to BUFFERED stream, flush operation is
+   * required in order for the rows to become available for reading. A
+   * Flush operation flushes up to any previously flushed offset in a BUFFERED
+   * stream, to the offset specified in the request.
+   *
+   * Flush is not supported on the _default stream, since it is not BUFFERED.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.writeStream
+   *   Required. The stream that is the target of the flush operation.
+   * @param {google.protobuf.Int64Value} request.offset
+   *   Ending offset of the flush operation. Rows before this offset(including
+   *   this offset) will be flushed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FlushRowsResponse]{@link google.cloud.bigquery.storage.v1.FlushRowsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.flushRows(request);
+   */
+  flushRows(
+    request?: protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse,
+          | protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse,
+      | protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsResponse,
+      protos.google.cloud.bigquery.storage.v1.IFlushRowsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        write_stream: request.writeStream || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.flushRows(request, options, callback);
+  }
+
+  /**
+   * Appends data to the given stream.
+   *
+   * If `offset` is specified, the `offset` is checked against the end of
+   * stream. The server returns `OUT_OF_RANGE` in `AppendRowsResponse` if an
+   * attempt is made to append to an offset beyond the current end of the stream
+   * or `ALREADY_EXISTS` if user provides an `offset` that has already been
+   * written to. User can retry with adjusted offset within the same RPC
+   * connection. If `offset` is not specified, append happens at the end of the
+   * stream.
+   *
+   * The response contains an optional offset at which the append
+   * happened.  No offset information will be returned for appends to a
+   * default stream.
+   *
+   * Responses are received in the same order in which requests are sent.
+   * There will be one response for each successful inserted request.  Responses
+   * may optionally embed error information if the originating AppendRequest was
+   * not successfully processed.
+   *
+   * The specifics of when successfully appended data is made visible to the
+   * table are governed by the type of stream:
+   *
+   * * For COMMITTED streams (which includes the default stream), data is
+   * visible immediately upon successful append.
+   *
+   * * For BUFFERED streams, data is made visible via a subsequent `FlushRows`
+   * rpc which advances a cursor to a newer offset in the stream.
+   *
+   * * For PENDING streams, data is not made visible until the stream itself is
+   * finalized (via the `FinalizeWriteStream` rpc), and the stream is explicitly
+   * committed via the `BatchCommitWriteStreams` rpc.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing [AppendRowsRequest]{@link google.cloud.bigquery.storage.v1.AppendRowsRequest} for write() method, and
+   *   will emit objects representing [AppendRowsResponse]{@link google.cloud.bigquery.storage.v1.AppendRowsResponse} on 'data' event asynchronously.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   for more details and examples.
+   * @example
+   * const stream = client.appendRows();
+   * stream.on('data', (response) => { ... });
+   * stream.on('end', () => { ... });
+   * stream.write(request);
+   * stream.end();
+   */
+  appendRows(options?: CallOptions): gax.CancellableStream {
+    this.initialize();
+    return this.innerApiCalls.appendRows(options);
   }
 
   // --------------------
@@ -889,7 +1173,7 @@ export class BigQueryReadClient {
   close(): Promise<void> {
     this.initialize();
     if (!this._terminated) {
-      return this.bigQueryReadStub!.then(stub => {
+      return this.bigQueryWriteStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });

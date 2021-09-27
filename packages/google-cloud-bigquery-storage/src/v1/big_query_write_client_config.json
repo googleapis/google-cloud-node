@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.bigquery.storage.v1.BigQueryRead": {
+    "google.cloud.bigquery.storage.v1.BigQueryWrite": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -23,18 +23,34 @@
         }
       },
       "methods": {
-        "CreateReadSession": {
+        "CreateWriteStream": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "ReadRows": {
+        "AppendRows": {
           "timeout_millis": 86400000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
-        "SplitReadStream": {
-          "retry_codes_name": "non_idempotent",
+        "GetWriteStream": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "FinalizeWriteStream": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCommitWriteStreams": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "FlushRows": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         }
       }

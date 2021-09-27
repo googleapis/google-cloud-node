@@ -43,6 +43,75 @@
           }
         }
       }
+    },
+    "BigQueryWrite": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BigQueryWriteClient",
+          "rpcs": {
+            "CreateWriteStream": {
+              "methods": [
+                "createWriteStream"
+              ]
+            },
+            "GetWriteStream": {
+              "methods": [
+                "getWriteStream"
+              ]
+            },
+            "FinalizeWriteStream": {
+              "methods": [
+                "finalizeWriteStream"
+              ]
+            },
+            "BatchCommitWriteStreams": {
+              "methods": [
+                "batchCommitWriteStreams"
+              ]
+            },
+            "FlushRows": {
+              "methods": [
+                "flushRows"
+              ]
+            },
+            "AppendRows": {
+              "methods": [
+                "appendRows"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BigQueryWriteClient",
+          "rpcs": {
+            "CreateWriteStream": {
+              "methods": [
+                "createWriteStream"
+              ]
+            },
+            "GetWriteStream": {
+              "methods": [
+                "getWriteStream"
+              ]
+            },
+            "FinalizeWriteStream": {
+              "methods": [
+                "finalizeWriteStream"
+              ]
+            },
+            "BatchCommitWriteStreams": {
+              "methods": [
+                "batchCommitWriteStreams"
+              ]
+            },
+            "FlushRows": {
+              "methods": [
+                "flushRows"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
