@@ -1058,7 +1058,8 @@ export class EventarcClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTriggers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTriggers.createStream(
       this.innerApiCalls.listTriggers as gax.GaxCall,
@@ -1118,7 +1119,8 @@ export class EventarcClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTriggers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTriggers.asyncIterate(
       this.innerApiCalls['listTriggers'] as GaxCall,
