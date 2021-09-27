@@ -150,7 +150,7 @@ it('should remove a bucket cors configuration', async () => {
   assert.ok(!bucket.metadata.cors);
 });
 
-it('should set public access prevention to enforced', async () => {
+it.skip('should set public access prevention to enforced', async () => {
   const output = execSync(
     `node setPublicAccessPreventionEnforced.js ${bucketName}`
   );
@@ -166,7 +166,7 @@ it('should set public access prevention to enforced', async () => {
   );
 });
 
-it("should get a bucket's public access prevention metadata", async () => {
+it.skip("should get a bucket's public access prevention metadata", async () => {
   await storage.bucket(bucketName).setMetadata({
     iamConfiguration: {
       publicAccessPrevention: PUBLIC_ACCESS_PREVENTION_ENFORCED,
@@ -184,7 +184,7 @@ it("should get a bucket's public access prevention metadata", async () => {
   assert.ok(metadata.iamConfiguration.publicAccessPrevention);
 });
 
-it('should set public access prevention to unspecified', async () => {
+it.skip('should set public access prevention to unspecified', async () => {
   const output = execSync(
     `node setPublicAccessPreventionUnspecified.js ${bucketName}`
   );

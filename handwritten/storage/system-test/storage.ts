@@ -878,7 +878,7 @@ describe('storage', () => {
       });
     });
 
-    it('inserts a bucket with unspecified public access prevention', async () => {
+    it.skip('inserts a bucket with unspecified public access prevention', async () => {
       await setPublicAccessPrevention(
         bucket,
         PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
