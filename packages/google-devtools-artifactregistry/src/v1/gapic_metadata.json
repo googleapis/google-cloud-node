@@ -1,0 +1,61 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.devtools.artifactregistry.v1",
+  "libraryPackage": "@google-cloud/artifact-registry",
+  "services": {
+    "ArtifactRegistry": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ArtifactRegistryClient",
+          "rpcs": {
+            "GetRepository": {
+              "methods": [
+                "getRepository"
+              ]
+            },
+            "ListDockerImages": {
+              "methods": [
+                "listDockerImages",
+                "listDockerImagesStream",
+                "listDockerImagesAsync"
+              ]
+            },
+            "ListRepositories": {
+              "methods": [
+                "listRepositories",
+                "listRepositoriesStream",
+                "listRepositoriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ArtifactRegistryClient",
+          "rpcs": {
+            "GetRepository": {
+              "methods": [
+                "getRepository"
+              ]
+            },
+            "ListDockerImages": {
+              "methods": [
+                "listDockerImages",
+                "listDockerImagesStream",
+                "listDockerImagesAsync"
+              ]
+            },
+            "ListRepositories": {
+              "methods": [
+                "listRepositories",
+                "listRepositoriesStream",
+                "listRepositoriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+[
+  "../../protos/google/devtools/artifactregistry/v1/artifact.proto",
+  "../../protos/google/devtools/artifactregistry/v1/repository.proto",
+  "../../protos/google/devtools/artifactregistry/v1/service.proto"
+]

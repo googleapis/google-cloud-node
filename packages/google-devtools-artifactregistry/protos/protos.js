@@ -57,6 +57,2054 @@
                  */
                 var artifactregistry = {};
     
+                artifactregistry.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.devtools.artifactregistry
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.DockerImage = (function() {
+    
+                        /**
+                         * Properties of a DockerImage.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IDockerImage
+                         * @property {string|null} [name] DockerImage name
+                         * @property {string|null} [uri] DockerImage uri
+                         * @property {Array.<string>|null} [tags] DockerImage tags
+                         * @property {number|Long|null} [imageSizeBytes] DockerImage imageSizeBytes
+                         * @property {google.protobuf.ITimestamp|null} [uploadTime] DockerImage uploadTime
+                         * @property {string|null} [mediaType] DockerImage mediaType
+                         * @property {google.protobuf.ITimestamp|null} [buildTime] DockerImage buildTime
+                         */
+    
+                        /**
+                         * Constructs a new DockerImage.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a DockerImage.
+                         * @implements IDockerImage
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IDockerImage=} [properties] Properties to set
+                         */
+                        function DockerImage(properties) {
+                            this.tags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DockerImage name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.name = "";
+    
+                        /**
+                         * DockerImage uri.
+                         * @member {string} uri
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.uri = "";
+    
+                        /**
+                         * DockerImage tags.
+                         * @member {Array.<string>} tags
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.tags = $util.emptyArray;
+    
+                        /**
+                         * DockerImage imageSizeBytes.
+                         * @member {number|Long} imageSizeBytes
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.imageSizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DockerImage uploadTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} uploadTime
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.uploadTime = null;
+    
+                        /**
+                         * DockerImage mediaType.
+                         * @member {string} mediaType
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.mediaType = "";
+    
+                        /**
+                         * DockerImage buildTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} buildTime
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         */
+                        DockerImage.prototype.buildTime = null;
+    
+                        /**
+                         * Creates a new DockerImage instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDockerImage=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.DockerImage} DockerImage instance
+                         */
+                        DockerImage.create = function create(properties) {
+                            return new DockerImage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DockerImage message. Does not implicitly {@link google.devtools.artifactregistry.v1.DockerImage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDockerImage} message DockerImage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DockerImage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.tags != null && message.tags.length)
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.tags[i]);
+                            if (message.imageSizeBytes != null && Object.hasOwnProperty.call(message, "imageSizeBytes"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.imageSizeBytes);
+                            if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
+                                $root.google.protobuf.Timestamp.encode(message.uploadTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.mediaType != null && Object.hasOwnProperty.call(message, "mediaType"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.mediaType);
+                            if (message.buildTime != null && Object.hasOwnProperty.call(message, "buildTime"))
+                                $root.google.protobuf.Timestamp.encode(message.buildTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DockerImage message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DockerImage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IDockerImage} message DockerImage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DockerImage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DockerImage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.DockerImage} DockerImage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DockerImage.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.DockerImage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.uri = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.tags && message.tags.length))
+                                        message.tags = [];
+                                    message.tags.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.imageSizeBytes = reader.int64();
+                                    break;
+                                case 5:
+                                    message.uploadTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.mediaType = reader.string();
+                                    break;
+                                case 7:
+                                    message.buildTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DockerImage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.DockerImage} DockerImage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DockerImage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DockerImage message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DockerImage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!Array.isArray(message.tags))
+                                    return "tags: array expected";
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    if (!$util.isString(message.tags[i]))
+                                        return "tags: string[] expected";
+                            }
+                            if (message.imageSizeBytes != null && message.hasOwnProperty("imageSizeBytes"))
+                                if (!$util.isInteger(message.imageSizeBytes) && !(message.imageSizeBytes && $util.isInteger(message.imageSizeBytes.low) && $util.isInteger(message.imageSizeBytes.high)))
+                                    return "imageSizeBytes: integer|Long expected";
+                            if (message.uploadTime != null && message.hasOwnProperty("uploadTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.uploadTime);
+                                if (error)
+                                    return "uploadTime." + error;
+                            }
+                            if (message.mediaType != null && message.hasOwnProperty("mediaType"))
+                                if (!$util.isString(message.mediaType))
+                                    return "mediaType: string expected";
+                            if (message.buildTime != null && message.hasOwnProperty("buildTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.buildTime);
+                                if (error)
+                                    return "buildTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DockerImage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.DockerImage} DockerImage
+                         */
+                        DockerImage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.DockerImage)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.DockerImage();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.tags) {
+                                if (!Array.isArray(object.tags))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.DockerImage.tags: array expected");
+                                message.tags = [];
+                                for (var i = 0; i < object.tags.length; ++i)
+                                    message.tags[i] = String(object.tags[i]);
+                            }
+                            if (object.imageSizeBytes != null)
+                                if ($util.Long)
+                                    (message.imageSizeBytes = $util.Long.fromValue(object.imageSizeBytes)).unsigned = false;
+                                else if (typeof object.imageSizeBytes === "string")
+                                    message.imageSizeBytes = parseInt(object.imageSizeBytes, 10);
+                                else if (typeof object.imageSizeBytes === "number")
+                                    message.imageSizeBytes = object.imageSizeBytes;
+                                else if (typeof object.imageSizeBytes === "object")
+                                    message.imageSizeBytes = new $util.LongBits(object.imageSizeBytes.low >>> 0, object.imageSizeBytes.high >>> 0).toNumber();
+                            if (object.uploadTime != null) {
+                                if (typeof object.uploadTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.DockerImage.uploadTime: object expected");
+                                message.uploadTime = $root.google.protobuf.Timestamp.fromObject(object.uploadTime);
+                            }
+                            if (object.mediaType != null)
+                                message.mediaType = String(object.mediaType);
+                            if (object.buildTime != null) {
+                                if (typeof object.buildTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.DockerImage.buildTime: object expected");
+                                message.buildTime = $root.google.protobuf.Timestamp.fromObject(object.buildTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DockerImage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.DockerImage} message DockerImage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DockerImage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tags = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.uri = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.imageSizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.imageSizeBytes = options.longs === String ? "0" : 0;
+                                object.uploadTime = null;
+                                object.mediaType = "";
+                                object.buildTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.tags && message.tags.length) {
+                                object.tags = [];
+                                for (var j = 0; j < message.tags.length; ++j)
+                                    object.tags[j] = message.tags[j];
+                            }
+                            if (message.imageSizeBytes != null && message.hasOwnProperty("imageSizeBytes"))
+                                if (typeof message.imageSizeBytes === "number")
+                                    object.imageSizeBytes = options.longs === String ? String(message.imageSizeBytes) : message.imageSizeBytes;
+                                else
+                                    object.imageSizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.imageSizeBytes) : options.longs === Number ? new $util.LongBits(message.imageSizeBytes.low >>> 0, message.imageSizeBytes.high >>> 0).toNumber() : message.imageSizeBytes;
+                            if (message.uploadTime != null && message.hasOwnProperty("uploadTime"))
+                                object.uploadTime = $root.google.protobuf.Timestamp.toObject(message.uploadTime, options);
+                            if (message.mediaType != null && message.hasOwnProperty("mediaType"))
+                                object.mediaType = message.mediaType;
+                            if (message.buildTime != null && message.hasOwnProperty("buildTime"))
+                                object.buildTime = $root.google.protobuf.Timestamp.toObject(message.buildTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DockerImage to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.DockerImage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DockerImage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DockerImage;
+                    })();
+    
+                    v1.ListDockerImagesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDockerImagesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListDockerImagesRequest
+                         * @property {string|null} [parent] ListDockerImagesRequest parent
+                         * @property {number|null} [pageSize] ListDockerImagesRequest pageSize
+                         * @property {string|null} [pageToken] ListDockerImagesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDockerImagesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListDockerImagesRequest.
+                         * @implements IListDockerImagesRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest=} [properties] Properties to set
+                         */
+                        function ListDockerImagesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDockerImagesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @instance
+                         */
+                        ListDockerImagesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDockerImagesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @instance
+                         */
+                        ListDockerImagesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDockerImagesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @instance
+                         */
+                        ListDockerImagesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDockerImagesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesRequest} ListDockerImagesRequest instance
+                         */
+                        ListDockerImagesRequest.create = function create(properties) {
+                            return new ListDockerImagesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDockerImagesRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListDockerImagesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest} message ListDockerImagesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDockerImagesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDockerImagesRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListDockerImagesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest} message ListDockerImagesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDockerImagesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDockerImagesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesRequest} ListDockerImagesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDockerImagesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListDockerImagesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDockerImagesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesRequest} ListDockerImagesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDockerImagesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDockerImagesRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDockerImagesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDockerImagesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesRequest} ListDockerImagesRequest
+                         */
+                        ListDockerImagesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListDockerImagesRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListDockerImagesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDockerImagesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListDockerImagesRequest} message ListDockerImagesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDockerImagesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDockerImagesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDockerImagesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDockerImagesRequest;
+                    })();
+    
+                    v1.ListDockerImagesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDockerImagesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListDockerImagesResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IDockerImage>|null} [dockerImages] ListDockerImagesResponse dockerImages
+                         * @property {string|null} [nextPageToken] ListDockerImagesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDockerImagesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListDockerImagesResponse.
+                         * @implements IListDockerImagesResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesResponse=} [properties] Properties to set
+                         */
+                        function ListDockerImagesResponse(properties) {
+                            this.dockerImages = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDockerImagesResponse dockerImages.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IDockerImage>} dockerImages
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @instance
+                         */
+                        ListDockerImagesResponse.prototype.dockerImages = $util.emptyArray;
+    
+                        /**
+                         * ListDockerImagesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @instance
+                         */
+                        ListDockerImagesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDockerImagesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesResponse} ListDockerImagesResponse instance
+                         */
+                        ListDockerImagesResponse.create = function create(properties) {
+                            return new ListDockerImagesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDockerImagesResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListDockerImagesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesResponse} message ListDockerImagesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDockerImagesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dockerImages != null && message.dockerImages.length)
+                                for (var i = 0; i < message.dockerImages.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.DockerImage.encode(message.dockerImages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDockerImagesResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListDockerImagesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesResponse} message ListDockerImagesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDockerImagesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDockerImagesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesResponse} ListDockerImagesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDockerImagesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListDockerImagesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dockerImages && message.dockerImages.length))
+                                        message.dockerImages = [];
+                                    message.dockerImages.push($root.google.devtools.artifactregistry.v1.DockerImage.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDockerImagesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesResponse} ListDockerImagesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDockerImagesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDockerImagesResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDockerImagesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dockerImages != null && message.hasOwnProperty("dockerImages")) {
+                                if (!Array.isArray(message.dockerImages))
+                                    return "dockerImages: array expected";
+                                for (var i = 0; i < message.dockerImages.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.DockerImage.verify(message.dockerImages[i]);
+                                    if (error)
+                                        return "dockerImages." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDockerImagesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListDockerImagesResponse} ListDockerImagesResponse
+                         */
+                        ListDockerImagesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListDockerImagesResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListDockerImagesResponse();
+                            if (object.dockerImages) {
+                                if (!Array.isArray(object.dockerImages))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ListDockerImagesResponse.dockerImages: array expected");
+                                message.dockerImages = [];
+                                for (var i = 0; i < object.dockerImages.length; ++i) {
+                                    if (typeof object.dockerImages[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ListDockerImagesResponse.dockerImages: object expected");
+                                    message.dockerImages[i] = $root.google.devtools.artifactregistry.v1.DockerImage.fromObject(object.dockerImages[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDockerImagesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListDockerImagesResponse} message ListDockerImagesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDockerImagesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dockerImages = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.dockerImages && message.dockerImages.length) {
+                                object.dockerImages = [];
+                                for (var j = 0; j < message.dockerImages.length; ++j)
+                                    object.dockerImages[j] = $root.google.devtools.artifactregistry.v1.DockerImage.toObject(message.dockerImages[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDockerImagesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListDockerImagesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDockerImagesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDockerImagesResponse;
+                    })();
+    
+                    v1.Repository = (function() {
+    
+                        /**
+                         * Properties of a Repository.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IRepository
+                         * @property {string|null} [name] Repository name
+                         * @property {google.devtools.artifactregistry.v1.Repository.Format|null} [format] Repository format
+                         * @property {string|null} [description] Repository description
+                         * @property {Object.<string,string>|null} [labels] Repository labels
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Repository createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Repository updateTime
+                         * @property {string|null} [kmsKeyName] Repository kmsKeyName
+                         */
+    
+                        /**
+                         * Constructs a new Repository.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a Repository.
+                         * @implements IRepository
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IRepository=} [properties] Properties to set
+                         */
+                        function Repository(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Repository name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.name = "";
+    
+                        /**
+                         * Repository format.
+                         * @member {google.devtools.artifactregistry.v1.Repository.Format} format
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.format = 0;
+    
+                        /**
+                         * Repository description.
+                         * @member {string} description
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.description = "";
+    
+                        /**
+                         * Repository labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Repository createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.createTime = null;
+    
+                        /**
+                         * Repository updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.updateTime = null;
+    
+                        /**
+                         * Repository kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         */
+                        Repository.prototype.kmsKeyName = "";
+    
+                        /**
+                         * Creates a new Repository instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IRepository=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.Repository} Repository instance
+                         */
+                        Repository.create = function create(properties) {
+                            return new Repository(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Repository message. Does not implicitly {@link google.devtools.artifactregistry.v1.Repository.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IRepository} message Repository message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Repository.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.format);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.kmsKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Repository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Repository.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IRepository} message Repository message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Repository.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Repository message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.Repository} Repository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Repository.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.Repository(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.format = reader.int32();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 5:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.kmsKeyName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Repository message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.Repository} Repository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Repository.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Repository message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Repository.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                switch (message.format) {
+                                default:
+                                    return "format: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 5:
+                                case 6:
+                                case 8:
+                                    break;
+                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Repository message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.Repository} Repository
+                         */
+                        Repository.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.Repository)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.Repository();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.format) {
+                            case "FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.format = 0;
+                                break;
+                            case "DOCKER":
+                            case 1:
+                                message.format = 1;
+                                break;
+                            case "MAVEN":
+                            case 2:
+                                message.format = 2;
+                                break;
+                            case "NPM":
+                            case 3:
+                                message.format = 3;
+                                break;
+                            case "APT":
+                            case 5:
+                                message.format = 5;
+                                break;
+                            case "YUM":
+                            case 6:
+                                message.format = 6;
+                                break;
+                            case "PYTHON":
+                            case 8:
+                                message.format = 8;
+                                break;
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Repository.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Repository.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.devtools.artifactregistry.v1.Repository.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Repository message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.Repository} message Repository
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Repository.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                                object.description = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.kmsKeyName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.format != null && message.hasOwnProperty("format"))
+                                object.format = options.enums === String ? $root.google.devtools.artifactregistry.v1.Repository.Format[message.format] : message.format;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Repository to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.Repository
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Repository.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Format enum.
+                         * @name google.devtools.artifactregistry.v1.Repository.Format
+                         * @enum {number}
+                         * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                         * @property {number} DOCKER=1 DOCKER value
+                         * @property {number} MAVEN=2 MAVEN value
+                         * @property {number} NPM=3 NPM value
+                         * @property {number} APT=5 APT value
+                         * @property {number} YUM=6 YUM value
+                         * @property {number} PYTHON=8 PYTHON value
+                         */
+                        Repository.Format = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DOCKER"] = 1;
+                            values[valuesById[2] = "MAVEN"] = 2;
+                            values[valuesById[3] = "NPM"] = 3;
+                            values[valuesById[5] = "APT"] = 5;
+                            values[valuesById[6] = "YUM"] = 6;
+                            values[valuesById[8] = "PYTHON"] = 8;
+                            return values;
+                        })();
+    
+                        return Repository;
+                    })();
+    
+                    v1.ListRepositoriesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRepositoriesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListRepositoriesRequest
+                         * @property {string|null} [parent] ListRepositoriesRequest parent
+                         * @property {number|null} [pageSize] ListRepositoriesRequest pageSize
+                         * @property {string|null} [pageToken] ListRepositoriesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRepositoriesRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListRepositoriesRequest.
+                         * @implements IListRepositoriesRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesRequest=} [properties] Properties to set
+                         */
+                        function ListRepositoriesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRepositoriesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @instance
+                         */
+                        ListRepositoriesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRepositoriesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @instance
+                         */
+                        ListRepositoriesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRepositoriesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @instance
+                         */
+                        ListRepositoriesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRepositoriesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesRequest} ListRepositoriesRequest instance
+                         */
+                        ListRepositoriesRequest.create = function create(properties) {
+                            return new ListRepositoriesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRepositoriesRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRepositoriesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesRequest} message ListRepositoriesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRepositoriesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRepositoriesRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRepositoriesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesRequest} message ListRepositoriesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRepositoriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRepositoriesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesRequest} ListRepositoriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRepositoriesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListRepositoriesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRepositoriesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesRequest} ListRepositoriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRepositoriesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRepositoriesRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRepositoriesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRepositoriesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesRequest} ListRepositoriesRequest
+                         */
+                        ListRepositoriesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListRepositoriesRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListRepositoriesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRepositoriesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListRepositoriesRequest} message ListRepositoriesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRepositoriesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRepositoriesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRepositoriesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRepositoriesRequest;
+                    })();
+    
+                    v1.ListRepositoriesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRepositoriesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IListRepositoriesResponse
+                         * @property {Array.<google.devtools.artifactregistry.v1.IRepository>|null} [repositories] ListRepositoriesResponse repositories
+                         * @property {string|null} [nextPageToken] ListRepositoriesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRepositoriesResponse.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a ListRepositoriesResponse.
+                         * @implements IListRepositoriesResponse
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesResponse=} [properties] Properties to set
+                         */
+                        function ListRepositoriesResponse(properties) {
+                            this.repositories = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRepositoriesResponse repositories.
+                         * @member {Array.<google.devtools.artifactregistry.v1.IRepository>} repositories
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @instance
+                         */
+                        ListRepositoriesResponse.prototype.repositories = $util.emptyArray;
+    
+                        /**
+                         * ListRepositoriesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @instance
+                         */
+                        ListRepositoriesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRepositoriesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesResponse=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesResponse} ListRepositoriesResponse instance
+                         */
+                        ListRepositoriesResponse.create = function create(properties) {
+                            return new ListRepositoriesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRepositoriesResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRepositoriesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesResponse} message ListRepositoriesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRepositoriesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.repositories != null && message.repositories.length)
+                                for (var i = 0; i < message.repositories.length; ++i)
+                                    $root.google.devtools.artifactregistry.v1.Repository.encode(message.repositories[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRepositoriesResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRepositoriesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesResponse} message ListRepositoriesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRepositoriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRepositoriesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesResponse} ListRepositoriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRepositoriesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.ListRepositoriesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.repositories && message.repositories.length))
+                                        message.repositories = [];
+                                    message.repositories.push($root.google.devtools.artifactregistry.v1.Repository.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRepositoriesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesResponse} ListRepositoriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRepositoriesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRepositoriesResponse message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRepositoriesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.repositories != null && message.hasOwnProperty("repositories")) {
+                                if (!Array.isArray(message.repositories))
+                                    return "repositories: array expected";
+                                for (var i = 0; i < message.repositories.length; ++i) {
+                                    var error = $root.google.devtools.artifactregistry.v1.Repository.verify(message.repositories[i]);
+                                    if (error)
+                                        return "repositories." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRepositoriesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.ListRepositoriesResponse} ListRepositoriesResponse
+                         */
+                        ListRepositoriesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.ListRepositoriesResponse)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.ListRepositoriesResponse();
+                            if (object.repositories) {
+                                if (!Array.isArray(object.repositories))
+                                    throw TypeError(".google.devtools.artifactregistry.v1.ListRepositoriesResponse.repositories: array expected");
+                                message.repositories = [];
+                                for (var i = 0; i < object.repositories.length; ++i) {
+                                    if (typeof object.repositories[i] !== "object")
+                                        throw TypeError(".google.devtools.artifactregistry.v1.ListRepositoriesResponse.repositories: object expected");
+                                    message.repositories[i] = $root.google.devtools.artifactregistry.v1.Repository.fromObject(object.repositories[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRepositoriesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.ListRepositoriesResponse} message ListRepositoriesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRepositoriesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.repositories = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.repositories && message.repositories.length) {
+                                object.repositories = [];
+                                for (var j = 0; j < message.repositories.length; ++j)
+                                    object.repositories[j] = $root.google.devtools.artifactregistry.v1.Repository.toObject(message.repositories[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRepositoriesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.ListRepositoriesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRepositoriesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRepositoriesResponse;
+                    })();
+    
+                    v1.GetRepositoryRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @interface IGetRepositoryRequest
+                         * @property {string|null} [name] GetRepositoryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRepositoryRequest.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents a GetRepositoryRequest.
+                         * @implements IGetRepositoryRequest
+                         * @constructor
+                         * @param {google.devtools.artifactregistry.v1.IGetRepositoryRequest=} [properties] Properties to set
+                         */
+                        function GetRepositoryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRepositoryRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @instance
+                         */
+                        GetRepositoryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRepositoryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetRepositoryRequest=} [properties] Properties to set
+                         * @returns {google.devtools.artifactregistry.v1.GetRepositoryRequest} GetRepositoryRequest instance
+                         */
+                        GetRepositoryRequest.create = function create(properties) {
+                            return new GetRepositoryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRepositoryRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetRepositoryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetRepositoryRequest} message GetRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRepositoryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRepositoryRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetRepositoryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.IGetRepositoryRequest} message GetRepositoryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRepositoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRepositoryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.artifactregistry.v1.GetRepositoryRequest} GetRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRepositoryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.artifactregistry.v1.GetRepositoryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRepositoryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.artifactregistry.v1.GetRepositoryRequest} GetRepositoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRepositoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRepositoryRequest message.
+                         * @function verify
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRepositoryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRepositoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.artifactregistry.v1.GetRepositoryRequest} GetRepositoryRequest
+                         */
+                        GetRepositoryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.artifactregistry.v1.GetRepositoryRequest)
+                                return object;
+                            var message = new $root.google.devtools.artifactregistry.v1.GetRepositoryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRepositoryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @static
+                         * @param {google.devtools.artifactregistry.v1.GetRepositoryRequest} message GetRepositoryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRepositoryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRepositoryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.artifactregistry.v1.GetRepositoryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRepositoryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetRepositoryRequest;
+                    })();
+    
+                    v1.ArtifactRegistry = (function() {
+    
+                        /**
+                         * Constructs a new ArtifactRegistry service.
+                         * @memberof google.devtools.artifactregistry.v1
+                         * @classdesc Represents an ArtifactRegistry
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function ArtifactRegistry(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (ArtifactRegistry.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ArtifactRegistry;
+    
+                        /**
+                         * Creates new ArtifactRegistry service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {ArtifactRegistry} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        ArtifactRegistry.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#listDockerImages}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ListDockerImagesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ListDockerImagesResponse} [response] ListDockerImagesResponse
+                         */
+    
+                        /**
+                         * Calls ListDockerImages.
+                         * @function listDockerImages
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest} request ListDockerImagesRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ListDockerImagesCallback} callback Node-style callback called with the error, if any, and ListDockerImagesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.listDockerImages = function listDockerImages(request, callback) {
+                            return this.rpcCall(listDockerImages, $root.google.devtools.artifactregistry.v1.ListDockerImagesRequest, $root.google.devtools.artifactregistry.v1.ListDockerImagesResponse, request, callback);
+                        }, "name", { value: "ListDockerImages" });
+    
+                        /**
+                         * Calls ListDockerImages.
+                         * @function listDockerImages
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListDockerImagesRequest} request ListDockerImagesRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ListDockerImagesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#listRepositories}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef ListRepositoriesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.ListRepositoriesResponse} [response] ListRepositoriesResponse
+                         */
+    
+                        /**
+                         * Calls ListRepositories.
+                         * @function listRepositories
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesRequest} request ListRepositoriesRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.ListRepositoriesCallback} callback Node-style callback called with the error, if any, and ListRepositoriesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.listRepositories = function listRepositories(request, callback) {
+                            return this.rpcCall(listRepositories, $root.google.devtools.artifactregistry.v1.ListRepositoriesRequest, $root.google.devtools.artifactregistry.v1.ListRepositoriesResponse, request, callback);
+                        }, "name", { value: "ListRepositories" });
+    
+                        /**
+                         * Calls ListRepositories.
+                         * @function listRepositories
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IListRepositoriesRequest} request ListRepositoriesRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.ListRepositoriesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry#getRepository}.
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @typedef GetRepositoryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.artifactregistry.v1.Repository} [response] Repository
+                         */
+    
+                        /**
+                         * Calls GetRepository.
+                         * @function getRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetRepositoryRequest} request GetRepositoryRequest message or plain object
+                         * @param {google.devtools.artifactregistry.v1.ArtifactRegistry.GetRepositoryCallback} callback Node-style callback called with the error, if any, and Repository
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ArtifactRegistry.prototype.getRepository = function getRepository(request, callback) {
+                            return this.rpcCall(getRepository, $root.google.devtools.artifactregistry.v1.GetRepositoryRequest, $root.google.devtools.artifactregistry.v1.Repository, request, callback);
+                        }, "name", { value: "GetRepository" });
+    
+                        /**
+                         * Calls GetRepository.
+                         * @function getRepository
+                         * @memberof google.devtools.artifactregistry.v1.ArtifactRegistry
+                         * @instance
+                         * @param {google.devtools.artifactregistry.v1.IGetRepositoryRequest} request GetRepositoryRequest message or plain object
+                         * @returns {Promise<google.devtools.artifactregistry.v1.Repository>} Promise
+                         * @variation 2
+                         */
+    
+                        return ArtifactRegistry;
+                    })();
+    
+                    return v1;
+                })();
+    
                 artifactregistry.v1beta2 = (function() {
     
                     /**
@@ -7813,6 +9861,30 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                return values;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -9350,30 +11422,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                return values;
             })();
     
             return api;
@@ -14608,8 +16656,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -14686,20 +16734,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -14805,9 +16853,6 @@
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                             break;
-                        case 1055:
-                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                            break;
                         case 1052:
                             if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                 message[".google.api.fieldBehavior"] = [];
@@ -14817,6 +16862,9 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                             } else
                                 message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -14892,11 +16940,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -14913,6 +16956,11 @@
                             case 6:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -14975,11 +17023,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -15016,6 +17059,11 @@
                                 message[".google.api.fieldBehavior"][i] = 6;
                                 break;
                             }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };
@@ -19146,1186 +21194,6 @@
                  */
                 var v1 = {};
     
-                v1.IAMPolicy = (function() {
-    
-                    /**
-                     * Constructs a new IAMPolicy service.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a IAMPolicy
-                     * @extends $protobuf.rpc.Service
-                     * @constructor
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    function IAMPolicy(rpcImpl, requestDelimited, responseDelimited) {
-                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                    }
-    
-                    (IAMPolicy.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = IAMPolicy;
-    
-                    /**
-                     * Creates new IAMPolicy service using the specified rpc implementation.
-                     * @function create
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @static
-                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                     * @returns {IAMPolicy} RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    IAMPolicy.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                        return new this(rpcImpl, requestDelimited, responseDelimited);
-                    };
-    
-                    /**
-                     * Callback as used by {@link google.iam.v1.IAMPolicy#setIamPolicy}.
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @typedef SetIamPolicyCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.iam.v1.Policy} [response] Policy
-                     */
-    
-                    /**
-                     * Calls SetIamPolicy.
-                     * @function setIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
-                     * @param {google.iam.v1.IAMPolicy.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
-                    }, "name", { value: "SetIamPolicy" });
-    
-                    /**
-                     * Calls SetIamPolicy.
-                     * @function setIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
-                     * @returns {Promise<google.iam.v1.Policy>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.iam.v1.IAMPolicy#getIamPolicy}.
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @typedef GetIamPolicyCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.iam.v1.Policy} [response] Policy
-                     */
-    
-                    /**
-                     * Calls GetIamPolicy.
-                     * @function getIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
-                     * @param {google.iam.v1.IAMPolicy.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
-                    }, "name", { value: "GetIamPolicy" });
-    
-                    /**
-                     * Calls GetIamPolicy.
-                     * @function getIamPolicy
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
-                     * @returns {Promise<google.iam.v1.Policy>} Promise
-                     * @variation 2
-                     */
-    
-                    /**
-                     * Callback as used by {@link google.iam.v1.IAMPolicy#testIamPermissions}.
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @typedef TestIamPermissionsCallback
-                     * @type {function}
-                     * @param {Error|null} error Error, if any
-                     * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
-                     */
-    
-                    /**
-                     * Calls TestIamPermissions.
-                     * @function testIamPermissions
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
-                     * @param {google.iam.v1.IAMPolicy.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
-                     * @returns {undefined}
-                     * @variation 1
-                     */
-                    Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
-                    }, "name", { value: "TestIamPermissions" });
-    
-                    /**
-                     * Calls TestIamPermissions.
-                     * @function testIamPermissions
-                     * @memberof google.iam.v1.IAMPolicy
-                     * @instance
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
-                     * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
-                     * @variation 2
-                     */
-    
-                    return IAMPolicy;
-                })();
-    
-                v1.SetIamPolicyRequest = (function() {
-    
-                    /**
-                     * Properties of a SetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @interface ISetIamPolicyRequest
-                     * @property {string|null} [resource] SetIamPolicyRequest resource
-                     * @property {google.iam.v1.IPolicy|null} [policy] SetIamPolicyRequest policy
-                     */
-    
-                    /**
-                     * Constructs a new SetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a SetIamPolicyRequest.
-                     * @implements ISetIamPolicyRequest
-                     * @constructor
-                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
-                     */
-                    function SetIamPolicyRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * SetIamPolicyRequest resource.
-                     * @member {string} resource
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @instance
-                     */
-                    SetIamPolicyRequest.prototype.resource = "";
-    
-                    /**
-                     * SetIamPolicyRequest policy.
-                     * @member {google.iam.v1.IPolicy|null|undefined} policy
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @instance
-                     */
-                    SetIamPolicyRequest.prototype.policy = null;
-    
-                    /**
-                     * Creates a new SetIamPolicyRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest instance
-                     */
-                    SetIamPolicyRequest.create = function create(properties) {
-                        return new SetIamPolicyRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified SetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    SetIamPolicyRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
-                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
-                            $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified SetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    SetIamPolicyRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.resource = reader.string();
-                                break;
-                            case 2:
-                                message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    SetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a SetIamPolicyRequest message.
-                     * @function verify
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    SetIamPolicyRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            if (!$util.isString(message.resource))
-                                return "resource: string expected";
-                        if (message.policy != null && message.hasOwnProperty("policy")) {
-                            var error = $root.google.iam.v1.Policy.verify(message.policy);
-                            if (error)
-                                return "policy." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a SetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
-                     */
-                    SetIamPolicyRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.SetIamPolicyRequest)
-                            return object;
-                        var message = new $root.google.iam.v1.SetIamPolicyRequest();
-                        if (object.resource != null)
-                            message.resource = String(object.resource);
-                        if (object.policy != null) {
-                            if (typeof object.policy !== "object")
-                                throw TypeError(".google.iam.v1.SetIamPolicyRequest.policy: object expected");
-                            message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a SetIamPolicyRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.SetIamPolicyRequest} message SetIamPolicyRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    SetIamPolicyRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.resource = "";
-                            object.policy = null;
-                        }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            object.resource = message.resource;
-                        if (message.policy != null && message.hasOwnProperty("policy"))
-                            object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this SetIamPolicyRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.SetIamPolicyRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    SetIamPolicyRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return SetIamPolicyRequest;
-                })();
-    
-                v1.GetIamPolicyRequest = (function() {
-    
-                    /**
-                     * Properties of a GetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @interface IGetIamPolicyRequest
-                     * @property {string|null} [resource] GetIamPolicyRequest resource
-                     * @property {google.iam.v1.IGetPolicyOptions|null} [options] GetIamPolicyRequest options
-                     */
-    
-                    /**
-                     * Constructs a new GetIamPolicyRequest.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a GetIamPolicyRequest.
-                     * @implements IGetIamPolicyRequest
-                     * @constructor
-                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
-                     */
-                    function GetIamPolicyRequest(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GetIamPolicyRequest resource.
-                     * @member {string} resource
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @instance
-                     */
-                    GetIamPolicyRequest.prototype.resource = "";
-    
-                    /**
-                     * GetIamPolicyRequest options.
-                     * @member {google.iam.v1.IGetPolicyOptions|null|undefined} options
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @instance
-                     */
-                    GetIamPolicyRequest.prototype.options = null;
-    
-                    /**
-                     * Creates a new GetIamPolicyRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest instance
-                     */
-                    GetIamPolicyRequest.create = function create(properties) {
-                        return new GetIamPolicyRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetIamPolicyRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
-                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                            $root.google.iam.v1.GetPolicyOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetIamPolicyRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.resource = reader.string();
-                                break;
-                            case 2:
-                                message.options = $root.google.iam.v1.GetPolicyOptions.decode(reader, reader.uint32());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GetIamPolicyRequest message.
-                     * @function verify
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GetIamPolicyRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            if (!$util.isString(message.resource))
-                                return "resource: string expected";
-                        if (message.options != null && message.hasOwnProperty("options")) {
-                            var error = $root.google.iam.v1.GetPolicyOptions.verify(message.options);
-                            if (error)
-                                return "options." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
-                     */
-                    GetIamPolicyRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.GetIamPolicyRequest)
-                            return object;
-                        var message = new $root.google.iam.v1.GetIamPolicyRequest();
-                        if (object.resource != null)
-                            message.resource = String(object.resource);
-                        if (object.options != null) {
-                            if (typeof object.options !== "object")
-                                throw TypeError(".google.iam.v1.GetIamPolicyRequest.options: object expected");
-                            message.options = $root.google.iam.v1.GetPolicyOptions.fromObject(object.options);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GetIamPolicyRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @static
-                     * @param {google.iam.v1.GetIamPolicyRequest} message GetIamPolicyRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GetIamPolicyRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.resource = "";
-                            object.options = null;
-                        }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            object.resource = message.resource;
-                        if (message.options != null && message.hasOwnProperty("options"))
-                            object.options = $root.google.iam.v1.GetPolicyOptions.toObject(message.options, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GetIamPolicyRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.GetIamPolicyRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GetIamPolicyRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return GetIamPolicyRequest;
-                })();
-    
-                v1.TestIamPermissionsRequest = (function() {
-    
-                    /**
-                     * Properties of a TestIamPermissionsRequest.
-                     * @memberof google.iam.v1
-                     * @interface ITestIamPermissionsRequest
-                     * @property {string|null} [resource] TestIamPermissionsRequest resource
-                     * @property {Array.<string>|null} [permissions] TestIamPermissionsRequest permissions
-                     */
-    
-                    /**
-                     * Constructs a new TestIamPermissionsRequest.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a TestIamPermissionsRequest.
-                     * @implements ITestIamPermissionsRequest
-                     * @constructor
-                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
-                     */
-                    function TestIamPermissionsRequest(properties) {
-                        this.permissions = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TestIamPermissionsRequest resource.
-                     * @member {string} resource
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @instance
-                     */
-                    TestIamPermissionsRequest.prototype.resource = "";
-    
-                    /**
-                     * TestIamPermissionsRequest permissions.
-                     * @member {Array.<string>} permissions
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @instance
-                     */
-                    TestIamPermissionsRequest.prototype.permissions = $util.emptyArray;
-    
-                    /**
-                     * Creates a new TestIamPermissionsRequest instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest instance
-                     */
-                    TestIamPermissionsRequest.create = function create(properties) {
-                        return new TestIamPermissionsRequest(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsRequest message. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsRequest.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
-                        if (message.permissions != null && message.permissions.length)
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.permissions[i]);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsRequest message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsRequest.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.resource = reader.string();
-                                break;
-                            case 2:
-                                if (!(message.permissions && message.permissions.length))
-                                    message.permissions = [];
-                                message.permissions.push(reader.string());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsRequest.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TestIamPermissionsRequest message.
-                     * @function verify
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TestIamPermissionsRequest.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            if (!$util.isString(message.resource))
-                                return "resource: string expected";
-                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
-                            if (!Array.isArray(message.permissions))
-                                return "permissions: array expected";
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                if (!$util.isString(message.permissions[i]))
-                                    return "permissions: string[] expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TestIamPermissionsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
-                     */
-                    TestIamPermissionsRequest.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.TestIamPermissionsRequest)
-                            return object;
-                        var message = new $root.google.iam.v1.TestIamPermissionsRequest();
-                        if (object.resource != null)
-                            message.resource = String(object.resource);
-                        if (object.permissions) {
-                            if (!Array.isArray(object.permissions))
-                                throw TypeError(".google.iam.v1.TestIamPermissionsRequest.permissions: array expected");
-                            message.permissions = [];
-                            for (var i = 0; i < object.permissions.length; ++i)
-                                message.permissions[i] = String(object.permissions[i]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TestIamPermissionsRequest message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @static
-                     * @param {google.iam.v1.TestIamPermissionsRequest} message TestIamPermissionsRequest
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TestIamPermissionsRequest.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.permissions = [];
-                        if (options.defaults)
-                            object.resource = "";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
-                            object.resource = message.resource;
-                        if (message.permissions && message.permissions.length) {
-                            object.permissions = [];
-                            for (var j = 0; j < message.permissions.length; ++j)
-                                object.permissions[j] = message.permissions[j];
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TestIamPermissionsRequest to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.TestIamPermissionsRequest
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TestIamPermissionsRequest.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return TestIamPermissionsRequest;
-                })();
-    
-                v1.TestIamPermissionsResponse = (function() {
-    
-                    /**
-                     * Properties of a TestIamPermissionsResponse.
-                     * @memberof google.iam.v1
-                     * @interface ITestIamPermissionsResponse
-                     * @property {Array.<string>|null} [permissions] TestIamPermissionsResponse permissions
-                     */
-    
-                    /**
-                     * Constructs a new TestIamPermissionsResponse.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a TestIamPermissionsResponse.
-                     * @implements ITestIamPermissionsResponse
-                     * @constructor
-                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
-                     */
-                    function TestIamPermissionsResponse(properties) {
-                        this.permissions = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TestIamPermissionsResponse permissions.
-                     * @member {Array.<string>} permissions
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @instance
-                     */
-                    TestIamPermissionsResponse.prototype.permissions = $util.emptyArray;
-    
-                    /**
-                     * Creates a new TestIamPermissionsResponse instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse instance
-                     */
-                    TestIamPermissionsResponse.create = function create(properties) {
-                        return new TestIamPermissionsResponse(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsResponse message. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsResponse.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.permissions != null && message.permissions.length)
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TestIamPermissionsResponse message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsResponse.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                if (!(message.permissions && message.permissions.length))
-                                    message.permissions = [];
-                                message.permissions.push(reader.string());
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TestIamPermissionsResponse.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TestIamPermissionsResponse message.
-                     * @function verify
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TestIamPermissionsResponse.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
-                            if (!Array.isArray(message.permissions))
-                                return "permissions: array expected";
-                            for (var i = 0; i < message.permissions.length; ++i)
-                                if (!$util.isString(message.permissions[i]))
-                                    return "permissions: string[] expected";
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TestIamPermissionsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
-                     */
-                    TestIamPermissionsResponse.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.TestIamPermissionsResponse)
-                            return object;
-                        var message = new $root.google.iam.v1.TestIamPermissionsResponse();
-                        if (object.permissions) {
-                            if (!Array.isArray(object.permissions))
-                                throw TypeError(".google.iam.v1.TestIamPermissionsResponse.permissions: array expected");
-                            message.permissions = [];
-                            for (var i = 0; i < object.permissions.length; ++i)
-                                message.permissions[i] = String(object.permissions[i]);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TestIamPermissionsResponse message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @static
-                     * @param {google.iam.v1.TestIamPermissionsResponse} message TestIamPermissionsResponse
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TestIamPermissionsResponse.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults)
-                            object.permissions = [];
-                        if (message.permissions && message.permissions.length) {
-                            object.permissions = [];
-                            for (var j = 0; j < message.permissions.length; ++j)
-                                object.permissions[j] = message.permissions[j];
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TestIamPermissionsResponse to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.TestIamPermissionsResponse
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TestIamPermissionsResponse.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return TestIamPermissionsResponse;
-                })();
-    
-                v1.GetPolicyOptions = (function() {
-    
-                    /**
-                     * Properties of a GetPolicyOptions.
-                     * @memberof google.iam.v1
-                     * @interface IGetPolicyOptions
-                     * @property {number|null} [requestedPolicyVersion] GetPolicyOptions requestedPolicyVersion
-                     */
-    
-                    /**
-                     * Constructs a new GetPolicyOptions.
-                     * @memberof google.iam.v1
-                     * @classdesc Represents a GetPolicyOptions.
-                     * @implements IGetPolicyOptions
-                     * @constructor
-                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
-                     */
-                    function GetPolicyOptions(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * GetPolicyOptions requestedPolicyVersion.
-                     * @member {number} requestedPolicyVersion
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @instance
-                     */
-                    GetPolicyOptions.prototype.requestedPolicyVersion = 0;
-    
-                    /**
-                     * Creates a new GetPolicyOptions instance using the specified properties.
-                     * @function create
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions instance
-                     */
-                    GetPolicyOptions.create = function create(properties) {
-                        return new GetPolicyOptions(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified GetPolicyOptions message. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetPolicyOptions.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requestedPolicyVersion);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified GetPolicyOptions message, length delimited. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a GetPolicyOptions message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetPolicyOptions.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1:
-                                message.requestedPolicyVersion = reader.int32();
-                                break;
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a GetPolicyOptions message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    GetPolicyOptions.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a GetPolicyOptions message.
-                     * @function verify
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    GetPolicyOptions.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
-                            if (!$util.isInteger(message.requestedPolicyVersion))
-                                return "requestedPolicyVersion: integer expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a GetPolicyOptions message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
-                     */
-                    GetPolicyOptions.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.iam.v1.GetPolicyOptions)
-                            return object;
-                        var message = new $root.google.iam.v1.GetPolicyOptions();
-                        if (object.requestedPolicyVersion != null)
-                            message.requestedPolicyVersion = object.requestedPolicyVersion | 0;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a GetPolicyOptions message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @static
-                     * @param {google.iam.v1.GetPolicyOptions} message GetPolicyOptions
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    GetPolicyOptions.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.requestedPolicyVersion = 0;
-                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
-                            object.requestedPolicyVersion = message.requestedPolicyVersion;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this GetPolicyOptions to JSON.
-                     * @function toJSON
-                     * @memberof google.iam.v1.GetPolicyOptions
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    GetPolicyOptions.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    return GetPolicyOptions;
-                })();
-    
                 v1.Policy = (function() {
     
                     /**
@@ -21674,6 +22542,1186 @@
                     })();
     
                     return AuditConfigDelta;
+                })();
+    
+                v1.IAMPolicy = (function() {
+    
+                    /**
+                     * Constructs a new IAMPolicy service.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a IAMPolicy
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function IAMPolicy(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (IAMPolicy.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = IAMPolicy;
+    
+                    /**
+                     * Creates new IAMPolicy service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {IAMPolicy} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    IAMPolicy.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy#setIamPolicy}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef SetIamPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.Policy} [response] Policy
+                     */
+    
+                    /**
+                     * Calls SetIamPolicy.
+                     * @function setIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                    }, "name", { value: "SetIamPolicy" });
+    
+                    /**
+                     * Calls SetIamPolicy.
+                     * @function setIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v1.Policy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy#getIamPolicy}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef GetIamPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.Policy} [response] Policy
+                     */
+    
+                    /**
+                     * Calls GetIamPolicy.
+                     * @function getIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                    }, "name", { value: "GetIamPolicy" });
+    
+                    /**
+                     * Calls GetIamPolicy.
+                     * @function getIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v1.Policy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy#testIamPermissions}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef TestIamPermissionsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                     */
+    
+                    /**
+                     * Calls TestIamPermissions.
+                     * @function testIamPermissions
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                    }, "name", { value: "TestIamPermissions" });
+    
+                    /**
+                     * Calls TestIamPermissions.
+                     * @function testIamPermissions
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                     * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return IAMPolicy;
+                })();
+    
+                v1.SetIamPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a SetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @interface ISetIamPolicyRequest
+                     * @property {string|null} [resource] SetIamPolicyRequest resource
+                     * @property {google.iam.v1.IPolicy|null} [policy] SetIamPolicyRequest policy
+                     */
+    
+                    /**
+                     * Constructs a new SetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a SetIamPolicyRequest.
+                     * @implements ISetIamPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
+                     */
+                    function SetIamPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SetIamPolicyRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.resource = "";
+    
+                    /**
+                     * SetIamPolicyRequest policy.
+                     * @member {google.iam.v1.IPolicy|null|undefined} policy
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.policy = null;
+    
+                    /**
+                     * Creates a new SetIamPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest instance
+                     */
+                    SetIamPolicyRequest.create = function create(properties) {
+                        return new SetIamPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SetIamPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                            $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SetIamPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resource = reader.string();
+                                break;
+                            case 2:
+                                message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SetIamPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SetIamPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.policy != null && message.hasOwnProperty("policy")) {
+                            var error = $root.google.iam.v1.Policy.verify(message.policy);
+                            if (error)
+                                return "policy." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     */
+                    SetIamPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.SetIamPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.policy != null) {
+                            if (typeof object.policy !== "object")
+                                throw TypeError(".google.iam.v1.SetIamPolicyRequest.policy: object expected");
+                            message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SetIamPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.SetIamPolicyRequest} message SetIamPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SetIamPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resource = "";
+                            object.policy = null;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SetIamPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SetIamPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SetIamPolicyRequest;
+                })();
+    
+                v1.GetIamPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a GetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @interface IGetIamPolicyRequest
+                     * @property {string|null} [resource] GetIamPolicyRequest resource
+                     * @property {google.iam.v1.IGetPolicyOptions|null} [options] GetIamPolicyRequest options
+                     */
+    
+                    /**
+                     * Constructs a new GetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a GetIamPolicyRequest.
+                     * @implements IGetIamPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
+                     */
+                    function GetIamPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetIamPolicyRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     */
+                    GetIamPolicyRequest.prototype.resource = "";
+    
+                    /**
+                     * GetIamPolicyRequest options.
+                     * @member {google.iam.v1.IGetPolicyOptions|null|undefined} options
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     */
+                    GetIamPolicyRequest.prototype.options = null;
+    
+                    /**
+                     * Creates a new GetIamPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest instance
+                     */
+                    GetIamPolicyRequest.create = function create(properties) {
+                        return new GetIamPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetIamPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                            $root.google.iam.v1.GetPolicyOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetIamPolicyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resource = reader.string();
+                                break;
+                            case 2:
+                                message.options = $root.google.iam.v1.GetPolicyOptions.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetIamPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetIamPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.options != null && message.hasOwnProperty("options")) {
+                            var error = $root.google.iam.v1.GetPolicyOptions.verify(message.options);
+                            if (error)
+                                return "options." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     */
+                    GetIamPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.GetIamPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.options != null) {
+                            if (typeof object.options !== "object")
+                                throw TypeError(".google.iam.v1.GetIamPolicyRequest.options: object expected");
+                            message.options = $root.google.iam.v1.GetPolicyOptions.fromObject(object.options);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetIamPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.GetIamPolicyRequest} message GetIamPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetIamPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resource = "";
+                            object.options = null;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.options != null && message.hasOwnProperty("options"))
+                            object.options = $root.google.iam.v1.GetPolicyOptions.toObject(message.options, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetIamPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetIamPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetIamPolicyRequest;
+                })();
+    
+                v1.TestIamPermissionsRequest = (function() {
+    
+                    /**
+                     * Properties of a TestIamPermissionsRequest.
+                     * @memberof google.iam.v1
+                     * @interface ITestIamPermissionsRequest
+                     * @property {string|null} [resource] TestIamPermissionsRequest resource
+                     * @property {Array.<string>|null} [permissions] TestIamPermissionsRequest permissions
+                     */
+    
+                    /**
+                     * Constructs a new TestIamPermissionsRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a TestIamPermissionsRequest.
+                     * @implements ITestIamPermissionsRequest
+                     * @constructor
+                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
+                     */
+                    function TestIamPermissionsRequest(properties) {
+                        this.permissions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TestIamPermissionsRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     */
+                    TestIamPermissionsRequest.prototype.resource = "";
+    
+                    /**
+                     * TestIamPermissionsRequest permissions.
+                     * @member {Array.<string>} permissions
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     */
+                    TestIamPermissionsRequest.prototype.permissions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TestIamPermissionsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest instance
+                     */
+                    TestIamPermissionsRequest.create = function create(properties) {
+                        return new TestIamPermissionsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsRequest message. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.permissions != null && message.permissions.length)
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.permissions[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsRequest message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.resource = reader.string();
+                                break;
+                            case 2:
+                                if (!(message.permissions && message.permissions.length))
+                                    message.permissions = [];
+                                message.permissions.push(reader.string());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TestIamPermissionsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TestIamPermissionsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                            if (!Array.isArray(message.permissions))
+                                return "permissions: array expected";
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                if (!$util.isString(message.permissions[i]))
+                                    return "permissions: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TestIamPermissionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     */
+                    TestIamPermissionsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.TestIamPermissionsRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.permissions) {
+                            if (!Array.isArray(object.permissions))
+                                throw TypeError(".google.iam.v1.TestIamPermissionsRequest.permissions: array expected");
+                            message.permissions = [];
+                            for (var i = 0; i < object.permissions.length; ++i)
+                                message.permissions[i] = String(object.permissions[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TestIamPermissionsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.TestIamPermissionsRequest} message TestIamPermissionsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TestIamPermissionsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.permissions = [];
+                        if (options.defaults)
+                            object.resource = "";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.permissions && message.permissions.length) {
+                            object.permissions = [];
+                            for (var j = 0; j < message.permissions.length; ++j)
+                                object.permissions[j] = message.permissions[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TestIamPermissionsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TestIamPermissionsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return TestIamPermissionsRequest;
+                })();
+    
+                v1.TestIamPermissionsResponse = (function() {
+    
+                    /**
+                     * Properties of a TestIamPermissionsResponse.
+                     * @memberof google.iam.v1
+                     * @interface ITestIamPermissionsResponse
+                     * @property {Array.<string>|null} [permissions] TestIamPermissionsResponse permissions
+                     */
+    
+                    /**
+                     * Constructs a new TestIamPermissionsResponse.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a TestIamPermissionsResponse.
+                     * @implements ITestIamPermissionsResponse
+                     * @constructor
+                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
+                     */
+                    function TestIamPermissionsResponse(properties) {
+                        this.permissions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TestIamPermissionsResponse permissions.
+                     * @member {Array.<string>} permissions
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @instance
+                     */
+                    TestIamPermissionsResponse.prototype.permissions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TestIamPermissionsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse instance
+                     */
+                    TestIamPermissionsResponse.create = function create(properties) {
+                        return new TestIamPermissionsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsResponse message. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.permissions != null && message.permissions.length)
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsResponse message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.permissions && message.permissions.length))
+                                    message.permissions = [];
+                                message.permissions.push(reader.string());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TestIamPermissionsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TestIamPermissionsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                            if (!Array.isArray(message.permissions))
+                                return "permissions: array expected";
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                if (!$util.isString(message.permissions[i]))
+                                    return "permissions: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TestIamPermissionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     */
+                    TestIamPermissionsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.TestIamPermissionsResponse)
+                            return object;
+                        var message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        if (object.permissions) {
+                            if (!Array.isArray(object.permissions))
+                                throw TypeError(".google.iam.v1.TestIamPermissionsResponse.permissions: array expected");
+                            message.permissions = [];
+                            for (var i = 0; i < object.permissions.length; ++i)
+                                message.permissions[i] = String(object.permissions[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TestIamPermissionsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.TestIamPermissionsResponse} message TestIamPermissionsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TestIamPermissionsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.permissions = [];
+                        if (message.permissions && message.permissions.length) {
+                            object.permissions = [];
+                            for (var j = 0; j < message.permissions.length; ++j)
+                                object.permissions[j] = message.permissions[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TestIamPermissionsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TestIamPermissionsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return TestIamPermissionsResponse;
+                })();
+    
+                v1.GetPolicyOptions = (function() {
+    
+                    /**
+                     * Properties of a GetPolicyOptions.
+                     * @memberof google.iam.v1
+                     * @interface IGetPolicyOptions
+                     * @property {number|null} [requestedPolicyVersion] GetPolicyOptions requestedPolicyVersion
+                     */
+    
+                    /**
+                     * Constructs a new GetPolicyOptions.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a GetPolicyOptions.
+                     * @implements IGetPolicyOptions
+                     * @constructor
+                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
+                     */
+                    function GetPolicyOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetPolicyOptions requestedPolicyVersion.
+                     * @member {number} requestedPolicyVersion
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @instance
+                     */
+                    GetPolicyOptions.prototype.requestedPolicyVersion = 0;
+    
+                    /**
+                     * Creates a new GetPolicyOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions instance
+                     */
+                    GetPolicyOptions.create = function create(properties) {
+                        return new GetPolicyOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyOptions message. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requestedPolicyVersion);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyOptions message, length delimited. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyOptions.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.requestedPolicyVersion = reader.int32();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetPolicyOptions message.
+                     * @function verify
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetPolicyOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                            if (!$util.isInteger(message.requestedPolicyVersion))
+                                return "requestedPolicyVersion: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetPolicyOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     */
+                    GetPolicyOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.GetPolicyOptions)
+                            return object;
+                        var message = new $root.google.iam.v1.GetPolicyOptions();
+                        if (object.requestedPolicyVersion != null)
+                            message.requestedPolicyVersion = object.requestedPolicyVersion | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetPolicyOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.GetPolicyOptions} message GetPolicyOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetPolicyOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.requestedPolicyVersion = 0;
+                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                            object.requestedPolicyVersion = message.requestedPolicyVersion;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetPolicyOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetPolicyOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GetPolicyOptions;
                 })();
     
                 return v1;
