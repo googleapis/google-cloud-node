@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.0.2...v3.1.0) (2021-09-21)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#258](https://www.github.com/googleapis/nodejs-document-ai/issues/258)) ([e39c909](https://www.github.com/googleapis/nodejs-document-ai/commit/e39c909422e03b6ba48ea1163d80bc8a2504d172))
+
+
+### Bug Fixes
+
+* flag module as GA ([#260](https://www.github.com/googleapis/nodejs-document-ai/issues/260)) ([ecc541c](https://www.github.com/googleapis/nodejs-document-ai/commit/ecc541ce928a0b69a4541d8df941d47b71374938))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.0.1...v3.0.2) (2021-08-17)
 
 
