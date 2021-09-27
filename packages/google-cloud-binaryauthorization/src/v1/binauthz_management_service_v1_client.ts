@@ -33,10 +33,10 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/binauthz_management_service_v1_beta1_client_config.json`.
+ * `src/v1/binauthz_management_service_v1_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './binauthz_management_service_v1_beta1_client_config.json';
+import * as gapicConfig from './binauthz_management_service_v1_client_config.json';
 
 const version = require('../../../package.json').version;
 
@@ -46,12 +46,12 @@ const version = require('../../../package.json').version;
  *
  *  This API implements a REST model with the following objects:
  *
- *  * {@link google.cloud.binaryauthorization.v1beta1.Policy|Policy}
- *  * {@link google.cloud.binaryauthorization.v1beta1.Attestor|Attestor}
+ *  * {@link google.cloud.binaryauthorization.v1.Policy|Policy}
+ *  * {@link google.cloud.binaryauthorization.v1.Attestor|Attestor}
  * @class
- * @memberof v1beta1
+ * @memberof v1
  */
-export class BinauthzManagementServiceV1Beta1Client {
+export class BinauthzManagementServiceV1Client {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -69,10 +69,10 @@ export class BinauthzManagementServiceV1Beta1Client {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  binauthzManagementServiceV1Beta1Stub?: Promise<{[name: string]: Function}>;
+  binauthzManagementServiceV1Stub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of BinauthzManagementServiceV1Beta1Client.
+   * Construct an instance of BinauthzManagementServiceV1Client.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -108,7 +108,7 @@ export class BinauthzManagementServiceV1Beta1Client {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this
-      .constructor as typeof BinauthzManagementServiceV1Beta1Client;
+      .constructor as typeof BinauthzManagementServiceV1Client;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -174,11 +174,14 @@ export class BinauthzManagementServiceV1Beta1Client {
       attestorPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/attestors/{attestor}'
       ),
-      policyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/policy'
+      locationPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'locations/{location}/policy'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/policy'
       ),
     };
 
@@ -195,7 +198,7 @@ export class BinauthzManagementServiceV1Beta1Client {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1',
+      'google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -223,27 +226,27 @@ export class BinauthzManagementServiceV1Beta1Client {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.binauthzManagementServiceV1Beta1Stub) {
-      return this.binauthzManagementServiceV1Beta1Stub;
+    if (this.binauthzManagementServiceV1Stub) {
+      return this.binauthzManagementServiceV1Stub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1.
-    this.binauthzManagementServiceV1Beta1Stub = this._gaxGrpc.createStub(
+    // google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.
+    this.binauthzManagementServiceV1Stub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.binaryauthorization.v1beta1.BinauthzManagementServiceV1Beta1'
+            'google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.binaryauthorization.v1beta1
-            .BinauthzManagementServiceV1Beta1,
+          (this._protos as any).google.cloud.binaryauthorization.v1
+            .BinauthzManagementServiceV1,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const binauthzManagementServiceV1Beta1StubMethods = [
+    const binauthzManagementServiceV1StubMethods = [
       'getPolicy',
       'updatePolicy',
       'createAttestor',
@@ -252,8 +255,8 @@ export class BinauthzManagementServiceV1Beta1Client {
       'listAttestors',
       'deleteAttestor',
     ];
-    for (const methodName of binauthzManagementServiceV1Beta1StubMethods) {
-      const callPromise = this.binauthzManagementServiceV1Beta1Stub.then(
+    for (const methodName of binauthzManagementServiceV1StubMethods) {
+      const callPromise = this.binauthzManagementServiceV1Stub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -277,7 +280,7 @@ export class BinauthzManagementServiceV1Beta1Client {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.binauthzManagementServiceV1Beta1Stub;
+    return this.binauthzManagementServiceV1Stub;
   }
 
   /**
@@ -334,61 +337,54 @@ export class BinauthzManagementServiceV1Beta1Client {
   // -- Service calls --
   // -------------------
   getPolicy(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      (
-        | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   getPolicy(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      | protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getPolicy(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      | protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * A {@link google.cloud.binaryauthorization.v1beta1.Policy|policy} specifies the
-   * {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors} that must
-   * attest to a container image, before the project is allowed to deploy that
+   * A {@link google.cloud.binaryauthorization.v1.Policy|policy} specifies the {@link google.cloud.binaryauthorization.v1.Attestor|attestors} that must attest to
+   * a container image, before the project is allowed to deploy that
    * image. There is at most one policy per project. All image admission
    * requests are permitted if a project has no policy.
    *
-   * Gets the {@link google.cloud.binaryauthorization.v1beta1.Policy|policy} for this
-   * project. Returns a default
-   * {@link google.cloud.binaryauthorization.v1beta1.Policy|policy} if the project
-   * does not have one.
+   * Gets the {@link google.cloud.binaryauthorization.v1.Policy|policy} for this project. Returns a default
+   * {@link google.cloud.binaryauthorization.v1.Policy|policy} if the project does not have one.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link google.cloud.binaryauthorization.v1beta1.Policy|policy} to retrieve, in
-   *   the format `projects/* /policy`.
+   *   Required. The resource name of the {@link google.cloud.binaryauthorization.v1.Policy|policy} to retrieve,
+   *   in the format `projects/* /policy`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.binaryauthorization.v1beta1.Policy}.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.binaryauthorization.v1.Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -396,30 +392,27 @@ export class BinauthzManagementServiceV1Beta1Client {
    * const [response] = await client.getPolicy(request);
    */
   getPolicy(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-          | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
+          protos.google.cloud.binaryauthorization.v1.IPolicy,
+          | protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      | protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      (
-        | protos.google.cloud.binaryauthorization.v1beta1.IGetPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      protos.google.cloud.binaryauthorization.v1.IGetPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -442,60 +435,56 @@ export class BinauthzManagementServiceV1Beta1Client {
     return this.innerApiCalls.getPolicy(request, options, callback);
   }
   updatePolicy(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+        | protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updatePolicy(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      | protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   updatePolicy(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      | protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Creates or updates a project's
-   * {@link google.cloud.binaryauthorization.v1beta1.Policy|policy}, and returns a
-   * copy of the new {@link google.cloud.binaryauthorization.v1beta1.Policy|policy}.
-   * A policy is always updated as a whole, to avoid race conditions with
-   * concurrent policy enforcement (or management!) requests. Returns NOT_FOUND
-   * if the project does not exist, INVALID_ARGUMENT if the request is
-   * malformed.
+   * Creates or updates a project's {@link google.cloud.binaryauthorization.v1.Policy|policy}, and returns a copy of the
+   * new {@link google.cloud.binaryauthorization.v1.Policy|policy}. A policy is always updated as a whole, to avoid race
+   * conditions with concurrent policy enforcement (or management!)
+   * requests. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT
+   * if the request is malformed.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.binaryauthorization.v1beta1.Policy} request.policy
-   *   Required. A new or updated
-   *   {@link google.cloud.binaryauthorization.v1beta1.Policy|policy} value. The
-   *   service will overwrite the [policy
-   *   name][google.cloud.binaryauthorization.v1beta1.Policy.name] field with the
-   *   resource name in the request URL, in the format `projects/* /policy`.
+   * @param {google.cloud.binaryauthorization.v1.Policy} request.policy
+   *   Required. A new or updated {@link google.cloud.binaryauthorization.v1.Policy|policy} value. The service will
+   *   overwrite the {@link google.cloud.binaryauthorization.v1.Policy.name|policy name} field with the resource name in
+   *   the request URL, in the format `projects/* /policy`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.binaryauthorization.v1beta1.Policy}.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.binaryauthorization.v1.Policy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -503,28 +492,28 @@ export class BinauthzManagementServiceV1Beta1Client {
    * const [response] = await client.updatePolicy(request);
    */
   updatePolicy(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-          | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+          protos.google.cloud.binaryauthorization.v1.IPolicy,
+          | protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
-      | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
+      | protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IPolicy,
+      protos.google.cloud.binaryauthorization.v1.IPolicy,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IUpdatePolicyRequest
+        | protos.google.cloud.binaryauthorization.v1.IUpdatePolicyRequest
         | undefined
       ),
       {} | undefined
@@ -549,66 +538,59 @@ export class BinauthzManagementServiceV1Beta1Client {
     return this.innerApiCalls.updatePolicy(request, options, callback);
   }
   createAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   createAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   createAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Creates an {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor},
-   * and returns a copy of the new
-   * {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor}. Returns
-   * NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is
-   * malformed, ALREADY_EXISTS if the
-   * {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} already
-   * exists.
+   * Creates an {@link google.cloud.binaryauthorization.v1.Attestor|attestor}, and returns a copy of the new
+   * {@link google.cloud.binaryauthorization.v1.Attestor|attestor}. Returns NOT_FOUND if the project does not exist,
+   * INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the
+   * {@link google.cloud.binaryauthorization.v1.Attestor|attestor} already exists.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent of this
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor}.
+   *   Required. The parent of this {@link google.cloud.binaryauthorization.v1.Attestor|attestor}.
    * @param {string} request.attestorId
-   *   Required. The
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors} ID.
-   * @param {google.cloud.binaryauthorization.v1beta1.Attestor} request.attestor
-   *   Required. The initial
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} value. The
-   *   service will overwrite the [attestor
-   *   name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
-   *   the resource name, in the format `projects/* /attestors/*`.
+   *   Required. The {@link google.cloud.binaryauthorization.v1.Attestor|attestors} ID.
+   * @param {google.cloud.binaryauthorization.v1.Attestor} request.attestor
+   *   Required. The initial {@link google.cloud.binaryauthorization.v1.Attestor|attestor} value. The service will
+   *   overwrite the {@link google.cloud.binaryauthorization.v1.Attestor.name|attestor name} field with the resource name,
+   *   in the format `projects/* /attestors/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Attestor]{@link google.cloud.binaryauthorization.v1beta1.Attestor}.
+   *   The first element of the array is an object representing [Attestor]{@link google.cloud.binaryauthorization.v1.Attestor}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -616,28 +598,28 @@ export class BinauthzManagementServiceV1Beta1Client {
    * const [response] = await client.createAttestor(request);
    */
   createAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-          | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+          protos.google.cloud.binaryauthorization.v1.IAttestor,
+          | protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.ICreateAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.ICreateAttestorRequest
         | undefined
       ),
       {} | undefined
@@ -662,55 +644,52 @@ export class BinauthzManagementServiceV1Beta1Client {
     return this.innerApiCalls.createAttestor(request, options, callback);
   }
   getAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   getAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Gets an {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor}.
-   * Returns NOT_FOUND if the
-   * {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} does not
-   * exist.
+   * Gets an {@link google.cloud.binaryauthorization.v1.Attestor|attestor}.
+   * Returns NOT_FOUND if the {@link google.cloud.binaryauthorization.v1.Attestor|attestor} does not exist.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} to retrieve,
-   *   in the format `projects/* /attestors/*`.
+   *   Required. The name of the {@link google.cloud.binaryauthorization.v1.Attestor|attestor} to retrieve, in the format
+   *   `projects/* /attestors/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Attestor]{@link google.cloud.binaryauthorization.v1beta1.Attestor}.
+   *   The first element of the array is an object representing [Attestor]{@link google.cloud.binaryauthorization.v1.Attestor}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -718,28 +697,28 @@ export class BinauthzManagementServiceV1Beta1Client {
    * const [response] = await client.getAttestor(request);
    */
   getAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-          | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+          protos.google.cloud.binaryauthorization.v1.IAttestor,
+          | protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IGetAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.IGetAttestorRequest
         | undefined
       ),
       {} | undefined
@@ -764,58 +743,53 @@ export class BinauthzManagementServiceV1Beta1Client {
     return this.innerApiCalls.getAttestor(request, options, callback);
   }
   updateAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   updateAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   updateAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest,
     callback: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Updates an {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor}.
-   * Returns NOT_FOUND if the
-   * {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} does not
-   * exist.
+   * Updates an {@link google.cloud.binaryauthorization.v1.Attestor|attestor}.
+   * Returns NOT_FOUND if the {@link google.cloud.binaryauthorization.v1.Attestor|attestor} does not exist.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.binaryauthorization.v1beta1.Attestor} request.attestor
-   *   Required. The updated
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} value. The
-   *   service will overwrite the [attestor
-   *   name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
-   *   the resource name in the request URL, in the format
-   *   `projects/* /attestors/*`.
+   * @param {google.cloud.binaryauthorization.v1.Attestor} request.attestor
+   *   Required. The updated {@link google.cloud.binaryauthorization.v1.Attestor|attestor} value. The service will
+   *   overwrite the {@link google.cloud.binaryauthorization.v1.Attestor.name|attestor name} field with the resource name
+   *   in the request URL, in the format `projects/* /attestors/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Attestor]{@link google.cloud.binaryauthorization.v1beta1.Attestor}.
+   *   The first element of the array is an object representing [Attestor]{@link google.cloud.binaryauthorization.v1.Attestor}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -823,28 +797,28 @@ export class BinauthzManagementServiceV1Beta1Client {
    * const [response] = await client.updateAttestor(request);
    */
   updateAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-          | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+          protos.google.cloud.binaryauthorization.v1.IAttestor,
+          | protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
-      | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
+      | protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor,
+      protos.google.cloud.binaryauthorization.v1.IAttestor,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IUpdateAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.IUpdateAttestorRequest
         | undefined
       ),
       {} | undefined
@@ -869,51 +843,48 @@ export class BinauthzManagementServiceV1Beta1Client {
     return this.innerApiCalls.updateAttestor(request, options, callback);
   }
   deleteAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   deleteAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+      | protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   deleteAttestor(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+      | protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Deletes an {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor}.
-   * Returns NOT_FOUND if the
-   * {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestor} does not
-   * exist.
+   * Deletes an {@link google.cloud.binaryauthorization.v1.Attestor|attestor}. Returns NOT_FOUND if the
+   * {@link google.cloud.binaryauthorization.v1.Attestor|attestor} does not exist.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors} to delete,
-   *   in the format `projects/* /attestors/*`.
+   *   Required. The name of the {@link google.cloud.binaryauthorization.v1.Attestor|attestors} to delete, in the format
+   *   `projects/* /attestors/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -925,19 +896,19 @@ export class BinauthzManagementServiceV1Beta1Client {
    * const [response] = await client.deleteAttestor(request);
    */
   deleteAttestor(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+          | protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+      | protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest
       | null
       | undefined,
       {} | null | undefined
@@ -946,7 +917,7 @@ export class BinauthzManagementServiceV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       (
-        | protos.google.cloud.binaryauthorization.v1beta1.IDeleteAttestorRequest
+        | protos.google.cloud.binaryauthorization.v1.IDeleteAttestorRequest
         | undefined
       ),
       {} | undefined
@@ -972,58 +943,56 @@ export class BinauthzManagementServiceV1Beta1Client {
   }
 
   listAttestors(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor[],
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest | null,
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1.IAttestor[],
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest | null,
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsResponse
     ]
   >;
   listAttestors(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
-      | protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
+      | protos.google.cloud.binaryauthorization.v1.IListAttestorsResponse
       | null
       | undefined,
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor
+      protos.google.cloud.binaryauthorization.v1.IAttestor
     >
   ): void;
   listAttestors(
-    request: protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+    request: protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
-      | protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
+      | protos.google.cloud.binaryauthorization.v1.IListAttestorsResponse
       | null
       | undefined,
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor
+      protos.google.cloud.binaryauthorization.v1.IAttestor
     >
   ): void;
   /**
-   * Lists {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors}.
+   * Lists {@link google.cloud.binaryauthorization.v1.Attestor|attestors}.
    * Returns INVALID_ARGUMENT if the project does not exist.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors}, in the
-   *   format `projects/*`.
+   *   {@link google.cloud.binaryauthorization.v1.Attestor|attestors}, in the format `projects/*`.
    * @param {number} request.pageSize
    *   Requested page size. The server may return fewer results than requested. If
    *   unspecified, the server will pick an appropriate default.
    * @param {string} request.pageToken
    *   A token identifying a page of results the server should return. Typically,
-   *   this is the value of
-   *   {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.next_page_token|ListAttestorsResponse.next_page_token}
-   *   returned from the previous call to the `ListAttestors` method.
+   *   this is the value of {@link google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token|ListAttestorsResponse.next_page_token} returned
+   *   from the previous call to the `ListAttestors` method.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Attestor]{@link google.cloud.binaryauthorization.v1beta1.Attestor}.
+   *   The first element of the array is Array of [Attestor]{@link google.cloud.binaryauthorization.v1.Attestor}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1034,28 +1003,28 @@ export class BinauthzManagementServiceV1Beta1Client {
    *   for more details and examples.
    */
   listAttestors(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
-          | protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+          protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
+          | protos.google.cloud.binaryauthorization.v1.IListAttestorsResponse
           | null
           | undefined,
-          protos.google.cloud.binaryauthorization.v1beta1.IAttestor
+          protos.google.cloud.binaryauthorization.v1.IAttestor
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
-      | protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
+      | protos.google.cloud.binaryauthorization.v1.IListAttestorsResponse
       | null
       | undefined,
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor
+      protos.google.cloud.binaryauthorization.v1.IAttestor
     >
   ): Promise<
     [
-      protos.google.cloud.binaryauthorization.v1beta1.IAttestor[],
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest | null,
-      protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsResponse
+      protos.google.cloud.binaryauthorization.v1.IAttestor[],
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest | null,
+      protos.google.cloud.binaryauthorization.v1.IListAttestorsResponse
     ]
   > | void {
     request = request || {};
@@ -1083,20 +1052,18 @@ export class BinauthzManagementServiceV1Beta1Client {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors}, in the
-   *   format `projects/*`.
+   *   {@link google.cloud.binaryauthorization.v1.Attestor|attestors}, in the format `projects/*`.
    * @param {number} request.pageSize
    *   Requested page size. The server may return fewer results than requested. If
    *   unspecified, the server will pick an appropriate default.
    * @param {string} request.pageToken
    *   A token identifying a page of results the server should return. Typically,
-   *   this is the value of
-   *   {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.next_page_token|ListAttestorsResponse.next_page_token}
-   *   returned from the previous call to the `ListAttestors` method.
+   *   this is the value of {@link google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token|ListAttestorsResponse.next_page_token} returned
+   *   from the previous call to the `ListAttestors` method.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Attestor]{@link google.cloud.binaryauthorization.v1beta1.Attestor} on 'data' event.
+   *   An object stream which emits an object representing [Attestor]{@link google.cloud.binaryauthorization.v1.Attestor} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAttestorsAsync()`
@@ -1106,7 +1073,7 @@ export class BinauthzManagementServiceV1Beta1Client {
    *   for more details and examples.
    */
   listAttestorsStream(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1135,22 +1102,20 @@ export class BinauthzManagementServiceV1Beta1Client {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the project associated with the
-   *   {@link google.cloud.binaryauthorization.v1beta1.Attestor|attestors}, in the
-   *   format `projects/*`.
+   *   {@link google.cloud.binaryauthorization.v1.Attestor|attestors}, in the format `projects/*`.
    * @param {number} request.pageSize
    *   Requested page size. The server may return fewer results than requested. If
    *   unspecified, the server will pick an appropriate default.
    * @param {string} request.pageToken
    *   A token identifying a page of results the server should return. Typically,
-   *   this is the value of
-   *   {@link google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse.next_page_token|ListAttestorsResponse.next_page_token}
-   *   returned from the previous call to the `ListAttestors` method.
+   *   this is the value of {@link google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token|ListAttestorsResponse.next_page_token} returned
+   *   from the previous call to the `ListAttestors` method.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Attestor]{@link google.cloud.binaryauthorization.v1beta1.Attestor}. The API will be called under the hood as needed, once per the page,
+   *   [Attestor]{@link google.cloud.binaryauthorization.v1.Attestor}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -1162,9 +1127,9 @@ export class BinauthzManagementServiceV1Beta1Client {
    * }
    */
   listAttestorsAsync(
-    request?: protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
+    request?: protos.google.cloud.binaryauthorization.v1.IListAttestorsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.binaryauthorization.v1beta1.IAttestor> {
+  ): AsyncIterable<protos.google.cloud.binaryauthorization.v1.IAttestor> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1181,7 +1146,7 @@ export class BinauthzManagementServiceV1Beta1Client {
       this.innerApiCalls['listAttestors'] as GaxCall,
       request as unknown as RequestType,
       callSettings
-    ) as AsyncIterable<protos.google.cloud.binaryauthorization.v1beta1.IAttestor>;
+    ) as AsyncIterable<protos.google.cloud.binaryauthorization.v1.IAttestor>;
   }
   // --------------------
   // -- Path templates --
@@ -1224,26 +1189,28 @@ export class BinauthzManagementServiceV1Beta1Client {
   }
 
   /**
-   * Return a fully-qualified policy resource name string.
+   * Return a fully-qualified locationPolicy resource name string.
    *
-   * @param {string} project
+   * @param {string} location
    * @returns {string} Resource name string.
    */
-  policyPath(project: string) {
-    return this.pathTemplates.policyPathTemplate.render({
-      project: project,
+  locationPolicyPath(location: string) {
+    return this.pathTemplates.locationPolicyPathTemplate.render({
+      location: location,
     });
   }
 
   /**
-   * Parse the project from Policy resource.
+   * Parse the location from LocationPolicy resource.
    *
-   * @param {string} policyName
-   *   A fully-qualified path representing Policy resource.
-   * @returns {string} A string representing the project.
+   * @param {string} locationPolicyName
+   *   A fully-qualified path representing location_policy resource.
+   * @returns {string} A string representing the location.
    */
-  matchProjectFromPolicyName(policyName: string) {
-    return this.pathTemplates.policyPathTemplate.match(policyName).project;
+  matchLocationFromLocationPolicyName(locationPolicyName: string) {
+    return this.pathTemplates.locationPolicyPathTemplate.match(
+      locationPolicyName
+    ).location;
   }
 
   /**
@@ -1270,6 +1237,30 @@ export class BinauthzManagementServiceV1Beta1Client {
   }
 
   /**
+   * Return a fully-qualified projectPolicy resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPolicyPath(project: string) {
+    return this.pathTemplates.projectPolicyPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPolicy resource.
+   *
+   * @param {string} projectPolicyName
+   *   A fully-qualified path representing project_policy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPolicyName(projectPolicyName: string) {
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName)
+      .project;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -1278,7 +1269,7 @@ export class BinauthzManagementServiceV1Beta1Client {
   close(): Promise<void> {
     this.initialize();
     if (!this._terminated) {
-      return this.binauthzManagementServiceV1Beta1Stub!.then(stub => {
+      return this.binauthzManagementServiceV1Stub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
