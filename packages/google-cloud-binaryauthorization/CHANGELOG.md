@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.2.0...v1.3.0) (2021-09-27)
+
+
+### Features
+
+* add v1 of the API, add generated samples ([#95](https://www.github.com/googleapis/nodejs-binary-authorization/issues/95)) ([baa9a6a](https://www.github.com/googleapis/nodejs-binary-authorization/commit/baa9a6aa096acc89a367a0ac4fcba5c899cb6f2a))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.6...v1.2.0) (2021-08-23)
 
 
