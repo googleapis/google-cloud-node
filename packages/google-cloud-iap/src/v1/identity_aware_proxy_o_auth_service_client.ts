@@ -1151,7 +1151,8 @@ export class IdentityAwareProxyOAuthServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listIdentityAwareProxyClients'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIdentityAwareProxyClients.createStream(
       this.innerApiCalls.listIdentityAwareProxyClients as gax.GaxCall,
@@ -1210,7 +1211,8 @@ export class IdentityAwareProxyOAuthServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listIdentityAwareProxyClients'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIdentityAwareProxyClients.asyncIterate(
       this.innerApiCalls['listIdentityAwareProxyClients'] as GaxCall,
