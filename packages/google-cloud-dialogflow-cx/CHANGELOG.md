@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.13.0...v2.14.0) (2021-09-21)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#167](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/167)) ([a474169](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/a47416973c53bb62a701204fcacb7e5013d25658))
+
 ## [2.13.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.12.1...v2.13.0) (2021-08-17)
 
 
