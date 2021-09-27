@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.4.2...v1.5.0) (2021-09-13)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#124](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/124)) ([fd91176](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/fd91176a1b7a2c93b68137e66198f93fea8fe939))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.4.1...v1.4.2) (2021-08-11)
 
 

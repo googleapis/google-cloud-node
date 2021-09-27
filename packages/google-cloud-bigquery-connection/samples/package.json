@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/bigquery-connection": "^1.4.2"
+    "@google-cloud/bigquery-connection": "^1.5.0"
   },
   "devDependencies": {
     "c8": "^7.1.0",
