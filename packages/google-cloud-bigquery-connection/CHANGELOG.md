@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.5.0...v1.5.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#123](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/123)) ([2112f0a](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/2112f0a9fe594c5cac19f79dd554ea3b232aae45))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.4.2...v1.5.0) (2021-09-13)
 
 
