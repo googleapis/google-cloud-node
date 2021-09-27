@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.11.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.10.1...v1.11.0) (2021-09-22)
+
+
+### Features
+
+* add deployment_group to DeployedIndex in aiplatform_v1beta1 ([35b45f1](https://www.github.com/googleapis/nodejs-ai-platform/commit/35b45f196743df8f27439cfc1b3bb0bdb13f4a7c))
+* add model_deployment_monitoring_job to Endpoint in aiplatform_v1beta1 ([35b45f1](https://www.github.com/googleapis/nodejs-ai-platform/commit/35b45f196743df8f27439cfc1b3bb0bdb13f4a7c))
+* add ModelEvaluationExplanationSpec in aiplatform_v1beta1 ([35b45f1](https://www.github.com/googleapis/nodejs-ai-platform/commit/35b45f196743df8f27439cfc1b3bb0bdb13f4a7c))
+* add prediction service RPC RawPredict to aiplatform_v1beta1 feat: add tensorboard service RPCs to aiplatform_v1beta1: BatchCreateTensorboardRuns, BatchCreateTensorboardTimeSeries, WriteTensorboardExperimentData feat: add model_deployment_monitori... ([#196](https://www.github.com/googleapis/nodejs-ai-platform/issues/196)) ([35b45f1](https://www.github.com/googleapis/nodejs-ai-platform/commit/35b45f196743df8f27439cfc1b3bb0bdb13f4a7c))
+* add tensorboard service RPCs to aiplatform_v1beta1: BatchCreateTensorboardRuns, BatchCreateTensorboardTimeSeries, WriteTensorboardExperimentData ([35b45f1](https://www.github.com/googleapis/nodejs-ai-platform/commit/35b45f196743df8f27439cfc1b3bb0bdb13f4a7c))
+* add Vizier service to aiplatform v1 ([#197](https://www.github.com/googleapis/nodejs-ai-platform/issues/197)) ([7da1062](https://www.github.com/googleapis/nodejs-ai-platform/commit/7da106232ff10fa538a96939db888d6143497773))
+* turns on self-signed JWT feature flag ([#191](https://www.github.com/googleapis/nodejs-ai-platform/issues/191)) ([7e9b76f](https://www.github.com/googleapis/nodejs-ai-platform/commit/7e9b76fbba979235afc9dbfd1396c4e411ccb530))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.24.1 ([#190](https://www.github.com/googleapis/nodejs-ai-platform/issues/190)) ([ce5177f](https://www.github.com/googleapis/nodejs-ai-platform/commit/ce5177f34896aa8fdd94e6aae169c09a33e34939))
+* promote library to GA ([#201](https://www.github.com/googleapis/nodejs-ai-platform/issues/201)) ([7a9bb5e](https://www.github.com/googleapis/nodejs-ai-platform/commit/7a9bb5e2c1af0b0466cdf26c30c3206910a15e94))
+
 ### [1.10.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.10.0...v1.10.1) (2021-08-09)
 
 
