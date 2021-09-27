@@ -15,7 +15,7 @@
     "test": "cd manager && npm test && cd ../ && cd http_example && npm test && cd ../ && cd mqtt_example && npm test && cd ../ && cd access_token_example && npm test && cd ../"
   },
   "dependencies": {
-    "@google-cloud/iot": "^2.5.0",
+    "@google-cloud/iot": "^2.5.1",
     "@google-cloud/pubsub": "^2.0.0",
     "@google-cloud/storage": "^5.0.0"
   },

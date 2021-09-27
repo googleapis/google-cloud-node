@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.5.0...v2.5.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v5 ([#515](https://www.github.com/googleapis/nodejs-iot/issues/515)) ([ba34e57](https://www.github.com/googleapis/nodejs-iot/commit/ba34e57652a18ac839d6feb4e0ba5c3e60364f60))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.4.0...v2.5.0) (2021-09-17)
 
 
