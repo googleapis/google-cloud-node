@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.1.0...v1.2.0) (2021-09-27)
+
+
+### Features
+
+* add v1 of the API, generate samples ([#82](https://www.github.com/googleapis/nodejs-artifact-registry/issues/82)) ([07b5be6](https://www.github.com/googleapis/nodejs-artifact-registry/commit/07b5be6b149324f451414bff52e2c1014f127d86))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.7...v1.1.0) (2021-08-23)
 
 
