@@ -333,6 +333,21 @@
     "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
+    "name": "eventarc",
+    "name_pretty": "Eventarc",
+    "product_documentation": "https://cloud.google.com/eventarc/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/eventarc/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-eventarc/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-eventarc",
+    "distribution_name": "@google-cloud/eventarc",
+    "api_id": "eventarc.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/eventarc/docs/getting-support"
+  },
+  {
     "name": "filestore",
     "name_pretty": "Filestore",
     "product_documentation": "https://cloud.google.com/filestore/",
@@ -1493,21 +1508,6 @@
     "api_id": "clouderrorreporting.googleapis.com",
     "codeowner_team": "@googleapis/api-logging",
     "support_documentation": "https://cloud.google.com/error-reporting"
-  },
-  {
-    "name": "eventarc",
-    "name_pretty": "Eventarc",
-    "product_documentation": "https://cloud.google.com/eventarc/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/eventarc/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-eventarc/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-eventarc",
-    "distribution_name": "@google-cloud/eventarc",
-    "api_id": "eventarc.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/eventarc/docs/getting-support"
   },
   {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-hub/latest",
