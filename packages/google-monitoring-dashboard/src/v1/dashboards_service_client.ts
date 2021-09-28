@@ -873,7 +873,8 @@ export class DashboardsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDashboards'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDashboards.createStream(
       this.innerApiCalls.listDashboards as gax.GaxCall,
@@ -928,7 +929,8 @@ export class DashboardsServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDashboards'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDashboards.asyncIterate(
       this.innerApiCalls['listDashboards'] as GaxCall,
