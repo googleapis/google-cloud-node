@@ -15,33 +15,33 @@
 'use strict';
 
 // sample-metadata:
-//   title: Export Assets
-//   description: Export asserts to specified dump file path.
-//   usage: node exportAssets.js <gs://my-bucket/my-assets.txt> <content_type>
+//   title: Export Assets To BigQuery
+//   description: Export asserts to specified BigQuery table.
+//   usage: node exportAssetsBigquery.js <projects/project_id/datasets/dataset_id> <table_name>
 
-async function main(dumpFilePath, contentType) {
-  // [START asset_quickstart_export_assets]
+async function main(dataSet, table) {
+  // [START asset_quickstart_export_assets_bigquery]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const dumpFilePath = 'gs://my-bucket/my-assets.txt';
-  // const contentType = 'RESOURCE';
+  // const dataSet = 'projects/project_id/datasets/dataset_id';
+  // const table = 'mytable';
 
   const {AssetServiceClient} = require('@google-cloud/asset');
   const client = new AssetServiceClient();
 
-  async function exportAssets() {
+  async function exportAssetsBigquery() {
     const projectId = await client.getProjectId();
-    const projectResource = `projects/${projectId}`;
+    const projectResource = client.projectPath(projectId);
+    const dataset = dataSet;
 
-    // TODO(developer): choose the dump file path
-    // const dumpFilePath = 'Dump file path, e.g.: gs://<my_bucket>/<my_asset_file>'
     const request = {
       parent: projectResource,
-      contentType: contentType,
       outputConfig: {
-        gcsDestination: {
-          uri: dumpFilePath,
+        bigqueryDestination: {
+          dataset: `projects/${projectId}/${dataset}`,
+          table: table,
+          force: true,
         },
       },
     };
@@ -55,10 +55,9 @@ async function main(dumpFilePath, contentType) {
     // Do things with with the response.
     console.log(result);
   }
-  exportAssets().catch(err => {
-    throw err;
-  });
-  // [END asset_quickstart_export_assets]
+
+  exportAssetsBigquery();
+  // [END asset_quickstart_export_assets_bigquery]
 }
 
 main(...process.argv.slice(2)).catch(err => {
