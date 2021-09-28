@@ -1514,6 +1514,10 @@
                           "nested": {
                             "TranscriptSegment": {
                               "fields": {
+                                "messageTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 6
+                                },
                                 "text": {
                                   "type": "string",
                                   "id": 1
@@ -1538,6 +1542,14 @@
                                 "segmentParticipant": {
                                   "type": "ConversationParticipant",
                                   "id": 9
+                                },
+                                "dialogflowSegmentMetadata": {
+                                  "type": "DialogflowSegmentMetadata",
+                                  "id": 10
+                                },
+                                "sentiment": {
+                                  "type": "SentimentData",
+                                  "id": 11
                                 }
                               },
                               "nested": {
@@ -1558,6 +1570,14 @@
                                     "confidence": {
                                       "type": "float",
                                       "id": 4
+                                    }
+                                  }
+                                },
+                                "DialogflowSegmentMetadata": {
+                                  "fields": {
+                                    "smartReplyAllowlistCovered": {
+                                      "type": "bool",
+                                      "id": 1
                                     }
                                   }
                                 }
@@ -2533,6 +2553,10 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "obfuscatedExternalUserId": {
+                          "type": "string",
+                          "id": 3
                         },
                         "role": {
                           "type": "Role",

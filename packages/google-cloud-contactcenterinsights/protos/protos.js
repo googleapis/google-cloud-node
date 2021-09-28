@@ -12574,12 +12574,15 @@
                                  * Properties of a TranscriptSegment.
                                  * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript
                                  * @interface ITranscriptSegment
+                                 * @property {google.protobuf.ITimestamp|null} [messageTime] TranscriptSegment messageTime
                                  * @property {string|null} [text] TranscriptSegment text
                                  * @property {number|null} [confidence] TranscriptSegment confidence
                                  * @property {Array.<google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IWordInfo>|null} [words] TranscriptSegment words
                                  * @property {string|null} [languageCode] TranscriptSegment languageCode
                                  * @property {number|null} [channelTag] TranscriptSegment channelTag
                                  * @property {google.cloud.contactcenterinsights.v1.IConversationParticipant|null} [segmentParticipant] TranscriptSegment segmentParticipant
+                                 * @property {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata|null} [dialogflowSegmentMetadata] TranscriptSegment dialogflowSegmentMetadata
+                                 * @property {google.cloud.contactcenterinsights.v1.ISentimentData|null} [sentiment] TranscriptSegment sentiment
                                  */
     
                                 /**
@@ -12597,6 +12600,14 @@
                                             if (properties[keys[i]] != null)
                                                 this[keys[i]] = properties[keys[i]];
                                 }
+    
+                                /**
+                                 * TranscriptSegment messageTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} messageTime
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
+                                 * @instance
+                                 */
+                                TranscriptSegment.prototype.messageTime = null;
     
                                 /**
                                  * TranscriptSegment text.
@@ -12647,6 +12658,22 @@
                                 TranscriptSegment.prototype.segmentParticipant = null;
     
                                 /**
+                                 * TranscriptSegment dialogflowSegmentMetadata.
+                                 * @member {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata|null|undefined} dialogflowSegmentMetadata
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
+                                 * @instance
+                                 */
+                                TranscriptSegment.prototype.dialogflowSegmentMetadata = null;
+    
+                                /**
+                                 * TranscriptSegment sentiment.
+                                 * @member {google.cloud.contactcenterinsights.v1.ISentimentData|null|undefined} sentiment
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
+                                 * @instance
+                                 */
+                                TranscriptSegment.prototype.sentiment = null;
+    
+                                /**
                                  * Creates a new TranscriptSegment instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
@@ -12681,8 +12708,14 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.languageCode);
                                     if (message.channelTag != null && Object.hasOwnProperty.call(message, "channelTag"))
                                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.channelTag);
+                                    if (message.messageTime != null && Object.hasOwnProperty.call(message, "messageTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.messageTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     if (message.segmentParticipant != null && Object.hasOwnProperty.call(message, "segmentParticipant"))
                                         $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.encode(message.segmentParticipant, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                    if (message.dialogflowSegmentMetadata != null && Object.hasOwnProperty.call(message, "dialogflowSegmentMetadata"))
+                                        $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.encode(message.dialogflowSegmentMetadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                    if (message.sentiment != null && Object.hasOwnProperty.call(message, "sentiment"))
+                                        $root.google.cloud.contactcenterinsights.v1.SentimentData.encode(message.sentiment, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -12717,6 +12750,9 @@
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
                                         switch (tag >>> 3) {
+                                        case 6:
+                                            message.messageTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
                                         case 1:
                                             message.text = reader.string();
                                             break;
@@ -12736,6 +12772,12 @@
                                             break;
                                         case 9:
                                             message.segmentParticipant = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.decode(reader, reader.uint32());
+                                            break;
+                                        case 10:
+                                            message.dialogflowSegmentMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.decode(reader, reader.uint32());
+                                            break;
+                                        case 11:
+                                            message.sentiment = $root.google.cloud.contactcenterinsights.v1.SentimentData.decode(reader, reader.uint32());
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -12772,6 +12814,11 @@
                                 TranscriptSegment.verify = function verify(message) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (message.messageTime != null && message.hasOwnProperty("messageTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.messageTime);
+                                        if (error)
+                                            return "messageTime." + error;
+                                    }
                                     if (message.text != null && message.hasOwnProperty("text"))
                                         if (!$util.isString(message.text))
                                             return "text: string expected";
@@ -12798,6 +12845,16 @@
                                         if (error)
                                             return "segmentParticipant." + error;
                                     }
+                                    if (message.dialogflowSegmentMetadata != null && message.hasOwnProperty("dialogflowSegmentMetadata")) {
+                                        var error = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.verify(message.dialogflowSegmentMetadata);
+                                        if (error)
+                                            return "dialogflowSegmentMetadata." + error;
+                                    }
+                                    if (message.sentiment != null && message.hasOwnProperty("sentiment")) {
+                                        var error = $root.google.cloud.contactcenterinsights.v1.SentimentData.verify(message.sentiment);
+                                        if (error)
+                                            return "sentiment." + error;
+                                    }
                                     return null;
                                 };
     
@@ -12813,6 +12870,11 @@
                                     if (object instanceof $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment)
                                         return object;
                                     var message = new $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment();
+                                    if (object.messageTime != null) {
+                                        if (typeof object.messageTime !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.messageTime: object expected");
+                                        message.messageTime = $root.google.protobuf.Timestamp.fromObject(object.messageTime);
+                                    }
                                     if (object.text != null)
                                         message.text = String(object.text);
                                     if (object.confidence != null)
@@ -12835,6 +12897,16 @@
                                         if (typeof object.segmentParticipant !== "object")
                                             throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.segmentParticipant: object expected");
                                         message.segmentParticipant = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.fromObject(object.segmentParticipant);
+                                    }
+                                    if (object.dialogflowSegmentMetadata != null) {
+                                        if (typeof object.dialogflowSegmentMetadata !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.dialogflowSegmentMetadata: object expected");
+                                        message.dialogflowSegmentMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.fromObject(object.dialogflowSegmentMetadata);
+                                    }
+                                    if (object.sentiment != null) {
+                                        if (typeof object.sentiment !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.sentiment: object expected");
+                                        message.sentiment = $root.google.cloud.contactcenterinsights.v1.SentimentData.fromObject(object.sentiment);
                                     }
                                     return message;
                                 };
@@ -12859,7 +12931,10 @@
                                         object.confidence = 0;
                                         object.languageCode = "";
                                         object.channelTag = 0;
+                                        object.messageTime = null;
                                         object.segmentParticipant = null;
+                                        object.dialogflowSegmentMetadata = null;
+                                        object.sentiment = null;
                                     }
                                     if (message.text != null && message.hasOwnProperty("text"))
                                         object.text = message.text;
@@ -12874,8 +12949,14 @@
                                         object.languageCode = message.languageCode;
                                     if (message.channelTag != null && message.hasOwnProperty("channelTag"))
                                         object.channelTag = message.channelTag;
+                                    if (message.messageTime != null && message.hasOwnProperty("messageTime"))
+                                        object.messageTime = $root.google.protobuf.Timestamp.toObject(message.messageTime, options);
                                     if (message.segmentParticipant != null && message.hasOwnProperty("segmentParticipant"))
                                         object.segmentParticipant = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.toObject(message.segmentParticipant, options);
+                                    if (message.dialogflowSegmentMetadata != null && message.hasOwnProperty("dialogflowSegmentMetadata"))
+                                        object.dialogflowSegmentMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.toObject(message.dialogflowSegmentMetadata, options);
+                                    if (message.sentiment != null && message.hasOwnProperty("sentiment"))
+                                        object.sentiment = $root.google.cloud.contactcenterinsights.v1.SentimentData.toObject(message.sentiment, options);
                                     return object;
                                 };
     
@@ -13152,6 +13233,193 @@
                                     };
     
                                     return WordInfo;
+                                })();
+    
+                                TranscriptSegment.DialogflowSegmentMetadata = (function() {
+    
+                                    /**
+                                     * Properties of a DialogflowSegmentMetadata.
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
+                                     * @interface IDialogflowSegmentMetadata
+                                     * @property {boolean|null} [smartReplyAllowlistCovered] DialogflowSegmentMetadata smartReplyAllowlistCovered
+                                     */
+    
+                                    /**
+                                     * Constructs a new DialogflowSegmentMetadata.
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
+                                     * @classdesc Represents a DialogflowSegmentMetadata.
+                                     * @implements IDialogflowSegmentMetadata
+                                     * @constructor
+                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata=} [properties] Properties to set
+                                     */
+                                    function DialogflowSegmentMetadata(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * DialogflowSegmentMetadata smartReplyAllowlistCovered.
+                                     * @member {boolean} smartReplyAllowlistCovered
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @instance
+                                     */
+                                    DialogflowSegmentMetadata.prototype.smartReplyAllowlistCovered = false;
+    
+                                    /**
+                                     * Creates a new DialogflowSegmentMetadata instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata=} [properties] Properties to set
+                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata} DialogflowSegmentMetadata instance
+                                     */
+                                    DialogflowSegmentMetadata.create = function create(properties) {
+                                        return new DialogflowSegmentMetadata(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified DialogflowSegmentMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata} message DialogflowSegmentMetadata message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    DialogflowSegmentMetadata.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.smartReplyAllowlistCovered != null && Object.hasOwnProperty.call(message, "smartReplyAllowlistCovered"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.smartReplyAllowlistCovered);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified DialogflowSegmentMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata} message DialogflowSegmentMetadata message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    DialogflowSegmentMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a DialogflowSegmentMetadata message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata} DialogflowSegmentMetadata
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    DialogflowSegmentMetadata.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.smartReplyAllowlistCovered = reader.bool();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a DialogflowSegmentMetadata message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata} DialogflowSegmentMetadata
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    DialogflowSegmentMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a DialogflowSegmentMetadata message.
+                                     * @function verify
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    DialogflowSegmentMetadata.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.smartReplyAllowlistCovered != null && message.hasOwnProperty("smartReplyAllowlistCovered"))
+                                            if (typeof message.smartReplyAllowlistCovered !== "boolean")
+                                                return "smartReplyAllowlistCovered: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a DialogflowSegmentMetadata message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata} DialogflowSegmentMetadata
+                                     */
+                                    DialogflowSegmentMetadata.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata)
+                                            return object;
+                                        var message = new $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata();
+                                        if (object.smartReplyAllowlistCovered != null)
+                                            message.smartReplyAllowlistCovered = Boolean(object.smartReplyAllowlistCovered);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a DialogflowSegmentMetadata message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @static
+                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata} message DialogflowSegmentMetadata
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    DialogflowSegmentMetadata.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.smartReplyAllowlistCovered = false;
+                                        if (message.smartReplyAllowlistCovered != null && message.hasOwnProperty("smartReplyAllowlistCovered"))
+                                            object.smartReplyAllowlistCovered = message.smartReplyAllowlistCovered;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this DialogflowSegmentMetadata to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    DialogflowSegmentMetadata.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return DialogflowSegmentMetadata;
                                 })();
     
                                 return TranscriptSegment;
@@ -24038,6 +24306,7 @@
                          * @property {string|null} [dialogflowParticipantName] ConversationParticipant dialogflowParticipantName
                          * @property {string|null} [userId] ConversationParticipant userId
                          * @property {string|null} [dialogflowParticipant] ConversationParticipant dialogflowParticipant
+                         * @property {string|null} [obfuscatedExternalUserId] ConversationParticipant obfuscatedExternalUserId
                          * @property {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null} [role] ConversationParticipant role
                          */
     
@@ -24079,6 +24348,14 @@
                          * @instance
                          */
                         ConversationParticipant.prototype.dialogflowParticipant = "";
+    
+                        /**
+                         * ConversationParticipant obfuscatedExternalUserId.
+                         * @member {string} obfuscatedExternalUserId
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         */
+                        ConversationParticipant.prototype.obfuscatedExternalUserId = "";
     
                         /**
                          * ConversationParticipant role.
@@ -24130,6 +24407,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.dialogflowParticipant);
                             if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.role);
+                            if (message.obfuscatedExternalUserId != null && Object.hasOwnProperty.call(message, "obfuscatedExternalUserId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.obfuscatedExternalUserId);
                             if (message.dialogflowParticipantName != null && Object.hasOwnProperty.call(message, "dialogflowParticipantName"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.dialogflowParticipantName);
                             if (message.userId != null && Object.hasOwnProperty.call(message, "userId"))
@@ -24176,6 +24455,9 @@
                                     break;
                                 case 1:
                                     message.dialogflowParticipant = reader.string();
+                                    break;
+                                case 3:
+                                    message.obfuscatedExternalUserId = reader.string();
                                     break;
                                 case 2:
                                     message.role = reader.int32();
@@ -24231,6 +24513,9 @@
                             if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
                                 if (!$util.isString(message.dialogflowParticipant))
                                     return "dialogflowParticipant: string expected";
+                            if (message.obfuscatedExternalUserId != null && message.hasOwnProperty("obfuscatedExternalUserId"))
+                                if (!$util.isString(message.obfuscatedExternalUserId))
+                                    return "obfuscatedExternalUserId: string expected";
                             if (message.role != null && message.hasOwnProperty("role"))
                                 switch (message.role) {
                                 default:
@@ -24263,6 +24548,8 @@
                                 message.userId = String(object.userId);
                             if (object.dialogflowParticipant != null)
                                 message.dialogflowParticipant = String(object.dialogflowParticipant);
+                            if (object.obfuscatedExternalUserId != null)
+                                message.obfuscatedExternalUserId = String(object.obfuscatedExternalUserId);
                             switch (object.role) {
                             case "ROLE_UNSPECIFIED":
                             case 0:
@@ -24304,11 +24591,14 @@
                             if (options.defaults) {
                                 object.dialogflowParticipant = "";
                                 object.role = options.enums === String ? "ROLE_UNSPECIFIED" : 0;
+                                object.obfuscatedExternalUserId = "";
                             }
                             if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
                                 object.dialogflowParticipant = message.dialogflowParticipant;
                             if (message.role != null && message.hasOwnProperty("role"))
                                 object.role = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.role] : message.role;
+                            if (message.obfuscatedExternalUserId != null && message.hasOwnProperty("obfuscatedExternalUserId"))
+                                object.obfuscatedExternalUserId = message.obfuscatedExternalUserId;
                             if (message.dialogflowParticipantName != null && message.hasOwnProperty("dialogflowParticipantName")) {
                                 object.dialogflowParticipantName = message.dialogflowParticipantName;
                                 if (options.oneofs)

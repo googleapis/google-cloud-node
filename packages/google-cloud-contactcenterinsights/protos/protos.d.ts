@@ -5566,6 +5566,9 @@ export namespace google {
                         /** Properties of a TranscriptSegment. */
                         interface ITranscriptSegment {
 
+                            /** TranscriptSegment messageTime */
+                            messageTime?: (google.protobuf.ITimestamp|null);
+
                             /** TranscriptSegment text */
                             text?: (string|null);
 
@@ -5583,6 +5586,12 @@ export namespace google {
 
                             /** TranscriptSegment segmentParticipant */
                             segmentParticipant?: (google.cloud.contactcenterinsights.v1.IConversationParticipant|null);
+
+                            /** TranscriptSegment dialogflowSegmentMetadata */
+                            dialogflowSegmentMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata|null);
+
+                            /** TranscriptSegment sentiment */
+                            sentiment?: (google.cloud.contactcenterinsights.v1.ISentimentData|null);
                         }
 
                         /** Represents a TranscriptSegment. */
@@ -5593,6 +5602,9 @@ export namespace google {
                              * @param [properties] Properties to set
                              */
                             constructor(properties?: google.cloud.contactcenterinsights.v1.Conversation.Transcript.ITranscriptSegment);
+
+                            /** TranscriptSegment messageTime. */
+                            public messageTime?: (google.protobuf.ITimestamp|null);
 
                             /** TranscriptSegment text. */
                             public text: string;
@@ -5611,6 +5623,12 @@ export namespace google {
 
                             /** TranscriptSegment segmentParticipant. */
                             public segmentParticipant?: (google.cloud.contactcenterinsights.v1.IConversationParticipant|null);
+
+                            /** TranscriptSegment dialogflowSegmentMetadata. */
+                            public dialogflowSegmentMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata|null);
+
+                            /** TranscriptSegment sentiment. */
+                            public sentiment?: (google.cloud.contactcenterinsights.v1.ISentimentData|null);
 
                             /**
                              * Creates a new TranscriptSegment instance using the specified properties.
@@ -5788,6 +5806,96 @@ export namespace google {
 
                                 /**
                                  * Converts this WordInfo to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a DialogflowSegmentMetadata. */
+                            interface IDialogflowSegmentMetadata {
+
+                                /** DialogflowSegmentMetadata smartReplyAllowlistCovered */
+                                smartReplyAllowlistCovered?: (boolean|null);
+                            }
+
+                            /** Represents a DialogflowSegmentMetadata. */
+                            class DialogflowSegmentMetadata implements IDialogflowSegmentMetadata {
+
+                                /**
+                                 * Constructs a new DialogflowSegmentMetadata.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata);
+
+                                /** DialogflowSegmentMetadata smartReplyAllowlistCovered. */
+                                public smartReplyAllowlistCovered: boolean;
+
+                                /**
+                                 * Creates a new DialogflowSegmentMetadata instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns DialogflowSegmentMetadata instance
+                                 */
+                                public static create(properties?: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata;
+
+                                /**
+                                 * Encodes the specified DialogflowSegmentMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.verify|verify} messages.
+                                 * @param message DialogflowSegmentMetadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified DialogflowSegmentMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata.verify|verify} messages.
+                                 * @param message DialogflowSegmentMetadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IDialogflowSegmentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a DialogflowSegmentMetadata message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns DialogflowSegmentMetadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata;
+
+                                /**
+                                 * Decodes a DialogflowSegmentMetadata message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns DialogflowSegmentMetadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata;
+
+                                /**
+                                 * Verifies a DialogflowSegmentMetadata message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a DialogflowSegmentMetadata message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns DialogflowSegmentMetadata
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata;
+
+                                /**
+                                 * Creates a plain object from a DialogflowSegmentMetadata message. Also converts values to other types if specified.
+                                 * @param message DialogflowSegmentMetadata
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this DialogflowSegmentMetadata to JSON.
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
@@ -10074,6 +10182,9 @@ export namespace google {
                     /** ConversationParticipant dialogflowParticipant */
                     dialogflowParticipant?: (string|null);
 
+                    /** ConversationParticipant obfuscatedExternalUserId */
+                    obfuscatedExternalUserId?: (string|null);
+
                     /** ConversationParticipant role */
                     role?: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null);
                 }
@@ -10095,6 +10206,9 @@ export namespace google {
 
                     /** ConversationParticipant dialogflowParticipant. */
                     public dialogflowParticipant: string;
+
+                    /** ConversationParticipant obfuscatedExternalUserId. */
+                    public obfuscatedExternalUserId: string;
 
                     /** ConversationParticipant role. */
                     public role: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role);
