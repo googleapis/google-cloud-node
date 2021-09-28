@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent) {
-  // [START kms_v1_generated_KeyManagementService_ListImportJobs_async]
+  // [START cloudkms_v1_generated_KeyManagementService_ListImportJobs_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -71,7 +71,7 @@ function main(parent) {
   }
 
   listImportJobs();
-  // [END kms_v1_generated_KeyManagementService_ListImportJobs_async]
+  // [END cloudkms_v1_generated_KeyManagementService_ListImportJobs_async]
 }
 
 process.on('unhandledRejection', err => {

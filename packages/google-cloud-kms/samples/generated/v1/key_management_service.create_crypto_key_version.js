@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, cryptoKeyVersion) {
-  // [START kms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
+  // [START cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(parent, cryptoKeyVersion) {
   }
 
   createCryptoKeyVersion();
-  // [END kms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
+  // [END cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async]
 }
 
 process.on('unhandledRejection', err => {

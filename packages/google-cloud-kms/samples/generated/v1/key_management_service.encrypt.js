@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name, plaintext) {
-  // [START kms_v1_generated_KeyManagementService_Encrypt_async]
+  // [START cloudkms_v1_generated_KeyManagementService_Encrypt_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -100,7 +100,7 @@ function main(name, plaintext) {
   }
 
   encrypt();
-  // [END kms_v1_generated_KeyManagementService_Encrypt_async]
+  // [END cloudkms_v1_generated_KeyManagementService_Encrypt_async]
 }
 
 process.on('unhandledRejection', err => {
