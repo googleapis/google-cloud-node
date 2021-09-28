@@ -1727,8 +1727,8 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    *
-   * @example <caption>include:samples/notifications.js</caption>
-   * region_tag:storage_create_notification
+   * @example <caption>include:samples/createNotification.js</caption>
+   * region_tag:storage_create_bucket_notifications
    * Another example:
    */
   createNotification(
@@ -2636,8 +2636,8 @@ class Bucket extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    *
-   * @example <caption>include:samples/notifications.js</caption>
-   * region_tag:storage_list_notifications
+   * @example <caption>include:samples/listNotifications.js</caption>
+   * region_tag:storage_list_bucket_notifications
    * Another example:
    */
   getNotifications(
