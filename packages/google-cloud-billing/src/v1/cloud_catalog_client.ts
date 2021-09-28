@@ -437,7 +437,8 @@ export class CloudCatalogClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as gax.GaxCall,
@@ -481,7 +482,8 @@ export class CloudCatalogClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -656,7 +658,8 @@ export class CloudCatalogClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as gax.GaxCall,
@@ -727,7 +730,8 @@ export class CloudCatalogClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,

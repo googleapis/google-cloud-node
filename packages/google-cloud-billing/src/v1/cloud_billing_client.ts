@@ -1269,7 +1269,8 @@ export class CloudBillingClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBillingAccounts'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBillingAccounts.createStream(
       this.innerApiCalls.listBillingAccounts as gax.GaxCall,
@@ -1321,7 +1322,8 @@ export class CloudBillingClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBillingAccounts'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBillingAccounts.asyncIterate(
       this.innerApiCalls['listBillingAccounts'] as GaxCall,
@@ -1477,7 +1479,8 @@ export class CloudBillingClient {
       gax.routingHeader.fromParams({
         name: request.name || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProjectBillingInfo'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProjectBillingInfo.createStream(
       this.innerApiCalls.listProjectBillingInfo as gax.GaxCall,
@@ -1531,7 +1534,8 @@ export class CloudBillingClient {
         name: request.name || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProjectBillingInfo'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProjectBillingInfo.asyncIterate(
       this.innerApiCalls['listProjectBillingInfo'] as GaxCall,
