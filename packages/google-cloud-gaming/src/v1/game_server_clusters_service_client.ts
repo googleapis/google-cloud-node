@@ -1442,7 +1442,8 @@ export class GameServerClustersServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listGameServerClusters'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGameServerClusters.createStream(
       this.innerApiCalls.listGameServerClusters as gax.GaxCall,
@@ -1509,7 +1510,8 @@ export class GameServerClustersServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listGameServerClusters'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGameServerClusters.asyncIterate(
       this.innerApiCalls['listGameServerClusters'] as GaxCall,

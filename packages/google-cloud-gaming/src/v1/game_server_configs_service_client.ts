@@ -926,7 +926,8 @@ export class GameServerConfigsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listGameServerConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGameServerConfigs.createStream(
       this.innerApiCalls.listGameServerConfigs as gax.GaxCall,
@@ -986,7 +987,8 @@ export class GameServerConfigsServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listGameServerConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGameServerConfigs.asyncIterate(
       this.innerApiCalls['listGameServerConfigs'] as GaxCall,

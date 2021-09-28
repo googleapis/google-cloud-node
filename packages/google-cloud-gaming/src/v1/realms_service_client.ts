@@ -1149,7 +1149,8 @@ export class RealmsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRealms'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRealms.createStream(
       this.innerApiCalls.listRealms as gax.GaxCall,
@@ -1210,7 +1211,8 @@ export class RealmsServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRealms'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRealms.asyncIterate(
       this.innerApiCalls['listRealms'] as GaxCall,
