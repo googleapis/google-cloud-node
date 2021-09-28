@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.5.0...v1.6.0) (2021-09-28)
+
+
+### Features
+
+* add metadata from dialogflow related to transcript segment, sentiment data for transcript segment ([#64](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/64)) ([982dbab](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/982dbabf513655e59c52cc05c41f172f06495c1e))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.4.0...v1.5.0) (2021-09-20)
 
 
