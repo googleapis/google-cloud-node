@@ -4134,7 +4134,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCustomers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomers.createStream(
       this.innerApiCalls.listCustomers as gax.GaxCall,
@@ -4190,7 +4191,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCustomers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
@@ -4353,7 +4355,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEntitlements'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as gax.GaxCall,
@@ -4410,7 +4413,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEntitlements'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
@@ -4618,7 +4622,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTransferableSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferableSkus.createStream(
       this.innerApiCalls.listTransferableSkus as gax.GaxCall,
@@ -4693,7 +4698,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTransferableSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferableSkus.asyncIterate(
       this.innerApiCalls['listTransferableSkus'] as GaxCall,
@@ -4887,7 +4893,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTransferableOffers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferableOffers.createStream(
       this.innerApiCalls.listTransferableOffers as gax.GaxCall,
@@ -4953,7 +4960,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTransferableOffers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferableOffers.asyncIterate(
       this.innerApiCalls['listTransferableOffers'] as GaxCall,
@@ -5126,7 +5134,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannelPartnerLinks.createStream(
       this.innerApiCalls.listChannelPartnerLinks as gax.GaxCall,
@@ -5185,7 +5194,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listChannelPartnerLinks.asyncIterate(
       this.innerApiCalls['listChannelPartnerLinks'] as GaxCall,
@@ -5326,7 +5336,8 @@ export class CloudChannelServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProducts'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as gax.GaxCall,
@@ -5377,7 +5388,8 @@ export class CloudChannelServiceClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProducts'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
@@ -5538,7 +5550,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as gax.GaxCall,
@@ -5600,7 +5613,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
@@ -5763,7 +5777,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listOffers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOffers.createStream(
       this.innerApiCalls.listOffers as gax.GaxCall,
@@ -5826,7 +5841,8 @@ export class CloudChannelServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listOffers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listOffers.asyncIterate(
       this.innerApiCalls['listOffers'] as GaxCall,
@@ -5997,7 +6013,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         customer: request.customer || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPurchasableSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPurchasableSkus.createStream(
       this.innerApiCalls.listPurchasableSkus as gax.GaxCall,
@@ -6058,7 +6075,8 @@ export class CloudChannelServiceClient {
         customer: request.customer || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPurchasableSkus'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPurchasableSkus.asyncIterate(
       this.innerApiCalls['listPurchasableSkus'] as GaxCall,
@@ -6229,7 +6247,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         customer: request.customer || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPurchasableOffers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPurchasableOffers.createStream(
       this.innerApiCalls.listPurchasableOffers as gax.GaxCall,
@@ -6290,7 +6309,8 @@ export class CloudChannelServiceClient {
         customer: request.customer || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPurchasableOffers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPurchasableOffers.asyncIterate(
       this.innerApiCalls['listPurchasableOffers'] as GaxCall,
@@ -6461,7 +6481,8 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         account: request.account || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSubscribers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSubscribers.createStream(
       this.innerApiCalls.listSubscribers as gax.GaxCall,
@@ -6518,7 +6539,8 @@ export class CloudChannelServiceClient {
         account: request.account || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSubscribers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSubscribers.asyncIterate(
       this.innerApiCalls['listSubscribers'] as GaxCall,
