@@ -1331,7 +1331,8 @@ export class TablesServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTables'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTables.createStream(
       this.innerApiCalls.listTables as gax.GaxCall,
@@ -1381,7 +1382,8 @@ export class TablesServiceClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTables'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTables.asyncIterate(
       this.innerApiCalls['listTables'] as GaxCall,
@@ -1522,7 +1524,8 @@ export class TablesServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listWorkspaces'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as gax.GaxCall,
@@ -1572,7 +1575,8 @@ export class TablesServiceClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listWorkspaces'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
@@ -1745,7 +1749,8 @@ export class TablesServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRows'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRows.createStream(
       this.innerApiCalls.listRows as gax.GaxCall,
@@ -1811,7 +1816,8 @@ export class TablesServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRows'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRows.asyncIterate(
       this.innerApiCalls['listRows'] as GaxCall,
