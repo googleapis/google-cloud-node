@@ -1669,7 +1669,7 @@ class File extends ServiceObject<File> {
    *     working with streams, the file format and size is unknown until it's
    *     completely consumed. Because of this, it's best for you to be explicit
    *     for what makes sense given your input.
-   * @param {number} [timeout=60000] Set the HTTP request timeout in
+   * @property {number} [timeout=60000] Set the HTTP request timeout in
    *     milliseconds. This option is not available for resumable uploads.
    *     Default: `60000`
    * @property {string} [uri] The URI for an already-created resumable
