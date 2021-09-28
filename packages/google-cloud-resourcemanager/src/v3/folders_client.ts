@@ -1724,7 +1724,8 @@ export class FoldersClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFolders'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFolders.createStream(
       this.innerApiCalls.listFolders as gax.GaxCall,
@@ -1778,7 +1779,8 @@ export class FoldersClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFolders'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFolders.asyncIterate(
       this.innerApiCalls['listFolders'] as GaxCall,
@@ -1972,7 +1974,8 @@ export class FoldersClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchFolders'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchFolders.createStream(
       this.innerApiCalls.searchFolders as gax.GaxCall,
@@ -2046,7 +2049,8 @@ export class FoldersClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchFolders'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchFolders.asyncIterate(
       this.innerApiCalls['searchFolders'] as GaxCall,

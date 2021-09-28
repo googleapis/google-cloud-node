@@ -873,7 +873,8 @@ export class OrganizationsClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchOrganizations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchOrganizations.createStream(
       this.innerApiCalls.searchOrganizations as gax.GaxCall,
@@ -935,7 +936,8 @@ export class OrganizationsClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchOrganizations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchOrganizations.asyncIterate(
       this.innerApiCalls['searchOrganizations'] as GaxCall,

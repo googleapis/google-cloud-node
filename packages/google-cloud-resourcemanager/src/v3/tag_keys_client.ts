@@ -1332,7 +1332,8 @@ export class TagKeysClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTagKeys'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagKeys.createStream(
       this.innerApiCalls.listTagKeys as gax.GaxCall,
@@ -1380,7 +1381,8 @@ export class TagKeysClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTagKeys'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagKeys.asyncIterate(
       this.innerApiCalls['listTagKeys'] as GaxCall,

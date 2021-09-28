@@ -791,7 +791,8 @@ export class TagBindingsClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTagBindings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagBindings.createStream(
       this.innerApiCalls.listTagBindings as gax.GaxCall,
@@ -840,7 +841,8 @@ export class TagBindingsClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTagBindings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagBindings.asyncIterate(
       this.innerApiCalls['listTagBindings'] as GaxCall,

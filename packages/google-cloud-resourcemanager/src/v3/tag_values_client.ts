@@ -1328,7 +1328,8 @@ export class TagValuesClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTagValues'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagValues.createStream(
       this.innerApiCalls.listTagValues as gax.GaxCall,
@@ -1376,7 +1377,8 @@ export class TagValuesClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTagValues'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTagValues.asyncIterate(
       this.innerApiCalls['listTagValues'] as GaxCall,

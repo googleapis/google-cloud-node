@@ -1742,7 +1742,8 @@ export class ProjectsClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProjects'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProjects.createStream(
       this.innerApiCalls.listProjects as gax.GaxCall,
@@ -1796,7 +1797,8 @@ export class ProjectsClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProjects'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProjects.asyncIterate(
       this.innerApiCalls['listProjects'] as GaxCall,
@@ -2010,7 +2012,8 @@ export class ProjectsClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchProjects'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchProjects.createStream(
       this.innerApiCalls.searchProjects as gax.GaxCall,
@@ -2092,7 +2095,8 @@ export class ProjectsClient {
     request = request || {};
     options = options || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchProjects'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchProjects.asyncIterate(
       this.innerApiCalls['searchProjects'] as GaxCall,
