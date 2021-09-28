@@ -859,7 +859,8 @@ export class BudgetServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBudgets'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBudgets.createStream(
       this.innerApiCalls.listBudgets as gax.GaxCall,
@@ -913,7 +914,8 @@ export class BudgetServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBudgets'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBudgets.asyncIterate(
       this.innerApiCalls['listBudgets'] as GaxCall,
