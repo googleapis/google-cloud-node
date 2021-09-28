@@ -490,7 +490,8 @@ export class AssetServiceClient {
       gax.routingHeader.fromParams({
         scope: request.scope || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAllResources'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllResources.createStream(
       this.innerApiCalls.searchAllResources as gax.GaxCall,
@@ -561,7 +562,8 @@ export class AssetServiceClient {
         scope: request.scope || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAllResources'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
@@ -739,7 +741,8 @@ export class AssetServiceClient {
       gax.routingHeader.fromParams({
         scope: request.scope || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAllIamPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllIamPolicies.createStream(
       this.innerApiCalls.searchAllIamPolicies as gax.GaxCall,
@@ -805,7 +808,8 @@ export class AssetServiceClient {
         scope: request.scope || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAllIamPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
