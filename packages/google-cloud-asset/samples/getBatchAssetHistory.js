@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,14 @@
 //   description: Batch get history of assets.
 //   usage: node getBatchAssetHistory "//storage.googleapis.com/<BUCKET_NAME>"
 
-async function main(assetNames) {
+async function main(assetNames, contentType) {
   // [START asset_quickstart_batch_get_assets_history]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // const assetNames = '//storage.googleapis.com/<BUCKET_NAME1>,//storage.googleapis.com/<BUCKET_NAME2>';
+  // const contentType = 'RESOURCE';
+
   const util = require('util');
   const {AssetServiceClient} = require('@google-cloud/asset');
 
@@ -35,7 +41,7 @@ async function main(assetNames) {
     const request = {
       parent: projectResource,
       assetNames: assetNames.split(','),
-      contentType: 'RESOURCE',
+      contentType: contentType,
       readTimeWindow: {
         startTime: {
           seconds: Math.floor(new Date().getTime() / 1000),

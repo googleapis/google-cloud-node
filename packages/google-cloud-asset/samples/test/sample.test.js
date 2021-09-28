@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const storage = new Storage();
 const bucketName = `asset-nodejs-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
+const fileSuffix = `${uuid.v4()}`;
 
 const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
@@ -61,14 +62,30 @@ describe('quickstart sample tests', () => {
   });
 
   it('should export assets to specified path', async () => {
-    const dumpFilePath = `gs://${bucketName}/my-assets.txt`;
+    const dumpFilePath = `gs://${bucketName}/my-assets-${fileSuffix}.txt`;
     execSync(`node exportAssets ${dumpFilePath}`);
     let waitMs = 1000;
     let exists = false;
     let file;
     for (let retry = 0; retry < 3 && !exists; ++retry) {
       await sleep((waitMs *= 2));
-      file = await bucket.file('my-assets.txt');
+      file = await bucket.file(`my-assets-${fileSuffix}.txt`);
+      exists = await file.exists();
+    }
+    assert.ok(exists);
+    await file.delete();
+  });
+
+  it('should export asset relationships to specified path', async () => {
+    const dumpFilePath = `gs://${bucketName}/my-relationships-${fileSuffix}.txt`;
+    const contentType = 'RELATIONSHIP';
+    execSync(`node exportAssets ${dumpFilePath} ${contentType}`);
+    let waitMs = 1000;
+    let exists = false;
+    let file;
+    for (let retry = 0; retry < 3 && !exists; ++retry) {
+      await sleep((waitMs *= 2));
+      file = await bucket.file(`my-relationships-${fileSuffix}.txt`);
       exists = await file.exists();
     }
     assert.ok(exists);
@@ -83,7 +100,9 @@ describe('quickstart sample tests', () => {
     let included = false;
     for (let retry = 0; retry < 3 && !included; ++retry) {
       await sleep((waitMs *= 2));
-      const stdout = execSync(`node getBatchAssetHistory ${assetName}`);
+      const stdout = execSync(
+        `node getBatchAssetHistory ${assetName} 'RESOURCE'`
+      );
       included = stdout.includes(assetName);
     }
     assert.ok(included);
@@ -109,8 +128,13 @@ describe('quickstart sample tests', () => {
 
   it('should list assets successfully', async () => {
     const assetType = 'storage.googleapis.com/Bucket';
-    const stdout = execSync(`node listAssets ${assetType}`);
+    const stdout = execSync(`node listAssets ${assetType} 'RESOURCE'`);
     assert.include(stdout, assetType);
+  });
+
+  it('should list asset relationship successfully', async () => {
+    const stdout = execSync("node listAssets '' 'RELATIONSHIP'");
+    assert.include(stdout, 'relatedAsset');
   });
 
   it('should analyze iam policy successfully', async () => {

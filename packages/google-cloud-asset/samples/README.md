@@ -18,6 +18,7 @@
   * [Create Feed](#create-feed)
   * [Delete Feed](#delete-feed)
   * [Export Assets](#export-assets)
+  * [Export Assets To BigQuery](#export-assets-to-bigquery)
   * [Get Batch Asset History](#get-batch-asset-history)
   * [Get Feed](#get-feed)
   * [List Assets](#list-assets)
@@ -110,7 +111,7 @@ View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samp
 __Usage:__
 
 
-`node createFeed <FEED_ID> "storage.googleapis.com/<BUCKET_NAME>", projects/<PROJECT_ID>/topics/<TOPIC_ID>`
+`node createFeed <FEED_ID> "storage.googleapis.com/<BUCKET_NAME>", projects/<PROJECT_ID>/topics/<TOPIC_ID>, "RESOURCE"`
 
 
 -----
@@ -148,7 +149,26 @@ View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samp
 __Usage:__
 
 
-`node exportAssets.js <gs:my-bucket/my-assets.txt>`
+`node exportAssets.js <gs:my-bucket/my-assets.txt> <content_type>`
+
+
+-----
+
+
+
+
+### Export Assets To BigQuery
+
+Export asserts to specified BigQuery table.
+
+View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samples/exportAssetsBigquery.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/exportAssetsBigquery.js,samples/README.md)
+
+__Usage:__
+
+
+`node exportAssetsBigquery.js <projects/project_id/datasets/dataset_id> <table_name>`
 
 
 -----
@@ -205,7 +225,7 @@ View the [source code](https://github.com/googleapis/nodejs-asset/blob/main/samp
 __Usage:__
 
 
-`node listAssets <ASSET_TYPES>`
+`node listAssets <ASSET_TYPES> <content_type>`
 
 
 -----

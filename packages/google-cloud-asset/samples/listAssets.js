@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,11 +17,17 @@
 // sample-metadata:
 //   title: List Assets
 //   description: List assets under the current project.
-//   usage: node listAssets <ASSET_TYPES>
-//   example: node listAssets "storage.googleapis.com/Bucket,bigquery.googleapis.com/Table"
+//   usage: node listAssets <ASSET_TYPES> <content_type>
+//   example: node listAssets "storage.googleapis.com/Bucket,bigquery.googleapis.com/Table" 'RESOURCE'
 
-async function main(assetTypes) {
+async function main(assetTypes, contentType) {
   // [START asset_quickstart_list_assets]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // const assetTypes = 'storage.googleapis.com/Bucket,bigquery.googleapis.com/Table';
+  // const contentType = 'RESOURCE';
+
   const util = require('util');
   const {v1} = require('@google-cloud/asset');
   const client = new v1.AssetServiceClient();
@@ -38,7 +44,7 @@ async function main(assetTypes) {
     const request = {
       parent: projectResource,
       assetTypes: assetTypesList,
-      contentType: 'RESOURCE',
+      contentType: contentType,
       // (Optional) Add readTime parameter to list assets at the given time instead of current time:
       //   readTime: { seconds: 1593988758 },
     };

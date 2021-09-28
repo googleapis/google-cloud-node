@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,10 +17,18 @@
 // sample-metadata:
 //   title: Create Feed
 //   description: Create Feed.
-//   usage: node createFeed <FEED_ID> "//storage.googleapis.com/<BUCKET_NAME>", projects/<PROJECT_ID>/topics/<TOPIC_ID>
+//   usage: node createFeed <FEED_ID> "//storage.googleapis.com/<BUCKET_NAME>", projects/<PROJECT_ID>/topics/<TOPIC_ID>, "RESOURCE"
 
-async function main(feedId, assetNames, topicName) {
+async function main(feedId, assetNames, topicName, contentType) {
   // [START asset_quickstart_create_feed]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // const feedId = 'my feed';
+  // const assetNames = '//storage.googleapis.com/<BUCKET_NAME1>,//storage.googleapis.com/<BUCKET_NAME2>';
+  // const topicName = 'projects/<PROJECT_ID>/topics/<TOPIC_ID>'
+  // const contentType = 'RESOURCE';
+
   const util = require('util');
   const {AssetServiceClient} = require('@google-cloud/asset');
 
@@ -36,6 +44,7 @@ async function main(feedId, assetNames, topicName) {
       feedId: feedId,
       feed: {
         assetNames: assetNames.split(','),
+        contentType: contentType,
         feedOutputConfig: {
           pubsubDestination: {
             topic: topicName,
