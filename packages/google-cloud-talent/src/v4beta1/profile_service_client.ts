@@ -1186,7 +1186,8 @@ export class ProfileServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProfiles.createStream(
       this.innerApiCalls.listProfiles as gax.GaxCall,
@@ -1269,7 +1270,8 @@ export class ProfileServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProfiles.asyncIterate(
       this.innerApiCalls['listProfiles'] as GaxCall,

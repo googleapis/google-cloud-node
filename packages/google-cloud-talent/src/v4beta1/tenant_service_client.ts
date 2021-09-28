@@ -860,7 +860,8 @@ export class TenantServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTenants'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTenants.createStream(
       this.innerApiCalls.listTenants as gax.GaxCall,
@@ -914,7 +915,8 @@ export class TenantServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTenants'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTenants.asyncIterate(
       this.innerApiCalls['listTenants'] as GaxCall,
