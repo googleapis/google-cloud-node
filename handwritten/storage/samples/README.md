@@ -30,6 +30,7 @@ objects to users via direct download.
   * [Storage File Convert CSEK to CMEK.](#storage-file-convert-csek-to-cmek.)
   * [Storage Combine files.](#storage-combine-files.)
   * [Storage Configure Bucket Cors.](#storage-configure-bucket-cors.)
+  * [Configure Retries](#configure-retries)
   * [Copy File](#copy-file)
   * [Copy Old Version Of File.](#copy-old-version-of-file.)
   * [Create Bucket With Storage Class and Location.](#create-bucket-with-storage-class-and-location.)
@@ -342,6 +343,23 @@ __Usage:__
 
 
 `node configureBucketCors.js <BUCKET_NAME> <MAX_AGE_SECONDS> <METHOD> <ORIGIN> <RESPONSE_HEADER>`
+
+
+-----
+
+
+
+
+### Configure Retries
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/configureRetries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/configureRetries.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/configureRetries.js`
 
 
 -----

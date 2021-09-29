@@ -479,6 +479,16 @@ describe('file', () => {
       assert.strictEqual(exists, true);
     });
 
+    it('should delete a file with customized retry settings', () => {
+      const output = execSync(
+        `node configureRetries.js ${bucketName} ${fileName}`
+      );
+      assert.match(
+        output,
+        new RegExp(`File ${fileName} deleted with a customized retry strategy.`)
+      );
+    });
+
     it('should delete file with versions', async () => {
       const [files] = await bucketWithVersioning.getFiles({versions: true});
       const generation = files[0].metadata.generation;
