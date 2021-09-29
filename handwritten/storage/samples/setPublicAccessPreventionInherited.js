@@ -21,30 +21,29 @@
  */
 
 function main(bucketName = 'my-bucket') {
-  // [START storage_get_public_access_prevention]
+  // [START storage_set_public_access_prevention_inherited]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // The name of your GCS bucket
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
-
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
   const storage = new Storage();
+  async function setPublicAccessPreventionInherited() {
+    // Sets public access prevention to 'inherited' for the bucket
+    await storage.bucket(bucketName).setMetadata({
+      iamConfiguration: {
+        publicAccessPrevention: 'inherited',
+      },
+    });
 
-  async function getPublicAccessPrevention() {
-    // Gets Bucket Metadata and prints publicAccessPrevention value (either 'inherited' or 'enforced').
-    const [metadata] = await storage.bucket(bucketName).getMetadata();
-    console.log(
-      `Public access prevention is ${metadata.iamConfiguration.publicAccessPrevention} for ${bucketName}.`
-    );
+    console.log(`Public access prevention is 'inherited' for ${bucketName}.`);
   }
 
-  getPublicAccessPrevention();
-
-  // [END storage_get_public_access_prevention]
+  setPublicAccessPreventionInherited();
+  // [END storage_set_public_access_prevention_inherited]
 }
-
 main(...process.argv.slice(2));

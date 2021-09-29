@@ -31,7 +31,7 @@ const bucketWithClassAndLocation = storage.bucket(
   bucketNameWithClassAndLocation
 );
 
-const PUBLIC_ACCESS_PREVENTION_UNSPECIFIED = 'unspecified';
+const PUBLIC_ACCESS_PREVENTION_INHERITED = 'inherited';
 const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
 
 after(async () => {
@@ -150,7 +150,7 @@ it('should remove a bucket cors configuration', async () => {
   assert.ok(!bucket.metadata.cors);
 });
 
-it.skip('should set public access prevention to enforced', async () => {
+it('should set public access prevention to enforced', async () => {
   const output = execSync(
     `node setPublicAccessPreventionEnforced.js ${bucketName}`
   );
@@ -166,7 +166,7 @@ it.skip('should set public access prevention to enforced', async () => {
   );
 });
 
-it.skip("should get a bucket's public access prevention metadata", async () => {
+it("should get a bucket's public access prevention metadata", async () => {
   await storage.bucket(bucketName).setMetadata({
     iamConfiguration: {
       publicAccessPrevention: PUBLIC_ACCESS_PREVENTION_ENFORCED,
@@ -184,19 +184,19 @@ it.skip("should get a bucket's public access prevention metadata", async () => {
   assert.ok(metadata.iamConfiguration.publicAccessPrevention);
 });
 
-it.skip('should set public access prevention to unspecified', async () => {
+it('should set public access prevention to inherited', async () => {
   const output = execSync(
-    `node setPublicAccessPreventionUnspecified.js ${bucketName}`
+    `node setPublicAccessPreventionInherited.js ${bucketName}`
   );
   assert.match(
     output,
-    new RegExp(`Public access prevention is 'unspecified' for ${bucketName}.`)
+    new RegExp(`Public access prevention is 'inherited' for ${bucketName}.`)
   );
 
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
     metadata[0].iamConfiguration.publicAccessPrevention,
-    PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
+    PUBLIC_ACCESS_PREVENTION_INHERITED
   );
 });
 

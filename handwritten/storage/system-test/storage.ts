@@ -794,7 +794,7 @@ describe('storage', () => {
   describe('public access prevention', () => {
     let bucket: Bucket;
 
-    const PUBLIC_ACCESS_PREVENTION_UNSPECIFIED = 'unspecified';
+    const PUBLIC_ACCESS_PREVENTION_INHERITED = 'inherited';
     const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
 
     const createBucket = () => {
@@ -878,24 +878,24 @@ describe('storage', () => {
       });
     });
 
-    it.skip('inserts a bucket with unspecified public access prevention', async () => {
+    it('inserts a bucket with inherited public access prevention', async () => {
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
+        PUBLIC_ACCESS_PREVENTION_INHERITED
       );
       const [bucketMetadata] = await bucket.getMetadata();
       const publicAccessPreventionStatus =
         bucketMetadata.iamConfiguration.publicAccessPrevention;
       return assert.strictEqual(
         publicAccessPreventionStatus,
-        PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
+        PUBLIC_ACCESS_PREVENTION_INHERITED
       );
     });
 
-    it('makes public a bucket with unspecified public access prevention', async () => {
+    it('makes public a bucket with inherited public access prevention', async () => {
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
+        PUBLIC_ACCESS_PREVENTION_INHERITED
       );
       return assert.ok(() => bucket.makePublic());
     });
@@ -938,7 +938,7 @@ describe('storage', () => {
         bucketMetadata.iamConfiguration.uniformBucketLevelAccess.enabled;
       await setPublicAccessPrevention(
         bucket,
-        PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
+        PUBLIC_ACCESS_PREVENTION_INHERITED
       );
       const [updatedBucketMetadata] = await bucket.getMetadata();
       return assert.strictEqual(

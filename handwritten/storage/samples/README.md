@@ -106,6 +106,7 @@ objects to users via direct download.
   * [Rotate Encryption Key](#rotate-encryption-key)
   * [Set Event Based Hold](#set-event-based-hold)
   * [Set Public Access Prevention Enforced](#set-public-access-prevention-enforced)
+  * [Set Public Access Prevention Inherited](#set-public-access-prevention-inherited)
   * [Set Public Access Prevention Unspecified](#set-public-access-prevention-unspecified)
   * [Set Retention Policy](#set-retention-policy)
   * [Set Temporary Hold](#set-temporary-hold)
@@ -1675,6 +1676,23 @@ __Usage:__
 
 
 `node samples/setPublicAccessPreventionEnforced.js`
+
+
+-----
+
+
+
+
+### Set Public Access Prevention Inherited
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/setPublicAccessPreventionInherited.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setPublicAccessPreventionInherited.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setPublicAccessPreventionInherited.js`
 
 
 -----
