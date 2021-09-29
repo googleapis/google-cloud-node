@@ -2746,7 +2746,8 @@ export class DataMigrationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listMigrationJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMigrationJobs.createStream(
       this.innerApiCalls.listMigrationJobs as gax.GaxCall,
@@ -2816,7 +2817,8 @@ export class DataMigrationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listMigrationJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listMigrationJobs.asyncIterate(
       this.innerApiCalls['listMigrationJobs'] as GaxCall,
@@ -2999,7 +3001,8 @@ export class DataMigrationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConnectionProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as gax.GaxCall,
@@ -3068,7 +3071,8 @@ export class DataMigrationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConnectionProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
