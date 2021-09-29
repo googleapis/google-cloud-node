@@ -3850,7 +3850,7 @@ class File extends ServiceObject<File> {
   /**
    * This creates a gcs-resumable-upload upload stream.
    *
-   * @see [gcs-resumable-upload]{@link https://github.com/stephenplusplus/gcs-resumable-upload}
+   * @see [gcs-resumable-upload]{@link https://github.com/googleapis/gcs-resumable-upload}
    *
    * @param {Duplexify} stream - Duplexify stream of data to pipe to the file.
    * @param {object=} options - Configuration object.
