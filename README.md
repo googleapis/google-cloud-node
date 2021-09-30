@@ -221,7 +221,7 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [hya-io]: https://hya.io
 [gstore-node]: https://github.com/sebelga/gstore-node
 [gstore-api]: https://github.com/sebelga/gstore-api
-[devconsole]: https://console.developer.google.com
+[devconsole]: https://console.developers.google.com
 [googleapis]: https://github.com/google/google-api-nodejs-client
 [semver]: http://semver.org
 [contributing]: CONTRIBUTING.md
