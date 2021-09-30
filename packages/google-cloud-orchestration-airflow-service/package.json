@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/orchestration-airflow",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "orchestration-airflow client for Node.js",
   "repository": "googleapis/nodejs-orchestration-airflow",
   "license": "Apache-2.0",
