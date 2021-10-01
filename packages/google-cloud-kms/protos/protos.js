@@ -973,6 +973,9 @@
                                 case 9:
                                 case 10:
                                 case 17:
+                                case 37:
+                                case 38:
+                                case 39:
                                 case 12:
                                 case 13:
                                 case 31:
@@ -1069,6 +1072,18 @@
                             case "RSA_DECRYPT_OAEP_4096_SHA512":
                             case 17:
                                 message.algorithm = 17;
+                                break;
+                            case "RSA_DECRYPT_OAEP_2048_SHA1":
+                            case 37:
+                                message.algorithm = 37;
+                                break;
+                            case "RSA_DECRYPT_OAEP_3072_SHA1":
+                            case 38:
+                                message.algorithm = 38;
+                                break;
+                            case "RSA_DECRYPT_OAEP_4096_SHA1":
+                            case 39:
+                                message.algorithm = 39;
                                 break;
                             case "EC_SIGN_P256_SHA256":
                             case 12:
@@ -1742,6 +1757,9 @@
                                 case 9:
                                 case 10:
                                 case 17:
+                                case 37:
+                                case 38:
+                                case 39:
                                 case 12:
                                 case 13:
                                 case 31:
@@ -1919,6 +1937,18 @@
                             case 17:
                                 message.algorithm = 17;
                                 break;
+                            case "RSA_DECRYPT_OAEP_2048_SHA1":
+                            case 37:
+                                message.algorithm = 37;
+                                break;
+                            case "RSA_DECRYPT_OAEP_3072_SHA1":
+                            case 38:
+                                message.algorithm = 38;
+                                break;
+                            case "RSA_DECRYPT_OAEP_4096_SHA1":
+                            case 39:
+                                message.algorithm = 39;
+                                break;
                             case "EC_SIGN_P256_SHA256":
                             case 12:
                                 message.algorithm = 12;
@@ -2073,6 +2103,9 @@
                          * @property {number} RSA_DECRYPT_OAEP_3072_SHA256=9 RSA_DECRYPT_OAEP_3072_SHA256 value
                          * @property {number} RSA_DECRYPT_OAEP_4096_SHA256=10 RSA_DECRYPT_OAEP_4096_SHA256 value
                          * @property {number} RSA_DECRYPT_OAEP_4096_SHA512=17 RSA_DECRYPT_OAEP_4096_SHA512 value
+                         * @property {number} RSA_DECRYPT_OAEP_2048_SHA1=37 RSA_DECRYPT_OAEP_2048_SHA1 value
+                         * @property {number} RSA_DECRYPT_OAEP_3072_SHA1=38 RSA_DECRYPT_OAEP_3072_SHA1 value
+                         * @property {number} RSA_DECRYPT_OAEP_4096_SHA1=39 RSA_DECRYPT_OAEP_4096_SHA1 value
                          * @property {number} EC_SIGN_P256_SHA256=12 EC_SIGN_P256_SHA256 value
                          * @property {number} EC_SIGN_P384_SHA384=13 EC_SIGN_P384_SHA384 value
                          * @property {number} EC_SIGN_SECP256K1_SHA256=31 EC_SIGN_SECP256K1_SHA256 value
@@ -2095,6 +2128,9 @@
                             values[valuesById[9] = "RSA_DECRYPT_OAEP_3072_SHA256"] = 9;
                             values[valuesById[10] = "RSA_DECRYPT_OAEP_4096_SHA256"] = 10;
                             values[valuesById[17] = "RSA_DECRYPT_OAEP_4096_SHA512"] = 17;
+                            values[valuesById[37] = "RSA_DECRYPT_OAEP_2048_SHA1"] = 37;
+                            values[valuesById[38] = "RSA_DECRYPT_OAEP_3072_SHA1"] = 38;
+                            values[valuesById[39] = "RSA_DECRYPT_OAEP_4096_SHA1"] = 39;
                             values[valuesById[12] = "EC_SIGN_P256_SHA256"] = 12;
                             values[valuesById[13] = "EC_SIGN_P384_SHA384"] = 13;
                             values[valuesById[31] = "EC_SIGN_SECP256K1_SHA256"] = 31;
@@ -2353,6 +2389,9 @@
                                 case 9:
                                 case 10:
                                 case 17:
+                                case 37:
+                                case 38:
+                                case 39:
                                 case 12:
                                 case 13:
                                 case 31:
@@ -2451,6 +2490,18 @@
                             case "RSA_DECRYPT_OAEP_4096_SHA512":
                             case 17:
                                 message.algorithm = 17;
+                                break;
+                            case "RSA_DECRYPT_OAEP_2048_SHA1":
+                            case 37:
+                                message.algorithm = 37;
+                                break;
+                            case "RSA_DECRYPT_OAEP_3072_SHA1":
+                            case 38:
+                                message.algorithm = 38;
+                                break;
+                            case "RSA_DECRYPT_OAEP_4096_SHA1":
+                            case 39:
+                                message.algorithm = 39;
                                 break;
                             case "EC_SIGN_P256_SHA256":
                             case 12:
@@ -8408,6 +8459,9 @@
                                 case 9:
                                 case 10:
                                 case 17:
+                                case 37:
+                                case 38:
+                                case 39:
                                 case 12:
                                 case 13:
                                 case 31:
@@ -8498,6 +8552,18 @@
                             case "RSA_DECRYPT_OAEP_4096_SHA512":
                             case 17:
                                 message.algorithm = 17;
+                                break;
+                            case "RSA_DECRYPT_OAEP_2048_SHA1":
+                            case 37:
+                                message.algorithm = 37;
+                                break;
+                            case "RSA_DECRYPT_OAEP_3072_SHA1":
+                            case 38:
+                                message.algorithm = 38;
+                                break;
+                            case "RSA_DECRYPT_OAEP_4096_SHA1":
+                            case 39:
+                                message.algorithm = 39;
                                 break;
                             case "EC_SIGN_P256_SHA256":
                             case 12:
