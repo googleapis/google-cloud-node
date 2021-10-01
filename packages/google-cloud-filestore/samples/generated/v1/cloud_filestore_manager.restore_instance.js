@@ -25,8 +25,8 @@ function main(name, fileShare) {
    */
   // const name = 'abc123'
   /**
-   *  Required. Name of the file share in the Cloud Filestore instance that the backup
-   *  is being restored to.
+   *  Required. Name of the file share in the Cloud Filestore instance that the
+   *  backup is being restored to.
    */
   // const fileShare = 'abc123'
   /**
