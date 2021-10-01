@@ -268,7 +268,7 @@ const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
         const reason = e.reason?.toLowerCase();
         if (
           (reason && reason.includes('eai_again')) || //DNS lookup error
-          reason === 'connection reset by peer' ||
+          reason === 'econnreset' ||
           reason === 'unexpected connection closure'
         ) {
           return true;

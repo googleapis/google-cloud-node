@@ -329,7 +329,7 @@ describe('Storage', () => {
       const error = new ApiError('Connection Reset By Peer error');
       error.errors = [
         {
-          reason: 'Connection Reset By Peer',
+          reason: 'ECONNRESET',
         },
       ];
       assert.strictEqual(calledWith.retryOptions.retryableErrorFn(error), true);
