@@ -168,6 +168,22 @@
     "support_documentation": "https://cloud.google.com/channel/"
   },
   {
+    "name": "orchestration-airflow",
+    "name_pretty": "Composer",
+    "api_description": "is a managed Apache Airflow service that helps you create, schedule, monitor and manage workflows. Cloud Composer automation helps you create Airflow environments quickly and use Airflow-native tools, such as the powerful Airflow web interface and command line tools, so you can focus on your workflows and not your infrastructure.",
+    "product_documentation": "https://cloud.google.com/composer/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/orchestration-airflow/latest",
+    "api_id": "composer.googleapis.com",
+    "distribution_name": "@google-cloud/orchestration-airflow",
+    "release_level": "ga",
+    "default_version": "v1",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-orchestration-airflow",
+    "requires_billing": true,
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=460446",
+    "support_documentation": "https://cloud.google.com/composer/docs/getting-support"
+  },
+  {
     "default_version": "v1",
     "release_level": "ga",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datacatalog/latest",
