@@ -651,7 +651,10 @@
                         "issueMatches": {
                           "keyType": "string",
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "conversationCountTimeSeries": {
                           "type": "TimeSeries",
