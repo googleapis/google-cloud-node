@@ -4075,15 +4075,8 @@ class Bucket extends ServiceObject {
     if (
       typeof coreOpts === 'object' &&
       coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
-      methodType === AvailableServiceObjectMethods.setMetadata &&
-      this.storage.retryOptions.idempotencyStrategy ===
-        IdempotencyStrategy.RetryConditional
-    ) {
-      this.storage.retryOptions.autoRetry = false;
-    } else if (
-      typeof coreOpts === 'object' &&
-      coreOpts?.reqOpts?.qs?.ifGenerationMatch === undefined &&
-      methodType === AvailableServiceObjectMethods.delete &&
+      (methodType === AvailableServiceObjectMethods.setMetadata ||
+        methodType === AvailableServiceObjectMethods.delete) &&
       this.storage.retryOptions.idempotencyStrategy ===
         IdempotencyStrategy.RetryConditional
     ) {

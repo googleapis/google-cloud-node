@@ -47,6 +47,7 @@ import {
   SetBucketMetadataCallback,
   SetBucketMetadataResponse,
   GetBucketSignedUrlConfig,
+  AvailableServiceObjectMethods,
 } from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
 import {Policy} from '../src/iam';
@@ -3235,6 +3236,60 @@ describe('Bucket', () => {
           done();
         }
       );
+    });
+  });
+  describe('disableAutoRetryConditionallyIdempotent_', () => {
+    beforeEach(() => {
+      bucket.storage.retryOptions.autoRetry = true;
+      STORAGE.retryOptions.idempotencyStrategy =
+        IdempotencyStrategy.RetryConditional;
+    });
+
+    it('should set autoRetry to false when ifMetagenerationMatch is undefined (setMetadata)', done => {
+      bucket.disableAutoRetryConditionallyIdempotent_(
+        bucket.methods.setMetadata,
+        AvailableServiceObjectMethods.setMetadata
+      );
+      assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+      done();
+    });
+
+    it('should set autoRetry to false when ifMetagenerationMatch is undefined (delete)', done => {
+      bucket.disableAutoRetryConditionallyIdempotent_(
+        bucket.methods.delete,
+        AvailableServiceObjectMethods.delete
+      );
+      assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+      done();
+    });
+
+    it('should set autoRetry to false when IdempotencyStrategy is set to RetryNever', done => {
+      STORAGE.retryOptions.idempotencyStrategy = IdempotencyStrategy.RetryNever;
+      bucket = new Bucket(STORAGE, BUCKET_NAME, {
+        preconditionOpts: {
+          ifMetagenerationMatch: 100,
+        },
+      });
+      bucket.disableAutoRetryConditionallyIdempotent_(
+        bucket.methods.delete,
+        AvailableServiceObjectMethods.delete
+      );
+      assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+      done();
+    });
+
+    it('autoRetry should remain true when ifMetagenerationMatch is not undefined', done => {
+      bucket = new Bucket(STORAGE, BUCKET_NAME, {
+        preconditionOpts: {
+          ifMetagenerationMatch: 100,
+        },
+      });
+      bucket.disableAutoRetryConditionallyIdempotent_(
+        bucket.methods.delete,
+        AvailableServiceObjectMethods.delete
+      );
+      assert.strictEqual(bucket.storage.retryOptions.autoRetry, true);
+      done();
     });
   });
 });
