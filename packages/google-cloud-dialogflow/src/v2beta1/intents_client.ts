@@ -1403,7 +1403,8 @@ export class IntentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listIntents'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIntents.createStream(
       this.innerApiCalls.listIntents as gax.GaxCall,
@@ -1471,7 +1472,8 @@ export class IntentsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listIntents'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIntents.asyncIterate(
       this.innerApiCalls['listIntents'] as GaxCall,

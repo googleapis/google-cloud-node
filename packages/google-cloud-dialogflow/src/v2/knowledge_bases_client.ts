@@ -955,7 +955,8 @@ export class KnowledgeBasesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listKnowledgeBases'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listKnowledgeBases.createStream(
       this.innerApiCalls.listKnowledgeBases as gax.GaxCall,
@@ -1007,7 +1008,8 @@ export class KnowledgeBasesClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listKnowledgeBases'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listKnowledgeBases.asyncIterate(
       this.innerApiCalls['listKnowledgeBases'] as GaxCall,

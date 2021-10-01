@@ -1076,7 +1076,8 @@ export class SessionEntityTypesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSessionEntityTypes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSessionEntityTypes.createStream(
       this.innerApiCalls.listSessionEntityTypes as gax.GaxCall,
@@ -1140,7 +1141,8 @@ export class SessionEntityTypesClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSessionEntityTypes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSessionEntityTypes.asyncIterate(
       this.innerApiCalls['listSessionEntityTypes'] as GaxCall,

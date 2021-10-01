@@ -1471,7 +1471,8 @@ export class ParticipantsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listParticipants'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as gax.GaxCall,
@@ -1524,7 +1525,8 @@ export class ParticipantsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listParticipants'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
@@ -1715,7 +1717,8 @@ export class ParticipantsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSuggestions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     this.warn(
       'DEP$Participants-$ListSuggestions',
@@ -1783,7 +1786,8 @@ export class ParticipantsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSuggestions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     this.warn(
       'DEP$Participants-$ListSuggestions',

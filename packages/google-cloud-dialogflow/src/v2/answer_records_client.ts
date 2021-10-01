@@ -692,7 +692,8 @@ export class AnswerRecordsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAnswerRecords'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAnswerRecords.createStream(
       this.innerApiCalls.listAnswerRecords as gax.GaxCall,
@@ -756,7 +757,8 @@ export class AnswerRecordsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAnswerRecords'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAnswerRecords.asyncIterate(
       this.innerApiCalls['listAnswerRecords'] as GaxCall,

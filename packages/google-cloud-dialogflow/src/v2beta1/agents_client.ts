@@ -1689,7 +1689,8 @@ export class AgentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAgents'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAgents.createStream(
       this.innerApiCalls.searchAgents as gax.GaxCall,
@@ -1742,7 +1743,8 @@ export class AgentsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAgents'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAgents.asyncIterate(
       this.innerApiCalls['searchAgents'] as GaxCall,

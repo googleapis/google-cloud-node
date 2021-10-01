@@ -27325,6 +27325,18 @@ export namespace google {
                     }
                 }
 
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                }
+
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -27419,18 +27431,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -33753,6 +33753,9 @@ export namespace google {
 
                     /** ResponseMessage endInteraction */
                     endInteraction?: (google.cloud.dialogflow.v2beta1.ResponseMessage.IEndInteraction|null);
+
+                    /** ResponseMessage telephonyTransferCall */
+                    telephonyTransferCall?: (google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall|null);
                 }
 
                 /** Represents a ResponseMessage. */
@@ -33776,8 +33779,11 @@ export namespace google {
                     /** ResponseMessage endInteraction. */
                     public endInteraction?: (google.cloud.dialogflow.v2beta1.ResponseMessage.IEndInteraction|null);
 
+                    /** ResponseMessage telephonyTransferCall. */
+                    public telephonyTransferCall?: (google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall|null);
+
                     /** ResponseMessage message. */
-                    public message?: ("text"|"payload"|"liveAgentHandoff"|"endInteraction");
+                    public message?: ("text"|"payload"|"liveAgentHandoff"|"endInteraction"|"telephonyTransferCall");
 
                     /**
                      * Creates a new ResponseMessage instance using the specified properties.
@@ -34111,6 +34117,105 @@ export namespace google {
 
                         /**
                          * Converts this EndInteraction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a TelephonyTransferCall. */
+                    interface ITelephonyTransferCall {
+
+                        /** TelephonyTransferCall phoneNumber */
+                        phoneNumber?: (string|null);
+
+                        /** TelephonyTransferCall sipUri */
+                        sipUri?: (string|null);
+                    }
+
+                    /** Represents a TelephonyTransferCall. */
+                    class TelephonyTransferCall implements ITelephonyTransferCall {
+
+                        /**
+                         * Constructs a new TelephonyTransferCall.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall);
+
+                        /** TelephonyTransferCall phoneNumber. */
+                        public phoneNumber?: (string|null);
+
+                        /** TelephonyTransferCall sipUri. */
+                        public sipUri?: (string|null);
+
+                        /** TelephonyTransferCall endpoint. */
+                        public endpoint?: ("phoneNumber"|"sipUri");
+
+                        /**
+                         * Creates a new TelephonyTransferCall instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TelephonyTransferCall instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall): google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall;
+
+                        /**
+                         * Encodes the specified TelephonyTransferCall message. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall.verify|verify} messages.
+                         * @param message TelephonyTransferCall message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TelephonyTransferCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall.verify|verify} messages.
+                         * @param message TelephonyTransferCall message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.v2beta1.ResponseMessage.ITelephonyTransferCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TelephonyTransferCall message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TelephonyTransferCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall;
+
+                        /**
+                         * Decodes a TelephonyTransferCall message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TelephonyTransferCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall;
+
+                        /**
+                         * Verifies a TelephonyTransferCall message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TelephonyTransferCall message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TelephonyTransferCall
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall;
+
+                        /**
+                         * Creates a plain object from a TelephonyTransferCall message. Also converts values to other types if specified.
+                         * @param message TelephonyTransferCall
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.v2beta1.ResponseMessage.TelephonyTransferCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TelephonyTransferCall to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
