@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.14.5](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.4...v5.14.5) (2021-10-01)
+
+
+### Bug Fixes
+
+* fix logic for buckets that do not have a generation ([#1634](https://www.github.com/googleapis/nodejs-storage/issues/1634)) ([9069bdc](https://www.github.com/googleapis/nodejs-storage/commit/9069bdc9a0ab495ab62033f432ea0e180e3b182e))
+* updated connection reset string ([#1632](https://www.github.com/googleapis/nodejs-storage/issues/1632)) ([b841d5b](https://www.github.com/googleapis/nodejs-storage/commit/b841d5b98c3d98b5f1dc7776a887159294eb0b36))
+
 ### [5.14.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.3...v5.14.4) (2021-09-27)
 
 
