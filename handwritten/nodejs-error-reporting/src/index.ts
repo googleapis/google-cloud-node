@@ -35,6 +35,8 @@ import * as manualRequestExtractor from './request-extractors/manual';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RestifyRequestHandler = (req: any, res: any, next: Function) => any;
 
+export {ErrorMessage};
+
 /**
  * @typedef ConfigurationOptions
  * @type {Object}
