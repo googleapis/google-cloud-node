@@ -1,0 +1,15 @@
+{
+  "name": "networksecurity",
+  "name_pretty": "Network Security API",
+  "product_documentation": "https://cloud.google.com/traffic-director/docs/reference/network-security/rest/",
+  "client_documentation": "https://cloud.google.com/traffic-director/docs/reference/network-security/rest",
+  "issue_tracker": "https://github.com/googleapis/nodejs-network-security/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-network-security",
+  "distribution_name": "@google-cloud/network-security",
+  "api_id": "networksecurity.googleapis.com",
+  "default_version": "v1beta1",
+  "requires_billing": true
+}
+
