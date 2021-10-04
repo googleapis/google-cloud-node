@@ -1,0 +1,169 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.datafusion.v1beta1",
+  "libraryPackage": "@google-cloud/datafusion",
+  "services": {
+    "DataFusion": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataFusionClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "RemoveIamPolicy": {
+              "methods": [
+                "removeIamPolicy"
+              ]
+            },
+            "AddDnsPeering": {
+              "methods": [
+                "addDnsPeering"
+              ]
+            },
+            "RemoveDnsPeering": {
+              "methods": [
+                "removeDnsPeering"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "RestartInstance": {
+              "methods": [
+                "restartInstance"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgradeInstance"
+              ]
+            },
+            "ListAvailableVersions": {
+              "methods": [
+                "listAvailableVersions",
+                "listAvailableVersionsStream",
+                "listAvailableVersionsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListNamespaces": {
+              "methods": [
+                "listNamespaces",
+                "listNamespacesStream",
+                "listNamespacesAsync"
+              ]
+            },
+            "ListDnsPeerings": {
+              "methods": [
+                "listDnsPeerings",
+                "listDnsPeeringsStream",
+                "listDnsPeeringsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataFusionClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "RemoveIamPolicy": {
+              "methods": [
+                "removeIamPolicy"
+              ]
+            },
+            "AddDnsPeering": {
+              "methods": [
+                "addDnsPeering"
+              ]
+            },
+            "RemoveDnsPeering": {
+              "methods": [
+                "removeDnsPeering"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "updateInstance"
+              ]
+            },
+            "RestartInstance": {
+              "methods": [
+                "restartInstance"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgradeInstance"
+              ]
+            },
+            "ListAvailableVersions": {
+              "methods": [
+                "listAvailableVersions",
+                "listAvailableVersionsStream",
+                "listAvailableVersionsAsync"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListNamespaces": {
+              "methods": [
+                "listNamespaces",
+                "listNamespacesStream",
+                "listNamespacesAsync"
+              ]
+            },
+            "ListDnsPeerings": {
+              "methods": [
+                "listDnsPeerings",
+                "listDnsPeeringsStream",
+                "listDnsPeeringsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
