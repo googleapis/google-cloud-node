@@ -15,7 +15,7 @@
 'use strict';
 
 function main(tensorboardTimeSeries) {
-  // [START aiplatform_read_tensorboard_time_series_data_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardTimeSeriesData_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -57,7 +57,7 @@ function main(tensorboardTimeSeries) {
   }
 
   readTensorboardTimeSeriesData();
-  // [END aiplatform_read_tensorboard_time_series_data_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardTimeSeriesData_async]
 }
 
 process.on('unhandledRejection', err => {

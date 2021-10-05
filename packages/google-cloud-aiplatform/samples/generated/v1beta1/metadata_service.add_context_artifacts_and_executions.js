@@ -15,7 +15,7 @@
 'use strict';
 
 function main(context) {
-  // [START aiplatform_add_context_artifacts_and_executions_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_AddContextArtifactsAndExecutions_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -60,7 +60,7 @@ function main(context) {
   }
 
   addContextArtifactsAndExecutions();
-  // [END aiplatform_add_context_artifacts_and_executions_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_AddContextArtifactsAndExecutions_async]
 }
 
 process.on('unhandledRejection', err => {

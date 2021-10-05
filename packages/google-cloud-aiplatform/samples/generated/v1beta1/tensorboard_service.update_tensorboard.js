@@ -15,7 +15,7 @@
 'use strict';
 
 function main(updateMask, tensorboard) {
-  // [START aiplatform_update_tensorboard_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboard_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -56,7 +56,7 @@ function main(updateMask, tensorboard) {
   }
 
   updateTensorboard();
-  // [END aiplatform_update_tensorboard_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboard_async]
 }
 
 process.on('unhandledRejection', err => {

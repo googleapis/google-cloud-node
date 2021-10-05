@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_get_endpoint_sample]
+  // [START aiplatform_v1_generated_EndpointService_GetEndpoint_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -44,7 +44,7 @@ function main(name) {
   }
 
   getEndpoint();
-  // [END aiplatform_get_endpoint_sample]
+  // [END aiplatform_v1_generated_EndpointService_GetEndpoint_async]
 }
 
 process.on('unhandledRejection', err => {

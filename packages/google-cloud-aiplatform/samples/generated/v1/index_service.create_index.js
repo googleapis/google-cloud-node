@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, index) {
-  // [START aiplatform_create_index_sample]
+  // [START aiplatform_v1_generated_IndexService_CreateIndex_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -49,7 +49,7 @@ function main(parent, index) {
   }
 
   createIndex();
-  // [END aiplatform_create_index_sample]
+  // [END aiplatform_v1_generated_IndexService_CreateIndex_async]
 }
 
 process.on('unhandledRejection', err => {

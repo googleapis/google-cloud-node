@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, filter) {
-  // [START aiplatform_purge_executions_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_PurgeExecutions_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -57,7 +57,7 @@ function main(parent, filter) {
   }
 
   purgeExecutions();
-  // [END aiplatform_purge_executions_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_PurgeExecutions_async]
 }
 
 process.on('unhandledRejection', err => {

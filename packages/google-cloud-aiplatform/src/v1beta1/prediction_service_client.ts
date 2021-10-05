@@ -446,10 +446,6 @@ export class PredictionServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.predict(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/prediction_service.predict.js</caption>
-   * region_tag:aiplatform_predict_sample
-   *
    */
   predict(
     request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
@@ -555,10 +551,6 @@ export class PredictionServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.rawPredict(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/prediction_service.raw_predict.js</caption>
-   * region_tag:aiplatform_raw_predict_sample
-   *
    */
   rawPredict(
     request?: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
@@ -684,10 +676,6 @@ export class PredictionServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.explain(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/prediction_service.explain.js</caption>
-   * region_tag:aiplatform_explain_sample
-   *
    */
   explain(
     request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,

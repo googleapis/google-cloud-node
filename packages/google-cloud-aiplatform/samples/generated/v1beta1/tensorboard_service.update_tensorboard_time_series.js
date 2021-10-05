@@ -15,7 +15,7 @@
 'use strict';
 
 function main(updateMask, tensorboardTimeSeries) {
-  // [START aiplatform_update_tensorboard_time_series_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboardTimeSeries_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -58,7 +58,7 @@ function main(updateMask, tensorboardTimeSeries) {
   }
 
   updateTensorboardTimeSeries();
-  // [END aiplatform_update_tensorboard_time_series_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboardTimeSeries_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name, importConfigs) {
-  // [START aiplatform_import_data_sample]
+  // [START aiplatform_v1_generated_DatasetService_ImportData_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -51,7 +51,7 @@ function main(name, importConfigs) {
   }
 
   importData();
-  // [END aiplatform_import_data_sample]
+  // [END aiplatform_v1_generated_DatasetService_ImportData_async]
 }
 
 process.on('unhandledRejection', err => {

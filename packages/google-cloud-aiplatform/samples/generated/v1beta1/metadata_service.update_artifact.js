@@ -15,7 +15,7 @@
 'use strict';
 
 function main(artifact, updateMask) {
-  // [START aiplatform_update_artifact_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_UpdateArtifact_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -57,7 +57,7 @@ function main(artifact, updateMask) {
   }
 
   updateArtifact();
-  // [END aiplatform_update_artifact_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_UpdateArtifact_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, hyperparameterTuningJob) {
-  // [START aiplatform_create_hyperparameter_tuning_job_sample]
+  // [START aiplatform_v1beta1_generated_JobService_CreateHyperparameterTuningJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -50,7 +50,7 @@ function main(parent, hyperparameterTuningJob) {
   }
 
   createHyperparameterTuningJob();
-  // [END aiplatform_create_hyperparameter_tuning_job_sample]
+  // [END aiplatform_v1beta1_generated_JobService_CreateHyperparameterTuningJob_async]
 }
 
 process.on('unhandledRejection', err => {

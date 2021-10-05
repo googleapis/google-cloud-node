@@ -624,10 +624,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getMetadataStore(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_metadata_store.js</caption>
-   * region_tag:aiplatform_get_metadata_store_sample
-   *
    */
   getMetadataStore(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataStoreRequest,
@@ -735,10 +731,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createArtifact(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_artifact.js</caption>
-   * region_tag:aiplatform_create_artifact_sample
-   *
    */
   createArtifact(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateArtifactRequest,
@@ -832,10 +824,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getArtifact(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_artifact.js</caption>
-   * region_tag:aiplatform_get_artifact_sample
-   *
    */
   getArtifact(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetArtifactRequest,
@@ -937,10 +925,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.updateArtifact(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.update_artifact.js</caption>
-   * region_tag:aiplatform_update_artifact_sample
-   *
    */
   updateArtifact(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateArtifactRequest,
@@ -1045,10 +1029,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createContext(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_context.js</caption>
-   * region_tag:aiplatform_create_context_sample
-   *
    */
   createContext(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateContextRequest,
@@ -1142,10 +1122,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getContext(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_context.js</caption>
-   * region_tag:aiplatform_get_context_sample
-   *
    */
   getContext(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetContextRequest,
@@ -1247,10 +1223,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.updateContext(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.update_context.js</caption>
-   * region_tag:aiplatform_update_context_sample
-   *
    */
   updateContext(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateContextRequest,
@@ -1361,10 +1333,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.addContextArtifactsAndExecutions(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.add_context_artifacts_and_executions.js</caption>
-   * region_tag:aiplatform_add_context_artifacts_and_executions_sample
-   *
    */
   addContextArtifactsAndExecutions(
     request?: protos.google.cloud.aiplatform.v1beta1.IAddContextArtifactsAndExecutionsRequest,
@@ -1475,10 +1443,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.addContextChildren(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.add_context_children.js</caption>
-   * region_tag:aiplatform_add_context_children_sample
-   *
    */
   addContextChildren(
     request?: protos.google.cloud.aiplatform.v1beta1.IAddContextChildrenRequest,
@@ -1584,10 +1548,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.queryContextLineageSubgraph(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.query_context_lineage_subgraph.js</caption>
-   * region_tag:aiplatform_query_context_lineage_subgraph_sample
-   *
    */
   queryContextLineageSubgraph(
     request?: protos.google.cloud.aiplatform.v1beta1.IQueryContextLineageSubgraphRequest,
@@ -1703,10 +1663,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createExecution(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_execution.js</caption>
-   * region_tag:aiplatform_create_execution_sample
-   *
    */
   createExecution(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateExecutionRequest,
@@ -1803,10 +1759,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getExecution(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_execution.js</caption>
-   * region_tag:aiplatform_get_execution_sample
-   *
    */
   getExecution(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetExecutionRequest,
@@ -1911,10 +1863,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.updateExecution(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.update_execution.js</caption>
-   * region_tag:aiplatform_update_execution_sample
-   *
    */
   updateExecution(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateExecutionRequest,
@@ -2020,10 +1968,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.addExecutionEvents(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.add_execution_events.js</caption>
-   * region_tag:aiplatform_add_execution_events_sample
-   *
    */
   addExecutionEvents(
     request?: protos.google.cloud.aiplatform.v1beta1.IAddExecutionEventsRequest,
@@ -2126,10 +2070,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.queryExecutionInputsAndOutputs(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.query_execution_inputs_and_outputs.js</caption>
-   * region_tag:aiplatform_query_execution_inputs_and_outputs_sample
-   *
    */
   queryExecutionInputsAndOutputs(
     request?: protos.google.cloud.aiplatform.v1beta1.IQueryExecutionInputsAndOutputsRequest,
@@ -2245,10 +2185,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createMetadataSchema(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_schema.js</caption>
-   * region_tag:aiplatform_create_metadata_schema_sample
-   *
    */
   createMetadataSchema(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataSchemaRequest,
@@ -2348,10 +2284,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getMetadataSchema(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.get_metadata_schema.js</caption>
-   * region_tag:aiplatform_get_metadata_schema_sample
-   *
    */
   getMetadataSchema(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetMetadataSchemaRequest,
@@ -2485,10 +2417,6 @@ export class MetadataServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.queryArtifactLineageSubgraph(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.query_artifact_lineage_subgraph.js</caption>
-   * region_tag:aiplatform_query_artifact_lineage_subgraph_sample
-   *
    */
   queryArtifactLineageSubgraph(
     request?: protos.google.cloud.aiplatform.v1beta1.IQueryArtifactLineageSubgraphRequest,
@@ -2609,10 +2537,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.createMetadataStore(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_store.js</caption>
-   * region_tag:aiplatform_create_metadata_store_sample
-   *
    */
   createMetadataStore(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateMetadataStoreRequest,
@@ -2676,10 +2600,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.create_metadata_store.js</caption>
-   * region_tag:aiplatform_create_metadata_store_sample
-   *
    */
   async checkCreateMetadataStoreProgress(
     name: string
@@ -2763,10 +2683,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.deleteMetadataStore(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_metadata_store.js</caption>
-   * region_tag:aiplatform_delete_metadata_store_sample
-   *
    */
   deleteMetadataStore(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteMetadataStoreRequest,
@@ -2830,10 +2746,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_metadata_store.js</caption>
-   * region_tag:aiplatform_delete_metadata_store_sample
-   *
    */
   async checkDeleteMetadataStoreProgress(
     name: string
@@ -2918,10 +2830,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.deleteArtifact(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_artifact.js</caption>
-   * region_tag:aiplatform_delete_artifact_sample
-   *
    */
   deleteArtifact(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
@@ -2985,10 +2893,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_artifact.js</caption>
-   * region_tag:aiplatform_delete_artifact_sample
-   *
    */
   async checkDeleteArtifactProgress(
     name: string
@@ -3076,10 +2980,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.purgeArtifacts(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_artifacts.js</caption>
-   * region_tag:aiplatform_purge_artifacts_sample
-   *
    */
   purgeArtifacts(
     request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
@@ -3143,10 +3043,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_artifacts.js</caption>
-   * region_tag:aiplatform_purge_artifacts_sample
-   *
    */
   async checkPurgeArtifactsProgress(
     name: string
@@ -3234,10 +3130,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.deleteContext(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_context.js</caption>
-   * region_tag:aiplatform_delete_context_sample
-   *
    */
   deleteContext(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
@@ -3301,10 +3193,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_context.js</caption>
-   * region_tag:aiplatform_delete_context_sample
-   *
    */
   async checkDeleteContextProgress(
     name: string
@@ -3392,10 +3280,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.purgeContexts(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_contexts.js</caption>
-   * region_tag:aiplatform_purge_contexts_sample
-   *
    */
   purgeContexts(
     request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
@@ -3459,10 +3343,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_contexts.js</caption>
-   * region_tag:aiplatform_purge_contexts_sample
-   *
    */
   async checkPurgeContextsProgress(
     name: string
@@ -3547,10 +3427,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.deleteExecution(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_execution.js</caption>
-   * region_tag:aiplatform_delete_execution_sample
-   *
    */
   deleteExecution(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
@@ -3614,10 +3490,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.delete_execution.js</caption>
-   * region_tag:aiplatform_delete_execution_sample
-   *
    */
   async checkDeleteExecutionProgress(
     name: string
@@ -3705,10 +3577,6 @@ export class MetadataServiceClient {
    * @example
    * const [operation] = await client.purgeExecutions(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_executions.js</caption>
-   * region_tag:aiplatform_purge_executions_sample
-   *
    */
   purgeExecutions(
     request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
@@ -3772,10 +3640,6 @@ export class MetadataServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.purge_executions.js</caption>
-   * region_tag:aiplatform_purge_executions_sample
-   *
    */
   async checkPurgeExecutionsProgress(
     name: string
@@ -3863,10 +3727,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_stores.js</caption>
-   * region_tag:aiplatform_list_metadata_stores_sample
-   *
    */
   listMetadataStores(
     request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
@@ -3943,10 +3803,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_stores.js</caption>
-   * region_tag:aiplatform_list_metadata_stores_sample
-   *
    */
   listMetadataStoresStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
@@ -4007,10 +3863,6 @@ export class MetadataServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_stores.js</caption>
-   * region_tag:aiplatform_list_metadata_stores_sample
-   *
    */
   listMetadataStoresAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataStoresRequest,
@@ -4124,10 +3976,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_artifacts.js</caption>
-   * region_tag:aiplatform_list_artifacts_sample
-   *
    */
   listArtifacts(
     request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
@@ -4230,10 +4078,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_artifacts.js</caption>
-   * region_tag:aiplatform_list_artifacts_sample
-   *
    */
   listArtifactsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
@@ -4320,10 +4164,6 @@ export class MetadataServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_artifacts.js</caption>
-   * region_tag:aiplatform_list_artifacts_sample
-   *
    */
   listArtifactsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListArtifactsRequest,
@@ -4441,10 +4281,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_contexts.js</caption>
-   * region_tag:aiplatform_list_contexts_sample
-   *
    */
   listContexts(
     request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
@@ -4551,10 +4387,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_contexts.js</caption>
-   * region_tag:aiplatform_list_contexts_sample
-   *
    */
   listContextsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
@@ -4645,10 +4477,6 @@ export class MetadataServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_contexts.js</caption>
-   * region_tag:aiplatform_list_contexts_sample
-   *
    */
   listContextsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListContextsRequest,
@@ -4761,10 +4589,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_executions.js</caption>
-   * region_tag:aiplatform_list_executions_sample
-   *
    */
   listExecutions(
     request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
@@ -4866,10 +4690,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_executions.js</caption>
-   * region_tag:aiplatform_list_executions_sample
-   *
    */
   listExecutionsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
@@ -4955,10 +4775,6 @@ export class MetadataServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_executions.js</caption>
-   * region_tag:aiplatform_list_executions_sample
-   *
    */
   listExecutionsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListExecutionsRequest,
@@ -5048,10 +4864,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_schemas.js</caption>
-   * region_tag:aiplatform_list_metadata_schemas_sample
-   *
    */
   listMetadataSchemas(
     request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
@@ -5130,10 +4942,6 @@ export class MetadataServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_schemas.js</caption>
-   * region_tag:aiplatform_list_metadata_schemas_sample
-   *
    */
   listMetadataSchemasStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,
@@ -5196,10 +5004,6 @@ export class MetadataServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/metadata_service.list_metadata_schemas.js</caption>
-   * region_tag:aiplatform_list_metadata_schemas_sample
-   *
    */
   listMetadataSchemasAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListMetadataSchemasRequest,

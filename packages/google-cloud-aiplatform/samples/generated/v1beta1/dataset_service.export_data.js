@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name, exportConfig) {
-  // [START aiplatform_export_data_sample]
+  // [START aiplatform_v1beta1_generated_DatasetService_ExportData_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -50,7 +50,7 @@ function main(name, exportConfig) {
   }
 
   exportData();
-  // [END aiplatform_export_data_sample]
+  // [END aiplatform_v1beta1_generated_DatasetService_ExportData_async]
 }
 
 process.on('unhandledRejection', err => {

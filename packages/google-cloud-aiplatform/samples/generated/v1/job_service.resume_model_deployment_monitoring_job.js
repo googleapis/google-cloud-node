@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_resume_model_deployment_monitoring_job_sample]
+  // [START aiplatform_v1_generated_JobService_ResumeModelDeploymentMonitoringJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -46,7 +46,7 @@ function main(name) {
   }
 
   resumeModelDeploymentMonitoringJob();
-  // [END aiplatform_resume_model_deployment_monitoring_job_sample]
+  // [END aiplatform_v1_generated_JobService_ResumeModelDeploymentMonitoringJob_async]
 }
 
 process.on('unhandledRejection', err => {

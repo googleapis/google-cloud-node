@@ -531,10 +531,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createStudy(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.create_study.js</caption>
-   * region_tag:aiplatform_create_study_sample
-   *
    */
   createStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
@@ -627,10 +623,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getStudy(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.get_study.js</caption>
-   * region_tag:aiplatform_get_study_sample
-   *
    */
   getStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
@@ -723,10 +715,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.deleteStudy(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.delete_study.js</caption>
-   * region_tag:aiplatform_delete_study_sample
-   *
    */
   deleteStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
@@ -822,10 +810,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.lookupStudy(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.lookup_study.js</caption>
-   * region_tag:aiplatform_lookup_study_sample
-   *
    */
   lookupStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
@@ -920,10 +904,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createTrial(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.create_trial.js</caption>
-   * region_tag:aiplatform_create_trial_sample
-   *
    */
   createTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
@@ -1017,10 +997,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getTrial(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.get_trial.js</caption>
-   * region_tag:aiplatform_get_trial_sample
-   *
    */
   getTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
@@ -1120,10 +1096,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.addTrialMeasurement(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.add_trial_measurement.js</caption>
-   * region_tag:aiplatform_add_trial_measurement_sample
-   *
    */
   addTrialMeasurement(
     request?: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
@@ -1230,10 +1202,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.completeTrial(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.complete_trial.js</caption>
-   * region_tag:aiplatform_complete_trial_sample
-   *
    */
   completeTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
@@ -1327,10 +1295,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.deleteTrial(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.delete_trial.js</caption>
-   * region_tag:aiplatform_delete_trial_sample
-   *
    */
   deleteTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
@@ -1424,10 +1388,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.stopTrial(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.stop_trial.js</caption>
-   * region_tag:aiplatform_stop_trial_sample
-   *
    */
   stopTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
@@ -1525,10 +1485,6 @@ export class VizierServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.listOptimalTrials(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_optimal_trials.js</caption>
-   * region_tag:aiplatform_list_optimal_trials_sample
-   *
    */
   listOptimalTrials(
     request?: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
@@ -1645,10 +1601,6 @@ export class VizierServiceClient {
    * @example
    * const [operation] = await client.suggestTrials(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.suggest_trials.js</caption>
-   * region_tag:aiplatform_suggest_trials_sample
-   *
    */
   suggestTrials(
     request?: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
@@ -1712,10 +1664,6 @@ export class VizierServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.suggest_trials.js</caption>
-   * region_tag:aiplatform_suggest_trials_sample
-   *
    */
   async checkSuggestTrialsProgress(
     name: string
@@ -1799,10 +1747,6 @@ export class VizierServiceClient {
    * @example
    * const [operation] = await client.checkTrialEarlyStoppingState(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js</caption>
-   * region_tag:aiplatform_check_trial_early_stopping_state_sample
-   *
    */
   checkTrialEarlyStoppingState(
     request?: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
@@ -1870,10 +1814,6 @@ export class VizierServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.check_trial_early_stopping_state.js</caption>
-   * region_tag:aiplatform_check_trial_early_stopping_state_sample
-   *
    */
   async checkCheckTrialEarlyStoppingStateProgress(
     name: string
@@ -1954,10 +1894,6 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_studies.js</caption>
-   * region_tag:aiplatform_list_studies_sample
-   *
    */
   listStudies(
     request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
@@ -2027,10 +1963,6 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_studies.js</caption>
-   * region_tag:aiplatform_list_studies_sample
-   *
    */
   listStudiesStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
@@ -2084,10 +2016,6 @@ export class VizierServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_studies.js</caption>
-   * region_tag:aiplatform_list_studies_sample
-   *
    */
   listStudiesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
@@ -2168,10 +2096,6 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_trials.js</caption>
-   * region_tag:aiplatform_list_trials_sample
-   *
    */
   listTrials(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
@@ -2241,10 +2165,6 @@ export class VizierServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_trials.js</caption>
-   * region_tag:aiplatform_list_trials_sample
-   *
    */
   listTrialsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
@@ -2298,10 +2218,6 @@ export class VizierServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/vizier_service.list_trials.js</caption>
-   * region_tag:aiplatform_list_trials_sample
-   *
    */
   listTrialsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,

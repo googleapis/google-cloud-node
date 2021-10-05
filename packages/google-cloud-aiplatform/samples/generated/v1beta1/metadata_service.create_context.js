@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, context) {
-  // [START aiplatform_create_context_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_CreateContext_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -60,7 +60,7 @@ function main(parent, context) {
   }
 
   createContext();
-  // [END aiplatform_create_context_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_CreateContext_async]
 }
 
 process.on('unhandledRejection', err => {

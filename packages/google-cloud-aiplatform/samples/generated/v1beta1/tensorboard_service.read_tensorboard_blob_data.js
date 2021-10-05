@@ -15,7 +15,7 @@
 'use strict';
 
 function main(timeSeries) {
-  // [START aiplatform_read_tensorboard_blob_data_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardBlobData_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -57,7 +57,7 @@ function main(timeSeries) {
   }
 
   readTensorboardBlobData();
-  // [END aiplatform_read_tensorboard_blob_data_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardBlobData_async]
 }
 
 process.on('unhandledRejection', err => {

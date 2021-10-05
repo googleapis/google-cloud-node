@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent) {
-  // [START aiplatform_list_data_items_sample]
+  // [START aiplatform_v1beta1_generated_DatasetService_ListDataItems_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -67,7 +67,7 @@ function main(parent) {
   }
 
   listDataItems();
-  // [END aiplatform_list_data_items_sample]
+  // [END aiplatform_v1beta1_generated_DatasetService_ListDataItems_async]
 }
 
 process.on('unhandledRejection', err => {

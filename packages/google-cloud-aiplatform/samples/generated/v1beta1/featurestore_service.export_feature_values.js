@@ -15,7 +15,7 @@
 'use strict';
 
 function main(entityType, destination, featureSelector) {
-  // [START aiplatform_export_feature_values_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_ExportFeatureValues_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -65,7 +65,7 @@ function main(entityType, destination, featureSelector) {
   }
 
   exportFeatureValues();
-  // [END aiplatform_export_feature_values_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_ExportFeatureValues_async]
 }
 
 process.on('unhandledRejection', err => {

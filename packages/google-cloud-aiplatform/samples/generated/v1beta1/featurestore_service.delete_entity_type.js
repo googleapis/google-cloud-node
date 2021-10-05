@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_delete_entity_type_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_DeleteEntityType_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -51,7 +51,7 @@ function main(name) {
   }
 
   deleteEntityType();
-  // [END aiplatform_delete_entity_type_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_DeleteEntityType_async]
 }
 
 process.on('unhandledRejection', err => {

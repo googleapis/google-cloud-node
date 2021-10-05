@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_delete_dataset_sample]
+  // [START aiplatform_v1_generated_DatasetService_DeleteDataset_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -45,7 +45,7 @@ function main(name) {
   }
 
   deleteDataset();
-  // [END aiplatform_delete_dataset_sample]
+  // [END aiplatform_v1_generated_DatasetService_DeleteDataset_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -15,7 +15,7 @@
 'use strict';
 
 function main(location) {
-  // [START aiplatform_search_features_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_SearchFeatures_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -114,7 +114,7 @@ function main(location) {
   }
 
   searchFeatures();
-  // [END aiplatform_search_features_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_SearchFeatures_async]
 }
 
 process.on('unhandledRejection', err => {

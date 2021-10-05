@@ -39,6 +39,8 @@ const IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
 type IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
 const IndexServiceClient = v1.IndexServiceClient;
 type IndexServiceClient = v1.IndexServiceClient;
+const VizierServiceClient = v1.VizierServiceClient;
+type VizierServiceClient = v1.VizierServiceClient;
 
 export {
   v1beta1,
@@ -53,6 +55,7 @@ export {
   SpecialistPoolServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
+  VizierServiceClient,
 };
 export default {
   v1beta1,
@@ -67,6 +70,7 @@ export default {
   SpecialistPoolServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
+  VizierServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

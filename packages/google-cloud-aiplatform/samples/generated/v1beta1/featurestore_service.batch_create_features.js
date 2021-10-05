@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, requests) {
-  // [START aiplatform_batch_create_features_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_BatchCreateFeatures_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -54,7 +54,7 @@ function main(parent, requests) {
   }
 
   batchCreateFeatures();
-  // [END aiplatform_batch_create_features_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_BatchCreateFeatures_async]
 }
 
 process.on('unhandledRejection', err => {

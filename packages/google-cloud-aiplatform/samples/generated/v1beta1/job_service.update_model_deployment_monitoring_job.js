@@ -15,7 +15,7 @@
 'use strict';
 
 function main(modelDeploymentMonitoringJob, updateMask) {
-  // [START aiplatform_update_model_deployment_monitoring_job_sample]
+  // [START aiplatform_v1beta1_generated_JobService_UpdateModelDeploymentMonitoringJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -50,7 +50,7 @@ function main(modelDeploymentMonitoringJob, updateMask) {
   }
 
   updateModelDeploymentMonitoringJob();
-  // [END aiplatform_update_model_deployment_monitoring_job_sample]
+  // [END aiplatform_v1beta1_generated_JobService_UpdateModelDeploymentMonitoringJob_async]
 }
 
 process.on('unhandledRejection', err => {

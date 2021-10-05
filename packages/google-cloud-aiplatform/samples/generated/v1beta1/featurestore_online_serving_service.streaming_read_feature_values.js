@@ -15,7 +15,7 @@
 'use strict';
 
 function main(entityType, entityIds, featureSelector) {
-  // [START aiplatform_streaming_read_feature_values_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_StreamingReadFeatureValues_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -68,7 +68,7 @@ function main(entityType, entityIds, featureSelector) {
   }
 
   streamingReadFeatureValues();
-  // [END aiplatform_streaming_read_feature_values_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_StreamingReadFeatureValues_async]
 }
 
 process.on('unhandledRejection', err => {

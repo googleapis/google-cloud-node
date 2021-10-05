@@ -497,10 +497,6 @@ export class SpecialistPoolServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getSpecialistPool(request);
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.get_specialist_pool.js</caption>
-   * region_tag:aiplatform_get_specialist_pool_sample
-   *
    */
   getSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1.IGetSpecialistPoolRequest,
@@ -604,10 +600,6 @@ export class SpecialistPoolServiceClient {
    * @example
    * const [operation] = await client.createSpecialistPool(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.create_specialist_pool.js</caption>
-   * region_tag:aiplatform_create_specialist_pool_sample
-   *
    */
   createSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1.ICreateSpecialistPoolRequest,
@@ -671,10 +663,6 @@ export class SpecialistPoolServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.create_specialist_pool.js</caption>
-   * region_tag:aiplatform_create_specialist_pool_sample
-   *
    */
   async checkCreateSpecialistPoolProgress(
     name: string
@@ -758,10 +746,6 @@ export class SpecialistPoolServiceClient {
    * @example
    * const [operation] = await client.deleteSpecialistPool(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.delete_specialist_pool.js</caption>
-   * region_tag:aiplatform_delete_specialist_pool_sample
-   *
    */
   deleteSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1.IDeleteSpecialistPoolRequest,
@@ -825,10 +809,6 @@ export class SpecialistPoolServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.delete_specialist_pool.js</caption>
-   * region_tag:aiplatform_delete_specialist_pool_sample
-   *
    */
   async checkDeleteSpecialistPoolProgress(
     name: string
@@ -909,10 +889,6 @@ export class SpecialistPoolServiceClient {
    * @example
    * const [operation] = await client.updateSpecialistPool(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.update_specialist_pool.js</caption>
-   * region_tag:aiplatform_update_specialist_pool_sample
-   *
    */
   updateSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1.IUpdateSpecialistPoolRequest,
@@ -976,10 +952,6 @@ export class SpecialistPoolServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.update_specialist_pool.js</caption>
-   * region_tag:aiplatform_update_specialist_pool_sample
-   *
    */
   async checkUpdateSpecialistPoolProgress(
     name: string
@@ -1063,10 +1035,6 @@ export class SpecialistPoolServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.list_specialist_pools.js</caption>
-   * region_tag:aiplatform_list_specialist_pools_sample
-   *
    */
   listSpecialistPools(
     request?: protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest,
@@ -1139,10 +1107,6 @@ export class SpecialistPoolServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.list_specialist_pools.js</caption>
-   * region_tag:aiplatform_list_specialist_pools_sample
-   *
    */
   listSpecialistPoolsStream(
     request?: protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest,
@@ -1199,10 +1163,6 @@ export class SpecialistPoolServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/specialist_pool_service.list_specialist_pools.js</caption>
-   * region_tag:aiplatform_list_specialist_pools_sample
-   *
    */
   listSpecialistPoolsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest,

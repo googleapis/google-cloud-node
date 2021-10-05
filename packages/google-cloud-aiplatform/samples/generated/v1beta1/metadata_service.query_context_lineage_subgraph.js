@@ -15,7 +15,7 @@
 'use strict';
 
 function main(context) {
-  // [START aiplatform_query_context_lineage_subgraph_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_QueryContextLineageSubgraph_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -50,7 +50,7 @@ function main(context) {
   }
 
   queryContextLineageSubgraph();
-  // [END aiplatform_query_context_lineage_subgraph_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_QueryContextLineageSubgraph_async]
 }
 
 process.on('unhandledRejection', err => {

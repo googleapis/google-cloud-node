@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, tensorboardRun, tensorboardRunId) {
-  // [START aiplatform_create_tensorboard_run_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardRun_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -58,7 +58,7 @@ function main(parent, tensorboardRun, tensorboardRunId) {
   }
 
   createTensorboardRun();
-  // [END aiplatform_create_tensorboard_run_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardRun_async]
 }
 
 process.on('unhandledRejection', err => {

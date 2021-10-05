@@ -15,7 +15,7 @@
 'use strict';
 
 function main(model, updateMask) {
-  // [START aiplatform_update_model_sample]
+  // [START aiplatform_v1beta1_generated_ModelService_UpdateModel_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(model, updateMask) {
   }
 
   updateModel();
-  // [END aiplatform_update_model_sample]
+  // [END aiplatform_v1beta1_generated_ModelService_UpdateModel_async]
 }
 
 process.on('unhandledRejection', err => {

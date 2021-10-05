@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_delete_custom_job_sample]
+  // [START aiplatform_v1_generated_JobService_DeleteCustomJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -45,7 +45,7 @@ function main(name) {
   }
 
   deleteCustomJob();
-  // [END aiplatform_delete_custom_job_sample]
+  // [END aiplatform_v1_generated_JobService_DeleteCustomJob_async]
 }
 
 process.on('unhandledRejection', err => {

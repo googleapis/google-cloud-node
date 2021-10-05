@@ -15,7 +15,7 @@
 'use strict';
 
 function main(endpoint, instances) {
-  // [START aiplatform_explain_sample]
+  // [START aiplatform_v1_generated_PredictionService_Explain_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -80,7 +80,7 @@ function main(endpoint, instances) {
   }
 
   explain();
-  // [END aiplatform_explain_sample]
+  // [END aiplatform_v1_generated_PredictionService_Explain_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_get_hyperparameter_tuning_job_sample]
+  // [START aiplatform_v1beta1_generated_JobService_GetHyperparameterTuningJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -44,7 +44,7 @@ function main(name) {
   }
 
   getHyperparameterTuningJob();
-  // [END aiplatform_get_hyperparameter_tuning_job_sample]
+  // [END aiplatform_v1beta1_generated_JobService_GetHyperparameterTuningJob_async]
 }
 
 process.on('unhandledRejection', err => {

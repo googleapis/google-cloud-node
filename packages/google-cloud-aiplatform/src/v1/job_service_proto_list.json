@@ -85,5 +85,6 @@
   "../../protos/google/cloud/aiplatform/v1/study.proto",
   "../../protos/google/cloud/aiplatform/v1/training_pipeline.proto",
   "../../protos/google/cloud/aiplatform/v1/user_action_reference.proto",
-  "../../protos/google/cloud/aiplatform/v1/value.proto"
+  "../../protos/google/cloud/aiplatform/v1/value.proto",
+  "../../protos/google/cloud/aiplatform/v1/vizier_service.proto"
 ]

@@ -15,7 +15,7 @@
 'use strict';
 
 function main(artifact) {
-  // [START aiplatform_query_artifact_lineage_subgraph_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_QueryArtifactLineageSubgraph_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -79,7 +79,7 @@ function main(artifact) {
   }
 
   queryArtifactLineageSubgraph();
-  // [END aiplatform_query_artifact_lineage_subgraph_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_QueryArtifactLineageSubgraph_async]
 }
 
 process.on('unhandledRejection', err => {

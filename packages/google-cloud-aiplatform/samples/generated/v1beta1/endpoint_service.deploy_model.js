@@ -15,7 +15,7 @@
 'use strict';
 
 function main(endpoint, deployedModel) {
-  // [START aiplatform_deploy_model_sample]
+  // [START aiplatform_v1beta1_generated_EndpointService_DeployModel_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -65,7 +65,7 @@ function main(endpoint, deployedModel) {
   }
 
   deployModel();
-  // [END aiplatform_deploy_model_sample]
+  // [END aiplatform_v1beta1_generated_EndpointService_DeployModel_async]
 }
 
 process.on('unhandledRejection', err => {

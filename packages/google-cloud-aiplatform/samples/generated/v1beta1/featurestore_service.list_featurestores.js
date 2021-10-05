@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent) {
-  // [START aiplatform_list_featurestores_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_ListFeaturestores_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -95,7 +95,7 @@ function main(parent) {
   }
 
   listFeaturestores();
-  // [END aiplatform_list_featurestores_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_ListFeaturestores_async]
 }
 
 process.on('unhandledRejection', err => {

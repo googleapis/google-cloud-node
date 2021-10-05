@@ -15,7 +15,7 @@
 'use strict';
 
 function main(indexEndpoint, deployedIndexId) {
-  // [START aiplatform_undeploy_index_sample]
+  // [START aiplatform_v1beta1_generated_IndexEndpointService_UndeployIndex_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -51,7 +51,7 @@ function main(indexEndpoint, deployedIndexId) {
   }
 
   undeployIndex();
-  // [END aiplatform_undeploy_index_sample]
+  // [END aiplatform_v1beta1_generated_IndexEndpointService_UndeployIndex_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -15,7 +15,7 @@
 'use strict';
 
 function main(trialName) {
-  // [START aiplatform_check_trial_early_stopping_state_sample]
+  // [START aiplatform_v1beta1_generated_VizierService_CheckTrialEarlyStoppingState_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -47,7 +47,7 @@ function main(trialName) {
   }
 
   checkTrialEarlyStoppingState();
-  // [END aiplatform_check_trial_early_stopping_state_sample]
+  // [END aiplatform_v1beta1_generated_VizierService_CheckTrialEarlyStoppingState_async]
 }
 
 process.on('unhandledRejection', err => {

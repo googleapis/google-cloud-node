@@ -15,7 +15,7 @@
 'use strict';
 
 function main(featurestore) {
-  // [START aiplatform_update_featurestore_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_UpdateFeaturestore_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -60,7 +60,7 @@ function main(featurestore) {
   }
 
   updateFeaturestore();
-  // [END aiplatform_update_featurestore_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_UpdateFeaturestore_async]
 }
 
 process.on('unhandledRejection', err => {

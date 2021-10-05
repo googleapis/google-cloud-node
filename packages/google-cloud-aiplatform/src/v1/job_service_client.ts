@@ -594,10 +594,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createCustomJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.create_custom_job.js</caption>
-   * region_tag:aiplatform_create_custom_job_sample
-   *
    */
   createCustomJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
@@ -687,10 +683,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getCustomJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.get_custom_job.js</caption>
-   * region_tag:aiplatform_get_custom_job_sample
-   *
    */
   getCustomJob(
     request?: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
@@ -791,10 +783,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelCustomJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.cancel_custom_job.js</caption>
-   * region_tag:aiplatform_cancel_custom_job_sample
-   *
    */
   cancelCustomJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
@@ -892,10 +880,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createDataLabelingJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.create_data_labeling_job.js</caption>
-   * region_tag:aiplatform_create_data_labeling_job_sample
-   *
    */
   createDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
@@ -992,10 +976,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getDataLabelingJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.get_data_labeling_job.js</caption>
-   * region_tag:aiplatform_get_data_labeling_job_sample
-   *
    */
   getDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
@@ -1092,10 +1072,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelDataLabelingJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.cancel_data_labeling_job.js</caption>
-   * region_tag:aiplatform_cancel_data_labeling_job_sample
-   *
    */
   cancelDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
@@ -1196,10 +1172,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createHyperparameterTuningJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.create_hyperparameter_tuning_job.js</caption>
-   * region_tag:aiplatform_create_hyperparameter_tuning_job_sample
-   *
    */
   createHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
@@ -1303,10 +1275,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getHyperparameterTuningJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.get_hyperparameter_tuning_job.js</caption>
-   * region_tag:aiplatform_get_hyperparameter_tuning_job_sample
-   *
    */
   getHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
@@ -1419,10 +1387,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelHyperparameterTuningJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.cancel_hyperparameter_tuning_job.js</caption>
-   * region_tag:aiplatform_cancel_hyperparameter_tuning_job_sample
-   *
    */
   cancelHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
@@ -1528,10 +1492,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createBatchPredictionJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.create_batch_prediction_job.js</caption>
-   * region_tag:aiplatform_create_batch_prediction_job_sample
-   *
    */
   createBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
@@ -1635,10 +1595,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getBatchPredictionJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.get_batch_prediction_job.js</caption>
-   * region_tag:aiplatform_get_batch_prediction_job_sample
-   *
    */
   getBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
@@ -1747,10 +1703,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelBatchPredictionJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.cancel_batch_prediction_job.js</caption>
-   * region_tag:aiplatform_cancel_batch_prediction_job_sample
-   *
    */
   cancelBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
@@ -1856,10 +1808,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createModelDeploymentMonitoringJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.create_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_create_model_deployment_monitoring_job_sample
-   *
    */
   createModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
@@ -1963,10 +1911,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getModelDeploymentMonitoringJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.get_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_get_model_deployment_monitoring_job_sample
-   *
    */
   getModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
@@ -2072,10 +2016,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.pauseModelDeploymentMonitoringJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.pause_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_pause_model_deployment_monitoring_job_sample
-   *
    */
   pauseModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
@@ -2181,10 +2121,6 @@ export class JobServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.resumeModelDeploymentMonitoringJob(request);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.resume_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_resume_model_deployment_monitoring_job_sample
-   *
    */
   resumeModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
@@ -2294,10 +2230,6 @@ export class JobServiceClient {
    * @example
    * const [operation] = await client.deleteCustomJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_custom_job.js</caption>
-   * region_tag:aiplatform_delete_custom_job_sample
-   *
    */
   deleteCustomJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
@@ -2361,10 +2293,6 @@ export class JobServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_custom_job.js</caption>
-   * region_tag:aiplatform_delete_custom_job_sample
-   *
    */
   async checkDeleteCustomJobProgress(
     name: string
@@ -2445,10 +2373,6 @@ export class JobServiceClient {
    * @example
    * const [operation] = await client.deleteDataLabelingJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_data_labeling_job.js</caption>
-   * region_tag:aiplatform_delete_data_labeling_job_sample
-   *
    */
   deleteDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
@@ -2512,10 +2436,6 @@ export class JobServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_data_labeling_job.js</caption>
-   * region_tag:aiplatform_delete_data_labeling_job_sample
-   *
    */
   async checkDeleteDataLabelingJobProgress(
     name: string
@@ -2596,10 +2516,6 @@ export class JobServiceClient {
    * @example
    * const [operation] = await client.deleteHyperparameterTuningJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js</caption>
-   * region_tag:aiplatform_delete_hyperparameter_tuning_job_sample
-   *
    */
   deleteHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
@@ -2667,10 +2583,6 @@ export class JobServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_hyperparameter_tuning_job.js</caption>
-   * region_tag:aiplatform_delete_hyperparameter_tuning_job_sample
-   *
    */
   async checkDeleteHyperparameterTuningJobProgress(
     name: string
@@ -2752,10 +2664,6 @@ export class JobServiceClient {
    * @example
    * const [operation] = await client.deleteBatchPredictionJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_batch_prediction_job.js</caption>
-   * region_tag:aiplatform_delete_batch_prediction_job_sample
-   *
    */
   deleteBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
@@ -2823,10 +2731,6 @@ export class JobServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_batch_prediction_job.js</caption>
-   * region_tag:aiplatform_delete_batch_prediction_job_sample
-   *
    */
   async checkDeleteBatchPredictionJobProgress(
     name: string
@@ -2934,10 +2838,6 @@ export class JobServiceClient {
    * @example
    * const [operation] = await client.updateModelDeploymentMonitoringJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/job_service.update_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_update_model_deployment_monitoring_job_sample
-   *
    */
   updateModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
@@ -3006,10 +2906,6 @@ export class JobServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.update_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_update_model_deployment_monitoring_job_sample
-   *
    */
   async checkUpdateModelDeploymentMonitoringJobProgress(
     name: string
@@ -3090,10 +2986,6 @@ export class JobServiceClient {
    * @example
    * const [operation] = await client.deleteModelDeploymentMonitoringJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_delete_model_deployment_monitoring_job_sample
-   *
    */
   deleteModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
@@ -3161,10 +3053,6 @@ export class JobServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1/job_service.delete_model_deployment_monitoring_job.js</caption>
-   * region_tag:aiplatform_delete_model_deployment_monitoring_job_sample
-   *
    */
   async checkDeleteModelDeploymentMonitoringJobProgress(
     name: string
@@ -3266,10 +3154,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_custom_jobs.js</caption>
-   * region_tag:aiplatform_list_custom_jobs_sample
-   *
    */
   listCustomJobs(
     request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
@@ -3360,10 +3244,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_custom_jobs.js</caption>
-   * region_tag:aiplatform_list_custom_jobs_sample
-   *
    */
   listCustomJobsStream(
     request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
@@ -3438,10 +3318,6 @@ export class JobServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_custom_jobs.js</caption>
-   * region_tag:aiplatform_list_custom_jobs_sample
-   *
    */
   listCustomJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
@@ -3547,10 +3423,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_data_labeling_jobs.js</caption>
-   * region_tag:aiplatform_list_data_labeling_jobs_sample
-   *
    */
   listDataLabelingJobs(
     request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
@@ -3645,10 +3517,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_data_labeling_jobs.js</caption>
-   * region_tag:aiplatform_list_data_labeling_jobs_sample
-   *
    */
   listDataLabelingJobsStream(
     request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
@@ -3727,10 +3595,6 @@ export class JobServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_data_labeling_jobs.js</caption>
-   * region_tag:aiplatform_list_data_labeling_jobs_sample
-   *
    */
   listDataLabelingJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
@@ -3832,10 +3696,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js</caption>
-   * region_tag:aiplatform_list_hyperparameter_tuning_jobs_sample
-   *
    */
   listHyperparameterTuningJobs(
     request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
@@ -3930,10 +3790,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js</caption>
-   * region_tag:aiplatform_list_hyperparameter_tuning_jobs_sample
-   *
    */
   listHyperparameterTuningJobsStream(
     request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
@@ -4008,10 +3864,6 @@ export class JobServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_hyperparameter_tuning_jobs.js</caption>
-   * region_tag:aiplatform_list_hyperparameter_tuning_jobs_sample
-   *
    */
   listHyperparameterTuningJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
@@ -4115,10 +3967,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_batch_prediction_jobs.js</caption>
-   * region_tag:aiplatform_list_batch_prediction_jobs_sample
-   *
    */
   listBatchPredictionJobs(
     request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
@@ -4215,10 +4063,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_batch_prediction_jobs.js</caption>
-   * region_tag:aiplatform_list_batch_prediction_jobs_sample
-   *
    */
   listBatchPredictionJobsStream(
     request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
@@ -4295,10 +4139,6 @@ export class JobServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_batch_prediction_jobs.js</caption>
-   * region_tag:aiplatform_list_batch_prediction_jobs_sample
-   *
    */
   listBatchPredictionJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
@@ -4396,10 +4236,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js</caption>
-   * region_tag:aiplatform_search_model_deployment_monitoring_stats_anomalies_sample
-   *
    */
   searchModelDeploymentMonitoringStatsAnomalies(
     request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
@@ -4491,10 +4327,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js</caption>
-   * region_tag:aiplatform_search_model_deployment_monitoring_stats_anomalies_sample
-   *
    */
   searchModelDeploymentMonitoringStatsAnomaliesStream(
     request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
@@ -4568,10 +4400,6 @@ export class JobServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/job_service.search_model_deployment_monitoring_stats_anomalies.js</caption>
-   * region_tag:aiplatform_search_model_deployment_monitoring_stats_anomalies_sample
-   *
    */
   searchModelDeploymentMonitoringStatsAnomaliesAsync(
     request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
@@ -4658,10 +4486,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js</caption>
-   * region_tag:aiplatform_list_model_deployment_monitoring_jobs_sample
-   *
    */
   listModelDeploymentMonitoringJobs(
     request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
@@ -4737,10 +4561,6 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js</caption>
-   * region_tag:aiplatform_list_model_deployment_monitoring_jobs_sample
-   *
    */
   listModelDeploymentMonitoringJobsStream(
     request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
@@ -4797,10 +4617,6 @@ export class JobServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1/job_service.list_model_deployment_monitoring_jobs.js</caption>
-   * region_tag:aiplatform_list_model_deployment_monitoring_jobs_sample
-   *
    */
   listModelDeploymentMonitoringJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,

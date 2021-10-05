@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, metadataSchema) {
-  // [START aiplatform_create_metadata_schema_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_CreateMetadataSchema_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -61,7 +61,7 @@ function main(parent, metadataSchema) {
   }
 
   createMetadataSchema();
-  // [END aiplatform_create_metadata_schema_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_CreateMetadataSchema_async]
 }
 
 process.on('unhandledRejection', err => {

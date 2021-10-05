@@ -27,6 +27,7 @@ import {
   PipelineServiceClient,
   PredictionServiceClient,
   SpecialistPoolServiceClient,
+  VizierServiceClient,
 } from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
@@ -64,6 +65,9 @@ function doStuffWithSpecialistPoolServiceClient(
 ) {
   client.close();
 }
+function doStuffWithVizierServiceClient(client: VizierServiceClient) {
+  client.close();
+}
 
 function main() {
   // check that the client instance can be created
@@ -96,6 +100,9 @@ function main() {
   // check that the client instance can be created
   const specialistPoolServiceClient = new SpecialistPoolServiceClient();
   doStuffWithSpecialistPoolServiceClient(specialistPoolServiceClient);
+  // check that the client instance can be created
+  const vizierServiceClient = new VizierServiceClient();
+  doStuffWithVizierServiceClient(vizierServiceClient);
 }
 
 main();

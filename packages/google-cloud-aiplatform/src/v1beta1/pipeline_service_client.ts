@@ -527,10 +527,6 @@ export class PipelineServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createTrainingPipeline(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.create_training_pipeline.js</caption>
-   * region_tag:aiplatform_create_training_pipeline_sample
-   *
    */
   createTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrainingPipelineRequest,
@@ -634,10 +630,6 @@ export class PipelineServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getTrainingPipeline(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.get_training_pipeline.js</caption>
-   * region_tag:aiplatform_get_training_pipeline_sample
-   *
    */
   getTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTrainingPipelineRequest,
@@ -746,10 +738,6 @@ export class PipelineServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelTrainingPipeline(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.cancel_training_pipeline.js</caption>
-   * region_tag:aiplatform_cancel_training_pipeline_sample
-   *
    */
   cancelTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelTrainingPipelineRequest,
@@ -861,10 +849,6 @@ export class PipelineServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.createPipelineJob(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.create_pipeline_job.js</caption>
-   * region_tag:aiplatform_create_pipeline_job_sample
-   *
    */
   createPipelineJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreatePipelineJobRequest,
@@ -961,10 +945,6 @@ export class PipelineServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.getPipelineJob(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.get_pipeline_job.js</caption>
-   * region_tag:aiplatform_get_pipeline_job_sample
-   *
    */
   getPipelineJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetPipelineJobRequest,
@@ -1070,10 +1050,6 @@ export class PipelineServiceClient {
    *   for more details and examples.
    * @example
    * const [response] = await client.cancelPipelineJob(request);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.cancel_pipeline_job.js</caption>
-   * region_tag:aiplatform_cancel_pipeline_job_sample
-   *
    */
   cancelPipelineJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelPipelineJobRequest,
@@ -1179,10 +1155,6 @@ export class PipelineServiceClient {
    * @example
    * const [operation] = await client.deleteTrainingPipeline(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js</caption>
-   * region_tag:aiplatform_delete_training_pipeline_sample
-   *
    */
   deleteTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrainingPipelineRequest,
@@ -1250,10 +1222,6 @@ export class PipelineServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_training_pipeline.js</caption>
-   * region_tag:aiplatform_delete_training_pipeline_sample
-   *
    */
   async checkDeleteTrainingPipelineProgress(
     name: string
@@ -1334,10 +1302,6 @@ export class PipelineServiceClient {
    * @example
    * const [operation] = await client.deletePipelineJob(request);
    * const [response] = await operation.promise();
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js</caption>
-   * region_tag:aiplatform_delete_pipeline_job_sample
-   *
    */
   deletePipelineJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeletePipelineJobRequest,
@@ -1401,10 +1365,6 @@ export class PipelineServiceClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.delete_pipeline_job.js</caption>
-   * region_tag:aiplatform_delete_pipeline_job_sample
-   *
    */
   async checkDeletePipelineJobProgress(
     name: string
@@ -1505,10 +1465,6 @@ export class PipelineServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_training_pipelines.js</caption>
-   * region_tag:aiplatform_list_training_pipelines_sample
-   *
    */
   listTrainingPipelines(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
@@ -1598,10 +1554,6 @@ export class PipelineServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_training_pipelines.js</caption>
-   * region_tag:aiplatform_list_training_pipelines_sample
-   *
    */
   listTrainingPipelinesStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
@@ -1675,10 +1627,6 @@ export class PipelineServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_training_pipelines.js</caption>
-   * region_tag:aiplatform_list_training_pipelines_sample
-   *
    */
   listTrainingPipelinesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrainingPipelinesRequest,
@@ -1787,10 +1735,6 @@ export class PipelineServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_list_pipeline_jobs_sample
-   *
    */
   listPipelineJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
@@ -1888,10 +1832,6 @@ export class PipelineServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_list_pipeline_jobs_sample
-   *
    */
   listPipelineJobsStream(
     request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,
@@ -1973,10 +1913,6 @@ export class PipelineServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
-   *
-   * @example <caption>include:samples/generated/v1beta1/pipeline_service.list_pipeline_jobs.js</caption>
-   * region_tag:aiplatform_list_pipeline_jobs_sample
-   *
    */
   listPipelineJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListPipelineJobsRequest,

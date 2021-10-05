@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, pipelineJob) {
-  // [START aiplatform_create_pipeline_job_sample]
+  // [START aiplatform_v1beta1_generated_PipelineService_CreatePipelineJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -56,7 +56,7 @@ function main(parent, pipelineJob) {
   }
 
   createPipelineJob();
-  // [END aiplatform_create_pipeline_job_sample]
+  // [END aiplatform_v1beta1_generated_PipelineService_CreatePipelineJob_async]
 }
 
 process.on('unhandledRejection', err => {

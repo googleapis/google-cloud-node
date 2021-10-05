@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_delete_tensorboard_run_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardRun_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -46,7 +46,7 @@ function main(name) {
   }
 
   deleteTensorboardRun();
-  // [END aiplatform_delete_tensorboard_run_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardRun_async]
 }
 
 process.on('unhandledRejection', err => {

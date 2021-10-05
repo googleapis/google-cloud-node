@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_delete_index_endpoint_sample]
+  // [START aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -45,7 +45,7 @@ function main(name) {
   }
 
   deleteIndexEndpoint();
-  // [END aiplatform_delete_index_endpoint_sample]
+  // [END aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async]
 }
 
 process.on('unhandledRejection', err => {

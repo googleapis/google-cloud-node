@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, displayName) {
-  // [START aiplatform_lookup_study_sample]
+  // [START aiplatform_v1beta1_generated_VizierService_LookupStudy_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(parent, displayName) {
   }
 
   lookupStudy();
-  // [END aiplatform_lookup_study_sample]
+  // [END aiplatform_v1beta1_generated_VizierService_LookupStudy_async]
 }
 
 process.on('unhandledRejection', err => {

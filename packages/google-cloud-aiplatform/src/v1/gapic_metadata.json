@@ -1090,6 +1090,178 @@
           }
         }
       }
+    },
+    "VizierService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VizierServiceClient",
+          "rpcs": {
+            "CreateStudy": {
+              "methods": [
+                "createStudy"
+              ]
+            },
+            "GetStudy": {
+              "methods": [
+                "getStudy"
+              ]
+            },
+            "DeleteStudy": {
+              "methods": [
+                "deleteStudy"
+              ]
+            },
+            "LookupStudy": {
+              "methods": [
+                "lookupStudy"
+              ]
+            },
+            "CreateTrial": {
+              "methods": [
+                "createTrial"
+              ]
+            },
+            "GetTrial": {
+              "methods": [
+                "getTrial"
+              ]
+            },
+            "AddTrialMeasurement": {
+              "methods": [
+                "addTrialMeasurement"
+              ]
+            },
+            "CompleteTrial": {
+              "methods": [
+                "completeTrial"
+              ]
+            },
+            "DeleteTrial": {
+              "methods": [
+                "deleteTrial"
+              ]
+            },
+            "StopTrial": {
+              "methods": [
+                "stopTrial"
+              ]
+            },
+            "ListOptimalTrials": {
+              "methods": [
+                "listOptimalTrials"
+              ]
+            },
+            "SuggestTrials": {
+              "methods": [
+                "suggestTrials"
+              ]
+            },
+            "CheckTrialEarlyStoppingState": {
+              "methods": [
+                "checkTrialEarlyStoppingState"
+              ]
+            },
+            "ListStudies": {
+              "methods": [
+                "listStudies",
+                "listStudiesStream",
+                "listStudiesAsync"
+              ]
+            },
+            "ListTrials": {
+              "methods": [
+                "listTrials",
+                "listTrialsStream",
+                "listTrialsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VizierServiceClient",
+          "rpcs": {
+            "CreateStudy": {
+              "methods": [
+                "createStudy"
+              ]
+            },
+            "GetStudy": {
+              "methods": [
+                "getStudy"
+              ]
+            },
+            "DeleteStudy": {
+              "methods": [
+                "deleteStudy"
+              ]
+            },
+            "LookupStudy": {
+              "methods": [
+                "lookupStudy"
+              ]
+            },
+            "CreateTrial": {
+              "methods": [
+                "createTrial"
+              ]
+            },
+            "GetTrial": {
+              "methods": [
+                "getTrial"
+              ]
+            },
+            "AddTrialMeasurement": {
+              "methods": [
+                "addTrialMeasurement"
+              ]
+            },
+            "CompleteTrial": {
+              "methods": [
+                "completeTrial"
+              ]
+            },
+            "DeleteTrial": {
+              "methods": [
+                "deleteTrial"
+              ]
+            },
+            "StopTrial": {
+              "methods": [
+                "stopTrial"
+              ]
+            },
+            "ListOptimalTrials": {
+              "methods": [
+                "listOptimalTrials"
+              ]
+            },
+            "SuggestTrials": {
+              "methods": [
+                "suggestTrials"
+              ]
+            },
+            "CheckTrialEarlyStoppingState": {
+              "methods": [
+                "checkTrialEarlyStoppingState"
+              ]
+            },
+            "ListStudies": {
+              "methods": [
+                "listStudies",
+                "listStudiesStream",
+                "listStudiesAsync"
+              ]
+            },
+            "ListTrials": {
+              "methods": [
+                "listTrials",
+                "listTrialsStream",
+                "listTrialsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

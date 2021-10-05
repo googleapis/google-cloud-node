@@ -15,7 +15,7 @@
 'use strict';
 
 function main(context) {
-  // [START aiplatform_add_context_children_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_AddContextChildren_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(context) {
   }
 
   addContextChildren();
-  // [END aiplatform_add_context_children_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_AddContextChildren_async]
 }
 
 process.on('unhandledRejection', err => {

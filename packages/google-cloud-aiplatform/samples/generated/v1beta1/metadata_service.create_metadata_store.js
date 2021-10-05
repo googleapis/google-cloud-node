@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, metadataStore) {
-  // [START aiplatform_create_metadata_store_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -61,7 +61,7 @@ function main(parent, metadataStore) {
   }
 
   createMetadataStore();
-  // [END aiplatform_create_metadata_store_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async]
 }
 
 process.on('unhandledRejection', err => {

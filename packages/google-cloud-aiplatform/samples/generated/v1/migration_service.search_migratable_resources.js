@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent) {
-  // [START aiplatform_search_migratable_resources_sample]
+  // [START aiplatform_v1_generated_MigrationService_SearchMigratableResources_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -73,7 +73,7 @@ function main(parent) {
   }
 
   searchMigratableResources();
-  // [END aiplatform_search_migratable_resources_sample]
+  // [END aiplatform_v1_generated_MigrationService_SearchMigratableResources_async]
 }
 
 process.on('unhandledRejection', err => {

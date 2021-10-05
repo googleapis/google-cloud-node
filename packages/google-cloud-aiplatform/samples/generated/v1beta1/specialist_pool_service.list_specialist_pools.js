@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent) {
-  // [START aiplatform_list_specialist_pools_sample]
+  // [START aiplatform_v1beta1_generated_SpecialistPoolService_ListSpecialistPools_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -61,7 +61,7 @@ function main(parent) {
   }
 
   listSpecialistPools();
-  // [END aiplatform_list_specialist_pools_sample]
+  // [END aiplatform_v1beta1_generated_SpecialistPoolService_ListSpecialistPools_async]
 }
 
 process.on('unhandledRejection', err => {

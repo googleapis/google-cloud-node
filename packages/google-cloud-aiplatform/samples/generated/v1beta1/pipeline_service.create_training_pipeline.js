@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, trainingPipeline) {
-  // [START aiplatform_create_training_pipeline_sample]
+  // [START aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(parent, trainingPipeline) {
   }
 
   createTrainingPipeline();
-  // [END aiplatform_create_training_pipeline_sample]
+  // [END aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async]
 }
 
 process.on('unhandledRejection', err => {

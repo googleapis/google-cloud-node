@@ -15,7 +15,7 @@
 'use strict';
 
 function main(tensorboardTimeSeries) {
-  // [START aiplatform_export_tensorboard_time_series_data_sample]
+  // [START aiplatform_v1beta1_generated_TensorboardService_ExportTensorboardTimeSeriesData_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -73,7 +73,7 @@ function main(tensorboardTimeSeries) {
   }
 
   exportTensorboardTimeSeriesData();
-  // [END aiplatform_export_tensorboard_time_series_data_sample]
+  // [END aiplatform_v1beta1_generated_TensorboardService_ExportTensorboardTimeSeriesData_async]
 }
 
 process.on('unhandledRejection', err => {

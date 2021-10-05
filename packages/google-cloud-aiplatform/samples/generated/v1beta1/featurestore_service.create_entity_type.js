@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, entityTypeId) {
-  // [START aiplatform_create_entity_type_sample]
+  // [START aiplatform_v1beta1_generated_FeaturestoreService_CreateEntityType_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -59,7 +59,7 @@ function main(parent, entityTypeId) {
   }
 
   createEntityType();
-  // [END aiplatform_create_entity_type_sample]
+  // [END aiplatform_v1beta1_generated_FeaturestoreService_CreateEntityType_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -32,6 +32,7 @@ function main() {
   const predictionServiceClient = new aiplatform.PredictionServiceClient();
   const specialistPoolServiceClient =
     new aiplatform.SpecialistPoolServiceClient();
+  const vizierServiceClient = new aiplatform.VizierServiceClient();
 }
 
 main();

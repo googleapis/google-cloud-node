@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_get_metadata_store_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_GetMetadataStore_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -44,7 +44,7 @@ function main(name) {
   }
 
   getMetadataStore();
-  // [END aiplatform_get_metadata_store_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_GetMetadataStore_async]
 }
 
 process.on('unhandledRejection', err => {

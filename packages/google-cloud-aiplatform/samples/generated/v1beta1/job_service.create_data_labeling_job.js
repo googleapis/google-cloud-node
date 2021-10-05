@@ -15,7 +15,7 @@
 'use strict';
 
 function main(parent, dataLabelingJob) {
-  // [START aiplatform_create_data_labeling_job_sample]
+  // [START aiplatform_v1beta1_generated_JobService_CreateDataLabelingJob_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -48,7 +48,7 @@ function main(parent, dataLabelingJob) {
   }
 
   createDataLabelingJob();
-  // [END aiplatform_create_data_labeling_job_sample]
+  // [END aiplatform_v1beta1_generated_JobService_CreateDataLabelingJob_async]
 }
 
 process.on('unhandledRejection', err => {

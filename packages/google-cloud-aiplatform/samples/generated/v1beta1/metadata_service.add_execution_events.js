@@ -15,7 +15,7 @@
 'use strict';
 
 function main(execution) {
-  // [START aiplatform_add_execution_events_sample]
+  // [START aiplatform_v1beta1_generated_MetadataService_AddExecutionEvents_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -49,7 +49,7 @@ function main(execution) {
   }
 
   addExecutionEvents();
-  // [END aiplatform_add_execution_events_sample]
+  // [END aiplatform_v1beta1_generated_MetadataService_AddExecutionEvents_async]
 }
 
 process.on('unhandledRejection', err => {
