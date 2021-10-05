@@ -926,7 +926,8 @@ export class WebhooksClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listWebhooks'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWebhooks.createStream(
       this.innerApiCalls.listWebhooks as gax.GaxCall,
@@ -978,7 +979,8 @@ export class WebhooksClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listWebhooks'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWebhooks.asyncIterate(
       this.innerApiCalls['listWebhooks'] as GaxCall,

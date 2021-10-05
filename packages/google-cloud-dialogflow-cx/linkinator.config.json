@@ -3,10 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/create-page.js",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/delete-page.js",
-    "https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/list-page.js"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10

@@ -1024,7 +1024,8 @@ export class TransitionRouteGroupsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransitionRouteGroups.createStream(
       this.innerApiCalls.listTransitionRouteGroups as gax.GaxCall,
@@ -1091,7 +1092,8 @@ export class TransitionRouteGroupsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransitionRouteGroups.asyncIterate(
       this.innerApiCalls['listTransitionRouteGroups'] as GaxCall,

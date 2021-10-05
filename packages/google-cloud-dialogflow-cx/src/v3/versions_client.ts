@@ -1133,7 +1133,8 @@ export class VersionsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listVersions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as gax.GaxCall,
@@ -1186,7 +1187,8 @@ export class VersionsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listVersions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,

@@ -947,7 +947,8 @@ export class SecuritySettingsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSecuritySettings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSecuritySettings.createStream(
       this.innerApiCalls.listSecuritySettings as gax.GaxCall,
@@ -999,7 +1000,8 @@ export class SecuritySettingsServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSecuritySettings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSecuritySettings.asyncIterate(
       this.innerApiCalls['listSecuritySettings'] as GaxCall,

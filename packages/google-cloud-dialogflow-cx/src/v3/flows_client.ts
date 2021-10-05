@@ -1686,7 +1686,8 @@ export class FlowsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFlows'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFlows.createStream(
       this.innerApiCalls.listFlows as gax.GaxCall,
@@ -1752,7 +1753,8 @@ export class FlowsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFlows'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFlows.asyncIterate(
       this.innerApiCalls['listFlows'] as GaxCall,

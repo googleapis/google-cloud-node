@@ -1019,7 +1019,8 @@ export class PagesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPages'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPages.createStream(
       this.innerApiCalls.listPages as gax.GaxCall,
@@ -1094,7 +1095,8 @@ export class PagesClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPages'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPages.asyncIterate(
       this.innerApiCalls['listPages'] as GaxCall,

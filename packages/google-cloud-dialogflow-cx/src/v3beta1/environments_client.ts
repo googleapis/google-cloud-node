@@ -1211,7 +1211,8 @@ export class EnvironmentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as gax.GaxCall,
@@ -1263,7 +1264,8 @@ export class EnvironmentsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
@@ -1414,7 +1416,8 @@ export class EnvironmentsClient {
       gax.routingHeader.fromParams({
         name: request.name || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['lookupEnvironmentHistory'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.lookupEnvironmentHistory.createStream(
       this.innerApiCalls.lookupEnvironmentHistory as gax.GaxCall,
@@ -1467,7 +1470,8 @@ export class EnvironmentsClient {
         name: request.name || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['lookupEnvironmentHistory'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.lookupEnvironmentHistory.asyncIterate(
       this.innerApiCalls['lookupEnvironmentHistory'] as GaxCall,
@@ -1618,7 +1622,8 @@ export class EnvironmentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listContinuousTestResults'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listContinuousTestResults.createStream(
       this.innerApiCalls.listContinuousTestResults as gax.GaxCall,
@@ -1671,7 +1676,8 @@ export class EnvironmentsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listContinuousTestResults'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listContinuousTestResults.asyncIterate(
       this.innerApiCalls['listContinuousTestResults'] as GaxCall,

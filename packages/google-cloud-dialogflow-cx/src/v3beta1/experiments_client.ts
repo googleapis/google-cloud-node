@@ -1119,7 +1119,8 @@ export class ExperimentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listExperiments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExperiments.createStream(
       this.innerApiCalls.listExperiments as gax.GaxCall,
@@ -1172,7 +1173,8 @@ export class ExperimentsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listExperiments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExperiments.asyncIterate(
       this.innerApiCalls['listExperiments'] as GaxCall,

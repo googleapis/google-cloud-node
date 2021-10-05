@@ -1808,7 +1808,8 @@ export class TestCasesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTestCases'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTestCases.createStream(
       this.innerApiCalls.listTestCases as gax.GaxCall,
@@ -1863,7 +1864,8 @@ export class TestCasesClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTestCases'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTestCases.asyncIterate(
       this.innerApiCalls['listTestCases'] as GaxCall,
@@ -2062,7 +2064,8 @@ export class TestCasesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTestCaseResults'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTestCaseResults.createStream(
       this.innerApiCalls.listTestCaseResults as gax.GaxCall,
@@ -2141,7 +2144,8 @@ export class TestCasesClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTestCaseResults'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTestCaseResults.asyncIterate(
       this.innerApiCalls['listTestCaseResults'] as GaxCall,

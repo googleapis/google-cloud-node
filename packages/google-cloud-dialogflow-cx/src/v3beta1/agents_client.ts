@@ -1464,7 +1464,8 @@ export class AgentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAgents'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAgents.createStream(
       this.innerApiCalls.listAgents as gax.GaxCall,
@@ -1516,7 +1517,8 @@ export class AgentsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAgents'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAgents.asyncIterate(
       this.innerApiCalls['listAgents'] as GaxCall,

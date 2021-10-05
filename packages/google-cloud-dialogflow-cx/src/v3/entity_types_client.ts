@@ -976,7 +976,8 @@ export class EntityTypesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEntityTypes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntityTypes.createStream(
       this.innerApiCalls.listEntityTypes as gax.GaxCall,
@@ -1041,7 +1042,8 @@ export class EntityTypesClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEntityTypes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
