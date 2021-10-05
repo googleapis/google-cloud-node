@@ -2135,7 +2135,8 @@ export class ReservationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listReservations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReservations.createStream(
       this.innerApiCalls.listReservations as gax.GaxCall,
@@ -2186,7 +2187,8 @@ export class ReservationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listReservations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReservations.asyncIterate(
       this.innerApiCalls['listReservations'] as GaxCall,
@@ -2333,7 +2335,8 @@ export class ReservationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCapacityCommitments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCapacityCommitments.createStream(
       this.innerApiCalls.listCapacityCommitments as gax.GaxCall,
@@ -2384,7 +2387,8 @@ export class ReservationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCapacityCommitments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCapacityCommitments.asyncIterate(
       this.innerApiCalls['listCapacityCommitments'] as GaxCall,
@@ -2557,7 +2561,8 @@ export class ReservationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssignments.createStream(
       this.innerApiCalls.listAssignments as gax.GaxCall,
@@ -2613,7 +2618,8 @@ export class ReservationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssignments.asyncIterate(
       this.innerApiCalls['listAssignments'] as GaxCall,
@@ -2803,7 +2809,8 @@ export class ReservationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     this.warn(
       'DEP$ReservationService-$SearchAssignments',
@@ -2869,7 +2876,8 @@ export class ReservationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     this.warn(
       'DEP$ReservationService-$SearchAssignments',
@@ -3054,7 +3062,8 @@ export class ReservationServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAllAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllAssignments.createStream(
       this.innerApiCalls.searchAllAssignments as gax.GaxCall,
@@ -3114,7 +3123,8 @@ export class ReservationServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['searchAllAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.searchAllAssignments.asyncIterate(
       this.innerApiCalls['searchAllAssignments'] as GaxCall,
