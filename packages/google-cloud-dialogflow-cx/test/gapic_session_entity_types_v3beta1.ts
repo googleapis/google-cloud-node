@@ -1269,6 +1269,95 @@ describe('v3beta1.SessionEntityTypesClient', () => {
       });
     });
 
+    describe('deployment', () => {
+      const fakePath = '/rendered/path/deployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        environment: 'environmentValue',
+        deployment: 'deploymentValue',
+      };
+      const client =
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.deploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.deploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('deploymentPath', () => {
+        const result = client.deploymentPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'environmentValue',
+          'deploymentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDeploymentName', () => {
+        const result = client.matchProjectFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDeploymentName', () => {
+        const result = client.matchLocationFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromDeploymentName', () => {
+        const result = client.matchAgentFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromDeploymentName', () => {
+        const result = client.matchEnvironmentFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeploymentFromDeploymentName', () => {
+        const result = client.matchDeploymentFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'deploymentValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('entityType', () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {

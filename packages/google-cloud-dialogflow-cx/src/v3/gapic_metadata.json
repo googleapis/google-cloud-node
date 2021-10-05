@@ -113,6 +113,44 @@
         }
       }
     },
+    "Deployments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeploymentsClient",
+          "rpcs": {
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeploymentsClient",
+          "rpcs": {
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityTypes": {
       "clients": {
         "grpc": {
@@ -211,6 +249,11 @@
                 "runContinuousTest"
               ]
             },
+            "DeployFlow": {
+              "methods": [
+                "deployFlow"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
@@ -260,6 +303,11 @@
             "RunContinuousTest": {
               "methods": [
                 "runContinuousTest"
+              ]
+            },
+            "DeployFlow": {
+              "methods": [
+                "deployFlow"
               ]
             },
             "ListEnvironments": {

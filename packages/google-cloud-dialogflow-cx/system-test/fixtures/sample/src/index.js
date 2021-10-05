@@ -21,6 +21,7 @@ const cx = require('@google-cloud/dialogflow-cx');
 
 function main() {
   const agentsClient = new cx.AgentsClient();
+  const deploymentsClient = new cx.DeploymentsClient();
   const entityTypesClient = new cx.EntityTypesClient();
   const environmentsClient = new cx.EnvironmentsClient();
   const experimentsClient = new cx.ExperimentsClient();

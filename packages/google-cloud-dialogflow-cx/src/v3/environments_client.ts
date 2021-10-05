@@ -175,6 +175,9 @@ export class EnvironmentsClient {
       continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
       ),
+      deploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/deployments/{deployment}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}'
       ),
@@ -281,6 +284,12 @@ export class EnvironmentsClient {
     const runContinuousTestMetadata = protoFilesRoot.lookup(
       '.google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata'
     ) as gax.protobuf.Type;
+    const deployFlowResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.DeployFlowResponse'
+    ) as gax.protobuf.Type;
+    const deployFlowMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.DeployFlowMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEnvironment: new this._gaxModule.LongrunningDescriptor(
@@ -297,6 +306,11 @@ export class EnvironmentsClient {
         this.operationsClient,
         runContinuousTestResponse.decode.bind(runContinuousTestResponse),
         runContinuousTestMetadata.decode.bind(runContinuousTestMetadata)
+      ),
+      deployFlow: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deployFlowResponse.decode.bind(deployFlowResponse),
+        deployFlowMetadata.decode.bind(deployFlowMetadata)
       ),
     };
 
@@ -358,6 +372,7 @@ export class EnvironmentsClient {
       'lookupEnvironmentHistory',
       'runContinuousTest',
       'listContinuousTestResults',
+      'deployFlow',
     ];
     for (const methodName of environmentsStubMethods) {
       const callPromise = this.environmentsStub.then(
@@ -678,6 +693,14 @@ export class EnvironmentsClient {
   /**
    * Creates an {@link google.cloud.dialogflow.cx.v3.Environment|Environment} in the specified {@link google.cloud.dialogflow.cx.v3.Agent|Agent}.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: {@link google.cloud.dialogflow.cx.v3.Environment|Environment}
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -822,6 +845,14 @@ export class EnvironmentsClient {
   /**
    * Updates the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: {@link google.cloud.dialogflow.cx.v3.Environment|Environment}
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.cx.v3.Environment} request.environment
@@ -965,6 +996,13 @@ export class EnvironmentsClient {
   /**
    * Kicks off a continuous test under the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata|RunContinuousTestMetadata}
+   * - `response`: {@link google.cloud.dialogflow.cx.v3.RunContinuousTestResponse|RunContinuousTestResponse}
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.environment
@@ -1066,6 +1104,160 @@ export class EnvironmentsClient {
     return decodeOperation as LROperation<
       protos.google.cloud.dialogflow.cx.v3.RunContinuousTestResponse,
       protos.google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata
+    >;
+  }
+  deployFlow(
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeployFlowRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowResponse,
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deployFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IDeployFlowRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowResponse,
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployFlow(
+    request: protos.google.cloud.dialogflow.cx.v3.IDeployFlowRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowResponse,
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deploys a flow to the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.cx.v3.DeployFlowMetadata|DeployFlowMetadata}
+   * - `response`: {@link google.cloud.dialogflow.cx.v3.DeployFlowResponse|DeployFlowResponse}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Required. The environment to deploy the flow to.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+   *   environments/<Environment ID>`.
+   * @param {string} request.flowVersion
+   *   Required. The flow version to deploy.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+   *   flows/<Flow ID>/versions/<Version ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deployFlow(request);
+   * const [response] = await operation.promise();
+   */
+  deployFlow(
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeployFlowRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IDeployFlowResponse,
+            protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowResponse,
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowResponse,
+        protos.google.cloud.dialogflow.cx.v3.IDeployFlowMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        environment: request.environment || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deployFlow(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deployFlow()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeployFlowProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeployFlowProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3.DeployFlowResponse,
+      protos.google.cloud.dialogflow.cx.v3.DeployFlowMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deployFlow,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3.DeployFlowResponse,
+      protos.google.cloud.dialogflow.cx.v3.DeployFlowMetadata
     >;
   }
   listEnvironments(
@@ -1882,6 +2074,92 @@ export class EnvironmentsClient {
     return this.pathTemplates.continuousTestResultPathTemplate.match(
       continuousTestResultName
     ).continuous_test_result;
+  }
+
+  /**
+   * Return a fully-qualified deployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} environment
+   * @param {string} deployment
+   * @returns {string} Resource name string.
+   */
+  deploymentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    deployment: string
+  ) {
+    return this.pathTemplates.deploymentPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      environment: environment,
+      deployment: deployment,
+    });
+  }
+
+  /**
+   * Parse the project from Deployment resource.
+   *
+   * @param {string} deploymentName
+   *   A fully-qualified path representing Deployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentName(deploymentName: string) {
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Deployment resource.
+   *
+   * @param {string} deploymentName
+   *   A fully-qualified path representing Deployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentName(deploymentName: string) {
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from Deployment resource.
+   *
+   * @param {string} deploymentName
+   *   A fully-qualified path representing Deployment resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromDeploymentName(deploymentName: string) {
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .agent;
+  }
+
+  /**
+   * Parse the environment from Deployment resource.
+   *
+   * @param {string} deploymentName
+   *   A fully-qualified path representing Deployment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromDeploymentName(deploymentName: string) {
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .environment;
+  }
+
+  /**
+   * Parse the deployment from Deployment resource.
+   *
+   * @param {string} deploymentName
+   *   A fully-qualified path representing Deployment resource.
+   * @returns {string} A string representing the deployment.
+   */
+  matchDeploymentFromDeploymentName(deploymentName: string) {
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**

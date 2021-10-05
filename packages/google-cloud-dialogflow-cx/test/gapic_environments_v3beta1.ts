@@ -1035,6 +1035,196 @@ describe('v3beta1.EnvironmentsClient', () => {
     });
   });
 
+  describe('deployFlow', () => {
+    it('invokes deployFlow without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeployFlowRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deployFlow = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deployFlow(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deployFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deployFlow without error using callback', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeployFlowRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deployFlow =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deployFlow(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dialogflow.cx.v3beta1.IDeployFlowResponse,
+              protos.google.cloud.dialogflow.cx.v3beta1.IDeployFlowMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IDeployFlowResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IDeployFlowMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deployFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deployFlow with call error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeployFlowRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deployFlow = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deployFlow(request), expectedError);
+      assert(
+        (client.innerApiCalls.deployFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deployFlow with LRO error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.DeployFlowRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deployFlow = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deployFlow(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deployFlow as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeployFlowProgress without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeployFlowProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeployFlowProgress with error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeployFlowProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listEnvironments', () => {
     it('invokes listEnvironments without error', async () => {
       const client = new environmentsModule.v3beta1.EnvironmentsClient({
@@ -2253,6 +2443,94 @@ describe('v3beta1.EnvironmentsClient', () => {
             client.pathTemplates.continuousTestResultPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('deployment', () => {
+      const fakePath = '/rendered/path/deployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        environment: 'environmentValue',
+        deployment: 'deploymentValue',
+      };
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.deploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.deploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('deploymentPath', () => {
+        const result = client.deploymentPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'environmentValue',
+          'deploymentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDeploymentName', () => {
+        const result = client.matchProjectFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDeploymentName', () => {
+        const result = client.matchLocationFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromDeploymentName', () => {
+        const result = client.matchAgentFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromDeploymentName', () => {
+        const result = client.matchEnvironmentFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeploymentFromDeploymentName', () => {
+        const result = client.matchDeploymentFromDeploymentName(fakePath);
+        assert.strictEqual(result, 'deploymentValue');
+        assert(
+          (client.pathTemplates.deploymentPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -2,6 +2,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3beta1/advanced_settings.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/agent.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/audio_config.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/deployment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/entity_type.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/environment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/experiment.proto",
