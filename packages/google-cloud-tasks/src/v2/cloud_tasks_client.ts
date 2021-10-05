@@ -1919,7 +1919,8 @@ export class CloudTasksClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listQueues'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listQueues.createStream(
       this.innerApiCalls.listQueues as gax.GaxCall,
@@ -1995,7 +1996,8 @@ export class CloudTasksClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listQueues'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listQueues.asyncIterate(
       this.innerApiCalls['listQueues'] as GaxCall,
@@ -2194,7 +2196,8 @@ export class CloudTasksClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTasks'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as gax.GaxCall,
@@ -2273,7 +2276,8 @@ export class CloudTasksClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTasks'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
