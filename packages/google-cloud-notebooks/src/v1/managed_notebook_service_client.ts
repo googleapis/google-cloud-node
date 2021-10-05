@@ -1673,7 +1673,8 @@ export class ManagedNotebookServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRuntimes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRuntimes.createStream(
       this.innerApiCalls.listRuntimes as gax.GaxCall,
@@ -1725,7 +1726,8 @@ export class ManagedNotebookServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRuntimes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRuntimes.asyncIterate(
       this.innerApiCalls['listRuntimes'] as GaxCall,

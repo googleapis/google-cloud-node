@@ -4527,7 +4527,8 @@ export class NotebookServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInstances'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as gax.GaxCall,
@@ -4579,7 +4580,8 @@ export class NotebookServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInstances'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
@@ -4722,7 +4724,8 @@ export class NotebookServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as gax.GaxCall,
@@ -4773,7 +4776,8 @@ export class NotebookServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
@@ -4926,7 +4930,8 @@ export class NotebookServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSchedules'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSchedules.createStream(
       this.innerApiCalls.listSchedules as gax.GaxCall,
@@ -4982,7 +4987,8 @@ export class NotebookServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSchedules'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSchedules.asyncIterate(
       this.innerApiCalls['listSchedules'] as GaxCall,
@@ -5037,7 +5043,7 @@ export class NotebookServiceClient {
    * @param {string} request.filter
    *   Filter applied to resulting executions. Currently only supports filtering
    *   executions by a specified schedule_id.
-   *   Format: "schedule_id=<Schedule_ID>"
+   *   Format: `schedule_id=<Schedule_ID>`
    * @param {string} request.orderBy
    *   Sort by field.
    * @param {object} [options]
@@ -5112,7 +5118,7 @@ export class NotebookServiceClient {
    * @param {string} request.filter
    *   Filter applied to resulting executions. Currently only supports filtering
    *   executions by a specified schedule_id.
-   *   Format: "schedule_id=<Schedule_ID>"
+   *   Format: `schedule_id=<Schedule_ID>`
    * @param {string} request.orderBy
    *   Sort by field.
    * @param {object} [options]
@@ -5139,7 +5145,8 @@ export class NotebookServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listExecutions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExecutions.createStream(
       this.innerApiCalls.listExecutions as gax.GaxCall,
@@ -5165,7 +5172,7 @@ export class NotebookServiceClient {
    * @param {string} request.filter
    *   Filter applied to resulting executions. Currently only supports filtering
    *   executions by a specified schedule_id.
-   *   Format: "schedule_id=<Schedule_ID>"
+   *   Format: `schedule_id=<Schedule_ID>`
    * @param {string} request.orderBy
    *   Sort by field.
    * @param {object} [options]
@@ -5197,7 +5204,8 @@ export class NotebookServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listExecutions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,
