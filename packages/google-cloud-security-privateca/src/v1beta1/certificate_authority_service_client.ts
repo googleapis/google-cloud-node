@@ -2826,7 +2826,8 @@ export class CertificateAuthorityServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCertificates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificates.createStream(
       this.innerApiCalls.listCertificates as gax.GaxCall,
@@ -2892,7 +2893,8 @@ export class CertificateAuthorityServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCertificates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
@@ -3061,7 +3063,8 @@ export class CertificateAuthorityServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCertificateAuthorities'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateAuthorities.createStream(
       this.innerApiCalls.listCertificateAuthorities as gax.GaxCall,
@@ -3123,7 +3126,8 @@ export class CertificateAuthorityServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCertificateAuthorities'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateAuthorities.asyncIterate(
       this.innerApiCalls['listCertificateAuthorities'] as GaxCall,
@@ -3292,7 +3296,9 @@ export class CertificateAuthorityServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings =
+      this._defaults['listCertificateRevocationLists'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateRevocationLists.createStream(
       this.innerApiCalls.listCertificateRevocationLists as gax.GaxCall,
@@ -3354,7 +3360,9 @@ export class CertificateAuthorityServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings =
+      this._defaults['listCertificateRevocationLists'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCertificateRevocationLists.asyncIterate(
       this.innerApiCalls['listCertificateRevocationLists'] as GaxCall,
@@ -3519,7 +3527,8 @@ export class CertificateAuthorityServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listReusableConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReusableConfigs.createStream(
       this.innerApiCalls.listReusableConfigs as gax.GaxCall,
@@ -3581,7 +3590,8 @@ export class CertificateAuthorityServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listReusableConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listReusableConfigs.asyncIterate(
       this.innerApiCalls['listReusableConfigs'] as GaxCall,

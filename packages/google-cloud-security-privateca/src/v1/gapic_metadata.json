@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.security.privateca.v1",
-  "libraryPackage": "@google-cloud/privateca",
+  "libraryPackage": "@google-cloud/security-private-ca",
   "services": {
     "CertificateAuthorityService": {
       "clients": {
