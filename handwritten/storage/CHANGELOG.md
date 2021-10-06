@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.14.7](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.6...v5.14.7) (2021-10-06)
+
+
+### Bug Fixes
+
+* file preconditions should respect ifGenerationMatch not ifMetagenerationMatch ([#1642](https://www.github.com/googleapis/nodejs-storage/issues/1642)) ([eb6f31f](https://www.github.com/googleapis/nodejs-storage/commit/eb6f31f3f6c439e21bbc0cd46f32a7327e15f65e))
+
 ### [5.14.6](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.5...v5.14.6) (2021-10-06)
 
 
