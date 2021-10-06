@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.5.0...v3.0.0) (2021-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated v1beta2 API (#532)
+
+### Code Refactoring
+
+* remove deprecated v1beta2 API ([#532](https://www.github.com/googleapis/nodejs-dataproc/issues/532)) ([2a7cd97](https://www.github.com/googleapis/nodejs-dataproc/commit/2a7cd976724874083ccc2966bcf4b28dca7cb705))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.4...v2.5.0) (2021-09-07)
 
 
