@@ -4379,7 +4379,7 @@ describe('File', () => {
       it('string upload should retry on first failure', async () => {
         const options = {
           resumable: false,
-          preconditionOpts: {ifMetagenerationMatch: 100},
+          preconditionOpts: {ifGenerationMatch: 100},
         };
         let retryCount = 0;
         file.createWriteStream = () => {
@@ -4432,7 +4432,7 @@ describe('File', () => {
       it('buffer upload should retry on first failure', async () => {
         const options = {
           resumable: false,
-          preconditionOpts: {ifMetagenerationMatch: 100},
+          preconditionOpts: {ifGenerationMatch: 100},
         };
         let retryCount = 0;
         file.createWriteStream = () => {
@@ -4446,7 +4446,7 @@ describe('File', () => {
       it('resumable upload should retry', async () => {
         const options = {
           resumable: true,
-          preconditionOpts: {ifMetagenerationMatch: 100},
+          preconditionOpts: {ifGenerationMatch: 100},
         };
         let retryCount = 0;
         file.createWriteStream = () => {

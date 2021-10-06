@@ -1587,8 +1587,8 @@ class File extends ServiceObject<File> {
 
     const retryOptions = this.storage.retryOptions;
     if (
-      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
+      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
@@ -3683,11 +3683,11 @@ class File extends ServiceObject<File> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
-    // Do not retry if precondition option ifMetagenerationMatch is not set
+    // Do not retry if precondition option ifGenerationMatch is not set
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
-      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
+      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
@@ -3868,11 +3868,11 @@ class File extends ServiceObject<File> {
       options
     );
 
-    // Do not retry if precondition option ifMetagenerationMatch is not set
+    // Do not retry if precondition option ifGenerationMatch is not set
     const retryOptions = this.storage.retryOptions;
     if (
-      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifMetagenerationMatch === undefined &&
+      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
+        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
       this.storage.retryOptions.idempotencyStrategy ===
@@ -4005,7 +4005,7 @@ class File extends ServiceObject<File> {
   ): void {
     if (
       (typeof coreOpts === 'object' &&
-        coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
+        coreOpts?.reqOpts?.qs?.ifGenerationMatch === undefined &&
         methodType === AvailableServiceObjectMethods.setMetadata &&
         this.storage.retryOptions.idempotencyStrategy ===
           IdempotencyStrategy.RetryConditional) ||
