@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.14.6](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.5...v5.14.6) (2021-10-06)
+
+
+### Bug Fixes
+
+* pass precondition opts to new file ([#1638](https://www.github.com/googleapis/nodejs-storage/issues/1638)) ([1523ca9](https://www.github.com/googleapis/nodejs-storage/commit/1523ca962fda070cf60e5b81d062e3a291461c83))
+
 ### [5.14.5](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.4...v5.14.5) (2021-10-01)
 
 
