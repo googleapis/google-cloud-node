@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.4.1...v2.5.0) (2021-10-06)
+
+
+### Features
+
+* **privateca:** add IAMPolicy & Locations mix-in support ([ca2312e](https://www.github.com/googleapis/nodejs-security-private-ca/commit/ca2312e60999e6068f92405922f1df1737d8a1ed))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.4.0...v2.4.1) (2021-09-10)
 
 
