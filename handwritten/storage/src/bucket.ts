@@ -3940,6 +3940,7 @@ class Bucket extends ServiceObject {
       newFile = this.file(options.destination, {
         encryptionKey: options.encryptionKey,
         kmsKeyName: options.kmsKeyName,
+        preconditionOpts: this.instancePreconditionOpts,
       });
     } else {
       // Resort to using the name of the incoming file.
@@ -3947,6 +3948,7 @@ class Bucket extends ServiceObject {
       newFile = this.file(destination, {
         encryptionKey: options.encryptionKey,
         kmsKeyName: options.kmsKeyName,
+        preconditionOpts: this.instancePreconditionOpts,
       });
     }
 
