@@ -170,6 +170,20 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.apiEndpoint, `${apiEndpoint}`);
     });
 
+    it('should propagate the useAuthWithCustomEndpoint option', () => {
+      const useAuthWithCustomEndpoint = true;
+      const apiEndpoint = 'https://some.fake.endpoint';
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+        useAuthWithCustomEndpoint,
+        apiEndpoint,
+      });
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(calledWith.apiEndpoint, 'https://some.fake.endpoint');
+      assert.strictEqual(calledWith.customEndpoint, true);
+      assert.strictEqual(calledWith.useAuthWithCustomEndpoint, true);
+    });
+
     it('should propagate autoRetry', () => {
       const autoRetry = false;
       const storage = new Storage({
