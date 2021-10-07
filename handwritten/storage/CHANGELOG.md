@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.15.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.7...v5.15.0) (2021-10-07)
+
+
+### Features
+
+* add support for useAuthWithCustomEndpoint option ([#1645](https://www.github.com/googleapis/nodejs-storage/issues/1645)) ([d11d6b4](https://www.github.com/googleapis/nodejs-storage/commit/d11d6b4b2678cb240928e2dfe20f983d2ae896f6))
+
+
+### Bug Fixes
+
+* update common dep ([#1644](https://www.github.com/googleapis/nodejs-storage/issues/1644)) ([793467f](https://www.github.com/googleapis/nodejs-storage/commit/793467f25abf46eb7ba5e6cd1b80f735faa035dc))
+
 ### [5.14.8](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.7...v5.14.8) (2021-10-06)
 
 
