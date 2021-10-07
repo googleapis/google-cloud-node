@@ -1,0 +1,219 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.deploy.v1",
+  "libraryPackage": "@google-cloud/deploy",
+  "services": {
+    "CloudDeploy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudDeployClient",
+          "rpcs": {
+            "GetDeliveryPipeline": {
+              "methods": [
+                "getDeliveryPipeline"
+              ]
+            },
+            "GetTarget": {
+              "methods": [
+                "getTarget"
+              ]
+            },
+            "GetRelease": {
+              "methods": [
+                "getRelease"
+              ]
+            },
+            "ApproveRollout": {
+              "methods": [
+                "approveRollout"
+              ]
+            },
+            "GetRollout": {
+              "methods": [
+                "getRollout"
+              ]
+            },
+            "GetConfig": {
+              "methods": [
+                "getConfig"
+              ]
+            },
+            "CreateDeliveryPipeline": {
+              "methods": [
+                "createDeliveryPipeline"
+              ]
+            },
+            "UpdateDeliveryPipeline": {
+              "methods": [
+                "updateDeliveryPipeline"
+              ]
+            },
+            "DeleteDeliveryPipeline": {
+              "methods": [
+                "deleteDeliveryPipeline"
+              ]
+            },
+            "CreateTarget": {
+              "methods": [
+                "createTarget"
+              ]
+            },
+            "UpdateTarget": {
+              "methods": [
+                "updateTarget"
+              ]
+            },
+            "DeleteTarget": {
+              "methods": [
+                "deleteTarget"
+              ]
+            },
+            "CreateRelease": {
+              "methods": [
+                "createRelease"
+              ]
+            },
+            "CreateRollout": {
+              "methods": [
+                "createRollout"
+              ]
+            },
+            "ListDeliveryPipelines": {
+              "methods": [
+                "listDeliveryPipelines",
+                "listDeliveryPipelinesStream",
+                "listDeliveryPipelinesAsync"
+              ]
+            },
+            "ListTargets": {
+              "methods": [
+                "listTargets",
+                "listTargetsStream",
+                "listTargetsAsync"
+              ]
+            },
+            "ListReleases": {
+              "methods": [
+                "listReleases",
+                "listReleasesStream",
+                "listReleasesAsync"
+              ]
+            },
+            "ListRollouts": {
+              "methods": [
+                "listRollouts",
+                "listRolloutsStream",
+                "listRolloutsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudDeployClient",
+          "rpcs": {
+            "GetDeliveryPipeline": {
+              "methods": [
+                "getDeliveryPipeline"
+              ]
+            },
+            "GetTarget": {
+              "methods": [
+                "getTarget"
+              ]
+            },
+            "GetRelease": {
+              "methods": [
+                "getRelease"
+              ]
+            },
+            "ApproveRollout": {
+              "methods": [
+                "approveRollout"
+              ]
+            },
+            "GetRollout": {
+              "methods": [
+                "getRollout"
+              ]
+            },
+            "GetConfig": {
+              "methods": [
+                "getConfig"
+              ]
+            },
+            "CreateDeliveryPipeline": {
+              "methods": [
+                "createDeliveryPipeline"
+              ]
+            },
+            "UpdateDeliveryPipeline": {
+              "methods": [
+                "updateDeliveryPipeline"
+              ]
+            },
+            "DeleteDeliveryPipeline": {
+              "methods": [
+                "deleteDeliveryPipeline"
+              ]
+            },
+            "CreateTarget": {
+              "methods": [
+                "createTarget"
+              ]
+            },
+            "UpdateTarget": {
+              "methods": [
+                "updateTarget"
+              ]
+            },
+            "DeleteTarget": {
+              "methods": [
+                "deleteTarget"
+              ]
+            },
+            "CreateRelease": {
+              "methods": [
+                "createRelease"
+              ]
+            },
+            "CreateRollout": {
+              "methods": [
+                "createRollout"
+              ]
+            },
+            "ListDeliveryPipelines": {
+              "methods": [
+                "listDeliveryPipelines",
+                "listDeliveryPipelinesStream",
+                "listDeliveryPipelinesAsync"
+              ]
+            },
+            "ListTargets": {
+              "methods": [
+                "listTargets",
+                "listTargetsStream",
+                "listTargetsAsync"
+              ]
+            },
+            "ListReleases": {
+              "methods": [
+                "listReleases",
+                "listReleasesStream",
+                "listReleasesAsync"
+              ]
+            },
+            "ListRollouts": {
+              "methods": [
+                "listRollouts",
+                "listRolloutsStream",
+                "listRolloutsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
