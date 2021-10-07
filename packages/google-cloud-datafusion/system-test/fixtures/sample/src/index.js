@@ -16,9 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const datafusion = require('@google-cloud/datafusion');
+const datafusion = require('@google-cloud/data-fusion');
 
 function main() {
   const dataFusionClient = new datafusion.DataFusionClient();

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 'use strict';
 
 function main() {
@@ -27,15 +26,14 @@ function main() {
   // const name = 'abc123'
 
   // Imports the Datafusion library
-  const {DataFusionClient} = require('@google-cloud/datafusion').v1beta1;
+  const {DataFusionClient} = require('@google-cloud/data-fusion').v1beta1;
 
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
   async function getInstance() {
     // Construct request
-    const request = {
-    };
+    const request = {};
 
     // Run request
     const response = await datafusionClient.getInstance(request);

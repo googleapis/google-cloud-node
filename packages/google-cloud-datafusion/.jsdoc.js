@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2021 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/datafusion',
+    systemName: '@google-cloud/data-fusion',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataFusionClient} from '@google-cloud/datafusion';
+import {DataFusionClient} from '@google-cloud/data-fusion';
 
 // check that the client class type name can be used
 function doStuffWithDataFusionClient(client: DataFusionClient) {

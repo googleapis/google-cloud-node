@@ -18,10 +18,18 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 
-import { Transform } from 'stream';
-import { RequestType } from 'google-gax/build/src/apitypes';
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -30,7 +38,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './data_fusion_client_config.json';
-import { operationsProtos } from 'google-gax';
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -98,11 +106,16 @@ export class DataFusionClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataFusionClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -120,7 +133,7 @@ export class DataFusionClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -134,10 +147,7 @@ export class DataFusionClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -145,7 +155,7 @@ export class DataFusionClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -170,14 +180,26 @@ export class DataFusionClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAvailableVersions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'availableVersions'),
-      listInstances:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'instances'),
-      listNamespaces:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'namespaces'),
-      listDnsPeerings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dnsPeerings')
+      listAvailableVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'availableVersions'
+      ),
+      listInstances: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'instances'
+      ),
+      listNamespaces: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'namespaces'
+      ),
+      listDnsPeerings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dnsPeerings'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -186,58 +208,78 @@ export class DataFusionClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
 
-    this.operationsClient = this._gaxModule.lro({
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
-    }).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.Instance') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.Instance'
+    ) as gax.protobuf.Type;
     const createInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
     const deleteInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const updateInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.Instance') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.Instance'
+    ) as gax.protobuf.Type;
     const updateInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const restartInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.Instance') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.Instance'
+    ) as gax.protobuf.Type;
     const restartInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const upgradeInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.Instance') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.Instance'
+    ) as gax.protobuf.Type;
     const upgradeInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.datafusion.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.datafusion.v1beta1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
-        createInstanceMetadata.decode.bind(createInstanceMetadata)),
+        createInstanceMetadata.decode.bind(createInstanceMetadata)
+      ),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
-        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)),
+        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
+      ),
       updateInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateInstanceResponse.decode.bind(updateInstanceResponse),
-        updateInstanceMetadata.decode.bind(updateInstanceMetadata)),
+        updateInstanceMetadata.decode.bind(updateInstanceMetadata)
+      ),
       restartInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restartInstanceResponse.decode.bind(restartInstanceResponse),
-        restartInstanceMetadata.decode.bind(restartInstanceMetadata)),
+        restartInstanceMetadata.decode.bind(restartInstanceMetadata)
+      ),
       upgradeInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         upgradeInstanceResponse.decode.bind(upgradeInstanceResponse),
-        upgradeInstanceMetadata.decode.bind(upgradeInstanceMetadata))
+        upgradeInstanceMetadata.decode.bind(upgradeInstanceMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.datafusion.v1beta1.DataFusion', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.datafusion.v1beta1.DataFusion',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -268,28 +310,47 @@ export class DataFusionClient {
     // Put together the "service stub" for
     // google.cloud.datafusion.v1beta1.DataFusion.
     this.dataFusionStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.datafusion.v1beta1.DataFusion') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.datafusion.v1beta1.DataFusion'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.datafusion.v1beta1.DataFusion,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataFusionStubMethods =
-        ['listAvailableVersions', 'listInstances', 'getInstance', 'createInstance', 'deleteInstance', 'updateInstance', 'restartInstance', 'upgradeInstance', 'removeIamPolicy', 'listNamespaces', 'addDnsPeering', 'removeDnsPeering', 'listDnsPeerings'];
+    const dataFusionStubMethods = [
+      'listAvailableVersions',
+      'listInstances',
+      'getInstance',
+      'createInstance',
+      'deleteInstance',
+      'updateInstance',
+      'restartInstance',
+      'upgradeInstance',
+      'removeIamPolicy',
+      'listNamespaces',
+      'addDnsPeering',
+      'removeDnsPeering',
+      'listDnsPeerings',
+    ];
     for (const methodName of dataFusionStubMethods) {
       const callPromise = this.dataFusionStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -338,9 +399,7 @@ export class DataFusionClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -349,8 +408,9 @@ export class DataFusionClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -362,920 +422,1259 @@ export class DataFusionClient {
   // -- Service calls --
   // -------------------
   getInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IInstance,
-        protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IInstance,
+      protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IInstance,
-          protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IInstance,
+      | protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IInstance,
-          protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets details of a single Data Fusion instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The instance resource name in the format
- *   projects/{project}/locations/{location}/instances/{instance}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Instance]{@link google.cloud.datafusion.v1beta1.Instance}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.getInstance(request);
- */
+    request: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IInstance,
+      | protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets details of a single Data Fusion instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The instance resource name in the format
+   *   projects/{project}/locations/{location}/instances/{instance}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Instance]{@link google.cloud.datafusion.v1beta1.Instance}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getInstance(request);
+   */
   getInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.datafusion.v1beta1.IInstance,
-          protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.datafusion.v1beta1.IInstance,
-          protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IInstance,
-        protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datafusion.v1beta1.IInstance,
+      | protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IInstance,
+      protos.google.cloud.datafusion.v1beta1.IGetInstanceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getInstance(request, options, callback);
   }
   removeIamPolicy(
-      request?: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
-        protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
+      (
+        | protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   removeIamPolicy(
-      request: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
+      | protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   removeIamPolicy(
-      request: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Remove IAM policy that is currently set on the given resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   The resource on which IAM policy to be removed is attached to.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [RemoveIamPolicyResponse]{@link google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.removeIamPolicy(request);
- */
+    request: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
+      | protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Remove IAM policy that is currently set on the given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   The resource on which IAM policy to be removed is attached to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RemoveIamPolicyResponse]{@link google.cloud.datafusion.v1beta1.RemoveIamPolicyResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.removeIamPolicy(request);
+   */
   removeIamPolicy(
-      request?: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
-        protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
+      | protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyResponse,
+      (
+        | protos.google.cloud.datafusion.v1beta1.IRemoveIamPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'resource': request.resource || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        resource: request.resource || '',
+      });
     this.initialize();
     return this.innerApiCalls.removeIamPolicy(request, options, callback);
   }
   addDnsPeering(
-      request?: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
-        protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest | undefined,
+      {} | undefined
+    ]
+  >;
   addDnsPeering(
-      request: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
+      | protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   addDnsPeering(
-      request: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Add DNS peering on the given resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The resource on which DNS peering will be created.
- * @param {google.cloud.datafusion.v1beta1.DnsPeering} request.dnsPeering
- *   Dns peering config.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [AddDnsPeeringResponse]{@link google.cloud.datafusion.v1beta1.AddDnsPeeringResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.addDnsPeering(request);
- */
+    request: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
+      | protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Add DNS peering on the given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The resource on which DNS peering will be created.
+   * @param {google.cloud.datafusion.v1beta1.DnsPeering} request.dnsPeering
+   *   Dns peering config.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AddDnsPeeringResponse]{@link google.cloud.datafusion.v1beta1.AddDnsPeeringResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.addDnsPeering(request);
+   */
   addDnsPeering(
-      request?: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
-        protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
+      | protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringResponse,
+      protos.google.cloud.datafusion.v1beta1.IAddDnsPeeringRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.addDnsPeering(request, options, callback);
   }
   removeDnsPeering(
-      request?: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
-        protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
+      (
+        | protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   removeDnsPeering(
-      request: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
+      | protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   removeDnsPeering(
-      request: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
-      callback: Callback<
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Remove DNS peering on the given resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The resource on which DNS peering will be removed.
- * @param {string} request.zone
- *   Required. The zone to be removed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [RemoveDnsPeeringResponse]{@link google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.removeDnsPeering(request);
- */
+    request: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
+    callback: Callback<
+      protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
+      | protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Remove DNS peering on the given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The resource on which DNS peering will be removed.
+   * @param {string} request.zone
+   *   Required. The zone to be removed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RemoveDnsPeeringResponse]{@link google.cloud.datafusion.v1beta1.RemoveDnsPeeringResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.removeDnsPeering(request);
+   */
   removeDnsPeering(
-      request?: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
-          protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
-        protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
+      | protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringResponse,
+      (
+        | protos.google.cloud.datafusion.v1beta1.IRemoveDnsPeeringRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.removeDnsPeering(request, options, callback);
   }
 
   createInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   createInstance(
-      request: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createInstance(
-      request: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates a new Data Fusion instance in the specified project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The instance's project and location in the format
- *   projects/{project}/locations/{location}.
- * @param {string} request.instanceId
- *   The name of the instance to create.
- * @param {google.cloud.datafusion.v1beta1.Instance} request.instance
- *   An instance resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.createInstance(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a new Data Fusion instance in the specified project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The instance's project and location in the format
+   *   projects/{project}/locations/{location}.
+   * @param {string} request.instanceId
+   *   The name of the instance to create.
+   * @param {google.cloud.datafusion.v1beta1.Instance} request.instance
+   *   An instance resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createInstance(request);
+   * const [response] = await operation.promise();
+   */
   createInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.datafusion.v1beta1.ICreateInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datafusion.v1beta1.IInstance,
+            protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.createInstance(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `createInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkCreateInstanceProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkCreateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `createInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.createInstance, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >;
   }
   deleteInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   deleteInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes a single Data Fusion instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   The instance resource name in the format
- *   projects/{project}/locations/{location}/instances/{instance}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.deleteInstance(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a single Data Fusion instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The instance resource name in the format
+   *   projects/{project}/locations/{location}/instances/{instance}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteInstance(request);
+   * const [response] = await operation.promise();
+   */
   deleteInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.datafusion.v1beta1.IDeleteInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteInstance(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `deleteInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkDeleteInstanceProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkDeleteInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.datafusion.v1beta1.OperationMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `deleteInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.deleteInstance, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.datafusion.v1beta1.OperationMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >;
   }
   updateInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   updateInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates a single Data Fusion instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.datafusion.v1beta1.Instance} request.instance
- *   The instance resource that replaces the resource on the server. Currently,
- *   Data Fusion only allows replacing labels, options, and stack driver
- *   settings. All other fields will be ignored.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields that the update will overwrite
- *   in an instance resource. The fields specified in the update_mask are
- *   relative to the resource, not the full request.
- *   A field will be overwritten if it is in the mask.
- *   If the user does not provide a mask, all the supported fields (labels and
- *   options currently) will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.updateInstance(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a single Data Fusion instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.datafusion.v1beta1.Instance} request.instance
+   *   The instance resource that replaces the resource on the server. Currently,
+   *   Data Fusion only allows replacing labels, options, and stack driver
+   *   settings. All other fields will be ignored.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields that the update will overwrite
+   *   in an instance resource. The fields specified in the update_mask are
+   *   relative to the resource, not the full request.
+   *   A field will be overwritten if it is in the mask.
+   *   If the user does not provide a mask, all the supported fields (labels and
+   *   options currently) will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateInstance(request);
+   * const [response] = await operation.promise();
+   */
   updateInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.datafusion.v1beta1.IUpdateInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datafusion.v1beta1.IInstance,
+            protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'instance.name': request.instance!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'instance.name': request.instance!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateInstance(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `updateInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkUpdateInstanceProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkUpdateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `updateInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUpdateInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.updateInstance, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >;
   }
   restartInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   restartInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   restartInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Restart a single Data Fusion instance.
- * At the end of an operation instance is fully restarted.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Name of the Data Fusion instance which need to be restarted in the form of
- *   projects/{project}/locations/{location}/instances/{instance}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.restartInstance(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Restart a single Data Fusion instance.
+   * At the end of an operation instance is fully restarted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the Data Fusion instance which need to be restarted in the form of
+   *   projects/{project}/locations/{location}/instances/{instance}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.restartInstance(request);
+   * const [response] = await operation.promise();
+   */
   restartInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.datafusion.v1beta1.IRestartInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datafusion.v1beta1.IInstance,
+            protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.restartInstance(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `restartInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkRestartInstanceProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkRestartInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `restartInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRestartInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkRestartInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.restartInstance, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.restartInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >;
   }
   upgradeInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   upgradeInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   upgradeInstance(
-      request: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Upgrade a single Data Fusion instance.
- * At the end of an operation instance is fully upgraded.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Name of the Data Fusion instance which need to be upgraded in the form of
- *   projects/{project}/locations/{location}/instances/{instance}
- *   Instance will be upgraded with the latest stable version of the Data
- *   Fusion.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.upgradeInstance(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Upgrade a single Data Fusion instance.
+   * At the end of an operation instance is fully upgraded.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the Data Fusion instance which need to be upgraded in the form of
+   *   projects/{project}/locations/{location}/instances/{instance}
+   *   Instance will be upgraded with the latest stable version of the Data
+   *   Fusion.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.upgradeInstance(request);
+   * const [response] = await operation.promise();
+   */
   upgradeInstance(
-      request?: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.datafusion.v1beta1.IInstance, protos.google.cloud.datafusion.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.datafusion.v1beta1.IUpgradeInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datafusion.v1beta1.IInstance,
+            protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datafusion.v1beta1.IInstance,
+        protos.google.cloud.datafusion.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.upgradeInstance(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `upgradeInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkUpgradeInstanceProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkUpgradeInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `upgradeInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpgradeInstanceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUpgradeInstanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.upgradeInstance, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.datafusion.v1beta1.Instance, protos.google.cloud.datafusion.v1beta1.OperationMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.upgradeInstance,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datafusion.v1beta1.Instance,
+      protos.google.cloud.datafusion.v1beta1.OperationMetadata
+    >;
   }
   listAvailableVersions(
-      request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IVersion[],
-        protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IVersion[],
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
+    ]
+  >;
   listAvailableVersions(
-      request: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IVersion>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IVersion
+    >
+  ): void;
   listAvailableVersions(
-      request: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IVersion>): void;
-/**
- * Lists possible versions for Data Fusion instances in the specified project
- * and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location for which to retrieve instance
- *   information in the format projects/{project}/locations/{location}.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {boolean} request.latestPatchOnly
- *   Whether or not to return the latest patch of every available minor version.
- *   If true, only the latest patch will be returned. Ex. if allowed versions is
- *   [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [Version]{@link google.cloud.datafusion.v1beta1.Version}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAvailableVersionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+    request: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IVersion
+    >
+  ): void;
+  /**
+   * Lists possible versions for Data Fusion instances in the specified project
+   * and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve instance
+   *   information in the format projects/{project}/locations/{location}.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {boolean} request.latestPatchOnly
+   *   Whether or not to return the latest patch of every available minor version.
+   *   If true, only the latest patch will be returned. Ex. if allowed versions is
+   *   [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Version]{@link google.cloud.datafusion.v1beta1.Version}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAvailableVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listAvailableVersions(
-      request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IVersion>,
-      callback?: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IVersion>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IVersion[],
-        protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datafusion.v1beta1.IVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IVersion
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IVersion[],
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsResponse
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listAvailableVersions(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location for which to retrieve instance
- *   information in the format projects/{project}/locations/{location}.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {boolean} request.latestPatchOnly
- *   Whether or not to return the latest patch of every available minor version.
- *   If true, only the latest patch will be returned. Ex. if allowed versions is
- *   [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [Version]{@link google.cloud.datafusion.v1beta1.Version} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAvailableVersionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve instance
+   *   information in the format projects/{project}/locations/{location}.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {boolean} request.latestPatchOnly
+   *   Whether or not to return the latest patch of every available minor version.
+   *   If true, only the latest patch will be returned. Ex. if allowed versions is
+   *   [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Version]{@link google.cloud.datafusion.v1beta1.Version} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAvailableVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listAvailableVersionsStream(
-      request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const defaultCallSettings = this._defaults['listAvailableVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1286,53 +1685,52 @@ export class DataFusionClient {
     );
   }
 
-/**
- * Equivalent to `listAvailableVersions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location for which to retrieve instance
- *   information in the format projects/{project}/locations/{location}.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {boolean} request.latestPatchOnly
- *   Whether or not to return the latest patch of every available minor version.
- *   If true, only the latest patch will be returned. Ex. if allowed versions is
- *   [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
- *   When you iterate the returned iterable, each element will be an object representing
- *   [Version]{@link google.cloud.datafusion.v1beta1.Version}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- * @example
- * const iterable = client.listAvailableVersionsAsync(request);
- * for await (const response of iterable) {
- *   // process response
- * }
- */
+  /**
+   * Equivalent to `listAvailableVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location for which to retrieve instance
+   *   information in the format projects/{project}/locations/{location}.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {boolean} request.latestPatchOnly
+   *   Whether or not to return the latest patch of every available minor version.
+   *   If true, only the latest patch will be returned. Ex. if allowed versions is
+   *   [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Version]{@link google.cloud.datafusion.v1beta1.Version}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listAvailableVersionsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
   listAvailableVersionsAsync(
-      request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.datafusion.v1beta1.IVersion>{
+    request?: protos.google.cloud.datafusion.v1beta1.IListAvailableVersionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.datafusion.v1beta1.IVersion> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const defaultCallSettings = this._defaults['listAvailableVersions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1344,137 +1742,154 @@ export class DataFusionClient {
     ) as AsyncIterable<protos.google.cloud.datafusion.v1beta1.IVersion>;
   }
   listInstances(
-      request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IInstance[],
-        protos.google.cloud.datafusion.v1beta1.IListInstancesRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IInstance[],
+      protos.google.cloud.datafusion.v1beta1.IListInstancesRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
+    ]
+  >;
   listInstances(
-      request: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IInstance>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IInstance
+    >
+  ): void;
   listInstances(
-      request: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IInstance>): void;
-/**
- * Lists Data Fusion instances in the specified project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The project and location for which to retrieve instance information
- *   in the format projects/{project}/locations/{location}. If the location is
- *   specified as '-' (wildcard), then all regions available to the project
- *   are queried, and the results are aggregated.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {string} request.filter
- *   List filter.
- * @param {string} request.orderBy
- *   Sort results. Supported values are "name", "name desc",  or "" (unsorted).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [Instance]{@link google.cloud.datafusion.v1beta1.Instance}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInstancesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+    request: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IInstance
+    >
+  ): void;
+  /**
+   * Lists Data Fusion instances in the specified project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The project and location for which to retrieve instance information
+   *   in the format projects/{project}/locations/{location}. If the location is
+   *   specified as '-' (wildcard), then all regions available to the project
+   *   are queried, and the results are aggregated.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {string} request.filter
+   *   List filter.
+   * @param {string} request.orderBy
+   *   Sort results. Supported values are "name", "name desc",  or "" (unsorted).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Instance]{@link google.cloud.datafusion.v1beta1.Instance}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listInstances(
-      request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IInstance>,
-      callback?: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IInstance>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IInstance[],
-        protos.google.cloud.datafusion.v1beta1.IListInstancesRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datafusion.v1beta1.IInstance
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IInstance
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IInstance[],
+      protos.google.cloud.datafusion.v1beta1.IListInstancesRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListInstancesResponse
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listInstances(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The project and location for which to retrieve instance information
- *   in the format projects/{project}/locations/{location}. If the location is
- *   specified as '-' (wildcard), then all regions available to the project
- *   are queried, and the results are aggregated.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {string} request.filter
- *   List filter.
- * @param {string} request.orderBy
- *   Sort results. Supported values are "name", "name desc",  or "" (unsorted).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [Instance]{@link google.cloud.datafusion.v1beta1.Instance} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInstancesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The project and location for which to retrieve instance information
+   *   in the format projects/{project}/locations/{location}. If the location is
+   *   specified as '-' (wildcard), then all regions available to the project
+   *   are queried, and the results are aggregated.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {string} request.filter
+   *   List filter.
+   * @param {string} request.orderBy
+   *   Sort results. Supported values are "name", "name desc",  or "" (unsorted).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Instance]{@link google.cloud.datafusion.v1beta1.Instance} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listInstancesStream(
-      request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1485,55 +1900,54 @@ export class DataFusionClient {
     );
   }
 
-/**
- * Equivalent to `listInstances`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   The project and location for which to retrieve instance information
- *   in the format projects/{project}/locations/{location}. If the location is
- *   specified as '-' (wildcard), then all regions available to the project
- *   are queried, and the results are aggregated.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {string} request.filter
- *   List filter.
- * @param {string} request.orderBy
- *   Sort results. Supported values are "name", "name desc",  or "" (unsorted).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
- *   When you iterate the returned iterable, each element will be an object representing
- *   [Instance]{@link google.cloud.datafusion.v1beta1.Instance}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- * @example
- * const iterable = client.listInstancesAsync(request);
- * for await (const response of iterable) {
- *   // process response
- * }
- */
+  /**
+   * Equivalent to `listInstances`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The project and location for which to retrieve instance information
+   *   in the format projects/{project}/locations/{location}. If the location is
+   *   specified as '-' (wildcard), then all regions available to the project
+   *   are queried, and the results are aggregated.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {string} request.filter
+   *   List filter.
+   * @param {string} request.orderBy
+   *   Sort results. Supported values are "name", "name desc",  or "" (unsorted).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Instance]{@link google.cloud.datafusion.v1beta1.Instance}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listInstancesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
   listInstancesAsync(
-      request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.datafusion.v1beta1.IInstance>{
+    request?: protos.google.cloud.datafusion.v1beta1.IListInstancesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.datafusion.v1beta1.IInstance> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1545,133 +1959,150 @@ export class DataFusionClient {
     ) as AsyncIterable<protos.google.cloud.datafusion.v1beta1.IInstance>;
   }
   listNamespaces(
-      request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.INamespace[],
-        protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.INamespace[],
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
+    ]
+  >;
   listNamespaces(
-      request: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.INamespace>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.INamespace
+    >
+  ): void;
   listNamespaces(
-      request: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.INamespace>): void;
-/**
- * List namespaces in a given instance
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The instance to list its namespaces.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {google.cloud.datafusion.v1beta1.NamespaceView} request.view
- *   By default, only basic information about a namespace is returned
- *   (e.g. name). When `NAMESPACE_VIEW_FULL` is specified, additional
- *   information associated with a namespace gets returned
- *   (e.g. IAM policy set on the namespace)
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNamespacesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+    request: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.INamespace
+    >
+  ): void;
+  /**
+   * List namespaces in a given instance
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The instance to list its namespaces.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {google.cloud.datafusion.v1beta1.NamespaceView} request.view
+   *   By default, only basic information about a namespace is returned
+   *   (e.g. name). When `NAMESPACE_VIEW_FULL` is specified, additional
+   *   information associated with a namespace gets returned
+   *   (e.g. IAM policy set on the namespace)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNamespacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listNamespaces(
-      request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.INamespace>,
-      callback?: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-          protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.INamespace>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.INamespace[],
-        protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datafusion.v1beta1.INamespace
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.INamespace
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.INamespace[],
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListNamespacesResponse
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listNamespaces(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The instance to list its namespaces.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {google.cloud.datafusion.v1beta1.NamespaceView} request.view
- *   By default, only basic information about a namespace is returned
- *   (e.g. name). When `NAMESPACE_VIEW_FULL` is specified, additional
- *   information associated with a namespace gets returned
- *   (e.g. IAM policy set on the namespace)
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNamespacesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The instance to list its namespaces.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {google.cloud.datafusion.v1beta1.NamespaceView} request.view
+   *   By default, only basic information about a namespace is returned
+   *   (e.g. name). When `NAMESPACE_VIEW_FULL` is specified, additional
+   *   information associated with a namespace gets returned
+   *   (e.g. IAM policy set on the namespace)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNamespacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listNamespacesStream(
-      request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1682,53 +2113,52 @@ export class DataFusionClient {
     );
   }
 
-/**
- * Equivalent to `listNamespaces`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The instance to list its namespaces.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {google.cloud.datafusion.v1beta1.NamespaceView} request.view
- *   By default, only basic information about a namespace is returned
- *   (e.g. name). When `NAMESPACE_VIEW_FULL` is specified, additional
- *   information associated with a namespace gets returned
- *   (e.g. IAM policy set on the namespace)
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
- *   When you iterate the returned iterable, each element will be an object representing
- *   [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- * @example
- * const iterable = client.listNamespacesAsync(request);
- * for await (const response of iterable) {
- *   // process response
- * }
- */
+  /**
+   * Equivalent to `listNamespaces`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The instance to list its namespaces.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {google.cloud.datafusion.v1beta1.NamespaceView} request.view
+   *   By default, only basic information about a namespace is returned
+   *   (e.g. name). When `NAMESPACE_VIEW_FULL` is specified, additional
+   *   information associated with a namespace gets returned
+   *   (e.g. IAM policy set on the namespace)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Namespace]{@link google.cloud.datafusion.v1beta1.Namespace}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listNamespacesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
   listNamespacesAsync(
-      request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.datafusion.v1beta1.INamespace>{
+    request?: protos.google.cloud.datafusion.v1beta1.IListNamespacesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.datafusion.v1beta1.INamespace> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1740,123 +2170,140 @@ export class DataFusionClient {
     ) as AsyncIterable<protos.google.cloud.datafusion.v1beta1.INamespace>;
   }
   listDnsPeerings(
-      request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IDnsPeering[],
-        protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
-      ]>;
+    request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IDnsPeering[],
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
+    ]
+  >;
   listDnsPeerings(
-      request: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IDnsPeering>): void;
+    request: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IDnsPeering
+    >
+  ): void;
   listDnsPeerings(
-      request: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IDnsPeering>): void;
-/**
- * List DNS peering for a given resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource on which dns peering will be listed.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDnsPeeringsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+    request: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IDnsPeering
+    >
+  ): void;
+  /**
+   * List DNS peering for a given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource on which dns peering will be listed.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDnsPeeringsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listDnsPeerings(
-      request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IDnsPeering>,
-      callback?: PaginationCallback<
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-          protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse|null|undefined,
-          protos.google.cloud.datafusion.v1beta1.IDnsPeering>):
-      Promise<[
-        protos.google.cloud.datafusion.v1beta1.IDnsPeering[],
-        protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest|null,
-        protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
-      ]>|void {
+          | protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datafusion.v1beta1.IDnsPeering
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+      | protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datafusion.v1beta1.IDnsPeering
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datafusion.v1beta1.IDnsPeering[],
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest | null,
+      protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsResponse
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listDnsPeerings(request, options, callback);
   }
 
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource on which dns peering will be listed.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDnsPeeringsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource on which dns peering will be listed.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDnsPeeringsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listDnsPeeringsStream(
-      request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+    options?: CallOptions
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const defaultCallSettings = this._defaults['listDnsPeerings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1867,48 +2314,47 @@ export class DataFusionClient {
     );
   }
 
-/**
- * Equivalent to `listDnsPeerings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource on which dns peering will be listed.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- * @param {string} request.pageToken
- *   The next_page_token value to use if there are additional
- *   results to retrieve for this list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
- *   When you iterate the returned iterable, each element will be an object representing
- *   [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
- *   for more details and examples.
- * @example
- * const iterable = client.listDnsPeeringsAsync(request);
- * for await (const response of iterable) {
- *   // process response
- * }
- */
+  /**
+   * Equivalent to `listDnsPeerings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource on which dns peering will be listed.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [DnsPeering]{@link google.cloud.datafusion.v1beta1.DnsPeering}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listDnsPeeringsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
   listDnsPeeringsAsync(
-      request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.datafusion.v1beta1.IDnsPeering>{
+    request?: protos.google.cloud.datafusion.v1beta1.IListDnsPeeringsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.datafusion.v1beta1.IDnsPeering> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'parent': request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const defaultCallSettings = this._defaults['listDnsPeerings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1931,7 +2377,7 @@ export class DataFusionClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -1981,7 +2427,12 @@ export class DataFusionClient {
    * @param {string} namespace
    * @returns {string} Resource name string.
    */
-  namespacePath(project:string,location:string,instance:string,namespace:string) {
+  namespacePath(
+    project: string,
+    location: string,
+    instance: string,
+    namespace: string
+  ) {
     return this.pathTemplates.namespacePathTemplate.render({
       project: project,
       location: location,
@@ -1998,7 +2449,8 @@ export class DataFusionClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).project;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .project;
   }
 
   /**
@@ -2009,7 +2461,8 @@ export class DataFusionClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).location;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .location;
   }
 
   /**
@@ -2020,7 +2473,8 @@ export class DataFusionClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).instance;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .instance;
   }
 
   /**
@@ -2031,7 +2485,8 @@ export class DataFusionClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).namespace;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .namespace;
   }
 
   /**
