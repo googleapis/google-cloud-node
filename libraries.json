@@ -1436,6 +1436,21 @@
     "support_documentation": "https://cloud.google.com/solutions/contact-center"
   },
   {
+    "name": "datafusion",
+    "name_pretty": "Data Fusion",
+    "product_documentation": "https://cloud.google.com/data-fusion/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datafusion/latest",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/5552618",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-data-fusion",
+    "distribution_name": "@google-cloud/data-fusion",
+    "api_id": "datafusion.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/data-fusion/"
+  },
+  {
     "default_version": "v1beta1",
     "release_level": "beta",
     "requires_billing": true,
@@ -1495,6 +1510,36 @@
     "name": "metastore",
     "issue_tracker": "https://github.com/googleapis/nodejs-dataproc-metastore/issues",
     "support_documentation": "https://cloud.google.com/dataproc-metastore/"
+  },
+  {
+    "name": "datastream",
+    "name_pretty": "Datastream",
+    "product_documentation": "https://cloud.google.com/datastream/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datastream/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-datastream/issues",
+    "release_level": "alpha",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-datastream",
+    "distribution_name": "@google-cloud/datastream",
+    "api_id": "datastream.googleapis.com",
+    "default_version": "v1alpha1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/datastream/docs/getting-support"
+  },
+  {
+    "name": "clouddeploy",
+    "name_pretty": "Deploy",
+    "product_documentation": "https://cloud.google.com/deploy/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/clouddeploy/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-deploy/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-deploy",
+    "distribution_name": "@google-cloud/deploy",
+    "api_id": "clouddeploy.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/deploy/"
   },
   {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/domains/latest",
@@ -1630,6 +1675,21 @@
     "name": "network-connectivity",
     "issue_tracker": "https://github.com/googleapis/nodejs-network-connectivity/issues",
     "support_documentation": "https://cloud.google.com/network-connectivity/docs"
+  },
+  {
+    "name": "networksecurity",
+    "name_pretty": "Network Security API",
+    "product_documentation": "https://cloud.google.com/traffic-director/docs/reference/network-security/rest/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/networksecurity/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-network-security/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-network-security",
+    "distribution_name": "@google-cloud/network-security",
+    "api_id": "networksecurity.googleapis.com",
+    "default_version": "v1beta1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/traffic-director/docs/getting-support"
   },
   {
     "name": "phishing-protection",
