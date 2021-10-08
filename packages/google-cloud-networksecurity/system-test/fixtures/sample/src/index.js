@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const networksecurity = require('@google-cloud/networksecurity');
+const networksecurity = require('@google-cloud/network-security');
 
 function main() {
   const networkSecurityClient = new networksecurity.NetworkSecurityClient();

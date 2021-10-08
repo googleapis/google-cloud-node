@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/network-security.svg)](https://www.npmjs.org/package/@google-cloud/network-security)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-network-security/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-network-security)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-network-security/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-network-security)
 
 
 
@@ -15,7 +15,7 @@ networksecurity client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-network-security/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-network-security/blob/main/CHANGELOG.md).
 
 * [Network Security API Node.js Client API Reference][client-docs]
 * [Network Security API Documentation][product-docs]
@@ -102,7 +102,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-network-security/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-network-security/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -114,9 +114,9 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-network-security/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-network-security/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/traffic-director/docs/reference/network-security/rest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/networksecurity/latest
 [product-docs]: https://cloud.google.com/traffic-director/docs/reference/network-security/rest/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

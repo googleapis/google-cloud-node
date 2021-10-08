@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {NetworkSecurityClient} from '@google-cloud/networksecurity';
+import {NetworkSecurityClient} from '@google-cloud/network-security';
 
 // check that the client class type name can be used
 function doStuffWithNetworkSecurityClient(client: NetworkSecurityClient) {

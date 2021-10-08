@@ -38,7 +38,7 @@ function main(parent, authorizationPolicyId, authorizationPolicy) {
 
   // Imports the Networksecurity library
   const {NetworkSecurityClient} =
-    require('@google-cloud/networksecurity').v1beta1;
+    require('@google-cloud/network-security').v1beta1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();

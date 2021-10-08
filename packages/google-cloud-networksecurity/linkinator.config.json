@@ -1,1 +1,12 @@
-{"recurse":true,"skip":["https://codecov.io/gh/googleapis/","www.googleapis.com","img.shields.io"],"silent":true,"concurrency":10}
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "https://github.com/googleapis/nodejs-network-security/blob/addSamplesAndTests/CHANGELOG.md",
+    "https://www.npmjs.org/package/@google-cloud/network-security"
+  ],
+  "silent": true,
+  "concurrency": 10
+}

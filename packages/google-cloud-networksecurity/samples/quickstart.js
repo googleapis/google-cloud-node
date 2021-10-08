@@ -1,50 +1,69 @@
+// Copyright 2021 Google LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
 
 'use strict';
 
-async function main() {
+function main(parent) {
+  // [START networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_async]
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  /**
+   *  Required. The project and location from which the ClientTlsPolicies should
+   *  be listed, specified in the format `projects/* /locations/{location}`.
+   */
+  // const parent = 'abc123'
+  /**
+   *  Maximum number of ClientTlsPolicies to return per call.
+   */
+  // const pageSize = 1234
+  /**
+   *  The value returned by the last `ListClientTlsPoliciesResponse`
+   *  Indicates that this is a continuation of a prior
+   *  `ListClientTlsPolicies` call, and that the system
+   *  should return the next page of data.
+   */
+  // const pageToken = 'abc123'
 
-  // [START nodejs_network_security_quickstart]
-  // Imports the Google Cloud client library
+  // Imports the Networksecurity library
+  const {NetworkSecurityClient} =
+    require('@google-cloud/network-security').v1beta1;
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
-  const {NetworkSecurityClient} = require('@google-cloud/network-security');
+  // Instantiates a client
+  const networksecurityClient = new NetworkSecurityClient();
 
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
+  async function listClientTlsPolicies() {
+    // Construct request
+    const request = {
+      parent,
+    };
 
-  // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {NetworkSecurityClient}();
-
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
+    // Run request
+    const iterable = await networksecurityClient.listClientTlsPoliciesAsync(
+      request
+    );
+    for await (const response of iterable) {
+      console.log(response);
+    }
   }
-  doSomething();
-  // [END nodejs_network_security_quickstart]
+
+  listClientTlsPolicies();
+  // [END networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_async]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err.message);
-  process.exitCode = 1;
-});
 process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
+main(...process.argv.slice(2));
