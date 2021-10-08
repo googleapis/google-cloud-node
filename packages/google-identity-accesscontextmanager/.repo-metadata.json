@@ -1,0 +1,15 @@
+{
+  "name": "accesscontextmanager",
+  "name_pretty": "Access Context Manager",
+  "product_documentation": "https://cloud.google.com/access-context-manager/",
+  "client_documentation": "https://cloud.google.com/access-context-manager/docs",
+  "issue_tracker": "https://github.com/googleapis/nodejs-access-context-manager/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-access-context-manager",
+  "distribution_name": "@google-cloud/access-context-manager",
+  "api_id": "accesscontextmanager.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
+
