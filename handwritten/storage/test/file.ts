@@ -4041,9 +4041,9 @@ describe('File', () => {
 
     it('should correctly format URL in the request', done => {
       file = new File(BUCKET, 'my#file$.png');
-      const expectedURL = `http://${
+      const expectedURL = `https://storage.googleapis.com/${
         BUCKET.name
-      }.storage.googleapis.com/${encodeURIComponent(file.name)}`;
+      }/${encodeURIComponent(file.name)}`;
 
       fakeUtil.makeRequest = function (
         reqOpts: DecorateRequestOptions,

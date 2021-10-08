@@ -3059,9 +3059,9 @@ class File extends ServiceObject<File> {
     util.makeRequest(
       {
         method: 'HEAD',
-        uri: `http://${
+        uri: `${this.storage.apiEndpoint}/${
           this.bucket.name
-        }.storage.googleapis.com/${encodeURIComponent(this.name)}`,
+        }/${encodeURIComponent(this.name)}`,
       },
       {
         retryOptions: this.storage.retryOptions,
