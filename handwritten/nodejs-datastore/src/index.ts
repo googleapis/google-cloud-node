@@ -120,11 +120,11 @@ const urlSafeKey = new entity.URLSafeKey();
 
 /**
  * Idiomatic class for interacting with Cloud Datastore. Uses the lower-level
- * {@link v1.DatastoreClient} class under the hood.
+ * {@link DatastoreClient} class under the hood.
  *
  * In addition to the constructor options shown here, the {@link Datastore}
  * class constructor accepts the same options accepted by
- * {@link v1.DatastoreClient}.
+ * {@link DatastoreClient}.
  *
  * <h4>The Datastore Emulator</h4>
  *
@@ -1828,3 +1828,5 @@ export interface KeyToLegacyUrlSafeCallback {
 }
 const v1 = gapic.v1;
 export {v1};
+
+export {DatastoreClient, DatastoreAdminClient} from './v1';
