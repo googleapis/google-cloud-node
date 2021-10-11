@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.5.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.4.0...v4.5.0) (2021-10-11)
+
+
+### Features
+
+* added support for TelephonyTransferCall in Participant ResponseMessage ([#880](https://www.github.com/googleapis/nodejs-dialogflow/issues/880)) ([dbcf3b0](https://www.github.com/googleapis/nodejs-dialogflow/commit/dbcf3b087cf141f88af5406bd9c1ae92f1c16e19))
+
 ## [4.4.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.3.1...v4.4.0) (2021-09-21)
 
 
