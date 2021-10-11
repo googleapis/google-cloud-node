@@ -22,7 +22,7 @@ function main(parent) {
   /**
    *  Required. The MetadataStore whose Artifacts should be listed.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
    */
   // const parent = 'abc123'
   /**

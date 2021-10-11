@@ -23,7 +23,7 @@ function main(execution) {
    *  Required. The resource name of the Execution that the Events connect
    *  Artifacts with.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    */
   // const execution = 'abc123'
   /**

@@ -22,7 +22,7 @@ function main(name) {
   /**
    *  Required. The resource name of the Context to retrieve.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    */
   // const name = 'abc123'
 

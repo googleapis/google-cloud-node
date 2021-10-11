@@ -21,16 +21,17 @@ function main(entityType, entityIds, featureSelector) {
    */
   /**
    *  Required. The resource name of the entities' type.
-   *  Value format: `projects/{project}/locations/{location}/featurestores/
-   *  {featurestore}/entityTypes/{entityType}`. For example,
+   *  Value format:
+   *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
+   *  For example,
    *  for a machine learning model predicting user clicks on a website, an
-   *  EntityType ID could be "user".
+   *  EntityType ID could be `user`.
    */
   // const entityType = 'abc123'
   /**
    *  Required. IDs of entities to read Feature values of. The maximum number of IDs is
    *  100. For example, for a machine learning model predicting user clicks on a
-   *  website, an entity ID could be "user_123".
+   *  website, an entity ID could be `user_123`.
    */
   // const entityIds = 'abc123'
   /**

@@ -11530,7 +11530,8 @@
                           "oneof": [
                             "sampledShapleyAttribution",
                             "integratedGradientsAttribution",
-                            "xraiAttribution"
+                            "xraiAttribution",
+                            "similarity"
                           ]
                         }
                       },
@@ -11546,6 +11547,10 @@
                         "xraiAttribution": {
                           "type": "XraiAttribution",
                           "id": 3
+                        },
+                        "similarity": {
+                          "type": "Similarity",
+                          "id": 7
                         },
                         "topK": {
                           "type": "int32",
@@ -11642,6 +11647,18 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "Similarity": {
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
+                        "nearestNeighborSearchConfig": {
+                          "type": "google.protobuf.Value",
+                          "id": 2
                         }
                       }
                     },
@@ -12947,6 +12964,11 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "specialistWorkerEmails": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -14481,6 +14503,10 @@
                           "type": "EncryptionSpec",
                           "id": 21
                         },
+                        "enableMonitoringPipelineLogs": {
+                          "type": "bool",
+                          "id": 22
+                        },
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 23,
@@ -15373,6 +15399,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -15785,7 +15818,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/featurestores/*}",
-                            "(google.api.method_signature)": "name",
+                            "(google.api.method_signature)": "name,force",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
                           },
@@ -15797,6 +15830,9 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -15895,7 +15931,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}",
-                            "(google.api.method_signature)": "name",
+                            "(google.api.method_signature)": "name,force",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
                           },
@@ -15907,6 +15943,9 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.api.method_signature)": "name,force"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -16143,7 +16182,7 @@
                           "responseType": "SearchFeaturesResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{location=projects/*/locations/*}/featurestores:searchFeatures",
-                            "(google.api.method_signature)": "location"
+                            "(google.api.method_signature)": "location,query"
                           },
                           "parsedOptions": [
                             {
@@ -16153,6 +16192,9 @@
                             },
                             {
                               "(google.api.method_signature)": "location"
+                            },
+                            {
+                              "(google.api.method_signature)": "location,query"
                             }
                           ]
                         }
@@ -22698,6 +22740,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "pipelineTaskStatus": {
+                          "rule": "repeated",
+                          "type": "PipelineTaskStatus",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "inputs": {
                           "keyType": "string",
                           "type": "ArtifactList",
@@ -22716,6 +22766,31 @@
                         }
                       },
                       "nested": {
+                        "PipelineTaskStatus": {
+                          "fields": {
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "ArtifactList": {
                           "fields": {
                             "artifacts": {
@@ -23172,6 +23247,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -23314,6 +23393,21 @@
                         "deployedModelId": {
                           "type": "string",
                           "id": 2
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "modelDisplayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -26206,6 +26300,24 @@
                             }
                           ]
                         },
+                        "BatchReadTensorboardTimeSeriesData": {
+                          "requestType": "BatchReadTensorboardTimeSeriesDataRequest",
+                          "responseType": "BatchReadTensorboardTimeSeriesDataResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{tensorboard=projects/*/locations/*/tensorboards/*}/experiments/*/runs/*/timeSeries:batchRead",
+                            "(google.api.method_signature)": "tensorboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{tensorboard=projects/*/locations/*/tensorboards/*}/experiments/*/runs/*/timeSeries:batchRead"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard"
+                            }
+                          ]
+                        },
                         "ReadTensorboardTimeSeriesData": {
                           "requestType": "ReadTensorboardTimeSeriesDataRequest",
                           "responseType": "ReadTensorboardTimeSeriesDataResponse",
@@ -26828,6 +26940,36 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
                           }
+                        }
+                      }
+                    },
+                    "BatchReadTensorboardTimeSeriesDataRequest": {
+                      "fields": {
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        },
+                        "timeSeries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TensorboardTimeSeries"
+                          }
+                        }
+                      }
+                    },
+                    "BatchReadTensorboardTimeSeriesDataResponse": {
+                      "fields": {
+                        "timeSeriesData": {
+                          "rule": "repeated",
+                          "type": "TimeSeriesData",
+                          "id": 1
                         }
                       }
                     },

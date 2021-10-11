@@ -22,7 +22,7 @@ function main(parent) {
   /**
    *  Required. The Location whose MetadataStores should be listed.
    *  Format:
-   *  projects/{project}/locations/{location}
+   *  `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

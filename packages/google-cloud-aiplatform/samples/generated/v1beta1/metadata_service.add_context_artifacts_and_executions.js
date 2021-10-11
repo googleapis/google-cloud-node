@@ -23,20 +23,20 @@ function main(context) {
    *  Required. The resource name of the Context that the Artifacts and Executions
    *  belong to.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    */
   // const context = 'abc123'
   /**
    *  The resource names of the Artifacts to attribute to the Context.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    */
   // const artifacts = 'abc123'
   /**
    *  The resource names of the Executions to associate with the
    *  Context.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    */
   // const executions = 'abc123'
 

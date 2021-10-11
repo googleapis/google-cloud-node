@@ -22,12 +22,12 @@ function main(parent, filter) {
   /**
    *  Required. The metadata store to purge Artifacts from.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
    */
   // const parent = 'abc123'
   /**
    *  Required. A required filter matching the Artifacts to be purged.
-   *  E.g., update_time <= 2020-11-19T11:30:00-04:00.
+   *  E.g., `update_time <= 2020-11-19T11:30:00-04:00`.
    */
   // const filter = 'abc123'
   /**

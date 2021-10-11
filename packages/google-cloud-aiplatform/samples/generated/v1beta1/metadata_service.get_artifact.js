@@ -22,7 +22,7 @@ function main(name) {
   /**
    *  Required. The resource name of the Artifact to retrieve.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    */
   // const name = 'abc123'
 

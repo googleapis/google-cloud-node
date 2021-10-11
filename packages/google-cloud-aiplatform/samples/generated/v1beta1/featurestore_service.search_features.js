@@ -34,9 +34,9 @@ function main(location) {
    *  and the FIELD are converted to a sequence of words (i.e. tokens) for
    *  comparison. This is done by:
    *    * Removing leading/trailing whitespace and tokenizing the search value.
-   *    Characters that are not one of alphanumeric [a-zA-Z0-9], underscore [_],
-   *    or asterisk [*] are treated as delimiters for tokens. (*) is treated as a
-   *    wildcard that matches characters within a token.
+   *    Characters that are not one of alphanumeric `[a-zA-Z0-9]`, underscore
+   *    `_`, or asterisk `*` are treated as delimiters for tokens. `*` is treated
+   *    as a wildcard that matches characters within a token.
    *    * Ignoring case.
    *    * Prepending an asterisk to the first and appending an asterisk to the
    *    last token in QUERY.

@@ -108,6 +108,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchReadTensorboardTimeSeriesData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ReadTensorboardTimeSeriesData": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

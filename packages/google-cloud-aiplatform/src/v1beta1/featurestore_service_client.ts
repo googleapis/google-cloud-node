@@ -2884,14 +2884,14 @@ export class FeaturestoreServiceClient {
    *   Lists the featurestores that match the filter expression. The following
    *   fields are supported:
    *
-   *   * `create_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
-   *   be
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
    *     in RFC 3339 format.
-   *   * `update_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
-   *   be
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
    *     in RFC 3339 format.
-   *   * `online_serving_config.fixed_node_count`: Supports =, !=, <, >, <=,
-   *   and >= comparisons.
+   *   * `online_serving_config.fixed_node_count`: Supports `=`, `!=`, `<`, `>`,
+   *   `<=`, and `>=` comparisons.
    *   * `labels`: Supports key-value equality and key presence.
    *
    *   Examples:
@@ -2992,14 +2992,14 @@ export class FeaturestoreServiceClient {
    *   Lists the featurestores that match the filter expression. The following
    *   fields are supported:
    *
-   *   * `create_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
-   *   be
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
    *     in RFC 3339 format.
-   *   * `update_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
-   *   be
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
    *     in RFC 3339 format.
-   *   * `online_serving_config.fixed_node_count`: Supports =, !=, <, >, <=,
-   *   and >= comparisons.
+   *   * `online_serving_config.fixed_node_count`: Supports `=`, `!=`, `<`, `>`,
+   *   `<=`, and `>=` comparisons.
    *   * `labels`: Supports key-value equality and key presence.
    *
    *   Examples:
@@ -3079,14 +3079,14 @@ export class FeaturestoreServiceClient {
    *   Lists the featurestores that match the filter expression. The following
    *   fields are supported:
    *
-   *   * `create_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
-   *   be
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
    *     in RFC 3339 format.
-   *   * `update_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
-   *   be
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *   Values must be
    *     in RFC 3339 format.
-   *   * `online_serving_config.fixed_node_count`: Supports =, !=, <, >, <=,
-   *   and >= comparisons.
+   *   * `online_serving_config.fixed_node_count`: Supports `=`, `!=`, `<`, `>`,
+   *   `<=`, and `>=` comparisons.
    *   * `labels`: Supports key-value equality and key presence.
    *
    *   Examples:
@@ -3200,10 +3200,10 @@ export class FeaturestoreServiceClient {
    *   Lists the EntityTypes that match the filter expression. The following
    *   filters are supported:
    *
-   *   * `create_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *   be in RFC 3339 format.
-   *   * `update_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *   be in RFC 3339 format.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *   Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *   Values must be in RFC 3339 format.
    *   * `labels`: Supports key-value equality as well as key presence.
    *
    *   Examples:
@@ -3308,10 +3308,10 @@ export class FeaturestoreServiceClient {
    *   Lists the EntityTypes that match the filter expression. The following
    *   filters are supported:
    *
-   *   * `create_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *   be in RFC 3339 format.
-   *   * `update_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *   be in RFC 3339 format.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *   Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *   Values must be in RFC 3339 format.
    *   * `labels`: Supports key-value equality as well as key presence.
    *
    *   Examples:
@@ -3395,10 +3395,10 @@ export class FeaturestoreServiceClient {
    *   Lists the EntityTypes that match the filter expression. The following
    *   filters are supported:
    *
-   *   * `create_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *   be in RFC 3339 format.
-   *   * `update_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *   be in RFC 3339 format.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *   Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *   Values must be in RFC 3339 format.
    *   * `labels`: Supports key-value equality as well as key presence.
    *
    *   Examples:
@@ -3860,9 +3860,9 @@ export class FeaturestoreServiceClient {
    *   comparison. This is done by:
    *
    *     * Removing leading/trailing whitespace and tokenizing the search value.
-   *     Characters that are not one of alphanumeric [a-zA-Z0-9], underscore [_],
-   *     or asterisk [*] are treated as delimiters for tokens. (*) is treated as a
-   *     wildcard that matches characters within a token.
+   *     Characters that are not one of alphanumeric `[a-zA-Z0-9]`, underscore
+   *     `_`, or asterisk `*` are treated as delimiters for tokens. `*` is treated
+   *     as a wildcard that matches characters within a token.
    *     * Ignoring case.
    *     * Prepending an asterisk to the first and appending an asterisk to the
    *     last token in QUERY.
@@ -3998,9 +3998,9 @@ export class FeaturestoreServiceClient {
    *   comparison. This is done by:
    *
    *     * Removing leading/trailing whitespace and tokenizing the search value.
-   *     Characters that are not one of alphanumeric [a-zA-Z0-9], underscore [_],
-   *     or asterisk [*] are treated as delimiters for tokens. (*) is treated as a
-   *     wildcard that matches characters within a token.
+   *     Characters that are not one of alphanumeric `[a-zA-Z0-9]`, underscore
+   *     `_`, or asterisk `*` are treated as delimiters for tokens. `*` is treated
+   *     as a wildcard that matches characters within a token.
    *     * Ignoring case.
    *     * Prepending an asterisk to the first and appending an asterisk to the
    *     last token in QUERY.
@@ -4115,9 +4115,9 @@ export class FeaturestoreServiceClient {
    *   comparison. This is done by:
    *
    *     * Removing leading/trailing whitespace and tokenizing the search value.
-   *     Characters that are not one of alphanumeric [a-zA-Z0-9], underscore [_],
-   *     or asterisk [*] are treated as delimiters for tokens. (*) is treated as a
-   *     wildcard that matches characters within a token.
+   *     Characters that are not one of alphanumeric `[a-zA-Z0-9]`, underscore
+   *     `_`, or asterisk `*` are treated as delimiters for tokens. `*` is treated
+   *     as a wildcard that matches characters within a token.
    *     * Ignoring case.
    *     * Prepending an asterisk to the first and appending an asterisk to the
    *     last token in QUERY.

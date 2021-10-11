@@ -22,7 +22,7 @@ function main(parent) {
   /**
    *  Required. The MetadataStore whose MetadataSchemas should be listed.
    *  Format:
-   *  projects/{project}/locations/{location}/metadataStores/{metadatastore}
+   *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
    */
   // const parent = 'abc123'
   /**

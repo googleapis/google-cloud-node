@@ -28,10 +28,10 @@ function main(parent) {
   /**
    *  Lists the EntityTypes that match the filter expression. The following
    *  filters are supported:
-   *  * `create_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *  be in RFC 3339 format.
-   *  * `update_time`: Supports =, !=, <, >, >=, and <= comparisons. Values must
-   *  be in RFC 3339 format.
+   *  * `create_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *  Values must be in RFC 3339 format.
+   *  * `update_time`: Supports `=`, `!=`, `<`, `>`, `>=`, and `<=` comparisons.
+   *  Values must be in RFC 3339 format.
    *  * `labels`: Supports key-value equality as well as key presence.
    *  Examples:
    *  * `create_time > \"2020-01-31T15:30:00.000000Z\" OR

@@ -1054,7 +1054,8 @@ export class ModelServiceClient {
   ): void;
   /**
    * Deletes a Model.
-   * Note: Model can only be deleted if there are no DeployedModels created
+   *
+   * Model can only be deleted if there are no {@link |DeployedModels} created
    * from it.
    *
    * @param {Object} request
@@ -1205,7 +1206,6 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Model to export.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
    * @param {google.cloud.aiplatform.v1beta1.ExportModelRequest.OutputConfig} request.outputConfig
    *   Required. The desired output location and configuration.
    * @param {object} [options]

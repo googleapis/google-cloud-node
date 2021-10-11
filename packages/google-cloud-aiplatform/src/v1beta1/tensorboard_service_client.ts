@@ -473,6 +473,7 @@ export class TensorboardServiceClient {
       'updateTensorboardTimeSeries',
       'listTensorboardTimeSeries',
       'deleteTensorboardTimeSeries',
+      'batchReadTensorboardTimeSeriesData',
       'readTensorboardTimeSeriesData',
       'readTensorboardBlobData',
       'writeTensorboardExperimentData',
@@ -1559,8 +1560,7 @@ export class TensorboardServiceClient {
    * @param {string} [request.tensorboardTimeSeriesId]
    *   Optional. The user specified unique ID to use for the TensorboardTimeSeries, which
    *   will become the final component of the TensorboardTimeSeries's resource
-   *   name. Ref: go/ucaip-user-specified-id
-   *
+   *   name.
    *   This value should match "{@link a-z0-9-|a-z0-9}{0, 127}"
    * @param {google.cloud.aiplatform.v1beta1.TensorboardTimeSeries} request.tensorboardTimeSeries
    *   Required. The TensorboardTimeSeries to create.
@@ -1839,6 +1839,118 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  batchReadTensorboardTimeSeriesData(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchReadTensorboardTimeSeriesData(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchReadTensorboardTimeSeriesData(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Reads multiple TensorboardTimeSeries' data. The data point number limit is
+   * 1000 for scalars, 100 for tensors and blob references. If the number of
+   * data points stored is less than the limit, all data will be returned.
+   * Otherwise, that limit number of data points will be randomly selected from
+   * this time series and returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboard
+   *   Required. The resource name of the Tensorboard containing TensorboardTimeSeries to
+   *   read data from. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
+   *   The TensorboardTimeSeries referenced by {@link google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest.time_series|time_series} must be sub
+   *   resources of this Tensorboard.
+   * @param {string[]} request.timeSeries
+   *   Required. The resource names of the TensorboardTimeSeries to read data from. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.batchReadTensorboardTimeSeriesData(request);
+   */
+  batchReadTensorboardTimeSeriesData(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        tensorboard: request.tensorboard || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchReadTensorboardTimeSeriesData(
+      request,
+      options,
+      callback
+    );
+  }
   readTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
     options?: CallOptions
@@ -1874,11 +1986,11 @@ export class TensorboardServiceClient {
     >
   ): void;
   /**
-   * Reads a TensorboardTimeSeries' data. Data is returned in paginated
-   * responses. By default, if the number of data points stored is less than
-   * 1000, all data will be returned. Otherwise, 1000 data points will be
-   * randomly selected from this time series and returned. This value can be
-   * changed by changing max_data_points.
+   * Reads a TensorboardTimeSeries' data. By default, if the number of data
+   * points stored is less than 1000, all data will be returned. Otherwise, 1000
+   * data points will be randomly selected from this time series and returned.
+   * This value can be changed by changing max_data_points, which can't be
+   * greater than 10k.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -1665,6 +1665,126 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
   });
 
+  describe('batchReadTensorboardTimeSeriesData', () => {
+    it('invokes batchReadTensorboardTimeSeriesData without error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      request.tensorboard = '';
+      const expectedHeaderRequestParams = 'tensorboard=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse()
+      );
+      client.innerApiCalls.batchReadTensorboardTimeSeriesData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchReadTensorboardTimeSeriesData(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchReadTensorboardTimeSeriesData without error using callback', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      request.tensorboard = '';
+      const expectedHeaderRequestParams = 'tensorboard=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse()
+      );
+      client.innerApiCalls.batchReadTensorboardTimeSeriesData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchReadTensorboardTimeSeriesData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchReadTensorboardTimeSeriesData with error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest()
+      );
+      request.tensorboard = '';
+      const expectedHeaderRequestParams = 'tensorboard=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchReadTensorboardTimeSeriesData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchReadTensorboardTimeSeriesData(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('readTensorboardTimeSeriesData', () => {
     it('invokes readTensorboardTimeSeriesData without error', async () => {
       const client =

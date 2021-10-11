@@ -441,14 +441,14 @@ export class FeaturestoreOnlineServingServiceClient {
    *   The request object that will be sent.
    * @param {string} request.entityType
    *   Required. The resource name of the EntityType for the entity being read.
-   *   Value format: `projects/{project}/locations/{location}/featurestores/
-   *   {featurestore}/entityTypes/{entityType}`. For example,
-   *   for a machine learning model predicting user clicks on a website, an
-   *   EntityType ID could be "user".
+   *   Value format:
+   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
+   *   For example, for a machine learning model predicting user clicks on a
+   *   website, an EntityType ID could be `user`.
    * @param {string} request.entityId
    *   Required. ID for a specific entity. For example,
    *   for a machine learning model predicting user clicks on a website, an entity
-   *   ID could be "user_123".
+   *   ID could be `user_123`.
    * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
    *   Required. Selector choosing Features of the target EntityType.
    * @param {object} [options]
@@ -517,14 +517,15 @@ export class FeaturestoreOnlineServingServiceClient {
    *   The request object that will be sent.
    * @param {string} request.entityType
    *   Required. The resource name of the entities' type.
-   *   Value format: `projects/{project}/locations/{location}/featurestores/
-   *   {featurestore}/entityTypes/{entityType}`. For example,
+   *   Value format:
+   *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`.
+   *   For example,
    *   for a machine learning model predicting user clicks on a website, an
-   *   EntityType ID could be "user".
+   *   EntityType ID could be `user`.
    * @param {string[]} request.entityIds
    *   Required. IDs of entities to read Feature values of. The maximum number of IDs is
    *   100. For example, for a machine learning model predicting user clicks on a
-   *   website, an entity ID could be "user_123".
+   *   website, an entity ID could be `user_123`.
    * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
    *   Required. Selector choosing Features of the target EntityType. Feature IDs will be
    *   deduplicated.
