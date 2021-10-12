@@ -426,7 +426,7 @@ class File extends ServiceObject<File> {
   private encryptionKeyHash?: string;
   private encryptionKeyInterceptor?: Interceptor;
   private instanceRetryValue?: boolean;
-  private instancePreconditionOpts?: PreconditionOptions;
+  instancePreconditionOpts?: PreconditionOptions;
 
   /**
    * Cloud Storage uses access control lists (ACLs) to manage object and

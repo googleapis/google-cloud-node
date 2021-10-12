@@ -1409,16 +1409,17 @@ class Bucket extends ServiceObject {
     }
 
     let maxRetries = this.storage.retryOptions.maxRetries;
-    if (
-      (options?.ifGenerationMatch === undefined &&
-        this.instancePreconditionOpts?.ifGenerationMatch === undefined &&
+    (sources as File[]).forEach(source => {
+      if (
+        (source?.instancePreconditionOpts?.ifGenerationMatch === undefined &&
+          this.storage.retryOptions.idempotencyStrategy ===
+            IdempotencyStrategy.RetryConditional) ||
         this.storage.retryOptions.idempotencyStrategy ===
-          IdempotencyStrategy.RetryConditional) ||
-      this.storage.retryOptions.idempotencyStrategy ===
-        IdempotencyStrategy.RetryNever
-    ) {
-      maxRetries = 0;
-    }
+          IdempotencyStrategy.RetryNever
+      ) {
+        maxRetries = 0;
+      }
+    });
 
     Object.assign(options, this.instancePreconditionOpts, options);
 
@@ -1439,11 +1440,11 @@ class Bucket extends ServiceObject {
 
             if (
               source?.metadata?.generation ||
-              this.instancePreconditionOpts?.ifGenerationMatch
+              source?.instancePreconditionOpts?.ifGenerationMatch
             ) {
               sourceObject.generation =
                 source?.metadata?.generation ||
-                this.instancePreconditionOpts?.ifGenerationMatch;
+                source?.instancePreconditionOpts?.ifGenerationMatch;
             }
 
             return sourceObject;
