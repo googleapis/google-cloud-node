@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.15.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.0...v5.15.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* check generation on source files not metageneration on bucket ([#1654](https://www.github.com/googleapis/nodejs-storage/issues/1654)) ([760231c](https://www.github.com/googleapis/nodejs-storage/commit/760231ca520f4eedf878c245489cb07f95e153af))
+
 ## [5.15.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.7...v5.15.0) (2021-10-07)
 
 
