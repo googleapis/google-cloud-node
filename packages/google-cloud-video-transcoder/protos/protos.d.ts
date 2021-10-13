@@ -952,9 +952,6 @@ export namespace google {
 
                         /** MuxStream segmentSettings */
                         segmentSettings?: (google.cloud.video.transcoder.v1.ISegmentSettings|null);
-
-                        /** MuxStream encryption */
-                        encryption?: (google.cloud.video.transcoder.v1.IEncryption|null);
                     }
 
                     /** Represents a MuxStream. */
@@ -980,9 +977,6 @@ export namespace google {
 
                         /** MuxStream segmentSettings. */
                         public segmentSettings?: (google.cloud.video.transcoder.v1.ISegmentSettings|null);
-
-                        /** MuxStream encryption. */
-                        public encryption?: (google.cloud.video.transcoder.v1.IEncryption|null);
 
                         /**
                          * Creates a new MuxStream instance using the specified properties.
@@ -4051,402 +4045,6 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
-                    /** Properties of an Encryption. */
-                    interface IEncryption {
-
-                        /** Encryption key */
-                        key?: (string|null);
-
-                        /** Encryption iv */
-                        iv?: (string|null);
-
-                        /** Encryption aes_128 */
-                        aes_128?: (google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null);
-
-                        /** Encryption sampleAes */
-                        sampleAes?: (google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null);
-
-                        /** Encryption mpegCenc */
-                        mpegCenc?: (google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null);
-                    }
-
-                    /** Represents an Encryption. */
-                    class Encryption implements IEncryption {
-
-                        /**
-                         * Constructs a new Encryption.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.video.transcoder.v1.IEncryption);
-
-                        /** Encryption key. */
-                        public key: string;
-
-                        /** Encryption iv. */
-                        public iv: string;
-
-                        /** Encryption aes_128. */
-                        public aes_128?: (google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null);
-
-                        /** Encryption sampleAes. */
-                        public sampleAes?: (google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null);
-
-                        /** Encryption mpegCenc. */
-                        public mpegCenc?: (google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null);
-
-                        /** Encryption encryptionMode. */
-                        public encryptionMode?: ("aes_128"|"sampleAes"|"mpegCenc");
-
-                        /**
-                         * Creates a new Encryption instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Encryption instance
-                         */
-                        public static create(properties?: google.cloud.video.transcoder.v1.IEncryption): google.cloud.video.transcoder.v1.Encryption;
-
-                        /**
-                         * Encodes the specified Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
-                         * @param message Encryption message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.video.transcoder.v1.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
-                         * @param message Encryption message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.video.transcoder.v1.IEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an Encryption message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Encryption
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption;
-
-                        /**
-                         * Decodes an Encryption message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Encryption
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption;
-
-                        /**
-                         * Verifies an Encryption message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an Encryption message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Encryption
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption;
-
-                        /**
-                         * Creates a plain object from an Encryption message. Also converts values to other types if specified.
-                         * @param message Encryption
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.video.transcoder.v1.Encryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Encryption to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace Encryption {
-
-                        /** Properties of an Aes128Encryption. */
-                        interface IAes128Encryption {
-
-                            /** Aes128Encryption keyUri */
-                            keyUri?: (string|null);
-                        }
-
-                        /** Represents an Aes128Encryption. */
-                        class Aes128Encryption implements IAes128Encryption {
-
-                            /**
-                             * Constructs a new Aes128Encryption.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption);
-
-                            /** Aes128Encryption keyUri. */
-                            public keyUri: string;
-
-                            /**
-                             * Creates a new Aes128Encryption instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns Aes128Encryption instance
-                             */
-                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
-
-                            /**
-                             * Encodes the specified Aes128Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
-                             * @param message Aes128Encryption message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified Aes128Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
-                             * @param message Aes128Encryption message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IAes128Encryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes an Aes128Encryption message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns Aes128Encryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
-
-                            /**
-                             * Decodes an Aes128Encryption message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns Aes128Encryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
-
-                            /**
-                             * Verifies an Aes128Encryption message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates an Aes128Encryption message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns Aes128Encryption
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.Aes128Encryption;
-
-                            /**
-                             * Creates a plain object from an Aes128Encryption message. Also converts values to other types if specified.
-                             * @param message Aes128Encryption
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.Aes128Encryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this Aes128Encryption to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        /** Properties of a SampleAesEncryption. */
-                        interface ISampleAesEncryption {
-
-                            /** SampleAesEncryption keyUri */
-                            keyUri?: (string|null);
-                        }
-
-                        /** Represents a SampleAesEncryption. */
-                        class SampleAesEncryption implements ISampleAesEncryption {
-
-                            /**
-                             * Constructs a new SampleAesEncryption.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption);
-
-                            /** SampleAesEncryption keyUri. */
-                            public keyUri: string;
-
-                            /**
-                             * Creates a new SampleAesEncryption instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns SampleAesEncryption instance
-                             */
-                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
-
-                            /**
-                             * Encodes the specified SampleAesEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
-                             * @param message SampleAesEncryption message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified SampleAesEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
-                             * @param message SampleAesEncryption message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a SampleAesEncryption message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns SampleAesEncryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
-
-                            /**
-                             * Decodes a SampleAesEncryption message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns SampleAesEncryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
-
-                            /**
-                             * Verifies a SampleAesEncryption message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a SampleAesEncryption message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns SampleAesEncryption
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption;
-
-                            /**
-                             * Creates a plain object from a SampleAesEncryption message. Also converts values to other types if specified.
-                             * @param message SampleAesEncryption
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this SampleAesEncryption to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-
-                        /** Properties of a MpegCommonEncryption. */
-                        interface IMpegCommonEncryption {
-
-                            /** MpegCommonEncryption keyId */
-                            keyId?: (string|null);
-
-                            /** MpegCommonEncryption scheme */
-                            scheme?: (string|null);
-                        }
-
-                        /** Represents a MpegCommonEncryption. */
-                        class MpegCommonEncryption implements IMpegCommonEncryption {
-
-                            /**
-                             * Constructs a new MpegCommonEncryption.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption);
-
-                            /** MpegCommonEncryption keyId. */
-                            public keyId: string;
-
-                            /** MpegCommonEncryption scheme. */
-                            public scheme: string;
-
-                            /**
-                             * Creates a new MpegCommonEncryption instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns MpegCommonEncryption instance
-                             */
-                            public static create(properties?: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
-
-                            /**
-                             * Encodes the specified MpegCommonEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
-                             * @param message MpegCommonEncryption message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified MpegCommonEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
-                             * @param message MpegCommonEncryption message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a MpegCommonEncryption message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns MpegCommonEncryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
-
-                            /**
-                             * Decodes a MpegCommonEncryption message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns MpegCommonEncryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
-
-                            /**
-                             * Verifies a MpegCommonEncryption message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a MpegCommonEncryption message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns MpegCommonEncryption
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption;
-
-                            /**
-                             * Creates a plain object from a MpegCommonEncryption message. Also converts values to other types if specified.
-                             * @param message MpegCommonEncryption
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this MpegCommonEncryption to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-                        }
-                    }
-
                     /** Represents a TranscoderService */
                     class TranscoderService extends $protobuf.rpc.Service {
 
@@ -4944,6 +4542,9 @@ export namespace google {
 
                         /** DeleteJobRequest name */
                         name?: (string|null);
+
+                        /** DeleteJobRequest allowMissing */
+                        allowMissing?: (boolean|null);
                     }
 
                     /** Represents a DeleteJobRequest. */
@@ -4957,6 +4558,9 @@ export namespace google {
 
                         /** DeleteJobRequest name. */
                         public name: string;
+
+                        /** DeleteJobRequest allowMissing. */
+                        public allowMissing: boolean;
 
                         /**
                          * Creates a new DeleteJobRequest instance using the specified properties.
@@ -5442,6 +5046,9 @@ export namespace google {
 
                         /** DeleteJobTemplateRequest name */
                         name?: (string|null);
+
+                        /** DeleteJobTemplateRequest allowMissing */
+                        allowMissing?: (boolean|null);
                     }
 
                     /** Represents a DeleteJobTemplateRequest. */
@@ -5455,6 +5062,9 @@ export namespace google {
 
                         /** DeleteJobTemplateRequest name. */
                         public name: string;
+
+                        /** DeleteJobTemplateRequest allowMissing. */
+                        public allowMissing: boolean;
 
                         /**
                          * Creates a new DeleteJobTemplateRequest instance using the specified properties.

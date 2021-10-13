@@ -556,6 +556,9 @@ export class TranscoderServiceClient {
    * @param {string} request.name
    *   Required. The name of the job to delete.
    *   Format: `projects/{project}/locations/{location}/jobs/{job}`
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the job is not found, the request will succeed but no
+   *   action will be taken on the server.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -856,6 +859,9 @@ export class TranscoderServiceClient {
    * @param {string} request.name
    *   Required. The name of the job template to delete.
    *   `projects/{project}/locations/{location}/jobTemplates/{job_template}`
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the job template is not found, the request will succeed
+   *   but no action will be taken on the server.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1060,7 +1066,8 @@ export class TranscoderServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as gax.GaxCall,
@@ -1117,7 +1124,8 @@ export class TranscoderServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -1274,7 +1282,8 @@ export class TranscoderServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobTemplates.createStream(
       this.innerApiCalls.listJobTemplates as gax.GaxCall,
@@ -1332,7 +1341,8 @@ export class TranscoderServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listJobTemplates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobTemplates.asyncIterate(
       this.innerApiCalls['listJobTemplates'] as GaxCall,

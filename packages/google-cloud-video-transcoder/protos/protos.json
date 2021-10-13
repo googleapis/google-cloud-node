@@ -286,10 +286,6 @@
                             "segmentSettings": {
                               "type": "SegmentSettings",
                               "id": 5
-                            },
-                            "encryption": {
-                              "type": "Encryption",
-                              "id": 6
                             }
                           }
                         },
@@ -1055,87 +1051,6 @@
                             }
                           }
                         },
-                        "Encryption": {
-                          "oneofs": {
-                            "encryptionMode": {
-                              "oneof": [
-                                "aes_128",
-                                "sampleAes",
-                                "mpegCenc"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "key": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "iv": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "aes_128": {
-                              "type": "Aes128Encryption",
-                              "id": 3
-                            },
-                            "sampleAes": {
-                              "type": "SampleAesEncryption",
-                              "id": 4
-                            },
-                            "mpegCenc": {
-                              "type": "MpegCommonEncryption",
-                              "id": 5
-                            }
-                          },
-                          "nested": {
-                            "Aes128Encryption": {
-                              "fields": {
-                                "keyUri": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              }
-                            },
-                            "SampleAesEncryption": {
-                              "fields": {
-                                "keyUri": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              }
-                            },
-                            "MpegCommonEncryption": {
-                              "fields": {
-                                "keyId": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "scheme": {
-                                  "type": "string",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
                         "TranscoderService": {
                           "options": {
                             "(google.api.default_host)": "transcoder.googleapis.com",
@@ -1360,6 +1275,10 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "transcoder.googleapis.com/Job"
                               }
+                            },
+                            "allowMissing": {
+                              "type": "bool",
+                              "id": 2
                             }
                           }
                         },
@@ -1456,6 +1375,10 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "transcoder.googleapis.com/JobTemplate"
                               }
+                            },
+                            "allowMissing": {
+                              "type": "bool",
+                              "id": 2
                             }
                           }
                         },

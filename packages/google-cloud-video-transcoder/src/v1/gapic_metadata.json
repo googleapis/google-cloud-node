@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.video.transcoder.v1",
-  "libraryPackage": "@google-cloud/transcoder",
+  "libraryPackage": "@google-cloud/video-transcoder",
   "services": {
     "TranscoderService": {
       "clients": {

@@ -2573,7 +2573,6 @@
                              * @property {string|null} [container] MuxStream container
                              * @property {Array.<string>|null} [elementaryStreams] MuxStream elementaryStreams
                              * @property {google.cloud.video.transcoder.v1.ISegmentSettings|null} [segmentSettings] MuxStream segmentSettings
-                             * @property {google.cloud.video.transcoder.v1.IEncryption|null} [encryption] MuxStream encryption
                              */
     
                             /**
@@ -2633,14 +2632,6 @@
                             MuxStream.prototype.segmentSettings = null;
     
                             /**
-                             * MuxStream encryption.
-                             * @member {google.cloud.video.transcoder.v1.IEncryption|null|undefined} encryption
-                             * @memberof google.cloud.video.transcoder.v1.MuxStream
-                             * @instance
-                             */
-                            MuxStream.prototype.encryption = null;
-    
-                            /**
                              * Creates a new MuxStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.MuxStream
@@ -2675,8 +2666,6 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.elementaryStreams[i]);
                                 if (message.segmentSettings != null && Object.hasOwnProperty.call(message, "segmentSettings"))
                                     $root.google.cloud.video.transcoder.v1.SegmentSettings.encode(message.segmentSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                                if (message.encryption != null && Object.hasOwnProperty.call(message, "encryption"))
-                                    $root.google.cloud.video.transcoder.v1.Encryption.encode(message.encryption, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2727,9 +2716,6 @@
                                         break;
                                     case 5:
                                         message.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.decode(reader, reader.uint32());
-                                        break;
-                                    case 6:
-                                        message.encryption = $root.google.cloud.video.transcoder.v1.Encryption.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2787,11 +2773,6 @@
                                     if (error)
                                         return "segmentSettings." + error;
                                 }
-                                if (message.encryption != null && message.hasOwnProperty("encryption")) {
-                                    var error = $root.google.cloud.video.transcoder.v1.Encryption.verify(message.encryption);
-                                    if (error)
-                                        return "encryption." + error;
-                                }
                                 return null;
                             };
     
@@ -2825,11 +2806,6 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.MuxStream.segmentSettings: object expected");
                                     message.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.fromObject(object.segmentSettings);
                                 }
-                                if (object.encryption != null) {
-                                    if (typeof object.encryption !== "object")
-                                        throw TypeError(".google.cloud.video.transcoder.v1.MuxStream.encryption: object expected");
-                                    message.encryption = $root.google.cloud.video.transcoder.v1.Encryption.fromObject(object.encryption);
-                                }
                                 return message;
                             };
     
@@ -2853,7 +2829,6 @@
                                     object.fileName = "";
                                     object.container = "";
                                     object.segmentSettings = null;
-                                    object.encryption = null;
                                 }
                                 if (message.key != null && message.hasOwnProperty("key"))
                                     object.key = message.key;
@@ -2868,8 +2843,6 @@
                                 }
                                 if (message.segmentSettings != null && message.hasOwnProperty("segmentSettings"))
                                     object.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.toObject(message.segmentSettings, options);
-                                if (message.encryption != null && message.hasOwnProperty("encryption"))
-                                    object.encryption = $root.google.cloud.video.transcoder.v1.Encryption.toObject(message.encryption, options);
                                 return object;
                             };
     
@@ -10464,915 +10437,6 @@
                             return SegmentSettings;
                         })();
     
-                        v1.Encryption = (function() {
-    
-                            /**
-                             * Properties of an Encryption.
-                             * @memberof google.cloud.video.transcoder.v1
-                             * @interface IEncryption
-                             * @property {string|null} [key] Encryption key
-                             * @property {string|null} [iv] Encryption iv
-                             * @property {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null} [aes_128] Encryption aes_128
-                             * @property {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null} [sampleAes] Encryption sampleAes
-                             * @property {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null} [mpegCenc] Encryption mpegCenc
-                             */
-    
-                            /**
-                             * Constructs a new Encryption.
-                             * @memberof google.cloud.video.transcoder.v1
-                             * @classdesc Represents an Encryption.
-                             * @implements IEncryption
-                             * @constructor
-                             * @param {google.cloud.video.transcoder.v1.IEncryption=} [properties] Properties to set
-                             */
-                            function Encryption(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Encryption key.
-                             * @member {string} key
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             */
-                            Encryption.prototype.key = "";
-    
-                            /**
-                             * Encryption iv.
-                             * @member {string} iv
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             */
-                            Encryption.prototype.iv = "";
-    
-                            /**
-                             * Encryption aes_128.
-                             * @member {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption|null|undefined} aes_128
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             */
-                            Encryption.prototype.aes_128 = null;
-    
-                            /**
-                             * Encryption sampleAes.
-                             * @member {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption|null|undefined} sampleAes
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             */
-                            Encryption.prototype.sampleAes = null;
-    
-                            /**
-                             * Encryption mpegCenc.
-                             * @member {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption|null|undefined} mpegCenc
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             */
-                            Encryption.prototype.mpegCenc = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * Encryption encryptionMode.
-                             * @member {"aes_128"|"sampleAes"|"mpegCenc"|undefined} encryptionMode
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             */
-                            Object.defineProperty(Encryption.prototype, "encryptionMode", {
-                                get: $util.oneOfGetter($oneOfFields = ["aes_128", "sampleAes", "mpegCenc"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new Encryption instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {google.cloud.video.transcoder.v1.IEncryption=} [properties] Properties to set
-                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption instance
-                             */
-                            Encryption.create = function create(properties) {
-                                return new Encryption(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {google.cloud.video.transcoder.v1.IEncryption} message Encryption message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Encryption.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-                                if (message.iv != null && Object.hasOwnProperty.call(message, "iv"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.iv);
-                                if (message.aes_128 != null && Object.hasOwnProperty.call(message, "aes_128"))
-                                    $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.encode(message.aes_128, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                if (message.sampleAes != null && Object.hasOwnProperty.call(message, "sampleAes"))
-                                    $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.encode(message.sampleAes, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                                if (message.mpegCenc != null && Object.hasOwnProperty.call(message, "mpegCenc"))
-                                    $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.encode(message.mpegCenc, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {google.cloud.video.transcoder.v1.IEncryption} message Encryption message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Encryption.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Encryption message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Encryption.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1:
-                                        message.key = reader.string();
-                                        break;
-                                    case 2:
-                                        message.iv = reader.string();
-                                        break;
-                                    case 3:
-                                        message.aes_128 = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.decode(reader, reader.uint32());
-                                        break;
-                                    case 4:
-                                        message.sampleAes = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.decode(reader, reader.uint32());
-                                        break;
-                                    case 5:
-                                        message.mpegCenc = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.decode(reader, reader.uint32());
-                                        break;
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Encryption message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Encryption.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Encryption message.
-                             * @function verify
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Encryption.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.key != null && message.hasOwnProperty("key"))
-                                    if (!$util.isString(message.key))
-                                        return "key: string expected";
-                                if (message.iv != null && message.hasOwnProperty("iv"))
-                                    if (!$util.isString(message.iv))
-                                        return "iv: string expected";
-                                if (message.aes_128 != null && message.hasOwnProperty("aes_128")) {
-                                    properties.encryptionMode = 1;
-                                    {
-                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify(message.aes_128);
-                                        if (error)
-                                            return "aes_128." + error;
-                                    }
-                                }
-                                if (message.sampleAes != null && message.hasOwnProperty("sampleAes")) {
-                                    if (properties.encryptionMode === 1)
-                                        return "encryptionMode: multiple values";
-                                    properties.encryptionMode = 1;
-                                    {
-                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify(message.sampleAes);
-                                        if (error)
-                                            return "sampleAes." + error;
-                                    }
-                                }
-                                if (message.mpegCenc != null && message.hasOwnProperty("mpegCenc")) {
-                                    if (properties.encryptionMode === 1)
-                                        return "encryptionMode: multiple values";
-                                    properties.encryptionMode = 1;
-                                    {
-                                        var error = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify(message.mpegCenc);
-                                        if (error)
-                                            return "mpegCenc." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Encryption message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.video.transcoder.v1.Encryption} Encryption
-                             */
-                            Encryption.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption)
-                                    return object;
-                                var message = new $root.google.cloud.video.transcoder.v1.Encryption();
-                                if (object.key != null)
-                                    message.key = String(object.key);
-                                if (object.iv != null)
-                                    message.iv = String(object.iv);
-                                if (object.aes_128 != null) {
-                                    if (typeof object.aes_128 !== "object")
-                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.aes_128: object expected");
-                                    message.aes_128 = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.fromObject(object.aes_128);
-                                }
-                                if (object.sampleAes != null) {
-                                    if (typeof object.sampleAes !== "object")
-                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.sampleAes: object expected");
-                                    message.sampleAes = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.fromObject(object.sampleAes);
-                                }
-                                if (object.mpegCenc != null) {
-                                    if (typeof object.mpegCenc !== "object")
-                                        throw TypeError(".google.cloud.video.transcoder.v1.Encryption.mpegCenc: object expected");
-                                    message.mpegCenc = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.fromObject(object.mpegCenc);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Encryption message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @static
-                             * @param {google.cloud.video.transcoder.v1.Encryption} message Encryption
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Encryption.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.key = "";
-                                    object.iv = "";
-                                }
-                                if (message.key != null && message.hasOwnProperty("key"))
-                                    object.key = message.key;
-                                if (message.iv != null && message.hasOwnProperty("iv"))
-                                    object.iv = message.iv;
-                                if (message.aes_128 != null && message.hasOwnProperty("aes_128")) {
-                                    object.aes_128 = $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.toObject(message.aes_128, options);
-                                    if (options.oneofs)
-                                        object.encryptionMode = "aes_128";
-                                }
-                                if (message.sampleAes != null && message.hasOwnProperty("sampleAes")) {
-                                    object.sampleAes = $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.toObject(message.sampleAes, options);
-                                    if (options.oneofs)
-                                        object.encryptionMode = "sampleAes";
-                                }
-                                if (message.mpegCenc != null && message.hasOwnProperty("mpegCenc")) {
-                                    object.mpegCenc = $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.toObject(message.mpegCenc, options);
-                                    if (options.oneofs)
-                                        object.encryptionMode = "mpegCenc";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Encryption to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.video.transcoder.v1.Encryption
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Encryption.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            Encryption.Aes128Encryption = (function() {
-    
-                                /**
-                                 * Properties of an Aes128Encryption.
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption
-                                 * @interface IAes128Encryption
-                                 * @property {string|null} [keyUri] Aes128Encryption keyUri
-                                 */
-    
-                                /**
-                                 * Constructs a new Aes128Encryption.
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption
-                                 * @classdesc Represents an Aes128Encryption.
-                                 * @implements IAes128Encryption
-                                 * @constructor
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption=} [properties] Properties to set
-                                 */
-                                function Aes128Encryption(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * Aes128Encryption keyUri.
-                                 * @member {string} keyUri
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @instance
-                                 */
-                                Aes128Encryption.prototype.keyUri = "";
-    
-                                /**
-                                 * Creates a new Aes128Encryption instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption=} [properties] Properties to set
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption instance
-                                 */
-                                Aes128Encryption.create = function create(properties) {
-                                    return new Aes128Encryption(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified Aes128Encryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption} message Aes128Encryption message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                Aes128Encryption.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.keyUri != null && Object.hasOwnProperty.call(message, "keyUri"))
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyUri);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified Aes128Encryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.Aes128Encryption.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IAes128Encryption} message Aes128Encryption message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                Aes128Encryption.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes an Aes128Encryption message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                Aes128Encryption.decode = function decode(reader, length) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        switch (tag >>> 3) {
-                                        case 1:
-                                            message.keyUri = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes an Aes128Encryption message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                Aes128Encryption.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies an Aes128Encryption message.
-                                 * @function verify
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                Aes128Encryption.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.keyUri != null && message.hasOwnProperty("keyUri"))
-                                        if (!$util.isString(message.keyUri))
-                                            return "keyUri: string expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates an Aes128Encryption message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} Aes128Encryption
-                                 */
-                                Aes128Encryption.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption)
-                                        return object;
-                                    var message = new $root.google.cloud.video.transcoder.v1.Encryption.Aes128Encryption();
-                                    if (object.keyUri != null)
-                                        message.keyUri = String(object.keyUri);
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from an Aes128Encryption message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.Aes128Encryption} message Aes128Encryption
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                Aes128Encryption.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults)
-                                        object.keyUri = "";
-                                    if (message.keyUri != null && message.hasOwnProperty("keyUri"))
-                                        object.keyUri = message.keyUri;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this Aes128Encryption to JSON.
-                                 * @function toJSON
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.Aes128Encryption
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                Aes128Encryption.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                return Aes128Encryption;
-                            })();
-    
-                            Encryption.SampleAesEncryption = (function() {
-    
-                                /**
-                                 * Properties of a SampleAesEncryption.
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption
-                                 * @interface ISampleAesEncryption
-                                 * @property {string|null} [keyUri] SampleAesEncryption keyUri
-                                 */
-    
-                                /**
-                                 * Constructs a new SampleAesEncryption.
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption
-                                 * @classdesc Represents a SampleAesEncryption.
-                                 * @implements ISampleAesEncryption
-                                 * @constructor
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption=} [properties] Properties to set
-                                 */
-                                function SampleAesEncryption(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * SampleAesEncryption keyUri.
-                                 * @member {string} keyUri
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @instance
-                                 */
-                                SampleAesEncryption.prototype.keyUri = "";
-    
-                                /**
-                                 * Creates a new SampleAesEncryption instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption=} [properties] Properties to set
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption instance
-                                 */
-                                SampleAesEncryption.create = function create(properties) {
-                                    return new SampleAesEncryption(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified SampleAesEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption} message SampleAesEncryption message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                SampleAesEncryption.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.keyUri != null && Object.hasOwnProperty.call(message, "keyUri"))
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyUri);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified SampleAesEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.ISampleAesEncryption} message SampleAesEncryption message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                SampleAesEncryption.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes a SampleAesEncryption message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                SampleAesEncryption.decode = function decode(reader, length) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        switch (tag >>> 3) {
-                                        case 1:
-                                            message.keyUri = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes a SampleAesEncryption message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                SampleAesEncryption.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies a SampleAesEncryption message.
-                                 * @function verify
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                SampleAesEncryption.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.keyUri != null && message.hasOwnProperty("keyUri"))
-                                        if (!$util.isString(message.keyUri))
-                                            return "keyUri: string expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates a SampleAesEncryption message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} SampleAesEncryption
-                                 */
-                                SampleAesEncryption.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption)
-                                        return object;
-                                    var message = new $root.google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption();
-                                    if (object.keyUri != null)
-                                        message.keyUri = String(object.keyUri);
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from a SampleAesEncryption message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption} message SampleAesEncryption
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                SampleAesEncryption.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults)
-                                        object.keyUri = "";
-                                    if (message.keyUri != null && message.hasOwnProperty("keyUri"))
-                                        object.keyUri = message.keyUri;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this SampleAesEncryption to JSON.
-                                 * @function toJSON
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                SampleAesEncryption.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                return SampleAesEncryption;
-                            })();
-    
-                            Encryption.MpegCommonEncryption = (function() {
-    
-                                /**
-                                 * Properties of a MpegCommonEncryption.
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption
-                                 * @interface IMpegCommonEncryption
-                                 * @property {string|null} [keyId] MpegCommonEncryption keyId
-                                 * @property {string|null} [scheme] MpegCommonEncryption scheme
-                                 */
-    
-                                /**
-                                 * Constructs a new MpegCommonEncryption.
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption
-                                 * @classdesc Represents a MpegCommonEncryption.
-                                 * @implements IMpegCommonEncryption
-                                 * @constructor
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption=} [properties] Properties to set
-                                 */
-                                function MpegCommonEncryption(properties) {
-                                    if (properties)
-                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
-                                                this[keys[i]] = properties[keys[i]];
-                                }
-    
-                                /**
-                                 * MpegCommonEncryption keyId.
-                                 * @member {string} keyId
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @instance
-                                 */
-                                MpegCommonEncryption.prototype.keyId = "";
-    
-                                /**
-                                 * MpegCommonEncryption scheme.
-                                 * @member {string} scheme
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @instance
-                                 */
-                                MpegCommonEncryption.prototype.scheme = "";
-    
-                                /**
-                                 * Creates a new MpegCommonEncryption instance using the specified properties.
-                                 * @function create
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption=} [properties] Properties to set
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption instance
-                                 */
-                                MpegCommonEncryption.create = function create(properties) {
-                                    return new MpegCommonEncryption(properties);
-                                };
-    
-                                /**
-                                 * Encodes the specified MpegCommonEncryption message. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
-                                 * @function encode
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption} message MpegCommonEncryption message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                MpegCommonEncryption.encode = function encode(message, writer) {
-                                    if (!writer)
-                                        writer = $Writer.create();
-                                    if (message.keyId != null && Object.hasOwnProperty.call(message, "keyId"))
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyId);
-                                    if (message.scheme != null && Object.hasOwnProperty.call(message, "scheme"))
-                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.scheme);
-                                    return writer;
-                                };
-    
-                                /**
-                                 * Encodes the specified MpegCommonEncryption message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption.verify|verify} messages.
-                                 * @function encodeDelimited
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.IMpegCommonEncryption} message MpegCommonEncryption message or plain object to encode
-                                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                                 * @returns {$protobuf.Writer} Writer
-                                 */
-                                MpegCommonEncryption.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer).ldelim();
-                                };
-    
-                                /**
-                                 * Decodes a MpegCommonEncryption message from the specified reader or buffer.
-                                 * @function decode
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @param {number} [length] Message length if known beforehand
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                MpegCommonEncryption.decode = function decode(reader, length) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = $Reader.create(reader);
-                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption();
-                                    while (reader.pos < end) {
-                                        var tag = reader.uint32();
-                                        switch (tag >>> 3) {
-                                        case 1:
-                                            message.keyId = reader.string();
-                                            break;
-                                        case 2:
-                                            message.scheme = reader.string();
-                                            break;
-                                        default:
-                                            reader.skipType(tag & 7);
-                                            break;
-                                        }
-                                    }
-                                    return message;
-                                };
-    
-                                /**
-                                 * Decodes a MpegCommonEncryption message from the specified reader or buffer, length delimited.
-                                 * @function decodeDelimited
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                MpegCommonEncryption.decodeDelimited = function decodeDelimited(reader) {
-                                    if (!(reader instanceof $Reader))
-                                        reader = new $Reader(reader);
-                                    return this.decode(reader, reader.uint32());
-                                };
-    
-                                /**
-                                 * Verifies a MpegCommonEncryption message.
-                                 * @function verify
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {Object.<string,*>} message Plain object to verify
-                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                 */
-                                MpegCommonEncryption.verify = function verify(message) {
-                                    if (typeof message !== "object" || message === null)
-                                        return "object expected";
-                                    if (message.keyId != null && message.hasOwnProperty("keyId"))
-                                        if (!$util.isString(message.keyId))
-                                            return "keyId: string expected";
-                                    if (message.scheme != null && message.hasOwnProperty("scheme"))
-                                        if (!$util.isString(message.scheme))
-                                            return "scheme: string expected";
-                                    return null;
-                                };
-    
-                                /**
-                                 * Creates a MpegCommonEncryption message from a plain object. Also converts values to their respective internal types.
-                                 * @function fromObject
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {Object.<string,*>} object Plain object
-                                 * @returns {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} MpegCommonEncryption
-                                 */
-                                MpegCommonEncryption.fromObject = function fromObject(object) {
-                                    if (object instanceof $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption)
-                                        return object;
-                                    var message = new $root.google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption();
-                                    if (object.keyId != null)
-                                        message.keyId = String(object.keyId);
-                                    if (object.scheme != null)
-                                        message.scheme = String(object.scheme);
-                                    return message;
-                                };
-    
-                                /**
-                                 * Creates a plain object from a MpegCommonEncryption message. Also converts values to other types if specified.
-                                 * @function toObject
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @static
-                                 * @param {google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption} message MpegCommonEncryption
-                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                 * @returns {Object.<string,*>} Plain object
-                                 */
-                                MpegCommonEncryption.toObject = function toObject(message, options) {
-                                    if (!options)
-                                        options = {};
-                                    var object = {};
-                                    if (options.defaults) {
-                                        object.keyId = "";
-                                        object.scheme = "";
-                                    }
-                                    if (message.keyId != null && message.hasOwnProperty("keyId"))
-                                        object.keyId = message.keyId;
-                                    if (message.scheme != null && message.hasOwnProperty("scheme"))
-                                        object.scheme = message.scheme;
-                                    return object;
-                                };
-    
-                                /**
-                                 * Converts this MpegCommonEncryption to JSON.
-                                 * @function toJSON
-                                 * @memberof google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption
-                                 * @instance
-                                 * @returns {Object.<string,*>} JSON object
-                                 */
-                                MpegCommonEncryption.prototype.toJSON = function toJSON() {
-                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                };
-    
-                                return MpegCommonEncryption;
-                            })();
-    
-                            return Encryption;
-                        })();
-    
                         v1.TranscoderService = (function() {
     
                             /**
@@ -12357,6 +11421,7 @@
                              * @memberof google.cloud.video.transcoder.v1
                              * @interface IDeleteJobRequest
                              * @property {string|null} [name] DeleteJobRequest name
+                             * @property {boolean|null} [allowMissing] DeleteJobRequest allowMissing
                              */
     
                             /**
@@ -12381,6 +11446,14 @@
                              * @instance
                              */
                             DeleteJobRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteJobRequest allowMissing.
+                             * @member {boolean} allowMissing
+                             * @memberof google.cloud.video.transcoder.v1.DeleteJobRequest
+                             * @instance
+                             */
+                            DeleteJobRequest.prototype.allowMissing = false;
     
                             /**
                              * Creates a new DeleteJobRequest instance using the specified properties.
@@ -12408,6 +11481,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowMissing);
                                 return writer;
                             };
     
@@ -12444,6 +11519,9 @@
                                     switch (tag >>> 3) {
                                     case 1:
                                         message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        message.allowMissing = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -12483,6 +11561,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                    if (typeof message.allowMissing !== "boolean")
+                                        return "allowMissing: boolean expected";
                                 return null;
                             };
     
@@ -12500,6 +11581,8 @@
                                 var message = new $root.google.cloud.video.transcoder.v1.DeleteJobRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.allowMissing != null)
+                                    message.allowMissing = Boolean(object.allowMissing);
                                 return message;
                             };
     
@@ -12516,10 +11599,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.allowMissing = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                    object.allowMissing = message.allowMissing;
                                 return object;
                             };
     
@@ -13514,6 +12601,7 @@
                              * @memberof google.cloud.video.transcoder.v1
                              * @interface IDeleteJobTemplateRequest
                              * @property {string|null} [name] DeleteJobTemplateRequest name
+                             * @property {boolean|null} [allowMissing] DeleteJobTemplateRequest allowMissing
                              */
     
                             /**
@@ -13538,6 +12626,14 @@
                              * @instance
                              */
                             DeleteJobTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteJobTemplateRequest allowMissing.
+                             * @member {boolean} allowMissing
+                             * @memberof google.cloud.video.transcoder.v1.DeleteJobTemplateRequest
+                             * @instance
+                             */
+                            DeleteJobTemplateRequest.prototype.allowMissing = false;
     
                             /**
                              * Creates a new DeleteJobTemplateRequest instance using the specified properties.
@@ -13565,6 +12661,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowMissing);
                                 return writer;
                             };
     
@@ -13601,6 +12699,9 @@
                                     switch (tag >>> 3) {
                                     case 1:
                                         message.name = reader.string();
+                                        break;
+                                    case 2:
+                                        message.allowMissing = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -13640,6 +12741,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                    if (typeof message.allowMissing !== "boolean")
+                                        return "allowMissing: boolean expected";
                                 return null;
                             };
     
@@ -13657,6 +12761,8 @@
                                 var message = new $root.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.allowMissing != null)
+                                    message.allowMissing = Boolean(object.allowMissing);
                                 return message;
                             };
     
@@ -13673,10 +12779,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.allowMissing = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                    object.allowMissing = message.allowMissing;
                                 return object;
                             };
     
