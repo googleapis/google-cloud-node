@@ -155,10 +155,7 @@ const urlSafeKey = new entity.URLSafeKey();
  * you don't need to provide a `projectId`.
  *
  *
- * @class
- * @extends {DatastoreRequest}
- *
- * @see [Cloud Datastore Concepts Overview]{@link https://cloud.google.com/datastore/docs/concepts/overview}
+ * See {@link https://cloud.google.com/datastore/docs/concepts/overview| Cloud Datastore Concepts Overview}
  *
  * @param {object} [options] Configuration options.
  * @param {string} [options.apiEndpoint] Override the default API endpoint used
@@ -1429,7 +1426,7 @@ class Datastore extends DatastoreRequest {
    * Create a query for the specified kind. See {@link Query} for all
    * of the available methods.
    *
-   * @see [Datastore Queries]{@link https://cloud.google.com/datastore/docs/concepts/queries}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries| Datastore Queries}
    * @see {@link Query}
    *
    * @param {string} [namespace] Namespace.

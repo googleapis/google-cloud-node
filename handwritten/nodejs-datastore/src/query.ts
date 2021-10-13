@@ -46,7 +46,7 @@ export interface Filter {
  * **Queries are built with {module:datastore#createQuery} and
  * {@link Transaction#createQuery}.**
  *
- * @see [Datastore Queries]{@link http://goo.gl/Cag0r6}
+ * @see {@link http://goo.gl/Cag0r6| Datastore Queries}
  *
  * @class
  * @param {Datastore|Transaction} scope The parent scope the query was created
@@ -159,7 +159,7 @@ class Query {
    *
    * *To filter by ancestors, see {module:datastore/query#hasAncestor}.*
    *
-   * @see [Datastore Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-property-filter-nodejs}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-property-filter-nodejs| Datastore Filters}
    *
    * @param {string} property The field name.
    * @param {string} [operator="="] Operator (=, <, >, <=, >=).
@@ -208,7 +208,7 @@ class Query {
   /**
    * Filter a query by ancestors.
    *
-   * @see [Datastore Ancestor Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-ancestor-query-nodejs}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-ancestor-query-nodejs| Datastore Ancestor Filters}
    *
    * @param {Key} key Key object to filter by.
    * @returns {Query}
@@ -228,7 +228,7 @@ class Query {
    * Sort the results by a property name in ascending or descending order. By
    * default, an ascending sort order will be used.
    *
-   * @see [Datastore Sort Orders]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-ascending-sort-nodejs}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-ascending-sort-nodejs| Datastore Sort Orders}
    *
    * @param {string} property The property to order by.
    * @param {object} [options] Options object.
@@ -277,7 +277,7 @@ class Query {
    *
    * Queries that select a subset of properties are called Projection Queries.
    *
-   * @see [Projection Queries]{@link https://cloud.google.com/datastore/docs/concepts/projectionqueries}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/projectionqueries| Projection Queries}
    *
    * @param {string|string[]} fieldNames Properties to return from the matched
    *     entities.
@@ -302,7 +302,7 @@ class Query {
   /**
    * Set a starting cursor to a query.
    *
-   * @see [Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets| Query Cursors}
    *
    * @param {string} cursorToken The starting cursor token.
    * @returns {Query}
@@ -325,7 +325,7 @@ class Query {
   /**
    * Set an ending cursor to a query.
    *
-   * @see [Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors| Query Cursors}
    *
    * @param {string} cursorToken The ending cursor token.
    * @returns {Query}
@@ -348,7 +348,7 @@ class Query {
   /**
    * Set a limit on a query.
    *
-   * @see [Query Limits]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-limit-nodejs}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-limit-nodejs| Query Limits}
    *
    * @param {number} n The number of results to limit the query to.
    * @returns {Query}
@@ -369,7 +369,7 @@ class Query {
   /**
    * Set an offset on a query.
    *
-   * @see [Query Offsets]{@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-limit-nodejs}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries#datastore-limit-nodejs| Query Offsets}
    *
    * @param {number} n The offset to start from after the start cursor.
    * @returns {Query}
