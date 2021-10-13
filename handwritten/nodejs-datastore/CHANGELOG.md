@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.6.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.5.0...v6.6.0) (2021-10-13)
+
+
+### Features
+
+* update retry and timeout logic for generated async/stream ([#883](https://www.github.com/googleapis/nodejs-datastore/issues/883)) ([cd3ae5c](https://www.github.com/googleapis/nodejs-datastore/commit/cd3ae5c12eddac3cc1149308c96cf9a8b0265e21))
+
 ## [6.5.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.8...v6.5.0) (2021-08-23)
 
 
