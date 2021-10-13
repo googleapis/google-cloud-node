@@ -277,6 +277,7 @@
                          * @property {google.cloud.dataproc.v1.IBasicAutoscalingAlgorithm|null} [basicAlgorithm] AutoscalingPolicy basicAlgorithm
                          * @property {google.cloud.dataproc.v1.IInstanceGroupAutoscalingPolicyConfig|null} [workerConfig] AutoscalingPolicy workerConfig
                          * @property {google.cloud.dataproc.v1.IInstanceGroupAutoscalingPolicyConfig|null} [secondaryWorkerConfig] AutoscalingPolicy secondaryWorkerConfig
+                         * @property {Object.<string,string>|null} [labels] AutoscalingPolicy labels
                          */
     
                         /**
@@ -288,6 +289,7 @@
                          * @param {google.cloud.dataproc.v1.IAutoscalingPolicy=} [properties] Properties to set
                          */
                         function AutoscalingPolicy(properties) {
+                            this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -333,6 +335,14 @@
                          * @instance
                          */
                         AutoscalingPolicy.prototype.secondaryWorkerConfig = null;
+    
+                        /**
+                         * AutoscalingPolicy labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.dataproc.v1.AutoscalingPolicy
+                         * @instance
+                         */
+                        AutoscalingPolicy.prototype.labels = $util.emptyObject;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -382,6 +392,9 @@
                                 $root.google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig.encode(message.workerConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.secondaryWorkerConfig != null && Object.hasOwnProperty.call(message, "secondaryWorkerConfig"))
                                 $root.google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig.encode(message.secondaryWorkerConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -412,7 +425,7 @@
                         AutoscalingPolicy.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.AutoscalingPolicy();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.AutoscalingPolicy(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -430,6 +443,28 @@
                                     break;
                                 case 5:
                                     message.secondaryWorkerConfig = $root.google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -491,6 +526,14 @@
                                 if (error)
                                     return "secondaryWorkerConfig." + error;
                             }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -525,6 +568,13 @@
                                     throw TypeError(".google.cloud.dataproc.v1.AutoscalingPolicy.secondaryWorkerConfig: object expected");
                                 message.secondaryWorkerConfig = $root.google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig.fromObject(object.secondaryWorkerConfig);
                             }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.AutoscalingPolicy.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -541,6 +591,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
                             if (options.defaults) {
                                 object.id = "";
                                 object.name = "";
@@ -560,6 +612,12 @@
                                 object.workerConfig = $root.google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig.toObject(message.workerConfig, options);
                             if (message.secondaryWorkerConfig != null && message.hasOwnProperty("secondaryWorkerConfig"))
                                 object.secondaryWorkerConfig = $root.google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig.toObject(message.secondaryWorkerConfig, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
                             return object;
                         };
     
@@ -4885,6 +4943,7 @@
                          * @property {google.cloud.dataproc.v1.IReservationAffinity|null} [reservationAffinity] GceClusterConfig reservationAffinity
                          * @property {google.cloud.dataproc.v1.INodeGroupAffinity|null} [nodeGroupAffinity] GceClusterConfig nodeGroupAffinity
                          * @property {google.cloud.dataproc.v1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] GceClusterConfig shieldedInstanceConfig
+                         * @property {google.cloud.dataproc.v1.IConfidentialInstanceConfig|null} [confidentialInstanceConfig] GceClusterConfig confidentialInstanceConfig
                          */
     
                         /**
@@ -5002,6 +5061,14 @@
                         GceClusterConfig.prototype.shieldedInstanceConfig = null;
     
                         /**
+                         * GceClusterConfig confidentialInstanceConfig.
+                         * @member {google.cloud.dataproc.v1.IConfidentialInstanceConfig|null|undefined} confidentialInstanceConfig
+                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
+                         * @instance
+                         */
+                        GceClusterConfig.prototype.confidentialInstanceConfig = null;
+    
+                        /**
                          * Creates a new GceClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.GceClusterConfig
@@ -5052,6 +5119,8 @@
                                 $root.google.cloud.dataproc.v1.NodeGroupAffinity.encode(message.nodeGroupAffinity, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
                                 $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
+                                $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -5144,6 +5213,9 @@
                                     break;
                                 case 14:
                                     message.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 15:
+                                    message.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5242,6 +5314,11 @@
                                 if (error)
                                     return "shieldedInstanceConfig." + error;
                             }
+                            if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.verify(message.confidentialInstanceConfig);
+                                if (error)
+                                    return "confidentialInstanceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -5321,6 +5398,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.shieldedInstanceConfig: object expected");
                                 message.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
                             }
+                            if (object.confidentialInstanceConfig != null) {
+                                if (typeof object.confidentialInstanceConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.confidentialInstanceConfig: object expected");
+                                message.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.fromObject(object.confidentialInstanceConfig);
+                            }
                             return message;
                         };
     
@@ -5353,6 +5435,7 @@
                                 object.privateIpv6GoogleAccess = options.enums === String ? "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED" : 0;
                                 object.nodeGroupAffinity = null;
                                 object.shieldedInstanceConfig = null;
+                                object.confidentialInstanceConfig = null;
                             }
                             if (message.zoneUri != null && message.hasOwnProperty("zoneUri"))
                                 object.zoneUri = message.zoneUri;
@@ -5388,6 +5471,8 @@
                                 object.nodeGroupAffinity = $root.google.cloud.dataproc.v1.NodeGroupAffinity.toObject(message.nodeGroupAffinity, options);
                             if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
                                 object.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
+                            if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
+                                object.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
                             return object;
                         };
     
@@ -5840,6 +5925,193 @@
                         };
     
                         return ShieldedInstanceConfig;
+                    })();
+    
+                    v1.ConfidentialInstanceConfig = (function() {
+    
+                        /**
+                         * Properties of a ConfidentialInstanceConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IConfidentialInstanceConfig
+                         * @property {boolean|null} [enableConfidentialCompute] ConfidentialInstanceConfig enableConfidentialCompute
+                         */
+    
+                        /**
+                         * Constructs a new ConfidentialInstanceConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a ConfidentialInstanceConfig.
+                         * @implements IConfidentialInstanceConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IConfidentialInstanceConfig=} [properties] Properties to set
+                         */
+                        function ConfidentialInstanceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfidentialInstanceConfig enableConfidentialCompute.
+                         * @member {boolean} enableConfidentialCompute
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @instance
+                         */
+                        ConfidentialInstanceConfig.prototype.enableConfidentialCompute = false;
+    
+                        /**
+                         * Creates a new ConfidentialInstanceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IConfidentialInstanceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.ConfidentialInstanceConfig} ConfidentialInstanceConfig instance
+                         */
+                        ConfidentialInstanceConfig.create = function create(properties) {
+                            return new ConfidentialInstanceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfidentialInstanceConfig message. Does not implicitly {@link google.cloud.dataproc.v1.ConfidentialInstanceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IConfidentialInstanceConfig} message ConfidentialInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfidentialInstanceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableConfidentialCompute != null && Object.hasOwnProperty.call(message, "enableConfidentialCompute"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableConfidentialCompute);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfidentialInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ConfidentialInstanceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IConfidentialInstanceConfig} message ConfidentialInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfidentialInstanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfidentialInstanceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.ConfidentialInstanceConfig} ConfidentialInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfidentialInstanceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.enableConfidentialCompute = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfidentialInstanceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.ConfidentialInstanceConfig} ConfidentialInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfidentialInstanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfidentialInstanceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfidentialInstanceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
+                                if (typeof message.enableConfidentialCompute !== "boolean")
+                                    return "enableConfidentialCompute: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfidentialInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.ConfidentialInstanceConfig} ConfidentialInstanceConfig
+                         */
+                        ConfidentialInstanceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig();
+                            if (object.enableConfidentialCompute != null)
+                                message.enableConfidentialCompute = Boolean(object.enableConfidentialCompute);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfidentialInstanceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ConfidentialInstanceConfig} message ConfidentialInstanceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfidentialInstanceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableConfidentialCompute = false;
+                            if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
+                                object.enableConfidentialCompute = message.enableConfidentialCompute;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfidentialInstanceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfidentialInstanceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ConfidentialInstanceConfig;
                     })();
     
                     v1.InstanceGroupConfig = (function() {
@@ -7358,6 +7630,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 9:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -7413,6 +7686,10 @@
                             case "ERROR":
                             case 3:
                                 message.state = 3;
+                                break;
+                            case "ERROR_DUE_TO_UPDATE":
+                            case 9:
+                                message.state = 9;
                                 break;
                             case "DELETING":
                             case 4:
@@ -7508,6 +7785,7 @@
                          * @property {number} CREATING=1 CREATING value
                          * @property {number} RUNNING=2 RUNNING value
                          * @property {number} ERROR=3 ERROR value
+                         * @property {number} ERROR_DUE_TO_UPDATE=9 ERROR_DUE_TO_UPDATE value
                          * @property {number} DELETING=4 DELETING value
                          * @property {number} UPDATING=5 UPDATING value
                          * @property {number} STOPPING=6 STOPPING value
@@ -7520,6 +7798,7 @@
                             values[valuesById[1] = "CREATING"] = 1;
                             values[valuesById[2] = "RUNNING"] = 2;
                             values[valuesById[3] = "ERROR"] = 3;
+                            values[valuesById[9] = "ERROR_DUE_TO_UPDATE"] = 9;
                             values[valuesById[4] = "DELETING"] = 4;
                             values[valuesById[5] = "UPDATING"] = 5;
                             values[valuesById[6] = "STOPPING"] = 6;
@@ -9644,6 +9923,7 @@
                          * @property {string|null} [region] CreateClusterRequest region
                          * @property {google.cloud.dataproc.v1.ICluster|null} [cluster] CreateClusterRequest cluster
                          * @property {string|null} [requestId] CreateClusterRequest requestId
+                         * @property {google.cloud.dataproc.v1.FailureAction|null} [actionOnFailedPrimaryWorkers] CreateClusterRequest actionOnFailedPrimaryWorkers
                          */
     
                         /**
@@ -9694,6 +9974,14 @@
                         CreateClusterRequest.prototype.requestId = "";
     
                         /**
+                         * CreateClusterRequest actionOnFailedPrimaryWorkers.
+                         * @member {google.cloud.dataproc.v1.FailureAction} actionOnFailedPrimaryWorkers
+                         * @memberof google.cloud.dataproc.v1.CreateClusterRequest
+                         * @instance
+                         */
+                        CreateClusterRequest.prototype.actionOnFailedPrimaryWorkers = 0;
+    
+                        /**
                          * Creates a new CreateClusterRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.CreateClusterRequest
@@ -9725,6 +10013,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.region);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.actionOnFailedPrimaryWorkers != null && Object.hasOwnProperty.call(message, "actionOnFailedPrimaryWorkers"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.actionOnFailedPrimaryWorkers);
                             return writer;
                         };
     
@@ -9770,6 +10060,9 @@
                                     break;
                                 case 4:
                                     message.requestId = reader.string();
+                                    break;
+                                case 5:
+                                    message.actionOnFailedPrimaryWorkers = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9820,6 +10113,15 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.actionOnFailedPrimaryWorkers != null && message.hasOwnProperty("actionOnFailedPrimaryWorkers"))
+                                switch (message.actionOnFailedPrimaryWorkers) {
+                                default:
+                                    return "actionOnFailedPrimaryWorkers: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -9846,6 +10148,20 @@
                             }
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            switch (object.actionOnFailedPrimaryWorkers) {
+                            case "FAILURE_ACTION_UNSPECIFIED":
+                            case 0:
+                                message.actionOnFailedPrimaryWorkers = 0;
+                                break;
+                            case "NO_ACTION":
+                            case 1:
+                                message.actionOnFailedPrimaryWorkers = 1;
+                                break;
+                            case "DELETE":
+                            case 2:
+                                message.actionOnFailedPrimaryWorkers = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -9867,6 +10183,7 @@
                                 object.cluster = null;
                                 object.region = "";
                                 object.requestId = "";
+                                object.actionOnFailedPrimaryWorkers = options.enums === String ? "FAILURE_ACTION_UNSPECIFIED" : 0;
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
@@ -9876,6 +10193,8 @@
                                 object.region = message.region;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.actionOnFailedPrimaryWorkers != null && message.hasOwnProperty("actionOnFailedPrimaryWorkers"))
+                                object.actionOnFailedPrimaryWorkers = options.enums === String ? $root.google.cloud.dataproc.v1.FailureAction[message.actionOnFailedPrimaryWorkers] : message.actionOnFailedPrimaryWorkers;
                             return object;
                         };
     
@@ -12504,6 +12823,1413 @@
                         return ReservationAffinity;
                     })();
     
+                    v1.RuntimeConfig = (function() {
+    
+                        /**
+                         * Properties of a RuntimeConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IRuntimeConfig
+                         * @property {Object.<string,string>|null} [properties] RuntimeConfig properties
+                         */
+    
+                        /**
+                         * Constructs a new RuntimeConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a RuntimeConfig.
+                         * @implements IRuntimeConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IRuntimeConfig=} [properties] Properties to set
+                         */
+                        function RuntimeConfig(properties) {
+                            this.properties = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RuntimeConfig properties.
+                         * @member {Object.<string,string>} properties
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @instance
+                         */
+                        RuntimeConfig.prototype.properties = $util.emptyObject;
+    
+                        /**
+                         * Creates a new RuntimeConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IRuntimeConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.RuntimeConfig} RuntimeConfig instance
+                         */
+                        RuntimeConfig.create = function create(properties) {
+                            return new RuntimeConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RuntimeConfig message. Does not implicitly {@link google.cloud.dataproc.v1.RuntimeConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IRuntimeConfig} message RuntimeConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuntimeConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.properties != null && Object.hasOwnProperty.call(message, "properties"))
+                                for (var keys = Object.keys(message.properties), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.properties[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RuntimeConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.RuntimeConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IRuntimeConfig} message RuntimeConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuntimeConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RuntimeConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.RuntimeConfig} RuntimeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuntimeConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.RuntimeConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    if (message.properties === $util.emptyObject)
+                                        message.properties = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.properties[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RuntimeConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.RuntimeConfig} RuntimeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuntimeConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RuntimeConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RuntimeConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.properties != null && message.hasOwnProperty("properties")) {
+                                if (!$util.isObject(message.properties))
+                                    return "properties: object expected";
+                                var key = Object.keys(message.properties);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.properties[key[i]]))
+                                        return "properties: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RuntimeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.RuntimeConfig} RuntimeConfig
+                         */
+                        RuntimeConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.RuntimeConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.RuntimeConfig();
+                            if (object.properties) {
+                                if (typeof object.properties !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.RuntimeConfig.properties: object expected");
+                                message.properties = {};
+                                for (var keys = Object.keys(object.properties), i = 0; i < keys.length; ++i)
+                                    message.properties[keys[i]] = String(object.properties[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RuntimeConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.RuntimeConfig} message RuntimeConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RuntimeConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.properties = {};
+                            var keys2;
+                            if (message.properties && (keys2 = Object.keys(message.properties)).length) {
+                                object.properties = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.properties[keys2[j]] = message.properties[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RuntimeConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.RuntimeConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RuntimeConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RuntimeConfig;
+                    })();
+    
+                    v1.EnvironmentConfig = (function() {
+    
+                        /**
+                         * Properties of an EnvironmentConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IEnvironmentConfig
+                         * @property {google.cloud.dataproc.v1.IExecutionConfig|null} [executionConfig] EnvironmentConfig executionConfig
+                         * @property {google.cloud.dataproc.v1.IPeripheralsConfig|null} [peripheralsConfig] EnvironmentConfig peripheralsConfig
+                         */
+    
+                        /**
+                         * Constructs a new EnvironmentConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an EnvironmentConfig.
+                         * @implements IEnvironmentConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IEnvironmentConfig=} [properties] Properties to set
+                         */
+                        function EnvironmentConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EnvironmentConfig executionConfig.
+                         * @member {google.cloud.dataproc.v1.IExecutionConfig|null|undefined} executionConfig
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @instance
+                         */
+                        EnvironmentConfig.prototype.executionConfig = null;
+    
+                        /**
+                         * EnvironmentConfig peripheralsConfig.
+                         * @member {google.cloud.dataproc.v1.IPeripheralsConfig|null|undefined} peripheralsConfig
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @instance
+                         */
+                        EnvironmentConfig.prototype.peripheralsConfig = null;
+    
+                        /**
+                         * Creates a new EnvironmentConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IEnvironmentConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.EnvironmentConfig} EnvironmentConfig instance
+                         */
+                        EnvironmentConfig.create = function create(properties) {
+                            return new EnvironmentConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EnvironmentConfig message. Does not implicitly {@link google.cloud.dataproc.v1.EnvironmentConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IEnvironmentConfig} message EnvironmentConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnvironmentConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.executionConfig != null && Object.hasOwnProperty.call(message, "executionConfig"))
+                                $root.google.cloud.dataproc.v1.ExecutionConfig.encode(message.executionConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.peripheralsConfig != null && Object.hasOwnProperty.call(message, "peripheralsConfig"))
+                                $root.google.cloud.dataproc.v1.PeripheralsConfig.encode(message.peripheralsConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EnvironmentConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.EnvironmentConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IEnvironmentConfig} message EnvironmentConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EnvironmentConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EnvironmentConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.EnvironmentConfig} EnvironmentConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnvironmentConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.EnvironmentConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.executionConfig = $root.google.cloud.dataproc.v1.ExecutionConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.peripheralsConfig = $root.google.cloud.dataproc.v1.PeripheralsConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EnvironmentConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.EnvironmentConfig} EnvironmentConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EnvironmentConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EnvironmentConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EnvironmentConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.executionConfig != null && message.hasOwnProperty("executionConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.ExecutionConfig.verify(message.executionConfig);
+                                if (error)
+                                    return "executionConfig." + error;
+                            }
+                            if (message.peripheralsConfig != null && message.hasOwnProperty("peripheralsConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.PeripheralsConfig.verify(message.peripheralsConfig);
+                                if (error)
+                                    return "peripheralsConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EnvironmentConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.EnvironmentConfig} EnvironmentConfig
+                         */
+                        EnvironmentConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.EnvironmentConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.EnvironmentConfig();
+                            if (object.executionConfig != null) {
+                                if (typeof object.executionConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.EnvironmentConfig.executionConfig: object expected");
+                                message.executionConfig = $root.google.cloud.dataproc.v1.ExecutionConfig.fromObject(object.executionConfig);
+                            }
+                            if (object.peripheralsConfig != null) {
+                                if (typeof object.peripheralsConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.EnvironmentConfig.peripheralsConfig: object expected");
+                                message.peripheralsConfig = $root.google.cloud.dataproc.v1.PeripheralsConfig.fromObject(object.peripheralsConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EnvironmentConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.EnvironmentConfig} message EnvironmentConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EnvironmentConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.executionConfig = null;
+                                object.peripheralsConfig = null;
+                            }
+                            if (message.executionConfig != null && message.hasOwnProperty("executionConfig"))
+                                object.executionConfig = $root.google.cloud.dataproc.v1.ExecutionConfig.toObject(message.executionConfig, options);
+                            if (message.peripheralsConfig != null && message.hasOwnProperty("peripheralsConfig"))
+                                object.peripheralsConfig = $root.google.cloud.dataproc.v1.PeripheralsConfig.toObject(message.peripheralsConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EnvironmentConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.EnvironmentConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EnvironmentConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return EnvironmentConfig;
+                    })();
+    
+                    v1.ExecutionConfig = (function() {
+    
+                        /**
+                         * Properties of an ExecutionConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IExecutionConfig
+                         * @property {string|null} [serviceAccount] ExecutionConfig serviceAccount
+                         * @property {string|null} [networkUri] ExecutionConfig networkUri
+                         * @property {string|null} [subnetworkUri] ExecutionConfig subnetworkUri
+                         * @property {Array.<string>|null} [networkTags] ExecutionConfig networkTags
+                         * @property {string|null} [kmsKey] ExecutionConfig kmsKey
+                         */
+    
+                        /**
+                         * Constructs a new ExecutionConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an ExecutionConfig.
+                         * @implements IExecutionConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IExecutionConfig=} [properties] Properties to set
+                         */
+                        function ExecutionConfig(properties) {
+                            this.networkTags = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecutionConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.serviceAccount = "";
+    
+                        /**
+                         * ExecutionConfig networkUri.
+                         * @member {string|null|undefined} networkUri
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.networkUri = null;
+    
+                        /**
+                         * ExecutionConfig subnetworkUri.
+                         * @member {string|null|undefined} subnetworkUri
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.subnetworkUri = null;
+    
+                        /**
+                         * ExecutionConfig networkTags.
+                         * @member {Array.<string>} networkTags
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.networkTags = $util.emptyArray;
+    
+                        /**
+                         * ExecutionConfig kmsKey.
+                         * @member {string} kmsKey
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        ExecutionConfig.prototype.kmsKey = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExecutionConfig network.
+                         * @member {"networkUri"|"subnetworkUri"|undefined} network
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         */
+                        Object.defineProperty(ExecutionConfig.prototype, "network", {
+                            get: $util.oneOfGetter($oneOfFields = ["networkUri", "subnetworkUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExecutionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IExecutionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.ExecutionConfig} ExecutionConfig instance
+                         */
+                        ExecutionConfig.create = function create(properties) {
+                            return new ExecutionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecutionConfig message. Does not implicitly {@link google.cloud.dataproc.v1.ExecutionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IExecutionConfig} message ExecutionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecutionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.networkUri);
+                            if (message.subnetworkUri != null && Object.hasOwnProperty.call(message, "subnetworkUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.subnetworkUri);
+                            if (message.networkTags != null && message.networkTags.length)
+                                for (var i = 0; i < message.networkTags.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.networkTags[i]);
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.kmsKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecutionConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ExecutionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IExecutionConfig} message ExecutionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecutionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecutionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.ExecutionConfig} ExecutionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecutionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.ExecutionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.serviceAccount = reader.string();
+                                    break;
+                                case 4:
+                                    message.networkUri = reader.string();
+                                    break;
+                                case 5:
+                                    message.subnetworkUri = reader.string();
+                                    break;
+                                case 6:
+                                    if (!(message.networkTags && message.networkTags.length))
+                                        message.networkTags = [];
+                                    message.networkTags.push(reader.string());
+                                    break;
+                                case 7:
+                                    message.kmsKey = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecutionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.ExecutionConfig} ExecutionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecutionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecutionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecutionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri")) {
+                                properties.network = 1;
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            }
+                            if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri")) {
+                                if (properties.network === 1)
+                                    return "network: multiple values";
+                                properties.network = 1;
+                                if (!$util.isString(message.subnetworkUri))
+                                    return "subnetworkUri: string expected";
+                            }
+                            if (message.networkTags != null && message.hasOwnProperty("networkTags")) {
+                                if (!Array.isArray(message.networkTags))
+                                    return "networkTags: array expected";
+                                for (var i = 0; i < message.networkTags.length; ++i)
+                                    if (!$util.isString(message.networkTags[i]))
+                                        return "networkTags: string[] expected";
+                            }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecutionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.ExecutionConfig} ExecutionConfig
+                         */
+                        ExecutionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.ExecutionConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.ExecutionConfig();
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            if (object.subnetworkUri != null)
+                                message.subnetworkUri = String(object.subnetworkUri);
+                            if (object.networkTags) {
+                                if (!Array.isArray(object.networkTags))
+                                    throw TypeError(".google.cloud.dataproc.v1.ExecutionConfig.networkTags: array expected");
+                                message.networkTags = [];
+                                for (var i = 0; i < object.networkTags.length; ++i)
+                                    message.networkTags[i] = String(object.networkTags[i]);
+                            }
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecutionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ExecutionConfig} message ExecutionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecutionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.networkTags = [];
+                            if (options.defaults) {
+                                object.serviceAccount = "";
+                                object.kmsKey = "";
+                            }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri")) {
+                                object.networkUri = message.networkUri;
+                                if (options.oneofs)
+                                    object.network = "networkUri";
+                            }
+                            if (message.subnetworkUri != null && message.hasOwnProperty("subnetworkUri")) {
+                                object.subnetworkUri = message.subnetworkUri;
+                                if (options.oneofs)
+                                    object.network = "subnetworkUri";
+                            }
+                            if (message.networkTags && message.networkTags.length) {
+                                object.networkTags = [];
+                                for (var j = 0; j < message.networkTags.length; ++j)
+                                    object.networkTags[j] = message.networkTags[j];
+                            }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                object.kmsKey = message.kmsKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecutionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.ExecutionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecutionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExecutionConfig;
+                    })();
+    
+                    v1.SparkHistoryServerConfig = (function() {
+    
+                        /**
+                         * Properties of a SparkHistoryServerConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface ISparkHistoryServerConfig
+                         * @property {string|null} [dataprocCluster] SparkHistoryServerConfig dataprocCluster
+                         */
+    
+                        /**
+                         * Constructs a new SparkHistoryServerConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a SparkHistoryServerConfig.
+                         * @implements ISparkHistoryServerConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.ISparkHistoryServerConfig=} [properties] Properties to set
+                         */
+                        function SparkHistoryServerConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SparkHistoryServerConfig dataprocCluster.
+                         * @member {string} dataprocCluster
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @instance
+                         */
+                        SparkHistoryServerConfig.prototype.dataprocCluster = "";
+    
+                        /**
+                         * Creates a new SparkHistoryServerConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ISparkHistoryServerConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.SparkHistoryServerConfig} SparkHistoryServerConfig instance
+                         */
+                        SparkHistoryServerConfig.create = function create(properties) {
+                            return new SparkHistoryServerConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SparkHistoryServerConfig message. Does not implicitly {@link google.cloud.dataproc.v1.SparkHistoryServerConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ISparkHistoryServerConfig} message SparkHistoryServerConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SparkHistoryServerConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataprocCluster != null && Object.hasOwnProperty.call(message, "dataprocCluster"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataprocCluster);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SparkHistoryServerConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.SparkHistoryServerConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.ISparkHistoryServerConfig} message SparkHistoryServerConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SparkHistoryServerConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SparkHistoryServerConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.SparkHistoryServerConfig} SparkHistoryServerConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SparkHistoryServerConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.SparkHistoryServerConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dataprocCluster = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SparkHistoryServerConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.SparkHistoryServerConfig} SparkHistoryServerConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SparkHistoryServerConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SparkHistoryServerConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SparkHistoryServerConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataprocCluster != null && message.hasOwnProperty("dataprocCluster"))
+                                if (!$util.isString(message.dataprocCluster))
+                                    return "dataprocCluster: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SparkHistoryServerConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.SparkHistoryServerConfig} SparkHistoryServerConfig
+                         */
+                        SparkHistoryServerConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.SparkHistoryServerConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.SparkHistoryServerConfig();
+                            if (object.dataprocCluster != null)
+                                message.dataprocCluster = String(object.dataprocCluster);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SparkHistoryServerConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.SparkHistoryServerConfig} message SparkHistoryServerConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SparkHistoryServerConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dataprocCluster = "";
+                            if (message.dataprocCluster != null && message.hasOwnProperty("dataprocCluster"))
+                                object.dataprocCluster = message.dataprocCluster;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SparkHistoryServerConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.SparkHistoryServerConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SparkHistoryServerConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SparkHistoryServerConfig;
+                    })();
+    
+                    v1.PeripheralsConfig = (function() {
+    
+                        /**
+                         * Properties of a PeripheralsConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IPeripheralsConfig
+                         * @property {string|null} [metastoreService] PeripheralsConfig metastoreService
+                         * @property {google.cloud.dataproc.v1.ISparkHistoryServerConfig|null} [sparkHistoryServerConfig] PeripheralsConfig sparkHistoryServerConfig
+                         */
+    
+                        /**
+                         * Constructs a new PeripheralsConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a PeripheralsConfig.
+                         * @implements IPeripheralsConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IPeripheralsConfig=} [properties] Properties to set
+                         */
+                        function PeripheralsConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PeripheralsConfig metastoreService.
+                         * @member {string} metastoreService
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @instance
+                         */
+                        PeripheralsConfig.prototype.metastoreService = "";
+    
+                        /**
+                         * PeripheralsConfig sparkHistoryServerConfig.
+                         * @member {google.cloud.dataproc.v1.ISparkHistoryServerConfig|null|undefined} sparkHistoryServerConfig
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @instance
+                         */
+                        PeripheralsConfig.prototype.sparkHistoryServerConfig = null;
+    
+                        /**
+                         * Creates a new PeripheralsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPeripheralsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.PeripheralsConfig} PeripheralsConfig instance
+                         */
+                        PeripheralsConfig.create = function create(properties) {
+                            return new PeripheralsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PeripheralsConfig message. Does not implicitly {@link google.cloud.dataproc.v1.PeripheralsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPeripheralsConfig} message PeripheralsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PeripheralsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metastoreService != null && Object.hasOwnProperty.call(message, "metastoreService"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.metastoreService);
+                            if (message.sparkHistoryServerConfig != null && Object.hasOwnProperty.call(message, "sparkHistoryServerConfig"))
+                                $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.encode(message.sparkHistoryServerConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PeripheralsConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.PeripheralsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IPeripheralsConfig} message PeripheralsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PeripheralsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PeripheralsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.PeripheralsConfig} PeripheralsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PeripheralsConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.PeripheralsConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.metastoreService = reader.string();
+                                    break;
+                                case 2:
+                                    message.sparkHistoryServerConfig = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PeripheralsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.PeripheralsConfig} PeripheralsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PeripheralsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PeripheralsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PeripheralsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metastoreService != null && message.hasOwnProperty("metastoreService"))
+                                if (!$util.isString(message.metastoreService))
+                                    return "metastoreService: string expected";
+                            if (message.sparkHistoryServerConfig != null && message.hasOwnProperty("sparkHistoryServerConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.verify(message.sparkHistoryServerConfig);
+                                if (error)
+                                    return "sparkHistoryServerConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PeripheralsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.PeripheralsConfig} PeripheralsConfig
+                         */
+                        PeripheralsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.PeripheralsConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.PeripheralsConfig();
+                            if (object.metastoreService != null)
+                                message.metastoreService = String(object.metastoreService);
+                            if (object.sparkHistoryServerConfig != null) {
+                                if (typeof object.sparkHistoryServerConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.PeripheralsConfig.sparkHistoryServerConfig: object expected");
+                                message.sparkHistoryServerConfig = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.fromObject(object.sparkHistoryServerConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PeripheralsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.PeripheralsConfig} message PeripheralsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PeripheralsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.metastoreService = "";
+                                object.sparkHistoryServerConfig = null;
+                            }
+                            if (message.metastoreService != null && message.hasOwnProperty("metastoreService"))
+                                object.metastoreService = message.metastoreService;
+                            if (message.sparkHistoryServerConfig != null && message.hasOwnProperty("sparkHistoryServerConfig"))
+                                object.sparkHistoryServerConfig = $root.google.cloud.dataproc.v1.SparkHistoryServerConfig.toObject(message.sparkHistoryServerConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PeripheralsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.PeripheralsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PeripheralsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PeripheralsConfig;
+                    })();
+    
+                    v1.RuntimeInfo = (function() {
+    
+                        /**
+                         * Properties of a RuntimeInfo.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IRuntimeInfo
+                         * @property {Object.<string,string>|null} [endpoints] RuntimeInfo endpoints
+                         * @property {string|null} [outputUri] RuntimeInfo outputUri
+                         */
+    
+                        /**
+                         * Constructs a new RuntimeInfo.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a RuntimeInfo.
+                         * @implements IRuntimeInfo
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IRuntimeInfo=} [properties] Properties to set
+                         */
+                        function RuntimeInfo(properties) {
+                            this.endpoints = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RuntimeInfo endpoints.
+                         * @member {Object.<string,string>} endpoints
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @instance
+                         */
+                        RuntimeInfo.prototype.endpoints = $util.emptyObject;
+    
+                        /**
+                         * RuntimeInfo outputUri.
+                         * @member {string} outputUri
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @instance
+                         */
+                        RuntimeInfo.prototype.outputUri = "";
+    
+                        /**
+                         * Creates a new RuntimeInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IRuntimeInfo=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.RuntimeInfo} RuntimeInfo instance
+                         */
+                        RuntimeInfo.create = function create(properties) {
+                            return new RuntimeInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RuntimeInfo message. Does not implicitly {@link google.cloud.dataproc.v1.RuntimeInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IRuntimeInfo} message RuntimeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuntimeInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.endpoints != null && Object.hasOwnProperty.call(message, "endpoints"))
+                                for (var keys = Object.keys(message.endpoints), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.endpoints[keys[i]]).ldelim();
+                            if (message.outputUri != null && Object.hasOwnProperty.call(message, "outputUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.outputUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RuntimeInfo message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.RuntimeInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IRuntimeInfo} message RuntimeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuntimeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RuntimeInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.RuntimeInfo} RuntimeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuntimeInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.RuntimeInfo(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (message.endpoints === $util.emptyObject)
+                                        message.endpoints = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.endpoints[key] = value;
+                                    break;
+                                case 2:
+                                    message.outputUri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RuntimeInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.RuntimeInfo} RuntimeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuntimeInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RuntimeInfo message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RuntimeInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.endpoints != null && message.hasOwnProperty("endpoints")) {
+                                if (!$util.isObject(message.endpoints))
+                                    return "endpoints: object expected";
+                                var key = Object.keys(message.endpoints);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.endpoints[key[i]]))
+                                        return "endpoints: string{k:string} expected";
+                            }
+                            if (message.outputUri != null && message.hasOwnProperty("outputUri"))
+                                if (!$util.isString(message.outputUri))
+                                    return "outputUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RuntimeInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.RuntimeInfo} RuntimeInfo
+                         */
+                        RuntimeInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.RuntimeInfo)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.RuntimeInfo();
+                            if (object.endpoints) {
+                                if (typeof object.endpoints !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.RuntimeInfo.endpoints: object expected");
+                                message.endpoints = {};
+                                for (var keys = Object.keys(object.endpoints), i = 0; i < keys.length; ++i)
+                                    message.endpoints[keys[i]] = String(object.endpoints[keys[i]]);
+                            }
+                            if (object.outputUri != null)
+                                message.outputUri = String(object.outputUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RuntimeInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @static
+                         * @param {google.cloud.dataproc.v1.RuntimeInfo} message RuntimeInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RuntimeInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.endpoints = {};
+                            if (options.defaults)
+                                object.outputUri = "";
+                            var keys2;
+                            if (message.endpoints && (keys2 = Object.keys(message.endpoints)).length) {
+                                object.endpoints = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.endpoints[keys2[j]] = message.endpoints[keys2[j]];
+                            }
+                            if (message.outputUri != null && message.hasOwnProperty("outputUri"))
+                                object.outputUri = message.outputUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RuntimeInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.RuntimeInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RuntimeInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RuntimeInfo;
+                    })();
+    
                     /**
                      * Component enum.
                      * @name google.cloud.dataproc.v1.Component
@@ -12537,6 +14263,22 @@
                         values[valuesById[10] = "SOLR"] = 10;
                         values[valuesById[4] = "ZEPPELIN"] = 4;
                         values[valuesById[8] = "ZOOKEEPER"] = 8;
+                        return values;
+                    })();
+    
+                    /**
+                     * FailureAction enum.
+                     * @name google.cloud.dataproc.v1.FailureAction
+                     * @enum {number}
+                     * @property {number} FAILURE_ACTION_UNSPECIFIED=0 FAILURE_ACTION_UNSPECIFIED value
+                     * @property {number} NO_ACTION=1 NO_ACTION value
+                     * @property {number} DELETE=2 DELETE value
+                     */
+                    v1.FailureAction = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FAILURE_ACTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NO_ACTION"] = 1;
+                        values[valuesById[2] = "DELETE"] = 2;
                         return values;
                     })();
     
@@ -21080,6 +22822,438 @@
                         };
     
                         return DeleteJobRequest;
+                    })();
+    
+                    v1.BatchOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a BatchOperationMetadata.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IBatchOperationMetadata
+                         * @property {string|null} [batch] BatchOperationMetadata batch
+                         * @property {string|null} [batchUuid] BatchOperationMetadata batchUuid
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BatchOperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [doneTime] BatchOperationMetadata doneTime
+                         * @property {google.cloud.dataproc.v1.BatchOperationMetadata.BatchOperationType|null} [operationType] BatchOperationMetadata operationType
+                         * @property {string|null} [description] BatchOperationMetadata description
+                         * @property {Object.<string,string>|null} [labels] BatchOperationMetadata labels
+                         * @property {Array.<string>|null} [warnings] BatchOperationMetadata warnings
+                         */
+    
+                        /**
+                         * Constructs a new BatchOperationMetadata.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a BatchOperationMetadata.
+                         * @implements IBatchOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IBatchOperationMetadata=} [properties] Properties to set
+                         */
+                        function BatchOperationMetadata(properties) {
+                            this.labels = {};
+                            this.warnings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchOperationMetadata batch.
+                         * @member {string} batch
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.batch = "";
+    
+                        /**
+                         * BatchOperationMetadata batchUuid.
+                         * @member {string} batchUuid
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.batchUuid = "";
+    
+                        /**
+                         * BatchOperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * BatchOperationMetadata doneTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} doneTime
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.doneTime = null;
+    
+                        /**
+                         * BatchOperationMetadata operationType.
+                         * @member {google.cloud.dataproc.v1.BatchOperationMetadata.BatchOperationType} operationType
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.operationType = 0;
+    
+                        /**
+                         * BatchOperationMetadata description.
+                         * @member {string} description
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.description = "";
+    
+                        /**
+                         * BatchOperationMetadata labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * BatchOperationMetadata warnings.
+                         * @member {Array.<string>} warnings
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         */
+                        BatchOperationMetadata.prototype.warnings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IBatchOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.BatchOperationMetadata} BatchOperationMetadata instance
+                         */
+                        BatchOperationMetadata.create = function create(properties) {
+                            return new BatchOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchOperationMetadata message. Does not implicitly {@link google.cloud.dataproc.v1.BatchOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IBatchOperationMetadata} message BatchOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.batch != null && Object.hasOwnProperty.call(message, "batch"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.batch);
+                            if (message.batchUuid != null && Object.hasOwnProperty.call(message, "batchUuid"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.batchUuid);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.doneTime != null && Object.hasOwnProperty.call(message, "doneTime"))
+                                $root.google.protobuf.Timestamp.encode(message.doneTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.operationType);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.warnings != null && message.warnings.length)
+                                for (var i = 0; i < message.warnings.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.warnings[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.BatchOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IBatchOperationMetadata} message BatchOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.BatchOperationMetadata} BatchOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchOperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.BatchOperationMetadata(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.batch = reader.string();
+                                    break;
+                                case 2:
+                                    message.batchUuid = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.doneTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.operationType = reader.int32();
+                                    break;
+                                case 7:
+                                    message.description = reader.string();
+                                    break;
+                                case 8:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 9:
+                                    if (!(message.warnings && message.warnings.length))
+                                        message.warnings = [];
+                                    message.warnings.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.BatchOperationMetadata} BatchOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.batch != null && message.hasOwnProperty("batch"))
+                                if (!$util.isString(message.batch))
+                                    return "batch: string expected";
+                            if (message.batchUuid != null && message.hasOwnProperty("batchUuid"))
+                                if (!$util.isString(message.batchUuid))
+                                    return "batchUuid: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.doneTime != null && message.hasOwnProperty("doneTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.doneTime);
+                                if (error)
+                                    return "doneTime." + error;
+                            }
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                switch (message.operationType) {
+                                default:
+                                    return "operationType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.warnings != null && message.hasOwnProperty("warnings")) {
+                                if (!Array.isArray(message.warnings))
+                                    return "warnings: array expected";
+                                for (var i = 0; i < message.warnings.length; ++i)
+                                    if (!$util.isString(message.warnings[i]))
+                                        return "warnings: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.BatchOperationMetadata} BatchOperationMetadata
+                         */
+                        BatchOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.BatchOperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.BatchOperationMetadata();
+                            if (object.batch != null)
+                                message.batch = String(object.batch);
+                            if (object.batchUuid != null)
+                                message.batchUuid = String(object.batchUuid);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.BatchOperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.doneTime != null) {
+                                if (typeof object.doneTime !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.BatchOperationMetadata.doneTime: object expected");
+                                message.doneTime = $root.google.protobuf.Timestamp.fromObject(object.doneTime);
+                            }
+                            switch (object.operationType) {
+                            case "BATCH_OPERATION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.operationType = 0;
+                                break;
+                            case "BATCH":
+                            case 1:
+                                message.operationType = 1;
+                                break;
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.BatchOperationMetadata.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.warnings) {
+                                if (!Array.isArray(object.warnings))
+                                    throw TypeError(".google.cloud.dataproc.v1.BatchOperationMetadata.warnings: array expected");
+                                message.warnings = [];
+                                for (var i = 0; i < object.warnings.length; ++i)
+                                    message.warnings[i] = String(object.warnings[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @static
+                         * @param {google.cloud.dataproc.v1.BatchOperationMetadata} message BatchOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchOperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.warnings = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.batch = "";
+                                object.batchUuid = "";
+                                object.createTime = null;
+                                object.doneTime = null;
+                                object.operationType = options.enums === String ? "BATCH_OPERATION_TYPE_UNSPECIFIED" : 0;
+                                object.description = "";
+                            }
+                            if (message.batch != null && message.hasOwnProperty("batch"))
+                                object.batch = message.batch;
+                            if (message.batchUuid != null && message.hasOwnProperty("batchUuid"))
+                                object.batchUuid = message.batchUuid;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.doneTime != null && message.hasOwnProperty("doneTime"))
+                                object.doneTime = $root.google.protobuf.Timestamp.toObject(message.doneTime, options);
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = options.enums === String ? $root.google.cloud.dataproc.v1.BatchOperationMetadata.BatchOperationType[message.operationType] : message.operationType;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.warnings && message.warnings.length) {
+                                object.warnings = [];
+                                for (var j = 0; j < message.warnings.length; ++j)
+                                    object.warnings[j] = message.warnings[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.BatchOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * BatchOperationType enum.
+                         * @name google.cloud.dataproc.v1.BatchOperationMetadata.BatchOperationType
+                         * @enum {number}
+                         * @property {number} BATCH_OPERATION_TYPE_UNSPECIFIED=0 BATCH_OPERATION_TYPE_UNSPECIFIED value
+                         * @property {number} BATCH=1 BATCH value
+                         */
+                        BatchOperationMetadata.BatchOperationType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BATCH_OPERATION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BATCH"] = 1;
+                            return values;
+                        })();
+    
+                        return BatchOperationMetadata;
                     })();
     
                     v1.ClusterOperationStatus = (function() {

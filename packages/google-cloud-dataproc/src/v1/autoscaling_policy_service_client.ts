@@ -926,7 +926,8 @@ export class AutoscalingPolicyServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAutoscalingPolicies.createStream(
       this.innerApiCalls.listAutoscalingPolicies as gax.GaxCall,
@@ -987,7 +988,8 @@ export class AutoscalingPolicyServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAutoscalingPolicies.asyncIterate(
       this.innerApiCalls['listAutoscalingPolicies'] as GaxCall,

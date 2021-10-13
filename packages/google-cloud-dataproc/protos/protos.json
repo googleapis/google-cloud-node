@@ -186,6 +186,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -902,6 +910,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "confidentialInstanceConfig": {
+                          "type": "ConfidentialInstanceConfig",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -945,6 +960,17 @@
                         "enableIntegrityMonitoring": {
                           "type": "bool",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ConfidentialInstanceConfig": {
+                      "fields": {
+                        "enableConfidentialCompute": {
+                          "type": "bool",
+                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1147,6 +1173,7 @@
                             "CREATING": 1,
                             "RUNNING": 2,
                             "ERROR": 3,
+                            "ERROR_DUE_TO_UPDATE": 9,
                             "DELETING": 4,
                             "UPDATING": 5,
                             "STOPPING": 6,
@@ -1421,6 +1448,13 @@
                         "requestId": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "actionOnFailedPrimaryWorkers": {
+                          "type": "FailureAction",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1752,6 +1786,132 @@
                         }
                       }
                     },
+                    "RuntimeConfig": {
+                      "fields": {
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EnvironmentConfig": {
+                      "fields": {
+                        "executionConfig": {
+                          "type": "ExecutionConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "peripheralsConfig": {
+                          "type": "PeripheralsConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExecutionConfig": {
+                      "oneofs": {
+                        "network": {
+                          "oneof": [
+                            "networkUri",
+                            "subnetworkUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "subnetworkUri": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SparkHistoryServerConfig": {
+                      "fields": {
+                        "dataprocCluster": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PeripheralsConfig": {
+                      "fields": {
+                        "metastoreService": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkHistoryServerConfig": {
+                          "type": "SparkHistoryServerConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RuntimeInfo": {
+                      "fields": {
+                        "endpoints": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "outputUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Component": {
                       "values": {
                         "COMPONENT_UNSPECIFIED": 0,
@@ -1767,6 +1927,13 @@
                         "SOLR": 10,
                         "ZEPPELIN": 4,
                         "ZOOKEEPER": 8
+                      }
+                    },
+                    "FailureAction": {
+                      "values": {
+                        "FAILURE_ACTION_UNSPECIFIED": 0,
+                        "NO_ACTION": 1,
+                        "DELETE": 2
                       }
                     },
                     "JobController": {
@@ -2995,6 +3162,52 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchOperationMetadata": {
+                      "fields": {
+                        "batch": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "batchUuid": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "doneTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "operationType": {
+                          "type": "BatchOperationType",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "warnings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "BatchOperationType": {
+                          "values": {
+                            "BATCH_OPERATION_TYPE_UNSPECIFIED": 0,
+                            "BATCH": 1
                           }
                         }
                       }

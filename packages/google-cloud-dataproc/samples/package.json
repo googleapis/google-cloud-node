@@ -6,7 +6,7 @@
     "*.js"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "repository": "googleapis/nodejs-dataproc",
   "private": true,
