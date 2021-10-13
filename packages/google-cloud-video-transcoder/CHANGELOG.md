@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.7.2](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.7.1...v1.7.2) (2021-10-13)
+
+
+### Bug Fixes
+
+* remove Encryption settings that were published due to a sync issue BREAKING CHANGE: requests specifying Encryption settings are rejected by the server ([1509f5c](https://www.github.com/googleapis/nodejs-video-transcoder/commit/1509f5ce94912bb64fc48103bbc21fe79d81b277))
+* update nodejs package name to video-transcoder ([#119](https://www.github.com/googleapis/nodejs-video-transcoder/issues/119)) ([1509f5c](https://www.github.com/googleapis/nodejs-video-transcoder/commit/1509f5ce94912bb64fc48103bbc21fe79d81b277))
+
 ### [1.7.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.7.0...v1.7.1) (2021-09-09)
 
 
