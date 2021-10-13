@@ -58,31 +58,49 @@ npm install @google-cloud/access-context-manager
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. Resource name for the container to list AccessPolicy instances
+ *  from.
+ *  Format:
+ *  `organizations/{org_id}`
+ */
+// const parent = 'abc123'
+/**
+ *  Number of AccessPolicy instances to include in the list. Default 100.
+ */
+// const pageSize = 1234
+/**
+ *  Next page token for the next batch of AccessPolicy instances. Defaults to
+ *  the first page of results.
+ */
+// const pageToken = 'abc123'
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {
-  AccessContextManagerClient,
-} = require('@google-cloud/access-context-manager');
+// Imports the Accesscontextmanager library
+const {AccessContextManagerClient} =
+  require('@google-cloud/access-context-manager').v1;
 
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
+// Instantiates a client
+const accesscontextmanagerClient = new AccessContextManagerClient();
 
-// Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {AccessContextManagerClient}();
+async function listAccessPolicies() {
+  // Construct request
+  const request = {
+    parent,
+  };
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
-  console.log(
-    'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
+  // Run request
+  const iterable = await accesscontextmanagerClient.listAccessPoliciesAsync(
+    request
   );
-  // const [thing] = await client.methodName({
-  // });
-  // console.info(thing);
+  for await (const response of iterable) {
+    console.log(response);
+  }
 }
-doSomething();
+
+listAccessPolicies();
 
 ```
 

@@ -17,36 +17,10 @@
 
 'use strict';
 
-const path = require('path');
-const cp = require('child_process');
-const {before, describe, it} = require('mocha');
-// eslint-disable-next-line node/no-missing-require
-const {
-  AccessContextManagerClient,
-} = require('@google-cloud/access-context-manager');
-// eslint-disable-next-line no-unused-vars, node/no-missing-require
-const {assert} = require('chai');
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const cwd = path.join(__dirname, '..');
-
-const client = new {AccessContextManagerClient}();
+const {describe, it} = require('mocha');
 
 describe('Quickstart', () => {
-  //TODO: remove this if not using the projectId
-  // eslint-disable-next-line no-unused-vars
-  let projectId;
-
-  before(async () => {
-    // eslint-disable-next-line no-unused-vars
-    projectId = await client.getProjectId();
-  });
-
   it('should run quickstart', async () => {
-    //TODO: remove this line
-    // eslint-disable-next-line no-unused-vars
-    const stdout = execSync('node ./quickstart.js', {cwd});
-    //assert(stdout, stdout !== null);
+    // TODO: add test.
   });
 });
