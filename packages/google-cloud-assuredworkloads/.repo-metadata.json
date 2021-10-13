@@ -3,7 +3,7 @@
   "api_id": "assuredworkloads.googleapis.com",
   "distribution_name": "@google-cloud/assured-workloads",
   "release_level": "beta",
-  "default_version": "v1beta1",
+  "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Assured Workloads for Government",
   "repo": "googleapis/nodejs-assured-workloads",

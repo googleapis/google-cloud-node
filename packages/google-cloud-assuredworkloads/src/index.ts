@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
-const AssuredWorkloadsServiceClient = v1beta1.AssuredWorkloadsServiceClient;
-type AssuredWorkloadsServiceClient = v1beta1.AssuredWorkloadsServiceClient;
+const AssuredWorkloadsServiceClient = v1.AssuredWorkloadsServiceClient;
+type AssuredWorkloadsServiceClient = v1.AssuredWorkloadsServiceClient;
 
 export {v1, v1beta1, AssuredWorkloadsServiceClient};
 export default {v1, v1beta1, AssuredWorkloadsServiceClient};
