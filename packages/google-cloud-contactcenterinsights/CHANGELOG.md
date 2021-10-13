@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.6.0...v1.7.0) (2021-10-01)
+
+
+### Features
+
+* deprecate issue_matches docs: if conversation medium is unspecified, it will default to PHONE_CALL ([#68](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/68)) ([44c03e9](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/44c03e9540e6eaea24f0ad02a0479042e623ef53))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.5.0...v1.6.0) (2021-09-28)
 
 
