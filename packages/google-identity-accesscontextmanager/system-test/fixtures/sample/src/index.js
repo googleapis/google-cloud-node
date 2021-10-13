@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const accesscontextmanager = require('@google-cloud/accesscontextmanager');
+const accesscontextmanager = require('@google-cloud/access-context-manager');
 
 function main() {
   const accessContextManagerClient =

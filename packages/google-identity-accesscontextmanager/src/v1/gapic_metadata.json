@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.identity.accesscontextmanager.v1",
-  "libraryPackage": "@google-cloud/accesscontextmanager",
+  "libraryPackage": "@google-cloud/access-context-manager",
   "services": {
     "AccessContextManager": {
       "clients": {

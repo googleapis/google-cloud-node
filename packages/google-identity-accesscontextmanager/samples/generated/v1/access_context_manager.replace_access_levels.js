@@ -48,7 +48,7 @@ function main(parent, accessLevels) {
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
-    require('@google-cloud/accesscontextmanager').v1;
+    require('@google-cloud/access-context-manager').v1;
 
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
