@@ -1301,7 +1301,8 @@ export class DatastoreAdminClient {
       gax.routingHeader.fromParams({
         project_id: request.projectId || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listIndexes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIndexes.createStream(
       this.innerApiCalls.listIndexes as gax.GaxCall,
@@ -1353,7 +1354,8 @@ export class DatastoreAdminClient {
         project_id: request.projectId || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listIndexes'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
