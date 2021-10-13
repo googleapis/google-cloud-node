@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v3.0.0...v3.1.0) (2021-10-13)
+
+
+### Features
+
+* add Dataproc Serverless for Spark Batches API ([#543](https://www.github.com/googleapis/nodejs-dataproc/issues/543)) ([012b56f](https://www.github.com/googleapis/nodejs-dataproc/commit/012b56fd656b22fe555c9edafbfb9a8f20c91358))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.5.0...v3.0.0) (2021-09-30)
 
 
