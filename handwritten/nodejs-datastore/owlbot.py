@@ -18,6 +18,7 @@ import synthtool.languages.node as node
 import logging
 from pathlib import Path
 from synthtool import _tracked_paths
+from synthtool import shell
 import shutil
 
 logging.basicConfig(level=logging.DEBUG)
@@ -57,3 +58,6 @@ templates = common_templates.node_library(source_location="build/src")
 s.copy(templates)
 
 node.postprocess_gapic_library_hermetic()
+
+# Remove generated samples from veneer library:
+shell.run(('rm', '-rf', 'samples/generated'), hide_output = False)
