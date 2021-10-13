@@ -104,9 +104,9 @@ class DatastoreRequest {
    *     entity[datastore.KEY] = datastore.key('Kind')
    *     datastore.save(entity, (err) => {})
    *
-   * @private
+   * @internal
    *
-   * @see [#1803]{@link https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1803}
+   * @see {@link https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1803}
    *
    * @param {object} obj The user's input object.
    */

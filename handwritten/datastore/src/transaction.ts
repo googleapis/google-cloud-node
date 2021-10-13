@@ -37,7 +37,7 @@ import {
  * never partially applied. Either all of the operations in the transaction are
  * applied, or none of them are applied.
  *
- * @see [Transactions Reference]{@link https://cloud.google.com/datastore/docs/concepts/transactions}
+ * @see {@link https://cloud.google.com/datastore/docs/concepts/transactions| Transactions Reference}
  *
  * @class
  * @extends {Request}
@@ -265,7 +265,7 @@ class Transaction extends DatastoreRequest {
    * Create a query for the specified kind. See {module:datastore/query} for all
    * of the available methods.
    *
-   * @see [Datastore Queries]{@link https://cloud.google.com/datastore/docs/concepts/queries}
+   * @see {@link https://cloud.google.com/datastore/docs/concepts/queries| Datastore Queries}
    *
    * @see {@link Query}
    *
