@@ -1887,25 +1887,14 @@ class Bucket extends ServiceObject {
 
     const MAX_PARALLEL_LIMIT = 10;
     const errors = [] as Error[];
-    this.disableAutoRetryConditionallyIdempotent_(
-      this.methods.delete,
-      AvailableServiceObjectMethods.delete
-    );
-
-    Object.assign(query, this.instancePreconditionOpts, query);
 
     const deleteFile = (file: File) => {
-      return file
-        .delete(query)
-        .catch(err => {
-          if (!query.force) {
-            throw err;
-          }
-          errors.push(err);
-        })
-        .finally(() => {
-          this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-        });
+      return file.delete(query).catch(err => {
+        if (!query.force) {
+          throw err;
+        }
+        errors.push(err);
+      });
     };
 
     this.getFiles(query)

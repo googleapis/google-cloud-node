@@ -1245,40 +1245,6 @@ describe('Bucket', () => {
       bucket.deleteFiles(done);
     });
 
-    it('should accept precondition options', done => {
-      const options = {
-        ifGenerationMatch: 100,
-        ifGenerationNotMatch: 101,
-        ifMetagenerationMatch: 102,
-        ifMetagenerationNotMatch: 103,
-      };
-
-      bucket.getFiles = (query: {}) => {
-        assert.deepStrictEqual(query, options);
-        return Promise.all([[]]);
-      };
-
-      bucket.deleteFiles(options, done);
-    });
-
-    it('should respect precondition options from constructor', done => {
-      bucket = new Bucket(STORAGE, BUCKET_NAME, {
-        preconditionOpts: {
-          ifGenerationMatch: 200,
-          ifGenerationNotMatch: 201,
-          ifMetagenerationMatch: 202,
-          ifMetagenerationNotMatch: 203,
-        },
-      });
-
-      bucket.getFiles = (query: {}) => {
-        assert.deepStrictEqual(query, bucket.instancePreconditionOpts);
-        return Promise.all([[]]);
-      };
-
-      bucket.deleteFiles(done);
-    });
-
     it('should get files from the bucket', done => {
       const query = {a: 'b', c: 'd'};
 
@@ -1374,15 +1340,6 @@ describe('Bucket', () => {
         assert.strictEqual(errs[1], error);
         done();
       });
-    });
-
-    it('should disable autoRetry when ifGenerationMatch is undefined', done => {
-      bucket.getFiles = () => {
-        assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
-        return Promise.resolve([[]]);
-      };
-
-      bucket.deleteFiles({}, done);
     });
   });
 
