@@ -72,7 +72,7 @@ describe('Vision', () => {
   it('should detect from a URL', function () {
     this.retries(3);
     const url =
-      'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
+      'https://lh3.googleusercontent.com/d_S5gxu_S1P6NR1gXeMthZeBzkrQMHdI5uvXrpn3nfJuXpCjlqhLQKH_hbOxTHxFhp5WugVOEcl4WDrv9rmKBDOMExhKU5KmmLFQVg';
     return client
       .logoDetection(url)
       .then(
