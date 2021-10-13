@@ -64,7 +64,7 @@ describe('quickstart sample tests', () => {
   it('should export assets to specified path', async () => {
     const dumpFilePath = `gs://${bucketName}/my-assets-${fileSuffix}.txt`;
     execSync(`node exportAssets ${dumpFilePath}`);
-    let waitMs = 1000;
+    let waitMs = 4000;
     let exists = false;
     let file;
     for (let retry = 0; retry < 3 && !exists; ++retry) {
@@ -80,7 +80,7 @@ describe('quickstart sample tests', () => {
     const dumpFilePath = `gs://${bucketName}/my-relationships-${fileSuffix}.txt`;
     const contentType = 'RELATIONSHIP';
     execSync(`node exportAssets ${dumpFilePath} ${contentType}`);
-    let waitMs = 1000;
+    let waitMs = 4000;
     let exists = false;
     let file;
     for (let retry = 0; retry < 3 && !exists; ++retry) {
@@ -162,7 +162,7 @@ describe('quickstart sample tests', () => {
     execSync(
       `node analyzeIamPolicyLongrunningBigquery ${datasetId} ${tablePrefix}`
     );
-    let waitMs = 1000;
+    let waitMs = 4000;
     let metadataTable;
     let metadataTable_exists = false;
     let resultsTable;
