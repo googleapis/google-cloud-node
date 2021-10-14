@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-filestore/compare/v1.1.0...v1.1.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* **filestore:** add missing operation_metadata.proto import ([#24](https://www.github.com/googleapis/nodejs-filestore/issues/24)) ([58f6bd0](https://www.github.com/googleapis/nodejs-filestore/commit/58f6bd08080f79e8b60967f27990783660b0f1be))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-filestore/compare/v1.0.1...v1.1.0) (2021-08-23)
 
 
