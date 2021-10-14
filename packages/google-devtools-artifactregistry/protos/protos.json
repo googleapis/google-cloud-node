@@ -182,7 +182,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "artifactregistry.googleapis.com/Repository"
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
                           }
                         }
                       }
