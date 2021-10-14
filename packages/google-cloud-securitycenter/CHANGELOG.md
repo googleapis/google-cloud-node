@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.6.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.5.1...v5.6.0) (2021-10-14)
+
+
+### Features
+
+* Added type field to the resource which is surfaced in NotificationMessage ([#428](https://www.github.com/googleapis/nodejs-security-center/issues/428)) ([924aaec](https://www.github.com/googleapis/nodejs-security-center/commit/924aaec714aec659a2cff0c995a00a9a269ca9d6))
+* Added vulnerability field to the finding ([924aaec](https://www.github.com/googleapis/nodejs-security-center/commit/924aaec714aec659a2cff0c995a00a9a269ca9d6))
+
 ### [5.5.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.5.0...v5.5.1) (2021-09-10)
 
 
