@@ -116,7 +116,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-network-security/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/networksecurity/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/network-security/latest
 [product-docs]: https://cloud.google.com/traffic-director/docs/reference/network-security/rest/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
