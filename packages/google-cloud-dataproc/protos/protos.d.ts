@@ -12015,7 +12015,8 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
-            UNORDERED_LIST = 6
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
         }
 
         /** Properties of a ResourceDescriptor. */
