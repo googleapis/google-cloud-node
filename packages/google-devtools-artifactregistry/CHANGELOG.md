@@ -1,5 +1,21 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.2.0...v1.2.1) (2021-10-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* * fix!: Fix the resource annotations for GetRepositoryRequest
+
+### Bug Fixes
+
+* Fix the resource annotations for GetRepositoryRequest ([#88](https://www.github.com/googleapis/nodejs-artifact-registry/issues/88)) ([80ba28f](https://www.github.com/googleapis/nodejs-artifact-registry/commit/80ba28f3d3df7ac211edd82b10bb966f61f787f6))
+
+
+### meta
+
+* release at 1.2.1 ([#90](https://www.github.com/googleapis/nodejs-artifact-registry/issues/90)) ([314bef4](https://www.github.com/googleapis/nodejs-artifact-registry/commit/314bef484ad3cc0aa7f673c9674115689f529d88))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.1.0...v1.2.0) (2021-09-27)
 
 
