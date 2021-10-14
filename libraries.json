@@ -1311,6 +1311,21 @@
     "support_documentation": "https://cloud.google.com/workflows/docs/getting-support"
   },
   {
+    "name": "accesscontextmanager",
+    "name_pretty": "Access Context Manager",
+    "product_documentation": "https://cloud.google.com/access-context-manager/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/accesscontextmanager/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-access-context-manager/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-access-context-manager",
+    "distribution_name": "@google-cloud/access-context-manager",
+    "api_id": "accesscontextmanager.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/access-context-manager/"
+  },
+  {
     "repo": "googleapis/nodejs-notebooks",
     "codeowner_team": "@googleapis/ml-apis",
     "requires_billing": true,
@@ -1378,7 +1393,7 @@
     "api_id": "assuredworkloads.googleapis.com",
     "distribution_name": "@google-cloud/assured-workloads",
     "release_level": "beta",
-    "default_version": "v1beta1",
+    "default_version": "v1",
     "language": "nodejs",
     "name_pretty": "Assured Workloads for Government",
     "repo": "googleapis/nodejs-assured-workloads",
