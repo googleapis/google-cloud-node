@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.15.3](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.2...v5.15.3) (2021-10-14)
+
+
+### Bug Fixes
+
+* do not use src precondition options in copy. ([#1666](https://www.github.com/googleapis/nodejs-storage/issues/1666)) ([678ae77](https://www.github.com/googleapis/nodejs-storage/commit/678ae77dfb2c1eb2272734f34315b4d0ec726076))
+
 ### [5.15.2](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.1...v5.15.2) (2021-10-13)
 
 
