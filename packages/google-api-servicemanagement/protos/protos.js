@@ -9767,6 +9767,7 @@
              * @property {number} INPUT_ONLY=4 INPUT_ONLY value
              * @property {number} IMMUTABLE=5 IMMUTABLE value
              * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -9777,6 +9778,7 @@
                 values[valuesById[4] = "INPUT_ONLY"] = 4;
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
                 return values;
             })();
     
@@ -12187,11 +12189,10 @@
                  * Properties of a Service.
                  * @memberof google.api
                  * @interface IService
-                 * @property {google.protobuf.IUInt32Value|null} [configVersion] Service configVersion
                  * @property {string|null} [name] Service name
-                 * @property {string|null} [id] Service id
                  * @property {string|null} [title] Service title
                  * @property {string|null} [producerProjectId] Service producerProjectId
+                 * @property {string|null} [id] Service id
                  * @property {Array.<google.protobuf.IApi>|null} [apis] Service apis
                  * @property {Array.<google.protobuf.IType>|null} [types] Service types
                  * @property {Array.<google.protobuf.IEnum>|null} [enums] Service enums
@@ -12212,6 +12213,7 @@
                  * @property {google.api.IMonitoring|null} [monitoring] Service monitoring
                  * @property {google.api.ISystemParameters|null} [systemParameters] Service systemParameters
                  * @property {google.api.ISourceInfo|null} [sourceInfo] Service sourceInfo
+                 * @property {google.protobuf.IUInt32Value|null} [configVersion] Service configVersion
                  */
     
                 /**
@@ -12237,28 +12239,12 @@
                 }
     
                 /**
-                 * Service configVersion.
-                 * @member {google.protobuf.IUInt32Value|null|undefined} configVersion
-                 * @memberof google.api.Service
-                 * @instance
-                 */
-                Service.prototype.configVersion = null;
-    
-                /**
                  * Service name.
                  * @member {string} name
                  * @memberof google.api.Service
                  * @instance
                  */
                 Service.prototype.name = "";
-    
-                /**
-                 * Service id.
-                 * @member {string} id
-                 * @memberof google.api.Service
-                 * @instance
-                 */
-                Service.prototype.id = "";
     
                 /**
                  * Service title.
@@ -12275,6 +12261,14 @@
                  * @instance
                  */
                 Service.prototype.producerProjectId = "";
+    
+                /**
+                 * Service id.
+                 * @member {string} id
+                 * @memberof google.api.Service
+                 * @instance
+                 */
+                Service.prototype.id = "";
     
                 /**
                  * Service apis.
@@ -12437,6 +12431,14 @@
                 Service.prototype.sourceInfo = null;
     
                 /**
+                 * Service configVersion.
+                 * @member {google.protobuf.IUInt32Value|null|undefined} configVersion
+                 * @memberof google.api.Service
+                 * @instance
+                 */
+                Service.prototype.configVersion = null;
+    
+                /**
                  * Creates a new Service instance using the specified properties.
                  * @function create
                  * @memberof google.api.Service
@@ -12551,20 +12553,17 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
-                        case 20:
-                            message.configVersion = $root.google.protobuf.UInt32Value.decode(reader, reader.uint32());
-                            break;
                         case 1:
                             message.name = reader.string();
-                            break;
-                        case 33:
-                            message.id = reader.string();
                             break;
                         case 2:
                             message.title = reader.string();
                             break;
                         case 22:
                             message.producerProjectId = reader.string();
+                            break;
+                        case 33:
+                            message.id = reader.string();
                             break;
                         case 3:
                             if (!(message.apis && message.apis.length))
@@ -12640,6 +12639,9 @@
                         case 37:
                             message.sourceInfo = $root.google.api.SourceInfo.decode(reader, reader.uint32());
                             break;
+                        case 20:
+                            message.configVersion = $root.google.protobuf.UInt32Value.decode(reader, reader.uint32());
+                            break;
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -12675,23 +12677,18 @@
                 Service.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
-                    if (message.configVersion != null && message.hasOwnProperty("configVersion")) {
-                        var error = $root.google.protobuf.UInt32Value.verify(message.configVersion);
-                        if (error)
-                            return "configVersion." + error;
-                    }
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.id != null && message.hasOwnProperty("id"))
-                        if (!$util.isString(message.id))
-                            return "id: string expected";
                     if (message.title != null && message.hasOwnProperty("title"))
                         if (!$util.isString(message.title))
                             return "title: string expected";
                     if (message.producerProjectId != null && message.hasOwnProperty("producerProjectId"))
                         if (!$util.isString(message.producerProjectId))
                             return "producerProjectId: string expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
                     if (message.apis != null && message.hasOwnProperty("apis")) {
                         if (!Array.isArray(message.apis))
                             return "apis: array expected";
@@ -12820,6 +12817,11 @@
                         if (error)
                             return "sourceInfo." + error;
                     }
+                    if (message.configVersion != null && message.hasOwnProperty("configVersion")) {
+                        var error = $root.google.protobuf.UInt32Value.verify(message.configVersion);
+                        if (error)
+                            return "configVersion." + error;
+                    }
                     return null;
                 };
     
@@ -12835,19 +12837,14 @@
                     if (object instanceof $root.google.api.Service)
                         return object;
                     var message = new $root.google.api.Service();
-                    if (object.configVersion != null) {
-                        if (typeof object.configVersion !== "object")
-                            throw TypeError(".google.api.Service.configVersion: object expected");
-                        message.configVersion = $root.google.protobuf.UInt32Value.fromObject(object.configVersion);
-                    }
                     if (object.name != null)
                         message.name = String(object.name);
-                    if (object.id != null)
-                        message.id = String(object.id);
                     if (object.title != null)
                         message.title = String(object.title);
                     if (object.producerProjectId != null)
                         message.producerProjectId = String(object.producerProjectId);
+                    if (object.id != null)
+                        message.id = String(object.id);
                     if (object.apis) {
                         if (!Array.isArray(object.apis))
                             throw TypeError(".google.api.Service.apis: array expected");
@@ -12982,6 +12979,11 @@
                         if (typeof object.sourceInfo !== "object")
                             throw TypeError(".google.api.Service.sourceInfo: object expected");
                         message.sourceInfo = $root.google.api.SourceInfo.fromObject(object.sourceInfo);
+                    }
+                    if (object.configVersion != null) {
+                        if (typeof object.configVersion !== "object")
+                            throw TypeError(".google.api.Service.configVersion: object expected");
+                        message.configVersion = $root.google.protobuf.UInt32Value.fromObject(object.configVersion);
                     }
                     return message;
                 };
@@ -27158,6 +27160,7 @@
                             case 4:
                             case 5:
                             case 6:
+                            case 7:
                                 break;
                             }
                     }
@@ -27261,6 +27264,10 @@
                             case "UNORDERED_LIST":
                             case 6:
                                 message[".google.api.fieldBehavior"][i] = 6;
+                                break;
+                            case "NON_EMPTY_DEFAULT":
+                            case 7:
+                                message[".google.api.fieldBehavior"][i] = 7;
                                 break;
                             }
                     }

@@ -4269,7 +4269,8 @@ export namespace google {
             OUTPUT_ONLY = 3,
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
-            UNORDERED_LIST = 6
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7
         }
 
         /** Properties of a MetricDescriptor. */
@@ -5105,20 +5106,17 @@ export namespace google {
         /** Properties of a Service. */
         interface IService {
 
-            /** Service configVersion */
-            configVersion?: (google.protobuf.IUInt32Value|null);
-
             /** Service name */
             name?: (string|null);
-
-            /** Service id */
-            id?: (string|null);
 
             /** Service title */
             title?: (string|null);
 
             /** Service producerProjectId */
             producerProjectId?: (string|null);
+
+            /** Service id */
+            id?: (string|null);
 
             /** Service apis */
             apis?: (google.protobuf.IApi[]|null);
@@ -5179,6 +5177,9 @@ export namespace google {
 
             /** Service sourceInfo */
             sourceInfo?: (google.api.ISourceInfo|null);
+
+            /** Service configVersion */
+            configVersion?: (google.protobuf.IUInt32Value|null);
         }
 
         /** Represents a Service. */
@@ -5190,20 +5191,17 @@ export namespace google {
              */
             constructor(properties?: google.api.IService);
 
-            /** Service configVersion. */
-            public configVersion?: (google.protobuf.IUInt32Value|null);
-
             /** Service name. */
             public name: string;
-
-            /** Service id. */
-            public id: string;
 
             /** Service title. */
             public title: string;
 
             /** Service producerProjectId. */
             public producerProjectId: string;
+
+            /** Service id. */
+            public id: string;
 
             /** Service apis. */
             public apis: google.protobuf.IApi[];
@@ -5264,6 +5262,9 @@ export namespace google {
 
             /** Service sourceInfo. */
             public sourceInfo?: (google.api.ISourceInfo|null);
+
+            /** Service configVersion. */
+            public configVersion?: (google.protobuf.IUInt32Value|null);
 
             /**
              * Creates a new Service instance using the specified properties.

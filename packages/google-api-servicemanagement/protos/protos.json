@@ -1098,7 +1098,8 @@
                 "OUTPUT_ONLY": 3,
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
               }
             },
             "MetricDescriptor": {
@@ -1315,17 +1316,9 @@
             },
             "Service": {
               "fields": {
-                "configVersion": {
-                  "type": "google.protobuf.UInt32Value",
-                  "id": 20
-                },
                 "name": {
                   "type": "string",
                   "id": 1
-                },
-                "id": {
-                  "type": "string",
-                  "id": 33
                 },
                 "title": {
                   "type": "string",
@@ -1334,6 +1327,10 @@
                 "producerProjectId": {
                   "type": "string",
                   "id": 22
+                },
+                "id": {
+                  "type": "string",
+                  "id": 33
                 },
                 "apis": {
                   "rule": "repeated",
@@ -1421,6 +1418,13 @@
                 "sourceInfo": {
                   "type": "SourceInfo",
                   "id": 37
+                },
+                "configVersion": {
+                  "type": "google.protobuf.UInt32Value",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
                 }
               }
             },
@@ -2626,6 +2630,18 @@
                 ]
               ],
               "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
                 [
                   8,
                   8
