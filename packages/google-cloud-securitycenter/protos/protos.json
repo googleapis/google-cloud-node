@@ -210,6 +210,10 @@
                         "indicator": {
                           "type": "Indicator",
                           "id": 18
+                        },
+                        "vulnerability": {
+                          "type": "Vulnerability",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -251,6 +255,131 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "Vulnerability": {
+                      "fields": {
+                        "cve": {
+                          "type": "Cve",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Cve": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "references": {
+                          "rule": "repeated",
+                          "type": "Reference",
+                          "id": 2
+                        },
+                        "cvssv3": {
+                          "type": "Cvssv3",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Reference": {
+                      "fields": {
+                        "source": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Cvssv3": {
+                      "fields": {
+                        "baseScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "attackVector": {
+                          "type": "AttackVector",
+                          "id": 5
+                        },
+                        "attackComplexity": {
+                          "type": "AttackComplexity",
+                          "id": 6
+                        },
+                        "privilegesRequired": {
+                          "type": "PrivilegesRequired",
+                          "id": 7
+                        },
+                        "userInteraction": {
+                          "type": "UserInteraction",
+                          "id": 8
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 9
+                        },
+                        "confidentialityImpact": {
+                          "type": "Impact",
+                          "id": 10
+                        },
+                        "integrityImpact": {
+                          "type": "Impact",
+                          "id": 11
+                        },
+                        "availabilityImpact": {
+                          "type": "Impact",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "AttackVector": {
+                          "values": {
+                            "ATTACK_VECTOR_UNSPECIFIED": 0,
+                            "ATTACK_VECTOR_NETWORK": 1,
+                            "ATTACK_VECTOR_ADJACENT": 2,
+                            "ATTACK_VECTOR_LOCAL": 3,
+                            "ATTACK_VECTOR_PHYSICAL": 4
+                          }
+                        },
+                        "AttackComplexity": {
+                          "values": {
+                            "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
+                            "ATTACK_COMPLEXITY_LOW": 1,
+                            "ATTACK_COMPLEXITY_HIGH": 2
+                          }
+                        },
+                        "PrivilegesRequired": {
+                          "values": {
+                            "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
+                            "PRIVILEGES_REQUIRED_NONE": 1,
+                            "PRIVILEGES_REQUIRED_LOW": 2,
+                            "PRIVILEGES_REQUIRED_HIGH": 3
+                          }
+                        },
+                        "UserInteraction": {
+                          "values": {
+                            "USER_INTERACTION_UNSPECIFIED": 0,
+                            "USER_INTERACTION_NONE": 1,
+                            "USER_INTERACTION_REQUIRED": 2
+                          }
+                        },
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "SCOPE_UNCHANGED": 1,
+                            "SCOPE_CHANGED": 2
+                          }
+                        },
+                        "Impact": {
+                          "values": {
+                            "IMPACT_UNSPECIFIED": 0,
+                            "IMPACT_HIGH": 1,
+                            "IMPACT_LOW": 2,
+                            "IMPACT_NONE": 3
+                          }
                         }
                       }
                     },
@@ -349,6 +478,10 @@
                         "parentDisplayName": {
                           "type": "string",
                           "id": 5
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 6
                         },
                         "folders": {
                           "rule": "repeated",

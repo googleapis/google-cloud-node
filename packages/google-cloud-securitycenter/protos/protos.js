@@ -1564,6 +1564,7 @@
                          * @property {string|null} [canonicalName] Finding canonicalName
                          * @property {google.cloud.securitycenter.v1.Finding.FindingClass|null} [findingClass] Finding findingClass
                          * @property {google.cloud.securitycenter.v1.IIndicator|null} [indicator] Finding indicator
+                         * @property {google.cloud.securitycenter.v1.IVulnerability|null} [vulnerability] Finding vulnerability
                          */
     
                         /**
@@ -1695,6 +1696,14 @@
                         Finding.prototype.indicator = null;
     
                         /**
+                         * Finding vulnerability.
+                         * @member {google.cloud.securitycenter.v1.IVulnerability|null|undefined} vulnerability
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.vulnerability = null;
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -1749,6 +1758,8 @@
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.findingClass);
                             if (message.indicator != null && Object.hasOwnProperty.call(message, "indicator"))
                                 $root.google.cloud.securitycenter.v1.Indicator.encode(message.indicator, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.vulnerability != null && Object.hasOwnProperty.call(message, "vulnerability"))
+                                $root.google.cloud.securitycenter.v1.Vulnerability.encode(message.vulnerability, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             return writer;
                         };
     
@@ -1843,6 +1854,9 @@
                                     break;
                                 case 18:
                                     message.indicator = $root.google.cloud.securitycenter.v1.Indicator.decode(reader, reader.uint32());
+                                    break;
+                                case 20:
+                                    message.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1957,6 +1971,11 @@
                                 var error = $root.google.cloud.securitycenter.v1.Indicator.verify(message.indicator);
                                 if (error)
                                     return "indicator." + error;
+                            }
+                            if (message.vulnerability != null && message.hasOwnProperty("vulnerability")) {
+                                var error = $root.google.cloud.securitycenter.v1.Vulnerability.verify(message.vulnerability);
+                                if (error)
+                                    return "vulnerability." + error;
                             }
                             return null;
                         };
@@ -2073,6 +2092,11 @@
                                     throw TypeError(".google.cloud.securitycenter.v1.Finding.indicator: object expected");
                                 message.indicator = $root.google.cloud.securitycenter.v1.Indicator.fromObject(object.indicator);
                             }
+                            if (object.vulnerability != null) {
+                                if (typeof object.vulnerability !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.vulnerability: object expected");
+                                message.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.fromObject(object.vulnerability);
+                            }
                             return message;
                         };
     
@@ -2105,6 +2129,7 @@
                                 object.canonicalName = "";
                                 object.findingClass = options.enums === String ? "FINDING_CLASS_UNSPECIFIED" : 0;
                                 object.indicator = null;
+                                object.vulnerability = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2138,6 +2163,8 @@
                                 object.findingClass = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.FindingClass[message.findingClass] : message.findingClass;
                             if (message.indicator != null && message.hasOwnProperty("indicator"))
                                 object.indicator = $root.google.cloud.securitycenter.v1.Indicator.toObject(message.indicator, options);
+                            if (message.vulnerability != null && message.hasOwnProperty("vulnerability"))
+                                object.vulnerability = $root.google.cloud.securitycenter.v1.Vulnerability.toObject(message.vulnerability, options);
                             return object;
                         };
     
@@ -2451,6 +2478,1309 @@
                         };
     
                         return Indicator;
+                    })();
+    
+                    v1.Vulnerability = (function() {
+    
+                        /**
+                         * Properties of a Vulnerability.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IVulnerability
+                         * @property {google.cloud.securitycenter.v1.ICve|null} [cve] Vulnerability cve
+                         */
+    
+                        /**
+                         * Constructs a new Vulnerability.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Vulnerability.
+                         * @implements IVulnerability
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IVulnerability=} [properties] Properties to set
+                         */
+                        function Vulnerability(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Vulnerability cve.
+                         * @member {google.cloud.securitycenter.v1.ICve|null|undefined} cve
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @instance
+                         */
+                        Vulnerability.prototype.cve = null;
+    
+                        /**
+                         * Creates a new Vulnerability instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IVulnerability=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Vulnerability} Vulnerability instance
+                         */
+                        Vulnerability.create = function create(properties) {
+                            return new Vulnerability(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Vulnerability message. Does not implicitly {@link google.cloud.securitycenter.v1.Vulnerability.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IVulnerability} message Vulnerability message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Vulnerability.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.cve != null && Object.hasOwnProperty.call(message, "cve"))
+                                $root.google.cloud.securitycenter.v1.Cve.encode(message.cve, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Vulnerability message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Vulnerability.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IVulnerability} message Vulnerability message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Vulnerability.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Vulnerability message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Vulnerability} Vulnerability
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Vulnerability.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Vulnerability();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.cve = $root.google.cloud.securitycenter.v1.Cve.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Vulnerability message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Vulnerability} Vulnerability
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Vulnerability.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Vulnerability message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Vulnerability.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.cve != null && message.hasOwnProperty("cve")) {
+                                var error = $root.google.cloud.securitycenter.v1.Cve.verify(message.cve);
+                                if (error)
+                                    return "cve." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Vulnerability message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Vulnerability} Vulnerability
+                         */
+                        Vulnerability.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Vulnerability)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Vulnerability();
+                            if (object.cve != null) {
+                                if (typeof object.cve !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Vulnerability.cve: object expected");
+                                message.cve = $root.google.cloud.securitycenter.v1.Cve.fromObject(object.cve);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Vulnerability message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Vulnerability} message Vulnerability
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Vulnerability.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.cve = null;
+                            if (message.cve != null && message.hasOwnProperty("cve"))
+                                object.cve = $root.google.cloud.securitycenter.v1.Cve.toObject(message.cve, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Vulnerability to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Vulnerability
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Vulnerability.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Vulnerability;
+                    })();
+    
+                    v1.Cve = (function() {
+    
+                        /**
+                         * Properties of a Cve.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ICve
+                         * @property {string|null} [id] Cve id
+                         * @property {Array.<google.cloud.securitycenter.v1.IReference>|null} [references] Cve references
+                         * @property {google.cloud.securitycenter.v1.ICvssv3|null} [cvssv3] Cve cvssv3
+                         */
+    
+                        /**
+                         * Constructs a new Cve.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Cve.
+                         * @implements ICve
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ICve=} [properties] Properties to set
+                         */
+                        function Cve(properties) {
+                            this.references = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Cve id.
+                         * @member {string} id
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @instance
+                         */
+                        Cve.prototype.id = "";
+    
+                        /**
+                         * Cve references.
+                         * @member {Array.<google.cloud.securitycenter.v1.IReference>} references
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @instance
+                         */
+                        Cve.prototype.references = $util.emptyArray;
+    
+                        /**
+                         * Cve cvssv3.
+                         * @member {google.cloud.securitycenter.v1.ICvssv3|null|undefined} cvssv3
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @instance
+                         */
+                        Cve.prototype.cvssv3 = null;
+    
+                        /**
+                         * Creates a new Cve instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICve=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Cve} Cve instance
+                         */
+                        Cve.create = function create(properties) {
+                            return new Cve(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Cve message. Does not implicitly {@link google.cloud.securitycenter.v1.Cve.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICve} message Cve message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cve.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.references != null && message.references.length)
+                                for (var i = 0; i < message.references.length; ++i)
+                                    $root.google.cloud.securitycenter.v1.Reference.encode(message.references[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.cvssv3 != null && Object.hasOwnProperty.call(message, "cvssv3"))
+                                $root.google.cloud.securitycenter.v1.Cvssv3.encode(message.cvssv3, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Cve message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Cve.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICve} message Cve message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cve.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Cve message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Cve} Cve
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cve.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Cve();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.references && message.references.length))
+                                        message.references = [];
+                                    message.references.push($root.google.cloud.securitycenter.v1.Reference.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    message.cvssv3 = $root.google.cloud.securitycenter.v1.Cvssv3.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Cve message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Cve} Cve
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cve.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Cve message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Cve.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.references != null && message.hasOwnProperty("references")) {
+                                if (!Array.isArray(message.references))
+                                    return "references: array expected";
+                                for (var i = 0; i < message.references.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v1.Reference.verify(message.references[i]);
+                                    if (error)
+                                        return "references." + error;
+                                }
+                            }
+                            if (message.cvssv3 != null && message.hasOwnProperty("cvssv3")) {
+                                var error = $root.google.cloud.securitycenter.v1.Cvssv3.verify(message.cvssv3);
+                                if (error)
+                                    return "cvssv3." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Cve message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Cve} Cve
+                         */
+                        Cve.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Cve)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Cve();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.references) {
+                                if (!Array.isArray(object.references))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Cve.references: array expected");
+                                message.references = [];
+                                for (var i = 0; i < object.references.length; ++i) {
+                                    if (typeof object.references[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v1.Cve.references: object expected");
+                                    message.references[i] = $root.google.cloud.securitycenter.v1.Reference.fromObject(object.references[i]);
+                                }
+                            }
+                            if (object.cvssv3 != null) {
+                                if (typeof object.cvssv3 !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Cve.cvssv3: object expected");
+                                message.cvssv3 = $root.google.cloud.securitycenter.v1.Cvssv3.fromObject(object.cvssv3);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Cve message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Cve} message Cve
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Cve.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.references = [];
+                            if (options.defaults) {
+                                object.id = "";
+                                object.cvssv3 = null;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.references && message.references.length) {
+                                object.references = [];
+                                for (var j = 0; j < message.references.length; ++j)
+                                    object.references[j] = $root.google.cloud.securitycenter.v1.Reference.toObject(message.references[j], options);
+                            }
+                            if (message.cvssv3 != null && message.hasOwnProperty("cvssv3"))
+                                object.cvssv3 = $root.google.cloud.securitycenter.v1.Cvssv3.toObject(message.cvssv3, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Cve to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Cve
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Cve.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Cve;
+                    })();
+    
+                    v1.Reference = (function() {
+    
+                        /**
+                         * Properties of a Reference.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IReference
+                         * @property {string|null} [source] Reference source
+                         * @property {string|null} [uri] Reference uri
+                         */
+    
+                        /**
+                         * Constructs a new Reference.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Reference.
+                         * @implements IReference
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IReference=} [properties] Properties to set
+                         */
+                        function Reference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Reference source.
+                         * @member {string} source
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @instance
+                         */
+                        Reference.prototype.source = "";
+    
+                        /**
+                         * Reference uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @instance
+                         */
+                        Reference.prototype.uri = "";
+    
+                        /**
+                         * Creates a new Reference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IReference=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Reference} Reference instance
+                         */
+                        Reference.create = function create(properties) {
+                            return new Reference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Reference message. Does not implicitly {@link google.cloud.securitycenter.v1.Reference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IReference} message Reference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Reference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.source);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Reference message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Reference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IReference} message Reference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Reference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Reference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Reference} Reference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Reference.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Reference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.source = reader.string();
+                                    break;
+                                case 2:
+                                    message.uri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Reference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Reference} Reference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Reference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Reference message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Reference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.source != null && message.hasOwnProperty("source"))
+                                if (!$util.isString(message.source))
+                                    return "source: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Reference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Reference} Reference
+                         */
+                        Reference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Reference)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Reference();
+                            if (object.source != null)
+                                message.source = String(object.source);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Reference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Reference} message Reference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Reference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.source = "";
+                                object.uri = "";
+                            }
+                            if (message.source != null && message.hasOwnProperty("source"))
+                                object.source = message.source;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Reference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Reference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Reference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Reference;
+                    })();
+    
+                    v1.Cvssv3 = (function() {
+    
+                        /**
+                         * Properties of a Cvssv3.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface ICvssv3
+                         * @property {number|null} [baseScore] Cvssv3 baseScore
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.AttackVector|null} [attackVector] Cvssv3 attackVector
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.AttackComplexity|null} [attackComplexity] Cvssv3 attackComplexity
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired|null} [privilegesRequired] Cvssv3 privilegesRequired
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.UserInteraction|null} [userInteraction] Cvssv3 userInteraction
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.Scope|null} [scope] Cvssv3 scope
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.Impact|null} [confidentialityImpact] Cvssv3 confidentialityImpact
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.Impact|null} [integrityImpact] Cvssv3 integrityImpact
+                         * @property {google.cloud.securitycenter.v1.Cvssv3.Impact|null} [availabilityImpact] Cvssv3 availabilityImpact
+                         */
+    
+                        /**
+                         * Constructs a new Cvssv3.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents a Cvssv3.
+                         * @implements ICvssv3
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.ICvssv3=} [properties] Properties to set
+                         */
+                        function Cvssv3(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Cvssv3 baseScore.
+                         * @member {number} baseScore
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.baseScore = 0;
+    
+                        /**
+                         * Cvssv3 attackVector.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.AttackVector} attackVector
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.attackVector = 0;
+    
+                        /**
+                         * Cvssv3 attackComplexity.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.AttackComplexity} attackComplexity
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.attackComplexity = 0;
+    
+                        /**
+                         * Cvssv3 privilegesRequired.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired} privilegesRequired
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.privilegesRequired = 0;
+    
+                        /**
+                         * Cvssv3 userInteraction.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.UserInteraction} userInteraction
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.userInteraction = 0;
+    
+                        /**
+                         * Cvssv3 scope.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.Scope} scope
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.scope = 0;
+    
+                        /**
+                         * Cvssv3 confidentialityImpact.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.Impact} confidentialityImpact
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.confidentialityImpact = 0;
+    
+                        /**
+                         * Cvssv3 integrityImpact.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.Impact} integrityImpact
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.integrityImpact = 0;
+    
+                        /**
+                         * Cvssv3 availabilityImpact.
+                         * @member {google.cloud.securitycenter.v1.Cvssv3.Impact} availabilityImpact
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         */
+                        Cvssv3.prototype.availabilityImpact = 0;
+    
+                        /**
+                         * Creates a new Cvssv3 instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICvssv3=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Cvssv3} Cvssv3 instance
+                         */
+                        Cvssv3.create = function create(properties) {
+                            return new Cvssv3(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Cvssv3 message. Does not implicitly {@link google.cloud.securitycenter.v1.Cvssv3.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICvssv3} message Cvssv3 message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cvssv3.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.baseScore != null && Object.hasOwnProperty.call(message, "baseScore"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.baseScore);
+                            if (message.attackVector != null && Object.hasOwnProperty.call(message, "attackVector"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.attackVector);
+                            if (message.attackComplexity != null && Object.hasOwnProperty.call(message, "attackComplexity"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.attackComplexity);
+                            if (message.privilegesRequired != null && Object.hasOwnProperty.call(message, "privilegesRequired"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.privilegesRequired);
+                            if (message.userInteraction != null && Object.hasOwnProperty.call(message, "userInteraction"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.userInteraction);
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.scope);
+                            if (message.confidentialityImpact != null && Object.hasOwnProperty.call(message, "confidentialityImpact"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.confidentialityImpact);
+                            if (message.integrityImpact != null && Object.hasOwnProperty.call(message, "integrityImpact"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.integrityImpact);
+                            if (message.availabilityImpact != null && Object.hasOwnProperty.call(message, "availabilityImpact"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.availabilityImpact);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Cvssv3 message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Cvssv3.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.ICvssv3} message Cvssv3 message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cvssv3.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Cvssv3 message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Cvssv3} Cvssv3
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cvssv3.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Cvssv3();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.baseScore = reader.double();
+                                    break;
+                                case 5:
+                                    message.attackVector = reader.int32();
+                                    break;
+                                case 6:
+                                    message.attackComplexity = reader.int32();
+                                    break;
+                                case 7:
+                                    message.privilegesRequired = reader.int32();
+                                    break;
+                                case 8:
+                                    message.userInteraction = reader.int32();
+                                    break;
+                                case 9:
+                                    message.scope = reader.int32();
+                                    break;
+                                case 10:
+                                    message.confidentialityImpact = reader.int32();
+                                    break;
+                                case 11:
+                                    message.integrityImpact = reader.int32();
+                                    break;
+                                case 12:
+                                    message.availabilityImpact = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Cvssv3 message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Cvssv3} Cvssv3
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cvssv3.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Cvssv3 message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Cvssv3.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.baseScore != null && message.hasOwnProperty("baseScore"))
+                                if (typeof message.baseScore !== "number")
+                                    return "baseScore: number expected";
+                            if (message.attackVector != null && message.hasOwnProperty("attackVector"))
+                                switch (message.attackVector) {
+                                default:
+                                    return "attackVector: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.attackComplexity != null && message.hasOwnProperty("attackComplexity"))
+                                switch (message.attackComplexity) {
+                                default:
+                                    return "attackComplexity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.privilegesRequired != null && message.hasOwnProperty("privilegesRequired"))
+                                switch (message.privilegesRequired) {
+                                default:
+                                    return "privilegesRequired: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.userInteraction != null && message.hasOwnProperty("userInteraction"))
+                                switch (message.userInteraction) {
+                                default:
+                                    return "userInteraction: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                switch (message.scope) {
+                                default:
+                                    return "scope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.confidentialityImpact != null && message.hasOwnProperty("confidentialityImpact"))
+                                switch (message.confidentialityImpact) {
+                                default:
+                                    return "confidentialityImpact: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.integrityImpact != null && message.hasOwnProperty("integrityImpact"))
+                                switch (message.integrityImpact) {
+                                default:
+                                    return "integrityImpact: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.availabilityImpact != null && message.hasOwnProperty("availabilityImpact"))
+                                switch (message.availabilityImpact) {
+                                default:
+                                    return "availabilityImpact: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Cvssv3 message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Cvssv3} Cvssv3
+                         */
+                        Cvssv3.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Cvssv3)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Cvssv3();
+                            if (object.baseScore != null)
+                                message.baseScore = Number(object.baseScore);
+                            switch (object.attackVector) {
+                            case "ATTACK_VECTOR_UNSPECIFIED":
+                            case 0:
+                                message.attackVector = 0;
+                                break;
+                            case "ATTACK_VECTOR_NETWORK":
+                            case 1:
+                                message.attackVector = 1;
+                                break;
+                            case "ATTACK_VECTOR_ADJACENT":
+                            case 2:
+                                message.attackVector = 2;
+                                break;
+                            case "ATTACK_VECTOR_LOCAL":
+                            case 3:
+                                message.attackVector = 3;
+                                break;
+                            case "ATTACK_VECTOR_PHYSICAL":
+                            case 4:
+                                message.attackVector = 4;
+                                break;
+                            }
+                            switch (object.attackComplexity) {
+                            case "ATTACK_COMPLEXITY_UNSPECIFIED":
+                            case 0:
+                                message.attackComplexity = 0;
+                                break;
+                            case "ATTACK_COMPLEXITY_LOW":
+                            case 1:
+                                message.attackComplexity = 1;
+                                break;
+                            case "ATTACK_COMPLEXITY_HIGH":
+                            case 2:
+                                message.attackComplexity = 2;
+                                break;
+                            }
+                            switch (object.privilegesRequired) {
+                            case "PRIVILEGES_REQUIRED_UNSPECIFIED":
+                            case 0:
+                                message.privilegesRequired = 0;
+                                break;
+                            case "PRIVILEGES_REQUIRED_NONE":
+                            case 1:
+                                message.privilegesRequired = 1;
+                                break;
+                            case "PRIVILEGES_REQUIRED_LOW":
+                            case 2:
+                                message.privilegesRequired = 2;
+                                break;
+                            case "PRIVILEGES_REQUIRED_HIGH":
+                            case 3:
+                                message.privilegesRequired = 3;
+                                break;
+                            }
+                            switch (object.userInteraction) {
+                            case "USER_INTERACTION_UNSPECIFIED":
+                            case 0:
+                                message.userInteraction = 0;
+                                break;
+                            case "USER_INTERACTION_NONE":
+                            case 1:
+                                message.userInteraction = 1;
+                                break;
+                            case "USER_INTERACTION_REQUIRED":
+                            case 2:
+                                message.userInteraction = 2;
+                                break;
+                            }
+                            switch (object.scope) {
+                            case "SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.scope = 0;
+                                break;
+                            case "SCOPE_UNCHANGED":
+                            case 1:
+                                message.scope = 1;
+                                break;
+                            case "SCOPE_CHANGED":
+                            case 2:
+                                message.scope = 2;
+                                break;
+                            }
+                            switch (object.confidentialityImpact) {
+                            case "IMPACT_UNSPECIFIED":
+                            case 0:
+                                message.confidentialityImpact = 0;
+                                break;
+                            case "IMPACT_HIGH":
+                            case 1:
+                                message.confidentialityImpact = 1;
+                                break;
+                            case "IMPACT_LOW":
+                            case 2:
+                                message.confidentialityImpact = 2;
+                                break;
+                            case "IMPACT_NONE":
+                            case 3:
+                                message.confidentialityImpact = 3;
+                                break;
+                            }
+                            switch (object.integrityImpact) {
+                            case "IMPACT_UNSPECIFIED":
+                            case 0:
+                                message.integrityImpact = 0;
+                                break;
+                            case "IMPACT_HIGH":
+                            case 1:
+                                message.integrityImpact = 1;
+                                break;
+                            case "IMPACT_LOW":
+                            case 2:
+                                message.integrityImpact = 2;
+                                break;
+                            case "IMPACT_NONE":
+                            case 3:
+                                message.integrityImpact = 3;
+                                break;
+                            }
+                            switch (object.availabilityImpact) {
+                            case "IMPACT_UNSPECIFIED":
+                            case 0:
+                                message.availabilityImpact = 0;
+                                break;
+                            case "IMPACT_HIGH":
+                            case 1:
+                                message.availabilityImpact = 1;
+                                break;
+                            case "IMPACT_LOW":
+                            case 2:
+                                message.availabilityImpact = 2;
+                                break;
+                            case "IMPACT_NONE":
+                            case 3:
+                                message.availabilityImpact = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Cvssv3 message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Cvssv3} message Cvssv3
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Cvssv3.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.baseScore = 0;
+                                object.attackVector = options.enums === String ? "ATTACK_VECTOR_UNSPECIFIED" : 0;
+                                object.attackComplexity = options.enums === String ? "ATTACK_COMPLEXITY_UNSPECIFIED" : 0;
+                                object.privilegesRequired = options.enums === String ? "PRIVILEGES_REQUIRED_UNSPECIFIED" : 0;
+                                object.userInteraction = options.enums === String ? "USER_INTERACTION_UNSPECIFIED" : 0;
+                                object.scope = options.enums === String ? "SCOPE_UNSPECIFIED" : 0;
+                                object.confidentialityImpact = options.enums === String ? "IMPACT_UNSPECIFIED" : 0;
+                                object.integrityImpact = options.enums === String ? "IMPACT_UNSPECIFIED" : 0;
+                                object.availabilityImpact = options.enums === String ? "IMPACT_UNSPECIFIED" : 0;
+                            }
+                            if (message.baseScore != null && message.hasOwnProperty("baseScore"))
+                                object.baseScore = options.json && !isFinite(message.baseScore) ? String(message.baseScore) : message.baseScore;
+                            if (message.attackVector != null && message.hasOwnProperty("attackVector"))
+                                object.attackVector = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.AttackVector[message.attackVector] : message.attackVector;
+                            if (message.attackComplexity != null && message.hasOwnProperty("attackComplexity"))
+                                object.attackComplexity = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.AttackComplexity[message.attackComplexity] : message.attackComplexity;
+                            if (message.privilegesRequired != null && message.hasOwnProperty("privilegesRequired"))
+                                object.privilegesRequired = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired[message.privilegesRequired] : message.privilegesRequired;
+                            if (message.userInteraction != null && message.hasOwnProperty("userInteraction"))
+                                object.userInteraction = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.UserInteraction[message.userInteraction] : message.userInteraction;
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.Scope[message.scope] : message.scope;
+                            if (message.confidentialityImpact != null && message.hasOwnProperty("confidentialityImpact"))
+                                object.confidentialityImpact = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.Impact[message.confidentialityImpact] : message.confidentialityImpact;
+                            if (message.integrityImpact != null && message.hasOwnProperty("integrityImpact"))
+                                object.integrityImpact = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.Impact[message.integrityImpact] : message.integrityImpact;
+                            if (message.availabilityImpact != null && message.hasOwnProperty("availabilityImpact"))
+                                object.availabilityImpact = options.enums === String ? $root.google.cloud.securitycenter.v1.Cvssv3.Impact[message.availabilityImpact] : message.availabilityImpact;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Cvssv3 to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Cvssv3
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Cvssv3.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * AttackVector enum.
+                         * @name google.cloud.securitycenter.v1.Cvssv3.AttackVector
+                         * @enum {number}
+                         * @property {number} ATTACK_VECTOR_UNSPECIFIED=0 ATTACK_VECTOR_UNSPECIFIED value
+                         * @property {number} ATTACK_VECTOR_NETWORK=1 ATTACK_VECTOR_NETWORK value
+                         * @property {number} ATTACK_VECTOR_ADJACENT=2 ATTACK_VECTOR_ADJACENT value
+                         * @property {number} ATTACK_VECTOR_LOCAL=3 ATTACK_VECTOR_LOCAL value
+                         * @property {number} ATTACK_VECTOR_PHYSICAL=4 ATTACK_VECTOR_PHYSICAL value
+                         */
+                        Cvssv3.AttackVector = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ATTACK_VECTOR_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ATTACK_VECTOR_NETWORK"] = 1;
+                            values[valuesById[2] = "ATTACK_VECTOR_ADJACENT"] = 2;
+                            values[valuesById[3] = "ATTACK_VECTOR_LOCAL"] = 3;
+                            values[valuesById[4] = "ATTACK_VECTOR_PHYSICAL"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * AttackComplexity enum.
+                         * @name google.cloud.securitycenter.v1.Cvssv3.AttackComplexity
+                         * @enum {number}
+                         * @property {number} ATTACK_COMPLEXITY_UNSPECIFIED=0 ATTACK_COMPLEXITY_UNSPECIFIED value
+                         * @property {number} ATTACK_COMPLEXITY_LOW=1 ATTACK_COMPLEXITY_LOW value
+                         * @property {number} ATTACK_COMPLEXITY_HIGH=2 ATTACK_COMPLEXITY_HIGH value
+                         */
+                        Cvssv3.AttackComplexity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ATTACK_COMPLEXITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ATTACK_COMPLEXITY_LOW"] = 1;
+                            values[valuesById[2] = "ATTACK_COMPLEXITY_HIGH"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * PrivilegesRequired enum.
+                         * @name google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired
+                         * @enum {number}
+                         * @property {number} PRIVILEGES_REQUIRED_UNSPECIFIED=0 PRIVILEGES_REQUIRED_UNSPECIFIED value
+                         * @property {number} PRIVILEGES_REQUIRED_NONE=1 PRIVILEGES_REQUIRED_NONE value
+                         * @property {number} PRIVILEGES_REQUIRED_LOW=2 PRIVILEGES_REQUIRED_LOW value
+                         * @property {number} PRIVILEGES_REQUIRED_HIGH=3 PRIVILEGES_REQUIRED_HIGH value
+                         */
+                        Cvssv3.PrivilegesRequired = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PRIVILEGES_REQUIRED_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRIVILEGES_REQUIRED_NONE"] = 1;
+                            values[valuesById[2] = "PRIVILEGES_REQUIRED_LOW"] = 2;
+                            values[valuesById[3] = "PRIVILEGES_REQUIRED_HIGH"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * UserInteraction enum.
+                         * @name google.cloud.securitycenter.v1.Cvssv3.UserInteraction
+                         * @enum {number}
+                         * @property {number} USER_INTERACTION_UNSPECIFIED=0 USER_INTERACTION_UNSPECIFIED value
+                         * @property {number} USER_INTERACTION_NONE=1 USER_INTERACTION_NONE value
+                         * @property {number} USER_INTERACTION_REQUIRED=2 USER_INTERACTION_REQUIRED value
+                         */
+                        Cvssv3.UserInteraction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "USER_INTERACTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "USER_INTERACTION_NONE"] = 1;
+                            values[valuesById[2] = "USER_INTERACTION_REQUIRED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Scope enum.
+                         * @name google.cloud.securitycenter.v1.Cvssv3.Scope
+                         * @enum {number}
+                         * @property {number} SCOPE_UNSPECIFIED=0 SCOPE_UNSPECIFIED value
+                         * @property {number} SCOPE_UNCHANGED=1 SCOPE_UNCHANGED value
+                         * @property {number} SCOPE_CHANGED=2 SCOPE_CHANGED value
+                         */
+                        Cvssv3.Scope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SCOPE_UNCHANGED"] = 1;
+                            values[valuesById[2] = "SCOPE_CHANGED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Impact enum.
+                         * @name google.cloud.securitycenter.v1.Cvssv3.Impact
+                         * @enum {number}
+                         * @property {number} IMPACT_UNSPECIFIED=0 IMPACT_UNSPECIFIED value
+                         * @property {number} IMPACT_HIGH=1 IMPACT_HIGH value
+                         * @property {number} IMPACT_LOW=2 IMPACT_LOW value
+                         * @property {number} IMPACT_NONE=3 IMPACT_NONE value
+                         */
+                        Cvssv3.Impact = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IMPACT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IMPACT_HIGH"] = 1;
+                            values[valuesById[2] = "IMPACT_LOW"] = 2;
+                            values[valuesById[3] = "IMPACT_NONE"] = 3;
+                            return values;
+                        })();
+    
+                        return Cvssv3;
                     })();
     
                     v1.NotificationConfig = (function() {
@@ -3214,6 +4544,7 @@
                          * @property {string|null} [projectDisplayName] Resource projectDisplayName
                          * @property {string|null} [parent] Resource parent
                          * @property {string|null} [parentDisplayName] Resource parentDisplayName
+                         * @property {string|null} [type] Resource type
                          * @property {Array.<google.cloud.securitycenter.v1.IFolder>|null} [folders] Resource folders
                          */
     
@@ -3274,6 +4605,14 @@
                         Resource.prototype.parentDisplayName = "";
     
                         /**
+                         * Resource type.
+                         * @member {string} type
+                         * @memberof google.cloud.securitycenter.v1.Resource
+                         * @instance
+                         */
+                        Resource.prototype.type = "";
+    
+                        /**
                          * Resource folders.
                          * @member {Array.<google.cloud.securitycenter.v1.IFolder>} folders
                          * @memberof google.cloud.securitycenter.v1.Resource
@@ -3315,6 +4654,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
                             if (message.parentDisplayName != null && Object.hasOwnProperty.call(message, "parentDisplayName"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.parentDisplayName);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.type);
                             if (message.folders != null && message.folders.length)
                                 for (var i = 0; i < message.folders.length; ++i)
                                     $root.google.cloud.securitycenter.v1.Folder.encode(message.folders[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
@@ -3366,6 +4707,9 @@
                                     break;
                                 case 5:
                                     message.parentDisplayName = reader.string();
+                                    break;
+                                case 6:
+                                    message.type = reader.string();
                                     break;
                                 case 7:
                                     if (!(message.folders && message.folders.length))
@@ -3422,6 +4766,9 @@
                             if (message.parentDisplayName != null && message.hasOwnProperty("parentDisplayName"))
                                 if (!$util.isString(message.parentDisplayName))
                                     return "parentDisplayName: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
                             if (message.folders != null && message.hasOwnProperty("folders")) {
                                 if (!Array.isArray(message.folders))
                                     return "folders: array expected";
@@ -3456,6 +4803,8 @@
                                 message.parent = String(object.parent);
                             if (object.parentDisplayName != null)
                                 message.parentDisplayName = String(object.parentDisplayName);
+                            if (object.type != null)
+                                message.type = String(object.type);
                             if (object.folders) {
                                 if (!Array.isArray(object.folders))
                                     throw TypeError(".google.cloud.securitycenter.v1.Resource.folders: array expected");
@@ -3490,6 +4839,7 @@
                                 object.projectDisplayName = "";
                                 object.parent = "";
                                 object.parentDisplayName = "";
+                                object.type = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3501,6 +4851,8 @@
                                 object.parent = message.parent;
                             if (message.parentDisplayName != null && message.hasOwnProperty("parentDisplayName"))
                                 object.parentDisplayName = message.parentDisplayName;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
                             if (message.folders && message.folders.length) {
                                 object.folders = [];
                                 for (var j = 0; j < message.folders.length; ++j)

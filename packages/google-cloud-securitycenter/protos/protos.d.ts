@@ -631,6 +631,9 @@ export namespace google {
 
                     /** Finding indicator */
                     indicator?: (google.cloud.securitycenter.v1.IIndicator|null);
+
+                    /** Finding vulnerability */
+                    vulnerability?: (google.cloud.securitycenter.v1.IVulnerability|null);
                 }
 
                 /** Represents a Finding. */
@@ -683,6 +686,9 @@ export namespace google {
 
                     /** Finding indicator. */
                     public indicator?: (google.cloud.securitycenter.v1.IIndicator|null);
+
+                    /** Finding vulnerability. */
+                    public vulnerability?: (google.cloud.securitycenter.v1.IVulnerability|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -877,6 +883,481 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Vulnerability. */
+                interface IVulnerability {
+
+                    /** Vulnerability cve */
+                    cve?: (google.cloud.securitycenter.v1.ICve|null);
+                }
+
+                /** Represents a Vulnerability. */
+                class Vulnerability implements IVulnerability {
+
+                    /**
+                     * Constructs a new Vulnerability.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IVulnerability);
+
+                    /** Vulnerability cve. */
+                    public cve?: (google.cloud.securitycenter.v1.ICve|null);
+
+                    /**
+                     * Creates a new Vulnerability instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Vulnerability instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IVulnerability): google.cloud.securitycenter.v1.Vulnerability;
+
+                    /**
+                     * Encodes the specified Vulnerability message. Does not implicitly {@link google.cloud.securitycenter.v1.Vulnerability.verify|verify} messages.
+                     * @param message Vulnerability message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IVulnerability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Vulnerability message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Vulnerability.verify|verify} messages.
+                     * @param message Vulnerability message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IVulnerability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Vulnerability message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Vulnerability
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Vulnerability;
+
+                    /**
+                     * Decodes a Vulnerability message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Vulnerability
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Vulnerability;
+
+                    /**
+                     * Verifies a Vulnerability message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Vulnerability message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Vulnerability
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Vulnerability;
+
+                    /**
+                     * Creates a plain object from a Vulnerability message. Also converts values to other types if specified.
+                     * @param message Vulnerability
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Vulnerability, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Vulnerability to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Cve. */
+                interface ICve {
+
+                    /** Cve id */
+                    id?: (string|null);
+
+                    /** Cve references */
+                    references?: (google.cloud.securitycenter.v1.IReference[]|null);
+
+                    /** Cve cvssv3 */
+                    cvssv3?: (google.cloud.securitycenter.v1.ICvssv3|null);
+                }
+
+                /** Represents a Cve. */
+                class Cve implements ICve {
+
+                    /**
+                     * Constructs a new Cve.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICve);
+
+                    /** Cve id. */
+                    public id: string;
+
+                    /** Cve references. */
+                    public references: google.cloud.securitycenter.v1.IReference[];
+
+                    /** Cve cvssv3. */
+                    public cvssv3?: (google.cloud.securitycenter.v1.ICvssv3|null);
+
+                    /**
+                     * Creates a new Cve instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Cve instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICve): google.cloud.securitycenter.v1.Cve;
+
+                    /**
+                     * Encodes the specified Cve message. Does not implicitly {@link google.cloud.securitycenter.v1.Cve.verify|verify} messages.
+                     * @param message Cve message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICve, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Cve message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Cve.verify|verify} messages.
+                     * @param message Cve message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICve, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Cve message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Cve
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Cve;
+
+                    /**
+                     * Decodes a Cve message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Cve
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Cve;
+
+                    /**
+                     * Verifies a Cve message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Cve message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Cve
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Cve;
+
+                    /**
+                     * Creates a plain object from a Cve message. Also converts values to other types if specified.
+                     * @param message Cve
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Cve, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Cve to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Reference. */
+                interface IReference {
+
+                    /** Reference source */
+                    source?: (string|null);
+
+                    /** Reference uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a Reference. */
+                class Reference implements IReference {
+
+                    /**
+                     * Constructs a new Reference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IReference);
+
+                    /** Reference source. */
+                    public source: string;
+
+                    /** Reference uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new Reference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Reference instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IReference): google.cloud.securitycenter.v1.Reference;
+
+                    /**
+                     * Encodes the specified Reference message. Does not implicitly {@link google.cloud.securitycenter.v1.Reference.verify|verify} messages.
+                     * @param message Reference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Reference message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Reference.verify|verify} messages.
+                     * @param message Reference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Reference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Reference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Reference;
+
+                    /**
+                     * Decodes a Reference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Reference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Reference;
+
+                    /**
+                     * Verifies a Reference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Reference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Reference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Reference;
+
+                    /**
+                     * Creates a plain object from a Reference message. Also converts values to other types if specified.
+                     * @param message Reference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Reference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Reference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Cvssv3. */
+                interface ICvssv3 {
+
+                    /** Cvssv3 baseScore */
+                    baseScore?: (number|null);
+
+                    /** Cvssv3 attackVector */
+                    attackVector?: (google.cloud.securitycenter.v1.Cvssv3.AttackVector|keyof typeof google.cloud.securitycenter.v1.Cvssv3.AttackVector|null);
+
+                    /** Cvssv3 attackComplexity */
+                    attackComplexity?: (google.cloud.securitycenter.v1.Cvssv3.AttackComplexity|keyof typeof google.cloud.securitycenter.v1.Cvssv3.AttackComplexity|null);
+
+                    /** Cvssv3 privilegesRequired */
+                    privilegesRequired?: (google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired|keyof typeof google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired|null);
+
+                    /** Cvssv3 userInteraction */
+                    userInteraction?: (google.cloud.securitycenter.v1.Cvssv3.UserInteraction|keyof typeof google.cloud.securitycenter.v1.Cvssv3.UserInteraction|null);
+
+                    /** Cvssv3 scope */
+                    scope?: (google.cloud.securitycenter.v1.Cvssv3.Scope|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Scope|null);
+
+                    /** Cvssv3 confidentialityImpact */
+                    confidentialityImpact?: (google.cloud.securitycenter.v1.Cvssv3.Impact|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Impact|null);
+
+                    /** Cvssv3 integrityImpact */
+                    integrityImpact?: (google.cloud.securitycenter.v1.Cvssv3.Impact|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Impact|null);
+
+                    /** Cvssv3 availabilityImpact */
+                    availabilityImpact?: (google.cloud.securitycenter.v1.Cvssv3.Impact|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Impact|null);
+                }
+
+                /** Represents a Cvssv3. */
+                class Cvssv3 implements ICvssv3 {
+
+                    /**
+                     * Constructs a new Cvssv3.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICvssv3);
+
+                    /** Cvssv3 baseScore. */
+                    public baseScore: number;
+
+                    /** Cvssv3 attackVector. */
+                    public attackVector: (google.cloud.securitycenter.v1.Cvssv3.AttackVector|keyof typeof google.cloud.securitycenter.v1.Cvssv3.AttackVector);
+
+                    /** Cvssv3 attackComplexity. */
+                    public attackComplexity: (google.cloud.securitycenter.v1.Cvssv3.AttackComplexity|keyof typeof google.cloud.securitycenter.v1.Cvssv3.AttackComplexity);
+
+                    /** Cvssv3 privilegesRequired. */
+                    public privilegesRequired: (google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired|keyof typeof google.cloud.securitycenter.v1.Cvssv3.PrivilegesRequired);
+
+                    /** Cvssv3 userInteraction. */
+                    public userInteraction: (google.cloud.securitycenter.v1.Cvssv3.UserInteraction|keyof typeof google.cloud.securitycenter.v1.Cvssv3.UserInteraction);
+
+                    /** Cvssv3 scope. */
+                    public scope: (google.cloud.securitycenter.v1.Cvssv3.Scope|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Scope);
+
+                    /** Cvssv3 confidentialityImpact. */
+                    public confidentialityImpact: (google.cloud.securitycenter.v1.Cvssv3.Impact|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Impact);
+
+                    /** Cvssv3 integrityImpact. */
+                    public integrityImpact: (google.cloud.securitycenter.v1.Cvssv3.Impact|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Impact);
+
+                    /** Cvssv3 availabilityImpact. */
+                    public availabilityImpact: (google.cloud.securitycenter.v1.Cvssv3.Impact|keyof typeof google.cloud.securitycenter.v1.Cvssv3.Impact);
+
+                    /**
+                     * Creates a new Cvssv3 instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Cvssv3 instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICvssv3): google.cloud.securitycenter.v1.Cvssv3;
+
+                    /**
+                     * Encodes the specified Cvssv3 message. Does not implicitly {@link google.cloud.securitycenter.v1.Cvssv3.verify|verify} messages.
+                     * @param message Cvssv3 message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICvssv3, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Cvssv3 message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Cvssv3.verify|verify} messages.
+                     * @param message Cvssv3 message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICvssv3, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Cvssv3 message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Cvssv3
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Cvssv3;
+
+                    /**
+                     * Decodes a Cvssv3 message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Cvssv3
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Cvssv3;
+
+                    /**
+                     * Verifies a Cvssv3 message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Cvssv3 message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Cvssv3
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Cvssv3;
+
+                    /**
+                     * Creates a plain object from a Cvssv3 message. Also converts values to other types if specified.
+                     * @param message Cvssv3
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Cvssv3, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Cvssv3 to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Cvssv3 {
+
+                    /** AttackVector enum. */
+                    enum AttackVector {
+                        ATTACK_VECTOR_UNSPECIFIED = 0,
+                        ATTACK_VECTOR_NETWORK = 1,
+                        ATTACK_VECTOR_ADJACENT = 2,
+                        ATTACK_VECTOR_LOCAL = 3,
+                        ATTACK_VECTOR_PHYSICAL = 4
+                    }
+
+                    /** AttackComplexity enum. */
+                    enum AttackComplexity {
+                        ATTACK_COMPLEXITY_UNSPECIFIED = 0,
+                        ATTACK_COMPLEXITY_LOW = 1,
+                        ATTACK_COMPLEXITY_HIGH = 2
+                    }
+
+                    /** PrivilegesRequired enum. */
+                    enum PrivilegesRequired {
+                        PRIVILEGES_REQUIRED_UNSPECIFIED = 0,
+                        PRIVILEGES_REQUIRED_NONE = 1,
+                        PRIVILEGES_REQUIRED_LOW = 2,
+                        PRIVILEGES_REQUIRED_HIGH = 3
+                    }
+
+                    /** UserInteraction enum. */
+                    enum UserInteraction {
+                        USER_INTERACTION_UNSPECIFIED = 0,
+                        USER_INTERACTION_NONE = 1,
+                        USER_INTERACTION_REQUIRED = 2
+                    }
+
+                    /** Scope enum. */
+                    enum Scope {
+                        SCOPE_UNSPECIFIED = 0,
+                        SCOPE_UNCHANGED = 1,
+                        SCOPE_CHANGED = 2
+                    }
+
+                    /** Impact enum. */
+                    enum Impact {
+                        IMPACT_UNSPECIFIED = 0,
+                        IMPACT_HIGH = 1,
+                        IMPACT_LOW = 2,
+                        IMPACT_NONE = 3
+                    }
                 }
 
                 /** Properties of a NotificationConfig. */
@@ -1212,6 +1693,9 @@ export namespace google {
                     /** Resource parentDisplayName */
                     parentDisplayName?: (string|null);
 
+                    /** Resource type */
+                    type?: (string|null);
+
                     /** Resource folders */
                     folders?: (google.cloud.securitycenter.v1.IFolder[]|null);
                 }
@@ -1239,6 +1723,9 @@ export namespace google {
 
                     /** Resource parentDisplayName. */
                     public parentDisplayName: string;
+
+                    /** Resource type. */
+                    public type: string;
 
                     /** Resource folders. */
                     public folders: google.cloud.securitycenter.v1.IFolder[];

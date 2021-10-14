@@ -10,5 +10,6 @@
   "../../protos/google/cloud/securitycenter/v1/run_asset_discovery_response.proto",
   "../../protos/google/cloud/securitycenter/v1/security_marks.proto",
   "../../protos/google/cloud/securitycenter/v1/securitycenter_service.proto",
-  "../../protos/google/cloud/securitycenter/v1/source.proto"
+  "../../protos/google/cloud/securitycenter/v1/source.proto",
+  "../../protos/google/cloud/securitycenter/v1/vulnerability.proto"
 ]
