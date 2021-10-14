@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.9.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.8.1...v2.9.0) (2021-10-14)
+
+
+### Features
+
+* add OAEP+SHA1 to the list of supported algorithms ([#503](https://www.github.com/googleapis/nodejs-kms/issues/503)) ([00cc42e](https://www.github.com/googleapis/nodejs-kms/commit/00cc42ed9a30650fc88d27c8205e08bb305dd0f8))
+* add RPC retry information for MacSign, MacVerify, and GenerateRandomBytes Committer: [@bdhess](https://www.github.com/bdhess) ([#506](https://www.github.com/googleapis/nodejs-kms/issues/506)) ([08cd155](https://www.github.com/googleapis/nodejs-kms/commit/08cd15524662ba81a35761df592ea8ce1557e023))
+
 ### [2.8.1](https://www.github.com/googleapis/nodejs-kms/compare/v2.8.0...v2.8.1) (2021-09-03)
 
 
