@@ -183,7 +183,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-deploy/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/clouddeploy/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/deploy/latest
 [product-docs]: https://cloud.google.com/deploy/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
