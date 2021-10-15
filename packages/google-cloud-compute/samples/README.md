@@ -21,8 +21,12 @@
   * [List Images By Page](#list-images-by-page)
   * [List Instances](#list-instances)
   * [Mailjet](#mailjet)
+  * [Reset Instance](#reset-instance)
   * [Sendgrid](#sendgrid)
   * [Set Usage Export Bucket](#set-usage-export-bucket)
+  * [Start Instance](#start-instance)
+  * [Start Instance With Enc Key](#start-instance-with-enc-key)
+  * [Stop Instance](#stop-instance)
   * [Wait For Operation](#wait-for-operation)
 
 ## Before you begin
@@ -193,6 +197,23 @@ __Usage:__
 
 
 
+### Reset Instance
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/resetInstance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/resetInstance.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/resetInstance.js`
+
+
+-----
+
+
+
+
 ### Sendgrid
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/sendgrid.js).
@@ -220,6 +241,57 @@ __Usage:__
 
 
 `node samples/setUsageExportBucket.js`
+
+
+-----
+
+
+
+
+### Start Instance
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/startInstance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startInstance.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/startInstance.js`
+
+
+-----
+
+
+
+
+### Start Instance With Enc Key
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/startInstanceWithEncKey.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startInstanceWithEncKey.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/startInstanceWithEncKey.js`
+
+
+-----
+
+
+
+
+### Stop Instance
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/stopInstance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/stopInstance.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/stopInstance.js`
 
 
 -----
