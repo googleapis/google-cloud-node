@@ -71,7 +71,7 @@ function main(
   provider.register();
 
   // OpenTelemetry tracing is an optional feature and can be enabled by setting
-  // enableOpenTelemetryTraceing as a publisher or subscriber option
+  // enableOpenTelemetryTracing as a publisher or subscriber option
   const enableOpenTelemetryTracing = {
     enableOpenTelemetryTracing: true,
   };
