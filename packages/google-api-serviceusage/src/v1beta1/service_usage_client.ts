@@ -2925,7 +2925,8 @@ export class ServiceUsageClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     this.warn(
       'DEP$ServiceUsage-$ListServices',
@@ -2991,7 +2992,8 @@ export class ServiceUsageClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     this.warn(
       'DEP$ServiceUsage-$ListServices',
@@ -3161,7 +3163,8 @@ export class ServiceUsageClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConsumerQuotaMetrics.createStream(
       this.innerApiCalls.listConsumerQuotaMetrics as gax.GaxCall,
@@ -3219,7 +3222,8 @@ export class ServiceUsageClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConsumerQuotaMetrics.asyncIterate(
       this.innerApiCalls['listConsumerQuotaMetrics'] as GaxCall,
@@ -3370,7 +3374,8 @@ export class ServiceUsageClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAdminOverrides'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAdminOverrides.createStream(
       this.innerApiCalls.listAdminOverrides as gax.GaxCall,
@@ -3425,7 +3430,8 @@ export class ServiceUsageClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAdminOverrides'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAdminOverrides.asyncIterate(
       this.innerApiCalls['listAdminOverrides'] as GaxCall,
@@ -3576,7 +3582,8 @@ export class ServiceUsageClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConsumerOverrides'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConsumerOverrides.createStream(
       this.innerApiCalls.listConsumerOverrides as gax.GaxCall,
@@ -3631,7 +3638,8 @@ export class ServiceUsageClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConsumerOverrides'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConsumerOverrides.asyncIterate(
       this.innerApiCalls['listConsumerOverrides'] as GaxCall,

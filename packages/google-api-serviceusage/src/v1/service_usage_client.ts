@@ -1091,7 +1091,7 @@ export class ServiceUsageClient {
    * @param {number} request.pageSize
    *   Requested size of the next page of data.
    *   Requested page size cannot exceed 200.
-   *    If not set, the default page size is 50.
+   *   If not set, the default page size is 50.
    * @param {string} request.pageToken
    *   Token identifying which result to start with, which is returned by a
    *   previous list call.
@@ -1167,7 +1167,7 @@ export class ServiceUsageClient {
    * @param {number} request.pageSize
    *   Requested size of the next page of data.
    *   Requested page size cannot exceed 200.
-   *    If not set, the default page size is 50.
+   *   If not set, the default page size is 50.
    * @param {string} request.pageToken
    *   Token identifying which result to start with, which is returned by a
    *   previous list call.
@@ -1198,7 +1198,8 @@ export class ServiceUsageClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as gax.GaxCall,
@@ -1221,7 +1222,7 @@ export class ServiceUsageClient {
    * @param {number} request.pageSize
    *   Requested size of the next page of data.
    *   Requested page size cannot exceed 200.
-   *    If not set, the default page size is 50.
+   *   If not set, the default page size is 50.
    * @param {string} request.pageToken
    *   Token identifying which result to start with, which is returned by a
    *   previous list call.
@@ -1257,7 +1258,8 @@ export class ServiceUsageClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
