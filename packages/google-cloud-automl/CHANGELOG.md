@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.5...v2.5.0) (2021-10-14)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#540](https://www.github.com/googleapis/nodejs-automl/issues/540)) ([bb611a4](https://www.github.com/googleapis/nodejs-automl/commit/bb611a4f2f1c372bafc4088f1a7660f7fddb9e08))
+
 ### [2.4.5](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.4...v2.4.5) (2021-08-17)
 
 
