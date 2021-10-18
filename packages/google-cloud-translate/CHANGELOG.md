@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.3.1](https://www.github.com/googleapis/nodejs-translate/compare/v6.3.0...v6.3.1) (2021-10-18)
+
+
+### Bug Fixes
+
+* add model signature for batch document translation ([#735](https://www.github.com/googleapis/nodejs-translate/issues/735)) ([406c768](https://www.github.com/googleapis/nodejs-translate/commit/406c7684babb00dcda8dfbb07c6210f810972262))
+
 ## [6.3.0](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.7...v6.3.0) (2021-09-13)
 
 
