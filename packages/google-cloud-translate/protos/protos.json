@@ -147,6 +147,7 @@
                           "options": {
                             "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:batchTranslateDocument",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,source_language_code,target_language_codes,input_configs,output_config",
                             "(google.longrunning.operation_info).response_type": "BatchTranslateDocumentResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchTranslateDocumentMetadata"
                           },
@@ -156,6 +157,9 @@
                                 "post": "/v3/{parent=projects/*/locations/*}:batchTranslateDocument",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source_language_code,target_language_codes,input_configs,output_config"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -1412,6 +1416,7 @@
                           "options": {
                             "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*}:batchTranslateDocument",
                             "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,source_language_code,target_language_codes,input_configs,output_config",
                             "(google.longrunning.operation_info).response_type": "BatchTranslateDocumentResponse",
                             "(google.longrunning.operation_info).metadata_type": "BatchTranslateDocumentMetadata"
                           },
@@ -1421,6 +1426,9 @@
                                 "post": "/v3beta1/{parent=projects/*/locations/*}:batchTranslateDocument",
                                 "body": "*"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,source_language_code,target_language_codes,input_configs,output_config"
                             },
                             {
                               "(google.longrunning.operation_info)": {
