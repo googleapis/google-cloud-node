@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.1.1...v1.2.0) (2021-10-19)
+
+
+### Features
+
+* TPU v2alpha1 public protos ([#43](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/43)) ([0b3aba7](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/0b3aba7b67adeb3df55c735eb513ffdcefe65e3d))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.1.0...v1.1.1) (2021-08-25)
 
 
