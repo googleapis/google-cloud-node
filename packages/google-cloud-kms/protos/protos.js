@@ -969,6 +969,9 @@
                                 case 6:
                                 case 7:
                                 case 16:
+                                case 28:
+                                case 29:
+                                case 30:
                                 case 8:
                                 case 9:
                                 case 10:
@@ -1056,6 +1059,18 @@
                             case "RSA_SIGN_PKCS1_4096_SHA512":
                             case 16:
                                 message.algorithm = 16;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_2048":
+                            case 28:
+                                message.algorithm = 28;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_3072":
+                            case 29:
+                                message.algorithm = 29;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_4096":
+                            case 30:
+                                message.algorithm = 30;
                                 break;
                             case "RSA_DECRYPT_OAEP_2048_SHA256":
                             case 8:
@@ -1753,6 +1768,9 @@
                                 case 6:
                                 case 7:
                                 case 16:
+                                case 28:
+                                case 29:
+                                case 30:
                                 case 8:
                                 case 9:
                                 case 10:
@@ -1920,6 +1938,18 @@
                             case "RSA_SIGN_PKCS1_4096_SHA512":
                             case 16:
                                 message.algorithm = 16;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_2048":
+                            case 28:
+                                message.algorithm = 28;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_3072":
+                            case 29:
+                                message.algorithm = 29;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_4096":
+                            case 30:
+                                message.algorithm = 30;
                                 break;
                             case "RSA_DECRYPT_OAEP_2048_SHA256":
                             case 8:
@@ -2099,6 +2129,9 @@
                          * @property {number} RSA_SIGN_PKCS1_3072_SHA256=6 RSA_SIGN_PKCS1_3072_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_4096_SHA256=7 RSA_SIGN_PKCS1_4096_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_4096_SHA512=16 RSA_SIGN_PKCS1_4096_SHA512 value
+                         * @property {number} RSA_SIGN_RAW_PKCS1_2048=28 RSA_SIGN_RAW_PKCS1_2048 value
+                         * @property {number} RSA_SIGN_RAW_PKCS1_3072=29 RSA_SIGN_RAW_PKCS1_3072 value
+                         * @property {number} RSA_SIGN_RAW_PKCS1_4096=30 RSA_SIGN_RAW_PKCS1_4096 value
                          * @property {number} RSA_DECRYPT_OAEP_2048_SHA256=8 RSA_DECRYPT_OAEP_2048_SHA256 value
                          * @property {number} RSA_DECRYPT_OAEP_3072_SHA256=9 RSA_DECRYPT_OAEP_3072_SHA256 value
                          * @property {number} RSA_DECRYPT_OAEP_4096_SHA256=10 RSA_DECRYPT_OAEP_4096_SHA256 value
@@ -2124,6 +2157,9 @@
                             values[valuesById[6] = "RSA_SIGN_PKCS1_3072_SHA256"] = 6;
                             values[valuesById[7] = "RSA_SIGN_PKCS1_4096_SHA256"] = 7;
                             values[valuesById[16] = "RSA_SIGN_PKCS1_4096_SHA512"] = 16;
+                            values[valuesById[28] = "RSA_SIGN_RAW_PKCS1_2048"] = 28;
+                            values[valuesById[29] = "RSA_SIGN_RAW_PKCS1_3072"] = 29;
+                            values[valuesById[30] = "RSA_SIGN_RAW_PKCS1_4096"] = 30;
                             values[valuesById[8] = "RSA_DECRYPT_OAEP_2048_SHA256"] = 8;
                             values[valuesById[9] = "RSA_DECRYPT_OAEP_3072_SHA256"] = 9;
                             values[valuesById[10] = "RSA_DECRYPT_OAEP_4096_SHA256"] = 10;
@@ -2385,6 +2421,9 @@
                                 case 6:
                                 case 7:
                                 case 16:
+                                case 28:
+                                case 29:
+                                case 30:
                                 case 8:
                                 case 9:
                                 case 10:
@@ -2474,6 +2513,18 @@
                             case "RSA_SIGN_PKCS1_4096_SHA512":
                             case 16:
                                 message.algorithm = 16;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_2048":
+                            case 28:
+                                message.algorithm = 28;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_3072":
+                            case 29:
+                                message.algorithm = 29;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_4096":
+                            case 30:
+                                message.algorithm = 30;
                                 break;
                             case "RSA_DECRYPT_OAEP_2048_SHA256":
                             case 8:
@@ -8455,6 +8506,9 @@
                                 case 6:
                                 case 7:
                                 case 16:
+                                case 28:
+                                case 29:
+                                case 30:
                                 case 8:
                                 case 9:
                                 case 10:
@@ -8536,6 +8590,18 @@
                             case "RSA_SIGN_PKCS1_4096_SHA512":
                             case 16:
                                 message.algorithm = 16;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_2048":
+                            case 28:
+                                message.algorithm = 28;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_3072":
+                            case 29:
+                                message.algorithm = 29;
+                                break;
+                            case "RSA_SIGN_RAW_PKCS1_4096":
+                            case 30:
+                                message.algorithm = 30;
                                 break;
                             case "RSA_DECRYPT_OAEP_2048_SHA256":
                             case 8:
@@ -10523,6 +10589,8 @@
                          * @property {string|null} [name] AsymmetricSignRequest name
                          * @property {google.cloud.kms.v1.IDigest|null} [digest] AsymmetricSignRequest digest
                          * @property {google.protobuf.IInt64Value|null} [digestCrc32c] AsymmetricSignRequest digestCrc32c
+                         * @property {Uint8Array|null} [data] AsymmetricSignRequest data
+                         * @property {google.protobuf.IInt64Value|null} [dataCrc32c] AsymmetricSignRequest dataCrc32c
                          */
     
                         /**
@@ -10565,6 +10633,22 @@
                         AsymmetricSignRequest.prototype.digestCrc32c = null;
     
                         /**
+                         * AsymmetricSignRequest data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.kms.v1.AsymmetricSignRequest
+                         * @instance
+                         */
+                        AsymmetricSignRequest.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * AsymmetricSignRequest dataCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} dataCrc32c
+                         * @memberof google.cloud.kms.v1.AsymmetricSignRequest
+                         * @instance
+                         */
+                        AsymmetricSignRequest.prototype.dataCrc32c = null;
+    
+                        /**
                          * Creates a new AsymmetricSignRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AsymmetricSignRequest
@@ -10594,6 +10678,10 @@
                                 $root.google.cloud.kms.v1.Digest.encode(message.digest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.digestCrc32c != null && Object.hasOwnProperty.call(message, "digestCrc32c"))
                                 $root.google.protobuf.Int64Value.encode(message.digestCrc32c, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.data);
+                            if (message.dataCrc32c != null && Object.hasOwnProperty.call(message, "dataCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.dataCrc32c, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -10636,6 +10724,12 @@
                                     break;
                                 case 4:
                                     message.digestCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.data = reader.bytes();
+                                    break;
+                                case 7:
+                                    message.dataCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10685,6 +10779,14 @@
                                 if (error)
                                     return "digestCrc32c." + error;
                             }
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.dataCrc32c);
+                                if (error)
+                                    return "dataCrc32c." + error;
+                            }
                             return null;
                         };
     
@@ -10712,6 +10814,16 @@
                                     throw TypeError(".google.cloud.kms.v1.AsymmetricSignRequest.digestCrc32c: object expected");
                                 message.digestCrc32c = $root.google.protobuf.Int64Value.fromObject(object.digestCrc32c);
                             }
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length)
+                                    message.data = object.data;
+                            if (object.dataCrc32c != null) {
+                                if (typeof object.dataCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.AsymmetricSignRequest.dataCrc32c: object expected");
+                                message.dataCrc32c = $root.google.protobuf.Int64Value.fromObject(object.dataCrc32c);
+                            }
                             return message;
                         };
     
@@ -10732,6 +10844,14 @@
                                 object.name = "";
                                 object.digest = null;
                                 object.digestCrc32c = null;
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                                object.dataCrc32c = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10739,6 +10859,10 @@
                                 object.digest = $root.google.cloud.kms.v1.Digest.toObject(message.digest, options);
                             if (message.digestCrc32c != null && message.hasOwnProperty("digestCrc32c"))
                                 object.digestCrc32c = $root.google.protobuf.Int64Value.toObject(message.digestCrc32c, options);
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c"))
+                                object.dataCrc32c = $root.google.protobuf.Int64Value.toObject(message.dataCrc32c, options);
                             return object;
                         };
     
@@ -12443,6 +12567,7 @@
                          * @property {google.protobuf.IInt64Value|null} [signatureCrc32c] AsymmetricSignResponse signatureCrc32c
                          * @property {boolean|null} [verifiedDigestCrc32c] AsymmetricSignResponse verifiedDigestCrc32c
                          * @property {string|null} [name] AsymmetricSignResponse name
+                         * @property {boolean|null} [verifiedDataCrc32c] AsymmetricSignResponse verifiedDataCrc32c
                          * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] AsymmetricSignResponse protectionLevel
                          */
     
@@ -12494,6 +12619,14 @@
                         AsymmetricSignResponse.prototype.name = "";
     
                         /**
+                         * AsymmetricSignResponse verifiedDataCrc32c.
+                         * @member {boolean} verifiedDataCrc32c
+                         * @memberof google.cloud.kms.v1.AsymmetricSignResponse
+                         * @instance
+                         */
+                        AsymmetricSignResponse.prototype.verifiedDataCrc32c = false;
+    
+                        /**
                          * AsymmetricSignResponse protectionLevel.
                          * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
                          * @memberof google.cloud.kms.v1.AsymmetricSignResponse
@@ -12533,6 +12666,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.verifiedDigestCrc32c);
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                            if (message.verifiedDataCrc32c != null && Object.hasOwnProperty.call(message, "verifiedDataCrc32c"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.verifiedDataCrc32c);
                             if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.protectionLevel);
                             return writer;
@@ -12580,6 +12715,9 @@
                                     break;
                                 case 4:
                                     message.name = reader.string();
+                                    break;
+                                case 5:
+                                    message.verifiedDataCrc32c = reader.bool();
                                     break;
                                 case 6:
                                     message.protectionLevel = reader.int32();
@@ -12633,6 +12771,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.verifiedDataCrc32c != null && message.hasOwnProperty("verifiedDataCrc32c"))
+                                if (typeof message.verifiedDataCrc32c !== "boolean")
+                                    return "verifiedDataCrc32c: boolean expected";
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
                                 switch (message.protectionLevel) {
                                 default:
@@ -12672,6 +12813,8 @@
                                 message.verifiedDigestCrc32c = Boolean(object.verifiedDigestCrc32c);
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.verifiedDataCrc32c != null)
+                                message.verifiedDataCrc32c = Boolean(object.verifiedDataCrc32c);
                             switch (object.protectionLevel) {
                             case "PROTECTION_LEVEL_UNSPECIFIED":
                             case 0:
@@ -12717,6 +12860,7 @@
                                 object.signatureCrc32c = null;
                                 object.verifiedDigestCrc32c = false;
                                 object.name = "";
+                                object.verifiedDataCrc32c = false;
                                 object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.signature != null && message.hasOwnProperty("signature"))
@@ -12727,6 +12871,8 @@
                                 object.verifiedDigestCrc32c = message.verifiedDigestCrc32c;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.verifiedDataCrc32c != null && message.hasOwnProperty("verifiedDataCrc32c"))
+                                object.verifiedDataCrc32c = message.verifiedDataCrc32c;
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
                                 object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;

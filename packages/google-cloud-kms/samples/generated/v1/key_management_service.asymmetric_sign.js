@@ -14,7 +14,7 @@
 
 'use strict';
 
-function main(name, digest) {
+function main(name) {
   // [START cloudkms_v1_generated_KeyManagementService_AsymmetricSign_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -24,7 +24,7 @@ function main(name, digest) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The digest of the data to sign. The digest must be produced with
+   *  Optional. The digest of the data to sign. The digest must be produced with
    *  the same digest algorithm as specified by the key version's
    *  [algorithm][google.cloud.kms.v1.CryptoKeyVersion.algorithm].
    */
@@ -45,6 +45,28 @@ function main(name, digest) {
    *  that support this type.
    */
   // const digestCrc32c = ''
+  /**
+   *  Optional. This field will only be honored for RAW_PKCS1 keys.
+   *  The data to sign. A digest is computed over the data that will be signed,
+   *  PKCS #1 padding is applied to the digest directly and then encrypted.
+   */
+  // const data = 'Buffer.from('string')'
+  /**
+   *  Optional. An optional CRC32C checksum of the [AsymmetricSignRequest.data][google.cloud.kms.v1.AsymmetricSignRequest.data]. If
+   *  specified, [KeyManagementService][google.cloud.kms.v1.KeyManagementService] will verify the integrity of the
+   *  received [AsymmetricSignRequest.data][google.cloud.kms.v1.AsymmetricSignRequest.data] using this checksum.
+   *  [KeyManagementService][google.cloud.kms.v1.KeyManagementService] will report an error if the checksum verification
+   *  fails. If you receive a checksum error, your client should verify that
+   *  CRC32C([AsymmetricSignRequest.data][google.cloud.kms.v1.AsymmetricSignRequest.data]) is equal to
+   *  [AsymmetricSignRequest.data_crc32c][google.cloud.kms.v1.AsymmetricSignRequest.data_crc32c], and if so, perform a limited
+   *  number of retries. A persistent mismatch may indicate an issue in your
+   *  computation of the CRC32C checksum.
+   *  Note: This field is defined as int64 for reasons of compatibility across
+   *  different languages. However, it is a non-negative integer, which will
+   *  never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+   *  that support this type.
+   */
+  // const dataCrc32c = ''
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
@@ -56,7 +78,6 @@ function main(name, digest) {
     // Construct request
     const request = {
       name,
-      digest,
     };
 
     // Run request

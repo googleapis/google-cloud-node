@@ -665,6 +665,9 @@ export namespace google {
                         RSA_SIGN_PKCS1_3072_SHA256 = 6,
                         RSA_SIGN_PKCS1_4096_SHA256 = 7,
                         RSA_SIGN_PKCS1_4096_SHA512 = 16,
+                        RSA_SIGN_RAW_PKCS1_2048 = 28,
+                        RSA_SIGN_RAW_PKCS1_3072 = 29,
+                        RSA_SIGN_RAW_PKCS1_4096 = 30,
                         RSA_DECRYPT_OAEP_2048_SHA256 = 8,
                         RSA_DECRYPT_OAEP_3072_SHA256 = 9,
                         RSA_DECRYPT_OAEP_4096_SHA256 = 10,
@@ -4290,6 +4293,12 @@ export namespace google {
 
                     /** AsymmetricSignRequest digestCrc32c */
                     digestCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** AsymmetricSignRequest data */
+                    data?: (Uint8Array|string|null);
+
+                    /** AsymmetricSignRequest dataCrc32c */
+                    dataCrc32c?: (google.protobuf.IInt64Value|null);
                 }
 
                 /** Represents an AsymmetricSignRequest. */
@@ -4309,6 +4318,12 @@ export namespace google {
 
                     /** AsymmetricSignRequest digestCrc32c. */
                     public digestCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /** AsymmetricSignRequest data. */
+                    public data: (Uint8Array|string);
+
+                    /** AsymmetricSignRequest dataCrc32c. */
+                    public dataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /**
                      * Creates a new AsymmetricSignRequest instance using the specified properties.
@@ -5044,6 +5059,9 @@ export namespace google {
                     /** AsymmetricSignResponse name */
                     name?: (string|null);
 
+                    /** AsymmetricSignResponse verifiedDataCrc32c */
+                    verifiedDataCrc32c?: (boolean|null);
+
                     /** AsymmetricSignResponse protectionLevel */
                     protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
                 }
@@ -5068,6 +5086,9 @@ export namespace google {
 
                     /** AsymmetricSignResponse name. */
                     public name: string;
+
+                    /** AsymmetricSignResponse verifiedDataCrc32c. */
+                    public verifiedDataCrc32c: boolean;
 
                     /** AsymmetricSignResponse protectionLevel. */
                     public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
