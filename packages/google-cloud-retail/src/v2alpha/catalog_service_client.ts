@@ -838,7 +838,8 @@ export class CatalogServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCatalogs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCatalogs.createStream(
       this.innerApiCalls.listCatalogs as gax.GaxCall,
@@ -906,7 +907,8 @@ export class CatalogServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCatalogs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCatalogs.asyncIterate(
       this.innerApiCalls['listCatalogs'] as GaxCall,

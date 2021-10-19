@@ -1973,6 +1973,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 23
+                        },
+                        "searchMode": {
+                          "type": "SearchMode",
+                          "id": 31
                         }
                       },
                       "nested": {
@@ -2100,6 +2104,13 @@
                                 "AUTO": 3
                               }
                             }
+                          }
+                        },
+                        "SearchMode": {
+                          "values": {
+                            "SEARCH_MODE_UNSPECIFIED": 0,
+                            "PRODUCT_SEARCH_ONLY": 1,
+                            "FACETED_SEARCH_ONLY": 2
                           }
                         }
                       }
@@ -4481,6 +4492,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 23
+                        },
+                        "searchMode": {
+                          "type": "SearchMode",
+                          "id": 31
                         }
                       },
                       "nested": {
@@ -4617,6 +4632,13 @@
                             "MEDIUM": 2,
                             "LOW": 3,
                             "LOWEST": 4
+                          }
+                        },
+                        "SearchMode": {
+                          "values": {
+                            "SEARCH_MODE_UNSPECIFIED": 0,
+                            "PRODUCT_SEARCH_ONLY": 1,
+                            "FACETED_SEARCH_ONLY": 2
                           }
                         }
                       }
@@ -6953,6 +6975,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 23
+                        },
+                        "searchMode": {
+                          "type": "SearchMode",
+                          "id": 31
                         }
                       },
                       "nested": {
@@ -7080,6 +7106,13 @@
                                 "AUTO": 3
                               }
                             }
+                          }
+                        },
+                        "SearchMode": {
+                          "values": {
+                            "SEARCH_MODE_UNSPECIFIED": 0,
+                            "PRODUCT_SEARCH_ONLY": 1,
+                            "FACETED_SEARCH_ONLY": 2
                           }
                         }
                       }

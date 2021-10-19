@@ -1119,7 +1119,7 @@ export class ProductServiceClient {
    *   {@link google.cloud.retail.v2.Product.name|Product.name} is not found, the
    *   inventory update will still be processed and retained for at most 1 day
    *   until the {@link google.cloud.retail.v2.Product|Product} is created. If set to
-   *   false, an INVALID_ARGUMENT error is returned if the
+   *   false, a NOT_FOUND error is returned if the
    *   {@link google.cloud.retail.v2.Product|Product} is not found.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1326,8 +1326,8 @@ export class ProductServiceClient {
    *   If set to true, and the {@link google.cloud.retail.v2.Product|Product} is not
    *   found, the fulfillment information will still be processed and retained for
    *   at most 1 day and processed once the
-   *   {@link google.cloud.retail.v2.Product|Product} is created. If set to false, an
-   *   INVALID_ARGUMENT error is returned if the
+   *   {@link google.cloud.retail.v2.Product|Product} is created. If set to false, a
+   *   NOT_FOUND error is returned if the
    *   {@link google.cloud.retail.v2.Product|Product} is not found.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1529,8 +1529,8 @@ export class ProductServiceClient {
    *   If set to true, and the {@link google.cloud.retail.v2.Product|Product} is not
    *   found, the fulfillment information will still be processed and retained for
    *   at most 1 day and processed once the
-   *   {@link google.cloud.retail.v2.Product|Product} is created. If set to false, an
-   *   INVALID_ARGUMENT error is returned if the
+   *   {@link google.cloud.retail.v2.Product|Product} is created. If set to false, a
+   *   NOT_FOUND error is returned if the
    *   {@link google.cloud.retail.v2.Product|Product} is not found.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1895,7 +1895,8 @@ export class ProductServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProducts'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as gax.GaxCall,
@@ -2012,7 +2013,8 @@ export class ProductServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listProducts'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,

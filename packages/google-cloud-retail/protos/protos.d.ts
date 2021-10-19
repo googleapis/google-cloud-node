@@ -7411,6 +7411,9 @@ export namespace google {
 
                     /** SearchRequest pageCategories */
                     pageCategories?: (string[]|null);
+
+                    /** SearchRequest searchMode */
+                    searchMode?: (google.cloud.retail.v2.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2.SearchRequest.SearchMode|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -7472,6 +7475,9 @@ export namespace google {
 
                     /** SearchRequest pageCategories. */
                     public pageCategories: string[];
+
+                    /** SearchRequest searchMode. */
+                    public searchMode: (google.cloud.retail.v2.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2.SearchRequest.SearchMode);
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -8176,6 +8182,13 @@ export namespace google {
                             DISABLED = 1,
                             AUTO = 3
                         }
+                    }
+
+                    /** SearchMode enum. */
+                    enum SearchMode {
+                        SEARCH_MODE_UNSPECIFIED = 0,
+                        PRODUCT_SEARCH_ONLY = 1,
+                        FACETED_SEARCH_ONLY = 2
                     }
                 }
 
@@ -17330,6 +17343,9 @@ export namespace google {
 
                     /** SearchRequest pageCategories */
                     pageCategories?: (string[]|null);
+
+                    /** SearchRequest searchMode */
+                    searchMode?: (google.cloud.retail.v2alpha.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2alpha.SearchRequest.SearchMode|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -17394,6 +17410,9 @@ export namespace google {
 
                     /** SearchRequest pageCategories. */
                     public pageCategories: string[];
+
+                    /** SearchRequest searchMode. */
+                    public searchMode: (google.cloud.retail.v2alpha.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2alpha.SearchRequest.SearchMode);
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -18107,6 +18126,13 @@ export namespace google {
                         MEDIUM = 2,
                         LOW = 3,
                         LOWEST = 4
+                    }
+
+                    /** SearchMode enum. */
+                    enum SearchMode {
+                        SEARCH_MODE_UNSPECIFIED = 0,
+                        PRODUCT_SEARCH_ONLY = 1,
+                        FACETED_SEARCH_ONLY = 2
                     }
                 }
 
@@ -27048,6 +27074,9 @@ export namespace google {
 
                     /** SearchRequest pageCategories */
                     pageCategories?: (string[]|null);
+
+                    /** SearchRequest searchMode */
+                    searchMode?: (google.cloud.retail.v2beta.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2beta.SearchRequest.SearchMode|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -27109,6 +27138,9 @@ export namespace google {
 
                     /** SearchRequest pageCategories. */
                     public pageCategories: string[];
+
+                    /** SearchRequest searchMode. */
+                    public searchMode: (google.cloud.retail.v2beta.SearchRequest.SearchMode|keyof typeof google.cloud.retail.v2beta.SearchRequest.SearchMode);
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -27813,6 +27845,13 @@ export namespace google {
                             DISABLED = 1,
                             AUTO = 3
                         }
+                    }
+
+                    /** SearchMode enum. */
+                    enum SearchMode {
+                        SEARCH_MODE_UNSPECIFIED = 0,
+                        PRODUCT_SEARCH_ONLY = 1,
+                        FACETED_SEARCH_ONLY = 2
                     }
                 }
 
