@@ -21,6 +21,7 @@
   * [List-intents](#list-intents)
   * [List-page](#list-page)
   * [List-testcase-results](#list-testcase-results)
+  * [List Training Phrases](#list-training-phrases)
   * [Quickstart](#quickstart)
   * [Update-intent](#update-intent)
 
@@ -185,6 +186,23 @@ __Usage:__
 
 
 `node samples/list-testcase-results.js`
+
+
+-----
+
+
+
+
+### List Training Phrases
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/listTrainingPhrases.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/listTrainingPhrases.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listTrainingPhrases.js`
 
 
 -----
