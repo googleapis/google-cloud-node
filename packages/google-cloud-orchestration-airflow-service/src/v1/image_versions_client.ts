@@ -452,7 +452,8 @@ export class ImageVersionsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listImageVersions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listImageVersions.createStream(
       this.innerApiCalls.listImageVersions as gax.GaxCall,
@@ -505,7 +506,8 @@ export class ImageVersionsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listImageVersions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listImageVersions.asyncIterate(
       this.innerApiCalls['listImageVersions'] as GaxCall,
