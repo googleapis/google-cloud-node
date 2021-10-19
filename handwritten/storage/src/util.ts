@@ -40,7 +40,7 @@ export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
  * Encode `str` with encodeURIComponent, plus these
  * reserved characters: `! * ' ( )`.
  *
- * @see [MDN: fixedEncodeURIComponent]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent}
+ * See {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent| MDN: fixedEncodeURIComponent}
  *
  * @param {string} str The URI component to encode.
  * @return {string} The encoded string.

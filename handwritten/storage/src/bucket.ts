@@ -457,8 +457,8 @@ const RESUMABLE_THRESHOLD = 5000000;
  * get, and update entities and permissions for these as well with
  * {@link Bucket#acl.default}.
  *
- * @see [About Access Control Lists]{@link http://goo.gl/6qBBPO}
- * @see [Default ACLs]{@link https://cloud.google.com/storage/docs/access-control/lists#default}
+ * See {@link http://goo.gl/6qBBPO| About Access Control Lists}
+ * See {@link https://cloud.google.com/storage/docs/access-control/lists#default| Default ACLs}
  *
  * @name Bucket#acl
  * @mixes Acl
@@ -715,7 +715,7 @@ class Bucket extends ServiceObject {
       /**
        * Delete the bucket.
        *
-       * @see [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
+       * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete| Buckets: delete API Documentation}
        *
        * @method Bucket#delete
        * @param {DeleteBucketOptions} [options] Configuration options.
@@ -869,7 +869,7 @@ class Bucket extends ServiceObject {
        *
        * To set metadata, see {@link Bucket#setMetadata}.
        *
-       * @see [Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}
+       * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get| Buckets: get API Documentation}
        *
        * @method Bucket#getMetadata
        * @param {GetBucketMetadataOptions} [options] Configuration options.
@@ -919,7 +919,7 @@ class Bucket extends ServiceObject {
       /**
        * Set the bucket's metadata.
        *
-       * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+       * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch| Buckets: patch API Documentation}
        *
        * @method Bucket#setMetadata
        * @param {object<string, *>} metadata The metadata you wish to set.
@@ -1065,8 +1065,8 @@ class Bucket extends ServiceObject {
    * will be included to the existing policy. To replace all existing rules,
    * supply the `options` argument, setting `append` to `false`.
    *
-   * @see [Object Lifecycle Management]{@link https://cloud.google.com/storage/docs/lifecycle}
-   * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+   * See {@link https://cloud.google.com/storage/docs/lifecycle| Object Lifecycle Management}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch| Buckets: patch API Documentation}
    *
    * @param {LifecycleRule} rule The new lifecycle rule to be added to objects
    *     in this bucket.
@@ -1323,7 +1323,7 @@ class Bucket extends ServiceObject {
   /**
    * Combine multiple files into one new file.
    *
-   * @see [Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose| Objects: compose API Documentation}
    *
    * @throws {Error} if a non-array is provided as sources argument.
    * @throws {Error} if no sources are provided.
@@ -1522,7 +1522,7 @@ class Bucket extends ServiceObject {
    * @throws {Error} If an ID is not provided.
    * @throws {Error} If an address is not provided.
    *
-   * @see [Objects: watchAll API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll| Objects: watchAll API Documentation}
    *
    * @param {string} id The ID of the channel to create.
    * @param {CreateChannelConfig} config Configuration for creating channel.
@@ -1665,7 +1665,7 @@ class Bucket extends ServiceObject {
   /**
    * Creates a notification subscription for the bucket.
    *
-   * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert| Notifications: insert}
    *
    * @param {Topic|string} topic The Cloud PubSub topic to which this
    * subscription publishes. If the project ID is omitted, the current
@@ -1826,7 +1826,7 @@ class Bucket extends ServiceObject {
    * The `query` object passed as the first argument will also be passed to
    * {@link Bucket#getFiles}.
    *
-   * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete| Objects: delete API Documentation}
    *
    * @param {DeleteFilesOptions} [query] Query object. See {@link Bucket#getFiles}
    * @param {boolean} [query.force] Suppress errors until all files have been
@@ -2313,7 +2313,7 @@ class Bucket extends ServiceObject {
   /**
    * Get {@link File} objects for the files currently in the bucket.
    *
-   * @see [Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/list| Objects: list API Documentation}
    *
    * @param {GetFilesOptions} [query] Query object for listing files.
    * @param {boolean} [query.autoPaginate=true] Have pagination handled
@@ -2599,7 +2599,7 @@ class Bucket extends ServiceObject {
   /**
    * Retrieves a list of notification subscriptions for a given bucket.
    *
-   * @see [Notifications: list]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/list}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/notifications/list| Notifications: list}
    *
    * @param {GetNotificationsOptions} [options] Configuration options.
    * @param {string} [options.userProject] The ID of the project which will be
@@ -2725,7 +2725,7 @@ class Bucket extends ServiceObject {
    * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
    * enabled.
    *
-   * @see [Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls}
+   * See {@link https://cloud.google.com/storage/docs/access-control/signed-urls| Signed URLs Reference}
    *
    * @throws {Error} if an expiration timestamp from the past is given.
    *
@@ -2922,7 +2922,7 @@ class Bucket extends ServiceObject {
    * NOTE: This may cause the process to be long-running and use a high number
    * of requests. Use with caution.
    *
-   * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch| Buckets: patch API Documentation}
    *
    * @param {MakeBucketPrivateOptions} [options] Configuration options.
    * @param {boolean} [options.includeFiles=false] Make each file in the bucket
@@ -3066,7 +3066,7 @@ class Bucket extends ServiceObject {
    * NOTE: This may cause the process to be long-running and use a high number
    * of requests. Use with caution.
    *
-   * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch| Buckets: patch API Documentation}
    *
    * @param {MakeBucketPublicOptions} [options] Configuration options.
    * @param {boolean} [options.includeFiles=false] Make each file in the bucket
@@ -3470,7 +3470,7 @@ class Bucket extends ServiceObject {
   /**
    * Set the default storage class for new files in this bucket.
    *
-   * @see [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
+   * See {@link https://cloud.google.com/storage/docs/storage-classes| Storage Classes}
    *
    * @param {string} storageClass The new storage class. (`standard`,
    *     `nearline`, `coldline`, or `archive`).
@@ -3658,8 +3658,8 @@ class Bucket extends ServiceObject {
    *
    *     $ npm install --save fast-crc32c
    *
-   * @see [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}
-   * @see [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads| Upload Options (Simple or Resumable)}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert| Objects: insert API Documentation}
    *
    * @param {string} pathString The fully qualified path to the file you
    *     wish to upload to your bucket.

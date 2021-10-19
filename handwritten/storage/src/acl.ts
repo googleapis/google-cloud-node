@@ -424,8 +424,8 @@ class Acl extends AclRoleAccessorMethods {
   /**
    * Add access controls on a {@link Bucket} or {@link File}.
    *
-   * @see [BucketAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert}
-   * @see [ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert| BucketAccessControls: insert API Documentation}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert| ObjectAccessControls: insert API Documentation}
    *
    * @param {object} options Configuration options.
    * @param {string} options.entity Whose permissions will be added.
@@ -532,8 +532,8 @@ class Acl extends AclRoleAccessorMethods {
   /**
    * Delete access controls on a {@link Bucket} or {@link File}.
    *
-   * @see [BucketAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}
-   * @see [ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete| BucketAccessControls: delete API Documentation}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete| ObjectAccessControls: delete API Documentation}
    *
    * @param {object} options Configuration object.
    * @param {string} options.entity Whose permissions will be revoked.
@@ -625,8 +625,8 @@ class Acl extends AclRoleAccessorMethods {
    * an entity is omitted, you will receive an array of all applicable access
    * controls.
    *
-   * @see [BucketAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get}
-   * @see [ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get| BucketAccessControls: get API Documentation}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get| ObjectAccessControls: get API Documentation}
    *
    * @param {object|function} [options] Configuration options. If you want to
    *     receive a list of all access controls, pass the callback function as
@@ -755,8 +755,8 @@ class Acl extends AclRoleAccessorMethods {
   /**
    * Update access controls on a {@link Bucket} or {@link File}.
    *
-   * @see [BucketAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}
-   * @see [ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update| BucketAccessControls: update API Documentation}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update| ObjectAccessControls: update API Documentation}
    *
    * @param {object} options Configuration options.
    * @param {string} options.entity Whose permissions will be updated.

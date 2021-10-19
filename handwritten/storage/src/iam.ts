@@ -160,7 +160,7 @@ class Iam {
    *     interpreting and modifying policies incorrectly. The service might
    *     return a policy with version lower than the one that was requested,
    *     based on the feature syntax in the policy fetched.
-   *     @see [IAM Policy versions]{@link https://cloud.google.com/iam/docs/policies#versions}
+   *     See {@link https://cloud.google.com/iam/docs/policies#versions| IAM Policy versions}
    * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
    */
@@ -176,7 +176,7 @@ class Iam {
    * @property {number} [policy.version] The syntax schema version of the Policy.
    *      To set an IAM policy with conditional binding, this field must be set to
    *      3 or greater.
-   *     @see [IAM Policy versions]{@link https://cloud.google.com/iam/docs/policies#versions}
+   *     See {@link https://cloud.google.com/iam/docs/policies#versions| IAM Policy versions}
    */
   /**
    * @typedef {object} PolicyBinding
@@ -206,7 +206,7 @@ class Iam {
    * @param {GetPolicyCallback} [callback] Callback function.
    * @returns {Promise<GetPolicyResponse>}
    *
-   * @see [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy| Buckets: setIamPolicy API Documentation}
    *
    * @example
    * const {Storage} = require('@google-cloud/storage');
@@ -283,7 +283,7 @@ class Iam {
    * @param {SetPolicyCallback} callback Callback function.
    * @returns {Promise<SetPolicyResponse>}
    *
-   * @see [Buckets: setIamPolicy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy| Buckets: setIamPolicy API Documentation}
    * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
    *
    * @example
@@ -372,7 +372,7 @@ class Iam {
    * @param {TestIamPermissionsCallback} [callback] Callback function.
    * @returns {Promise<TestIamPermissionsResponse>}
    *
-   * @see [Buckets: testIamPermissions API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions| Buckets: testIamPermissions API Documentation}
    *
    * @example
    * const {Storage} = require('@google-cloud/storage');

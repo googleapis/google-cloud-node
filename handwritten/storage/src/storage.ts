@@ -298,7 +298,7 @@ const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
  *   - `gcs.acl.READER_ROLE` - ("READER")
  *   - `gcs.acl.WRITER_ROLE` - ("WRITER")
  *
- * @see [About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control/lists}
+ * See {@link https://cloud.google.com/storage/docs/access-control/lists| About Access Control Lists}
  *
  * @name Storage#acl
  * @type {object}
@@ -407,8 +407,8 @@ const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
  * To learn more about ACLs, read this overview on
  * [Access Control](https://cloud.google.com/storage/docs/access-control).
  *
- * @see [Cloud Storage overview]{@link https://cloud.google.com/storage/docs/overview}
- * @see [Access Control]{@link https://cloud.google.com/storage/docs/access-control}
+ * See {@link https://cloud.google.com/storage/docs/overview| Cloud Storage overview}
+ * See {@link https://cloud.google.com/storage/docs/access-control| Access Control}
  *
  * @class
  */
@@ -741,8 +741,8 @@ export class Storage extends Service {
    * [Bucket Naming
    * Guidelines](https://cloud.google.com/storage/docs/bucketnaming.html#requirements).
    *
-   * @see [Buckets: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}
-   * @see [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert| Buckets: insert API Documentation}
+   * See {@link https://cloud.google.com/storage/docs/storage-classes| Storage Classes}
    *
    * @param {string} name Name of the bucket to create.
    * @param {CreateBucketRequest} [metadata] Metadata to set for the bucket.
@@ -941,7 +941,7 @@ export class Storage extends Service {
    * Create an HMAC key associated with an service account to authenticate
    * requests to the Cloud Storage XML API.
    *
-   * @see [HMAC keys documentation]{@link https://cloud.google.com/storage/docs/authentication/hmackeys}
+   * See {@link https://cloud.google.com/storage/docs/authentication/hmackeys| HMAC keys documentation}
    *
    * @param {string} serviceAccountEmail The service account's email address
    *     with which the HMAC key is created for.
@@ -1052,7 +1052,7 @@ export class Storage extends Service {
   /**
    * Get Bucket objects for all of the buckets in your project.
    *
-   * @see [Buckets: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/list}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/list| Buckets: list API Documentation}
    *
    * @param {GetBucketsRequest} [query] Query object for listing buckets.
    * @param {GetBucketsCallback} [callback] Callback function.
@@ -1290,8 +1290,8 @@ export class Storage extends Service {
    * Get the email address of this project's Google Cloud Storage service
    * account.
    *
-   * @see [Projects.serviceAccount: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount/get}
-   * @see [Projects.serviceAccount Resource]{@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount/get| Projects.serviceAccount: get API Documentation}
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| Projects.serviceAccount Resource}
    *
    * @param {object} [options] Configuration object.
    * @param {string} [options.userProject] User project to be billed for this
