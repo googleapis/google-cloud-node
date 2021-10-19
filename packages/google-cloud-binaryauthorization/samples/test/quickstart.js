@@ -17,7 +17,6 @@
 
 'use strict';
 
-const path = require('path');
 const cp = require('child_process');
 const {before, describe, it} = require('mocha');
 const {
@@ -27,21 +26,16 @@ const {assert} = require('chai');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cwd = path.join(__dirname, '..');
-
-const client = new BinauthzManagementServiceV1Beta1Client();
-
 describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
+    const client = new BinauthzManagementServiceV1Beta1Client();
     projectId = await client.getProjectId();
   });
 
   it('should run quickstart', async () => {
-    const stdout = execSync(`node ./quickstart.js projects/${projectId}`, {
-      cwd,
-    });
-    assert(stdout.match(/\[\]/));
+    const stdout = execSync(`node ./quickstart.js projects/${projectId}`);
+    assert.ok(stdout);
   });
 });
