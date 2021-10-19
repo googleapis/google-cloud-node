@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-domains/compare/v1.1.0...v1.2.0) (2021-10-19)
+
+
+### Features
+
+* added library for Cloud Domains v1 API. Also added methods for the transfer-in flow ([ce97a96](https://www.github.com/googleapis/nodejs-domains/commit/ce97a96ef13e9a73a69b05b59729d2d4172adafc))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.8...v1.1.0) (2021-08-23)
 
 
