@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.10.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.9.0...v2.10.0) (2021-10-19)
+
+
+### Features
+
+* add support for Raw PKCS[#1](https://www.github.com/googleapis/nodejs-kms/issues/1) signing keys ([#509](https://www.github.com/googleapis/nodejs-kms/issues/509)) ([3dfb35d](https://www.github.com/googleapis/nodejs-kms/commit/3dfb35dbe8847d8fbc0635a624e6deff7830d547))
+
 ## [2.9.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.8.1...v2.9.0) (2021-10-14)
 
 
