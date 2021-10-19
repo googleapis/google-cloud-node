@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v3.1.0...v3.2.0) (2021-10-19)
+
+
+### Features
+
+* Add support for dataproc BatchController service ([#546](https://www.github.com/googleapis/nodejs-dataproc/issues/546)) ([cfc0eeb](https://www.github.com/googleapis/nodejs-dataproc/commit/cfc0eeba2e614b271aae246acde8200f080a6ccb))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v3.0.0...v3.1.0) (2021-10-13)
 
 
