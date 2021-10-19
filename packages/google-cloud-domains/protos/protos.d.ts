@@ -23,6 +23,3764 @@ export namespace google {
         /** Namespace domains. */
         namespace domains {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents a Domains */
+                class Domains extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Domains service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Domains service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Domains;
+
+                    /**
+                     * Calls SearchDomains.
+                     * @param request SearchDomainsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchDomainsResponse
+                     */
+                    public searchDomains(request: google.cloud.domains.v1.ISearchDomainsRequest, callback: google.cloud.domains.v1.Domains.SearchDomainsCallback): void;
+
+                    /**
+                     * Calls SearchDomains.
+                     * @param request SearchDomainsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchDomains(request: google.cloud.domains.v1.ISearchDomainsRequest): Promise<google.cloud.domains.v1.SearchDomainsResponse>;
+
+                    /**
+                     * Calls RetrieveRegisterParameters.
+                     * @param request RetrieveRegisterParametersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveRegisterParametersResponse
+                     */
+                    public retrieveRegisterParameters(request: google.cloud.domains.v1.IRetrieveRegisterParametersRequest, callback: google.cloud.domains.v1.Domains.RetrieveRegisterParametersCallback): void;
+
+                    /**
+                     * Calls RetrieveRegisterParameters.
+                     * @param request RetrieveRegisterParametersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveRegisterParameters(request: google.cloud.domains.v1.IRetrieveRegisterParametersRequest): Promise<google.cloud.domains.v1.RetrieveRegisterParametersResponse>;
+
+                    /**
+                     * Calls RegisterDomain.
+                     * @param request RegisterDomainRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public registerDomain(request: google.cloud.domains.v1.IRegisterDomainRequest, callback: google.cloud.domains.v1.Domains.RegisterDomainCallback): void;
+
+                    /**
+                     * Calls RegisterDomain.
+                     * @param request RegisterDomainRequest message or plain object
+                     * @returns Promise
+                     */
+                    public registerDomain(request: google.cloud.domains.v1.IRegisterDomainRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetrieveTransferParameters.
+                     * @param request RetrieveTransferParametersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveTransferParametersResponse
+                     */
+                    public retrieveTransferParameters(request: google.cloud.domains.v1.IRetrieveTransferParametersRequest, callback: google.cloud.domains.v1.Domains.RetrieveTransferParametersCallback): void;
+
+                    /**
+                     * Calls RetrieveTransferParameters.
+                     * @param request RetrieveTransferParametersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveTransferParameters(request: google.cloud.domains.v1.IRetrieveTransferParametersRequest): Promise<google.cloud.domains.v1.RetrieveTransferParametersResponse>;
+
+                    /**
+                     * Calls TransferDomain.
+                     * @param request TransferDomainRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public transferDomain(request: google.cloud.domains.v1.ITransferDomainRequest, callback: google.cloud.domains.v1.Domains.TransferDomainCallback): void;
+
+                    /**
+                     * Calls TransferDomain.
+                     * @param request TransferDomainRequest message or plain object
+                     * @returns Promise
+                     */
+                    public transferDomain(request: google.cloud.domains.v1.ITransferDomainRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListRegistrations.
+                     * @param request ListRegistrationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRegistrationsResponse
+                     */
+                    public listRegistrations(request: google.cloud.domains.v1.IListRegistrationsRequest, callback: google.cloud.domains.v1.Domains.ListRegistrationsCallback): void;
+
+                    /**
+                     * Calls ListRegistrations.
+                     * @param request ListRegistrationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRegistrations(request: google.cloud.domains.v1.IListRegistrationsRequest): Promise<google.cloud.domains.v1.ListRegistrationsResponse>;
+
+                    /**
+                     * Calls GetRegistration.
+                     * @param request GetRegistrationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Registration
+                     */
+                    public getRegistration(request: google.cloud.domains.v1.IGetRegistrationRequest, callback: google.cloud.domains.v1.Domains.GetRegistrationCallback): void;
+
+                    /**
+                     * Calls GetRegistration.
+                     * @param request GetRegistrationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRegistration(request: google.cloud.domains.v1.IGetRegistrationRequest): Promise<google.cloud.domains.v1.Registration>;
+
+                    /**
+                     * Calls UpdateRegistration.
+                     * @param request UpdateRegistrationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRegistration(request: google.cloud.domains.v1.IUpdateRegistrationRequest, callback: google.cloud.domains.v1.Domains.UpdateRegistrationCallback): void;
+
+                    /**
+                     * Calls UpdateRegistration.
+                     * @param request UpdateRegistrationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRegistration(request: google.cloud.domains.v1.IUpdateRegistrationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ConfigureManagementSettings.
+                     * @param request ConfigureManagementSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public configureManagementSettings(request: google.cloud.domains.v1.IConfigureManagementSettingsRequest, callback: google.cloud.domains.v1.Domains.ConfigureManagementSettingsCallback): void;
+
+                    /**
+                     * Calls ConfigureManagementSettings.
+                     * @param request ConfigureManagementSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public configureManagementSettings(request: google.cloud.domains.v1.IConfigureManagementSettingsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ConfigureDnsSettings.
+                     * @param request ConfigureDnsSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public configureDnsSettings(request: google.cloud.domains.v1.IConfigureDnsSettingsRequest, callback: google.cloud.domains.v1.Domains.ConfigureDnsSettingsCallback): void;
+
+                    /**
+                     * Calls ConfigureDnsSettings.
+                     * @param request ConfigureDnsSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public configureDnsSettings(request: google.cloud.domains.v1.IConfigureDnsSettingsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ConfigureContactSettings.
+                     * @param request ConfigureContactSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public configureContactSettings(request: google.cloud.domains.v1.IConfigureContactSettingsRequest, callback: google.cloud.domains.v1.Domains.ConfigureContactSettingsCallback): void;
+
+                    /**
+                     * Calls ConfigureContactSettings.
+                     * @param request ConfigureContactSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public configureContactSettings(request: google.cloud.domains.v1.IConfigureContactSettingsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportRegistration.
+                     * @param request ExportRegistrationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportRegistration(request: google.cloud.domains.v1.IExportRegistrationRequest, callback: google.cloud.domains.v1.Domains.ExportRegistrationCallback): void;
+
+                    /**
+                     * Calls ExportRegistration.
+                     * @param request ExportRegistrationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportRegistration(request: google.cloud.domains.v1.IExportRegistrationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteRegistration.
+                     * @param request DeleteRegistrationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteRegistration(request: google.cloud.domains.v1.IDeleteRegistrationRequest, callback: google.cloud.domains.v1.Domains.DeleteRegistrationCallback): void;
+
+                    /**
+                     * Calls DeleteRegistration.
+                     * @param request DeleteRegistrationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRegistration(request: google.cloud.domains.v1.IDeleteRegistrationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetrieveAuthorizationCode.
+                     * @param request RetrieveAuthorizationCodeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthorizationCode
+                     */
+                    public retrieveAuthorizationCode(request: google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest, callback: google.cloud.domains.v1.Domains.RetrieveAuthorizationCodeCallback): void;
+
+                    /**
+                     * Calls RetrieveAuthorizationCode.
+                     * @param request RetrieveAuthorizationCodeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveAuthorizationCode(request: google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest): Promise<google.cloud.domains.v1.AuthorizationCode>;
+
+                    /**
+                     * Calls ResetAuthorizationCode.
+                     * @param request ResetAuthorizationCodeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthorizationCode
+                     */
+                    public resetAuthorizationCode(request: google.cloud.domains.v1.IResetAuthorizationCodeRequest, callback: google.cloud.domains.v1.Domains.ResetAuthorizationCodeCallback): void;
+
+                    /**
+                     * Calls ResetAuthorizationCode.
+                     * @param request ResetAuthorizationCodeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resetAuthorizationCode(request: google.cloud.domains.v1.IResetAuthorizationCodeRequest): Promise<google.cloud.domains.v1.AuthorizationCode>;
+                }
+
+                namespace Domains {
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#searchDomains}.
+                     * @param error Error, if any
+                     * @param [response] SearchDomainsResponse
+                     */
+                    type SearchDomainsCallback = (error: (Error|null), response?: google.cloud.domains.v1.SearchDomainsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveRegisterParameters}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveRegisterParametersResponse
+                     */
+                    type RetrieveRegisterParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1.RetrieveRegisterParametersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#registerDomain}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RegisterDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveTransferParameters}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveTransferParametersResponse
+                     */
+                    type RetrieveTransferParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1.RetrieveTransferParametersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#transferDomain}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TransferDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#listRegistrations}.
+                     * @param error Error, if any
+                     * @param [response] ListRegistrationsResponse
+                     */
+                    type ListRegistrationsCallback = (error: (Error|null), response?: google.cloud.domains.v1.ListRegistrationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#getRegistration}.
+                     * @param error Error, if any
+                     * @param [response] Registration
+                     */
+                    type GetRegistrationCallback = (error: (Error|null), response?: google.cloud.domains.v1.Registration) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#updateRegistration}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#configureManagementSettings}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ConfigureManagementSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#configureDnsSettings}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ConfigureDnsSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#configureContactSettings}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ConfigureContactSettingsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#exportRegistration}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#deleteRegistration}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteRegistrationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveAuthorizationCode}.
+                     * @param error Error, if any
+                     * @param [response] AuthorizationCode
+                     */
+                    type RetrieveAuthorizationCodeCallback = (error: (Error|null), response?: google.cloud.domains.v1.AuthorizationCode) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1.Domains#resetAuthorizationCode}.
+                     * @param error Error, if any
+                     * @param [response] AuthorizationCode
+                     */
+                    type ResetAuthorizationCodeCallback = (error: (Error|null), response?: google.cloud.domains.v1.AuthorizationCode) => void;
+                }
+
+                /** Properties of a Registration. */
+                interface IRegistration {
+
+                    /** Registration name */
+                    name?: (string|null);
+
+                    /** Registration domainName */
+                    domainName?: (string|null);
+
+                    /** Registration createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Registration expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Registration state */
+                    state?: (google.cloud.domains.v1.Registration.State|keyof typeof google.cloud.domains.v1.Registration.State|null);
+
+                    /** Registration issues */
+                    issues?: (google.cloud.domains.v1.Registration.Issue[]|null);
+
+                    /** Registration labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Registration managementSettings */
+                    managementSettings?: (google.cloud.domains.v1.IManagementSettings|null);
+
+                    /** Registration dnsSettings */
+                    dnsSettings?: (google.cloud.domains.v1.IDnsSettings|null);
+
+                    /** Registration contactSettings */
+                    contactSettings?: (google.cloud.domains.v1.IContactSettings|null);
+
+                    /** Registration pendingContactSettings */
+                    pendingContactSettings?: (google.cloud.domains.v1.IContactSettings|null);
+
+                    /** Registration supportedPrivacy */
+                    supportedPrivacy?: (google.cloud.domains.v1.ContactPrivacy[]|null);
+                }
+
+                /** Represents a Registration. */
+                class Registration implements IRegistration {
+
+                    /**
+                     * Constructs a new Registration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRegistration);
+
+                    /** Registration name. */
+                    public name: string;
+
+                    /** Registration domainName. */
+                    public domainName: string;
+
+                    /** Registration createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Registration expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Registration state. */
+                    public state: (google.cloud.domains.v1.Registration.State|keyof typeof google.cloud.domains.v1.Registration.State);
+
+                    /** Registration issues. */
+                    public issues: google.cloud.domains.v1.Registration.Issue[];
+
+                    /** Registration labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Registration managementSettings. */
+                    public managementSettings?: (google.cloud.domains.v1.IManagementSettings|null);
+
+                    /** Registration dnsSettings. */
+                    public dnsSettings?: (google.cloud.domains.v1.IDnsSettings|null);
+
+                    /** Registration contactSettings. */
+                    public contactSettings?: (google.cloud.domains.v1.IContactSettings|null);
+
+                    /** Registration pendingContactSettings. */
+                    public pendingContactSettings?: (google.cloud.domains.v1.IContactSettings|null);
+
+                    /** Registration supportedPrivacy. */
+                    public supportedPrivacy: google.cloud.domains.v1.ContactPrivacy[];
+
+                    /**
+                     * Creates a new Registration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Registration instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRegistration): google.cloud.domains.v1.Registration;
+
+                    /**
+                     * Encodes the specified Registration message. Does not implicitly {@link google.cloud.domains.v1.Registration.verify|verify} messages.
+                     * @param message Registration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRegistration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Registration message, length delimited. Does not implicitly {@link google.cloud.domains.v1.Registration.verify|verify} messages.
+                     * @param message Registration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRegistration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Registration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Registration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.Registration;
+
+                    /**
+                     * Decodes a Registration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Registration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.Registration;
+
+                    /**
+                     * Verifies a Registration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Registration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Registration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.Registration;
+
+                    /**
+                     * Creates a plain object from a Registration message. Also converts values to other types if specified.
+                     * @param message Registration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.Registration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Registration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Registration {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        REGISTRATION_PENDING = 1,
+                        REGISTRATION_FAILED = 2,
+                        TRANSFER_PENDING = 3,
+                        TRANSFER_FAILED = 4,
+                        ACTIVE = 6,
+                        SUSPENDED = 7,
+                        EXPORTED = 8
+                    }
+
+                    /** Issue enum. */
+                    enum Issue {
+                        ISSUE_UNSPECIFIED = 0,
+                        CONTACT_SUPPORT = 1,
+                        UNVERIFIED_EMAIL = 2
+                    }
+                }
+
+                /** Properties of a ManagementSettings. */
+                interface IManagementSettings {
+
+                    /** ManagementSettings renewalMethod */
+                    renewalMethod?: (google.cloud.domains.v1.ManagementSettings.RenewalMethod|keyof typeof google.cloud.domains.v1.ManagementSettings.RenewalMethod|null);
+
+                    /** ManagementSettings transferLockState */
+                    transferLockState?: (google.cloud.domains.v1.TransferLockState|keyof typeof google.cloud.domains.v1.TransferLockState|null);
+                }
+
+                /** Represents a ManagementSettings. */
+                class ManagementSettings implements IManagementSettings {
+
+                    /**
+                     * Constructs a new ManagementSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IManagementSettings);
+
+                    /** ManagementSettings renewalMethod. */
+                    public renewalMethod: (google.cloud.domains.v1.ManagementSettings.RenewalMethod|keyof typeof google.cloud.domains.v1.ManagementSettings.RenewalMethod);
+
+                    /** ManagementSettings transferLockState. */
+                    public transferLockState: (google.cloud.domains.v1.TransferLockState|keyof typeof google.cloud.domains.v1.TransferLockState);
+
+                    /**
+                     * Creates a new ManagementSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ManagementSettings instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IManagementSettings): google.cloud.domains.v1.ManagementSettings;
+
+                    /**
+                     * Encodes the specified ManagementSettings message. Does not implicitly {@link google.cloud.domains.v1.ManagementSettings.verify|verify} messages.
+                     * @param message ManagementSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IManagementSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ManagementSettings message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ManagementSettings.verify|verify} messages.
+                     * @param message ManagementSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IManagementSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ManagementSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ManagementSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ManagementSettings;
+
+                    /**
+                     * Decodes a ManagementSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ManagementSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ManagementSettings;
+
+                    /**
+                     * Verifies a ManagementSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ManagementSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ManagementSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ManagementSettings;
+
+                    /**
+                     * Creates a plain object from a ManagementSettings message. Also converts values to other types if specified.
+                     * @param message ManagementSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ManagementSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ManagementSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ManagementSettings {
+
+                    /** RenewalMethod enum. */
+                    enum RenewalMethod {
+                        RENEWAL_METHOD_UNSPECIFIED = 0,
+                        AUTOMATIC_RENEWAL = 1,
+                        MANUAL_RENEWAL = 2
+                    }
+                }
+
+                /** Properties of a DnsSettings. */
+                interface IDnsSettings {
+
+                    /** DnsSettings customDns */
+                    customDns?: (google.cloud.domains.v1.DnsSettings.ICustomDns|null);
+
+                    /** DnsSettings googleDomainsDns */
+                    googleDomainsDns?: (google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns|null);
+
+                    /** DnsSettings glueRecords */
+                    glueRecords?: (google.cloud.domains.v1.DnsSettings.IGlueRecord[]|null);
+                }
+
+                /** Represents a DnsSettings. */
+                class DnsSettings implements IDnsSettings {
+
+                    /**
+                     * Constructs a new DnsSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IDnsSettings);
+
+                    /** DnsSettings customDns. */
+                    public customDns?: (google.cloud.domains.v1.DnsSettings.ICustomDns|null);
+
+                    /** DnsSettings googleDomainsDns. */
+                    public googleDomainsDns?: (google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns|null);
+
+                    /** DnsSettings glueRecords. */
+                    public glueRecords: google.cloud.domains.v1.DnsSettings.IGlueRecord[];
+
+                    /** DnsSettings dnsProvider. */
+                    public dnsProvider?: ("customDns"|"googleDomainsDns");
+
+                    /**
+                     * Creates a new DnsSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DnsSettings instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IDnsSettings): google.cloud.domains.v1.DnsSettings;
+
+                    /**
+                     * Encodes the specified DnsSettings message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.verify|verify} messages.
+                     * @param message DnsSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IDnsSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DnsSettings message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.verify|verify} messages.
+                     * @param message DnsSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IDnsSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DnsSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DnsSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.DnsSettings;
+
+                    /**
+                     * Decodes a DnsSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DnsSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.DnsSettings;
+
+                    /**
+                     * Verifies a DnsSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DnsSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DnsSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.DnsSettings;
+
+                    /**
+                     * Creates a plain object from a DnsSettings message. Also converts values to other types if specified.
+                     * @param message DnsSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.DnsSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DnsSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DnsSettings {
+
+                    /** Properties of a CustomDns. */
+                    interface ICustomDns {
+
+                        /** CustomDns nameServers */
+                        nameServers?: (string[]|null);
+
+                        /** CustomDns dsRecords */
+                        dsRecords?: (google.cloud.domains.v1.DnsSettings.IDsRecord[]|null);
+                    }
+
+                    /** Represents a CustomDns. */
+                    class CustomDns implements ICustomDns {
+
+                        /**
+                         * Constructs a new CustomDns.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.domains.v1.DnsSettings.ICustomDns);
+
+                        /** CustomDns nameServers. */
+                        public nameServers: string[];
+
+                        /** CustomDns dsRecords. */
+                        public dsRecords: google.cloud.domains.v1.DnsSettings.IDsRecord[];
+
+                        /**
+                         * Creates a new CustomDns instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomDns instance
+                         */
+                        public static create(properties?: google.cloud.domains.v1.DnsSettings.ICustomDns): google.cloud.domains.v1.DnsSettings.CustomDns;
+
+                        /**
+                         * Encodes the specified CustomDns message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.CustomDns.verify|verify} messages.
+                         * @param message CustomDns message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.domains.v1.DnsSettings.ICustomDns, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomDns message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.CustomDns.verify|verify} messages.
+                         * @param message CustomDns message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.domains.v1.DnsSettings.ICustomDns, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomDns message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomDns
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.DnsSettings.CustomDns;
+
+                        /**
+                         * Decodes a CustomDns message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomDns
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.DnsSettings.CustomDns;
+
+                        /**
+                         * Verifies a CustomDns message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomDns message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomDns
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.DnsSettings.CustomDns;
+
+                        /**
+                         * Creates a plain object from a CustomDns message. Also converts values to other types if specified.
+                         * @param message CustomDns
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.domains.v1.DnsSettings.CustomDns, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomDns to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a GoogleDomainsDns. */
+                    interface IGoogleDomainsDns {
+
+                        /** GoogleDomainsDns nameServers */
+                        nameServers?: (string[]|null);
+
+                        /** GoogleDomainsDns dsState */
+                        dsState?: (google.cloud.domains.v1.DnsSettings.DsState|keyof typeof google.cloud.domains.v1.DnsSettings.DsState|null);
+
+                        /** GoogleDomainsDns dsRecords */
+                        dsRecords?: (google.cloud.domains.v1.DnsSettings.IDsRecord[]|null);
+                    }
+
+                    /** Represents a GoogleDomainsDns. */
+                    class GoogleDomainsDns implements IGoogleDomainsDns {
+
+                        /**
+                         * Constructs a new GoogleDomainsDns.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns);
+
+                        /** GoogleDomainsDns nameServers. */
+                        public nameServers: string[];
+
+                        /** GoogleDomainsDns dsState. */
+                        public dsState: (google.cloud.domains.v1.DnsSettings.DsState|keyof typeof google.cloud.domains.v1.DnsSettings.DsState);
+
+                        /** GoogleDomainsDns dsRecords. */
+                        public dsRecords: google.cloud.domains.v1.DnsSettings.IDsRecord[];
+
+                        /**
+                         * Creates a new GoogleDomainsDns instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleDomainsDns instance
+                         */
+                        public static create(properties?: google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns): google.cloud.domains.v1.DnsSettings.GoogleDomainsDns;
+
+                        /**
+                         * Encodes the specified GoogleDomainsDns message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.verify|verify} messages.
+                         * @param message GoogleDomainsDns message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleDomainsDns message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.verify|verify} messages.
+                         * @param message GoogleDomainsDns message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleDomainsDns message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleDomainsDns
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.DnsSettings.GoogleDomainsDns;
+
+                        /**
+                         * Decodes a GoogleDomainsDns message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleDomainsDns
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.DnsSettings.GoogleDomainsDns;
+
+                        /**
+                         * Verifies a GoogleDomainsDns message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleDomainsDns message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleDomainsDns
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.DnsSettings.GoogleDomainsDns;
+
+                        /**
+                         * Creates a plain object from a GoogleDomainsDns message. Also converts values to other types if specified.
+                         * @param message GoogleDomainsDns
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.domains.v1.DnsSettings.GoogleDomainsDns, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleDomainsDns to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a DsRecord. */
+                    interface IDsRecord {
+
+                        /** DsRecord keyTag */
+                        keyTag?: (number|null);
+
+                        /** DsRecord algorithm */
+                        algorithm?: (google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm|keyof typeof google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm|null);
+
+                        /** DsRecord digestType */
+                        digestType?: (google.cloud.domains.v1.DnsSettings.DsRecord.DigestType|keyof typeof google.cloud.domains.v1.DnsSettings.DsRecord.DigestType|null);
+
+                        /** DsRecord digest */
+                        digest?: (string|null);
+                    }
+
+                    /** Represents a DsRecord. */
+                    class DsRecord implements IDsRecord {
+
+                        /**
+                         * Constructs a new DsRecord.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.domains.v1.DnsSettings.IDsRecord);
+
+                        /** DsRecord keyTag. */
+                        public keyTag: number;
+
+                        /** DsRecord algorithm. */
+                        public algorithm: (google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm|keyof typeof google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm);
+
+                        /** DsRecord digestType. */
+                        public digestType: (google.cloud.domains.v1.DnsSettings.DsRecord.DigestType|keyof typeof google.cloud.domains.v1.DnsSettings.DsRecord.DigestType);
+
+                        /** DsRecord digest. */
+                        public digest: string;
+
+                        /**
+                         * Creates a new DsRecord instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DsRecord instance
+                         */
+                        public static create(properties?: google.cloud.domains.v1.DnsSettings.IDsRecord): google.cloud.domains.v1.DnsSettings.DsRecord;
+
+                        /**
+                         * Encodes the specified DsRecord message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.DsRecord.verify|verify} messages.
+                         * @param message DsRecord message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.domains.v1.DnsSettings.IDsRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DsRecord message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.DsRecord.verify|verify} messages.
+                         * @param message DsRecord message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.domains.v1.DnsSettings.IDsRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DsRecord message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DsRecord
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.DnsSettings.DsRecord;
+
+                        /**
+                         * Decodes a DsRecord message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DsRecord
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.DnsSettings.DsRecord;
+
+                        /**
+                         * Verifies a DsRecord message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DsRecord message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DsRecord
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.DnsSettings.DsRecord;
+
+                        /**
+                         * Creates a plain object from a DsRecord message. Also converts values to other types if specified.
+                         * @param message DsRecord
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.domains.v1.DnsSettings.DsRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DsRecord to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace DsRecord {
+
+                        /** Algorithm enum. */
+                        enum Algorithm {
+                            ALGORITHM_UNSPECIFIED = 0,
+                            RSAMD5 = 1,
+                            DH = 2,
+                            DSA = 3,
+                            ECC = 4,
+                            RSASHA1 = 5,
+                            DSANSEC3SHA1 = 6,
+                            RSASHA1NSEC3SHA1 = 7,
+                            RSASHA256 = 8,
+                            RSASHA512 = 10,
+                            ECCGOST = 12,
+                            ECDSAP256SHA256 = 13,
+                            ECDSAP384SHA384 = 14,
+                            ED25519 = 15,
+                            ED448 = 16,
+                            INDIRECT = 252,
+                            PRIVATEDNS = 253,
+                            PRIVATEOID = 254
+                        }
+
+                        /** DigestType enum. */
+                        enum DigestType {
+                            DIGEST_TYPE_UNSPECIFIED = 0,
+                            SHA1 = 1,
+                            SHA256 = 2,
+                            GOST3411 = 3,
+                            SHA384 = 4
+                        }
+                    }
+
+                    /** Properties of a GlueRecord. */
+                    interface IGlueRecord {
+
+                        /** GlueRecord hostName */
+                        hostName?: (string|null);
+
+                        /** GlueRecord ipv4Addresses */
+                        ipv4Addresses?: (string[]|null);
+
+                        /** GlueRecord ipv6Addresses */
+                        ipv6Addresses?: (string[]|null);
+                    }
+
+                    /** Represents a GlueRecord. */
+                    class GlueRecord implements IGlueRecord {
+
+                        /**
+                         * Constructs a new GlueRecord.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.domains.v1.DnsSettings.IGlueRecord);
+
+                        /** GlueRecord hostName. */
+                        public hostName: string;
+
+                        /** GlueRecord ipv4Addresses. */
+                        public ipv4Addresses: string[];
+
+                        /** GlueRecord ipv6Addresses. */
+                        public ipv6Addresses: string[];
+
+                        /**
+                         * Creates a new GlueRecord instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GlueRecord instance
+                         */
+                        public static create(properties?: google.cloud.domains.v1.DnsSettings.IGlueRecord): google.cloud.domains.v1.DnsSettings.GlueRecord;
+
+                        /**
+                         * Encodes the specified GlueRecord message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GlueRecord.verify|verify} messages.
+                         * @param message GlueRecord message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.domains.v1.DnsSettings.IGlueRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GlueRecord message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GlueRecord.verify|verify} messages.
+                         * @param message GlueRecord message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.domains.v1.DnsSettings.IGlueRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GlueRecord message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GlueRecord
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.DnsSettings.GlueRecord;
+
+                        /**
+                         * Decodes a GlueRecord message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GlueRecord
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.DnsSettings.GlueRecord;
+
+                        /**
+                         * Verifies a GlueRecord message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GlueRecord message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GlueRecord
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.DnsSettings.GlueRecord;
+
+                        /**
+                         * Creates a plain object from a GlueRecord message. Also converts values to other types if specified.
+                         * @param message GlueRecord
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.domains.v1.DnsSettings.GlueRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GlueRecord to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** DsState enum. */
+                    enum DsState {
+                        DS_STATE_UNSPECIFIED = 0,
+                        DS_RECORDS_UNPUBLISHED = 1,
+                        DS_RECORDS_PUBLISHED = 2
+                    }
+                }
+
+                /** Properties of a ContactSettings. */
+                interface IContactSettings {
+
+                    /** ContactSettings privacy */
+                    privacy?: (google.cloud.domains.v1.ContactPrivacy|keyof typeof google.cloud.domains.v1.ContactPrivacy|null);
+
+                    /** ContactSettings registrantContact */
+                    registrantContact?: (google.cloud.domains.v1.ContactSettings.IContact|null);
+
+                    /** ContactSettings adminContact */
+                    adminContact?: (google.cloud.domains.v1.ContactSettings.IContact|null);
+
+                    /** ContactSettings technicalContact */
+                    technicalContact?: (google.cloud.domains.v1.ContactSettings.IContact|null);
+                }
+
+                /** Represents a ContactSettings. */
+                class ContactSettings implements IContactSettings {
+
+                    /**
+                     * Constructs a new ContactSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IContactSettings);
+
+                    /** ContactSettings privacy. */
+                    public privacy: (google.cloud.domains.v1.ContactPrivacy|keyof typeof google.cloud.domains.v1.ContactPrivacy);
+
+                    /** ContactSettings registrantContact. */
+                    public registrantContact?: (google.cloud.domains.v1.ContactSettings.IContact|null);
+
+                    /** ContactSettings adminContact. */
+                    public adminContact?: (google.cloud.domains.v1.ContactSettings.IContact|null);
+
+                    /** ContactSettings technicalContact. */
+                    public technicalContact?: (google.cloud.domains.v1.ContactSettings.IContact|null);
+
+                    /**
+                     * Creates a new ContactSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContactSettings instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IContactSettings): google.cloud.domains.v1.ContactSettings;
+
+                    /**
+                     * Encodes the specified ContactSettings message. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.verify|verify} messages.
+                     * @param message ContactSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IContactSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContactSettings message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.verify|verify} messages.
+                     * @param message ContactSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IContactSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContactSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContactSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ContactSettings;
+
+                    /**
+                     * Decodes a ContactSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContactSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ContactSettings;
+
+                    /**
+                     * Verifies a ContactSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContactSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContactSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ContactSettings;
+
+                    /**
+                     * Creates a plain object from a ContactSettings message. Also converts values to other types if specified.
+                     * @param message ContactSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ContactSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContactSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ContactSettings {
+
+                    /** Properties of a Contact. */
+                    interface IContact {
+
+                        /** Contact postalAddress */
+                        postalAddress?: (google.type.IPostalAddress|null);
+
+                        /** Contact email */
+                        email?: (string|null);
+
+                        /** Contact phoneNumber */
+                        phoneNumber?: (string|null);
+
+                        /** Contact faxNumber */
+                        faxNumber?: (string|null);
+                    }
+
+                    /** Represents a Contact. */
+                    class Contact implements IContact {
+
+                        /**
+                         * Constructs a new Contact.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.domains.v1.ContactSettings.IContact);
+
+                        /** Contact postalAddress. */
+                        public postalAddress?: (google.type.IPostalAddress|null);
+
+                        /** Contact email. */
+                        public email: string;
+
+                        /** Contact phoneNumber. */
+                        public phoneNumber: string;
+
+                        /** Contact faxNumber. */
+                        public faxNumber: string;
+
+                        /**
+                         * Creates a new Contact instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Contact instance
+                         */
+                        public static create(properties?: google.cloud.domains.v1.ContactSettings.IContact): google.cloud.domains.v1.ContactSettings.Contact;
+
+                        /**
+                         * Encodes the specified Contact message. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.Contact.verify|verify} messages.
+                         * @param message Contact message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.domains.v1.ContactSettings.IContact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Contact message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.Contact.verify|verify} messages.
+                         * @param message Contact message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.domains.v1.ContactSettings.IContact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Contact message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Contact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ContactSettings.Contact;
+
+                        /**
+                         * Decodes a Contact message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Contact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ContactSettings.Contact;
+
+                        /**
+                         * Verifies a Contact message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Contact message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Contact
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ContactSettings.Contact;
+
+                        /**
+                         * Creates a plain object from a Contact message. Also converts values to other types if specified.
+                         * @param message Contact
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.domains.v1.ContactSettings.Contact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Contact to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a SearchDomainsRequest. */
+                interface ISearchDomainsRequest {
+
+                    /** SearchDomainsRequest query */
+                    query?: (string|null);
+
+                    /** SearchDomainsRequest location */
+                    location?: (string|null);
+                }
+
+                /** Represents a SearchDomainsRequest. */
+                class SearchDomainsRequest implements ISearchDomainsRequest {
+
+                    /**
+                     * Constructs a new SearchDomainsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.ISearchDomainsRequest);
+
+                    /** SearchDomainsRequest query. */
+                    public query: string;
+
+                    /** SearchDomainsRequest location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new SearchDomainsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchDomainsRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.ISearchDomainsRequest): google.cloud.domains.v1.SearchDomainsRequest;
+
+                    /**
+                     * Encodes the specified SearchDomainsRequest message. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsRequest.verify|verify} messages.
+                     * @param message SearchDomainsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.ISearchDomainsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchDomainsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsRequest.verify|verify} messages.
+                     * @param message SearchDomainsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.ISearchDomainsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchDomainsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchDomainsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.SearchDomainsRequest;
+
+                    /**
+                     * Decodes a SearchDomainsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchDomainsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.SearchDomainsRequest;
+
+                    /**
+                     * Verifies a SearchDomainsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchDomainsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchDomainsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.SearchDomainsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchDomainsRequest message. Also converts values to other types if specified.
+                     * @param message SearchDomainsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.SearchDomainsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchDomainsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchDomainsResponse. */
+                interface ISearchDomainsResponse {
+
+                    /** SearchDomainsResponse registerParameters */
+                    registerParameters?: (google.cloud.domains.v1.IRegisterParameters[]|null);
+                }
+
+                /** Represents a SearchDomainsResponse. */
+                class SearchDomainsResponse implements ISearchDomainsResponse {
+
+                    /**
+                     * Constructs a new SearchDomainsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.ISearchDomainsResponse);
+
+                    /** SearchDomainsResponse registerParameters. */
+                    public registerParameters: google.cloud.domains.v1.IRegisterParameters[];
+
+                    /**
+                     * Creates a new SearchDomainsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchDomainsResponse instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.ISearchDomainsResponse): google.cloud.domains.v1.SearchDomainsResponse;
+
+                    /**
+                     * Encodes the specified SearchDomainsResponse message. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsResponse.verify|verify} messages.
+                     * @param message SearchDomainsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.ISearchDomainsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchDomainsResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsResponse.verify|verify} messages.
+                     * @param message SearchDomainsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.ISearchDomainsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchDomainsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchDomainsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.SearchDomainsResponse;
+
+                    /**
+                     * Decodes a SearchDomainsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchDomainsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.SearchDomainsResponse;
+
+                    /**
+                     * Verifies a SearchDomainsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchDomainsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchDomainsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.SearchDomainsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchDomainsResponse message. Also converts values to other types if specified.
+                     * @param message SearchDomainsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.SearchDomainsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchDomainsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveRegisterParametersRequest. */
+                interface IRetrieveRegisterParametersRequest {
+
+                    /** RetrieveRegisterParametersRequest domainName */
+                    domainName?: (string|null);
+
+                    /** RetrieveRegisterParametersRequest location */
+                    location?: (string|null);
+                }
+
+                /** Represents a RetrieveRegisterParametersRequest. */
+                class RetrieveRegisterParametersRequest implements IRetrieveRegisterParametersRequest {
+
+                    /**
+                     * Constructs a new RetrieveRegisterParametersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRetrieveRegisterParametersRequest);
+
+                    /** RetrieveRegisterParametersRequest domainName. */
+                    public domainName: string;
+
+                    /** RetrieveRegisterParametersRequest location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new RetrieveRegisterParametersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveRegisterParametersRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRetrieveRegisterParametersRequest): google.cloud.domains.v1.RetrieveRegisterParametersRequest;
+
+                    /**
+                     * Encodes the specified RetrieveRegisterParametersRequest message. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersRequest.verify|verify} messages.
+                     * @param message RetrieveRegisterParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRetrieveRegisterParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveRegisterParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersRequest.verify|verify} messages.
+                     * @param message RetrieveRegisterParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRetrieveRegisterParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveRegisterParametersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveRegisterParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RetrieveRegisterParametersRequest;
+
+                    /**
+                     * Decodes a RetrieveRegisterParametersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveRegisterParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RetrieveRegisterParametersRequest;
+
+                    /**
+                     * Verifies a RetrieveRegisterParametersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveRegisterParametersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveRegisterParametersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RetrieveRegisterParametersRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveRegisterParametersRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveRegisterParametersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RetrieveRegisterParametersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveRegisterParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveRegisterParametersResponse. */
+                interface IRetrieveRegisterParametersResponse {
+
+                    /** RetrieveRegisterParametersResponse registerParameters */
+                    registerParameters?: (google.cloud.domains.v1.IRegisterParameters|null);
+                }
+
+                /** Represents a RetrieveRegisterParametersResponse. */
+                class RetrieveRegisterParametersResponse implements IRetrieveRegisterParametersResponse {
+
+                    /**
+                     * Constructs a new RetrieveRegisterParametersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRetrieveRegisterParametersResponse);
+
+                    /** RetrieveRegisterParametersResponse registerParameters. */
+                    public registerParameters?: (google.cloud.domains.v1.IRegisterParameters|null);
+
+                    /**
+                     * Creates a new RetrieveRegisterParametersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveRegisterParametersResponse instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRetrieveRegisterParametersResponse): google.cloud.domains.v1.RetrieveRegisterParametersResponse;
+
+                    /**
+                     * Encodes the specified RetrieveRegisterParametersResponse message. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersResponse.verify|verify} messages.
+                     * @param message RetrieveRegisterParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRetrieveRegisterParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveRegisterParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersResponse.verify|verify} messages.
+                     * @param message RetrieveRegisterParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRetrieveRegisterParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveRegisterParametersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveRegisterParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RetrieveRegisterParametersResponse;
+
+                    /**
+                     * Decodes a RetrieveRegisterParametersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveRegisterParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RetrieveRegisterParametersResponse;
+
+                    /**
+                     * Verifies a RetrieveRegisterParametersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveRegisterParametersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveRegisterParametersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RetrieveRegisterParametersResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveRegisterParametersResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveRegisterParametersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RetrieveRegisterParametersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveRegisterParametersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RegisterDomainRequest. */
+                interface IRegisterDomainRequest {
+
+                    /** RegisterDomainRequest parent */
+                    parent?: (string|null);
+
+                    /** RegisterDomainRequest registration */
+                    registration?: (google.cloud.domains.v1.IRegistration|null);
+
+                    /** RegisterDomainRequest domainNotices */
+                    domainNotices?: (google.cloud.domains.v1.DomainNotice[]|null);
+
+                    /** RegisterDomainRequest contactNotices */
+                    contactNotices?: (google.cloud.domains.v1.ContactNotice[]|null);
+
+                    /** RegisterDomainRequest yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+
+                    /** RegisterDomainRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a RegisterDomainRequest. */
+                class RegisterDomainRequest implements IRegisterDomainRequest {
+
+                    /**
+                     * Constructs a new RegisterDomainRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRegisterDomainRequest);
+
+                    /** RegisterDomainRequest parent. */
+                    public parent: string;
+
+                    /** RegisterDomainRequest registration. */
+                    public registration?: (google.cloud.domains.v1.IRegistration|null);
+
+                    /** RegisterDomainRequest domainNotices. */
+                    public domainNotices: google.cloud.domains.v1.DomainNotice[];
+
+                    /** RegisterDomainRequest contactNotices. */
+                    public contactNotices: google.cloud.domains.v1.ContactNotice[];
+
+                    /** RegisterDomainRequest yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /** RegisterDomainRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new RegisterDomainRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegisterDomainRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRegisterDomainRequest): google.cloud.domains.v1.RegisterDomainRequest;
+
+                    /**
+                     * Encodes the specified RegisterDomainRequest message. Does not implicitly {@link google.cloud.domains.v1.RegisterDomainRequest.verify|verify} messages.
+                     * @param message RegisterDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRegisterDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegisterDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RegisterDomainRequest.verify|verify} messages.
+                     * @param message RegisterDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRegisterDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegisterDomainRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegisterDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RegisterDomainRequest;
+
+                    /**
+                     * Decodes a RegisterDomainRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegisterDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RegisterDomainRequest;
+
+                    /**
+                     * Verifies a RegisterDomainRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegisterDomainRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegisterDomainRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RegisterDomainRequest;
+
+                    /**
+                     * Creates a plain object from a RegisterDomainRequest message. Also converts values to other types if specified.
+                     * @param message RegisterDomainRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RegisterDomainRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegisterDomainRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveTransferParametersRequest. */
+                interface IRetrieveTransferParametersRequest {
+
+                    /** RetrieveTransferParametersRequest domainName */
+                    domainName?: (string|null);
+
+                    /** RetrieveTransferParametersRequest location */
+                    location?: (string|null);
+                }
+
+                /** Represents a RetrieveTransferParametersRequest. */
+                class RetrieveTransferParametersRequest implements IRetrieveTransferParametersRequest {
+
+                    /**
+                     * Constructs a new RetrieveTransferParametersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRetrieveTransferParametersRequest);
+
+                    /** RetrieveTransferParametersRequest domainName. */
+                    public domainName: string;
+
+                    /** RetrieveTransferParametersRequest location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new RetrieveTransferParametersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveTransferParametersRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRetrieveTransferParametersRequest): google.cloud.domains.v1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersRequest message. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersRequest.verify|verify} messages.
+                     * @param message RetrieveTransferParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRetrieveTransferParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersRequest.verify|verify} messages.
+                     * @param message RetrieveTransferParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRetrieveTransferParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveTransferParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveTransferParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Verifies a RetrieveTransferParametersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveTransferParametersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveTransferParametersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveTransferParametersRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveTransferParametersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RetrieveTransferParametersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveTransferParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveTransferParametersResponse. */
+                interface IRetrieveTransferParametersResponse {
+
+                    /** RetrieveTransferParametersResponse transferParameters */
+                    transferParameters?: (google.cloud.domains.v1.ITransferParameters|null);
+                }
+
+                /** Represents a RetrieveTransferParametersResponse. */
+                class RetrieveTransferParametersResponse implements IRetrieveTransferParametersResponse {
+
+                    /**
+                     * Constructs a new RetrieveTransferParametersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRetrieveTransferParametersResponse);
+
+                    /** RetrieveTransferParametersResponse transferParameters. */
+                    public transferParameters?: (google.cloud.domains.v1.ITransferParameters|null);
+
+                    /**
+                     * Creates a new RetrieveTransferParametersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveTransferParametersResponse instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRetrieveTransferParametersResponse): google.cloud.domains.v1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersResponse message. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersResponse.verify|verify} messages.
+                     * @param message RetrieveTransferParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRetrieveTransferParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersResponse.verify|verify} messages.
+                     * @param message RetrieveTransferParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRetrieveTransferParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveTransferParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveTransferParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Verifies a RetrieveTransferParametersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveTransferParametersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveTransferParametersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveTransferParametersResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveTransferParametersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RetrieveTransferParametersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveTransferParametersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TransferDomainRequest. */
+                interface ITransferDomainRequest {
+
+                    /** TransferDomainRequest parent */
+                    parent?: (string|null);
+
+                    /** TransferDomainRequest registration */
+                    registration?: (google.cloud.domains.v1.IRegistration|null);
+
+                    /** TransferDomainRequest contactNotices */
+                    contactNotices?: (google.cloud.domains.v1.ContactNotice[]|null);
+
+                    /** TransferDomainRequest yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+
+                    /** TransferDomainRequest authorizationCode */
+                    authorizationCode?: (google.cloud.domains.v1.IAuthorizationCode|null);
+
+                    /** TransferDomainRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a TransferDomainRequest. */
+                class TransferDomainRequest implements ITransferDomainRequest {
+
+                    /**
+                     * Constructs a new TransferDomainRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.ITransferDomainRequest);
+
+                    /** TransferDomainRequest parent. */
+                    public parent: string;
+
+                    /** TransferDomainRequest registration. */
+                    public registration?: (google.cloud.domains.v1.IRegistration|null);
+
+                    /** TransferDomainRequest contactNotices. */
+                    public contactNotices: google.cloud.domains.v1.ContactNotice[];
+
+                    /** TransferDomainRequest yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /** TransferDomainRequest authorizationCode. */
+                    public authorizationCode?: (google.cloud.domains.v1.IAuthorizationCode|null);
+
+                    /** TransferDomainRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new TransferDomainRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferDomainRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.ITransferDomainRequest): google.cloud.domains.v1.TransferDomainRequest;
+
+                    /**
+                     * Encodes the specified TransferDomainRequest message. Does not implicitly {@link google.cloud.domains.v1.TransferDomainRequest.verify|verify} messages.
+                     * @param message TransferDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.ITransferDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.TransferDomainRequest.verify|verify} messages.
+                     * @param message TransferDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.ITransferDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferDomainRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.TransferDomainRequest;
+
+                    /**
+                     * Decodes a TransferDomainRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.TransferDomainRequest;
+
+                    /**
+                     * Verifies a TransferDomainRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferDomainRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferDomainRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.TransferDomainRequest;
+
+                    /**
+                     * Creates a plain object from a TransferDomainRequest message. Also converts values to other types if specified.
+                     * @param message TransferDomainRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.TransferDomainRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferDomainRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRegistrationsRequest. */
+                interface IListRegistrationsRequest {
+
+                    /** ListRegistrationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRegistrationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRegistrationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRegistrationsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListRegistrationsRequest. */
+                class ListRegistrationsRequest implements IListRegistrationsRequest {
+
+                    /**
+                     * Constructs a new ListRegistrationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IListRegistrationsRequest);
+
+                    /** ListRegistrationsRequest parent. */
+                    public parent: string;
+
+                    /** ListRegistrationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRegistrationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRegistrationsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListRegistrationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRegistrationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IListRegistrationsRequest): google.cloud.domains.v1.ListRegistrationsRequest;
+
+                    /**
+                     * Encodes the specified ListRegistrationsRequest message. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsRequest.verify|verify} messages.
+                     * @param message ListRegistrationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IListRegistrationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRegistrationsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsRequest.verify|verify} messages.
+                     * @param message ListRegistrationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IListRegistrationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRegistrationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRegistrationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ListRegistrationsRequest;
+
+                    /**
+                     * Decodes a ListRegistrationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRegistrationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ListRegistrationsRequest;
+
+                    /**
+                     * Verifies a ListRegistrationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRegistrationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRegistrationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ListRegistrationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRegistrationsRequest message. Also converts values to other types if specified.
+                     * @param message ListRegistrationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ListRegistrationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRegistrationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRegistrationsResponse. */
+                interface IListRegistrationsResponse {
+
+                    /** ListRegistrationsResponse registrations */
+                    registrations?: (google.cloud.domains.v1.IRegistration[]|null);
+
+                    /** ListRegistrationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRegistrationsResponse. */
+                class ListRegistrationsResponse implements IListRegistrationsResponse {
+
+                    /**
+                     * Constructs a new ListRegistrationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IListRegistrationsResponse);
+
+                    /** ListRegistrationsResponse registrations. */
+                    public registrations: google.cloud.domains.v1.IRegistration[];
+
+                    /** ListRegistrationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRegistrationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRegistrationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IListRegistrationsResponse): google.cloud.domains.v1.ListRegistrationsResponse;
+
+                    /**
+                     * Encodes the specified ListRegistrationsResponse message. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsResponse.verify|verify} messages.
+                     * @param message ListRegistrationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IListRegistrationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRegistrationsResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsResponse.verify|verify} messages.
+                     * @param message ListRegistrationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IListRegistrationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRegistrationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRegistrationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ListRegistrationsResponse;
+
+                    /**
+                     * Decodes a ListRegistrationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRegistrationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ListRegistrationsResponse;
+
+                    /**
+                     * Verifies a ListRegistrationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRegistrationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRegistrationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ListRegistrationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRegistrationsResponse message. Also converts values to other types if specified.
+                     * @param message ListRegistrationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ListRegistrationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRegistrationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetRegistrationRequest. */
+                interface IGetRegistrationRequest {
+
+                    /** GetRegistrationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRegistrationRequest. */
+                class GetRegistrationRequest implements IGetRegistrationRequest {
+
+                    /**
+                     * Constructs a new GetRegistrationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IGetRegistrationRequest);
+
+                    /** GetRegistrationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRegistrationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRegistrationRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IGetRegistrationRequest): google.cloud.domains.v1.GetRegistrationRequest;
+
+                    /**
+                     * Encodes the specified GetRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.GetRegistrationRequest.verify|verify} messages.
+                     * @param message GetRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IGetRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.GetRegistrationRequest.verify|verify} messages.
+                     * @param message GetRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IGetRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRegistrationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.GetRegistrationRequest;
+
+                    /**
+                     * Decodes a GetRegistrationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.GetRegistrationRequest;
+
+                    /**
+                     * Verifies a GetRegistrationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRegistrationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.GetRegistrationRequest;
+
+                    /**
+                     * Creates a plain object from a GetRegistrationRequest message. Also converts values to other types if specified.
+                     * @param message GetRegistrationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.GetRegistrationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRegistrationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateRegistrationRequest. */
+                interface IUpdateRegistrationRequest {
+
+                    /** UpdateRegistrationRequest registration */
+                    registration?: (google.cloud.domains.v1.IRegistration|null);
+
+                    /** UpdateRegistrationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateRegistrationRequest. */
+                class UpdateRegistrationRequest implements IUpdateRegistrationRequest {
+
+                    /**
+                     * Constructs a new UpdateRegistrationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IUpdateRegistrationRequest);
+
+                    /** UpdateRegistrationRequest registration. */
+                    public registration?: (google.cloud.domains.v1.IRegistration|null);
+
+                    /** UpdateRegistrationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateRegistrationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRegistrationRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IUpdateRegistrationRequest): google.cloud.domains.v1.UpdateRegistrationRequest;
+
+                    /**
+                     * Encodes the specified UpdateRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.UpdateRegistrationRequest.verify|verify} messages.
+                     * @param message UpdateRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IUpdateRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.UpdateRegistrationRequest.verify|verify} messages.
+                     * @param message UpdateRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IUpdateRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRegistrationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.UpdateRegistrationRequest;
+
+                    /**
+                     * Decodes an UpdateRegistrationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.UpdateRegistrationRequest;
+
+                    /**
+                     * Verifies an UpdateRegistrationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRegistrationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.UpdateRegistrationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRegistrationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRegistrationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.UpdateRegistrationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRegistrationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConfigureManagementSettingsRequest. */
+                interface IConfigureManagementSettingsRequest {
+
+                    /** ConfigureManagementSettingsRequest registration */
+                    registration?: (string|null);
+
+                    /** ConfigureManagementSettingsRequest managementSettings */
+                    managementSettings?: (google.cloud.domains.v1.IManagementSettings|null);
+
+                    /** ConfigureManagementSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a ConfigureManagementSettingsRequest. */
+                class ConfigureManagementSettingsRequest implements IConfigureManagementSettingsRequest {
+
+                    /**
+                     * Constructs a new ConfigureManagementSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IConfigureManagementSettingsRequest);
+
+                    /** ConfigureManagementSettingsRequest registration. */
+                    public registration: string;
+
+                    /** ConfigureManagementSettingsRequest managementSettings. */
+                    public managementSettings?: (google.cloud.domains.v1.IManagementSettings|null);
+
+                    /** ConfigureManagementSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new ConfigureManagementSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigureManagementSettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IConfigureManagementSettingsRequest): google.cloud.domains.v1.ConfigureManagementSettingsRequest;
+
+                    /**
+                     * Encodes the specified ConfigureManagementSettingsRequest message. Does not implicitly {@link google.cloud.domains.v1.ConfigureManagementSettingsRequest.verify|verify} messages.
+                     * @param message ConfigureManagementSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IConfigureManagementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigureManagementSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ConfigureManagementSettingsRequest.verify|verify} messages.
+                     * @param message ConfigureManagementSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IConfigureManagementSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigureManagementSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigureManagementSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ConfigureManagementSettingsRequest;
+
+                    /**
+                     * Decodes a ConfigureManagementSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigureManagementSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ConfigureManagementSettingsRequest;
+
+                    /**
+                     * Verifies a ConfigureManagementSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigureManagementSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigureManagementSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ConfigureManagementSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a ConfigureManagementSettingsRequest message. Also converts values to other types if specified.
+                     * @param message ConfigureManagementSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ConfigureManagementSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigureManagementSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConfigureDnsSettingsRequest. */
+                interface IConfigureDnsSettingsRequest {
+
+                    /** ConfigureDnsSettingsRequest registration */
+                    registration?: (string|null);
+
+                    /** ConfigureDnsSettingsRequest dnsSettings */
+                    dnsSettings?: (google.cloud.domains.v1.IDnsSettings|null);
+
+                    /** ConfigureDnsSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ConfigureDnsSettingsRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a ConfigureDnsSettingsRequest. */
+                class ConfigureDnsSettingsRequest implements IConfigureDnsSettingsRequest {
+
+                    /**
+                     * Constructs a new ConfigureDnsSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IConfigureDnsSettingsRequest);
+
+                    /** ConfigureDnsSettingsRequest registration. */
+                    public registration: string;
+
+                    /** ConfigureDnsSettingsRequest dnsSettings. */
+                    public dnsSettings?: (google.cloud.domains.v1.IDnsSettings|null);
+
+                    /** ConfigureDnsSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ConfigureDnsSettingsRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new ConfigureDnsSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigureDnsSettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IConfigureDnsSettingsRequest): google.cloud.domains.v1.ConfigureDnsSettingsRequest;
+
+                    /**
+                     * Encodes the specified ConfigureDnsSettingsRequest message. Does not implicitly {@link google.cloud.domains.v1.ConfigureDnsSettingsRequest.verify|verify} messages.
+                     * @param message ConfigureDnsSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IConfigureDnsSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigureDnsSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ConfigureDnsSettingsRequest.verify|verify} messages.
+                     * @param message ConfigureDnsSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IConfigureDnsSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigureDnsSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigureDnsSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ConfigureDnsSettingsRequest;
+
+                    /**
+                     * Decodes a ConfigureDnsSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigureDnsSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ConfigureDnsSettingsRequest;
+
+                    /**
+                     * Verifies a ConfigureDnsSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigureDnsSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigureDnsSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ConfigureDnsSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a ConfigureDnsSettingsRequest message. Also converts values to other types if specified.
+                     * @param message ConfigureDnsSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ConfigureDnsSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigureDnsSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConfigureContactSettingsRequest. */
+                interface IConfigureContactSettingsRequest {
+
+                    /** ConfigureContactSettingsRequest registration */
+                    registration?: (string|null);
+
+                    /** ConfigureContactSettingsRequest contactSettings */
+                    contactSettings?: (google.cloud.domains.v1.IContactSettings|null);
+
+                    /** ConfigureContactSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ConfigureContactSettingsRequest contactNotices */
+                    contactNotices?: (google.cloud.domains.v1.ContactNotice[]|null);
+
+                    /** ConfigureContactSettingsRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a ConfigureContactSettingsRequest. */
+                class ConfigureContactSettingsRequest implements IConfigureContactSettingsRequest {
+
+                    /**
+                     * Constructs a new ConfigureContactSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IConfigureContactSettingsRequest);
+
+                    /** ConfigureContactSettingsRequest registration. */
+                    public registration: string;
+
+                    /** ConfigureContactSettingsRequest contactSettings. */
+                    public contactSettings?: (google.cloud.domains.v1.IContactSettings|null);
+
+                    /** ConfigureContactSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ConfigureContactSettingsRequest contactNotices. */
+                    public contactNotices: google.cloud.domains.v1.ContactNotice[];
+
+                    /** ConfigureContactSettingsRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new ConfigureContactSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigureContactSettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IConfigureContactSettingsRequest): google.cloud.domains.v1.ConfigureContactSettingsRequest;
+
+                    /**
+                     * Encodes the specified ConfigureContactSettingsRequest message. Does not implicitly {@link google.cloud.domains.v1.ConfigureContactSettingsRequest.verify|verify} messages.
+                     * @param message ConfigureContactSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IConfigureContactSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigureContactSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ConfigureContactSettingsRequest.verify|verify} messages.
+                     * @param message ConfigureContactSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IConfigureContactSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigureContactSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigureContactSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ConfigureContactSettingsRequest;
+
+                    /**
+                     * Decodes a ConfigureContactSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigureContactSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ConfigureContactSettingsRequest;
+
+                    /**
+                     * Verifies a ConfigureContactSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigureContactSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigureContactSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ConfigureContactSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a ConfigureContactSettingsRequest message. Also converts values to other types if specified.
+                     * @param message ConfigureContactSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ConfigureContactSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigureContactSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ExportRegistrationRequest. */
+                interface IExportRegistrationRequest {
+
+                    /** ExportRegistrationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExportRegistrationRequest. */
+                class ExportRegistrationRequest implements IExportRegistrationRequest {
+
+                    /**
+                     * Constructs a new ExportRegistrationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IExportRegistrationRequest);
+
+                    /** ExportRegistrationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExportRegistrationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportRegistrationRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IExportRegistrationRequest): google.cloud.domains.v1.ExportRegistrationRequest;
+
+                    /**
+                     * Encodes the specified ExportRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.ExportRegistrationRequest.verify|verify} messages.
+                     * @param message ExportRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IExportRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ExportRegistrationRequest.verify|verify} messages.
+                     * @param message ExportRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IExportRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportRegistrationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ExportRegistrationRequest;
+
+                    /**
+                     * Decodes an ExportRegistrationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ExportRegistrationRequest;
+
+                    /**
+                     * Verifies an ExportRegistrationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportRegistrationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ExportRegistrationRequest;
+
+                    /**
+                     * Creates a plain object from an ExportRegistrationRequest message. Also converts values to other types if specified.
+                     * @param message ExportRegistrationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ExportRegistrationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportRegistrationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteRegistrationRequest. */
+                interface IDeleteRegistrationRequest {
+
+                    /** DeleteRegistrationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteRegistrationRequest. */
+                class DeleteRegistrationRequest implements IDeleteRegistrationRequest {
+
+                    /**
+                     * Constructs a new DeleteRegistrationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IDeleteRegistrationRequest);
+
+                    /** DeleteRegistrationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteRegistrationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRegistrationRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IDeleteRegistrationRequest): google.cloud.domains.v1.DeleteRegistrationRequest;
+
+                    /**
+                     * Encodes the specified DeleteRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.DeleteRegistrationRequest.verify|verify} messages.
+                     * @param message DeleteRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IDeleteRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DeleteRegistrationRequest.verify|verify} messages.
+                     * @param message DeleteRegistrationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IDeleteRegistrationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRegistrationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.DeleteRegistrationRequest;
+
+                    /**
+                     * Decodes a DeleteRegistrationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRegistrationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.DeleteRegistrationRequest;
+
+                    /**
+                     * Verifies a DeleteRegistrationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRegistrationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.DeleteRegistrationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRegistrationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRegistrationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.DeleteRegistrationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRegistrationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveAuthorizationCodeRequest. */
+                interface IRetrieveAuthorizationCodeRequest {
+
+                    /** RetrieveAuthorizationCodeRequest registration */
+                    registration?: (string|null);
+                }
+
+                /** Represents a RetrieveAuthorizationCodeRequest. */
+                class RetrieveAuthorizationCodeRequest implements IRetrieveAuthorizationCodeRequest {
+
+                    /**
+                     * Constructs a new RetrieveAuthorizationCodeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest);
+
+                    /** RetrieveAuthorizationCodeRequest registration. */
+                    public registration: string;
+
+                    /**
+                     * Creates a new RetrieveAuthorizationCodeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveAuthorizationCodeRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest): google.cloud.domains.v1.RetrieveAuthorizationCodeRequest;
+
+                    /**
+                     * Encodes the specified RetrieveAuthorizationCodeRequest message. Does not implicitly {@link google.cloud.domains.v1.RetrieveAuthorizationCodeRequest.verify|verify} messages.
+                     * @param message RetrieveAuthorizationCodeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveAuthorizationCodeRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveAuthorizationCodeRequest.verify|verify} messages.
+                     * @param message RetrieveAuthorizationCodeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveAuthorizationCodeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveAuthorizationCodeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RetrieveAuthorizationCodeRequest;
+
+                    /**
+                     * Decodes a RetrieveAuthorizationCodeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveAuthorizationCodeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RetrieveAuthorizationCodeRequest;
+
+                    /**
+                     * Verifies a RetrieveAuthorizationCodeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveAuthorizationCodeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveAuthorizationCodeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RetrieveAuthorizationCodeRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveAuthorizationCodeRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveAuthorizationCodeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RetrieveAuthorizationCodeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveAuthorizationCodeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ResetAuthorizationCodeRequest. */
+                interface IResetAuthorizationCodeRequest {
+
+                    /** ResetAuthorizationCodeRequest registration */
+                    registration?: (string|null);
+                }
+
+                /** Represents a ResetAuthorizationCodeRequest. */
+                class ResetAuthorizationCodeRequest implements IResetAuthorizationCodeRequest {
+
+                    /**
+                     * Constructs a new ResetAuthorizationCodeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IResetAuthorizationCodeRequest);
+
+                    /** ResetAuthorizationCodeRequest registration. */
+                    public registration: string;
+
+                    /**
+                     * Creates a new ResetAuthorizationCodeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResetAuthorizationCodeRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IResetAuthorizationCodeRequest): google.cloud.domains.v1.ResetAuthorizationCodeRequest;
+
+                    /**
+                     * Encodes the specified ResetAuthorizationCodeRequest message. Does not implicitly {@link google.cloud.domains.v1.ResetAuthorizationCodeRequest.verify|verify} messages.
+                     * @param message ResetAuthorizationCodeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IResetAuthorizationCodeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResetAuthorizationCodeRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ResetAuthorizationCodeRequest.verify|verify} messages.
+                     * @param message ResetAuthorizationCodeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IResetAuthorizationCodeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResetAuthorizationCodeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResetAuthorizationCodeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.ResetAuthorizationCodeRequest;
+
+                    /**
+                     * Decodes a ResetAuthorizationCodeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResetAuthorizationCodeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.ResetAuthorizationCodeRequest;
+
+                    /**
+                     * Verifies a ResetAuthorizationCodeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResetAuthorizationCodeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResetAuthorizationCodeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.ResetAuthorizationCodeRequest;
+
+                    /**
+                     * Creates a plain object from a ResetAuthorizationCodeRequest message. Also converts values to other types if specified.
+                     * @param message ResetAuthorizationCodeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.ResetAuthorizationCodeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResetAuthorizationCodeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RegisterParameters. */
+                interface IRegisterParameters {
+
+                    /** RegisterParameters domainName */
+                    domainName?: (string|null);
+
+                    /** RegisterParameters availability */
+                    availability?: (google.cloud.domains.v1.RegisterParameters.Availability|keyof typeof google.cloud.domains.v1.RegisterParameters.Availability|null);
+
+                    /** RegisterParameters supportedPrivacy */
+                    supportedPrivacy?: (google.cloud.domains.v1.ContactPrivacy[]|null);
+
+                    /** RegisterParameters domainNotices */
+                    domainNotices?: (google.cloud.domains.v1.DomainNotice[]|null);
+
+                    /** RegisterParameters yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+                }
+
+                /** Represents a RegisterParameters. */
+                class RegisterParameters implements IRegisterParameters {
+
+                    /**
+                     * Constructs a new RegisterParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IRegisterParameters);
+
+                    /** RegisterParameters domainName. */
+                    public domainName: string;
+
+                    /** RegisterParameters availability. */
+                    public availability: (google.cloud.domains.v1.RegisterParameters.Availability|keyof typeof google.cloud.domains.v1.RegisterParameters.Availability);
+
+                    /** RegisterParameters supportedPrivacy. */
+                    public supportedPrivacy: google.cloud.domains.v1.ContactPrivacy[];
+
+                    /** RegisterParameters domainNotices. */
+                    public domainNotices: google.cloud.domains.v1.DomainNotice[];
+
+                    /** RegisterParameters yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /**
+                     * Creates a new RegisterParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegisterParameters instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IRegisterParameters): google.cloud.domains.v1.RegisterParameters;
+
+                    /**
+                     * Encodes the specified RegisterParameters message. Does not implicitly {@link google.cloud.domains.v1.RegisterParameters.verify|verify} messages.
+                     * @param message RegisterParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IRegisterParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegisterParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RegisterParameters.verify|verify} messages.
+                     * @param message RegisterParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IRegisterParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegisterParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegisterParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.RegisterParameters;
+
+                    /**
+                     * Decodes a RegisterParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegisterParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.RegisterParameters;
+
+                    /**
+                     * Verifies a RegisterParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegisterParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegisterParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.RegisterParameters;
+
+                    /**
+                     * Creates a plain object from a RegisterParameters message. Also converts values to other types if specified.
+                     * @param message RegisterParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.RegisterParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegisterParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace RegisterParameters {
+
+                    /** Availability enum. */
+                    enum Availability {
+                        AVAILABILITY_UNSPECIFIED = 0,
+                        AVAILABLE = 1,
+                        UNAVAILABLE = 2,
+                        UNSUPPORTED = 3,
+                        UNKNOWN = 4
+                    }
+                }
+
+                /** Properties of a TransferParameters. */
+                interface ITransferParameters {
+
+                    /** TransferParameters domainName */
+                    domainName?: (string|null);
+
+                    /** TransferParameters currentRegistrar */
+                    currentRegistrar?: (string|null);
+
+                    /** TransferParameters nameServers */
+                    nameServers?: (string[]|null);
+
+                    /** TransferParameters transferLockState */
+                    transferLockState?: (google.cloud.domains.v1.TransferLockState|keyof typeof google.cloud.domains.v1.TransferLockState|null);
+
+                    /** TransferParameters supportedPrivacy */
+                    supportedPrivacy?: (google.cloud.domains.v1.ContactPrivacy[]|null);
+
+                    /** TransferParameters yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+                }
+
+                /** Represents a TransferParameters. */
+                class TransferParameters implements ITransferParameters {
+
+                    /**
+                     * Constructs a new TransferParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.ITransferParameters);
+
+                    /** TransferParameters domainName. */
+                    public domainName: string;
+
+                    /** TransferParameters currentRegistrar. */
+                    public currentRegistrar: string;
+
+                    /** TransferParameters nameServers. */
+                    public nameServers: string[];
+
+                    /** TransferParameters transferLockState. */
+                    public transferLockState: (google.cloud.domains.v1.TransferLockState|keyof typeof google.cloud.domains.v1.TransferLockState);
+
+                    /** TransferParameters supportedPrivacy. */
+                    public supportedPrivacy: google.cloud.domains.v1.ContactPrivacy[];
+
+                    /** TransferParameters yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /**
+                     * Creates a new TransferParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferParameters instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.ITransferParameters): google.cloud.domains.v1.TransferParameters;
+
+                    /**
+                     * Encodes the specified TransferParameters message. Does not implicitly {@link google.cloud.domains.v1.TransferParameters.verify|verify} messages.
+                     * @param message TransferParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.ITransferParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1.TransferParameters.verify|verify} messages.
+                     * @param message TransferParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.ITransferParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.TransferParameters;
+
+                    /**
+                     * Decodes a TransferParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.TransferParameters;
+
+                    /**
+                     * Verifies a TransferParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.TransferParameters;
+
+                    /**
+                     * Creates a plain object from a TransferParameters message. Also converts values to other types if specified.
+                     * @param message TransferParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.TransferParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an AuthorizationCode. */
+                interface IAuthorizationCode {
+
+                    /** AuthorizationCode code */
+                    code?: (string|null);
+                }
+
+                /** Represents an AuthorizationCode. */
+                class AuthorizationCode implements IAuthorizationCode {
+
+                    /**
+                     * Constructs a new AuthorizationCode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IAuthorizationCode);
+
+                    /** AuthorizationCode code. */
+                    public code: string;
+
+                    /**
+                     * Creates a new AuthorizationCode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthorizationCode instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IAuthorizationCode): google.cloud.domains.v1.AuthorizationCode;
+
+                    /**
+                     * Encodes the specified AuthorizationCode message. Does not implicitly {@link google.cloud.domains.v1.AuthorizationCode.verify|verify} messages.
+                     * @param message AuthorizationCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IAuthorizationCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthorizationCode message, length delimited. Does not implicitly {@link google.cloud.domains.v1.AuthorizationCode.verify|verify} messages.
+                     * @param message AuthorizationCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IAuthorizationCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthorizationCode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthorizationCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.AuthorizationCode;
+
+                    /**
+                     * Decodes an AuthorizationCode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthorizationCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.AuthorizationCode;
+
+                    /**
+                     * Verifies an AuthorizationCode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthorizationCode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthorizationCode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.AuthorizationCode;
+
+                    /**
+                     * Creates a plain object from an AuthorizationCode message. Also converts values to other types if specified.
+                     * @param message AuthorizationCode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.AuthorizationCode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthorizationCode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusDetail */
+                    statusDetail?: (string|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusDetail. */
+                    public statusDetail: string;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1.IOperationMetadata): google.cloud.domains.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.domains.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.domains.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** ContactPrivacy enum. */
+                enum ContactPrivacy {
+                    CONTACT_PRIVACY_UNSPECIFIED = 0,
+                    PUBLIC_CONTACT_DATA = 1,
+                    PRIVATE_CONTACT_DATA = 2,
+                    REDACTED_CONTACT_DATA = 3
+                }
+
+                /** DomainNotice enum. */
+                enum DomainNotice {
+                    DOMAIN_NOTICE_UNSPECIFIED = 0,
+                    HSTS_PRELOADED = 1
+                }
+
+                /** ContactNotice enum. */
+                enum ContactNotice {
+                    CONTACT_NOTICE_UNSPECIFIED = 0,
+                    PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT = 1
+                }
+
+                /** TransferLockState enum. */
+                enum TransferLockState {
+                    TRANSFER_LOCK_STATE_UNSPECIFIED = 0,
+                    UNLOCKED = 1,
+                    LOCKED = 2
+                }
+            }
+
             /** Namespace v1alpha2. */
             namespace v1alpha2 {
 
@@ -87,6 +3845,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public registerDomain(request: google.cloud.domains.v1alpha2.IRegisterDomainRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RetrieveTransferParameters.
+                     * @param request RetrieveTransferParametersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveTransferParametersResponse
+                     */
+                    public retrieveTransferParameters(request: google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest, callback: google.cloud.domains.v1alpha2.Domains.RetrieveTransferParametersCallback): void;
+
+                    /**
+                     * Calls RetrieveTransferParameters.
+                     * @param request RetrieveTransferParametersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveTransferParameters(request: google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest): Promise<google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse>;
+
+                    /**
+                     * Calls TransferDomain.
+                     * @param request TransferDomainRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public transferDomain(request: google.cloud.domains.v1alpha2.ITransferDomainRequest, callback: google.cloud.domains.v1alpha2.Domains.TransferDomainCallback): void;
+
+                    /**
+                     * Calls TransferDomain.
+                     * @param request TransferDomainRequest message or plain object
+                     * @returns Promise
+                     */
+                    public transferDomain(request: google.cloud.domains.v1alpha2.ITransferDomainRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ListRegistrations.
@@ -251,6 +4037,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RegisterDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#retrieveTransferParameters}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveTransferParametersResponse
+                     */
+                    type RetrieveTransferParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#transferDomain}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TransferDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#listRegistrations}.
@@ -486,6 +4286,8 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         REGISTRATION_PENDING = 1,
                         REGISTRATION_FAILED = 2,
+                        TRANSFER_PENDING = 3,
+                        TRANSFER_FAILED = 4,
                         ACTIVE = 6,
                         SUSPENDED = 7,
                         EXPORTED = 8
@@ -1023,6 +4825,8 @@ export namespace google {
                         /** Algorithm enum. */
                         enum Algorithm {
                             ALGORITHM_UNSPECIFIED = 0,
+                            RSAMD5 = 1,
+                            DH = 2,
                             DSA = 3,
                             ECC = 4,
                             RSASHA1 = 5,
@@ -1034,7 +4838,10 @@ export namespace google {
                             ECDSAP256SHA256 = 13,
                             ECDSAP384SHA384 = 14,
                             ED25519 = 15,
-                            ED448 = 16
+                            ED448 = 16,
+                            INDIRECT = 252,
+                            PRIVATEDNS = 253,
+                            PRIVATEOID = 254
                         }
 
                         /** DigestType enum. */
@@ -1863,6 +5670,312 @@ export namespace google {
 
                     /**
                      * Converts this RegisterDomainRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveTransferParametersRequest. */
+                interface IRetrieveTransferParametersRequest {
+
+                    /** RetrieveTransferParametersRequest domainName */
+                    domainName?: (string|null);
+
+                    /** RetrieveTransferParametersRequest location */
+                    location?: (string|null);
+                }
+
+                /** Represents a RetrieveTransferParametersRequest. */
+                class RetrieveTransferParametersRequest implements IRetrieveTransferParametersRequest {
+
+                    /**
+                     * Constructs a new RetrieveTransferParametersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest);
+
+                    /** RetrieveTransferParametersRequest domainName. */
+                    public domainName: string;
+
+                    /** RetrieveTransferParametersRequest location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new RetrieveTransferParametersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveTransferParametersRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest): google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersRequest message. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest.verify|verify} messages.
+                     * @param message RetrieveTransferParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest.verify|verify} messages.
+                     * @param message RetrieveTransferParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveTransferParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveTransferParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Verifies a RetrieveTransferParametersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveTransferParametersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveTransferParametersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveTransferParametersRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveTransferParametersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveTransferParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveTransferParametersResponse. */
+                interface IRetrieveTransferParametersResponse {
+
+                    /** RetrieveTransferParametersResponse transferParameters */
+                    transferParameters?: (google.cloud.domains.v1alpha2.ITransferParameters|null);
+                }
+
+                /** Represents a RetrieveTransferParametersResponse. */
+                class RetrieveTransferParametersResponse implements IRetrieveTransferParametersResponse {
+
+                    /**
+                     * Constructs a new RetrieveTransferParametersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse);
+
+                    /** RetrieveTransferParametersResponse transferParameters. */
+                    public transferParameters?: (google.cloud.domains.v1alpha2.ITransferParameters|null);
+
+                    /**
+                     * Creates a new RetrieveTransferParametersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveTransferParametersResponse instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse): google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersResponse message. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse.verify|verify} messages.
+                     * @param message RetrieveTransferParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse.verify|verify} messages.
+                     * @param message RetrieveTransferParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveTransferParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveTransferParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Verifies a RetrieveTransferParametersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveTransferParametersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveTransferParametersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveTransferParametersResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveTransferParametersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveTransferParametersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TransferDomainRequest. */
+                interface ITransferDomainRequest {
+
+                    /** TransferDomainRequest parent */
+                    parent?: (string|null);
+
+                    /** TransferDomainRequest registration */
+                    registration?: (google.cloud.domains.v1alpha2.IRegistration|null);
+
+                    /** TransferDomainRequest contactNotices */
+                    contactNotices?: (google.cloud.domains.v1alpha2.ContactNotice[]|null);
+
+                    /** TransferDomainRequest yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+
+                    /** TransferDomainRequest authorizationCode */
+                    authorizationCode?: (google.cloud.domains.v1alpha2.IAuthorizationCode|null);
+
+                    /** TransferDomainRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a TransferDomainRequest. */
+                class TransferDomainRequest implements ITransferDomainRequest {
+
+                    /**
+                     * Constructs a new TransferDomainRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1alpha2.ITransferDomainRequest);
+
+                    /** TransferDomainRequest parent. */
+                    public parent: string;
+
+                    /** TransferDomainRequest registration. */
+                    public registration?: (google.cloud.domains.v1alpha2.IRegistration|null);
+
+                    /** TransferDomainRequest contactNotices. */
+                    public contactNotices: google.cloud.domains.v1alpha2.ContactNotice[];
+
+                    /** TransferDomainRequest yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /** TransferDomainRequest authorizationCode. */
+                    public authorizationCode?: (google.cloud.domains.v1alpha2.IAuthorizationCode|null);
+
+                    /** TransferDomainRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new TransferDomainRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferDomainRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1alpha2.ITransferDomainRequest): google.cloud.domains.v1alpha2.TransferDomainRequest;
+
+                    /**
+                     * Encodes the specified TransferDomainRequest message. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferDomainRequest.verify|verify} messages.
+                     * @param message TransferDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1alpha2.ITransferDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferDomainRequest.verify|verify} messages.
+                     * @param message TransferDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1alpha2.ITransferDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferDomainRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1alpha2.TransferDomainRequest;
+
+                    /**
+                     * Decodes a TransferDomainRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1alpha2.TransferDomainRequest;
+
+                    /**
+                     * Verifies a TransferDomainRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferDomainRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferDomainRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1alpha2.TransferDomainRequest;
+
+                    /**
+                     * Creates a plain object from a TransferDomainRequest message. Also converts values to other types if specified.
+                     * @param message TransferDomainRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1alpha2.TransferDomainRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferDomainRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3068,6 +7181,126 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a TransferParameters. */
+                interface ITransferParameters {
+
+                    /** TransferParameters domainName */
+                    domainName?: (string|null);
+
+                    /** TransferParameters currentRegistrar */
+                    currentRegistrar?: (string|null);
+
+                    /** TransferParameters nameServers */
+                    nameServers?: (string[]|null);
+
+                    /** TransferParameters transferLockState */
+                    transferLockState?: (google.cloud.domains.v1alpha2.TransferLockState|keyof typeof google.cloud.domains.v1alpha2.TransferLockState|null);
+
+                    /** TransferParameters supportedPrivacy */
+                    supportedPrivacy?: (google.cloud.domains.v1alpha2.ContactPrivacy[]|null);
+
+                    /** TransferParameters yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+                }
+
+                /** Represents a TransferParameters. */
+                class TransferParameters implements ITransferParameters {
+
+                    /**
+                     * Constructs a new TransferParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1alpha2.ITransferParameters);
+
+                    /** TransferParameters domainName. */
+                    public domainName: string;
+
+                    /** TransferParameters currentRegistrar. */
+                    public currentRegistrar: string;
+
+                    /** TransferParameters nameServers. */
+                    public nameServers: string[];
+
+                    /** TransferParameters transferLockState. */
+                    public transferLockState: (google.cloud.domains.v1alpha2.TransferLockState|keyof typeof google.cloud.domains.v1alpha2.TransferLockState);
+
+                    /** TransferParameters supportedPrivacy. */
+                    public supportedPrivacy: google.cloud.domains.v1alpha2.ContactPrivacy[];
+
+                    /** TransferParameters yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /**
+                     * Creates a new TransferParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferParameters instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1alpha2.ITransferParameters): google.cloud.domains.v1alpha2.TransferParameters;
+
+                    /**
+                     * Encodes the specified TransferParameters message. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferParameters.verify|verify} messages.
+                     * @param message TransferParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1alpha2.ITransferParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferParameters.verify|verify} messages.
+                     * @param message TransferParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1alpha2.ITransferParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1alpha2.TransferParameters;
+
+                    /**
+                     * Decodes a TransferParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1alpha2.TransferParameters;
+
+                    /**
+                     * Verifies a TransferParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1alpha2.TransferParameters;
+
+                    /**
+                     * Creates a plain object from a TransferParameters message. Also converts values to other types if specified.
+                     * @param message TransferParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1alpha2.TransferParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an AuthorizationCode. */
                 interface IAuthorizationCode {
 
@@ -3372,6 +7605,34 @@ export namespace google {
                     public registerDomain(request: google.cloud.domains.v1beta1.IRegisterDomainRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RetrieveTransferParameters.
+                     * @param request RetrieveTransferParametersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetrieveTransferParametersResponse
+                     */
+                    public retrieveTransferParameters(request: google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest, callback: google.cloud.domains.v1beta1.Domains.RetrieveTransferParametersCallback): void;
+
+                    /**
+                     * Calls RetrieveTransferParameters.
+                     * @param request RetrieveTransferParametersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public retrieveTransferParameters(request: google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest): Promise<google.cloud.domains.v1beta1.RetrieveTransferParametersResponse>;
+
+                    /**
+                     * Calls TransferDomain.
+                     * @param request TransferDomainRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public transferDomain(request: google.cloud.domains.v1beta1.ITransferDomainRequest, callback: google.cloud.domains.v1beta1.Domains.TransferDomainCallback): void;
+
+                    /**
+                     * Calls TransferDomain.
+                     * @param request TransferDomainRequest message or plain object
+                     * @returns Promise
+                     */
+                    public transferDomain(request: google.cloud.domains.v1beta1.ITransferDomainRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListRegistrations.
                      * @param request ListRegistrationsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListRegistrationsResponse
@@ -3534,6 +7795,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RegisterDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#retrieveTransferParameters}.
+                     * @param error Error, if any
+                     * @param [response] RetrieveTransferParametersResponse
+                     */
+                    type RetrieveTransferParametersCallback = (error: (Error|null), response?: google.cloud.domains.v1beta1.RetrieveTransferParametersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.domains.v1beta1.Domains#transferDomain}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TransferDomainCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.domains.v1beta1.Domains#listRegistrations}.
@@ -3769,6 +8044,8 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         REGISTRATION_PENDING = 1,
                         REGISTRATION_FAILED = 2,
+                        TRANSFER_PENDING = 3,
+                        TRANSFER_FAILED = 4,
                         ACTIVE = 6,
                         SUSPENDED = 7,
                         EXPORTED = 8
@@ -4306,6 +8583,8 @@ export namespace google {
                         /** Algorithm enum. */
                         enum Algorithm {
                             ALGORITHM_UNSPECIFIED = 0,
+                            RSAMD5 = 1,
+                            DH = 2,
                             DSA = 3,
                             ECC = 4,
                             RSASHA1 = 5,
@@ -4317,7 +8596,10 @@ export namespace google {
                             ECDSAP256SHA256 = 13,
                             ECDSAP384SHA384 = 14,
                             ED25519 = 15,
-                            ED448 = 16
+                            ED448 = 16,
+                            INDIRECT = 252,
+                            PRIVATEDNS = 253,
+                            PRIVATEOID = 254
                         }
 
                         /** DigestType enum. */
@@ -5146,6 +9428,312 @@ export namespace google {
 
                     /**
                      * Converts this RegisterDomainRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveTransferParametersRequest. */
+                interface IRetrieveTransferParametersRequest {
+
+                    /** RetrieveTransferParametersRequest domainName */
+                    domainName?: (string|null);
+
+                    /** RetrieveTransferParametersRequest location */
+                    location?: (string|null);
+                }
+
+                /** Represents a RetrieveTransferParametersRequest. */
+                class RetrieveTransferParametersRequest implements IRetrieveTransferParametersRequest {
+
+                    /**
+                     * Constructs a new RetrieveTransferParametersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest);
+
+                    /** RetrieveTransferParametersRequest domainName. */
+                    public domainName: string;
+
+                    /** RetrieveTransferParametersRequest location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new RetrieveTransferParametersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveTransferParametersRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest): google.cloud.domains.v1beta1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersRequest message. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersRequest.verify|verify} messages.
+                     * @param message RetrieveTransferParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersRequest.verify|verify} messages.
+                     * @param message RetrieveTransferParametersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveTransferParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1beta1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveTransferParametersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1beta1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Verifies a RetrieveTransferParametersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveTransferParametersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveTransferParametersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1beta1.RetrieveTransferParametersRequest;
+
+                    /**
+                     * Creates a plain object from a RetrieveTransferParametersRequest message. Also converts values to other types if specified.
+                     * @param message RetrieveTransferParametersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1beta1.RetrieveTransferParametersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveTransferParametersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RetrieveTransferParametersResponse. */
+                interface IRetrieveTransferParametersResponse {
+
+                    /** RetrieveTransferParametersResponse transferParameters */
+                    transferParameters?: (google.cloud.domains.v1beta1.ITransferParameters|null);
+                }
+
+                /** Represents a RetrieveTransferParametersResponse. */
+                class RetrieveTransferParametersResponse implements IRetrieveTransferParametersResponse {
+
+                    /**
+                     * Constructs a new RetrieveTransferParametersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse);
+
+                    /** RetrieveTransferParametersResponse transferParameters. */
+                    public transferParameters?: (google.cloud.domains.v1beta1.ITransferParameters|null);
+
+                    /**
+                     * Creates a new RetrieveTransferParametersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrieveTransferParametersResponse instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse): google.cloud.domains.v1beta1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersResponse message. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersResponse.verify|verify} messages.
+                     * @param message RetrieveTransferParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrieveTransferParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersResponse.verify|verify} messages.
+                     * @param message RetrieveTransferParametersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrieveTransferParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1beta1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrieveTransferParametersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1beta1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Verifies a RetrieveTransferParametersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrieveTransferParametersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrieveTransferParametersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1beta1.RetrieveTransferParametersResponse;
+
+                    /**
+                     * Creates a plain object from a RetrieveTransferParametersResponse message. Also converts values to other types if specified.
+                     * @param message RetrieveTransferParametersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1beta1.RetrieveTransferParametersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrieveTransferParametersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TransferDomainRequest. */
+                interface ITransferDomainRequest {
+
+                    /** TransferDomainRequest parent */
+                    parent?: (string|null);
+
+                    /** TransferDomainRequest registration */
+                    registration?: (google.cloud.domains.v1beta1.IRegistration|null);
+
+                    /** TransferDomainRequest contactNotices */
+                    contactNotices?: (google.cloud.domains.v1beta1.ContactNotice[]|null);
+
+                    /** TransferDomainRequest yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+
+                    /** TransferDomainRequest authorizationCode */
+                    authorizationCode?: (google.cloud.domains.v1beta1.IAuthorizationCode|null);
+
+                    /** TransferDomainRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a TransferDomainRequest. */
+                class TransferDomainRequest implements ITransferDomainRequest {
+
+                    /**
+                     * Constructs a new TransferDomainRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1beta1.ITransferDomainRequest);
+
+                    /** TransferDomainRequest parent. */
+                    public parent: string;
+
+                    /** TransferDomainRequest registration. */
+                    public registration?: (google.cloud.domains.v1beta1.IRegistration|null);
+
+                    /** TransferDomainRequest contactNotices. */
+                    public contactNotices: google.cloud.domains.v1beta1.ContactNotice[];
+
+                    /** TransferDomainRequest yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /** TransferDomainRequest authorizationCode. */
+                    public authorizationCode?: (google.cloud.domains.v1beta1.IAuthorizationCode|null);
+
+                    /** TransferDomainRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new TransferDomainRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferDomainRequest instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1beta1.ITransferDomainRequest): google.cloud.domains.v1beta1.TransferDomainRequest;
+
+                    /**
+                     * Encodes the specified TransferDomainRequest message. Does not implicitly {@link google.cloud.domains.v1beta1.TransferDomainRequest.verify|verify} messages.
+                     * @param message TransferDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1beta1.ITransferDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.TransferDomainRequest.verify|verify} messages.
+                     * @param message TransferDomainRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1beta1.ITransferDomainRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferDomainRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1beta1.TransferDomainRequest;
+
+                    /**
+                     * Decodes a TransferDomainRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferDomainRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1beta1.TransferDomainRequest;
+
+                    /**
+                     * Verifies a TransferDomainRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferDomainRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferDomainRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1beta1.TransferDomainRequest;
+
+                    /**
+                     * Creates a plain object from a TransferDomainRequest message. Also converts values to other types if specified.
+                     * @param message TransferDomainRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1beta1.TransferDomainRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferDomainRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -6349,6 +10937,126 @@ export namespace google {
                         UNSUPPORTED = 3,
                         UNKNOWN = 4
                     }
+                }
+
+                /** Properties of a TransferParameters. */
+                interface ITransferParameters {
+
+                    /** TransferParameters domainName */
+                    domainName?: (string|null);
+
+                    /** TransferParameters currentRegistrar */
+                    currentRegistrar?: (string|null);
+
+                    /** TransferParameters nameServers */
+                    nameServers?: (string[]|null);
+
+                    /** TransferParameters transferLockState */
+                    transferLockState?: (google.cloud.domains.v1beta1.TransferLockState|keyof typeof google.cloud.domains.v1beta1.TransferLockState|null);
+
+                    /** TransferParameters supportedPrivacy */
+                    supportedPrivacy?: (google.cloud.domains.v1beta1.ContactPrivacy[]|null);
+
+                    /** TransferParameters yearlyPrice */
+                    yearlyPrice?: (google.type.IMoney|null);
+                }
+
+                /** Represents a TransferParameters. */
+                class TransferParameters implements ITransferParameters {
+
+                    /**
+                     * Constructs a new TransferParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.domains.v1beta1.ITransferParameters);
+
+                    /** TransferParameters domainName. */
+                    public domainName: string;
+
+                    /** TransferParameters currentRegistrar. */
+                    public currentRegistrar: string;
+
+                    /** TransferParameters nameServers. */
+                    public nameServers: string[];
+
+                    /** TransferParameters transferLockState. */
+                    public transferLockState: (google.cloud.domains.v1beta1.TransferLockState|keyof typeof google.cloud.domains.v1beta1.TransferLockState);
+
+                    /** TransferParameters supportedPrivacy. */
+                    public supportedPrivacy: google.cloud.domains.v1beta1.ContactPrivacy[];
+
+                    /** TransferParameters yearlyPrice. */
+                    public yearlyPrice?: (google.type.IMoney|null);
+
+                    /**
+                     * Creates a new TransferParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferParameters instance
+                     */
+                    public static create(properties?: google.cloud.domains.v1beta1.ITransferParameters): google.cloud.domains.v1beta1.TransferParameters;
+
+                    /**
+                     * Encodes the specified TransferParameters message. Does not implicitly {@link google.cloud.domains.v1beta1.TransferParameters.verify|verify} messages.
+                     * @param message TransferParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.domains.v1beta1.ITransferParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.TransferParameters.verify|verify} messages.
+                     * @param message TransferParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.domains.v1beta1.ITransferParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.domains.v1beta1.TransferParameters;
+
+                    /**
+                     * Decodes a TransferParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.domains.v1beta1.TransferParameters;
+
+                    /**
+                     * Verifies a TransferParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.domains.v1beta1.TransferParameters;
+
+                    /**
+                     * Creates a plain object from a TransferParameters message. Also converts values to other types if specified.
+                     * @param message TransferParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.domains.v1beta1.TransferParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of an AuthorizationCode. */

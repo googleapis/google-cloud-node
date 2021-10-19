@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.domains.v1beta1.Domains": {
+    "google.cloud.domains.v1.Domains": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [

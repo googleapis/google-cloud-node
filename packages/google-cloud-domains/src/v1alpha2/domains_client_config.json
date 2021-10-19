@@ -32,6 +32,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RetrieveTransferParameters": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "TransferDomain": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListRegistrations": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

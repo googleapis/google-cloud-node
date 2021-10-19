@@ -451,6 +451,121 @@ describe('v1beta1.DomainsClient', () => {
     });
   });
 
+  describe('retrieveTransferParameters', () => {
+    it('invokes retrieveTransferParameters without error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse()
+      );
+      client.innerApiCalls.retrieveTransferParameters =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.retrieveTransferParameters(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.retrieveTransferParameters as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes retrieveTransferParameters without error using callback', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse()
+      );
+      client.innerApiCalls.retrieveTransferParameters =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.retrieveTransferParameters(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.retrieveTransferParameters as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes retrieveTransferParameters with error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest()
+      );
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.retrieveTransferParameters = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.retrieveTransferParameters(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.retrieveTransferParameters as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('getRegistration', () => {
     it('invokes getRegistration without error', async () => {
       const client = new domainsModule.v1beta1.DomainsClient({
@@ -980,6 +1095,200 @@ describe('v1beta1.DomainsClient', () => {
       );
       await assert.rejects(
         client.checkRegisterDomainProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('transferDomain', () => {
+    it('invokes transferDomain without error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.transferDomain =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.transferDomain(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.transferDomain as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes transferDomain without error using callback', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.transferDomain =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.transferDomain(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.domains.v1beta1.IRegistration,
+              protos.google.cloud.domains.v1beta1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.domains.v1beta1.IRegistration,
+        protos.google.cloud.domains.v1beta1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.transferDomain as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes transferDomain with call error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.transferDomain = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.transferDomain(request), expectedError);
+      assert(
+        (client.innerApiCalls.transferDomain as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes transferDomain with LRO error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.domains.v1beta1.TransferDomainRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.transferDomain = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.transferDomain(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.transferDomain as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkTransferDomainProgress without error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkTransferDomainProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTransferDomainProgress with error', async () => {
+      const client = new domainsModule.v1beta1.DomainsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkTransferDomainProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

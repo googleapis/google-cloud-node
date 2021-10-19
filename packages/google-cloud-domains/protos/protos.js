@@ -57,6 +57,9382 @@
                  */
                 var domains = {};
     
+                domains.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.domains
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.Domains = (function() {
+    
+                        /**
+                         * Constructs a new Domains service.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a Domains
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function Domains(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (Domains.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Domains;
+    
+                        /**
+                         * Creates new Domains service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {Domains} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        Domains.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#searchDomains}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef SearchDomainsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.SearchDomainsResponse} [response] SearchDomainsResponse
+                         */
+    
+                        /**
+                         * Calls SearchDomains.
+                         * @function searchDomains
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.ISearchDomainsRequest} request SearchDomainsRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.SearchDomainsCallback} callback Node-style callback called with the error, if any, and SearchDomainsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.searchDomains = function searchDomains(request, callback) {
+                            return this.rpcCall(searchDomains, $root.google.cloud.domains.v1.SearchDomainsRequest, $root.google.cloud.domains.v1.SearchDomainsResponse, request, callback);
+                        }, "name", { value: "SearchDomains" });
+    
+                        /**
+                         * Calls SearchDomains.
+                         * @function searchDomains
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.ISearchDomainsRequest} request SearchDomainsRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.SearchDomainsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveRegisterParameters}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef RetrieveRegisterParametersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.RetrieveRegisterParametersResponse} [response] RetrieveRegisterParametersResponse
+                         */
+    
+                        /**
+                         * Calls RetrieveRegisterParameters.
+                         * @function retrieveRegisterParameters
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersRequest} request RetrieveRegisterParametersRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.RetrieveRegisterParametersCallback} callback Node-style callback called with the error, if any, and RetrieveRegisterParametersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.retrieveRegisterParameters = function retrieveRegisterParameters(request, callback) {
+                            return this.rpcCall(retrieveRegisterParameters, $root.google.cloud.domains.v1.RetrieveRegisterParametersRequest, $root.google.cloud.domains.v1.RetrieveRegisterParametersResponse, request, callback);
+                        }, "name", { value: "RetrieveRegisterParameters" });
+    
+                        /**
+                         * Calls RetrieveRegisterParameters.
+                         * @function retrieveRegisterParameters
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersRequest} request RetrieveRegisterParametersRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.RetrieveRegisterParametersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#registerDomain}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef RegisterDomainCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RegisterDomain.
+                         * @function registerDomain
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRegisterDomainRequest} request RegisterDomainRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.RegisterDomainCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.registerDomain = function registerDomain(request, callback) {
+                            return this.rpcCall(registerDomain, $root.google.cloud.domains.v1.RegisterDomainRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RegisterDomain" });
+    
+                        /**
+                         * Calls RegisterDomain.
+                         * @function registerDomain
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRegisterDomainRequest} request RegisterDomainRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveTransferParameters}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef RetrieveTransferParametersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.RetrieveTransferParametersResponse} [response] RetrieveTransferParametersResponse
+                         */
+    
+                        /**
+                         * Calls RetrieveTransferParameters.
+                         * @function retrieveTransferParameters
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersRequest} request RetrieveTransferParametersRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.RetrieveTransferParametersCallback} callback Node-style callback called with the error, if any, and RetrieveTransferParametersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.retrieveTransferParameters = function retrieveTransferParameters(request, callback) {
+                            return this.rpcCall(retrieveTransferParameters, $root.google.cloud.domains.v1.RetrieveTransferParametersRequest, $root.google.cloud.domains.v1.RetrieveTransferParametersResponse, request, callback);
+                        }, "name", { value: "RetrieveTransferParameters" });
+    
+                        /**
+                         * Calls RetrieveTransferParameters.
+                         * @function retrieveTransferParameters
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersRequest} request RetrieveTransferParametersRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.RetrieveTransferParametersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#transferDomain}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef TransferDomainCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls TransferDomain.
+                         * @function transferDomain
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.ITransferDomainRequest} request TransferDomainRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.TransferDomainCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.transferDomain = function transferDomain(request, callback) {
+                            return this.rpcCall(transferDomain, $root.google.cloud.domains.v1.TransferDomainRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "TransferDomain" });
+    
+                        /**
+                         * Calls TransferDomain.
+                         * @function transferDomain
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.ITransferDomainRequest} request TransferDomainRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#listRegistrations}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef ListRegistrationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.ListRegistrationsResponse} [response] ListRegistrationsResponse
+                         */
+    
+                        /**
+                         * Calls ListRegistrations.
+                         * @function listRegistrations
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IListRegistrationsRequest} request ListRegistrationsRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.ListRegistrationsCallback} callback Node-style callback called with the error, if any, and ListRegistrationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.listRegistrations = function listRegistrations(request, callback) {
+                            return this.rpcCall(listRegistrations, $root.google.cloud.domains.v1.ListRegistrationsRequest, $root.google.cloud.domains.v1.ListRegistrationsResponse, request, callback);
+                        }, "name", { value: "ListRegistrations" });
+    
+                        /**
+                         * Calls ListRegistrations.
+                         * @function listRegistrations
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IListRegistrationsRequest} request ListRegistrationsRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.ListRegistrationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#getRegistration}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef GetRegistrationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.Registration} [response] Registration
+                         */
+    
+                        /**
+                         * Calls GetRegistration.
+                         * @function getRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IGetRegistrationRequest} request GetRegistrationRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.GetRegistrationCallback} callback Node-style callback called with the error, if any, and Registration
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.getRegistration = function getRegistration(request, callback) {
+                            return this.rpcCall(getRegistration, $root.google.cloud.domains.v1.GetRegistrationRequest, $root.google.cloud.domains.v1.Registration, request, callback);
+                        }, "name", { value: "GetRegistration" });
+    
+                        /**
+                         * Calls GetRegistration.
+                         * @function getRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IGetRegistrationRequest} request GetRegistrationRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.Registration>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#updateRegistration}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef UpdateRegistrationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateRegistration.
+                         * @function updateRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IUpdateRegistrationRequest} request UpdateRegistrationRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.UpdateRegistrationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.updateRegistration = function updateRegistration(request, callback) {
+                            return this.rpcCall(updateRegistration, $root.google.cloud.domains.v1.UpdateRegistrationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateRegistration" });
+    
+                        /**
+                         * Calls UpdateRegistration.
+                         * @function updateRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IUpdateRegistrationRequest} request UpdateRegistrationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#configureManagementSettings}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef ConfigureManagementSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ConfigureManagementSettings.
+                         * @function configureManagementSettings
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IConfigureManagementSettingsRequest} request ConfigureManagementSettingsRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.ConfigureManagementSettingsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.configureManagementSettings = function configureManagementSettings(request, callback) {
+                            return this.rpcCall(configureManagementSettings, $root.google.cloud.domains.v1.ConfigureManagementSettingsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ConfigureManagementSettings" });
+    
+                        /**
+                         * Calls ConfigureManagementSettings.
+                         * @function configureManagementSettings
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IConfigureManagementSettingsRequest} request ConfigureManagementSettingsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#configureDnsSettings}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef ConfigureDnsSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ConfigureDnsSettings.
+                         * @function configureDnsSettings
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IConfigureDnsSettingsRequest} request ConfigureDnsSettingsRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.ConfigureDnsSettingsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.configureDnsSettings = function configureDnsSettings(request, callback) {
+                            return this.rpcCall(configureDnsSettings, $root.google.cloud.domains.v1.ConfigureDnsSettingsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ConfigureDnsSettings" });
+    
+                        /**
+                         * Calls ConfigureDnsSettings.
+                         * @function configureDnsSettings
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IConfigureDnsSettingsRequest} request ConfigureDnsSettingsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#configureContactSettings}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef ConfigureContactSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ConfigureContactSettings.
+                         * @function configureContactSettings
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IConfigureContactSettingsRequest} request ConfigureContactSettingsRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.ConfigureContactSettingsCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.configureContactSettings = function configureContactSettings(request, callback) {
+                            return this.rpcCall(configureContactSettings, $root.google.cloud.domains.v1.ConfigureContactSettingsRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ConfigureContactSettings" });
+    
+                        /**
+                         * Calls ConfigureContactSettings.
+                         * @function configureContactSettings
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IConfigureContactSettingsRequest} request ConfigureContactSettingsRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#exportRegistration}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef ExportRegistrationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportRegistration.
+                         * @function exportRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IExportRegistrationRequest} request ExportRegistrationRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.ExportRegistrationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.exportRegistration = function exportRegistration(request, callback) {
+                            return this.rpcCall(exportRegistration, $root.google.cloud.domains.v1.ExportRegistrationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportRegistration" });
+    
+                        /**
+                         * Calls ExportRegistration.
+                         * @function exportRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IExportRegistrationRequest} request ExportRegistrationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#deleteRegistration}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef DeleteRegistrationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteRegistration.
+                         * @function deleteRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IDeleteRegistrationRequest} request DeleteRegistrationRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.DeleteRegistrationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.deleteRegistration = function deleteRegistration(request, callback) {
+                            return this.rpcCall(deleteRegistration, $root.google.cloud.domains.v1.DeleteRegistrationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteRegistration" });
+    
+                        /**
+                         * Calls DeleteRegistration.
+                         * @function deleteRegistration
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IDeleteRegistrationRequest} request DeleteRegistrationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#retrieveAuthorizationCode}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef RetrieveAuthorizationCodeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.AuthorizationCode} [response] AuthorizationCode
+                         */
+    
+                        /**
+                         * Calls RetrieveAuthorizationCode.
+                         * @function retrieveAuthorizationCode
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest} request RetrieveAuthorizationCodeRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.RetrieveAuthorizationCodeCallback} callback Node-style callback called with the error, if any, and AuthorizationCode
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.retrieveAuthorizationCode = function retrieveAuthorizationCode(request, callback) {
+                            return this.rpcCall(retrieveAuthorizationCode, $root.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest, $root.google.cloud.domains.v1.AuthorizationCode, request, callback);
+                        }, "name", { value: "RetrieveAuthorizationCode" });
+    
+                        /**
+                         * Calls RetrieveAuthorizationCode.
+                         * @function retrieveAuthorizationCode
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest} request RetrieveAuthorizationCodeRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.AuthorizationCode>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1.Domains#resetAuthorizationCode}.
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @typedef ResetAuthorizationCodeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1.AuthorizationCode} [response] AuthorizationCode
+                         */
+    
+                        /**
+                         * Calls ResetAuthorizationCode.
+                         * @function resetAuthorizationCode
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IResetAuthorizationCodeRequest} request ResetAuthorizationCodeRequest message or plain object
+                         * @param {google.cloud.domains.v1.Domains.ResetAuthorizationCodeCallback} callback Node-style callback called with the error, if any, and AuthorizationCode
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.resetAuthorizationCode = function resetAuthorizationCode(request, callback) {
+                            return this.rpcCall(resetAuthorizationCode, $root.google.cloud.domains.v1.ResetAuthorizationCodeRequest, $root.google.cloud.domains.v1.AuthorizationCode, request, callback);
+                        }, "name", { value: "ResetAuthorizationCode" });
+    
+                        /**
+                         * Calls ResetAuthorizationCode.
+                         * @function resetAuthorizationCode
+                         * @memberof google.cloud.domains.v1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1.IResetAuthorizationCodeRequest} request ResetAuthorizationCodeRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1.AuthorizationCode>} Promise
+                         * @variation 2
+                         */
+    
+                        return Domains;
+                    })();
+    
+                    v1.Registration = (function() {
+    
+                        /**
+                         * Properties of a Registration.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRegistration
+                         * @property {string|null} [name] Registration name
+                         * @property {string|null} [domainName] Registration domainName
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Registration createTime
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] Registration expireTime
+                         * @property {google.cloud.domains.v1.Registration.State|null} [state] Registration state
+                         * @property {Array.<google.cloud.domains.v1.Registration.Issue>|null} [issues] Registration issues
+                         * @property {Object.<string,string>|null} [labels] Registration labels
+                         * @property {google.cloud.domains.v1.IManagementSettings|null} [managementSettings] Registration managementSettings
+                         * @property {google.cloud.domains.v1.IDnsSettings|null} [dnsSettings] Registration dnsSettings
+                         * @property {google.cloud.domains.v1.IContactSettings|null} [contactSettings] Registration contactSettings
+                         * @property {google.cloud.domains.v1.IContactSettings|null} [pendingContactSettings] Registration pendingContactSettings
+                         * @property {Array.<google.cloud.domains.v1.ContactPrivacy>|null} [supportedPrivacy] Registration supportedPrivacy
+                         */
+    
+                        /**
+                         * Constructs a new Registration.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a Registration.
+                         * @implements IRegistration
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRegistration=} [properties] Properties to set
+                         */
+                        function Registration(properties) {
+                            this.issues = [];
+                            this.labels = {};
+                            this.supportedPrivacy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Registration name.
+                         * @member {string} name
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.name = "";
+    
+                        /**
+                         * Registration domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.domainName = "";
+    
+                        /**
+                         * Registration createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.createTime = null;
+    
+                        /**
+                         * Registration expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.expireTime = null;
+    
+                        /**
+                         * Registration state.
+                         * @member {google.cloud.domains.v1.Registration.State} state
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.state = 0;
+    
+                        /**
+                         * Registration issues.
+                         * @member {Array.<google.cloud.domains.v1.Registration.Issue>} issues
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.issues = $util.emptyArray;
+    
+                        /**
+                         * Registration labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Registration managementSettings.
+                         * @member {google.cloud.domains.v1.IManagementSettings|null|undefined} managementSettings
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.managementSettings = null;
+    
+                        /**
+                         * Registration dnsSettings.
+                         * @member {google.cloud.domains.v1.IDnsSettings|null|undefined} dnsSettings
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.dnsSettings = null;
+    
+                        /**
+                         * Registration contactSettings.
+                         * @member {google.cloud.domains.v1.IContactSettings|null|undefined} contactSettings
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.contactSettings = null;
+    
+                        /**
+                         * Registration pendingContactSettings.
+                         * @member {google.cloud.domains.v1.IContactSettings|null|undefined} pendingContactSettings
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.pendingContactSettings = null;
+    
+                        /**
+                         * Registration supportedPrivacy.
+                         * @member {Array.<google.cloud.domains.v1.ContactPrivacy>} supportedPrivacy
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         */
+                        Registration.prototype.supportedPrivacy = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Registration instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegistration=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.Registration} Registration instance
+                         */
+                        Registration.create = function create(properties) {
+                            return new Registration(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Registration message. Does not implicitly {@link google.cloud.domains.v1.Registration.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegistration} message Registration message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Registration.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.domainName);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            if (message.issues != null && message.issues.length) {
+                                writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                                for (var i = 0; i < message.issues.length; ++i)
+                                    writer.int32(message.issues[i]);
+                                writer.ldelim();
+                            }
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.managementSettings != null && Object.hasOwnProperty.call(message, "managementSettings"))
+                                $root.google.cloud.domains.v1.ManagementSettings.encode(message.managementSettings, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.dnsSettings != null && Object.hasOwnProperty.call(message, "dnsSettings"))
+                                $root.google.cloud.domains.v1.DnsSettings.encode(message.dnsSettings, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.contactSettings != null && Object.hasOwnProperty.call(message, "contactSettings"))
+                                $root.google.cloud.domains.v1.ContactSettings.encode(message.contactSettings, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.pendingContactSettings != null && Object.hasOwnProperty.call(message, "pendingContactSettings"))
+                                $root.google.cloud.domains.v1.ContactSettings.encode(message.pendingContactSettings, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.supportedPrivacy != null && message.supportedPrivacy.length) {
+                                writer.uint32(/* id 14, wireType 2 =*/114).fork();
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    writer.int32(message.supportedPrivacy[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Registration message, length delimited. Does not implicitly {@link google.cloud.domains.v1.Registration.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegistration} message Registration message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Registration.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Registration message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.Registration} Registration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Registration.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.Registration(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.state = reader.int32();
+                                    break;
+                                case 8:
+                                    if (!(message.issues && message.issues.length))
+                                        message.issues = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.issues.push(reader.int32());
+                                    } else
+                                        message.issues.push(reader.int32());
+                                    break;
+                                case 9:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                case 10:
+                                    message.managementSettings = $root.google.cloud.domains.v1.ManagementSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 11:
+                                    message.dnsSettings = $root.google.cloud.domains.v1.DnsSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 12:
+                                    message.contactSettings = $root.google.cloud.domains.v1.ContactSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.pendingContactSettings = $root.google.cloud.domains.v1.ContactSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 14:
+                                    if (!(message.supportedPrivacy && message.supportedPrivacy.length))
+                                        message.supportedPrivacy = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.supportedPrivacy.push(reader.int32());
+                                    } else
+                                        message.supportedPrivacy.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Registration message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.Registration} Registration
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Registration.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Registration message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Registration.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            if (message.issues != null && message.hasOwnProperty("issues")) {
+                                if (!Array.isArray(message.issues))
+                                    return "issues: array expected";
+                                for (var i = 0; i < message.issues.length; ++i)
+                                    switch (message.issues[i]) {
+                                    default:
+                                        return "issues: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.managementSettings != null && message.hasOwnProperty("managementSettings")) {
+                                var error = $root.google.cloud.domains.v1.ManagementSettings.verify(message.managementSettings);
+                                if (error)
+                                    return "managementSettings." + error;
+                            }
+                            if (message.dnsSettings != null && message.hasOwnProperty("dnsSettings")) {
+                                var error = $root.google.cloud.domains.v1.DnsSettings.verify(message.dnsSettings);
+                                if (error)
+                                    return "dnsSettings." + error;
+                            }
+                            if (message.contactSettings != null && message.hasOwnProperty("contactSettings")) {
+                                var error = $root.google.cloud.domains.v1.ContactSettings.verify(message.contactSettings);
+                                if (error)
+                                    return "contactSettings." + error;
+                            }
+                            if (message.pendingContactSettings != null && message.hasOwnProperty("pendingContactSettings")) {
+                                var error = $root.google.cloud.domains.v1.ContactSettings.verify(message.pendingContactSettings);
+                                if (error)
+                                    return "pendingContactSettings." + error;
+                            }
+                            if (message.supportedPrivacy != null && message.hasOwnProperty("supportedPrivacy")) {
+                                if (!Array.isArray(message.supportedPrivacy))
+                                    return "supportedPrivacy: array expected";
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    switch (message.supportedPrivacy[i]) {
+                                    default:
+                                        return "supportedPrivacy: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Registration message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.Registration} Registration
+                         */
+                        Registration.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.Registration)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.Registration();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "REGISTRATION_PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "REGISTRATION_FAILED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "TRANSFER_PENDING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "TRANSFER_FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "ACTIVE":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "SUSPENDED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "EXPORTED":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            }
+                            if (object.issues) {
+                                if (!Array.isArray(object.issues))
+                                    throw TypeError(".google.cloud.domains.v1.Registration.issues: array expected");
+                                message.issues = [];
+                                for (var i = 0; i < object.issues.length; ++i)
+                                    switch (object.issues[i]) {
+                                    default:
+                                    case "ISSUE_UNSPECIFIED":
+                                    case 0:
+                                        message.issues[i] = 0;
+                                        break;
+                                    case "CONTACT_SUPPORT":
+                                    case 1:
+                                        message.issues[i] = 1;
+                                        break;
+                                    case "UNVERIFIED_EMAIL":
+                                    case 2:
+                                        message.issues[i] = 2;
+                                        break;
+                                    }
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.managementSettings != null) {
+                                if (typeof object.managementSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.managementSettings: object expected");
+                                message.managementSettings = $root.google.cloud.domains.v1.ManagementSettings.fromObject(object.managementSettings);
+                            }
+                            if (object.dnsSettings != null) {
+                                if (typeof object.dnsSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.dnsSettings: object expected");
+                                message.dnsSettings = $root.google.cloud.domains.v1.DnsSettings.fromObject(object.dnsSettings);
+                            }
+                            if (object.contactSettings != null) {
+                                if (typeof object.contactSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.contactSettings: object expected");
+                                message.contactSettings = $root.google.cloud.domains.v1.ContactSettings.fromObject(object.contactSettings);
+                            }
+                            if (object.pendingContactSettings != null) {
+                                if (typeof object.pendingContactSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.Registration.pendingContactSettings: object expected");
+                                message.pendingContactSettings = $root.google.cloud.domains.v1.ContactSettings.fromObject(object.pendingContactSettings);
+                            }
+                            if (object.supportedPrivacy) {
+                                if (!Array.isArray(object.supportedPrivacy))
+                                    throw TypeError(".google.cloud.domains.v1.Registration.supportedPrivacy: array expected");
+                                message.supportedPrivacy = [];
+                                for (var i = 0; i < object.supportedPrivacy.length; ++i)
+                                    switch (object.supportedPrivacy[i]) {
+                                    default:
+                                    case "CONTACT_PRIVACY_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedPrivacy[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA":
+                                    case 1:
+                                        message.supportedPrivacy[i] = 1;
+                                        break;
+                                    case "PRIVATE_CONTACT_DATA":
+                                    case 2:
+                                        message.supportedPrivacy[i] = 2;
+                                        break;
+                                    case "REDACTED_CONTACT_DATA":
+                                    case 3:
+                                        message.supportedPrivacy[i] = 3;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Registration message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @static
+                         * @param {google.cloud.domains.v1.Registration} message Registration
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Registration.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.issues = [];
+                                object.supportedPrivacy = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.domainName = "";
+                                object.createTime = null;
+                                object.expireTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.managementSettings = null;
+                                object.dnsSettings = null;
+                                object.contactSettings = null;
+                                object.pendingContactSettings = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.domains.v1.Registration.State[message.state] : message.state;
+                            if (message.issues && message.issues.length) {
+                                object.issues = [];
+                                for (var j = 0; j < message.issues.length; ++j)
+                                    object.issues[j] = options.enums === String ? $root.google.cloud.domains.v1.Registration.Issue[message.issues[j]] : message.issues[j];
+                            }
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.managementSettings != null && message.hasOwnProperty("managementSettings"))
+                                object.managementSettings = $root.google.cloud.domains.v1.ManagementSettings.toObject(message.managementSettings, options);
+                            if (message.dnsSettings != null && message.hasOwnProperty("dnsSettings"))
+                                object.dnsSettings = $root.google.cloud.domains.v1.DnsSettings.toObject(message.dnsSettings, options);
+                            if (message.contactSettings != null && message.hasOwnProperty("contactSettings"))
+                                object.contactSettings = $root.google.cloud.domains.v1.ContactSettings.toObject(message.contactSettings, options);
+                            if (message.pendingContactSettings != null && message.hasOwnProperty("pendingContactSettings"))
+                                object.pendingContactSettings = $root.google.cloud.domains.v1.ContactSettings.toObject(message.pendingContactSettings, options);
+                            if (message.supportedPrivacy && message.supportedPrivacy.length) {
+                                object.supportedPrivacy = [];
+                                for (var j = 0; j < message.supportedPrivacy.length; ++j)
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Registration to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.Registration
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Registration.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.domains.v1.Registration.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} REGISTRATION_PENDING=1 REGISTRATION_PENDING value
+                         * @property {number} REGISTRATION_FAILED=2 REGISTRATION_FAILED value
+                         * @property {number} TRANSFER_PENDING=3 TRANSFER_PENDING value
+                         * @property {number} TRANSFER_FAILED=4 TRANSFER_FAILED value
+                         * @property {number} ACTIVE=6 ACTIVE value
+                         * @property {number} SUSPENDED=7 SUSPENDED value
+                         * @property {number} EXPORTED=8 EXPORTED value
+                         */
+                        Registration.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REGISTRATION_PENDING"] = 1;
+                            values[valuesById[2] = "REGISTRATION_FAILED"] = 2;
+                            values[valuesById[3] = "TRANSFER_PENDING"] = 3;
+                            values[valuesById[4] = "TRANSFER_FAILED"] = 4;
+                            values[valuesById[6] = "ACTIVE"] = 6;
+                            values[valuesById[7] = "SUSPENDED"] = 7;
+                            values[valuesById[8] = "EXPORTED"] = 8;
+                            return values;
+                        })();
+    
+                        /**
+                         * Issue enum.
+                         * @name google.cloud.domains.v1.Registration.Issue
+                         * @enum {number}
+                         * @property {number} ISSUE_UNSPECIFIED=0 ISSUE_UNSPECIFIED value
+                         * @property {number} CONTACT_SUPPORT=1 CONTACT_SUPPORT value
+                         * @property {number} UNVERIFIED_EMAIL=2 UNVERIFIED_EMAIL value
+                         */
+                        Registration.Issue = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ISSUE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CONTACT_SUPPORT"] = 1;
+                            values[valuesById[2] = "UNVERIFIED_EMAIL"] = 2;
+                            return values;
+                        })();
+    
+                        return Registration;
+                    })();
+    
+                    v1.ManagementSettings = (function() {
+    
+                        /**
+                         * Properties of a ManagementSettings.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IManagementSettings
+                         * @property {google.cloud.domains.v1.ManagementSettings.RenewalMethod|null} [renewalMethod] ManagementSettings renewalMethod
+                         * @property {google.cloud.domains.v1.TransferLockState|null} [transferLockState] ManagementSettings transferLockState
+                         */
+    
+                        /**
+                         * Constructs a new ManagementSettings.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ManagementSettings.
+                         * @implements IManagementSettings
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IManagementSettings=} [properties] Properties to set
+                         */
+                        function ManagementSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ManagementSettings renewalMethod.
+                         * @member {google.cloud.domains.v1.ManagementSettings.RenewalMethod} renewalMethod
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @instance
+                         */
+                        ManagementSettings.prototype.renewalMethod = 0;
+    
+                        /**
+                         * ManagementSettings transferLockState.
+                         * @member {google.cloud.domains.v1.TransferLockState} transferLockState
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @instance
+                         */
+                        ManagementSettings.prototype.transferLockState = 0;
+    
+                        /**
+                         * Creates a new ManagementSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IManagementSettings=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ManagementSettings} ManagementSettings instance
+                         */
+                        ManagementSettings.create = function create(properties) {
+                            return new ManagementSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ManagementSettings message. Does not implicitly {@link google.cloud.domains.v1.ManagementSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IManagementSettings} message ManagementSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ManagementSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.renewalMethod != null && Object.hasOwnProperty.call(message, "renewalMethod"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.renewalMethod);
+                            if (message.transferLockState != null && Object.hasOwnProperty.call(message, "transferLockState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.transferLockState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ManagementSettings message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ManagementSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IManagementSettings} message ManagementSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ManagementSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ManagementSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ManagementSettings} ManagementSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ManagementSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ManagementSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    message.renewalMethod = reader.int32();
+                                    break;
+                                case 4:
+                                    message.transferLockState = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ManagementSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ManagementSettings} ManagementSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ManagementSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ManagementSettings message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ManagementSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.renewalMethod != null && message.hasOwnProperty("renewalMethod"))
+                                switch (message.renewalMethod) {
+                                default:
+                                    return "renewalMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                switch (message.transferLockState) {
+                                default:
+                                    return "transferLockState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ManagementSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ManagementSettings} ManagementSettings
+                         */
+                        ManagementSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ManagementSettings)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ManagementSettings();
+                            switch (object.renewalMethod) {
+                            case "RENEWAL_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.renewalMethod = 0;
+                                break;
+                            case "AUTOMATIC_RENEWAL":
+                            case 1:
+                                message.renewalMethod = 1;
+                                break;
+                            case "MANUAL_RENEWAL":
+                            case 2:
+                                message.renewalMethod = 2;
+                                break;
+                            }
+                            switch (object.transferLockState) {
+                            case "TRANSFER_LOCK_STATE_UNSPECIFIED":
+                            case 0:
+                                message.transferLockState = 0;
+                                break;
+                            case "UNLOCKED":
+                            case 1:
+                                message.transferLockState = 1;
+                                break;
+                            case "LOCKED":
+                            case 2:
+                                message.transferLockState = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ManagementSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.ManagementSettings} message ManagementSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ManagementSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.renewalMethod = options.enums === String ? "RENEWAL_METHOD_UNSPECIFIED" : 0;
+                                object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.renewalMethod != null && message.hasOwnProperty("renewalMethod"))
+                                object.renewalMethod = options.enums === String ? $root.google.cloud.domains.v1.ManagementSettings.RenewalMethod[message.renewalMethod] : message.renewalMethod;
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] : message.transferLockState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ManagementSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ManagementSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ManagementSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * RenewalMethod enum.
+                         * @name google.cloud.domains.v1.ManagementSettings.RenewalMethod
+                         * @enum {number}
+                         * @property {number} RENEWAL_METHOD_UNSPECIFIED=0 RENEWAL_METHOD_UNSPECIFIED value
+                         * @property {number} AUTOMATIC_RENEWAL=1 AUTOMATIC_RENEWAL value
+                         * @property {number} MANUAL_RENEWAL=2 MANUAL_RENEWAL value
+                         */
+                        ManagementSettings.RenewalMethod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RENEWAL_METHOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AUTOMATIC_RENEWAL"] = 1;
+                            values[valuesById[2] = "MANUAL_RENEWAL"] = 2;
+                            return values;
+                        })();
+    
+                        return ManagementSettings;
+                    })();
+    
+                    v1.DnsSettings = (function() {
+    
+                        /**
+                         * Properties of a DnsSettings.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IDnsSettings
+                         * @property {google.cloud.domains.v1.DnsSettings.ICustomDns|null} [customDns] DnsSettings customDns
+                         * @property {google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns|null} [googleDomainsDns] DnsSettings googleDomainsDns
+                         * @property {Array.<google.cloud.domains.v1.DnsSettings.IGlueRecord>|null} [glueRecords] DnsSettings glueRecords
+                         */
+    
+                        /**
+                         * Constructs a new DnsSettings.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a DnsSettings.
+                         * @implements IDnsSettings
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IDnsSettings=} [properties] Properties to set
+                         */
+                        function DnsSettings(properties) {
+                            this.glueRecords = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DnsSettings customDns.
+                         * @member {google.cloud.domains.v1.DnsSettings.ICustomDns|null|undefined} customDns
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @instance
+                         */
+                        DnsSettings.prototype.customDns = null;
+    
+                        /**
+                         * DnsSettings googleDomainsDns.
+                         * @member {google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns|null|undefined} googleDomainsDns
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @instance
+                         */
+                        DnsSettings.prototype.googleDomainsDns = null;
+    
+                        /**
+                         * DnsSettings glueRecords.
+                         * @member {Array.<google.cloud.domains.v1.DnsSettings.IGlueRecord>} glueRecords
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @instance
+                         */
+                        DnsSettings.prototype.glueRecords = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DnsSettings dnsProvider.
+                         * @member {"customDns"|"googleDomainsDns"|undefined} dnsProvider
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @instance
+                         */
+                        Object.defineProperty(DnsSettings.prototype, "dnsProvider", {
+                            get: $util.oneOfGetter($oneOfFields = ["customDns", "googleDomainsDns"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DnsSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IDnsSettings=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.DnsSettings} DnsSettings instance
+                         */
+                        DnsSettings.create = function create(properties) {
+                            return new DnsSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DnsSettings message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IDnsSettings} message DnsSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DnsSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customDns != null && Object.hasOwnProperty.call(message, "customDns"))
+                                $root.google.cloud.domains.v1.DnsSettings.CustomDns.encode(message.customDns, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.googleDomainsDns != null && Object.hasOwnProperty.call(message, "googleDomainsDns"))
+                                $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.encode(message.googleDomainsDns, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.glueRecords != null && message.glueRecords.length)
+                                for (var i = 0; i < message.glueRecords.length; ++i)
+                                    $root.google.cloud.domains.v1.DnsSettings.GlueRecord.encode(message.glueRecords[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DnsSettings message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IDnsSettings} message DnsSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DnsSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DnsSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.DnsSettings} DnsSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DnsSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.DnsSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customDns = $root.google.cloud.domains.v1.DnsSettings.CustomDns.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.googleDomainsDns = $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    if (!(message.glueRecords && message.glueRecords.length))
+                                        message.glueRecords = [];
+                                    message.glueRecords.push($root.google.cloud.domains.v1.DnsSettings.GlueRecord.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DnsSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.DnsSettings} DnsSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DnsSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DnsSettings message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DnsSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.customDns != null && message.hasOwnProperty("customDns")) {
+                                properties.dnsProvider = 1;
+                                {
+                                    var error = $root.google.cloud.domains.v1.DnsSettings.CustomDns.verify(message.customDns);
+                                    if (error)
+                                        return "customDns." + error;
+                                }
+                            }
+                            if (message.googleDomainsDns != null && message.hasOwnProperty("googleDomainsDns")) {
+                                if (properties.dnsProvider === 1)
+                                    return "dnsProvider: multiple values";
+                                properties.dnsProvider = 1;
+                                {
+                                    var error = $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.verify(message.googleDomainsDns);
+                                    if (error)
+                                        return "googleDomainsDns." + error;
+                                }
+                            }
+                            if (message.glueRecords != null && message.hasOwnProperty("glueRecords")) {
+                                if (!Array.isArray(message.glueRecords))
+                                    return "glueRecords: array expected";
+                                for (var i = 0; i < message.glueRecords.length; ++i) {
+                                    var error = $root.google.cloud.domains.v1.DnsSettings.GlueRecord.verify(message.glueRecords[i]);
+                                    if (error)
+                                        return "glueRecords." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DnsSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.DnsSettings} DnsSettings
+                         */
+                        DnsSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.DnsSettings)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.DnsSettings();
+                            if (object.customDns != null) {
+                                if (typeof object.customDns !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.DnsSettings.customDns: object expected");
+                                message.customDns = $root.google.cloud.domains.v1.DnsSettings.CustomDns.fromObject(object.customDns);
+                            }
+                            if (object.googleDomainsDns != null) {
+                                if (typeof object.googleDomainsDns !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.DnsSettings.googleDomainsDns: object expected");
+                                message.googleDomainsDns = $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.fromObject(object.googleDomainsDns);
+                            }
+                            if (object.glueRecords) {
+                                if (!Array.isArray(object.glueRecords))
+                                    throw TypeError(".google.cloud.domains.v1.DnsSettings.glueRecords: array expected");
+                                message.glueRecords = [];
+                                for (var i = 0; i < object.glueRecords.length; ++i) {
+                                    if (typeof object.glueRecords[i] !== "object")
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.glueRecords: object expected");
+                                    message.glueRecords[i] = $root.google.cloud.domains.v1.DnsSettings.GlueRecord.fromObject(object.glueRecords[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DnsSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.DnsSettings} message DnsSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DnsSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.glueRecords = [];
+                            if (message.customDns != null && message.hasOwnProperty("customDns")) {
+                                object.customDns = $root.google.cloud.domains.v1.DnsSettings.CustomDns.toObject(message.customDns, options);
+                                if (options.oneofs)
+                                    object.dnsProvider = "customDns";
+                            }
+                            if (message.googleDomainsDns != null && message.hasOwnProperty("googleDomainsDns")) {
+                                object.googleDomainsDns = $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.toObject(message.googleDomainsDns, options);
+                                if (options.oneofs)
+                                    object.dnsProvider = "googleDomainsDns";
+                            }
+                            if (message.glueRecords && message.glueRecords.length) {
+                                object.glueRecords = [];
+                                for (var j = 0; j < message.glueRecords.length; ++j)
+                                    object.glueRecords[j] = $root.google.cloud.domains.v1.DnsSettings.GlueRecord.toObject(message.glueRecords[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DnsSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.DnsSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DnsSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        DnsSettings.CustomDns = (function() {
+    
+                            /**
+                             * Properties of a CustomDns.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @interface ICustomDns
+                             * @property {Array.<string>|null} [nameServers] CustomDns nameServers
+                             * @property {Array.<google.cloud.domains.v1.DnsSettings.IDsRecord>|null} [dsRecords] CustomDns dsRecords
+                             */
+    
+                            /**
+                             * Constructs a new CustomDns.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @classdesc Represents a CustomDns.
+                             * @implements ICustomDns
+                             * @constructor
+                             * @param {google.cloud.domains.v1.DnsSettings.ICustomDns=} [properties] Properties to set
+                             */
+                            function CustomDns(properties) {
+                                this.nameServers = [];
+                                this.dsRecords = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CustomDns nameServers.
+                             * @member {Array.<string>} nameServers
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @instance
+                             */
+                            CustomDns.prototype.nameServers = $util.emptyArray;
+    
+                            /**
+                             * CustomDns dsRecords.
+                             * @member {Array.<google.cloud.domains.v1.DnsSettings.IDsRecord>} dsRecords
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @instance
+                             */
+                            CustomDns.prototype.dsRecords = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CustomDns instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.ICustomDns=} [properties] Properties to set
+                             * @returns {google.cloud.domains.v1.DnsSettings.CustomDns} CustomDns instance
+                             */
+                            CustomDns.create = function create(properties) {
+                                return new CustomDns(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CustomDns message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.CustomDns.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.ICustomDns} message CustomDns message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomDns.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.nameServers != null && message.nameServers.length)
+                                    for (var i = 0; i < message.nameServers.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.nameServers[i]);
+                                if (message.dsRecords != null && message.dsRecords.length)
+                                    for (var i = 0; i < message.dsRecords.length; ++i)
+                                        $root.google.cloud.domains.v1.DnsSettings.DsRecord.encode(message.dsRecords[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CustomDns message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.CustomDns.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.ICustomDns} message CustomDns message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CustomDns.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CustomDns message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.domains.v1.DnsSettings.CustomDns} CustomDns
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomDns.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.DnsSettings.CustomDns();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.nameServers && message.nameServers.length))
+                                            message.nameServers = [];
+                                        message.nameServers.push(reader.string());
+                                        break;
+                                    case 2:
+                                        if (!(message.dsRecords && message.dsRecords.length))
+                                            message.dsRecords = [];
+                                        message.dsRecords.push($root.google.cloud.domains.v1.DnsSettings.DsRecord.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CustomDns message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.domains.v1.DnsSettings.CustomDns} CustomDns
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CustomDns.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CustomDns message.
+                             * @function verify
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CustomDns.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.nameServers != null && message.hasOwnProperty("nameServers")) {
+                                    if (!Array.isArray(message.nameServers))
+                                        return "nameServers: array expected";
+                                    for (var i = 0; i < message.nameServers.length; ++i)
+                                        if (!$util.isString(message.nameServers[i]))
+                                            return "nameServers: string[] expected";
+                                }
+                                if (message.dsRecords != null && message.hasOwnProperty("dsRecords")) {
+                                    if (!Array.isArray(message.dsRecords))
+                                        return "dsRecords: array expected";
+                                    for (var i = 0; i < message.dsRecords.length; ++i) {
+                                        var error = $root.google.cloud.domains.v1.DnsSettings.DsRecord.verify(message.dsRecords[i]);
+                                        if (error)
+                                            return "dsRecords." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CustomDns message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.domains.v1.DnsSettings.CustomDns} CustomDns
+                             */
+                            CustomDns.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.domains.v1.DnsSettings.CustomDns)
+                                    return object;
+                                var message = new $root.google.cloud.domains.v1.DnsSettings.CustomDns();
+                                if (object.nameServers) {
+                                    if (!Array.isArray(object.nameServers))
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.CustomDns.nameServers: array expected");
+                                    message.nameServers = [];
+                                    for (var i = 0; i < object.nameServers.length; ++i)
+                                        message.nameServers[i] = String(object.nameServers[i]);
+                                }
+                                if (object.dsRecords) {
+                                    if (!Array.isArray(object.dsRecords))
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.CustomDns.dsRecords: array expected");
+                                    message.dsRecords = [];
+                                    for (var i = 0; i < object.dsRecords.length; ++i) {
+                                        if (typeof object.dsRecords[i] !== "object")
+                                            throw TypeError(".google.cloud.domains.v1.DnsSettings.CustomDns.dsRecords: object expected");
+                                        message.dsRecords[i] = $root.google.cloud.domains.v1.DnsSettings.DsRecord.fromObject(object.dsRecords[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CustomDns message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.CustomDns} message CustomDns
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CustomDns.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.nameServers = [];
+                                    object.dsRecords = [];
+                                }
+                                if (message.nameServers && message.nameServers.length) {
+                                    object.nameServers = [];
+                                    for (var j = 0; j < message.nameServers.length; ++j)
+                                        object.nameServers[j] = message.nameServers[j];
+                                }
+                                if (message.dsRecords && message.dsRecords.length) {
+                                    object.dsRecords = [];
+                                    for (var j = 0; j < message.dsRecords.length; ++j)
+                                        object.dsRecords[j] = $root.google.cloud.domains.v1.DnsSettings.DsRecord.toObject(message.dsRecords[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CustomDns to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.domains.v1.DnsSettings.CustomDns
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CustomDns.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return CustomDns;
+                        })();
+    
+                        DnsSettings.GoogleDomainsDns = (function() {
+    
+                            /**
+                             * Properties of a GoogleDomainsDns.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @interface IGoogleDomainsDns
+                             * @property {Array.<string>|null} [nameServers] GoogleDomainsDns nameServers
+                             * @property {google.cloud.domains.v1.DnsSettings.DsState|null} [dsState] GoogleDomainsDns dsState
+                             * @property {Array.<google.cloud.domains.v1.DnsSettings.IDsRecord>|null} [dsRecords] GoogleDomainsDns dsRecords
+                             */
+    
+                            /**
+                             * Constructs a new GoogleDomainsDns.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @classdesc Represents a GoogleDomainsDns.
+                             * @implements IGoogleDomainsDns
+                             * @constructor
+                             * @param {google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns=} [properties] Properties to set
+                             */
+                            function GoogleDomainsDns(properties) {
+                                this.nameServers = [];
+                                this.dsRecords = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoogleDomainsDns nameServers.
+                             * @member {Array.<string>} nameServers
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @instance
+                             */
+                            GoogleDomainsDns.prototype.nameServers = $util.emptyArray;
+    
+                            /**
+                             * GoogleDomainsDns dsState.
+                             * @member {google.cloud.domains.v1.DnsSettings.DsState} dsState
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @instance
+                             */
+                            GoogleDomainsDns.prototype.dsState = 0;
+    
+                            /**
+                             * GoogleDomainsDns dsRecords.
+                             * @member {Array.<google.cloud.domains.v1.DnsSettings.IDsRecord>} dsRecords
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @instance
+                             */
+                            GoogleDomainsDns.prototype.dsRecords = $util.emptyArray;
+    
+                            /**
+                             * Creates a new GoogleDomainsDns instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns=} [properties] Properties to set
+                             * @returns {google.cloud.domains.v1.DnsSettings.GoogleDomainsDns} GoogleDomainsDns instance
+                             */
+                            GoogleDomainsDns.create = function create(properties) {
+                                return new GoogleDomainsDns(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleDomainsDns message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns} message GoogleDomainsDns message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleDomainsDns.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.nameServers != null && message.nameServers.length)
+                                    for (var i = 0; i < message.nameServers.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.nameServers[i]);
+                                if (message.dsState != null && Object.hasOwnProperty.call(message, "dsState"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dsState);
+                                if (message.dsRecords != null && message.dsRecords.length)
+                                    for (var i = 0; i < message.dsRecords.length; ++i)
+                                        $root.google.cloud.domains.v1.DnsSettings.DsRecord.encode(message.dsRecords[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleDomainsDns message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IGoogleDomainsDns} message GoogleDomainsDns message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleDomainsDns.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoogleDomainsDns message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.domains.v1.DnsSettings.GoogleDomainsDns} GoogleDomainsDns
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleDomainsDns.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.nameServers && message.nameServers.length))
+                                            message.nameServers = [];
+                                        message.nameServers.push(reader.string());
+                                        break;
+                                    case 2:
+                                        message.dsState = reader.int32();
+                                        break;
+                                    case 3:
+                                        if (!(message.dsRecords && message.dsRecords.length))
+                                            message.dsRecords = [];
+                                        message.dsRecords.push($root.google.cloud.domains.v1.DnsSettings.DsRecord.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoogleDomainsDns message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.domains.v1.DnsSettings.GoogleDomainsDns} GoogleDomainsDns
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleDomainsDns.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoogleDomainsDns message.
+                             * @function verify
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoogleDomainsDns.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.nameServers != null && message.hasOwnProperty("nameServers")) {
+                                    if (!Array.isArray(message.nameServers))
+                                        return "nameServers: array expected";
+                                    for (var i = 0; i < message.nameServers.length; ++i)
+                                        if (!$util.isString(message.nameServers[i]))
+                                            return "nameServers: string[] expected";
+                                }
+                                if (message.dsState != null && message.hasOwnProperty("dsState"))
+                                    switch (message.dsState) {
+                                    default:
+                                        return "dsState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.dsRecords != null && message.hasOwnProperty("dsRecords")) {
+                                    if (!Array.isArray(message.dsRecords))
+                                        return "dsRecords: array expected";
+                                    for (var i = 0; i < message.dsRecords.length; ++i) {
+                                        var error = $root.google.cloud.domains.v1.DnsSettings.DsRecord.verify(message.dsRecords[i]);
+                                        if (error)
+                                            return "dsRecords." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoogleDomainsDns message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.domains.v1.DnsSettings.GoogleDomainsDns} GoogleDomainsDns
+                             */
+                            GoogleDomainsDns.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns)
+                                    return object;
+                                var message = new $root.google.cloud.domains.v1.DnsSettings.GoogleDomainsDns();
+                                if (object.nameServers) {
+                                    if (!Array.isArray(object.nameServers))
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.nameServers: array expected");
+                                    message.nameServers = [];
+                                    for (var i = 0; i < object.nameServers.length; ++i)
+                                        message.nameServers[i] = String(object.nameServers[i]);
+                                }
+                                switch (object.dsState) {
+                                case "DS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.dsState = 0;
+                                    break;
+                                case "DS_RECORDS_UNPUBLISHED":
+                                case 1:
+                                    message.dsState = 1;
+                                    break;
+                                case "DS_RECORDS_PUBLISHED":
+                                case 2:
+                                    message.dsState = 2;
+                                    break;
+                                }
+                                if (object.dsRecords) {
+                                    if (!Array.isArray(object.dsRecords))
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.dsRecords: array expected");
+                                    message.dsRecords = [];
+                                    for (var i = 0; i < object.dsRecords.length; ++i) {
+                                        if (typeof object.dsRecords[i] !== "object")
+                                            throw TypeError(".google.cloud.domains.v1.DnsSettings.GoogleDomainsDns.dsRecords: object expected");
+                                        message.dsRecords[i] = $root.google.cloud.domains.v1.DnsSettings.DsRecord.fromObject(object.dsRecords[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoogleDomainsDns message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.GoogleDomainsDns} message GoogleDomainsDns
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoogleDomainsDns.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.nameServers = [];
+                                    object.dsRecords = [];
+                                }
+                                if (options.defaults)
+                                    object.dsState = options.enums === String ? "DS_STATE_UNSPECIFIED" : 0;
+                                if (message.nameServers && message.nameServers.length) {
+                                    object.nameServers = [];
+                                    for (var j = 0; j < message.nameServers.length; ++j)
+                                        object.nameServers[j] = message.nameServers[j];
+                                }
+                                if (message.dsState != null && message.hasOwnProperty("dsState"))
+                                    object.dsState = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsState[message.dsState] : message.dsState;
+                                if (message.dsRecords && message.dsRecords.length) {
+                                    object.dsRecords = [];
+                                    for (var j = 0; j < message.dsRecords.length; ++j)
+                                        object.dsRecords[j] = $root.google.cloud.domains.v1.DnsSettings.DsRecord.toObject(message.dsRecords[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoogleDomainsDns to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.domains.v1.DnsSettings.GoogleDomainsDns
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoogleDomainsDns.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GoogleDomainsDns;
+                        })();
+    
+                        DnsSettings.DsRecord = (function() {
+    
+                            /**
+                             * Properties of a DsRecord.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @interface IDsRecord
+                             * @property {number|null} [keyTag] DsRecord keyTag
+                             * @property {google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm|null} [algorithm] DsRecord algorithm
+                             * @property {google.cloud.domains.v1.DnsSettings.DsRecord.DigestType|null} [digestType] DsRecord digestType
+                             * @property {string|null} [digest] DsRecord digest
+                             */
+    
+                            /**
+                             * Constructs a new DsRecord.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @classdesc Represents a DsRecord.
+                             * @implements IDsRecord
+                             * @constructor
+                             * @param {google.cloud.domains.v1.DnsSettings.IDsRecord=} [properties] Properties to set
+                             */
+                            function DsRecord(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DsRecord keyTag.
+                             * @member {number} keyTag
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @instance
+                             */
+                            DsRecord.prototype.keyTag = 0;
+    
+                            /**
+                             * DsRecord algorithm.
+                             * @member {google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm} algorithm
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @instance
+                             */
+                            DsRecord.prototype.algorithm = 0;
+    
+                            /**
+                             * DsRecord digestType.
+                             * @member {google.cloud.domains.v1.DnsSettings.DsRecord.DigestType} digestType
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @instance
+                             */
+                            DsRecord.prototype.digestType = 0;
+    
+                            /**
+                             * DsRecord digest.
+                             * @member {string} digest
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @instance
+                             */
+                            DsRecord.prototype.digest = "";
+    
+                            /**
+                             * Creates a new DsRecord instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IDsRecord=} [properties] Properties to set
+                             * @returns {google.cloud.domains.v1.DnsSettings.DsRecord} DsRecord instance
+                             */
+                            DsRecord.create = function create(properties) {
+                                return new DsRecord(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DsRecord message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.DsRecord.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IDsRecord} message DsRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DsRecord.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.keyTag != null && Object.hasOwnProperty.call(message, "keyTag"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.keyTag);
+                                if (message.algorithm != null && Object.hasOwnProperty.call(message, "algorithm"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.algorithm);
+                                if (message.digestType != null && Object.hasOwnProperty.call(message, "digestType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.digestType);
+                                if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.digest);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DsRecord message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.DsRecord.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IDsRecord} message DsRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DsRecord.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DsRecord message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.domains.v1.DnsSettings.DsRecord} DsRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DsRecord.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.DnsSettings.DsRecord();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.keyTag = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.algorithm = reader.int32();
+                                        break;
+                                    case 3:
+                                        message.digestType = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.digest = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DsRecord message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.domains.v1.DnsSettings.DsRecord} DsRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DsRecord.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DsRecord message.
+                             * @function verify
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DsRecord.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.keyTag != null && message.hasOwnProperty("keyTag"))
+                                    if (!$util.isInteger(message.keyTag))
+                                        return "keyTag: integer expected";
+                                if (message.algorithm != null && message.hasOwnProperty("algorithm"))
+                                    switch (message.algorithm) {
+                                    default:
+                                        return "algorithm: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 10:
+                                    case 12:
+                                    case 13:
+                                    case 14:
+                                    case 15:
+                                    case 16:
+                                    case 252:
+                                    case 253:
+                                    case 254:
+                                        break;
+                                    }
+                                if (message.digestType != null && message.hasOwnProperty("digestType"))
+                                    switch (message.digestType) {
+                                    default:
+                                        return "digestType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.digest != null && message.hasOwnProperty("digest"))
+                                    if (!$util.isString(message.digest))
+                                        return "digest: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DsRecord message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.domains.v1.DnsSettings.DsRecord} DsRecord
+                             */
+                            DsRecord.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.domains.v1.DnsSettings.DsRecord)
+                                    return object;
+                                var message = new $root.google.cloud.domains.v1.DnsSettings.DsRecord();
+                                if (object.keyTag != null)
+                                    message.keyTag = object.keyTag | 0;
+                                switch (object.algorithm) {
+                                case "ALGORITHM_UNSPECIFIED":
+                                case 0:
+                                    message.algorithm = 0;
+                                    break;
+                                case "RSAMD5":
+                                case 1:
+                                    message.algorithm = 1;
+                                    break;
+                                case "DH":
+                                case 2:
+                                    message.algorithm = 2;
+                                    break;
+                                case "DSA":
+                                case 3:
+                                    message.algorithm = 3;
+                                    break;
+                                case "ECC":
+                                case 4:
+                                    message.algorithm = 4;
+                                    break;
+                                case "RSASHA1":
+                                case 5:
+                                    message.algorithm = 5;
+                                    break;
+                                case "DSANSEC3SHA1":
+                                case 6:
+                                    message.algorithm = 6;
+                                    break;
+                                case "RSASHA1NSEC3SHA1":
+                                case 7:
+                                    message.algorithm = 7;
+                                    break;
+                                case "RSASHA256":
+                                case 8:
+                                    message.algorithm = 8;
+                                    break;
+                                case "RSASHA512":
+                                case 10:
+                                    message.algorithm = 10;
+                                    break;
+                                case "ECCGOST":
+                                case 12:
+                                    message.algorithm = 12;
+                                    break;
+                                case "ECDSAP256SHA256":
+                                case 13:
+                                    message.algorithm = 13;
+                                    break;
+                                case "ECDSAP384SHA384":
+                                case 14:
+                                    message.algorithm = 14;
+                                    break;
+                                case "ED25519":
+                                case 15:
+                                    message.algorithm = 15;
+                                    break;
+                                case "ED448":
+                                case 16:
+                                    message.algorithm = 16;
+                                    break;
+                                case "INDIRECT":
+                                case 252:
+                                    message.algorithm = 252;
+                                    break;
+                                case "PRIVATEDNS":
+                                case 253:
+                                    message.algorithm = 253;
+                                    break;
+                                case "PRIVATEOID":
+                                case 254:
+                                    message.algorithm = 254;
+                                    break;
+                                }
+                                switch (object.digestType) {
+                                case "DIGEST_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.digestType = 0;
+                                    break;
+                                case "SHA1":
+                                case 1:
+                                    message.digestType = 1;
+                                    break;
+                                case "SHA256":
+                                case 2:
+                                    message.digestType = 2;
+                                    break;
+                                case "GOST3411":
+                                case 3:
+                                    message.digestType = 3;
+                                    break;
+                                case "SHA384":
+                                case 4:
+                                    message.digestType = 4;
+                                    break;
+                                }
+                                if (object.digest != null)
+                                    message.digest = String(object.digest);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DsRecord message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.DsRecord} message DsRecord
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DsRecord.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.keyTag = 0;
+                                    object.algorithm = options.enums === String ? "ALGORITHM_UNSPECIFIED" : 0;
+                                    object.digestType = options.enums === String ? "DIGEST_TYPE_UNSPECIFIED" : 0;
+                                    object.digest = "";
+                                }
+                                if (message.keyTag != null && message.hasOwnProperty("keyTag"))
+                                    object.keyTag = message.keyTag;
+                                if (message.algorithm != null && message.hasOwnProperty("algorithm"))
+                                    object.algorithm = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm[message.algorithm] : message.algorithm;
+                                if (message.digestType != null && message.hasOwnProperty("digestType"))
+                                    object.digestType = options.enums === String ? $root.google.cloud.domains.v1.DnsSettings.DsRecord.DigestType[message.digestType] : message.digestType;
+                                if (message.digest != null && message.hasOwnProperty("digest"))
+                                    object.digest = message.digest;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DsRecord to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.domains.v1.DnsSettings.DsRecord
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DsRecord.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Algorithm enum.
+                             * @name google.cloud.domains.v1.DnsSettings.DsRecord.Algorithm
+                             * @enum {number}
+                             * @property {number} ALGORITHM_UNSPECIFIED=0 ALGORITHM_UNSPECIFIED value
+                             * @property {number} RSAMD5=1 RSAMD5 value
+                             * @property {number} DH=2 DH value
+                             * @property {number} DSA=3 DSA value
+                             * @property {number} ECC=4 ECC value
+                             * @property {number} RSASHA1=5 RSASHA1 value
+                             * @property {number} DSANSEC3SHA1=6 DSANSEC3SHA1 value
+                             * @property {number} RSASHA1NSEC3SHA1=7 RSASHA1NSEC3SHA1 value
+                             * @property {number} RSASHA256=8 RSASHA256 value
+                             * @property {number} RSASHA512=10 RSASHA512 value
+                             * @property {number} ECCGOST=12 ECCGOST value
+                             * @property {number} ECDSAP256SHA256=13 ECDSAP256SHA256 value
+                             * @property {number} ECDSAP384SHA384=14 ECDSAP384SHA384 value
+                             * @property {number} ED25519=15 ED25519 value
+                             * @property {number} ED448=16 ED448 value
+                             * @property {number} INDIRECT=252 INDIRECT value
+                             * @property {number} PRIVATEDNS=253 PRIVATEDNS value
+                             * @property {number} PRIVATEOID=254 PRIVATEOID value
+                             */
+                            DsRecord.Algorithm = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ALGORITHM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "RSAMD5"] = 1;
+                                values[valuesById[2] = "DH"] = 2;
+                                values[valuesById[3] = "DSA"] = 3;
+                                values[valuesById[4] = "ECC"] = 4;
+                                values[valuesById[5] = "RSASHA1"] = 5;
+                                values[valuesById[6] = "DSANSEC3SHA1"] = 6;
+                                values[valuesById[7] = "RSASHA1NSEC3SHA1"] = 7;
+                                values[valuesById[8] = "RSASHA256"] = 8;
+                                values[valuesById[10] = "RSASHA512"] = 10;
+                                values[valuesById[12] = "ECCGOST"] = 12;
+                                values[valuesById[13] = "ECDSAP256SHA256"] = 13;
+                                values[valuesById[14] = "ECDSAP384SHA384"] = 14;
+                                values[valuesById[15] = "ED25519"] = 15;
+                                values[valuesById[16] = "ED448"] = 16;
+                                values[valuesById[252] = "INDIRECT"] = 252;
+                                values[valuesById[253] = "PRIVATEDNS"] = 253;
+                                values[valuesById[254] = "PRIVATEOID"] = 254;
+                                return values;
+                            })();
+    
+                            /**
+                             * DigestType enum.
+                             * @name google.cloud.domains.v1.DnsSettings.DsRecord.DigestType
+                             * @enum {number}
+                             * @property {number} DIGEST_TYPE_UNSPECIFIED=0 DIGEST_TYPE_UNSPECIFIED value
+                             * @property {number} SHA1=1 SHA1 value
+                             * @property {number} SHA256=2 SHA256 value
+                             * @property {number} GOST3411=3 GOST3411 value
+                             * @property {number} SHA384=4 SHA384 value
+                             */
+                            DsRecord.DigestType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DIGEST_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SHA1"] = 1;
+                                values[valuesById[2] = "SHA256"] = 2;
+                                values[valuesById[3] = "GOST3411"] = 3;
+                                values[valuesById[4] = "SHA384"] = 4;
+                                return values;
+                            })();
+    
+                            return DsRecord;
+                        })();
+    
+                        DnsSettings.GlueRecord = (function() {
+    
+                            /**
+                             * Properties of a GlueRecord.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @interface IGlueRecord
+                             * @property {string|null} [hostName] GlueRecord hostName
+                             * @property {Array.<string>|null} [ipv4Addresses] GlueRecord ipv4Addresses
+                             * @property {Array.<string>|null} [ipv6Addresses] GlueRecord ipv6Addresses
+                             */
+    
+                            /**
+                             * Constructs a new GlueRecord.
+                             * @memberof google.cloud.domains.v1.DnsSettings
+                             * @classdesc Represents a GlueRecord.
+                             * @implements IGlueRecord
+                             * @constructor
+                             * @param {google.cloud.domains.v1.DnsSettings.IGlueRecord=} [properties] Properties to set
+                             */
+                            function GlueRecord(properties) {
+                                this.ipv4Addresses = [];
+                                this.ipv6Addresses = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GlueRecord hostName.
+                             * @member {string} hostName
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @instance
+                             */
+                            GlueRecord.prototype.hostName = "";
+    
+                            /**
+                             * GlueRecord ipv4Addresses.
+                             * @member {Array.<string>} ipv4Addresses
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @instance
+                             */
+                            GlueRecord.prototype.ipv4Addresses = $util.emptyArray;
+    
+                            /**
+                             * GlueRecord ipv6Addresses.
+                             * @member {Array.<string>} ipv6Addresses
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @instance
+                             */
+                            GlueRecord.prototype.ipv6Addresses = $util.emptyArray;
+    
+                            /**
+                             * Creates a new GlueRecord instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IGlueRecord=} [properties] Properties to set
+                             * @returns {google.cloud.domains.v1.DnsSettings.GlueRecord} GlueRecord instance
+                             */
+                            GlueRecord.create = function create(properties) {
+                                return new GlueRecord(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GlueRecord message. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GlueRecord.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IGlueRecord} message GlueRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlueRecord.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.hostName != null && Object.hasOwnProperty.call(message, "hostName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostName);
+                                if (message.ipv4Addresses != null && message.ipv4Addresses.length)
+                                    for (var i = 0; i < message.ipv4Addresses.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.ipv4Addresses[i]);
+                                if (message.ipv6Addresses != null && message.ipv6Addresses.length)
+                                    for (var i = 0; i < message.ipv6Addresses.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.ipv6Addresses[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GlueRecord message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DnsSettings.GlueRecord.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.IGlueRecord} message GlueRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlueRecord.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GlueRecord message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.domains.v1.DnsSettings.GlueRecord} GlueRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlueRecord.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.DnsSettings.GlueRecord();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.hostName = reader.string();
+                                        break;
+                                    case 2:
+                                        if (!(message.ipv4Addresses && message.ipv4Addresses.length))
+                                            message.ipv4Addresses = [];
+                                        message.ipv4Addresses.push(reader.string());
+                                        break;
+                                    case 3:
+                                        if (!(message.ipv6Addresses && message.ipv6Addresses.length))
+                                            message.ipv6Addresses = [];
+                                        message.ipv6Addresses.push(reader.string());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GlueRecord message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.domains.v1.DnsSettings.GlueRecord} GlueRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlueRecord.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GlueRecord message.
+                             * @function verify
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GlueRecord.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.hostName != null && message.hasOwnProperty("hostName"))
+                                    if (!$util.isString(message.hostName))
+                                        return "hostName: string expected";
+                                if (message.ipv4Addresses != null && message.hasOwnProperty("ipv4Addresses")) {
+                                    if (!Array.isArray(message.ipv4Addresses))
+                                        return "ipv4Addresses: array expected";
+                                    for (var i = 0; i < message.ipv4Addresses.length; ++i)
+                                        if (!$util.isString(message.ipv4Addresses[i]))
+                                            return "ipv4Addresses: string[] expected";
+                                }
+                                if (message.ipv6Addresses != null && message.hasOwnProperty("ipv6Addresses")) {
+                                    if (!Array.isArray(message.ipv6Addresses))
+                                        return "ipv6Addresses: array expected";
+                                    for (var i = 0; i < message.ipv6Addresses.length; ++i)
+                                        if (!$util.isString(message.ipv6Addresses[i]))
+                                            return "ipv6Addresses: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GlueRecord message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.domains.v1.DnsSettings.GlueRecord} GlueRecord
+                             */
+                            GlueRecord.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.domains.v1.DnsSettings.GlueRecord)
+                                    return object;
+                                var message = new $root.google.cloud.domains.v1.DnsSettings.GlueRecord();
+                                if (object.hostName != null)
+                                    message.hostName = String(object.hostName);
+                                if (object.ipv4Addresses) {
+                                    if (!Array.isArray(object.ipv4Addresses))
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.GlueRecord.ipv4Addresses: array expected");
+                                    message.ipv4Addresses = [];
+                                    for (var i = 0; i < object.ipv4Addresses.length; ++i)
+                                        message.ipv4Addresses[i] = String(object.ipv4Addresses[i]);
+                                }
+                                if (object.ipv6Addresses) {
+                                    if (!Array.isArray(object.ipv6Addresses))
+                                        throw TypeError(".google.cloud.domains.v1.DnsSettings.GlueRecord.ipv6Addresses: array expected");
+                                    message.ipv6Addresses = [];
+                                    for (var i = 0; i < object.ipv6Addresses.length; ++i)
+                                        message.ipv6Addresses[i] = String(object.ipv6Addresses[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GlueRecord message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @static
+                             * @param {google.cloud.domains.v1.DnsSettings.GlueRecord} message GlueRecord
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GlueRecord.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.ipv4Addresses = [];
+                                    object.ipv6Addresses = [];
+                                }
+                                if (options.defaults)
+                                    object.hostName = "";
+                                if (message.hostName != null && message.hasOwnProperty("hostName"))
+                                    object.hostName = message.hostName;
+                                if (message.ipv4Addresses && message.ipv4Addresses.length) {
+                                    object.ipv4Addresses = [];
+                                    for (var j = 0; j < message.ipv4Addresses.length; ++j)
+                                        object.ipv4Addresses[j] = message.ipv4Addresses[j];
+                                }
+                                if (message.ipv6Addresses && message.ipv6Addresses.length) {
+                                    object.ipv6Addresses = [];
+                                    for (var j = 0; j < message.ipv6Addresses.length; ++j)
+                                        object.ipv6Addresses[j] = message.ipv6Addresses[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GlueRecord to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.domains.v1.DnsSettings.GlueRecord
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GlueRecord.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return GlueRecord;
+                        })();
+    
+                        /**
+                         * DsState enum.
+                         * @name google.cloud.domains.v1.DnsSettings.DsState
+                         * @enum {number}
+                         * @property {number} DS_STATE_UNSPECIFIED=0 DS_STATE_UNSPECIFIED value
+                         * @property {number} DS_RECORDS_UNPUBLISHED=1 DS_RECORDS_UNPUBLISHED value
+                         * @property {number} DS_RECORDS_PUBLISHED=2 DS_RECORDS_PUBLISHED value
+                         */
+                        DnsSettings.DsState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DS_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DS_RECORDS_UNPUBLISHED"] = 1;
+                            values[valuesById[2] = "DS_RECORDS_PUBLISHED"] = 2;
+                            return values;
+                        })();
+    
+                        return DnsSettings;
+                    })();
+    
+                    v1.ContactSettings = (function() {
+    
+                        /**
+                         * Properties of a ContactSettings.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IContactSettings
+                         * @property {google.cloud.domains.v1.ContactPrivacy|null} [privacy] ContactSettings privacy
+                         * @property {google.cloud.domains.v1.ContactSettings.IContact|null} [registrantContact] ContactSettings registrantContact
+                         * @property {google.cloud.domains.v1.ContactSettings.IContact|null} [adminContact] ContactSettings adminContact
+                         * @property {google.cloud.domains.v1.ContactSettings.IContact|null} [technicalContact] ContactSettings technicalContact
+                         */
+    
+                        /**
+                         * Constructs a new ContactSettings.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ContactSettings.
+                         * @implements IContactSettings
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IContactSettings=} [properties] Properties to set
+                         */
+                        function ContactSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContactSettings privacy.
+                         * @member {google.cloud.domains.v1.ContactPrivacy} privacy
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @instance
+                         */
+                        ContactSettings.prototype.privacy = 0;
+    
+                        /**
+                         * ContactSettings registrantContact.
+                         * @member {google.cloud.domains.v1.ContactSettings.IContact|null|undefined} registrantContact
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @instance
+                         */
+                        ContactSettings.prototype.registrantContact = null;
+    
+                        /**
+                         * ContactSettings adminContact.
+                         * @member {google.cloud.domains.v1.ContactSettings.IContact|null|undefined} adminContact
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @instance
+                         */
+                        ContactSettings.prototype.adminContact = null;
+    
+                        /**
+                         * ContactSettings technicalContact.
+                         * @member {google.cloud.domains.v1.ContactSettings.IContact|null|undefined} technicalContact
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @instance
+                         */
+                        ContactSettings.prototype.technicalContact = null;
+    
+                        /**
+                         * Creates a new ContactSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IContactSettings=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ContactSettings} ContactSettings instance
+                         */
+                        ContactSettings.create = function create(properties) {
+                            return new ContactSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContactSettings message. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IContactSettings} message ContactSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContactSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.privacy != null && Object.hasOwnProperty.call(message, "privacy"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.privacy);
+                            if (message.registrantContact != null && Object.hasOwnProperty.call(message, "registrantContact"))
+                                $root.google.cloud.domains.v1.ContactSettings.Contact.encode(message.registrantContact, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.adminContact != null && Object.hasOwnProperty.call(message, "adminContact"))
+                                $root.google.cloud.domains.v1.ContactSettings.Contact.encode(message.adminContact, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.technicalContact != null && Object.hasOwnProperty.call(message, "technicalContact"))
+                                $root.google.cloud.domains.v1.ContactSettings.Contact.encode(message.technicalContact, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContactSettings message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.IContactSettings} message ContactSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContactSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContactSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ContactSettings} ContactSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContactSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ContactSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.privacy = reader.int32();
+                                    break;
+                                case 2:
+                                    message.registrantContact = $root.google.cloud.domains.v1.ContactSettings.Contact.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.adminContact = $root.google.cloud.domains.v1.ContactSettings.Contact.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.technicalContact = $root.google.cloud.domains.v1.ContactSettings.Contact.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContactSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ContactSettings} ContactSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContactSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContactSettings message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContactSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.privacy != null && message.hasOwnProperty("privacy"))
+                                switch (message.privacy) {
+                                default:
+                                    return "privacy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.registrantContact != null && message.hasOwnProperty("registrantContact")) {
+                                var error = $root.google.cloud.domains.v1.ContactSettings.Contact.verify(message.registrantContact);
+                                if (error)
+                                    return "registrantContact." + error;
+                            }
+                            if (message.adminContact != null && message.hasOwnProperty("adminContact")) {
+                                var error = $root.google.cloud.domains.v1.ContactSettings.Contact.verify(message.adminContact);
+                                if (error)
+                                    return "adminContact." + error;
+                            }
+                            if (message.technicalContact != null && message.hasOwnProperty("technicalContact")) {
+                                var error = $root.google.cloud.domains.v1.ContactSettings.Contact.verify(message.technicalContact);
+                                if (error)
+                                    return "technicalContact." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContactSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ContactSettings} ContactSettings
+                         */
+                        ContactSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ContactSettings)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ContactSettings();
+                            switch (object.privacy) {
+                            case "CONTACT_PRIVACY_UNSPECIFIED":
+                            case 0:
+                                message.privacy = 0;
+                                break;
+                            case "PUBLIC_CONTACT_DATA":
+                            case 1:
+                                message.privacy = 1;
+                                break;
+                            case "PRIVATE_CONTACT_DATA":
+                            case 2:
+                                message.privacy = 2;
+                                break;
+                            case "REDACTED_CONTACT_DATA":
+                            case 3:
+                                message.privacy = 3;
+                                break;
+                            }
+                            if (object.registrantContact != null) {
+                                if (typeof object.registrantContact !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ContactSettings.registrantContact: object expected");
+                                message.registrantContact = $root.google.cloud.domains.v1.ContactSettings.Contact.fromObject(object.registrantContact);
+                            }
+                            if (object.adminContact != null) {
+                                if (typeof object.adminContact !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ContactSettings.adminContact: object expected");
+                                message.adminContact = $root.google.cloud.domains.v1.ContactSettings.Contact.fromObject(object.adminContact);
+                            }
+                            if (object.technicalContact != null) {
+                                if (typeof object.technicalContact !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ContactSettings.technicalContact: object expected");
+                                message.technicalContact = $root.google.cloud.domains.v1.ContactSettings.Contact.fromObject(object.technicalContact);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContactSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @static
+                         * @param {google.cloud.domains.v1.ContactSettings} message ContactSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContactSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.privacy = options.enums === String ? "CONTACT_PRIVACY_UNSPECIFIED" : 0;
+                                object.registrantContact = null;
+                                object.adminContact = null;
+                                object.technicalContact = null;
+                            }
+                            if (message.privacy != null && message.hasOwnProperty("privacy"))
+                                object.privacy = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.privacy] : message.privacy;
+                            if (message.registrantContact != null && message.hasOwnProperty("registrantContact"))
+                                object.registrantContact = $root.google.cloud.domains.v1.ContactSettings.Contact.toObject(message.registrantContact, options);
+                            if (message.adminContact != null && message.hasOwnProperty("adminContact"))
+                                object.adminContact = $root.google.cloud.domains.v1.ContactSettings.Contact.toObject(message.adminContact, options);
+                            if (message.technicalContact != null && message.hasOwnProperty("technicalContact"))
+                                object.technicalContact = $root.google.cloud.domains.v1.ContactSettings.Contact.toObject(message.technicalContact, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContactSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ContactSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContactSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        ContactSettings.Contact = (function() {
+    
+                            /**
+                             * Properties of a Contact.
+                             * @memberof google.cloud.domains.v1.ContactSettings
+                             * @interface IContact
+                             * @property {google.type.IPostalAddress|null} [postalAddress] Contact postalAddress
+                             * @property {string|null} [email] Contact email
+                             * @property {string|null} [phoneNumber] Contact phoneNumber
+                             * @property {string|null} [faxNumber] Contact faxNumber
+                             */
+    
+                            /**
+                             * Constructs a new Contact.
+                             * @memberof google.cloud.domains.v1.ContactSettings
+                             * @classdesc Represents a Contact.
+                             * @implements IContact
+                             * @constructor
+                             * @param {google.cloud.domains.v1.ContactSettings.IContact=} [properties] Properties to set
+                             */
+                            function Contact(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Contact postalAddress.
+                             * @member {google.type.IPostalAddress|null|undefined} postalAddress
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @instance
+                             */
+                            Contact.prototype.postalAddress = null;
+    
+                            /**
+                             * Contact email.
+                             * @member {string} email
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @instance
+                             */
+                            Contact.prototype.email = "";
+    
+                            /**
+                             * Contact phoneNumber.
+                             * @member {string} phoneNumber
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @instance
+                             */
+                            Contact.prototype.phoneNumber = "";
+    
+                            /**
+                             * Contact faxNumber.
+                             * @member {string} faxNumber
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @instance
+                             */
+                            Contact.prototype.faxNumber = "";
+    
+                            /**
+                             * Creates a new Contact instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {google.cloud.domains.v1.ContactSettings.IContact=} [properties] Properties to set
+                             * @returns {google.cloud.domains.v1.ContactSettings.Contact} Contact instance
+                             */
+                            Contact.create = function create(properties) {
+                                return new Contact(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Contact message. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.Contact.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {google.cloud.domains.v1.ContactSettings.IContact} message Contact message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Contact.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.postalAddress != null && Object.hasOwnProperty.call(message, "postalAddress"))
+                                    $root.google.type.PostalAddress.encode(message.postalAddress, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.email != null && Object.hasOwnProperty.call(message, "email"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.email);
+                                if (message.phoneNumber != null && Object.hasOwnProperty.call(message, "phoneNumber"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.phoneNumber);
+                                if (message.faxNumber != null && Object.hasOwnProperty.call(message, "faxNumber"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.faxNumber);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Contact message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ContactSettings.Contact.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {google.cloud.domains.v1.ContactSettings.IContact} message Contact message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Contact.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Contact message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.domains.v1.ContactSettings.Contact} Contact
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Contact.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ContactSettings.Contact();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.postalAddress = $root.google.type.PostalAddress.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.email = reader.string();
+                                        break;
+                                    case 3:
+                                        message.phoneNumber = reader.string();
+                                        break;
+                                    case 4:
+                                        message.faxNumber = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Contact message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.domains.v1.ContactSettings.Contact} Contact
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Contact.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Contact message.
+                             * @function verify
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Contact.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.postalAddress != null && message.hasOwnProperty("postalAddress")) {
+                                    var error = $root.google.type.PostalAddress.verify(message.postalAddress);
+                                    if (error)
+                                        return "postalAddress." + error;
+                                }
+                                if (message.email != null && message.hasOwnProperty("email"))
+                                    if (!$util.isString(message.email))
+                                        return "email: string expected";
+                                if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber"))
+                                    if (!$util.isString(message.phoneNumber))
+                                        return "phoneNumber: string expected";
+                                if (message.faxNumber != null && message.hasOwnProperty("faxNumber"))
+                                    if (!$util.isString(message.faxNumber))
+                                        return "faxNumber: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Contact message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.domains.v1.ContactSettings.Contact} Contact
+                             */
+                            Contact.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.domains.v1.ContactSettings.Contact)
+                                    return object;
+                                var message = new $root.google.cloud.domains.v1.ContactSettings.Contact();
+                                if (object.postalAddress != null) {
+                                    if (typeof object.postalAddress !== "object")
+                                        throw TypeError(".google.cloud.domains.v1.ContactSettings.Contact.postalAddress: object expected");
+                                    message.postalAddress = $root.google.type.PostalAddress.fromObject(object.postalAddress);
+                                }
+                                if (object.email != null)
+                                    message.email = String(object.email);
+                                if (object.phoneNumber != null)
+                                    message.phoneNumber = String(object.phoneNumber);
+                                if (object.faxNumber != null)
+                                    message.faxNumber = String(object.faxNumber);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Contact message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @static
+                             * @param {google.cloud.domains.v1.ContactSettings.Contact} message Contact
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Contact.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.postalAddress = null;
+                                    object.email = "";
+                                    object.phoneNumber = "";
+                                    object.faxNumber = "";
+                                }
+                                if (message.postalAddress != null && message.hasOwnProperty("postalAddress"))
+                                    object.postalAddress = $root.google.type.PostalAddress.toObject(message.postalAddress, options);
+                                if (message.email != null && message.hasOwnProperty("email"))
+                                    object.email = message.email;
+                                if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber"))
+                                    object.phoneNumber = message.phoneNumber;
+                                if (message.faxNumber != null && message.hasOwnProperty("faxNumber"))
+                                    object.faxNumber = message.faxNumber;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Contact to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.domains.v1.ContactSettings.Contact
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Contact.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Contact;
+                        })();
+    
+                        return ContactSettings;
+                    })();
+    
+                    v1.SearchDomainsRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchDomainsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface ISearchDomainsRequest
+                         * @property {string|null} [query] SearchDomainsRequest query
+                         * @property {string|null} [location] SearchDomainsRequest location
+                         */
+    
+                        /**
+                         * Constructs a new SearchDomainsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a SearchDomainsRequest.
+                         * @implements ISearchDomainsRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.ISearchDomainsRequest=} [properties] Properties to set
+                         */
+                        function SearchDomainsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchDomainsRequest query.
+                         * @member {string} query
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @instance
+                         */
+                        SearchDomainsRequest.prototype.query = "";
+    
+                        /**
+                         * SearchDomainsRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @instance
+                         */
+                        SearchDomainsRequest.prototype.location = "";
+    
+                        /**
+                         * Creates a new SearchDomainsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ISearchDomainsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.SearchDomainsRequest} SearchDomainsRequest instance
+                         */
+                        SearchDomainsRequest.create = function create(properties) {
+                            return new SearchDomainsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchDomainsRequest message. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ISearchDomainsRequest} message SearchDomainsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchDomainsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchDomainsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ISearchDomainsRequest} message SearchDomainsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchDomainsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchDomainsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.SearchDomainsRequest} SearchDomainsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchDomainsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.SearchDomainsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.query = reader.string();
+                                    break;
+                                case 2:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchDomainsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.SearchDomainsRequest} SearchDomainsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchDomainsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchDomainsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchDomainsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                if (!$util.isString(message.query))
+                                    return "query: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchDomainsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.SearchDomainsRequest} SearchDomainsRequest
+                         */
+                        SearchDomainsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.SearchDomainsRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.SearchDomainsRequest();
+                            if (object.query != null)
+                                message.query = String(object.query);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchDomainsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.SearchDomainsRequest} message SearchDomainsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchDomainsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.query = "";
+                                object.location = "";
+                            }
+                            if (message.query != null && message.hasOwnProperty("query"))
+                                object.query = message.query;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchDomainsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.SearchDomainsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchDomainsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchDomainsRequest;
+                    })();
+    
+                    v1.SearchDomainsResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchDomainsResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @interface ISearchDomainsResponse
+                         * @property {Array.<google.cloud.domains.v1.IRegisterParameters>|null} [registerParameters] SearchDomainsResponse registerParameters
+                         */
+    
+                        /**
+                         * Constructs a new SearchDomainsResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a SearchDomainsResponse.
+                         * @implements ISearchDomainsResponse
+                         * @constructor
+                         * @param {google.cloud.domains.v1.ISearchDomainsResponse=} [properties] Properties to set
+                         */
+                        function SearchDomainsResponse(properties) {
+                            this.registerParameters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchDomainsResponse registerParameters.
+                         * @member {Array.<google.cloud.domains.v1.IRegisterParameters>} registerParameters
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @instance
+                         */
+                        SearchDomainsResponse.prototype.registerParameters = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SearchDomainsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.ISearchDomainsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.SearchDomainsResponse} SearchDomainsResponse instance
+                         */
+                        SearchDomainsResponse.create = function create(properties) {
+                            return new SearchDomainsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchDomainsResponse message. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.ISearchDomainsResponse} message SearchDomainsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchDomainsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registerParameters != null && message.registerParameters.length)
+                                for (var i = 0; i < message.registerParameters.length; ++i)
+                                    $root.google.cloud.domains.v1.RegisterParameters.encode(message.registerParameters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchDomainsResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.SearchDomainsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.ISearchDomainsResponse} message SearchDomainsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchDomainsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchDomainsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.SearchDomainsResponse} SearchDomainsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchDomainsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.SearchDomainsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.registerParameters && message.registerParameters.length))
+                                        message.registerParameters = [];
+                                    message.registerParameters.push($root.google.cloud.domains.v1.RegisterParameters.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchDomainsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.SearchDomainsResponse} SearchDomainsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchDomainsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchDomainsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchDomainsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registerParameters != null && message.hasOwnProperty("registerParameters")) {
+                                if (!Array.isArray(message.registerParameters))
+                                    return "registerParameters: array expected";
+                                for (var i = 0; i < message.registerParameters.length; ++i) {
+                                    var error = $root.google.cloud.domains.v1.RegisterParameters.verify(message.registerParameters[i]);
+                                    if (error)
+                                        return "registerParameters." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchDomainsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.SearchDomainsResponse} SearchDomainsResponse
+                         */
+                        SearchDomainsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.SearchDomainsResponse)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.SearchDomainsResponse();
+                            if (object.registerParameters) {
+                                if (!Array.isArray(object.registerParameters))
+                                    throw TypeError(".google.cloud.domains.v1.SearchDomainsResponse.registerParameters: array expected");
+                                message.registerParameters = [];
+                                for (var i = 0; i < object.registerParameters.length; ++i) {
+                                    if (typeof object.registerParameters[i] !== "object")
+                                        throw TypeError(".google.cloud.domains.v1.SearchDomainsResponse.registerParameters: object expected");
+                                    message.registerParameters[i] = $root.google.cloud.domains.v1.RegisterParameters.fromObject(object.registerParameters[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchDomainsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.SearchDomainsResponse} message SearchDomainsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchDomainsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.registerParameters = [];
+                            if (message.registerParameters && message.registerParameters.length) {
+                                object.registerParameters = [];
+                                for (var j = 0; j < message.registerParameters.length; ++j)
+                                    object.registerParameters[j] = $root.google.cloud.domains.v1.RegisterParameters.toObject(message.registerParameters[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchDomainsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.SearchDomainsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchDomainsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchDomainsResponse;
+                    })();
+    
+                    v1.RetrieveRegisterParametersRequest = (function() {
+    
+                        /**
+                         * Properties of a RetrieveRegisterParametersRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRetrieveRegisterParametersRequest
+                         * @property {string|null} [domainName] RetrieveRegisterParametersRequest domainName
+                         * @property {string|null} [location] RetrieveRegisterParametersRequest location
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveRegisterParametersRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RetrieveRegisterParametersRequest.
+                         * @implements IRetrieveRegisterParametersRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersRequest=} [properties] Properties to set
+                         */
+                        function RetrieveRegisterParametersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveRegisterParametersRequest domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @instance
+                         */
+                        RetrieveRegisterParametersRequest.prototype.domainName = "";
+    
+                        /**
+                         * RetrieveRegisterParametersRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @instance
+                         */
+                        RetrieveRegisterParametersRequest.prototype.location = "";
+    
+                        /**
+                         * Creates a new RetrieveRegisterParametersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersRequest} RetrieveRegisterParametersRequest instance
+                         */
+                        RetrieveRegisterParametersRequest.create = function create(properties) {
+                            return new RetrieveRegisterParametersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveRegisterParametersRequest message. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersRequest} message RetrieveRegisterParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveRegisterParametersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveRegisterParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersRequest} message RetrieveRegisterParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveRegisterParametersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveRegisterParametersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersRequest} RetrieveRegisterParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveRegisterParametersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RetrieveRegisterParametersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveRegisterParametersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersRequest} RetrieveRegisterParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveRegisterParametersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveRegisterParametersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveRegisterParametersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveRegisterParametersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersRequest} RetrieveRegisterParametersRequest
+                         */
+                        RetrieveRegisterParametersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RetrieveRegisterParametersRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RetrieveRegisterParametersRequest();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveRegisterParametersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.RetrieveRegisterParametersRequest} message RetrieveRegisterParametersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveRegisterParametersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.location = "";
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveRegisterParametersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveRegisterParametersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveRegisterParametersRequest;
+                    })();
+    
+                    v1.RetrieveRegisterParametersResponse = (function() {
+    
+                        /**
+                         * Properties of a RetrieveRegisterParametersResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRetrieveRegisterParametersResponse
+                         * @property {google.cloud.domains.v1.IRegisterParameters|null} [registerParameters] RetrieveRegisterParametersResponse registerParameters
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveRegisterParametersResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RetrieveRegisterParametersResponse.
+                         * @implements IRetrieveRegisterParametersResponse
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersResponse=} [properties] Properties to set
+                         */
+                        function RetrieveRegisterParametersResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveRegisterParametersResponse registerParameters.
+                         * @member {google.cloud.domains.v1.IRegisterParameters|null|undefined} registerParameters
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @instance
+                         */
+                        RetrieveRegisterParametersResponse.prototype.registerParameters = null;
+    
+                        /**
+                         * Creates a new RetrieveRegisterParametersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersResponse} RetrieveRegisterParametersResponse instance
+                         */
+                        RetrieveRegisterParametersResponse.create = function create(properties) {
+                            return new RetrieveRegisterParametersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveRegisterParametersResponse message. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersResponse} message RetrieveRegisterParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveRegisterParametersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registerParameters != null && Object.hasOwnProperty.call(message, "registerParameters"))
+                                $root.google.cloud.domains.v1.RegisterParameters.encode(message.registerParameters, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveRegisterParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveRegisterParametersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveRegisterParametersResponse} message RetrieveRegisterParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveRegisterParametersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveRegisterParametersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersResponse} RetrieveRegisterParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveRegisterParametersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RetrieveRegisterParametersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registerParameters = $root.google.cloud.domains.v1.RegisterParameters.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveRegisterParametersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersResponse} RetrieveRegisterParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveRegisterParametersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveRegisterParametersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveRegisterParametersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registerParameters != null && message.hasOwnProperty("registerParameters")) {
+                                var error = $root.google.cloud.domains.v1.RegisterParameters.verify(message.registerParameters);
+                                if (error)
+                                    return "registerParameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveRegisterParametersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RetrieveRegisterParametersResponse} RetrieveRegisterParametersResponse
+                         */
+                        RetrieveRegisterParametersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RetrieveRegisterParametersResponse)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RetrieveRegisterParametersResponse();
+                            if (object.registerParameters != null) {
+                                if (typeof object.registerParameters !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.RetrieveRegisterParametersResponse.registerParameters: object expected");
+                                message.registerParameters = $root.google.cloud.domains.v1.RegisterParameters.fromObject(object.registerParameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveRegisterParametersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.RetrieveRegisterParametersResponse} message RetrieveRegisterParametersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveRegisterParametersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.registerParameters = null;
+                            if (message.registerParameters != null && message.hasOwnProperty("registerParameters"))
+                                object.registerParameters = $root.google.cloud.domains.v1.RegisterParameters.toObject(message.registerParameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveRegisterParametersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RetrieveRegisterParametersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveRegisterParametersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveRegisterParametersResponse;
+                    })();
+    
+                    v1.RegisterDomainRequest = (function() {
+    
+                        /**
+                         * Properties of a RegisterDomainRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRegisterDomainRequest
+                         * @property {string|null} [parent] RegisterDomainRequest parent
+                         * @property {google.cloud.domains.v1.IRegistration|null} [registration] RegisterDomainRequest registration
+                         * @property {Array.<google.cloud.domains.v1.DomainNotice>|null} [domainNotices] RegisterDomainRequest domainNotices
+                         * @property {Array.<google.cloud.domains.v1.ContactNotice>|null} [contactNotices] RegisterDomainRequest contactNotices
+                         * @property {google.type.IMoney|null} [yearlyPrice] RegisterDomainRequest yearlyPrice
+                         * @property {boolean|null} [validateOnly] RegisterDomainRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new RegisterDomainRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RegisterDomainRequest.
+                         * @implements IRegisterDomainRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRegisterDomainRequest=} [properties] Properties to set
+                         */
+                        function RegisterDomainRequest(properties) {
+                            this.domainNotices = [];
+                            this.contactNotices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegisterDomainRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         */
+                        RegisterDomainRequest.prototype.parent = "";
+    
+                        /**
+                         * RegisterDomainRequest registration.
+                         * @member {google.cloud.domains.v1.IRegistration|null|undefined} registration
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         */
+                        RegisterDomainRequest.prototype.registration = null;
+    
+                        /**
+                         * RegisterDomainRequest domainNotices.
+                         * @member {Array.<google.cloud.domains.v1.DomainNotice>} domainNotices
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         */
+                        RegisterDomainRequest.prototype.domainNotices = $util.emptyArray;
+    
+                        /**
+                         * RegisterDomainRequest contactNotices.
+                         * @member {Array.<google.cloud.domains.v1.ContactNotice>} contactNotices
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         */
+                        RegisterDomainRequest.prototype.contactNotices = $util.emptyArray;
+    
+                        /**
+                         * RegisterDomainRequest yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         */
+                        RegisterDomainRequest.prototype.yearlyPrice = null;
+    
+                        /**
+                         * RegisterDomainRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         */
+                        RegisterDomainRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new RegisterDomainRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegisterDomainRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RegisterDomainRequest} RegisterDomainRequest instance
+                         */
+                        RegisterDomainRequest.create = function create(properties) {
+                            return new RegisterDomainRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterDomainRequest message. Does not implicitly {@link google.cloud.domains.v1.RegisterDomainRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegisterDomainRequest} message RegisterDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterDomainRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                $root.google.cloud.domains.v1.Registration.encode(message.registration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.domainNotices != null && message.domainNotices.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.domainNotices.length; ++i)
+                                    writer.int32(message.domainNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.contactNotices != null && message.contactNotices.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    writer.int32(message.contactNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RegisterDomainRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegisterDomainRequest} message RegisterDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterDomainRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegisterDomainRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RegisterDomainRequest} RegisterDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterDomainRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RegisterDomainRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.registration = $root.google.cloud.domains.v1.Registration.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    if (!(message.domainNotices && message.domainNotices.length))
+                                        message.domainNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.domainNotices.push(reader.int32());
+                                    } else
+                                        message.domainNotices.push(reader.int32());
+                                    break;
+                                case 4:
+                                    if (!(message.contactNotices && message.contactNotices.length))
+                                        message.contactNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.contactNotices.push(reader.int32());
+                                    } else
+                                        message.contactNotices.push(reader.int32());
+                                    break;
+                                case 5:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegisterDomainRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RegisterDomainRequest} RegisterDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterDomainRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegisterDomainRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegisterDomainRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.registration != null && message.hasOwnProperty("registration")) {
+                                var error = $root.google.cloud.domains.v1.Registration.verify(message.registration);
+                                if (error)
+                                    return "registration." + error;
+                            }
+                            if (message.domainNotices != null && message.hasOwnProperty("domainNotices")) {
+                                if (!Array.isArray(message.domainNotices))
+                                    return "domainNotices: array expected";
+                                for (var i = 0; i < message.domainNotices.length; ++i)
+                                    switch (message.domainNotices[i]) {
+                                    default:
+                                        return "domainNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.contactNotices != null && message.hasOwnProperty("contactNotices")) {
+                                if (!Array.isArray(message.contactNotices))
+                                    return "contactNotices: array expected";
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    switch (message.contactNotices[i]) {
+                                    default:
+                                        return "contactNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegisterDomainRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RegisterDomainRequest} RegisterDomainRequest
+                         */
+                        RegisterDomainRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RegisterDomainRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RegisterDomainRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.registration != null) {
+                                if (typeof object.registration !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.RegisterDomainRequest.registration: object expected");
+                                message.registration = $root.google.cloud.domains.v1.Registration.fromObject(object.registration);
+                            }
+                            if (object.domainNotices) {
+                                if (!Array.isArray(object.domainNotices))
+                                    throw TypeError(".google.cloud.domains.v1.RegisterDomainRequest.domainNotices: array expected");
+                                message.domainNotices = [];
+                                for (var i = 0; i < object.domainNotices.length; ++i)
+                                    switch (object.domainNotices[i]) {
+                                    default:
+                                    case "DOMAIN_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.domainNotices[i] = 0;
+                                        break;
+                                    case "HSTS_PRELOADED":
+                                    case 1:
+                                        message.domainNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.contactNotices) {
+                                if (!Array.isArray(object.contactNotices))
+                                    throw TypeError(".google.cloud.domains.v1.RegisterDomainRequest.contactNotices: array expected");
+                                message.contactNotices = [];
+                                for (var i = 0; i < object.contactNotices.length; ++i)
+                                    switch (object.contactNotices[i]) {
+                                    default:
+                                    case "CONTACT_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.contactNotices[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT":
+                                    case 1:
+                                        message.contactNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.RegisterDomainRequest.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegisterDomainRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.RegisterDomainRequest} message RegisterDomainRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegisterDomainRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.domainNotices = [];
+                                object.contactNotices = [];
+                            }
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.registration = null;
+                                object.yearlyPrice = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = $root.google.cloud.domains.v1.Registration.toObject(message.registration, options);
+                            if (message.domainNotices && message.domainNotices.length) {
+                                object.domainNotices = [];
+                                for (var j = 0; j < message.domainNotices.length; ++j)
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                            }
+                            if (message.contactNotices && message.contactNotices.length) {
+                                object.contactNotices = [];
+                                for (var j = 0; j < message.contactNotices.length; ++j)
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegisterDomainRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RegisterDomainRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegisterDomainRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RegisterDomainRequest;
+                    })();
+    
+                    v1.RetrieveTransferParametersRequest = (function() {
+    
+                        /**
+                         * Properties of a RetrieveTransferParametersRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRetrieveTransferParametersRequest
+                         * @property {string|null} [domainName] RetrieveTransferParametersRequest domainName
+                         * @property {string|null} [location] RetrieveTransferParametersRequest location
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveTransferParametersRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RetrieveTransferParametersRequest.
+                         * @implements IRetrieveTransferParametersRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersRequest=} [properties] Properties to set
+                         */
+                        function RetrieveTransferParametersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveTransferParametersRequest domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @instance
+                         */
+                        RetrieveTransferParametersRequest.prototype.domainName = "";
+    
+                        /**
+                         * RetrieveTransferParametersRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @instance
+                         */
+                        RetrieveTransferParametersRequest.prototype.location = "";
+    
+                        /**
+                         * Creates a new RetrieveTransferParametersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest instance
+                         */
+                        RetrieveTransferParametersRequest.create = function create(properties) {
+                            return new RetrieveTransferParametersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersRequest message. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersRequest} message RetrieveTransferParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersRequest} message RetrieveTransferParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RetrieveTransferParametersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveTransferParametersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveTransferParametersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveTransferParametersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         */
+                        RetrieveTransferParametersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RetrieveTransferParametersRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RetrieveTransferParametersRequest();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveTransferParametersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.RetrieveTransferParametersRequest} message RetrieveTransferParametersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveTransferParametersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.location = "";
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveTransferParametersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveTransferParametersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveTransferParametersRequest;
+                    })();
+    
+                    v1.RetrieveTransferParametersResponse = (function() {
+    
+                        /**
+                         * Properties of a RetrieveTransferParametersResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRetrieveTransferParametersResponse
+                         * @property {google.cloud.domains.v1.ITransferParameters|null} [transferParameters] RetrieveTransferParametersResponse transferParameters
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveTransferParametersResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RetrieveTransferParametersResponse.
+                         * @implements IRetrieveTransferParametersResponse
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersResponse=} [properties] Properties to set
+                         */
+                        function RetrieveTransferParametersResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveTransferParametersResponse transferParameters.
+                         * @member {google.cloud.domains.v1.ITransferParameters|null|undefined} transferParameters
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @instance
+                         */
+                        RetrieveTransferParametersResponse.prototype.transferParameters = null;
+    
+                        /**
+                         * Creates a new RetrieveTransferParametersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse instance
+                         */
+                        RetrieveTransferParametersResponse.create = function create(properties) {
+                            return new RetrieveTransferParametersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersResponse message. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersResponse} message RetrieveTransferParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.transferParameters != null && Object.hasOwnProperty.call(message, "transferParameters"))
+                                $root.google.cloud.domains.v1.TransferParameters.encode(message.transferParameters, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveTransferParametersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveTransferParametersResponse} message RetrieveTransferParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RetrieveTransferParametersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.transferParameters = $root.google.cloud.domains.v1.TransferParameters.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveTransferParametersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveTransferParametersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.transferParameters != null && message.hasOwnProperty("transferParameters")) {
+                                var error = $root.google.cloud.domains.v1.TransferParameters.verify(message.transferParameters);
+                                if (error)
+                                    return "transferParameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveTransferParametersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         */
+                        RetrieveTransferParametersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RetrieveTransferParametersResponse)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RetrieveTransferParametersResponse();
+                            if (object.transferParameters != null) {
+                                if (typeof object.transferParameters !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.RetrieveTransferParametersResponse.transferParameters: object expected");
+                                message.transferParameters = $root.google.cloud.domains.v1.TransferParameters.fromObject(object.transferParameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveTransferParametersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.RetrieveTransferParametersResponse} message RetrieveTransferParametersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveTransferParametersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.transferParameters = null;
+                            if (message.transferParameters != null && message.hasOwnProperty("transferParameters"))
+                                object.transferParameters = $root.google.cloud.domains.v1.TransferParameters.toObject(message.transferParameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveTransferParametersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RetrieveTransferParametersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveTransferParametersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveTransferParametersResponse;
+                    })();
+    
+                    v1.TransferDomainRequest = (function() {
+    
+                        /**
+                         * Properties of a TransferDomainRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface ITransferDomainRequest
+                         * @property {string|null} [parent] TransferDomainRequest parent
+                         * @property {google.cloud.domains.v1.IRegistration|null} [registration] TransferDomainRequest registration
+                         * @property {Array.<google.cloud.domains.v1.ContactNotice>|null} [contactNotices] TransferDomainRequest contactNotices
+                         * @property {google.type.IMoney|null} [yearlyPrice] TransferDomainRequest yearlyPrice
+                         * @property {google.cloud.domains.v1.IAuthorizationCode|null} [authorizationCode] TransferDomainRequest authorizationCode
+                         * @property {boolean|null} [validateOnly] TransferDomainRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new TransferDomainRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a TransferDomainRequest.
+                         * @implements ITransferDomainRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.ITransferDomainRequest=} [properties] Properties to set
+                         */
+                        function TransferDomainRequest(properties) {
+                            this.contactNotices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferDomainRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.parent = "";
+    
+                        /**
+                         * TransferDomainRequest registration.
+                         * @member {google.cloud.domains.v1.IRegistration|null|undefined} registration
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.registration = null;
+    
+                        /**
+                         * TransferDomainRequest contactNotices.
+                         * @member {Array.<google.cloud.domains.v1.ContactNotice>} contactNotices
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.contactNotices = $util.emptyArray;
+    
+                        /**
+                         * TransferDomainRequest yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.yearlyPrice = null;
+    
+                        /**
+                         * TransferDomainRequest authorizationCode.
+                         * @member {google.cloud.domains.v1.IAuthorizationCode|null|undefined} authorizationCode
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.authorizationCode = null;
+    
+                        /**
+                         * TransferDomainRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new TransferDomainRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ITransferDomainRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.TransferDomainRequest} TransferDomainRequest instance
+                         */
+                        TransferDomainRequest.create = function create(properties) {
+                            return new TransferDomainRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferDomainRequest message. Does not implicitly {@link google.cloud.domains.v1.TransferDomainRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ITransferDomainRequest} message TransferDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferDomainRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                $root.google.cloud.domains.v1.Registration.encode(message.registration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.contactNotices != null && message.contactNotices.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    writer.int32(message.contactNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.authorizationCode != null && Object.hasOwnProperty.call(message, "authorizationCode"))
+                                $root.google.cloud.domains.v1.AuthorizationCode.encode(message.authorizationCode, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.TransferDomainRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ITransferDomainRequest} message TransferDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferDomainRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferDomainRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.TransferDomainRequest} TransferDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferDomainRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.TransferDomainRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.registration = $root.google.cloud.domains.v1.Registration.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    if (!(message.contactNotices && message.contactNotices.length))
+                                        message.contactNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.contactNotices.push(reader.int32());
+                                    } else
+                                        message.contactNotices.push(reader.int32());
+                                    break;
+                                case 4:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.authorizationCode = $root.google.cloud.domains.v1.AuthorizationCode.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferDomainRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.TransferDomainRequest} TransferDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferDomainRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferDomainRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferDomainRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.registration != null && message.hasOwnProperty("registration")) {
+                                var error = $root.google.cloud.domains.v1.Registration.verify(message.registration);
+                                if (error)
+                                    return "registration." + error;
+                            }
+                            if (message.contactNotices != null && message.hasOwnProperty("contactNotices")) {
+                                if (!Array.isArray(message.contactNotices))
+                                    return "contactNotices: array expected";
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    switch (message.contactNotices[i]) {
+                                    default:
+                                        return "contactNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            if (message.authorizationCode != null && message.hasOwnProperty("authorizationCode")) {
+                                var error = $root.google.cloud.domains.v1.AuthorizationCode.verify(message.authorizationCode);
+                                if (error)
+                                    return "authorizationCode." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferDomainRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.TransferDomainRequest} TransferDomainRequest
+                         */
+                        TransferDomainRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.TransferDomainRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.TransferDomainRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.registration != null) {
+                                if (typeof object.registration !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.TransferDomainRequest.registration: object expected");
+                                message.registration = $root.google.cloud.domains.v1.Registration.fromObject(object.registration);
+                            }
+                            if (object.contactNotices) {
+                                if (!Array.isArray(object.contactNotices))
+                                    throw TypeError(".google.cloud.domains.v1.TransferDomainRequest.contactNotices: array expected");
+                                message.contactNotices = [];
+                                for (var i = 0; i < object.contactNotices.length; ++i)
+                                    switch (object.contactNotices[i]) {
+                                    default:
+                                    case "CONTACT_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.contactNotices[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT":
+                                    case 1:
+                                        message.contactNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.TransferDomainRequest.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            if (object.authorizationCode != null) {
+                                if (typeof object.authorizationCode !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.TransferDomainRequest.authorizationCode: object expected");
+                                message.authorizationCode = $root.google.cloud.domains.v1.AuthorizationCode.fromObject(object.authorizationCode);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferDomainRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.TransferDomainRequest} message TransferDomainRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferDomainRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.contactNotices = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.registration = null;
+                                object.yearlyPrice = null;
+                                object.authorizationCode = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = $root.google.cloud.domains.v1.Registration.toObject(message.registration, options);
+                            if (message.contactNotices && message.contactNotices.length) {
+                                object.contactNotices = [];
+                                for (var j = 0; j < message.contactNotices.length; ++j)
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            if (message.authorizationCode != null && message.hasOwnProperty("authorizationCode"))
+                                object.authorizationCode = $root.google.cloud.domains.v1.AuthorizationCode.toObject(message.authorizationCode, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferDomainRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.TransferDomainRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferDomainRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TransferDomainRequest;
+                    })();
+    
+                    v1.ListRegistrationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRegistrationsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IListRegistrationsRequest
+                         * @property {string|null} [parent] ListRegistrationsRequest parent
+                         * @property {number|null} [pageSize] ListRegistrationsRequest pageSize
+                         * @property {string|null} [pageToken] ListRegistrationsRequest pageToken
+                         * @property {string|null} [filter] ListRegistrationsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListRegistrationsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ListRegistrationsRequest.
+                         * @implements IListRegistrationsRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IListRegistrationsRequest=} [properties] Properties to set
+                         */
+                        function ListRegistrationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRegistrationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @instance
+                         */
+                        ListRegistrationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRegistrationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @instance
+                         */
+                        ListRegistrationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRegistrationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @instance
+                         */
+                        ListRegistrationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListRegistrationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @instance
+                         */
+                        ListRegistrationsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListRegistrationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IListRegistrationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ListRegistrationsRequest} ListRegistrationsRequest instance
+                         */
+                        ListRegistrationsRequest.create = function create(properties) {
+                            return new ListRegistrationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRegistrationsRequest message. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IListRegistrationsRequest} message ListRegistrationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRegistrationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRegistrationsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IListRegistrationsRequest} message ListRegistrationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRegistrationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRegistrationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ListRegistrationsRequest} ListRegistrationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRegistrationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ListRegistrationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRegistrationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ListRegistrationsRequest} ListRegistrationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRegistrationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRegistrationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRegistrationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRegistrationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ListRegistrationsRequest} ListRegistrationsRequest
+                         */
+                        ListRegistrationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ListRegistrationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ListRegistrationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRegistrationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ListRegistrationsRequest} message ListRegistrationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRegistrationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRegistrationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ListRegistrationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRegistrationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRegistrationsRequest;
+                    })();
+    
+                    v1.ListRegistrationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRegistrationsResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IListRegistrationsResponse
+                         * @property {Array.<google.cloud.domains.v1.IRegistration>|null} [registrations] ListRegistrationsResponse registrations
+                         * @property {string|null} [nextPageToken] ListRegistrationsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRegistrationsResponse.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ListRegistrationsResponse.
+                         * @implements IListRegistrationsResponse
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IListRegistrationsResponse=} [properties] Properties to set
+                         */
+                        function ListRegistrationsResponse(properties) {
+                            this.registrations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRegistrationsResponse registrations.
+                         * @member {Array.<google.cloud.domains.v1.IRegistration>} registrations
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @instance
+                         */
+                        ListRegistrationsResponse.prototype.registrations = $util.emptyArray;
+    
+                        /**
+                         * ListRegistrationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @instance
+                         */
+                        ListRegistrationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRegistrationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IListRegistrationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ListRegistrationsResponse} ListRegistrationsResponse instance
+                         */
+                        ListRegistrationsResponse.create = function create(properties) {
+                            return new ListRegistrationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRegistrationsResponse message. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IListRegistrationsResponse} message ListRegistrationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRegistrationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registrations != null && message.registrations.length)
+                                for (var i = 0; i < message.registrations.length; ++i)
+                                    $root.google.cloud.domains.v1.Registration.encode(message.registrations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRegistrationsResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ListRegistrationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.IListRegistrationsResponse} message ListRegistrationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRegistrationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRegistrationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ListRegistrationsResponse} ListRegistrationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRegistrationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ListRegistrationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.registrations && message.registrations.length))
+                                        message.registrations = [];
+                                    message.registrations.push($root.google.cloud.domains.v1.Registration.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRegistrationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ListRegistrationsResponse} ListRegistrationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRegistrationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRegistrationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRegistrationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registrations != null && message.hasOwnProperty("registrations")) {
+                                if (!Array.isArray(message.registrations))
+                                    return "registrations: array expected";
+                                for (var i = 0; i < message.registrations.length; ++i) {
+                                    var error = $root.google.cloud.domains.v1.Registration.verify(message.registrations[i]);
+                                    if (error)
+                                        return "registrations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRegistrationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ListRegistrationsResponse} ListRegistrationsResponse
+                         */
+                        ListRegistrationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ListRegistrationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ListRegistrationsResponse();
+                            if (object.registrations) {
+                                if (!Array.isArray(object.registrations))
+                                    throw TypeError(".google.cloud.domains.v1.ListRegistrationsResponse.registrations: array expected");
+                                message.registrations = [];
+                                for (var i = 0; i < object.registrations.length; ++i) {
+                                    if (typeof object.registrations[i] !== "object")
+                                        throw TypeError(".google.cloud.domains.v1.ListRegistrationsResponse.registrations: object expected");
+                                    message.registrations[i] = $root.google.cloud.domains.v1.Registration.fromObject(object.registrations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRegistrationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @static
+                         * @param {google.cloud.domains.v1.ListRegistrationsResponse} message ListRegistrationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRegistrationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.registrations = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.registrations && message.registrations.length) {
+                                object.registrations = [];
+                                for (var j = 0; j < message.registrations.length; ++j)
+                                    object.registrations[j] = $root.google.cloud.domains.v1.Registration.toObject(message.registrations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRegistrationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ListRegistrationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRegistrationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRegistrationsResponse;
+                    })();
+    
+                    v1.GetRegistrationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IGetRegistrationRequest
+                         * @property {string|null} [name] GetRegistrationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a GetRegistrationRequest.
+                         * @implements IGetRegistrationRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IGetRegistrationRequest=} [properties] Properties to set
+                         */
+                        function GetRegistrationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRegistrationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @instance
+                         */
+                        GetRegistrationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRegistrationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IGetRegistrationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.GetRegistrationRequest} GetRegistrationRequest instance
+                         */
+                        GetRegistrationRequest.create = function create(properties) {
+                            return new GetRegistrationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.GetRegistrationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IGetRegistrationRequest} message GetRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRegistrationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.GetRegistrationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IGetRegistrationRequest} message GetRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRegistrationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRegistrationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.GetRegistrationRequest} GetRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRegistrationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.GetRegistrationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRegistrationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.GetRegistrationRequest} GetRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRegistrationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRegistrationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRegistrationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.GetRegistrationRequest} GetRegistrationRequest
+                         */
+                        GetRegistrationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.GetRegistrationRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.GetRegistrationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRegistrationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.GetRegistrationRequest} message GetRegistrationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRegistrationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRegistrationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.GetRegistrationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRegistrationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetRegistrationRequest;
+                    })();
+    
+                    v1.UpdateRegistrationRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IUpdateRegistrationRequest
+                         * @property {google.cloud.domains.v1.IRegistration|null} [registration] UpdateRegistrationRequest registration
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateRegistrationRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents an UpdateRegistrationRequest.
+                         * @implements IUpdateRegistrationRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IUpdateRegistrationRequest=} [properties] Properties to set
+                         */
+                        function UpdateRegistrationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateRegistrationRequest registration.
+                         * @member {google.cloud.domains.v1.IRegistration|null|undefined} registration
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @instance
+                         */
+                        UpdateRegistrationRequest.prototype.registration = null;
+    
+                        /**
+                         * UpdateRegistrationRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @instance
+                         */
+                        UpdateRegistrationRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateRegistrationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IUpdateRegistrationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.UpdateRegistrationRequest} UpdateRegistrationRequest instance
+                         */
+                        UpdateRegistrationRequest.create = function create(properties) {
+                            return new UpdateRegistrationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.UpdateRegistrationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IUpdateRegistrationRequest} message UpdateRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRegistrationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                $root.google.cloud.domains.v1.Registration.encode(message.registration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.UpdateRegistrationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IUpdateRegistrationRequest} message UpdateRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateRegistrationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateRegistrationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.UpdateRegistrationRequest} UpdateRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRegistrationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.UpdateRegistrationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registration = $root.google.cloud.domains.v1.Registration.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateRegistrationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.UpdateRegistrationRequest} UpdateRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateRegistrationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateRegistrationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateRegistrationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registration != null && message.hasOwnProperty("registration")) {
+                                var error = $root.google.cloud.domains.v1.Registration.verify(message.registration);
+                                if (error)
+                                    return "registration." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.UpdateRegistrationRequest} UpdateRegistrationRequest
+                         */
+                        UpdateRegistrationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.UpdateRegistrationRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.UpdateRegistrationRequest();
+                            if (object.registration != null) {
+                                if (typeof object.registration !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.UpdateRegistrationRequest.registration: object expected");
+                                message.registration = $root.google.cloud.domains.v1.Registration.fromObject(object.registration);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.UpdateRegistrationRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateRegistrationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.UpdateRegistrationRequest} message UpdateRegistrationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateRegistrationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.registration = null;
+                                object.updateMask = null;
+                            }
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = $root.google.cloud.domains.v1.Registration.toObject(message.registration, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateRegistrationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.UpdateRegistrationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateRegistrationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateRegistrationRequest;
+                    })();
+    
+                    v1.ConfigureManagementSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a ConfigureManagementSettingsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IConfigureManagementSettingsRequest
+                         * @property {string|null} [registration] ConfigureManagementSettingsRequest registration
+                         * @property {google.cloud.domains.v1.IManagementSettings|null} [managementSettings] ConfigureManagementSettingsRequest managementSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] ConfigureManagementSettingsRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new ConfigureManagementSettingsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ConfigureManagementSettingsRequest.
+                         * @implements IConfigureManagementSettingsRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IConfigureManagementSettingsRequest=} [properties] Properties to set
+                         */
+                        function ConfigureManagementSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfigureManagementSettingsRequest registration.
+                         * @member {string} registration
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @instance
+                         */
+                        ConfigureManagementSettingsRequest.prototype.registration = "";
+    
+                        /**
+                         * ConfigureManagementSettingsRequest managementSettings.
+                         * @member {google.cloud.domains.v1.IManagementSettings|null|undefined} managementSettings
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @instance
+                         */
+                        ConfigureManagementSettingsRequest.prototype.managementSettings = null;
+    
+                        /**
+                         * ConfigureManagementSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @instance
+                         */
+                        ConfigureManagementSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new ConfigureManagementSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureManagementSettingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ConfigureManagementSettingsRequest} ConfigureManagementSettingsRequest instance
+                         */
+                        ConfigureManagementSettingsRequest.create = function create(properties) {
+                            return new ConfigureManagementSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureManagementSettingsRequest message. Does not implicitly {@link google.cloud.domains.v1.ConfigureManagementSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureManagementSettingsRequest} message ConfigureManagementSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureManagementSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.registration);
+                            if (message.managementSettings != null && Object.hasOwnProperty.call(message, "managementSettings"))
+                                $root.google.cloud.domains.v1.ManagementSettings.encode(message.managementSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureManagementSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ConfigureManagementSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureManagementSettingsRequest} message ConfigureManagementSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureManagementSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfigureManagementSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ConfigureManagementSettingsRequest} ConfigureManagementSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureManagementSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ConfigureManagementSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registration = reader.string();
+                                    break;
+                                case 2:
+                                    message.managementSettings = $root.google.cloud.domains.v1.ManagementSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfigureManagementSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ConfigureManagementSettingsRequest} ConfigureManagementSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureManagementSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfigureManagementSettingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfigureManagementSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                if (!$util.isString(message.registration))
+                                    return "registration: string expected";
+                            if (message.managementSettings != null && message.hasOwnProperty("managementSettings")) {
+                                var error = $root.google.cloud.domains.v1.ManagementSettings.verify(message.managementSettings);
+                                if (error)
+                                    return "managementSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfigureManagementSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ConfigureManagementSettingsRequest} ConfigureManagementSettingsRequest
+                         */
+                        ConfigureManagementSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ConfigureManagementSettingsRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ConfigureManagementSettingsRequest();
+                            if (object.registration != null)
+                                message.registration = String(object.registration);
+                            if (object.managementSettings != null) {
+                                if (typeof object.managementSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureManagementSettingsRequest.managementSettings: object expected");
+                                message.managementSettings = $root.google.cloud.domains.v1.ManagementSettings.fromObject(object.managementSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureManagementSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfigureManagementSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ConfigureManagementSettingsRequest} message ConfigureManagementSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfigureManagementSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.registration = "";
+                                object.managementSettings = null;
+                                object.updateMask = null;
+                            }
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = message.registration;
+                            if (message.managementSettings != null && message.hasOwnProperty("managementSettings"))
+                                object.managementSettings = $root.google.cloud.domains.v1.ManagementSettings.toObject(message.managementSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfigureManagementSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ConfigureManagementSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfigureManagementSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ConfigureManagementSettingsRequest;
+                    })();
+    
+                    v1.ConfigureDnsSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a ConfigureDnsSettingsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IConfigureDnsSettingsRequest
+                         * @property {string|null} [registration] ConfigureDnsSettingsRequest registration
+                         * @property {google.cloud.domains.v1.IDnsSettings|null} [dnsSettings] ConfigureDnsSettingsRequest dnsSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] ConfigureDnsSettingsRequest updateMask
+                         * @property {boolean|null} [validateOnly] ConfigureDnsSettingsRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new ConfigureDnsSettingsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ConfigureDnsSettingsRequest.
+                         * @implements IConfigureDnsSettingsRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IConfigureDnsSettingsRequest=} [properties] Properties to set
+                         */
+                        function ConfigureDnsSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfigureDnsSettingsRequest registration.
+                         * @member {string} registration
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @instance
+                         */
+                        ConfigureDnsSettingsRequest.prototype.registration = "";
+    
+                        /**
+                         * ConfigureDnsSettingsRequest dnsSettings.
+                         * @member {google.cloud.domains.v1.IDnsSettings|null|undefined} dnsSettings
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @instance
+                         */
+                        ConfigureDnsSettingsRequest.prototype.dnsSettings = null;
+    
+                        /**
+                         * ConfigureDnsSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @instance
+                         */
+                        ConfigureDnsSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * ConfigureDnsSettingsRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @instance
+                         */
+                        ConfigureDnsSettingsRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new ConfigureDnsSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureDnsSettingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ConfigureDnsSettingsRequest} ConfigureDnsSettingsRequest instance
+                         */
+                        ConfigureDnsSettingsRequest.create = function create(properties) {
+                            return new ConfigureDnsSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureDnsSettingsRequest message. Does not implicitly {@link google.cloud.domains.v1.ConfigureDnsSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureDnsSettingsRequest} message ConfigureDnsSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureDnsSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.registration);
+                            if (message.dnsSettings != null && Object.hasOwnProperty.call(message, "dnsSettings"))
+                                $root.google.cloud.domains.v1.DnsSettings.encode(message.dnsSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureDnsSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ConfigureDnsSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureDnsSettingsRequest} message ConfigureDnsSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureDnsSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfigureDnsSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ConfigureDnsSettingsRequest} ConfigureDnsSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureDnsSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ConfigureDnsSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registration = reader.string();
+                                    break;
+                                case 2:
+                                    message.dnsSettings = $root.google.cloud.domains.v1.DnsSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfigureDnsSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ConfigureDnsSettingsRequest} ConfigureDnsSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureDnsSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfigureDnsSettingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfigureDnsSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                if (!$util.isString(message.registration))
+                                    return "registration: string expected";
+                            if (message.dnsSettings != null && message.hasOwnProperty("dnsSettings")) {
+                                var error = $root.google.cloud.domains.v1.DnsSettings.verify(message.dnsSettings);
+                                if (error)
+                                    return "dnsSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfigureDnsSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ConfigureDnsSettingsRequest} ConfigureDnsSettingsRequest
+                         */
+                        ConfigureDnsSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ConfigureDnsSettingsRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ConfigureDnsSettingsRequest();
+                            if (object.registration != null)
+                                message.registration = String(object.registration);
+                            if (object.dnsSettings != null) {
+                                if (typeof object.dnsSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureDnsSettingsRequest.dnsSettings: object expected");
+                                message.dnsSettings = $root.google.cloud.domains.v1.DnsSettings.fromObject(object.dnsSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureDnsSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfigureDnsSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ConfigureDnsSettingsRequest} message ConfigureDnsSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfigureDnsSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.registration = "";
+                                object.dnsSettings = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = message.registration;
+                            if (message.dnsSettings != null && message.hasOwnProperty("dnsSettings"))
+                                object.dnsSettings = $root.google.cloud.domains.v1.DnsSettings.toObject(message.dnsSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfigureDnsSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ConfigureDnsSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfigureDnsSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ConfigureDnsSettingsRequest;
+                    })();
+    
+                    v1.ConfigureContactSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a ConfigureContactSettingsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IConfigureContactSettingsRequest
+                         * @property {string|null} [registration] ConfigureContactSettingsRequest registration
+                         * @property {google.cloud.domains.v1.IContactSettings|null} [contactSettings] ConfigureContactSettingsRequest contactSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] ConfigureContactSettingsRequest updateMask
+                         * @property {Array.<google.cloud.domains.v1.ContactNotice>|null} [contactNotices] ConfigureContactSettingsRequest contactNotices
+                         * @property {boolean|null} [validateOnly] ConfigureContactSettingsRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new ConfigureContactSettingsRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ConfigureContactSettingsRequest.
+                         * @implements IConfigureContactSettingsRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IConfigureContactSettingsRequest=} [properties] Properties to set
+                         */
+                        function ConfigureContactSettingsRequest(properties) {
+                            this.contactNotices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConfigureContactSettingsRequest registration.
+                         * @member {string} registration
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @instance
+                         */
+                        ConfigureContactSettingsRequest.prototype.registration = "";
+    
+                        /**
+                         * ConfigureContactSettingsRequest contactSettings.
+                         * @member {google.cloud.domains.v1.IContactSettings|null|undefined} contactSettings
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @instance
+                         */
+                        ConfigureContactSettingsRequest.prototype.contactSettings = null;
+    
+                        /**
+                         * ConfigureContactSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @instance
+                         */
+                        ConfigureContactSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * ConfigureContactSettingsRequest contactNotices.
+                         * @member {Array.<google.cloud.domains.v1.ContactNotice>} contactNotices
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @instance
+                         */
+                        ConfigureContactSettingsRequest.prototype.contactNotices = $util.emptyArray;
+    
+                        /**
+                         * ConfigureContactSettingsRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @instance
+                         */
+                        ConfigureContactSettingsRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new ConfigureContactSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureContactSettingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ConfigureContactSettingsRequest} ConfigureContactSettingsRequest instance
+                         */
+                        ConfigureContactSettingsRequest.create = function create(properties) {
+                            return new ConfigureContactSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureContactSettingsRequest message. Does not implicitly {@link google.cloud.domains.v1.ConfigureContactSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureContactSettingsRequest} message ConfigureContactSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureContactSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.registration);
+                            if (message.contactSettings != null && Object.hasOwnProperty.call(message, "contactSettings"))
+                                $root.google.cloud.domains.v1.ContactSettings.encode(message.contactSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.contactNotices != null && message.contactNotices.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    writer.int32(message.contactNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConfigureContactSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ConfigureContactSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IConfigureContactSettingsRequest} message ConfigureContactSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConfigureContactSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConfigureContactSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ConfigureContactSettingsRequest} ConfigureContactSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureContactSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ConfigureContactSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registration = reader.string();
+                                    break;
+                                case 2:
+                                    message.contactSettings = $root.google.cloud.domains.v1.ContactSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    if (!(message.contactNotices && message.contactNotices.length))
+                                        message.contactNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.contactNotices.push(reader.int32());
+                                    } else
+                                        message.contactNotices.push(reader.int32());
+                                    break;
+                                case 5:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConfigureContactSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ConfigureContactSettingsRequest} ConfigureContactSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConfigureContactSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConfigureContactSettingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConfigureContactSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                if (!$util.isString(message.registration))
+                                    return "registration: string expected";
+                            if (message.contactSettings != null && message.hasOwnProperty("contactSettings")) {
+                                var error = $root.google.cloud.domains.v1.ContactSettings.verify(message.contactSettings);
+                                if (error)
+                                    return "contactSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.contactNotices != null && message.hasOwnProperty("contactNotices")) {
+                                if (!Array.isArray(message.contactNotices))
+                                    return "contactNotices: array expected";
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    switch (message.contactNotices[i]) {
+                                    default:
+                                        return "contactNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConfigureContactSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ConfigureContactSettingsRequest} ConfigureContactSettingsRequest
+                         */
+                        ConfigureContactSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ConfigureContactSettingsRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ConfigureContactSettingsRequest();
+                            if (object.registration != null)
+                                message.registration = String(object.registration);
+                            if (object.contactSettings != null) {
+                                if (typeof object.contactSettings !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureContactSettingsRequest.contactSettings: object expected");
+                                message.contactSettings = $root.google.cloud.domains.v1.ContactSettings.fromObject(object.contactSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureContactSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.contactNotices) {
+                                if (!Array.isArray(object.contactNotices))
+                                    throw TypeError(".google.cloud.domains.v1.ConfigureContactSettingsRequest.contactNotices: array expected");
+                                message.contactNotices = [];
+                                for (var i = 0; i < object.contactNotices.length; ++i)
+                                    switch (object.contactNotices[i]) {
+                                    default:
+                                    case "CONTACT_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.contactNotices[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT":
+                                    case 1:
+                                        message.contactNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConfigureContactSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ConfigureContactSettingsRequest} message ConfigureContactSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConfigureContactSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.contactNotices = [];
+                            if (options.defaults) {
+                                object.registration = "";
+                                object.contactSettings = null;
+                                object.updateMask = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = message.registration;
+                            if (message.contactSettings != null && message.hasOwnProperty("contactSettings"))
+                                object.contactSettings = $root.google.cloud.domains.v1.ContactSettings.toObject(message.contactSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.contactNotices && message.contactNotices.length) {
+                                object.contactNotices = [];
+                                for (var j = 0; j < message.contactNotices.length; ++j)
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConfigureContactSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ConfigureContactSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConfigureContactSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ConfigureContactSettingsRequest;
+                    })();
+    
+                    v1.ExportRegistrationRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IExportRegistrationRequest
+                         * @property {string|null} [name] ExportRegistrationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ExportRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents an ExportRegistrationRequest.
+                         * @implements IExportRegistrationRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IExportRegistrationRequest=} [properties] Properties to set
+                         */
+                        function ExportRegistrationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportRegistrationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @instance
+                         */
+                        ExportRegistrationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ExportRegistrationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IExportRegistrationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ExportRegistrationRequest} ExportRegistrationRequest instance
+                         */
+                        ExportRegistrationRequest.create = function create(properties) {
+                            return new ExportRegistrationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.ExportRegistrationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IExportRegistrationRequest} message ExportRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportRegistrationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ExportRegistrationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IExportRegistrationRequest} message ExportRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportRegistrationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportRegistrationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ExportRegistrationRequest} ExportRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportRegistrationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ExportRegistrationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportRegistrationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ExportRegistrationRequest} ExportRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportRegistrationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportRegistrationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportRegistrationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ExportRegistrationRequest} ExportRegistrationRequest
+                         */
+                        ExportRegistrationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ExportRegistrationRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ExportRegistrationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportRegistrationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ExportRegistrationRequest} message ExportRegistrationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportRegistrationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportRegistrationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ExportRegistrationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportRegistrationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ExportRegistrationRequest;
+                    })();
+    
+                    v1.DeleteRegistrationRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IDeleteRegistrationRequest
+                         * @property {string|null} [name] DeleteRegistrationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteRegistrationRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a DeleteRegistrationRequest.
+                         * @implements IDeleteRegistrationRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IDeleteRegistrationRequest=} [properties] Properties to set
+                         */
+                        function DeleteRegistrationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteRegistrationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @instance
+                         */
+                        DeleteRegistrationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteRegistrationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IDeleteRegistrationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.DeleteRegistrationRequest} DeleteRegistrationRequest instance
+                         */
+                        DeleteRegistrationRequest.create = function create(properties) {
+                            return new DeleteRegistrationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRegistrationRequest message. Does not implicitly {@link google.cloud.domains.v1.DeleteRegistrationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IDeleteRegistrationRequest} message DeleteRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRegistrationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteRegistrationRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.DeleteRegistrationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IDeleteRegistrationRequest} message DeleteRegistrationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteRegistrationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteRegistrationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.DeleteRegistrationRequest} DeleteRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRegistrationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.DeleteRegistrationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteRegistrationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.DeleteRegistrationRequest} DeleteRegistrationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteRegistrationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteRegistrationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteRegistrationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteRegistrationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.DeleteRegistrationRequest} DeleteRegistrationRequest
+                         */
+                        DeleteRegistrationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.DeleteRegistrationRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.DeleteRegistrationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteRegistrationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.DeleteRegistrationRequest} message DeleteRegistrationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteRegistrationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteRegistrationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.DeleteRegistrationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteRegistrationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteRegistrationRequest;
+                    })();
+    
+                    v1.RetrieveAuthorizationCodeRequest = (function() {
+    
+                        /**
+                         * Properties of a RetrieveAuthorizationCodeRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRetrieveAuthorizationCodeRequest
+                         * @property {string|null} [registration] RetrieveAuthorizationCodeRequest registration
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveAuthorizationCodeRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RetrieveAuthorizationCodeRequest.
+                         * @implements IRetrieveAuthorizationCodeRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest=} [properties] Properties to set
+                         */
+                        function RetrieveAuthorizationCodeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveAuthorizationCodeRequest registration.
+                         * @member {string} registration
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @instance
+                         */
+                        RetrieveAuthorizationCodeRequest.prototype.registration = "";
+    
+                        /**
+                         * Creates a new RetrieveAuthorizationCodeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RetrieveAuthorizationCodeRequest} RetrieveAuthorizationCodeRequest instance
+                         */
+                        RetrieveAuthorizationCodeRequest.create = function create(properties) {
+                            return new RetrieveAuthorizationCodeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveAuthorizationCodeRequest message. Does not implicitly {@link google.cloud.domains.v1.RetrieveAuthorizationCodeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest} message RetrieveAuthorizationCodeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveAuthorizationCodeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.registration);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveAuthorizationCodeRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RetrieveAuthorizationCodeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest} message RetrieveAuthorizationCodeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveAuthorizationCodeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveAuthorizationCodeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RetrieveAuthorizationCodeRequest} RetrieveAuthorizationCodeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveAuthorizationCodeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registration = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveAuthorizationCodeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RetrieveAuthorizationCodeRequest} RetrieveAuthorizationCodeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveAuthorizationCodeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveAuthorizationCodeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveAuthorizationCodeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                if (!$util.isString(message.registration))
+                                    return "registration: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveAuthorizationCodeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RetrieveAuthorizationCodeRequest} RetrieveAuthorizationCodeRequest
+                         */
+                        RetrieveAuthorizationCodeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest();
+                            if (object.registration != null)
+                                message.registration = String(object.registration);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveAuthorizationCodeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.RetrieveAuthorizationCodeRequest} message RetrieveAuthorizationCodeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveAuthorizationCodeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.registration = "";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = message.registration;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveAuthorizationCodeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RetrieveAuthorizationCodeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveAuthorizationCodeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveAuthorizationCodeRequest;
+                    })();
+    
+                    v1.ResetAuthorizationCodeRequest = (function() {
+    
+                        /**
+                         * Properties of a ResetAuthorizationCodeRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IResetAuthorizationCodeRequest
+                         * @property {string|null} [registration] ResetAuthorizationCodeRequest registration
+                         */
+    
+                        /**
+                         * Constructs a new ResetAuthorizationCodeRequest.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a ResetAuthorizationCodeRequest.
+                         * @implements IResetAuthorizationCodeRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IResetAuthorizationCodeRequest=} [properties] Properties to set
+                         */
+                        function ResetAuthorizationCodeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResetAuthorizationCodeRequest registration.
+                         * @member {string} registration
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @instance
+                         */
+                        ResetAuthorizationCodeRequest.prototype.registration = "";
+    
+                        /**
+                         * Creates a new ResetAuthorizationCodeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IResetAuthorizationCodeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.ResetAuthorizationCodeRequest} ResetAuthorizationCodeRequest instance
+                         */
+                        ResetAuthorizationCodeRequest.create = function create(properties) {
+                            return new ResetAuthorizationCodeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResetAuthorizationCodeRequest message. Does not implicitly {@link google.cloud.domains.v1.ResetAuthorizationCodeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IResetAuthorizationCodeRequest} message ResetAuthorizationCodeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResetAuthorizationCodeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.registration);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResetAuthorizationCodeRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1.ResetAuthorizationCodeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.IResetAuthorizationCodeRequest} message ResetAuthorizationCodeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResetAuthorizationCodeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResetAuthorizationCodeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.ResetAuthorizationCodeRequest} ResetAuthorizationCodeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResetAuthorizationCodeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.ResetAuthorizationCodeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.registration = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResetAuthorizationCodeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.ResetAuthorizationCodeRequest} ResetAuthorizationCodeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResetAuthorizationCodeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResetAuthorizationCodeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResetAuthorizationCodeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                if (!$util.isString(message.registration))
+                                    return "registration: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResetAuthorizationCodeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.ResetAuthorizationCodeRequest} ResetAuthorizationCodeRequest
+                         */
+                        ResetAuthorizationCodeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.ResetAuthorizationCodeRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.ResetAuthorizationCodeRequest();
+                            if (object.registration != null)
+                                message.registration = String(object.registration);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResetAuthorizationCodeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @static
+                         * @param {google.cloud.domains.v1.ResetAuthorizationCodeRequest} message ResetAuthorizationCodeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResetAuthorizationCodeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.registration = "";
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = message.registration;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResetAuthorizationCodeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.ResetAuthorizationCodeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResetAuthorizationCodeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ResetAuthorizationCodeRequest;
+                    })();
+    
+                    v1.RegisterParameters = (function() {
+    
+                        /**
+                         * Properties of a RegisterParameters.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IRegisterParameters
+                         * @property {string|null} [domainName] RegisterParameters domainName
+                         * @property {google.cloud.domains.v1.RegisterParameters.Availability|null} [availability] RegisterParameters availability
+                         * @property {Array.<google.cloud.domains.v1.ContactPrivacy>|null} [supportedPrivacy] RegisterParameters supportedPrivacy
+                         * @property {Array.<google.cloud.domains.v1.DomainNotice>|null} [domainNotices] RegisterParameters domainNotices
+                         * @property {google.type.IMoney|null} [yearlyPrice] RegisterParameters yearlyPrice
+                         */
+    
+                        /**
+                         * Constructs a new RegisterParameters.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a RegisterParameters.
+                         * @implements IRegisterParameters
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IRegisterParameters=} [properties] Properties to set
+                         */
+                        function RegisterParameters(properties) {
+                            this.supportedPrivacy = [];
+                            this.domainNotices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegisterParameters domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @instance
+                         */
+                        RegisterParameters.prototype.domainName = "";
+    
+                        /**
+                         * RegisterParameters availability.
+                         * @member {google.cloud.domains.v1.RegisterParameters.Availability} availability
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @instance
+                         */
+                        RegisterParameters.prototype.availability = 0;
+    
+                        /**
+                         * RegisterParameters supportedPrivacy.
+                         * @member {Array.<google.cloud.domains.v1.ContactPrivacy>} supportedPrivacy
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @instance
+                         */
+                        RegisterParameters.prototype.supportedPrivacy = $util.emptyArray;
+    
+                        /**
+                         * RegisterParameters domainNotices.
+                         * @member {Array.<google.cloud.domains.v1.DomainNotice>} domainNotices
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @instance
+                         */
+                        RegisterParameters.prototype.domainNotices = $util.emptyArray;
+    
+                        /**
+                         * RegisterParameters yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @instance
+                         */
+                        RegisterParameters.prototype.yearlyPrice = null;
+    
+                        /**
+                         * Creates a new RegisterParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegisterParameters=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.RegisterParameters} RegisterParameters instance
+                         */
+                        RegisterParameters.create = function create(properties) {
+                            return new RegisterParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterParameters message. Does not implicitly {@link google.cloud.domains.v1.RegisterParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegisterParameters} message RegisterParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.availability != null && Object.hasOwnProperty.call(message, "availability"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.availability);
+                            if (message.supportedPrivacy != null && message.supportedPrivacy.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    writer.int32(message.supportedPrivacy[i]);
+                                writer.ldelim();
+                            }
+                            if (message.domainNotices != null && message.domainNotices.length) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                for (var i = 0; i < message.domainNotices.length; ++i)
+                                    writer.int32(message.domainNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegisterParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1.RegisterParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.IRegisterParameters} message RegisterParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegisterParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegisterParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.RegisterParameters} RegisterParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.RegisterParameters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.availability = reader.int32();
+                                    break;
+                                case 3:
+                                    if (!(message.supportedPrivacy && message.supportedPrivacy.length))
+                                        message.supportedPrivacy = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.supportedPrivacy.push(reader.int32());
+                                    } else
+                                        message.supportedPrivacy.push(reader.int32());
+                                    break;
+                                case 4:
+                                    if (!(message.domainNotices && message.domainNotices.length))
+                                        message.domainNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.domainNotices.push(reader.int32());
+                                    } else
+                                        message.domainNotices.push(reader.int32());
+                                    break;
+                                case 5:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegisterParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.RegisterParameters} RegisterParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegisterParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegisterParameters message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegisterParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.availability != null && message.hasOwnProperty("availability"))
+                                switch (message.availability) {
+                                default:
+                                    return "availability: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.supportedPrivacy != null && message.hasOwnProperty("supportedPrivacy")) {
+                                if (!Array.isArray(message.supportedPrivacy))
+                                    return "supportedPrivacy: array expected";
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    switch (message.supportedPrivacy[i]) {
+                                    default:
+                                        return "supportedPrivacy: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.domainNotices != null && message.hasOwnProperty("domainNotices")) {
+                                if (!Array.isArray(message.domainNotices))
+                                    return "domainNotices: array expected";
+                                for (var i = 0; i < message.domainNotices.length; ++i)
+                                    switch (message.domainNotices[i]) {
+                                    default:
+                                        return "domainNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegisterParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.RegisterParameters} RegisterParameters
+                         */
+                        RegisterParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.RegisterParameters)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.RegisterParameters();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            switch (object.availability) {
+                            case "AVAILABILITY_UNSPECIFIED":
+                            case 0:
+                                message.availability = 0;
+                                break;
+                            case "AVAILABLE":
+                            case 1:
+                                message.availability = 1;
+                                break;
+                            case "UNAVAILABLE":
+                            case 2:
+                                message.availability = 2;
+                                break;
+                            case "UNSUPPORTED":
+                            case 3:
+                                message.availability = 3;
+                                break;
+                            case "UNKNOWN":
+                            case 4:
+                                message.availability = 4;
+                                break;
+                            }
+                            if (object.supportedPrivacy) {
+                                if (!Array.isArray(object.supportedPrivacy))
+                                    throw TypeError(".google.cloud.domains.v1.RegisterParameters.supportedPrivacy: array expected");
+                                message.supportedPrivacy = [];
+                                for (var i = 0; i < object.supportedPrivacy.length; ++i)
+                                    switch (object.supportedPrivacy[i]) {
+                                    default:
+                                    case "CONTACT_PRIVACY_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedPrivacy[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA":
+                                    case 1:
+                                        message.supportedPrivacy[i] = 1;
+                                        break;
+                                    case "PRIVATE_CONTACT_DATA":
+                                    case 2:
+                                        message.supportedPrivacy[i] = 2;
+                                        break;
+                                    case "REDACTED_CONTACT_DATA":
+                                    case 3:
+                                        message.supportedPrivacy[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.domainNotices) {
+                                if (!Array.isArray(object.domainNotices))
+                                    throw TypeError(".google.cloud.domains.v1.RegisterParameters.domainNotices: array expected");
+                                message.domainNotices = [];
+                                for (var i = 0; i < object.domainNotices.length; ++i)
+                                    switch (object.domainNotices[i]) {
+                                    default:
+                                    case "DOMAIN_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.domainNotices[i] = 0;
+                                        break;
+                                    case "HSTS_PRELOADED":
+                                    case 1:
+                                        message.domainNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.RegisterParameters.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegisterParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.RegisterParameters} message RegisterParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegisterParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.supportedPrivacy = [];
+                                object.domainNotices = [];
+                            }
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.availability = options.enums === String ? "AVAILABILITY_UNSPECIFIED" : 0;
+                                object.yearlyPrice = null;
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.availability != null && message.hasOwnProperty("availability"))
+                                object.availability = options.enums === String ? $root.google.cloud.domains.v1.RegisterParameters.Availability[message.availability] : message.availability;
+                            if (message.supportedPrivacy && message.supportedPrivacy.length) {
+                                object.supportedPrivacy = [];
+                                for (var j = 0; j < message.supportedPrivacy.length; ++j)
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                            }
+                            if (message.domainNotices && message.domainNotices.length) {
+                                object.domainNotices = [];
+                                for (var j = 0; j < message.domainNotices.length; ++j)
+                                    object.domainNotices[j] = options.enums === String ? $root.google.cloud.domains.v1.DomainNotice[message.domainNotices[j]] : message.domainNotices[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegisterParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.RegisterParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegisterParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Availability enum.
+                         * @name google.cloud.domains.v1.RegisterParameters.Availability
+                         * @enum {number}
+                         * @property {number} AVAILABILITY_UNSPECIFIED=0 AVAILABILITY_UNSPECIFIED value
+                         * @property {number} AVAILABLE=1 AVAILABLE value
+                         * @property {number} UNAVAILABLE=2 UNAVAILABLE value
+                         * @property {number} UNSUPPORTED=3 UNSUPPORTED value
+                         * @property {number} UNKNOWN=4 UNKNOWN value
+                         */
+                        RegisterParameters.Availability = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "AVAILABILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AVAILABLE"] = 1;
+                            values[valuesById[2] = "UNAVAILABLE"] = 2;
+                            values[valuesById[3] = "UNSUPPORTED"] = 3;
+                            values[valuesById[4] = "UNKNOWN"] = 4;
+                            return values;
+                        })();
+    
+                        return RegisterParameters;
+                    })();
+    
+                    v1.TransferParameters = (function() {
+    
+                        /**
+                         * Properties of a TransferParameters.
+                         * @memberof google.cloud.domains.v1
+                         * @interface ITransferParameters
+                         * @property {string|null} [domainName] TransferParameters domainName
+                         * @property {string|null} [currentRegistrar] TransferParameters currentRegistrar
+                         * @property {Array.<string>|null} [nameServers] TransferParameters nameServers
+                         * @property {google.cloud.domains.v1.TransferLockState|null} [transferLockState] TransferParameters transferLockState
+                         * @property {Array.<google.cloud.domains.v1.ContactPrivacy>|null} [supportedPrivacy] TransferParameters supportedPrivacy
+                         * @property {google.type.IMoney|null} [yearlyPrice] TransferParameters yearlyPrice
+                         */
+    
+                        /**
+                         * Constructs a new TransferParameters.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents a TransferParameters.
+                         * @implements ITransferParameters
+                         * @constructor
+                         * @param {google.cloud.domains.v1.ITransferParameters=} [properties] Properties to set
+                         */
+                        function TransferParameters(properties) {
+                            this.nameServers = [];
+                            this.supportedPrivacy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferParameters domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.domainName = "";
+    
+                        /**
+                         * TransferParameters currentRegistrar.
+                         * @member {string} currentRegistrar
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.currentRegistrar = "";
+    
+                        /**
+                         * TransferParameters nameServers.
+                         * @member {Array.<string>} nameServers
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.nameServers = $util.emptyArray;
+    
+                        /**
+                         * TransferParameters transferLockState.
+                         * @member {google.cloud.domains.v1.TransferLockState} transferLockState
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.transferLockState = 0;
+    
+                        /**
+                         * TransferParameters supportedPrivacy.
+                         * @member {Array.<google.cloud.domains.v1.ContactPrivacy>} supportedPrivacy
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.supportedPrivacy = $util.emptyArray;
+    
+                        /**
+                         * TransferParameters yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.yearlyPrice = null;
+    
+                        /**
+                         * Creates a new TransferParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.ITransferParameters=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.TransferParameters} TransferParameters instance
+                         */
+                        TransferParameters.create = function create(properties) {
+                            return new TransferParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferParameters message. Does not implicitly {@link google.cloud.domains.v1.TransferParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.ITransferParameters} message TransferParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.currentRegistrar != null && Object.hasOwnProperty.call(message, "currentRegistrar"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.currentRegistrar);
+                            if (message.nameServers != null && message.nameServers.length)
+                                for (var i = 0; i < message.nameServers.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameServers[i]);
+                            if (message.transferLockState != null && Object.hasOwnProperty.call(message, "transferLockState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.transferLockState);
+                            if (message.supportedPrivacy != null && message.supportedPrivacy.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    writer.int32(message.supportedPrivacy[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1.TransferParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.ITransferParameters} message TransferParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.TransferParameters} TransferParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.TransferParameters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.currentRegistrar = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.nameServers && message.nameServers.length))
+                                        message.nameServers = [];
+                                    message.nameServers.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.transferLockState = reader.int32();
+                                    break;
+                                case 5:
+                                    if (!(message.supportedPrivacy && message.supportedPrivacy.length))
+                                        message.supportedPrivacy = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.supportedPrivacy.push(reader.int32());
+                                    } else
+                                        message.supportedPrivacy.push(reader.int32());
+                                    break;
+                                case 6:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.TransferParameters} TransferParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferParameters message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.currentRegistrar != null && message.hasOwnProperty("currentRegistrar"))
+                                if (!$util.isString(message.currentRegistrar))
+                                    return "currentRegistrar: string expected";
+                            if (message.nameServers != null && message.hasOwnProperty("nameServers")) {
+                                if (!Array.isArray(message.nameServers))
+                                    return "nameServers: array expected";
+                                for (var i = 0; i < message.nameServers.length; ++i)
+                                    if (!$util.isString(message.nameServers[i]))
+                                        return "nameServers: string[] expected";
+                            }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                switch (message.transferLockState) {
+                                default:
+                                    return "transferLockState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.supportedPrivacy != null && message.hasOwnProperty("supportedPrivacy")) {
+                                if (!Array.isArray(message.supportedPrivacy))
+                                    return "supportedPrivacy: array expected";
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    switch (message.supportedPrivacy[i]) {
+                                    default:
+                                        return "supportedPrivacy: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.TransferParameters} TransferParameters
+                         */
+                        TransferParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.TransferParameters)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.TransferParameters();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.currentRegistrar != null)
+                                message.currentRegistrar = String(object.currentRegistrar);
+                            if (object.nameServers) {
+                                if (!Array.isArray(object.nameServers))
+                                    throw TypeError(".google.cloud.domains.v1.TransferParameters.nameServers: array expected");
+                                message.nameServers = [];
+                                for (var i = 0; i < object.nameServers.length; ++i)
+                                    message.nameServers[i] = String(object.nameServers[i]);
+                            }
+                            switch (object.transferLockState) {
+                            case "TRANSFER_LOCK_STATE_UNSPECIFIED":
+                            case 0:
+                                message.transferLockState = 0;
+                                break;
+                            case "UNLOCKED":
+                            case 1:
+                                message.transferLockState = 1;
+                                break;
+                            case "LOCKED":
+                            case 2:
+                                message.transferLockState = 2;
+                                break;
+                            }
+                            if (object.supportedPrivacy) {
+                                if (!Array.isArray(object.supportedPrivacy))
+                                    throw TypeError(".google.cloud.domains.v1.TransferParameters.supportedPrivacy: array expected");
+                                message.supportedPrivacy = [];
+                                for (var i = 0; i < object.supportedPrivacy.length; ++i)
+                                    switch (object.supportedPrivacy[i]) {
+                                    default:
+                                    case "CONTACT_PRIVACY_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedPrivacy[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA":
+                                    case 1:
+                                        message.supportedPrivacy[i] = 1;
+                                        break;
+                                    case "PRIVATE_CONTACT_DATA":
+                                    case 2:
+                                        message.supportedPrivacy[i] = 2;
+                                        break;
+                                    case "REDACTED_CONTACT_DATA":
+                                    case 3:
+                                        message.supportedPrivacy[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.TransferParameters.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1.TransferParameters} message TransferParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.nameServers = [];
+                                object.supportedPrivacy = [];
+                            }
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.currentRegistrar = "";
+                                object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
+                                object.yearlyPrice = null;
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.currentRegistrar != null && message.hasOwnProperty("currentRegistrar"))
+                                object.currentRegistrar = message.currentRegistrar;
+                            if (message.nameServers && message.nameServers.length) {
+                                object.nameServers = [];
+                                for (var j = 0; j < message.nameServers.length; ++j)
+                                    object.nameServers[j] = message.nameServers[j];
+                            }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1.TransferLockState[message.transferLockState] : message.transferLockState;
+                            if (message.supportedPrivacy && message.supportedPrivacy.length) {
+                                object.supportedPrivacy = [];
+                                for (var j = 0; j < message.supportedPrivacy.length; ++j)
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.TransferParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TransferParameters;
+                    })();
+    
+                    v1.AuthorizationCode = (function() {
+    
+                        /**
+                         * Properties of an AuthorizationCode.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IAuthorizationCode
+                         * @property {string|null} [code] AuthorizationCode code
+                         */
+    
+                        /**
+                         * Constructs a new AuthorizationCode.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents an AuthorizationCode.
+                         * @implements IAuthorizationCode
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IAuthorizationCode=} [properties] Properties to set
+                         */
+                        function AuthorizationCode(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AuthorizationCode code.
+                         * @member {string} code
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @instance
+                         */
+                        AuthorizationCode.prototype.code = "";
+    
+                        /**
+                         * Creates a new AuthorizationCode instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {google.cloud.domains.v1.IAuthorizationCode=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.AuthorizationCode} AuthorizationCode instance
+                         */
+                        AuthorizationCode.create = function create(properties) {
+                            return new AuthorizationCode(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AuthorizationCode message. Does not implicitly {@link google.cloud.domains.v1.AuthorizationCode.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {google.cloud.domains.v1.IAuthorizationCode} message AuthorizationCode message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthorizationCode.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AuthorizationCode message, length delimited. Does not implicitly {@link google.cloud.domains.v1.AuthorizationCode.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {google.cloud.domains.v1.IAuthorizationCode} message AuthorizationCode message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AuthorizationCode.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AuthorizationCode message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.AuthorizationCode} AuthorizationCode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthorizationCode.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.AuthorizationCode();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.code = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AuthorizationCode message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.AuthorizationCode} AuthorizationCode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AuthorizationCode.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AuthorizationCode message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AuthorizationCode.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                if (!$util.isString(message.code))
+                                    return "code: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AuthorizationCode message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.AuthorizationCode} AuthorizationCode
+                         */
+                        AuthorizationCode.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.AuthorizationCode)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.AuthorizationCode();
+                            if (object.code != null)
+                                message.code = String(object.code);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AuthorizationCode message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @static
+                         * @param {google.cloud.domains.v1.AuthorizationCode} message AuthorizationCode
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AuthorizationCode.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.code = "";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                object.code = message.code;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AuthorizationCode to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.AuthorizationCode
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AuthorizationCode.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AuthorizationCode;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.domains.v1
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusDetail] OperationMetadata statusDetail
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.domains.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.domains.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusDetail.
+                         * @member {string} statusDetail
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusDetail = "";
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.domains.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.domains.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.domains.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusDetail != null && Object.hasOwnProperty.call(message, "statusDetail"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusDetail);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.domains.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.domains.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.target = reader.string();
+                                    break;
+                                case 4:
+                                    message.verb = reader.string();
+                                    break;
+                                case 5:
+                                    message.statusDetail = reader.string();
+                                    break;
+                                case 6:
+                                    message.apiVersion = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                if (!$util.isString(message.statusDetail))
+                                    return "statusDetail: string expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.domains.v1.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusDetail != null)
+                                message.statusDetail = String(object.statusDetail);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.domains.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusDetail = "";
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                object.statusDetail = message.statusDetail;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    /**
+                     * ContactPrivacy enum.
+                     * @name google.cloud.domains.v1.ContactPrivacy
+                     * @enum {number}
+                     * @property {number} CONTACT_PRIVACY_UNSPECIFIED=0 CONTACT_PRIVACY_UNSPECIFIED value
+                     * @property {number} PUBLIC_CONTACT_DATA=1 PUBLIC_CONTACT_DATA value
+                     * @property {number} PRIVATE_CONTACT_DATA=2 PRIVATE_CONTACT_DATA value
+                     * @property {number} REDACTED_CONTACT_DATA=3 REDACTED_CONTACT_DATA value
+                     */
+                    v1.ContactPrivacy = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONTACT_PRIVACY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PUBLIC_CONTACT_DATA"] = 1;
+                        values[valuesById[2] = "PRIVATE_CONTACT_DATA"] = 2;
+                        values[valuesById[3] = "REDACTED_CONTACT_DATA"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * DomainNotice enum.
+                     * @name google.cloud.domains.v1.DomainNotice
+                     * @enum {number}
+                     * @property {number} DOMAIN_NOTICE_UNSPECIFIED=0 DOMAIN_NOTICE_UNSPECIFIED value
+                     * @property {number} HSTS_PRELOADED=1 HSTS_PRELOADED value
+                     */
+                    v1.DomainNotice = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DOMAIN_NOTICE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HSTS_PRELOADED"] = 1;
+                        return values;
+                    })();
+    
+                    /**
+                     * ContactNotice enum.
+                     * @name google.cloud.domains.v1.ContactNotice
+                     * @enum {number}
+                     * @property {number} CONTACT_NOTICE_UNSPECIFIED=0 CONTACT_NOTICE_UNSPECIFIED value
+                     * @property {number} PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT=1 PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT value
+                     */
+                    v1.ContactNotice = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CONTACT_NOTICE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"] = 1;
+                        return values;
+                    })();
+    
+                    /**
+                     * TransferLockState enum.
+                     * @name google.cloud.domains.v1.TransferLockState
+                     * @enum {number}
+                     * @property {number} TRANSFER_LOCK_STATE_UNSPECIFIED=0 TRANSFER_LOCK_STATE_UNSPECIFIED value
+                     * @property {number} UNLOCKED=1 UNLOCKED value
+                     * @property {number} LOCKED=2 LOCKED value
+                     */
+                    v1.TransferLockState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TRANSFER_LOCK_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "UNLOCKED"] = 1;
+                        values[valuesById[2] = "LOCKED"] = 2;
+                        return values;
+                    })();
+    
+                    return v1;
+                })();
+    
                 domains.v1alpha2 = (function() {
     
                     /**
@@ -193,6 +9569,72 @@
                          * @memberof google.cloud.domains.v1alpha2.Domains
                          * @instance
                          * @param {google.cloud.domains.v1alpha2.IRegisterDomainRequest} request RegisterDomainRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#retrieveTransferParameters}.
+                         * @memberof google.cloud.domains.v1alpha2.Domains
+                         * @typedef RetrieveTransferParametersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse} [response] RetrieveTransferParametersResponse
+                         */
+    
+                        /**
+                         * Calls RetrieveTransferParameters.
+                         * @function retrieveTransferParameters
+                         * @memberof google.cloud.domains.v1alpha2.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest} request RetrieveTransferParametersRequest message or plain object
+                         * @param {google.cloud.domains.v1alpha2.Domains.RetrieveTransferParametersCallback} callback Node-style callback called with the error, if any, and RetrieveTransferParametersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.retrieveTransferParameters = function retrieveTransferParameters(request, callback) {
+                            return this.rpcCall(retrieveTransferParameters, $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest, $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse, request, callback);
+                        }, "name", { value: "RetrieveTransferParameters" });
+    
+                        /**
+                         * Calls RetrieveTransferParameters.
+                         * @function retrieveTransferParameters
+                         * @memberof google.cloud.domains.v1alpha2.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest} request RetrieveTransferParametersRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1alpha2.Domains#transferDomain}.
+                         * @memberof google.cloud.domains.v1alpha2.Domains
+                         * @typedef TransferDomainCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls TransferDomain.
+                         * @function transferDomain
+                         * @memberof google.cloud.domains.v1alpha2.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1alpha2.ITransferDomainRequest} request TransferDomainRequest message or plain object
+                         * @param {google.cloud.domains.v1alpha2.Domains.TransferDomainCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.transferDomain = function transferDomain(request, callback) {
+                            return this.rpcCall(transferDomain, $root.google.cloud.domains.v1alpha2.TransferDomainRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "TransferDomain" });
+    
+                        /**
+                         * Calls TransferDomain.
+                         * @function transferDomain
+                         * @memberof google.cloud.domains.v1alpha2.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1alpha2.ITransferDomainRequest} request TransferDomainRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -882,6 +10324,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                 case 6:
                                 case 7:
                                 case 8:
@@ -983,6 +10427,14 @@
                             case "REGISTRATION_FAILED":
                             case 2:
                                 message.state = 2;
+                                break;
+                            case "TRANSFER_PENDING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "TRANSFER_FAILED":
+                            case 4:
+                                message.state = 4;
                                 break;
                             case "ACTIVE":
                             case 6:
@@ -1158,6 +10610,8 @@
                          * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
                          * @property {number} REGISTRATION_PENDING=1 REGISTRATION_PENDING value
                          * @property {number} REGISTRATION_FAILED=2 REGISTRATION_FAILED value
+                         * @property {number} TRANSFER_PENDING=3 TRANSFER_PENDING value
+                         * @property {number} TRANSFER_FAILED=4 TRANSFER_FAILED value
                          * @property {number} ACTIVE=6 ACTIVE value
                          * @property {number} SUSPENDED=7 SUSPENDED value
                          * @property {number} EXPORTED=8 EXPORTED value
@@ -1167,6 +10621,8 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "REGISTRATION_PENDING"] = 1;
                             values[valuesById[2] = "REGISTRATION_FAILED"] = 2;
+                            values[valuesById[3] = "TRANSFER_PENDING"] = 3;
+                            values[valuesById[4] = "TRANSFER_FAILED"] = 4;
                             values[valuesById[6] = "ACTIVE"] = 6;
                             values[valuesById[7] = "SUSPENDED"] = 7;
                             values[valuesById[8] = "EXPORTED"] = 8;
@@ -2455,6 +11911,8 @@
                                     default:
                                         return "algorithm: enum value expected";
                                     case 0:
+                                    case 1:
+                                    case 2:
                                     case 3:
                                     case 4:
                                     case 5:
@@ -2467,6 +11925,9 @@
                                     case 14:
                                     case 15:
                                     case 16:
+                                    case 252:
+                                    case 253:
+                                    case 254:
                                         break;
                                     }
                                 if (message.digestType != null && message.hasOwnProperty("digestType"))
@@ -2504,6 +11965,14 @@
                                 case "ALGORITHM_UNSPECIFIED":
                                 case 0:
                                     message.algorithm = 0;
+                                    break;
+                                case "RSAMD5":
+                                case 1:
+                                    message.algorithm = 1;
+                                    break;
+                                case "DH":
+                                case 2:
+                                    message.algorithm = 2;
                                     break;
                                 case "DSA":
                                 case 3:
@@ -2552,6 +12021,18 @@
                                 case "ED448":
                                 case 16:
                                     message.algorithm = 16;
+                                    break;
+                                case "INDIRECT":
+                                case 252:
+                                    message.algorithm = 252;
+                                    break;
+                                case "PRIVATEDNS":
+                                case 253:
+                                    message.algorithm = 253;
+                                    break;
+                                case "PRIVATEOID":
+                                case 254:
+                                    message.algorithm = 254;
                                     break;
                                 }
                                 switch (object.digestType) {
@@ -2627,6 +12108,8 @@
                              * @name google.cloud.domains.v1alpha2.DnsSettings.DsRecord.Algorithm
                              * @enum {number}
                              * @property {number} ALGORITHM_UNSPECIFIED=0 ALGORITHM_UNSPECIFIED value
+                             * @property {number} RSAMD5=1 RSAMD5 value
+                             * @property {number} DH=2 DH value
                              * @property {number} DSA=3 DSA value
                              * @property {number} ECC=4 ECC value
                              * @property {number} RSASHA1=5 RSASHA1 value
@@ -2639,10 +12122,15 @@
                              * @property {number} ECDSAP384SHA384=14 ECDSAP384SHA384 value
                              * @property {number} ED25519=15 ED25519 value
                              * @property {number} ED448=16 ED448 value
+                             * @property {number} INDIRECT=252 INDIRECT value
+                             * @property {number} PRIVATEDNS=253 PRIVATEDNS value
+                             * @property {number} PRIVATEOID=254 PRIVATEOID value
                              */
                             DsRecord.Algorithm = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "ALGORITHM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "RSAMD5"] = 1;
+                                values[valuesById[2] = "DH"] = 2;
                                 values[valuesById[3] = "DSA"] = 3;
                                 values[valuesById[4] = "ECC"] = 4;
                                 values[valuesById[5] = "RSASHA1"] = 5;
@@ -2655,6 +12143,9 @@
                                 values[valuesById[14] = "ECDSAP384SHA384"] = 14;
                                 values[valuesById[15] = "ED25519"] = 15;
                                 values[valuesById[16] = "ED448"] = 16;
+                                values[valuesById[252] = "INDIRECT"] = 252;
+                                values[valuesById[253] = "PRIVATEDNS"] = 253;
+                                values[valuesById[254] = "PRIVATEOID"] = 254;
                                 return values;
                             })();
     
@@ -4722,6 +14213,761 @@
                         };
     
                         return RegisterDomainRequest;
+                    })();
+    
+                    v1alpha2.RetrieveTransferParametersRequest = (function() {
+    
+                        /**
+                         * Properties of a RetrieveTransferParametersRequest.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @interface IRetrieveTransferParametersRequest
+                         * @property {string|null} [domainName] RetrieveTransferParametersRequest domainName
+                         * @property {string|null} [location] RetrieveTransferParametersRequest location
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveTransferParametersRequest.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @classdesc Represents a RetrieveTransferParametersRequest.
+                         * @implements IRetrieveTransferParametersRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest=} [properties] Properties to set
+                         */
+                        function RetrieveTransferParametersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveTransferParametersRequest domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @instance
+                         */
+                        RetrieveTransferParametersRequest.prototype.domainName = "";
+    
+                        /**
+                         * RetrieveTransferParametersRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @instance
+                         */
+                        RetrieveTransferParametersRequest.prototype.location = "";
+    
+                        /**
+                         * Creates a new RetrieveTransferParametersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest instance
+                         */
+                        RetrieveTransferParametersRequest.create = function create(properties) {
+                            return new RetrieveTransferParametersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersRequest message. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest} message RetrieveTransferParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest} message RetrieveTransferParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveTransferParametersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveTransferParametersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveTransferParametersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         */
+                        RetrieveTransferParametersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveTransferParametersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest} message RetrieveTransferParametersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveTransferParametersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.location = "";
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveTransferParametersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveTransferParametersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveTransferParametersRequest;
+                    })();
+    
+                    v1alpha2.RetrieveTransferParametersResponse = (function() {
+    
+                        /**
+                         * Properties of a RetrieveTransferParametersResponse.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @interface IRetrieveTransferParametersResponse
+                         * @property {google.cloud.domains.v1alpha2.ITransferParameters|null} [transferParameters] RetrieveTransferParametersResponse transferParameters
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveTransferParametersResponse.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @classdesc Represents a RetrieveTransferParametersResponse.
+                         * @implements IRetrieveTransferParametersResponse
+                         * @constructor
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse=} [properties] Properties to set
+                         */
+                        function RetrieveTransferParametersResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveTransferParametersResponse transferParameters.
+                         * @member {google.cloud.domains.v1alpha2.ITransferParameters|null|undefined} transferParameters
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @instance
+                         */
+                        RetrieveTransferParametersResponse.prototype.transferParameters = null;
+    
+                        /**
+                         * Creates a new RetrieveTransferParametersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse instance
+                         */
+                        RetrieveTransferParametersResponse.create = function create(properties) {
+                            return new RetrieveTransferParametersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersResponse message. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse} message RetrieveTransferParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.transferParameters != null && Object.hasOwnProperty.call(message, "transferParameters"))
+                                $root.google.cloud.domains.v1alpha2.TransferParameters.encode(message.transferParameters, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse} message RetrieveTransferParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.transferParameters = $root.google.cloud.domains.v1alpha2.TransferParameters.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveTransferParametersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveTransferParametersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.transferParameters != null && message.hasOwnProperty("transferParameters")) {
+                                var error = $root.google.cloud.domains.v1alpha2.TransferParameters.verify(message.transferParameters);
+                                if (error)
+                                    return "transferParameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveTransferParametersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         */
+                        RetrieveTransferParametersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse();
+                            if (object.transferParameters != null) {
+                                if (typeof object.transferParameters !== "object")
+                                    throw TypeError(".google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse.transferParameters: object expected");
+                                message.transferParameters = $root.google.cloud.domains.v1alpha2.TransferParameters.fromObject(object.transferParameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveTransferParametersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse} message RetrieveTransferParametersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveTransferParametersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.transferParameters = null;
+                            if (message.transferParameters != null && message.hasOwnProperty("transferParameters"))
+                                object.transferParameters = $root.google.cloud.domains.v1alpha2.TransferParameters.toObject(message.transferParameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveTransferParametersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveTransferParametersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveTransferParametersResponse;
+                    })();
+    
+                    v1alpha2.TransferDomainRequest = (function() {
+    
+                        /**
+                         * Properties of a TransferDomainRequest.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @interface ITransferDomainRequest
+                         * @property {string|null} [parent] TransferDomainRequest parent
+                         * @property {google.cloud.domains.v1alpha2.IRegistration|null} [registration] TransferDomainRequest registration
+                         * @property {Array.<google.cloud.domains.v1alpha2.ContactNotice>|null} [contactNotices] TransferDomainRequest contactNotices
+                         * @property {google.type.IMoney|null} [yearlyPrice] TransferDomainRequest yearlyPrice
+                         * @property {google.cloud.domains.v1alpha2.IAuthorizationCode|null} [authorizationCode] TransferDomainRequest authorizationCode
+                         * @property {boolean|null} [validateOnly] TransferDomainRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new TransferDomainRequest.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @classdesc Represents a TransferDomainRequest.
+                         * @implements ITransferDomainRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1alpha2.ITransferDomainRequest=} [properties] Properties to set
+                         */
+                        function TransferDomainRequest(properties) {
+                            this.contactNotices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferDomainRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.parent = "";
+    
+                        /**
+                         * TransferDomainRequest registration.
+                         * @member {google.cloud.domains.v1alpha2.IRegistration|null|undefined} registration
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.registration = null;
+    
+                        /**
+                         * TransferDomainRequest contactNotices.
+                         * @member {Array.<google.cloud.domains.v1alpha2.ContactNotice>} contactNotices
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.contactNotices = $util.emptyArray;
+    
+                        /**
+                         * TransferDomainRequest yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.yearlyPrice = null;
+    
+                        /**
+                         * TransferDomainRequest authorizationCode.
+                         * @member {google.cloud.domains.v1alpha2.IAuthorizationCode|null|undefined} authorizationCode
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.authorizationCode = null;
+    
+                        /**
+                         * TransferDomainRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new TransferDomainRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.ITransferDomainRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1alpha2.TransferDomainRequest} TransferDomainRequest instance
+                         */
+                        TransferDomainRequest.create = function create(properties) {
+                            return new TransferDomainRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferDomainRequest message. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferDomainRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.ITransferDomainRequest} message TransferDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferDomainRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                $root.google.cloud.domains.v1alpha2.Registration.encode(message.registration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.contactNotices != null && message.contactNotices.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    writer.int32(message.contactNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.authorizationCode != null && Object.hasOwnProperty.call(message, "authorizationCode"))
+                                $root.google.cloud.domains.v1alpha2.AuthorizationCode.encode(message.authorizationCode, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferDomainRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.ITransferDomainRequest} message TransferDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferDomainRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferDomainRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1alpha2.TransferDomainRequest} TransferDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferDomainRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1alpha2.TransferDomainRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.registration = $root.google.cloud.domains.v1alpha2.Registration.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    if (!(message.contactNotices && message.contactNotices.length))
+                                        message.contactNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.contactNotices.push(reader.int32());
+                                    } else
+                                        message.contactNotices.push(reader.int32());
+                                    break;
+                                case 4:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.authorizationCode = $root.google.cloud.domains.v1alpha2.AuthorizationCode.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferDomainRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1alpha2.TransferDomainRequest} TransferDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferDomainRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferDomainRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferDomainRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.registration != null && message.hasOwnProperty("registration")) {
+                                var error = $root.google.cloud.domains.v1alpha2.Registration.verify(message.registration);
+                                if (error)
+                                    return "registration." + error;
+                            }
+                            if (message.contactNotices != null && message.hasOwnProperty("contactNotices")) {
+                                if (!Array.isArray(message.contactNotices))
+                                    return "contactNotices: array expected";
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    switch (message.contactNotices[i]) {
+                                    default:
+                                        return "contactNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            if (message.authorizationCode != null && message.hasOwnProperty("authorizationCode")) {
+                                var error = $root.google.cloud.domains.v1alpha2.AuthorizationCode.verify(message.authorizationCode);
+                                if (error)
+                                    return "authorizationCode." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferDomainRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1alpha2.TransferDomainRequest} TransferDomainRequest
+                         */
+                        TransferDomainRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1alpha2.TransferDomainRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1alpha2.TransferDomainRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.registration != null) {
+                                if (typeof object.registration !== "object")
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferDomainRequest.registration: object expected");
+                                message.registration = $root.google.cloud.domains.v1alpha2.Registration.fromObject(object.registration);
+                            }
+                            if (object.contactNotices) {
+                                if (!Array.isArray(object.contactNotices))
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferDomainRequest.contactNotices: array expected");
+                                message.contactNotices = [];
+                                for (var i = 0; i < object.contactNotices.length; ++i)
+                                    switch (object.contactNotices[i]) {
+                                    default:
+                                    case "CONTACT_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.contactNotices[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT":
+                                    case 1:
+                                        message.contactNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferDomainRequest.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            if (object.authorizationCode != null) {
+                                if (typeof object.authorizationCode !== "object")
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferDomainRequest.authorizationCode: object expected");
+                                message.authorizationCode = $root.google.cloud.domains.v1alpha2.AuthorizationCode.fromObject(object.authorizationCode);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferDomainRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.TransferDomainRequest} message TransferDomainRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferDomainRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.contactNotices = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.registration = null;
+                                object.yearlyPrice = null;
+                                object.authorizationCode = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = $root.google.cloud.domains.v1alpha2.Registration.toObject(message.registration, options);
+                            if (message.contactNotices && message.contactNotices.length) {
+                                object.contactNotices = [];
+                                for (var j = 0; j < message.contactNotices.length; ++j)
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            if (message.authorizationCode != null && message.hasOwnProperty("authorizationCode"))
+                                object.authorizationCode = $root.google.cloud.domains.v1alpha2.AuthorizationCode.toObject(message.authorizationCode, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferDomainRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1alpha2.TransferDomainRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferDomainRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TransferDomainRequest;
                     })();
     
                     v1alpha2.ListRegistrationsRequest = (function() {
@@ -7615,6 +17861,394 @@
                         return RegisterParameters;
                     })();
     
+                    v1alpha2.TransferParameters = (function() {
+    
+                        /**
+                         * Properties of a TransferParameters.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @interface ITransferParameters
+                         * @property {string|null} [domainName] TransferParameters domainName
+                         * @property {string|null} [currentRegistrar] TransferParameters currentRegistrar
+                         * @property {Array.<string>|null} [nameServers] TransferParameters nameServers
+                         * @property {google.cloud.domains.v1alpha2.TransferLockState|null} [transferLockState] TransferParameters transferLockState
+                         * @property {Array.<google.cloud.domains.v1alpha2.ContactPrivacy>|null} [supportedPrivacy] TransferParameters supportedPrivacy
+                         * @property {google.type.IMoney|null} [yearlyPrice] TransferParameters yearlyPrice
+                         */
+    
+                        /**
+                         * Constructs a new TransferParameters.
+                         * @memberof google.cloud.domains.v1alpha2
+                         * @classdesc Represents a TransferParameters.
+                         * @implements ITransferParameters
+                         * @constructor
+                         * @param {google.cloud.domains.v1alpha2.ITransferParameters=} [properties] Properties to set
+                         */
+                        function TransferParameters(properties) {
+                            this.nameServers = [];
+                            this.supportedPrivacy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferParameters domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.domainName = "";
+    
+                        /**
+                         * TransferParameters currentRegistrar.
+                         * @member {string} currentRegistrar
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.currentRegistrar = "";
+    
+                        /**
+                         * TransferParameters nameServers.
+                         * @member {Array.<string>} nameServers
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.nameServers = $util.emptyArray;
+    
+                        /**
+                         * TransferParameters transferLockState.
+                         * @member {google.cloud.domains.v1alpha2.TransferLockState} transferLockState
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.transferLockState = 0;
+    
+                        /**
+                         * TransferParameters supportedPrivacy.
+                         * @member {Array.<google.cloud.domains.v1alpha2.ContactPrivacy>} supportedPrivacy
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.supportedPrivacy = $util.emptyArray;
+    
+                        /**
+                         * TransferParameters yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.yearlyPrice = null;
+    
+                        /**
+                         * Creates a new TransferParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.ITransferParameters=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1alpha2.TransferParameters} TransferParameters instance
+                         */
+                        TransferParameters.create = function create(properties) {
+                            return new TransferParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferParameters message. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.ITransferParameters} message TransferParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.currentRegistrar != null && Object.hasOwnProperty.call(message, "currentRegistrar"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.currentRegistrar);
+                            if (message.nameServers != null && message.nameServers.length)
+                                for (var i = 0; i < message.nameServers.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameServers[i]);
+                            if (message.transferLockState != null && Object.hasOwnProperty.call(message, "transferLockState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.transferLockState);
+                            if (message.supportedPrivacy != null && message.supportedPrivacy.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    writer.int32(message.supportedPrivacy[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1alpha2.TransferParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.ITransferParameters} message TransferParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1alpha2.TransferParameters} TransferParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1alpha2.TransferParameters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.currentRegistrar = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.nameServers && message.nameServers.length))
+                                        message.nameServers = [];
+                                    message.nameServers.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.transferLockState = reader.int32();
+                                    break;
+                                case 5:
+                                    if (!(message.supportedPrivacy && message.supportedPrivacy.length))
+                                        message.supportedPrivacy = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.supportedPrivacy.push(reader.int32());
+                                    } else
+                                        message.supportedPrivacy.push(reader.int32());
+                                    break;
+                                case 6:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1alpha2.TransferParameters} TransferParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferParameters message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.currentRegistrar != null && message.hasOwnProperty("currentRegistrar"))
+                                if (!$util.isString(message.currentRegistrar))
+                                    return "currentRegistrar: string expected";
+                            if (message.nameServers != null && message.hasOwnProperty("nameServers")) {
+                                if (!Array.isArray(message.nameServers))
+                                    return "nameServers: array expected";
+                                for (var i = 0; i < message.nameServers.length; ++i)
+                                    if (!$util.isString(message.nameServers[i]))
+                                        return "nameServers: string[] expected";
+                            }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                switch (message.transferLockState) {
+                                default:
+                                    return "transferLockState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.supportedPrivacy != null && message.hasOwnProperty("supportedPrivacy")) {
+                                if (!Array.isArray(message.supportedPrivacy))
+                                    return "supportedPrivacy: array expected";
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    switch (message.supportedPrivacy[i]) {
+                                    default:
+                                        return "supportedPrivacy: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1alpha2.TransferParameters} TransferParameters
+                         */
+                        TransferParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1alpha2.TransferParameters)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1alpha2.TransferParameters();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.currentRegistrar != null)
+                                message.currentRegistrar = String(object.currentRegistrar);
+                            if (object.nameServers) {
+                                if (!Array.isArray(object.nameServers))
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferParameters.nameServers: array expected");
+                                message.nameServers = [];
+                                for (var i = 0; i < object.nameServers.length; ++i)
+                                    message.nameServers[i] = String(object.nameServers[i]);
+                            }
+                            switch (object.transferLockState) {
+                            case "TRANSFER_LOCK_STATE_UNSPECIFIED":
+                            case 0:
+                                message.transferLockState = 0;
+                                break;
+                            case "UNLOCKED":
+                            case 1:
+                                message.transferLockState = 1;
+                                break;
+                            case "LOCKED":
+                            case 2:
+                                message.transferLockState = 2;
+                                break;
+                            }
+                            if (object.supportedPrivacy) {
+                                if (!Array.isArray(object.supportedPrivacy))
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferParameters.supportedPrivacy: array expected");
+                                message.supportedPrivacy = [];
+                                for (var i = 0; i < object.supportedPrivacy.length; ++i)
+                                    switch (object.supportedPrivacy[i]) {
+                                    default:
+                                    case "CONTACT_PRIVACY_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedPrivacy[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA":
+                                    case 1:
+                                        message.supportedPrivacy[i] = 1;
+                                        break;
+                                    case "PRIVATE_CONTACT_DATA":
+                                    case 2:
+                                        message.supportedPrivacy[i] = 2;
+                                        break;
+                                    case "REDACTED_CONTACT_DATA":
+                                    case 3:
+                                        message.supportedPrivacy[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1alpha2.TransferParameters.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1alpha2.TransferParameters} message TransferParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.nameServers = [];
+                                object.supportedPrivacy = [];
+                            }
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.currentRegistrar = "";
+                                object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
+                                object.yearlyPrice = null;
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.currentRegistrar != null && message.hasOwnProperty("currentRegistrar"))
+                                object.currentRegistrar = message.currentRegistrar;
+                            if (message.nameServers && message.nameServers.length) {
+                                object.nameServers = [];
+                                for (var j = 0; j < message.nameServers.length; ++j)
+                                    object.nameServers[j] = message.nameServers[j];
+                            }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1alpha2.TransferLockState[message.transferLockState] : message.transferLockState;
+                            if (message.supportedPrivacy && message.supportedPrivacy.length) {
+                                object.supportedPrivacy = [];
+                                for (var j = 0; j < message.supportedPrivacy.length; ++j)
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1alpha2.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1alpha2.TransferParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TransferParameters;
+                    })();
+    
                     v1alpha2.AuthorizationCode = (function() {
     
                         /**
@@ -8316,6 +18950,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.domains.v1beta1.Domains#retrieveTransferParameters}.
+                         * @memberof google.cloud.domains.v1beta1.Domains
+                         * @typedef RetrieveTransferParametersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.domains.v1beta1.RetrieveTransferParametersResponse} [response] RetrieveTransferParametersResponse
+                         */
+    
+                        /**
+                         * Calls RetrieveTransferParameters.
+                         * @function retrieveTransferParameters
+                         * @memberof google.cloud.domains.v1beta1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest} request RetrieveTransferParametersRequest message or plain object
+                         * @param {google.cloud.domains.v1beta1.Domains.RetrieveTransferParametersCallback} callback Node-style callback called with the error, if any, and RetrieveTransferParametersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.retrieveTransferParameters = function retrieveTransferParameters(request, callback) {
+                            return this.rpcCall(retrieveTransferParameters, $root.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest, $root.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse, request, callback);
+                        }, "name", { value: "RetrieveTransferParameters" });
+    
+                        /**
+                         * Calls RetrieveTransferParameters.
+                         * @function retrieveTransferParameters
+                         * @memberof google.cloud.domains.v1beta1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest} request RetrieveTransferParametersRequest message or plain object
+                         * @returns {Promise<google.cloud.domains.v1beta1.RetrieveTransferParametersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.domains.v1beta1.Domains#transferDomain}.
+                         * @memberof google.cloud.domains.v1beta1.Domains
+                         * @typedef TransferDomainCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls TransferDomain.
+                         * @function transferDomain
+                         * @memberof google.cloud.domains.v1beta1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1beta1.ITransferDomainRequest} request TransferDomainRequest message or plain object
+                         * @param {google.cloud.domains.v1beta1.Domains.TransferDomainCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Domains.prototype.transferDomain = function transferDomain(request, callback) {
+                            return this.rpcCall(transferDomain, $root.google.cloud.domains.v1beta1.TransferDomainRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "TransferDomain" });
+    
+                        /**
+                         * Calls TransferDomain.
+                         * @function transferDomain
+                         * @memberof google.cloud.domains.v1beta1.Domains
+                         * @instance
+                         * @param {google.cloud.domains.v1beta1.ITransferDomainRequest} request TransferDomainRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.domains.v1beta1.Domains#listRegistrations}.
                          * @memberof google.cloud.domains.v1beta1.Domains
                          * @typedef ListRegistrationsCallback
@@ -9000,6 +19700,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                 case 6:
                                 case 7:
                                 case 8:
@@ -9101,6 +19803,14 @@
                             case "REGISTRATION_FAILED":
                             case 2:
                                 message.state = 2;
+                                break;
+                            case "TRANSFER_PENDING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "TRANSFER_FAILED":
+                            case 4:
+                                message.state = 4;
                                 break;
                             case "ACTIVE":
                             case 6:
@@ -9276,6 +19986,8 @@
                          * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
                          * @property {number} REGISTRATION_PENDING=1 REGISTRATION_PENDING value
                          * @property {number} REGISTRATION_FAILED=2 REGISTRATION_FAILED value
+                         * @property {number} TRANSFER_PENDING=3 TRANSFER_PENDING value
+                         * @property {number} TRANSFER_FAILED=4 TRANSFER_FAILED value
                          * @property {number} ACTIVE=6 ACTIVE value
                          * @property {number} SUSPENDED=7 SUSPENDED value
                          * @property {number} EXPORTED=8 EXPORTED value
@@ -9285,6 +19997,8 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "REGISTRATION_PENDING"] = 1;
                             values[valuesById[2] = "REGISTRATION_FAILED"] = 2;
+                            values[valuesById[3] = "TRANSFER_PENDING"] = 3;
+                            values[valuesById[4] = "TRANSFER_FAILED"] = 4;
                             values[valuesById[6] = "ACTIVE"] = 6;
                             values[valuesById[7] = "SUSPENDED"] = 7;
                             values[valuesById[8] = "EXPORTED"] = 8;
@@ -10573,6 +21287,8 @@
                                     default:
                                         return "algorithm: enum value expected";
                                     case 0:
+                                    case 1:
+                                    case 2:
                                     case 3:
                                     case 4:
                                     case 5:
@@ -10585,6 +21301,9 @@
                                     case 14:
                                     case 15:
                                     case 16:
+                                    case 252:
+                                    case 253:
+                                    case 254:
                                         break;
                                     }
                                 if (message.digestType != null && message.hasOwnProperty("digestType"))
@@ -10622,6 +21341,14 @@
                                 case "ALGORITHM_UNSPECIFIED":
                                 case 0:
                                     message.algorithm = 0;
+                                    break;
+                                case "RSAMD5":
+                                case 1:
+                                    message.algorithm = 1;
+                                    break;
+                                case "DH":
+                                case 2:
+                                    message.algorithm = 2;
                                     break;
                                 case "DSA":
                                 case 3:
@@ -10670,6 +21397,18 @@
                                 case "ED448":
                                 case 16:
                                     message.algorithm = 16;
+                                    break;
+                                case "INDIRECT":
+                                case 252:
+                                    message.algorithm = 252;
+                                    break;
+                                case "PRIVATEDNS":
+                                case 253:
+                                    message.algorithm = 253;
+                                    break;
+                                case "PRIVATEOID":
+                                case 254:
+                                    message.algorithm = 254;
                                     break;
                                 }
                                 switch (object.digestType) {
@@ -10745,6 +21484,8 @@
                              * @name google.cloud.domains.v1beta1.DnsSettings.DsRecord.Algorithm
                              * @enum {number}
                              * @property {number} ALGORITHM_UNSPECIFIED=0 ALGORITHM_UNSPECIFIED value
+                             * @property {number} RSAMD5=1 RSAMD5 value
+                             * @property {number} DH=2 DH value
                              * @property {number} DSA=3 DSA value
                              * @property {number} ECC=4 ECC value
                              * @property {number} RSASHA1=5 RSASHA1 value
@@ -10757,10 +21498,15 @@
                              * @property {number} ECDSAP384SHA384=14 ECDSAP384SHA384 value
                              * @property {number} ED25519=15 ED25519 value
                              * @property {number} ED448=16 ED448 value
+                             * @property {number} INDIRECT=252 INDIRECT value
+                             * @property {number} PRIVATEDNS=253 PRIVATEDNS value
+                             * @property {number} PRIVATEOID=254 PRIVATEOID value
                              */
                             DsRecord.Algorithm = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "ALGORITHM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "RSAMD5"] = 1;
+                                values[valuesById[2] = "DH"] = 2;
                                 values[valuesById[3] = "DSA"] = 3;
                                 values[valuesById[4] = "ECC"] = 4;
                                 values[valuesById[5] = "RSASHA1"] = 5;
@@ -10773,6 +21519,9 @@
                                 values[valuesById[14] = "ECDSAP384SHA384"] = 14;
                                 values[valuesById[15] = "ED25519"] = 15;
                                 values[valuesById[16] = "ED448"] = 16;
+                                values[valuesById[252] = "INDIRECT"] = 252;
+                                values[valuesById[253] = "PRIVATEDNS"] = 253;
+                                values[valuesById[254] = "PRIVATEOID"] = 254;
                                 return values;
                             })();
     
@@ -12840,6 +23589,761 @@
                         };
     
                         return RegisterDomainRequest;
+                    })();
+    
+                    v1beta1.RetrieveTransferParametersRequest = (function() {
+    
+                        /**
+                         * Properties of a RetrieveTransferParametersRequest.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @interface IRetrieveTransferParametersRequest
+                         * @property {string|null} [domainName] RetrieveTransferParametersRequest domainName
+                         * @property {string|null} [location] RetrieveTransferParametersRequest location
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveTransferParametersRequest.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @classdesc Represents a RetrieveTransferParametersRequest.
+                         * @implements IRetrieveTransferParametersRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest=} [properties] Properties to set
+                         */
+                        function RetrieveTransferParametersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveTransferParametersRequest domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @instance
+                         */
+                        RetrieveTransferParametersRequest.prototype.domainName = "";
+    
+                        /**
+                         * RetrieveTransferParametersRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @instance
+                         */
+                        RetrieveTransferParametersRequest.prototype.location = "";
+    
+                        /**
+                         * Creates a new RetrieveTransferParametersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest instance
+                         */
+                        RetrieveTransferParametersRequest.create = function create(properties) {
+                            return new RetrieveTransferParametersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersRequest message. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest} message RetrieveTransferParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest} message RetrieveTransferParametersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.location = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveTransferParametersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveTransferParametersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveTransferParametersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersRequest} RetrieveTransferParametersRequest
+                         */
+                        RetrieveTransferParametersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1beta1.RetrieveTransferParametersRequest();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveTransferParametersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.RetrieveTransferParametersRequest} message RetrieveTransferParametersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveTransferParametersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.location = "";
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveTransferParametersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveTransferParametersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveTransferParametersRequest;
+                    })();
+    
+                    v1beta1.RetrieveTransferParametersResponse = (function() {
+    
+                        /**
+                         * Properties of a RetrieveTransferParametersResponse.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @interface IRetrieveTransferParametersResponse
+                         * @property {google.cloud.domains.v1beta1.ITransferParameters|null} [transferParameters] RetrieveTransferParametersResponse transferParameters
+                         */
+    
+                        /**
+                         * Constructs a new RetrieveTransferParametersResponse.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @classdesc Represents a RetrieveTransferParametersResponse.
+                         * @implements IRetrieveTransferParametersResponse
+                         * @constructor
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse=} [properties] Properties to set
+                         */
+                        function RetrieveTransferParametersResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrieveTransferParametersResponse transferParameters.
+                         * @member {google.cloud.domains.v1beta1.ITransferParameters|null|undefined} transferParameters
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @instance
+                         */
+                        RetrieveTransferParametersResponse.prototype.transferParameters = null;
+    
+                        /**
+                         * Creates a new RetrieveTransferParametersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse instance
+                         */
+                        RetrieveTransferParametersResponse.create = function create(properties) {
+                            return new RetrieveTransferParametersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersResponse message. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse} message RetrieveTransferParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.transferParameters != null && Object.hasOwnProperty.call(message, "transferParameters"))
+                                $root.google.cloud.domains.v1beta1.TransferParameters.encode(message.transferParameters, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrieveTransferParametersResponse message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.RetrieveTransferParametersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse} message RetrieveTransferParametersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrieveTransferParametersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.transferParameters = $root.google.cloud.domains.v1beta1.TransferParameters.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrieveTransferParametersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrieveTransferParametersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrieveTransferParametersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrieveTransferParametersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.transferParameters != null && message.hasOwnProperty("transferParameters")) {
+                                var error = $root.google.cloud.domains.v1beta1.TransferParameters.verify(message.transferParameters);
+                                if (error)
+                                    return "transferParameters." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrieveTransferParametersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1beta1.RetrieveTransferParametersResponse} RetrieveTransferParametersResponse
+                         */
+                        RetrieveTransferParametersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1beta1.RetrieveTransferParametersResponse();
+                            if (object.transferParameters != null) {
+                                if (typeof object.transferParameters !== "object")
+                                    throw TypeError(".google.cloud.domains.v1beta1.RetrieveTransferParametersResponse.transferParameters: object expected");
+                                message.transferParameters = $root.google.cloud.domains.v1beta1.TransferParameters.fromObject(object.transferParameters);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrieveTransferParametersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.RetrieveTransferParametersResponse} message RetrieveTransferParametersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrieveTransferParametersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.transferParameters = null;
+                            if (message.transferParameters != null && message.hasOwnProperty("transferParameters"))
+                                object.transferParameters = $root.google.cloud.domains.v1beta1.TransferParameters.toObject(message.transferParameters, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrieveTransferParametersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1beta1.RetrieveTransferParametersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrieveTransferParametersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RetrieveTransferParametersResponse;
+                    })();
+    
+                    v1beta1.TransferDomainRequest = (function() {
+    
+                        /**
+                         * Properties of a TransferDomainRequest.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @interface ITransferDomainRequest
+                         * @property {string|null} [parent] TransferDomainRequest parent
+                         * @property {google.cloud.domains.v1beta1.IRegistration|null} [registration] TransferDomainRequest registration
+                         * @property {Array.<google.cloud.domains.v1beta1.ContactNotice>|null} [contactNotices] TransferDomainRequest contactNotices
+                         * @property {google.type.IMoney|null} [yearlyPrice] TransferDomainRequest yearlyPrice
+                         * @property {google.cloud.domains.v1beta1.IAuthorizationCode|null} [authorizationCode] TransferDomainRequest authorizationCode
+                         * @property {boolean|null} [validateOnly] TransferDomainRequest validateOnly
+                         */
+    
+                        /**
+                         * Constructs a new TransferDomainRequest.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @classdesc Represents a TransferDomainRequest.
+                         * @implements ITransferDomainRequest
+                         * @constructor
+                         * @param {google.cloud.domains.v1beta1.ITransferDomainRequest=} [properties] Properties to set
+                         */
+                        function TransferDomainRequest(properties) {
+                            this.contactNotices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferDomainRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.parent = "";
+    
+                        /**
+                         * TransferDomainRequest registration.
+                         * @member {google.cloud.domains.v1beta1.IRegistration|null|undefined} registration
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.registration = null;
+    
+                        /**
+                         * TransferDomainRequest contactNotices.
+                         * @member {Array.<google.cloud.domains.v1beta1.ContactNotice>} contactNotices
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.contactNotices = $util.emptyArray;
+    
+                        /**
+                         * TransferDomainRequest yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.yearlyPrice = null;
+    
+                        /**
+                         * TransferDomainRequest authorizationCode.
+                         * @member {google.cloud.domains.v1beta1.IAuthorizationCode|null|undefined} authorizationCode
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.authorizationCode = null;
+    
+                        /**
+                         * TransferDomainRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         */
+                        TransferDomainRequest.prototype.validateOnly = false;
+    
+                        /**
+                         * Creates a new TransferDomainRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.ITransferDomainRequest=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1beta1.TransferDomainRequest} TransferDomainRequest instance
+                         */
+                        TransferDomainRequest.create = function create(properties) {
+                            return new TransferDomainRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferDomainRequest message. Does not implicitly {@link google.cloud.domains.v1beta1.TransferDomainRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.ITransferDomainRequest} message TransferDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferDomainRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.registration != null && Object.hasOwnProperty.call(message, "registration"))
+                                $root.google.cloud.domains.v1beta1.Registration.encode(message.registration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.contactNotices != null && message.contactNotices.length) {
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    writer.int32(message.contactNotices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.authorizationCode != null && Object.hasOwnProperty.call(message, "authorizationCode"))
+                                $root.google.cloud.domains.v1beta1.AuthorizationCode.encode(message.authorizationCode, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferDomainRequest message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.TransferDomainRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.ITransferDomainRequest} message TransferDomainRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferDomainRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferDomainRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1beta1.TransferDomainRequest} TransferDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferDomainRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1beta1.TransferDomainRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.registration = $root.google.cloud.domains.v1beta1.Registration.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    if (!(message.contactNotices && message.contactNotices.length))
+                                        message.contactNotices = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.contactNotices.push(reader.int32());
+                                    } else
+                                        message.contactNotices.push(reader.int32());
+                                    break;
+                                case 4:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.authorizationCode = $root.google.cloud.domains.v1beta1.AuthorizationCode.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.validateOnly = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferDomainRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1beta1.TransferDomainRequest} TransferDomainRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferDomainRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferDomainRequest message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferDomainRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.registration != null && message.hasOwnProperty("registration")) {
+                                var error = $root.google.cloud.domains.v1beta1.Registration.verify(message.registration);
+                                if (error)
+                                    return "registration." + error;
+                            }
+                            if (message.contactNotices != null && message.hasOwnProperty("contactNotices")) {
+                                if (!Array.isArray(message.contactNotices))
+                                    return "contactNotices: array expected";
+                                for (var i = 0; i < message.contactNotices.length; ++i)
+                                    switch (message.contactNotices[i]) {
+                                    default:
+                                        return "contactNotices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            if (message.authorizationCode != null && message.hasOwnProperty("authorizationCode")) {
+                                var error = $root.google.cloud.domains.v1beta1.AuthorizationCode.verify(message.authorizationCode);
+                                if (error)
+                                    return "authorizationCode." + error;
+                            }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferDomainRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1beta1.TransferDomainRequest} TransferDomainRequest
+                         */
+                        TransferDomainRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1beta1.TransferDomainRequest)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1beta1.TransferDomainRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.registration != null) {
+                                if (typeof object.registration !== "object")
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferDomainRequest.registration: object expected");
+                                message.registration = $root.google.cloud.domains.v1beta1.Registration.fromObject(object.registration);
+                            }
+                            if (object.contactNotices) {
+                                if (!Array.isArray(object.contactNotices))
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferDomainRequest.contactNotices: array expected");
+                                message.contactNotices = [];
+                                for (var i = 0; i < object.contactNotices.length; ++i)
+                                    switch (object.contactNotices[i]) {
+                                    default:
+                                    case "CONTACT_NOTICE_UNSPECIFIED":
+                                    case 0:
+                                        message.contactNotices[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT":
+                                    case 1:
+                                        message.contactNotices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferDomainRequest.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            if (object.authorizationCode != null) {
+                                if (typeof object.authorizationCode !== "object")
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferDomainRequest.authorizationCode: object expected");
+                                message.authorizationCode = $root.google.cloud.domains.v1beta1.AuthorizationCode.fromObject(object.authorizationCode);
+                            }
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferDomainRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.TransferDomainRequest} message TransferDomainRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferDomainRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.contactNotices = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.registration = null;
+                                object.yearlyPrice = null;
+                                object.authorizationCode = null;
+                                object.validateOnly = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.registration != null && message.hasOwnProperty("registration"))
+                                object.registration = $root.google.cloud.domains.v1beta1.Registration.toObject(message.registration, options);
+                            if (message.contactNotices && message.contactNotices.length) {
+                                object.contactNotices = [];
+                                for (var j = 0; j < message.contactNotices.length; ++j)
+                                    object.contactNotices[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactNotice[message.contactNotices[j]] : message.contactNotices[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            if (message.authorizationCode != null && message.hasOwnProperty("authorizationCode"))
+                                object.authorizationCode = $root.google.cloud.domains.v1beta1.AuthorizationCode.toObject(message.authorizationCode, options);
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferDomainRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1beta1.TransferDomainRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferDomainRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TransferDomainRequest;
                     })();
     
                     v1beta1.ListRegistrationsRequest = (function() {
@@ -15731,6 +27235,394 @@
                         })();
     
                         return RegisterParameters;
+                    })();
+    
+                    v1beta1.TransferParameters = (function() {
+    
+                        /**
+                         * Properties of a TransferParameters.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @interface ITransferParameters
+                         * @property {string|null} [domainName] TransferParameters domainName
+                         * @property {string|null} [currentRegistrar] TransferParameters currentRegistrar
+                         * @property {Array.<string>|null} [nameServers] TransferParameters nameServers
+                         * @property {google.cloud.domains.v1beta1.TransferLockState|null} [transferLockState] TransferParameters transferLockState
+                         * @property {Array.<google.cloud.domains.v1beta1.ContactPrivacy>|null} [supportedPrivacy] TransferParameters supportedPrivacy
+                         * @property {google.type.IMoney|null} [yearlyPrice] TransferParameters yearlyPrice
+                         */
+    
+                        /**
+                         * Constructs a new TransferParameters.
+                         * @memberof google.cloud.domains.v1beta1
+                         * @classdesc Represents a TransferParameters.
+                         * @implements ITransferParameters
+                         * @constructor
+                         * @param {google.cloud.domains.v1beta1.ITransferParameters=} [properties] Properties to set
+                         */
+                        function TransferParameters(properties) {
+                            this.nameServers = [];
+                            this.supportedPrivacy = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TransferParameters domainName.
+                         * @member {string} domainName
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.domainName = "";
+    
+                        /**
+                         * TransferParameters currentRegistrar.
+                         * @member {string} currentRegistrar
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.currentRegistrar = "";
+    
+                        /**
+                         * TransferParameters nameServers.
+                         * @member {Array.<string>} nameServers
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.nameServers = $util.emptyArray;
+    
+                        /**
+                         * TransferParameters transferLockState.
+                         * @member {google.cloud.domains.v1beta1.TransferLockState} transferLockState
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.transferLockState = 0;
+    
+                        /**
+                         * TransferParameters supportedPrivacy.
+                         * @member {Array.<google.cloud.domains.v1beta1.ContactPrivacy>} supportedPrivacy
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.supportedPrivacy = $util.emptyArray;
+    
+                        /**
+                         * TransferParameters yearlyPrice.
+                         * @member {google.type.IMoney|null|undefined} yearlyPrice
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         */
+                        TransferParameters.prototype.yearlyPrice = null;
+    
+                        /**
+                         * Creates a new TransferParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.ITransferParameters=} [properties] Properties to set
+                         * @returns {google.cloud.domains.v1beta1.TransferParameters} TransferParameters instance
+                         */
+                        TransferParameters.create = function create(properties) {
+                            return new TransferParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TransferParameters message. Does not implicitly {@link google.cloud.domains.v1beta1.TransferParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.ITransferParameters} message TransferParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domainName != null && Object.hasOwnProperty.call(message, "domainName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domainName);
+                            if (message.currentRegistrar != null && Object.hasOwnProperty.call(message, "currentRegistrar"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.currentRegistrar);
+                            if (message.nameServers != null && message.nameServers.length)
+                                for (var i = 0; i < message.nameServers.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameServers[i]);
+                            if (message.transferLockState != null && Object.hasOwnProperty.call(message, "transferLockState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.transferLockState);
+                            if (message.supportedPrivacy != null && message.supportedPrivacy.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    writer.int32(message.supportedPrivacy[i]);
+                                writer.ldelim();
+                            }
+                            if (message.yearlyPrice != null && Object.hasOwnProperty.call(message, "yearlyPrice"))
+                                $root.google.type.Money.encode(message.yearlyPrice, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TransferParameters message, length delimited. Does not implicitly {@link google.cloud.domains.v1beta1.TransferParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.ITransferParameters} message TransferParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TransferParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TransferParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.domains.v1beta1.TransferParameters} TransferParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.domains.v1beta1.TransferParameters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.domainName = reader.string();
+                                    break;
+                                case 2:
+                                    message.currentRegistrar = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.nameServers && message.nameServers.length))
+                                        message.nameServers = [];
+                                    message.nameServers.push(reader.string());
+                                    break;
+                                case 4:
+                                    message.transferLockState = reader.int32();
+                                    break;
+                                case 5:
+                                    if (!(message.supportedPrivacy && message.supportedPrivacy.length))
+                                        message.supportedPrivacy = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.supportedPrivacy.push(reader.int32());
+                                    } else
+                                        message.supportedPrivacy.push(reader.int32());
+                                    break;
+                                case 6:
+                                    message.yearlyPrice = $root.google.type.Money.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TransferParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.domains.v1beta1.TransferParameters} TransferParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TransferParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TransferParameters message.
+                         * @function verify
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TransferParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                if (!$util.isString(message.domainName))
+                                    return "domainName: string expected";
+                            if (message.currentRegistrar != null && message.hasOwnProperty("currentRegistrar"))
+                                if (!$util.isString(message.currentRegistrar))
+                                    return "currentRegistrar: string expected";
+                            if (message.nameServers != null && message.hasOwnProperty("nameServers")) {
+                                if (!Array.isArray(message.nameServers))
+                                    return "nameServers: array expected";
+                                for (var i = 0; i < message.nameServers.length; ++i)
+                                    if (!$util.isString(message.nameServers[i]))
+                                        return "nameServers: string[] expected";
+                            }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                switch (message.transferLockState) {
+                                default:
+                                    return "transferLockState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.supportedPrivacy != null && message.hasOwnProperty("supportedPrivacy")) {
+                                if (!Array.isArray(message.supportedPrivacy))
+                                    return "supportedPrivacy: array expected";
+                                for (var i = 0; i < message.supportedPrivacy.length; ++i)
+                                    switch (message.supportedPrivacy[i]) {
+                                    default:
+                                        return "supportedPrivacy: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice")) {
+                                var error = $root.google.type.Money.verify(message.yearlyPrice);
+                                if (error)
+                                    return "yearlyPrice." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TransferParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.domains.v1beta1.TransferParameters} TransferParameters
+                         */
+                        TransferParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.domains.v1beta1.TransferParameters)
+                                return object;
+                            var message = new $root.google.cloud.domains.v1beta1.TransferParameters();
+                            if (object.domainName != null)
+                                message.domainName = String(object.domainName);
+                            if (object.currentRegistrar != null)
+                                message.currentRegistrar = String(object.currentRegistrar);
+                            if (object.nameServers) {
+                                if (!Array.isArray(object.nameServers))
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferParameters.nameServers: array expected");
+                                message.nameServers = [];
+                                for (var i = 0; i < object.nameServers.length; ++i)
+                                    message.nameServers[i] = String(object.nameServers[i]);
+                            }
+                            switch (object.transferLockState) {
+                            case "TRANSFER_LOCK_STATE_UNSPECIFIED":
+                            case 0:
+                                message.transferLockState = 0;
+                                break;
+                            case "UNLOCKED":
+                            case 1:
+                                message.transferLockState = 1;
+                                break;
+                            case "LOCKED":
+                            case 2:
+                                message.transferLockState = 2;
+                                break;
+                            }
+                            if (object.supportedPrivacy) {
+                                if (!Array.isArray(object.supportedPrivacy))
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferParameters.supportedPrivacy: array expected");
+                                message.supportedPrivacy = [];
+                                for (var i = 0; i < object.supportedPrivacy.length; ++i)
+                                    switch (object.supportedPrivacy[i]) {
+                                    default:
+                                    case "CONTACT_PRIVACY_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedPrivacy[i] = 0;
+                                        break;
+                                    case "PUBLIC_CONTACT_DATA":
+                                    case 1:
+                                        message.supportedPrivacy[i] = 1;
+                                        break;
+                                    case "PRIVATE_CONTACT_DATA":
+                                    case 2:
+                                        message.supportedPrivacy[i] = 2;
+                                        break;
+                                    case "REDACTED_CONTACT_DATA":
+                                    case 3:
+                                        message.supportedPrivacy[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.yearlyPrice != null) {
+                                if (typeof object.yearlyPrice !== "object")
+                                    throw TypeError(".google.cloud.domains.v1beta1.TransferParameters.yearlyPrice: object expected");
+                                message.yearlyPrice = $root.google.type.Money.fromObject(object.yearlyPrice);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TransferParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @static
+                         * @param {google.cloud.domains.v1beta1.TransferParameters} message TransferParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TransferParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.nameServers = [];
+                                object.supportedPrivacy = [];
+                            }
+                            if (options.defaults) {
+                                object.domainName = "";
+                                object.currentRegistrar = "";
+                                object.transferLockState = options.enums === String ? "TRANSFER_LOCK_STATE_UNSPECIFIED" : 0;
+                                object.yearlyPrice = null;
+                            }
+                            if (message.domainName != null && message.hasOwnProperty("domainName"))
+                                object.domainName = message.domainName;
+                            if (message.currentRegistrar != null && message.hasOwnProperty("currentRegistrar"))
+                                object.currentRegistrar = message.currentRegistrar;
+                            if (message.nameServers && message.nameServers.length) {
+                                object.nameServers = [];
+                                for (var j = 0; j < message.nameServers.length; ++j)
+                                    object.nameServers[j] = message.nameServers[j];
+                            }
+                            if (message.transferLockState != null && message.hasOwnProperty("transferLockState"))
+                                object.transferLockState = options.enums === String ? $root.google.cloud.domains.v1beta1.TransferLockState[message.transferLockState] : message.transferLockState;
+                            if (message.supportedPrivacy && message.supportedPrivacy.length) {
+                                object.supportedPrivacy = [];
+                                for (var j = 0; j < message.supportedPrivacy.length; ++j)
+                                    object.supportedPrivacy[j] = options.enums === String ? $root.google.cloud.domains.v1beta1.ContactPrivacy[message.supportedPrivacy[j]] : message.supportedPrivacy[j];
+                            }
+                            if (message.yearlyPrice != null && message.hasOwnProperty("yearlyPrice"))
+                                object.yearlyPrice = $root.google.type.Money.toObject(message.yearlyPrice, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TransferParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.domains.v1beta1.TransferParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TransferParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TransferParameters;
                     })();
     
                     v1beta1.AuthorizationCode = (function() {

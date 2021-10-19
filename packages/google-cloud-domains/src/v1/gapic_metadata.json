@@ -2,7 +2,7 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.cloud.domains.v1beta1",
+  "protoPackage": "google.cloud.domains.v1",
   "libraryPackage": "@google-cloud/domains",
   "services": {
     "Domains": {

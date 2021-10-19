@@ -20,6 +20,11 @@
                 "retrieveRegisterParameters"
               ]
             },
+            "RetrieveTransferParameters": {
+              "methods": [
+                "retrieveTransferParameters"
+              ]
+            },
             "GetRegistration": {
               "methods": [
                 "getRegistration"
@@ -38,6 +43,11 @@
             "RegisterDomain": {
               "methods": [
                 "registerDomain"
+              ]
+            },
+            "TransferDomain": {
+              "methods": [
+                "transferDomain"
               ]
             },
             "UpdateRegistration": {
@@ -92,6 +102,11 @@
                 "retrieveRegisterParameters"
               ]
             },
+            "RetrieveTransferParameters": {
+              "methods": [
+                "retrieveTransferParameters"
+              ]
+            },
             "GetRegistration": {
               "methods": [
                 "getRegistration"
@@ -110,6 +125,11 @@
             "RegisterDomain": {
               "methods": [
                 "registerDomain"
+              ]
+            },
+            "TransferDomain": {
+              "methods": [
+                "transferDomain"
               ]
             },
             "UpdateRegistration": {

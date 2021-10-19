@@ -34,7 +34,7 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/domains_client_config.json`.
+ * `src/v1/domains_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './domains_client_config.json';
@@ -44,7 +44,7 @@ const version = require('../../../package.json').version;
 /**
  *  The Cloud Domains API enables management and configuration of domain names.
  * @class
- * @memberof v1beta1
+ * @memberof v1
  */
 export class DomainsClient {
   private _terminated = false;
@@ -198,52 +198,52 @@ export class DomainsClient {
       })
       .operationsClient(opts);
     const registerDomainResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const registerDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const transferDomainResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const transferDomainMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateRegistrationResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const updateRegistrationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const configureManagementSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const configureManagementSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const configureDnsSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const configureDnsSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const configureContactSettingsResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const configureContactSettingsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const exportRegistrationResponse = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.Registration'
+      '.google.cloud.domains.v1.Registration'
     ) as gax.protobuf.Type;
     const exportRegistrationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteRegistrationResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteRegistrationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.domains.v1beta1.OperationMetadata'
+      '.google.cloud.domains.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -299,7 +299,7 @@ export class DomainsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.domains.v1beta1.Domains',
+      'google.cloud.domains.v1.Domains',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -332,14 +332,14 @@ export class DomainsClient {
     }
 
     // Put together the "service stub" for
-    // google.cloud.domains.v1beta1.Domains.
+    // google.cloud.domains.v1.Domains.
     this.domainsStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.domains.v1beta1.Domains'
+            'google.cloud.domains.v1.Domains'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.domains.v1beta1.Domains,
+          (this._protos as any).google.cloud.domains.v1.Domains,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
@@ -448,33 +448,29 @@ export class DomainsClient {
   // -- Service calls --
   // -------------------
   searchDomains(
-    request?: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
+    request?: protos.google.cloud.domains.v1.ISearchDomainsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1beta1.ISearchDomainsRequest | undefined,
+      protos.google.cloud.domains.v1.ISearchDomainsResponse,
+      protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
       {} | undefined
     ]
   >;
   searchDomains(
-    request: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
+    request: protos.google.cloud.domains.v1.ISearchDomainsRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.ISearchDomainsResponse,
-      | protos.google.cloud.domains.v1beta1.ISearchDomainsRequest
-      | null
-      | undefined,
+      protos.google.cloud.domains.v1.ISearchDomainsResponse,
+      protos.google.cloud.domains.v1.ISearchDomainsRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   searchDomains(
-    request: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
+    request: protos.google.cloud.domains.v1.ISearchDomainsRequest,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.ISearchDomainsResponse,
-      | protos.google.cloud.domains.v1beta1.ISearchDomainsRequest
-      | null
-      | undefined,
+      protos.google.cloud.domains.v1.ISearchDomainsResponse,
+      protos.google.cloud.domains.v1.ISearchDomainsRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
@@ -494,7 +490,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SearchDomainsResponse]{@link google.cloud.domains.v1beta1.SearchDomainsResponse}.
+   *   The first element of the array is an object representing [SearchDomainsResponse]{@link google.cloud.domains.v1.SearchDomainsResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -502,27 +498,25 @@ export class DomainsClient {
    * const [response] = await client.searchDomains(request);
    */
   searchDomains(
-    request?: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
+    request?: protos.google.cloud.domains.v1.ISearchDomainsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.domains.v1beta1.ISearchDomainsResponse,
-          | protos.google.cloud.domains.v1beta1.ISearchDomainsRequest
+          protos.google.cloud.domains.v1.ISearchDomainsResponse,
+          | protos.google.cloud.domains.v1.ISearchDomainsRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.domains.v1beta1.ISearchDomainsResponse,
-      | protos.google.cloud.domains.v1beta1.ISearchDomainsRequest
-      | null
-      | undefined,
+      protos.google.cloud.domains.v1.ISearchDomainsResponse,
+      protos.google.cloud.domains.v1.ISearchDomainsRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.ISearchDomainsResponse,
-      protos.google.cloud.domains.v1beta1.ISearchDomainsRequest | undefined,
+      protos.google.cloud.domains.v1.ISearchDomainsResponse,
+      protos.google.cloud.domains.v1.ISearchDomainsRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -545,34 +539,34 @@ export class DomainsClient {
     return this.innerApiCalls.searchDomains(request, options, callback);
   }
   retrieveRegisterParameters(
-    request?: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
+    request?: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersResponse,
+      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
       (
-        | protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest
+        | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   retrieveRegisterParameters(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
+    request: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersResponse,
-      | protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest
+      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+      | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   retrieveRegisterParameters(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
+    request: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersResponse,
-      | protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest
+      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+      | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
       | null
       | undefined,
       {} | null | undefined
@@ -591,7 +585,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RetrieveRegisterParametersResponse]{@link google.cloud.domains.v1beta1.RetrieveRegisterParametersResponse}.
+   *   The first element of the array is an object representing [RetrieveRegisterParametersResponse]{@link google.cloud.domains.v1.RetrieveRegisterParametersResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -599,28 +593,28 @@ export class DomainsClient {
    * const [response] = await client.retrieveRegisterParameters(request);
    */
   retrieveRegisterParameters(
-    request?: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
+    request?: protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersResponse,
-          | protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest
+          protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+          | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersResponse,
-      | protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest
+      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
+      | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersResponse,
+      protos.google.cloud.domains.v1.IRetrieveRegisterParametersResponse,
       (
-        | protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest
+        | protos.google.cloud.domains.v1.IRetrieveRegisterParametersRequest
         | undefined
       ),
       {} | undefined
@@ -649,34 +643,34 @@ export class DomainsClient {
     );
   }
   retrieveTransferParameters(
-    request?: protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest,
+    request?: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse,
+      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
       (
-        | protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest
+        | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   retrieveTransferParameters(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest,
+    request: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse,
-      | protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest
+      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+      | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   retrieveTransferParameters(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest,
+    request: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse,
-      | protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest
+      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+      | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
       | null
       | undefined,
       {} | null | undefined
@@ -699,7 +693,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RetrieveTransferParametersResponse]{@link google.cloud.domains.v1beta1.RetrieveTransferParametersResponse}.
+   *   The first element of the array is an object representing [RetrieveTransferParametersResponse]{@link google.cloud.domains.v1.RetrieveTransferParametersResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -707,28 +701,28 @@ export class DomainsClient {
    * const [response] = await client.retrieveTransferParameters(request);
    */
   retrieveTransferParameters(
-    request?: protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest,
+    request?: protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse,
-          | protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest
+          protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+          | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse,
-      | protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest
+      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
+      | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersResponse,
+      protos.google.cloud.domains.v1.IRetrieveTransferParametersResponse,
       (
-        | protos.google.cloud.domains.v1beta1.IRetrieveTransferParametersRequest
+        | protos.google.cloud.domains.v1.IRetrieveTransferParametersRequest
         | undefined
       ),
       {} | undefined
@@ -757,33 +751,29 @@ export class DomainsClient {
     );
   }
   getRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IGetRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRegistration,
-      protos.google.cloud.domains.v1beta1.IGetRegistrationRequest | undefined,
+      protos.google.cloud.domains.v1.IRegistration,
+      protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
       {} | undefined
     ]
   >;
   getRegistration(
-    request: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IGetRegistrationRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IRegistration,
-      | protos.google.cloud.domains.v1beta1.IGetRegistrationRequest
-      | null
-      | undefined,
+      protos.google.cloud.domains.v1.IRegistration,
+      protos.google.cloud.domains.v1.IGetRegistrationRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   getRegistration(
-    request: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IGetRegistrationRequest,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IRegistration,
-      | protos.google.cloud.domains.v1beta1.IGetRegistrationRequest
-      | null
-      | undefined,
+      protos.google.cloud.domains.v1.IRegistration,
+      protos.google.cloud.domains.v1.IGetRegistrationRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
@@ -798,7 +788,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Registration]{@link google.cloud.domains.v1beta1.Registration}.
+   *   The first element of the array is an object representing [Registration]{@link google.cloud.domains.v1.Registration}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -806,27 +796,25 @@ export class DomainsClient {
    * const [response] = await client.getRegistration(request);
    */
   getRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IGetRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.domains.v1beta1.IRegistration,
-          | protos.google.cloud.domains.v1beta1.IGetRegistrationRequest
+          protos.google.cloud.domains.v1.IRegistration,
+          | protos.google.cloud.domains.v1.IGetRegistrationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.domains.v1beta1.IRegistration,
-      | protos.google.cloud.domains.v1beta1.IGetRegistrationRequest
-      | null
-      | undefined,
+      protos.google.cloud.domains.v1.IRegistration,
+      protos.google.cloud.domains.v1.IGetRegistrationRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRegistration,
-      protos.google.cloud.domains.v1beta1.IGetRegistrationRequest | undefined,
+      protos.google.cloud.domains.v1.IRegistration,
+      protos.google.cloud.domains.v1.IGetRegistrationRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -849,34 +837,34 @@ export class DomainsClient {
     return this.innerApiCalls.getRegistration(request, options, callback);
   }
   retrieveAuthorizationCode(
-    request?: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
+      protos.google.cloud.domains.v1.IAuthorizationCode,
       (
-        | protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest
+        | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
   retrieveAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
+    request: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   retrieveAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
+    request: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
       | null
       | undefined,
       {} | null | undefined
@@ -897,7 +885,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1beta1.AuthorizationCode}.
+   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1.AuthorizationCode}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -905,28 +893,28 @@ export class DomainsClient {
    * const [response] = await client.retrieveAuthorizationCode(request);
    */
   retrieveAuthorizationCode(
-    request?: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-          | protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
+      protos.google.cloud.domains.v1.IAuthorizationCode,
       (
-        | protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest
+        | protos.google.cloud.domains.v1.IRetrieveAuthorizationCodeRequest
         | undefined
       ),
       {} | undefined
@@ -955,34 +943,31 @@ export class DomainsClient {
     );
   }
   resetAuthorizationCode(
-    request?: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      (
-        | protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest
-        | undefined
-      ),
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
       {} | undefined
     ]
   >;
   resetAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
+    request: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   resetAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
+    request: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
     callback: Callback<
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
       | null
       | undefined,
       {} | null | undefined
@@ -1002,7 +987,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1beta1.AuthorizationCode}.
+   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1.AuthorizationCode}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
@@ -1010,30 +995,27 @@ export class DomainsClient {
    * const [response] = await client.resetAuthorizationCode(request);
    */
   resetAuthorizationCode(
-    request?: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-          | protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest
+          protos.google.cloud.domains.v1.IAuthorizationCode,
+          | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      | protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      | protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IAuthorizationCode,
-      (
-        | protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest
-        | undefined
-      ),
+      protos.google.cloud.domains.v1.IAuthorizationCode,
+      protos.google.cloud.domains.v1.IResetAuthorizationCodeRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1061,36 +1043,36 @@ export class DomainsClient {
   }
 
   registerDomain(
-    request?: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
+    request?: protos.google.cloud.domains.v1.IRegisterDomainRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   registerDomain(
-    request: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
+    request: protos.google.cloud.domains.v1.IRegisterDomainRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   registerDomain(
-    request: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
+    request: protos.google.cloud.domains.v1.IRegisterDomainRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1116,7 +1098,7 @@ export class DomainsClient {
    * @param {string} request.parent
    *   Required. The parent resource of the `Registration`. Must be in the
    *   format `projects/* /locations/*`.
-   * @param {google.cloud.domains.v1beta1.Registration} request.registration
+   * @param {google.cloud.domains.v1.Registration} request.registration
    *   Required. The complete `Registration` resource to be created.
    * @param {number[]} request.domainNotices
    *   The list of domain notices that you acknowledge. Call
@@ -1147,21 +1129,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   registerDomain(
-    request?: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
+    request?: protos.google.cloud.domains.v1.IRegisterDomainRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1169,8 +1151,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1213,8 +1195,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1227,41 +1209,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   transferDomain(
-    request?: protos.google.cloud.domains.v1beta1.ITransferDomainRequest,
+    request?: protos.google.cloud.domains.v1.ITransferDomainRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   transferDomain(
-    request: protos.google.cloud.domains.v1beta1.ITransferDomainRequest,
+    request: protos.google.cloud.domains.v1.ITransferDomainRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   transferDomain(
-    request: protos.google.cloud.domains.v1beta1.ITransferDomainRequest,
+    request: protos.google.cloud.domains.v1.ITransferDomainRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1295,7 +1277,7 @@ export class DomainsClient {
    * @param {string} request.parent
    *   Required. The parent resource of the `Registration`. Must be in the
    *   format `projects/* /locations/*`.
-   * @param {google.cloud.domains.v1beta1.Registration} request.registration
+   * @param {google.cloud.domains.v1.Registration} request.registration
    *   Required. The complete `Registration` resource to be created.
    *
    *   You can leave `registration.dns_settings` unset to import the
@@ -1311,7 +1293,7 @@ export class DomainsClient {
    *   Required. Acknowledgement of the price to transfer or renew the domain for one year.
    *   Call `RetrieveTransferParameters` to obtain the price, which you must
    *   acknowledge.
-   * @param {google.cloud.domains.v1beta1.AuthorizationCode} request.authorizationCode
+   * @param {google.cloud.domains.v1.AuthorizationCode} request.authorizationCode
    *   The domain's transfer authorization code. You can obtain this from the
    *   domain's current registrar.
    * @param {boolean} request.validateOnly
@@ -1330,21 +1312,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   transferDomain(
-    request?: protos.google.cloud.domains.v1beta1.ITransferDomainRequest,
+    request?: protos.google.cloud.domains.v1.ITransferDomainRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1352,8 +1334,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1396,8 +1378,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1410,41 +1392,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   updateRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   updateRegistration(
-    request: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateRegistration(
-    request: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1460,7 +1442,7 @@ export class DomainsClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.domains.v1beta1.Registration} request.registration
+   * @param {google.cloud.domains.v1.Registration} request.registration
    *   Fields of the `Registration` to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
@@ -1480,21 +1462,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   updateRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IUpdateRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1502,8 +1484,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1546,8 +1528,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1560,41 +1542,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   configureManagementSettings(
-    request?: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
+    request?: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   configureManagementSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
+    request: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   configureManagementSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
+    request: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1608,7 +1590,7 @@ export class DomainsClient {
    * @param {string} request.registration
    *   Required. The name of the `Registration` whose management settings are being updated,
    *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1beta1.ManagementSettings} request.managementSettings
+   * @param {google.cloud.domains.v1.ManagementSettings} request.managementSettings
    *   Fields of the `ManagementSettings` to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
@@ -1628,21 +1610,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   configureManagementSettings(
-    request?: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
+    request?: protos.google.cloud.domains.v1.IConfigureManagementSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1650,8 +1632,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1698,8 +1680,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1712,41 +1694,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   configureDnsSettings(
-    request?: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
+    request?: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   configureDnsSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
+    request: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   configureDnsSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
+    request: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1760,7 +1742,7 @@ export class DomainsClient {
    * @param {string} request.registration
    *   Required. The name of the `Registration` whose DNS settings are being updated,
    *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1beta1.DnsSettings} request.dnsSettings
+   * @param {google.cloud.domains.v1.DnsSettings} request.dnsSettings
    *   Fields of the `DnsSettings` to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
@@ -1788,21 +1770,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   configureDnsSettings(
-    request?: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
+    request?: protos.google.cloud.domains.v1.IConfigureDnsSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1810,8 +1792,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1854,8 +1836,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1868,41 +1850,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   configureContactSettings(
-    request?: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
+    request?: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   configureContactSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
+    request: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   configureContactSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
+    request: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1917,7 +1899,7 @@ export class DomainsClient {
    * @param {string} request.registration
    *   Required. The name of the `Registration` whose contact settings are being updated,
    *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1beta1.ContactSettings} request.contactSettings
+   * @param {google.cloud.domains.v1.ContactSettings} request.contactSettings
    *   Fields of the `ContactSettings` to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
@@ -1942,21 +1924,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   configureContactSettings(
-    request?: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
+    request?: protos.google.cloud.domains.v1.IConfigureContactSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1964,8 +1946,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2012,8 +1994,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -2026,41 +2008,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   exportRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IExportRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   exportRegistration(
-    request: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IExportRegistrationRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   exportRegistration(
-    request: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IExportRegistrationRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2096,21 +2078,21 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   exportRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IExportRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.domains.v1beta1.IRegistration,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IRegistration,
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2118,8 +2100,8 @@ export class DomainsClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.domains.v1beta1.IRegistration,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IRegistration,
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2162,8 +2144,8 @@ export class DomainsClient {
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -2176,41 +2158,41 @@ export class DomainsClient {
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.domains.v1beta1.Registration,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.Registration,
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   deleteRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
     ]
   >;
   deleteRegistration(
-    request: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteRegistration(
-    request: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
+    request: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2256,13 +2238,13 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   deleteRegistration(
-    request?: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
+    request?: protos.google.cloud.domains.v1.IDeleteRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.domains.v1beta1.IOperationMetadata
+            protos.google.cloud.domains.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -2270,7 +2252,7 @@ export class DomainsClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -2279,7 +2261,7 @@ export class DomainsClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.domains.v1beta1.IOperationMetadata
+        protos.google.cloud.domains.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -2323,7 +2305,7 @@ export class DomainsClient {
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.OperationMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -2337,38 +2319,38 @@ export class DomainsClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.domains.v1beta1.OperationMetadata
+      protos.google.cloud.domains.v1.OperationMetadata
     >;
   }
   listRegistrations(
-    request?: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRegistration[],
-      protos.google.cloud.domains.v1beta1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1beta1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IRegistration[],
+      protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
+      protos.google.cloud.domains.v1.IListRegistrationsResponse
     ]
   >;
   listRegistrations(
-    request: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request: protos.google.cloud.domains.v1.IListRegistrationsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1beta1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      | protos.google.cloud.domains.v1.IListRegistrationsResponse
       | null
       | undefined,
-      protos.google.cloud.domains.v1beta1.IRegistration
+      protos.google.cloud.domains.v1.IRegistration
     >
   ): void;
   listRegistrations(
-    request: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request: protos.google.cloud.domains.v1.IListRegistrationsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1beta1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      | protos.google.cloud.domains.v1.IListRegistrationsResponse
       | null
       | undefined,
-      protos.google.cloud.domains.v1beta1.IRegistration
+      protos.google.cloud.domains.v1.IRegistration
     >
   ): void;
   /**
@@ -2404,7 +2386,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Registration]{@link google.cloud.domains.v1beta1.Registration}.
+   *   The first element of the array is Array of [Registration]{@link google.cloud.domains.v1.Registration}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -2415,28 +2397,28 @@ export class DomainsClient {
    *   for more details and examples.
    */
   listRegistrations(
-    request?: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
-          | protos.google.cloud.domains.v1beta1.IListRegistrationsResponse
+          protos.google.cloud.domains.v1.IListRegistrationsRequest,
+          | protos.google.cloud.domains.v1.IListRegistrationsResponse
           | null
           | undefined,
-          protos.google.cloud.domains.v1beta1.IRegistration
+          protos.google.cloud.domains.v1.IRegistration
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1beta1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IListRegistrationsRequest,
+      | protos.google.cloud.domains.v1.IListRegistrationsResponse
       | null
       | undefined,
-      protos.google.cloud.domains.v1beta1.IRegistration
+      protos.google.cloud.domains.v1.IRegistration
     >
   ): Promise<
     [
-      protos.google.cloud.domains.v1beta1.IRegistration[],
-      protos.google.cloud.domains.v1beta1.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1beta1.IListRegistrationsResponse
+      protos.google.cloud.domains.v1.IRegistration[],
+      protos.google.cloud.domains.v1.IListRegistrationsRequest | null,
+      protos.google.cloud.domains.v1.IListRegistrationsResponse
     ]
   > | void {
     request = request || {};
@@ -2490,7 +2472,7 @@ export class DomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Registration]{@link google.cloud.domains.v1beta1.Registration} on 'data' event.
+   *   An object stream which emits an object representing [Registration]{@link google.cloud.domains.v1.Registration} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRegistrationsAsync()`
@@ -2500,7 +2482,7 @@ export class DomainsClient {
    *   for more details and examples.
    */
   listRegistrationsStream(
-    request?: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2557,7 +2539,7 @@ export class DomainsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Registration]{@link google.cloud.domains.v1beta1.Registration}. The API will be called under the hood as needed, once per the page,
+   *   [Registration]{@link google.cloud.domains.v1.Registration}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
@@ -2569,9 +2551,9 @@ export class DomainsClient {
    * }
    */
   listRegistrationsAsync(
-    request?: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request?: protos.google.cloud.domains.v1.IListRegistrationsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.domains.v1beta1.IRegistration> {
+  ): AsyncIterable<protos.google.cloud.domains.v1.IRegistration> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2588,7 +2570,7 @@ export class DomainsClient {
       this.innerApiCalls['listRegistrations'] as GaxCall,
       request as unknown as RequestType,
       callSettings
-    ) as AsyncIterable<protos.google.cloud.domains.v1beta1.IRegistration>;
+    ) as AsyncIterable<protos.google.cloud.domains.v1.IRegistration>;
   }
   // --------------------
   // -- Path templates --

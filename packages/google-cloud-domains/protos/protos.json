@@ -6,6 +6,1205 @@
           "nested": {
             "domains": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/domains/v1;domains",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "DomainsProto",
+                    "java_package": "com.google.cloud.domains.v1"
+                  },
+                  "nested": {
+                    "Domains": {
+                      "options": {
+                        "(google.api.default_host)": "domains.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SearchDomains": {
+                          "requestType": "SearchDomainsRequest",
+                          "responseType": "SearchDomainsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{location=projects/*/locations/*}/registrations:searchDomains",
+                            "(google.api.method_signature)": "location,query"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{location=projects/*/locations/*}/registrations:searchDomains"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "location,query"
+                            }
+                          ]
+                        },
+                        "RetrieveRegisterParameters": {
+                          "requestType": "RetrieveRegisterParametersRequest",
+                          "responseType": "RetrieveRegisterParametersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{location=projects/*/locations/*}/registrations:retrieveRegisterParameters",
+                            "(google.api.method_signature)": "location,domain_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{location=projects/*/locations/*}/registrations:retrieveRegisterParameters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "location,domain_name"
+                            }
+                          ]
+                        },
+                        "RegisterDomain": {
+                          "requestType": "RegisterDomainRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/registrations:register",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,registration,yearly_price",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/registrations:register",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,registration,yearly_price"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveTransferParameters": {
+                          "requestType": "RetrieveTransferParametersRequest",
+                          "responseType": "RetrieveTransferParametersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{location=projects/*/locations/*}/registrations:retrieveTransferParameters",
+                            "(google.api.method_signature)": "location,domain_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{location=projects/*/locations/*}/registrations:retrieveTransferParameters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "location,domain_name"
+                            }
+                          ]
+                        },
+                        "TransferDomain": {
+                          "requestType": "TransferDomainRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/registrations:transfer",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,registration,yearly_price,authorization_code",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/registrations:transfer",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,registration,yearly_price,authorization_code"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListRegistrations": {
+                          "requestType": "ListRegistrationsRequest",
+                          "responseType": "ListRegistrationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/registrations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/registrations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetRegistration": {
+                          "requestType": "GetRegistrationRequest",
+                          "responseType": "Registration",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/registrations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/registrations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateRegistration": {
+                          "requestType": "UpdateRegistrationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{registration.name=projects/*/locations/*/registrations/*}",
+                            "(google.api.http).body": "registration",
+                            "(google.api.method_signature)": "registration,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{registration.name=projects/*/locations/*/registrations/*}",
+                                "body": "registration"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "registration,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ConfigureManagementSettings": {
+                          "requestType": "ConfigureManagementSettingsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{registration=projects/*/locations/*/registrations/*}:configureManagementSettings",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "registration,management_settings,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{registration=projects/*/locations/*/registrations/*}:configureManagementSettings",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "registration,management_settings,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ConfigureDnsSettings": {
+                          "requestType": "ConfigureDnsSettingsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{registration=projects/*/locations/*/registrations/*}:configureDnsSettings",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "registration,dns_settings,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{registration=projects/*/locations/*/registrations/*}:configureDnsSettings",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "registration,dns_settings,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ConfigureContactSettings": {
+                          "requestType": "ConfigureContactSettingsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{registration=projects/*/locations/*/registrations/*}:configureContactSettings",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "registration,contact_settings,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{registration=projects/*/locations/*/registrations/*}:configureContactSettings",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "registration,contact_settings,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportRegistration": {
+                          "requestType": "ExportRegistrationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/registrations/*}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/registrations/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteRegistration": {
+                          "requestType": "DeleteRegistrationRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/registrations/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/registrations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveAuthorizationCode": {
+                          "requestType": "RetrieveAuthorizationCodeRequest",
+                          "responseType": "AuthorizationCode",
+                          "options": {
+                            "(google.api.http).get": "/v1/{registration=projects/*/locations/*/registrations/*}:retrieveAuthorizationCode",
+                            "(google.api.method_signature)": "registration"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{registration=projects/*/locations/*/registrations/*}:retrieveAuthorizationCode"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "registration"
+                            }
+                          ]
+                        },
+                        "ResetAuthorizationCode": {
+                          "requestType": "ResetAuthorizationCodeRequest",
+                          "responseType": "AuthorizationCode",
+                          "options": {
+                            "(google.api.http).post": "/v1/{registration=projects/*/locations/*/registrations/*}:resetAuthorizationCode",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "registration"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{registration=projects/*/locations/*/registrations/*}:resetAuthorizationCode",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "registration"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Registration": {
+                      "options": {
+                        "(google.api.resource).type": "domains.googleapis.com/Registration",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/registrations/{registration}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "domainName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "issues": {
+                          "rule": "repeated",
+                          "type": "Issue",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "managementSettings": {
+                          "type": "ManagementSettings",
+                          "id": 10
+                        },
+                        "dnsSettings": {
+                          "type": "DnsSettings",
+                          "id": 11
+                        },
+                        "contactSettings": {
+                          "type": "ContactSettings",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pendingContactSettings": {
+                          "type": "ContactSettings",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "supportedPrivacy": {
+                          "rule": "repeated",
+                          "type": "ContactPrivacy",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "REGISTRATION_PENDING": 1,
+                            "REGISTRATION_FAILED": 2,
+                            "TRANSFER_PENDING": 3,
+                            "TRANSFER_FAILED": 4,
+                            "ACTIVE": 6,
+                            "SUSPENDED": 7,
+                            "EXPORTED": 8
+                          }
+                        },
+                        "Issue": {
+                          "values": {
+                            "ISSUE_UNSPECIFIED": 0,
+                            "CONTACT_SUPPORT": 1,
+                            "UNVERIFIED_EMAIL": 2
+                          }
+                        }
+                      }
+                    },
+                    "ManagementSettings": {
+                      "fields": {
+                        "renewalMethod": {
+                          "type": "RenewalMethod",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "transferLockState": {
+                          "type": "TransferLockState",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "RenewalMethod": {
+                          "values": {
+                            "RENEWAL_METHOD_UNSPECIFIED": 0,
+                            "AUTOMATIC_RENEWAL": 1,
+                            "MANUAL_RENEWAL": 2
+                          }
+                        }
+                      }
+                    },
+                    "DnsSettings": {
+                      "oneofs": {
+                        "dnsProvider": {
+                          "oneof": [
+                            "customDns",
+                            "googleDomainsDns"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "customDns": {
+                          "type": "CustomDns",
+                          "id": 1
+                        },
+                        "googleDomainsDns": {
+                          "type": "GoogleDomainsDns",
+                          "id": 2
+                        },
+                        "glueRecords": {
+                          "rule": "repeated",
+                          "type": "GlueRecord",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "CustomDns": {
+                          "fields": {
+                            "nameServers": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "dsRecords": {
+                              "rule": "repeated",
+                              "type": "DsRecord",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GoogleDomainsDns": {
+                          "fields": {
+                            "nameServers": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "dsState": {
+                              "type": "DsState",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "dsRecords": {
+                              "rule": "repeated",
+                              "type": "DsRecord",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "DsRecord": {
+                          "fields": {
+                            "keyTag": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "algorithm": {
+                              "type": "Algorithm",
+                              "id": 2
+                            },
+                            "digestType": {
+                              "type": "DigestType",
+                              "id": 3
+                            },
+                            "digest": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Algorithm": {
+                              "values": {
+                                "ALGORITHM_UNSPECIFIED": 0,
+                                "RSAMD5": 1,
+                                "DH": 2,
+                                "DSA": 3,
+                                "ECC": 4,
+                                "RSASHA1": 5,
+                                "DSANSEC3SHA1": 6,
+                                "RSASHA1NSEC3SHA1": 7,
+                                "RSASHA256": 8,
+                                "RSASHA512": 10,
+                                "ECCGOST": 12,
+                                "ECDSAP256SHA256": 13,
+                                "ECDSAP384SHA384": 14,
+                                "ED25519": 15,
+                                "ED448": 16,
+                                "INDIRECT": 252,
+                                "PRIVATEDNS": 253,
+                                "PRIVATEOID": 254
+                              }
+                            },
+                            "DigestType": {
+                              "values": {
+                                "DIGEST_TYPE_UNSPECIFIED": 0,
+                                "SHA1": 1,
+                                "SHA256": 2,
+                                "GOST3411": 3,
+                                "SHA384": 4
+                              }
+                            }
+                          }
+                        },
+                        "GlueRecord": {
+                          "fields": {
+                            "hostName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ipv4Addresses": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "ipv6Addresses": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "DsState": {
+                          "values": {
+                            "DS_STATE_UNSPECIFIED": 0,
+                            "DS_RECORDS_UNPUBLISHED": 1,
+                            "DS_RECORDS_PUBLISHED": 2
+                          }
+                        }
+                      }
+                    },
+                    "ContactSettings": {
+                      "fields": {
+                        "privacy": {
+                          "type": "ContactPrivacy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "registrantContact": {
+                          "type": "Contact",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "adminContact": {
+                          "type": "Contact",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "technicalContact": {
+                          "type": "Contact",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Contact": {
+                          "fields": {
+                            "postalAddress": {
+                              "type": "google.type.PostalAddress",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "email": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "phoneNumber": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "faxNumber": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchDomainsRequest": {
+                      "fields": {
+                        "query": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "SearchDomainsResponse": {
+                      "fields": {
+                        "registerParameters": {
+                          "rule": "repeated",
+                          "type": "RegisterParameters",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RetrieveRegisterParametersRequest": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveRegisterParametersResponse": {
+                      "fields": {
+                        "registerParameters": {
+                          "type": "RegisterParameters",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RegisterDomainRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "registration": {
+                          "type": "Registration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "domainNotices": {
+                          "rule": "repeated",
+                          "type": "DomainNotice",
+                          "id": 3
+                        },
+                        "contactNotices": {
+                          "rule": "repeated",
+                          "type": "ContactNotice",
+                          "id": 4
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RetrieveTransferParametersRequest": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveTransferParametersResponse": {
+                      "fields": {
+                        "transferParameters": {
+                          "type": "TransferParameters",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TransferDomainRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "registration": {
+                          "type": "Registration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contactNotices": {
+                          "rule": "repeated",
+                          "type": "ContactNotice",
+                          "id": 3
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authorizationCode": {
+                          "type": "AuthorizationCode",
+                          "id": 5
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListRegistrationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListRegistrationsResponse": {
+                      "fields": {
+                        "registrations": {
+                          "rule": "repeated",
+                          "type": "Registration",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetRegistrationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRegistrationRequest": {
+                      "fields": {
+                        "registration": {
+                          "type": "Registration",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ConfigureManagementSettingsRequest": {
+                      "fields": {
+                        "registration": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        },
+                        "managementSettings": {
+                          "type": "ManagementSettings",
+                          "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ConfigureDnsSettingsRequest": {
+                      "fields": {
+                        "registration": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        },
+                        "dnsSettings": {
+                          "type": "DnsSettings",
+                          "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ConfigureContactSettingsRequest": {
+                      "fields": {
+                        "registration": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        },
+                        "contactSettings": {
+                          "type": "ContactSettings",
+                          "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contactNotices": {
+                          "rule": "repeated",
+                          "type": "ContactNotice",
+                          "id": 4
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ExportRegistrationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRegistrationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveAuthorizationCodeRequest": {
+                      "fields": {
+                        "registration": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        }
+                      }
+                    },
+                    "ResetAuthorizationCodeRequest": {
+                      "fields": {
+                        "registration": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "domains.googleapis.com/Registration"
+                          }
+                        }
+                      }
+                    },
+                    "RegisterParameters": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "availability": {
+                          "type": "Availability",
+                          "id": 2
+                        },
+                        "supportedPrivacy": {
+                          "rule": "repeated",
+                          "type": "ContactPrivacy",
+                          "id": 3
+                        },
+                        "domainNotices": {
+                          "rule": "repeated",
+                          "type": "DomainNotice",
+                          "id": 4
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Availability": {
+                          "values": {
+                            "AVAILABILITY_UNSPECIFIED": 0,
+                            "AVAILABLE": 1,
+                            "UNAVAILABLE": 2,
+                            "UNSUPPORTED": 3,
+                            "UNKNOWN": 4
+                          }
+                        }
+                      }
+                    },
+                    "TransferParameters": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "currentRegistrar": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nameServers": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "transferLockState": {
+                          "type": "TransferLockState",
+                          "id": 4
+                        },
+                        "supportedPrivacy": {
+                          "rule": "repeated",
+                          "type": "ContactPrivacy",
+                          "id": 5
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AuthorizationCode": {
+                      "fields": {
+                        "code": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "statusDetail": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ContactPrivacy": {
+                      "values": {
+                        "CONTACT_PRIVACY_UNSPECIFIED": 0,
+                        "PUBLIC_CONTACT_DATA": 1,
+                        "PRIVATE_CONTACT_DATA": 2,
+                        "REDACTED_CONTACT_DATA": 3
+                      }
+                    },
+                    "DomainNotice": {
+                      "values": {
+                        "DOMAIN_NOTICE_UNSPECIFIED": 0,
+                        "HSTS_PRELOADED": 1
+                      }
+                    },
+                    "ContactNotice": {
+                      "values": {
+                        "CONTACT_NOTICE_UNSPECIFIED": 0,
+                        "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT": 1
+                      }
+                    },
+                    "TransferLockState": {
+                      "values": {
+                        "TRANSFER_LOCK_STATE_UNSPECIFIED": 0,
+                        "UNLOCKED": 1,
+                        "LOCKED": 2
+                      }
+                    }
+                  }
+                },
                 "v1alpha2": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/domains/v1alpha2;domains",
@@ -75,6 +1274,52 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,registration,yearly_price"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveTransferParameters": {
+                          "requestType": "RetrieveTransferParametersRequest",
+                          "responseType": "RetrieveTransferParametersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha2/{location=projects/*/locations/*}/registrations:retrieveTransferParameters",
+                            "(google.api.method_signature)": "location,domain_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha2/{location=projects/*/locations/*}/registrations:retrieveTransferParameters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "location,domain_name"
+                            }
+                          ]
+                        },
+                        "TransferDomain": {
+                          "requestType": "TransferDomainRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha2/{parent=projects/*/locations/*}/registrations:transfer",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,registration,yearly_price,authorization_code",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha2/{parent=projects/*/locations/*}/registrations:transfer",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,registration,yearly_price,authorization_code"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -417,6 +1662,8 @@
                             "STATE_UNSPECIFIED": 0,
                             "REGISTRATION_PENDING": 1,
                             "REGISTRATION_FAILED": 2,
+                            "TRANSFER_PENDING": 3,
+                            "TRANSFER_FAILED": 4,
                             "ACTIVE": 6,
                             "SUSPENDED": 7,
                             "EXPORTED": 8
@@ -547,6 +1794,8 @@
                             "Algorithm": {
                               "values": {
                                 "ALGORITHM_UNSPECIFIED": 0,
+                                "RSAMD5": 1,
+                                "DH": 2,
                                 "DSA": 3,
                                 "ECC": 4,
                                 "RSASHA1": 5,
@@ -558,7 +1807,10 @@
                                 "ECDSAP256SHA256": 13,
                                 "ECDSAP384SHA384": 14,
                                 "ED25519": 15,
-                                "ED448": 16
+                                "ED448": 16,
+                                "INDIRECT": 252,
+                                "PRIVATEDNS": 253,
+                                "PRIVATEOID": 254
                               }
                             },
                             "DigestType": {
@@ -753,6 +2005,72 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RetrieveTransferParametersRequest": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveTransferParametersResponse": {
+                      "fields": {
+                        "transferParameters": {
+                          "type": "TransferParameters",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TransferDomainRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "registration": {
+                          "type": "Registration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contactNotices": {
+                          "rule": "repeated",
+                          "type": "ContactNotice",
+                          "id": 3
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authorizationCode": {
+                          "type": "AuthorizationCode",
+                          "id": 5
                         },
                         "validateOnly": {
                           "type": "bool",
@@ -991,6 +2309,36 @@
                         }
                       }
                     },
+                    "TransferParameters": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "currentRegistrar": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nameServers": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "transferLockState": {
+                          "type": "TransferLockState",
+                          "id": 4
+                        },
+                        "supportedPrivacy": {
+                          "rule": "repeated",
+                          "type": "ContactPrivacy",
+                          "id": 5
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 6
+                        }
+                      }
+                    },
                     "AuthorizationCode": {
                       "fields": {
                         "code": {
@@ -1125,6 +2473,52 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,registration,yearly_price"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Registration",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveTransferParameters": {
+                          "requestType": "RetrieveTransferParametersRequest",
+                          "responseType": "RetrieveTransferParametersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{location=projects/*/locations/*}/registrations:retrieveTransferParameters",
+                            "(google.api.method_signature)": "location,domain_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{location=projects/*/locations/*}/registrations:retrieveTransferParameters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "location,domain_name"
+                            }
+                          ]
+                        },
+                        "TransferDomain": {
+                          "requestType": "TransferDomainRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/registrations:transfer",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,registration,yearly_price,authorization_code",
+                            "(google.longrunning.operation_info).response_type": "Registration",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/registrations:transfer",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,registration,yearly_price,authorization_code"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -1467,6 +2861,8 @@
                             "STATE_UNSPECIFIED": 0,
                             "REGISTRATION_PENDING": 1,
                             "REGISTRATION_FAILED": 2,
+                            "TRANSFER_PENDING": 3,
+                            "TRANSFER_FAILED": 4,
                             "ACTIVE": 6,
                             "SUSPENDED": 7,
                             "EXPORTED": 8
@@ -1597,6 +2993,8 @@
                             "Algorithm": {
                               "values": {
                                 "ALGORITHM_UNSPECIFIED": 0,
+                                "RSAMD5": 1,
+                                "DH": 2,
                                 "DSA": 3,
                                 "ECC": 4,
                                 "RSASHA1": 5,
@@ -1608,7 +3006,10 @@
                                 "ECDSAP256SHA256": 13,
                                 "ECDSAP384SHA384": 14,
                                 "ED25519": 15,
-                                "ED448": 16
+                                "ED448": 16,
+                                "INDIRECT": 252,
+                                "PRIVATEDNS": 253,
+                                "PRIVATEOID": 254
                               }
                             },
                             "DigestType": {
@@ -1803,6 +3204,72 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RetrieveTransferParametersRequest": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveTransferParametersResponse": {
+                      "fields": {
+                        "transferParameters": {
+                          "type": "TransferParameters",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TransferDomainRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "registration": {
+                          "type": "Registration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contactNotices": {
+                          "rule": "repeated",
+                          "type": "ContactNotice",
+                          "id": 3
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authorizationCode": {
+                          "type": "AuthorizationCode",
+                          "id": 5
                         },
                         "validateOnly": {
                           "type": "bool",
@@ -2038,6 +3505,36 @@
                             "UNSUPPORTED": 3,
                             "UNKNOWN": 4
                           }
+                        }
+                      }
+                    },
+                    "TransferParameters": {
+                      "fields": {
+                        "domainName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "currentRegistrar": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nameServers": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "transferLockState": {
+                          "type": "TransferLockState",
+                          "id": 4
+                        },
+                        "supportedPrivacy": {
+                          "rule": "repeated",
+                          "type": "ContactPrivacy",
+                          "id": 5
+                        },
+                        "yearlyPrice": {
+                          "type": "google.type.Money",
+                          "id": 6
                         }
                       }
                     },

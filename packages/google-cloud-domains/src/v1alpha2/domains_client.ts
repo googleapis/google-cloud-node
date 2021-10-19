@@ -203,6 +203,12 @@ export class DomainsClient {
     const registerDomainMetadata = protoFilesRoot.lookup(
       '.google.cloud.domains.v1alpha2.OperationMetadata'
     ) as gax.protobuf.Type;
+    const transferDomainResponse = protoFilesRoot.lookup(
+      '.google.cloud.domains.v1alpha2.Registration'
+    ) as gax.protobuf.Type;
+    const transferDomainMetadata = protoFilesRoot.lookup(
+      '.google.cloud.domains.v1alpha2.OperationMetadata'
+    ) as gax.protobuf.Type;
     const updateRegistrationResponse = protoFilesRoot.lookup(
       '.google.cloud.domains.v1alpha2.Registration'
     ) as gax.protobuf.Type;
@@ -245,6 +251,11 @@ export class DomainsClient {
         this.operationsClient,
         registerDomainResponse.decode.bind(registerDomainResponse),
         registerDomainMetadata.decode.bind(registerDomainMetadata)
+      ),
+      transferDomain: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        transferDomainResponse.decode.bind(transferDomainResponse),
+        transferDomainMetadata.decode.bind(transferDomainMetadata)
       ),
       updateRegistration: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -339,6 +350,8 @@ export class DomainsClient {
       'searchDomains',
       'retrieveRegisterParameters',
       'registerDomain',
+      'retrieveTransferParameters',
+      'transferDomain',
       'listRegistrations',
       'getRegistration',
       'updateRegistration',
@@ -630,6 +643,114 @@ export class DomainsClient {
       });
     this.initialize();
     return this.innerApiCalls.retrieveRegisterParameters(
+      request,
+      options,
+      callback
+    );
+  }
+  retrieveTransferParameters(
+    request?: protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+      (
+        | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  retrieveTransferParameters(
+    request: protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+      | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  retrieveTransferParameters(
+    request: protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest,
+    callback: Callback<
+      protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+      | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets parameters needed to transfer a domain name from another registrar to
+   * Cloud Domains. For domains managed by Google Domains, transferring to Cloud
+   * Domains is not supported.
+   *
+   *
+   * Use the returned values to call `TransferDomain`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.domainName
+   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
+   * @param {string} request.location
+   *   Required. The location. Must be in the format `projects/* /locations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RetrieveTransferParametersResponse]{@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.retrieveTransferParameters(request);
+   */
+  retrieveTransferParameters(
+    request?: protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+          | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+      | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersResponse,
+      (
+        | protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        location: request.location || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.retrieveTransferParameters(
       request,
       options,
       callback
@@ -1002,14 +1123,14 @@ export class DomainsClient {
    *   `RetrieveRegisterParameters` to see the notices that need acknowledgement.
    * @param {number[]} request.contactNotices
    *   The list of contact notices that the caller acknowledges. The notices
-   *   required here depend on the values specified in
+   *   needed here depend on the values specified in
    *   `registration.contact_settings`.
    * @param {google.type.Money} request.yearlyPrice
    *   Required. Yearly price to register or renew the domain.
    *   The value that should be put here can be obtained from
    *   RetrieveRegisterParameters or SearchDomains calls.
    * @param {boolean} request.validateOnly
-   *   When true, only validation will be performed, without actually registering
+   *   When true, only validation is performed, without actually registering
    *   the domain. Follows:
    *   https://cloud.google.com/apis/design/design_patterns#request_validation
    * @param {object} [options]
@@ -1110,6 +1231,189 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  transferDomain(
+    request?: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  transferDomain(
+    request: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  transferDomain(
+    request: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Transfers a domain name from another registrar to Cloud Domains.  For
+   * domains managed by Google Domains, transferring to Cloud Domains is not
+   * supported.
+   *
+   *
+   * Before calling this method, go to the domain's current registrar to unlock
+   * the domain for transfer and retrieve the domain's transfer authorization
+   * code. Then call `RetrieveTransferParameters` to confirm that the domain is
+   * unlocked and to get values needed to build a call to this method.
+   *
+   * A successful call creates a `Registration` resource in state
+   * `TRANSFER_PENDING`. It can take several days to complete the transfer
+   * process. The registrant can often speed up this process by approving the
+   * transfer through the current registrar, either by clicking a link in an
+   * email from the registrar or by visiting the registrar's website.
+   *
+   * A few minutes after transfer approval, the resource transitions to state
+   * `ACTIVE`, indicating that the transfer was successful. If the transfer is
+   * rejected or the request expires without being approved, the resource can
+   * end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete
+   * the resource and retry the transfer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the `Registration`. Must be in the
+   *   format `projects/* /locations/*`.
+   * @param {google.cloud.domains.v1alpha2.Registration} request.registration
+   *   Required. The complete `Registration` resource to be created.
+   *
+   *   You can leave `registration.dns_settings` unset to import the
+   *   domain's current DNS configuration from its current registrar. Use this
+   *   option only if you are sure that the domain's current DNS service
+   *   does not cease upon transfer, as is often the case for DNS services
+   *   provided for free by the registrar.
+   * @param {number[]} request.contactNotices
+   *   The list of contact notices that you acknowledge. The notices
+   *   needed here depend on the values specified in
+   *   `registration.contact_settings`.
+   * @param {google.type.Money} request.yearlyPrice
+   *   Required. Acknowledgement of the price to transfer or renew the domain for one year.
+   *   Call `RetrieveTransferParameters` to obtain the price, which you must
+   *   acknowledge.
+   * @param {google.cloud.domains.v1alpha2.AuthorizationCode} request.authorizationCode
+   *   The domain's transfer authorization code. You can obtain this from the
+   *   domain's current registrar.
+   * @param {boolean} request.validateOnly
+   *   Validate the request without actually transferring the domain.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.transferDomain(request);
+   * const [response] = await operation.promise();
+   */
+  transferDomain(
+    request?: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.domains.v1alpha2.IRegistration,
+            protos.google.cloud.domains.v1alpha2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.transferDomain(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `transferDomain()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkTransferDomainProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkTransferDomainProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.domains.v1alpha2.Registration,
+      protos.google.cloud.domains.v1alpha2.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.transferDomain,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.domains.v1alpha2.Registration,
+      protos.google.cloud.domains.v1alpha2.OperationMetadata
+    >;
+  }
   updateRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IUpdateRegistrationRequest,
     options?: CallOptions
@@ -1160,8 +1464,8 @@ export class DomainsClient {
    *   Fields of the `Registration` to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the labels are being updated, the `update_mask` would
-   *   be `"labels"`.
+   *   For example, if only the labels are being updated, the `update_mask` is
+   *   `"labels"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1309,7 +1613,7 @@ export class DomainsClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
    *   For example, if only the transfer lock is being updated, the `update_mask`
-   *   would be `"transfer_lock_state"`.
+   *   is `"transfer_lock_state"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1461,13 +1765,13 @@ export class DomainsClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
    *   For example, if only the name servers are being updated for an existing
-   *   Custom DNS configuration, the `update_mask` would be
+   *   Custom DNS configuration, the `update_mask` is
    *   `"custom_dns.name_servers"`.
    *
    *   When changing the DNS provider from one type to another, pass the new
    *   provider's field name as part of the field mask. For example, when changing
    *   from a Google Domains DNS configuration to a Custom DNS configuration, the
-   *   `update_mask` would be `"custom_dns"`. //
+   *   `update_mask` is `"custom_dns"`. //
    * @param {boolean} request.validateOnly
    *   Validate the request without actually updating the DNS settings.
    * @param {object} [options]
@@ -1618,10 +1922,10 @@ export class DomainsClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The field mask describing which fields to update as a comma-separated list.
    *   For example, if only the registrant contact is being updated, the
-   *   `update_mask` would be `"registrant_contact"`.
+   *   `update_mask` is `"registrant_contact"`.
    * @param {number[]} request.contactNotices
    *   The list of contact notices that the caller acknowledges. The notices
-   *   required here depend on the values specified in `contact_settings`.
+   *   needed here depend on the values specified in `contact_settings`.
    * @param {boolean} request.validateOnly
    *   Validate the request without actually updating the contact settings.
    * @param {object} [options]
@@ -1763,20 +2067,15 @@ export class DomainsClient {
     >
   ): void;
   /**
-   * Exports a `Registration` that you no longer want to use with
-   * Cloud Domains. You can continue to use the domain in
-   * [Google Domains](https://domains.google/) until it expires.
+   * Exports a `Registration` resource, such that it is no longer managed by
+   * Cloud Domains.
    *
-   * If the export is successful:
-   *
-   * * The resource's `state` becomes `EXPORTED`, meaning that it is no longer
-   * managed by Cloud Domains
-   * * Because individual users can own domains in Google Domains, the calling
-   * user becomes the domain's sole owner. Permissions for the domain are
-   * subsequently managed in Google Domains.
-   * * Without further action, the domain does not renew automatically.
-   * The new owner can set up billing in Google Domains to renew the domain
-   * if needed.
+   * When an active domain is successfully exported, you can continue to use the
+   * domain in [Google Domains](https://domains.google/) until it expires. The
+   * calling user becomes the domain's sole owner in Google Domains, and
+   * permissions for the domain are subsequently managed there. The domain does
+   * not renew automatically unless the new owner sets up billing in Google
+   * Domains.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1920,10 +2219,23 @@ export class DomainsClient {
   /**
    * Deletes a `Registration` resource.
    *
-   * This method only works on resources in one of the following states:
+   * This method works on any `Registration` resource using [Subscription or
+   * Commitment billing](/domains/pricing#billing-models), provided that the
+   * resource was created at least 1 day in the past.
+   *
+   * For `Registration` resources using
+   * [Monthly billing](/domains/pricing#billing-models), this method works if:
    *
    * * `state` is `EXPORTED` with `expire_time` in the past
    * * `state` is `REGISTRATION_FAILED`
+   * * `state` is `TRANSFER_FAILED`
+   *
+   * When an active registration is successfully deleted, you can continue to
+   * use the domain in [Google Domains](https://domains.google/) until it
+   * expires. The calling user becomes the domain's sole owner in Google
+   * Domains, and permissions for the domain are subsequently managed there. The
+   * domain does not renew automatically unless the new owner sets up billing in
+   * Google Domains.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2199,7 +2511,8 @@ export class DomainsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRegistrations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRegistrations.createStream(
       this.innerApiCalls.listRegistrations as gax.GaxCall,
@@ -2268,7 +2581,8 @@ export class DomainsClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listRegistrations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listRegistrations.asyncIterate(
       this.innerApiCalls['listRegistrations'] as GaxCall,
