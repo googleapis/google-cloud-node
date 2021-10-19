@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.2.2...v1.3.0) (2021-10-19)
+
+
+### Features
+
+* add search mode to search request. If not specified, a single search request triggers both product search and faceted search. ([49b9b8e](https://www.github.com/googleapis/nodejs-retail/commit/49b9b8e22eba6318f54e44025df4e3c1900cb73e))
+* update grpc service config settings to reflect correct API deadlines ([49b9b8e](https://www.github.com/googleapis/nodejs-retail/commit/49b9b8e22eba6318f54e44025df4e3c1900cb73e))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-retail/compare/v1.2.1...v1.2.2) (2021-09-10)
 
 
