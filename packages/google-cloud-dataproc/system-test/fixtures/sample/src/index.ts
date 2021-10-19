@@ -18,6 +18,7 @@
 
 import {
   AutoscalingPolicyServiceClient,
+  BatchControllerClient,
   ClusterControllerClient,
   JobControllerClient,
   WorkflowTemplateServiceClient,
@@ -27,6 +28,9 @@ import {
 function doStuffWithAutoscalingPolicyServiceClient(
   client: AutoscalingPolicyServiceClient
 ) {
+  client.close();
+}
+function doStuffWithBatchControllerClient(client: BatchControllerClient) {
   client.close();
 }
 function doStuffWithClusterControllerClient(client: ClusterControllerClient) {
@@ -45,6 +49,9 @@ function main() {
   // check that the client instance can be created
   const autoscalingPolicyServiceClient = new AutoscalingPolicyServiceClient();
   doStuffWithAutoscalingPolicyServiceClient(autoscalingPolicyServiceClient);
+  // check that the client instance can be created
+  const batchControllerClient = new BatchControllerClient();
+  doStuffWithBatchControllerClient(batchControllerClient);
   // check that the client instance can be created
   const clusterControllerClient = new ClusterControllerClient();
   doStuffWithClusterControllerClient(clusterControllerClient);

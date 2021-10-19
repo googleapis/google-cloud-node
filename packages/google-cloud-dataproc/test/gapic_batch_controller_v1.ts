@@ -21,11 +21,11 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as autoscalingpolicyserviceModule from '../src';
+import * as batchcontrollerModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -49,6 +49,38 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -112,69 +144,61 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.AutoscalingPolicyServiceClient', () => {
+describe('v1.BatchControllerClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
-        .servicePath;
+      batchcontrollerModule.v1.BatchControllerClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
-        .apiEndpoint;
+      batchcontrollerModule.v1.BatchControllerClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port =
-      autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient.port;
+    const port = batchcontrollerModule.v1.BatchControllerClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
-    const client =
-      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient();
+    const client = new batchcontrollerModule.v1.BatchControllerClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client =
-      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-        fallback: true,
-      });
+    const client = new batchcontrollerModule.v1.BatchControllerClient({
+      fallback: true,
+    });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
+    const client = new batchcontrollerModule.v1.BatchControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.batchControllerStub, undefined);
     await client.initialize();
-    assert(client.autoscalingPolicyServiceStub);
+    assert(client.batchControllerStub);
   });
 
   it('has close method', () => {
-    const client =
-      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    const client = new batchcontrollerModule.v1.BatchControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    const client = new batchcontrollerModule.v1.BatchControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -183,11 +207,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    const client = new batchcontrollerModule.v1.BatchControllerClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -204,19 +227,18 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('createAutoscalingPolicy', () => {
-    it('invokes createAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('getBatch', () => {
+    it('invokes getBatch without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
+        new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -225,31 +247,29 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
+        new protos.google.cloud.dataproc.v1.Batch()
       );
-      client.innerApiCalls.createAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.createAutoscalingPolicy(request);
+      client.innerApiCalls.getBatch = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBatch(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
+        (client.innerApiCalls.getBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes createAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes getBatch without error using callback', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
+        new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -258,16 +278,16 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
+        new protos.google.cloud.dataproc.v1.Batch()
       );
-      client.innerApiCalls.createAutoscalingPolicy =
+      client.innerApiCalls.getBatch =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createAutoscalingPolicy(
+        client.getBatch(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy | null
+            result?: protos.google.cloud.dataproc.v1.IBatch | null
           ) => {
             if (err) {
               reject(err);
@@ -280,145 +300,23 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
+        (client.innerApiCalls.getBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes createAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
-      );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.createAutoscalingPolicy(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.createAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('updateAutoscalingPolicy', () => {
-    it('invokes updateAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
-      );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.updateAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateAutoscalingPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes updateAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
-      );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.updateAutoscalingPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateAutoscalingPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
+    it('invokes getBatch with error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes updateAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
+        new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -427,147 +325,25 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateAutoscalingPolicy(request),
-        expectedError
-      );
+      client.innerApiCalls.getBatch = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getBatch(request), expectedError);
       assert(
-        (client.innerApiCalls.updateAutoscalingPolicy as SinonStub)
+        (client.innerApiCalls.getBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('getAutoscalingPolicy', () => {
-    it('invokes getAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.getAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.getAutoscalingPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes getAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-      );
-      client.innerApiCalls.getAutoscalingPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getAutoscalingPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
+  describe('deleteBatch', () => {
+    it('invokes deleteBatch without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes getAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
-      );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getAutoscalingPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAutoscalingPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('deleteAutoscalingPolicy', () => {
-    it('invokes deleteAutoscalingPolicy without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
+        new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -581,26 +357,24 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAutoscalingPolicy =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteAutoscalingPolicy(request);
+      client.innerApiCalls.deleteBatch = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteBatch(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
+        (client.innerApiCalls.deleteBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes deleteAutoscalingPolicy without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes deleteBatch without error using callback', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
+        new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -614,10 +388,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAutoscalingPolicy =
+      client.innerApiCalls.deleteBatch =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteAutoscalingPolicy(
+        client.deleteBatch(
           request,
           (
             err?: Error | null,
@@ -634,21 +408,20 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
+        (client.innerApiCalls.deleteBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes deleteAutoscalingPolicy with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes deleteBatch with error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
+        new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -660,32 +433,28 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteAutoscalingPolicy = stubSimpleCall(
+      client.innerApiCalls.deleteBatch = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.deleteAutoscalingPolicy(request),
-        expectedError
-      );
+      await assert.rejects(client.deleteBatch(request), expectedError);
       assert(
-        (client.innerApiCalls.deleteAutoscalingPolicy as SinonStub)
+        (client.innerApiCalls.deleteBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('listAutoscalingPolicies', () => {
-    it('invokes listAutoscalingPolicies without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+  describe('createBatch', () => {
+    it('invokes createBatch without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.CreateBatchRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -696,37 +465,186 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           },
         },
       };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-      ];
-      client.innerApiCalls.listAutoscalingPolicies =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAutoscalingPolicies(request);
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBatch = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createBatch(request);
+      const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
+        (client.innerApiCalls.createBatch as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listAutoscalingPolicies without error using callback', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes createBatch without error using callback', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.CreateBatchRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBatch =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createBatch(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dataproc.v1.IBatch,
+              protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createBatch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createBatch with call error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateBatchRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBatch = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createBatch(request), expectedError);
+      assert(
+        (client.innerApiCalls.createBatch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createBatch with LRO error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.CreateBatchRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBatch = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createBatch(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.createBatch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkCreateBatchProgress without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateBatchProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateBatchProgress with error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateBatchProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listBatches', () => {
+    it('invokes listBatches without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -738,24 +656,51 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
       ];
-      client.innerApiCalls.listAutoscalingPolicies =
+      client.innerApiCalls.listBatches = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBatches(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listBatches as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listBatches without error using callback', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+      ];
+      client.innerApiCalls.listBatches =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listAutoscalingPolicies(
+        client.listBatches(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] | null
+            result?: protos.google.cloud.dataproc.v1.IBatch[] | null
           ) => {
             if (err) {
               reject(err);
@@ -768,21 +713,20 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
+        (client.innerApiCalls.listBatches as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes listAutoscalingPolicies with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listBatches with error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -794,56 +738,42 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listAutoscalingPolicies = stubSimpleCall(
+      client.innerApiCalls.listBatches = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.listAutoscalingPolicies(request),
-        expectedError
-      );
+      await assert.rejects(client.listBatches(request), expectedError);
       assert(
-        (client.innerApiCalls.listAutoscalingPolicies as SinonStub)
+        (client.innerApiCalls.listBatches as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listAutoscalingPoliciesStream without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listBatchesStream without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
       ];
-      client.descriptors.page.listAutoscalingPolicies.createStream =
+      client.descriptors.page.listBatches.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listAutoscalingPoliciesStream(request);
+      const stream = client.listBatchesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataproc.v1.AutoscalingPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataproc.v1.AutoscalingPolicy) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.cloud.dataproc.v1.Batch[] = [];
+        stream.on('data', (response: protos.google.cloud.dataproc.v1.Batch) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -854,47 +784,40 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listBatches.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAutoscalingPolicies, request)
+          .calledWith(client.innerApiCalls.listBatches, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listBatches.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('invokes listAutoscalingPoliciesStream with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('invokes listBatchesStream with error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAutoscalingPolicies.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listAutoscalingPoliciesStream(request);
+      client.descriptors.page.listBatches.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listBatchesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dataproc.v1.AutoscalingPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.dataproc.v1.AutoscalingPolicy) => {
-            responses.push(response);
-          }
-        );
+        const responses: protos.google.cloud.dataproc.v1.Batch[] = [];
+        stream.on('data', (response: protos.google.cloud.dataproc.v1.Batch) => {
+          responses.push(response);
+        });
         stream.on('end', () => {
           resolve(responses);
         });
@@ -904,105 +827,89 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        )
+        (client.descriptors.page.listBatches.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAutoscalingPolicies, request)
+          .calledWith(client.innerApiCalls.listBatches, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listBatches.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listAutoscalingPolicies without error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listBatches without error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.dataproc.v1.AutoscalingPolicy()
-        ),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
+        generateSampleMessage(new protos.google.cloud.dataproc.v1.Batch()),
       ];
-      client.descriptors.page.listAutoscalingPolicies.asyncIterate =
+      client.descriptors.page.listBatches.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] =
-        [];
-      const iterable = client.listAutoscalingPoliciesAsync(request);
+      const responses: protos.google.cloud.dataproc.v1.IBatch[] = [];
+      const iterable = client.listBatchesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listBatches.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listBatches.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listAutoscalingPolicies with error', async () => {
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+    it('uses async iteration with listBatches with error', async () => {
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
+        new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAutoscalingPolicies.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listAutoscalingPoliciesAsync(request);
+      client.descriptors.page.listBatches.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listBatchesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] =
-          [];
+        const responses: protos.google.cloud.dataproc.v1.IBatch[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listBatches.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listAutoscalingPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listBatches.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1016,11 +923,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         location: 'locationValue',
         batch: 'batchValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.batchPathTemplate.render = sinon
         .stub()
@@ -1080,11 +986,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -1129,11 +1034,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1170,11 +1074,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         location: 'locationValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1252,11 +1155,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         location: 'locationValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1332,11 +1234,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         region: 'regionValue',
         autoscaling_policy: 'autoscalingPolicyValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1412,11 +1313,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         region: 'regionValue',
         workflow_template: 'workflowTemplateValue',
       };
-      const client =
-        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
+      const client = new batchcontrollerModule.v1.BatchControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
       client.initialize();
       client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);

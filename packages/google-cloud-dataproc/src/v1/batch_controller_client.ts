@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -33,20 +34,19 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/autoscaling_policy_service_client_config.json`.
+ * `src/v1/batch_controller_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './autoscaling_policy_service_client_config.json';
-
+import * as gapicConfig from './batch_controller_client_config.json';
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  The API interface for managing autoscaling policies in the
- *  Dataproc API.
+ *  The BatchController provides methods to manage batch workloads.
  * @class
  * @memberof v1
  */
-export class AutoscalingPolicyServiceClient {
+export class BatchControllerClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -64,10 +64,11 @@ export class AutoscalingPolicyServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  autoscalingPolicyServiceStub?: Promise<{[name: string]: Function}>;
+  operationsClient: gax.OperationsClient;
+  batchControllerStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of AutoscalingPolicyServiceClient.
+   * Construct an instance of BatchControllerClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -102,8 +103,7 @@ export class AutoscalingPolicyServiceClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof AutoscalingPolicyServiceClient;
+    const staticMembers = this.constructor as typeof BatchControllerClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -197,16 +197,43 @@ export class AutoscalingPolicyServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAutoscalingPolicies: new this._gaxModule.PageDescriptor(
+      listBatches: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'policies'
+        'batches'
+      ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
+    const createBatchResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1.Batch'
+    ) as gax.protobuf.Type;
+    const createBatchMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataproc.v1.BatchOperationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      createBatch: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createBatchResponse.decode.bind(createBatchResponse),
+        createBatchMetadata.decode.bind(createBatchMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.AutoscalingPolicyService',
+      'google.cloud.dataproc.v1.BatchController',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -234,35 +261,33 @@ export class AutoscalingPolicyServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.autoscalingPolicyServiceStub) {
-      return this.autoscalingPolicyServiceStub;
+    if (this.batchControllerStub) {
+      return this.batchControllerStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.dataproc.v1.AutoscalingPolicyService.
-    this.autoscalingPolicyServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.dataproc.v1.BatchController.
+    this.batchControllerStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataproc.v1.AutoscalingPolicyService'
+            'google.cloud.dataproc.v1.BatchController'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.dataproc.v1
-            .AutoscalingPolicyService,
+          (this._protos as any).google.cloud.dataproc.v1.BatchController,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const autoscalingPolicyServiceStubMethods = [
-      'createAutoscalingPolicy',
-      'updateAutoscalingPolicy',
-      'getAutoscalingPolicy',
-      'listAutoscalingPolicies',
-      'deleteAutoscalingPolicy',
+    const batchControllerStubMethods = [
+      'createBatch',
+      'getBatch',
+      'listBatches',
+      'deleteBatch',
     ];
-    for (const methodName of autoscalingPolicyServiceStubMethods) {
-      const callPromise = this.autoscalingPolicyServiceStub.then(
+    for (const methodName of batchControllerStubMethods) {
+      const callPromise = this.batchControllerStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -276,7 +301,10 @@ export class AutoscalingPolicyServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -286,7 +314,7 @@ export class AutoscalingPolicyServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.autoscalingPolicyServiceStub;
+    return this.batchControllerStub;
   }
 
   /**
@@ -342,301 +370,68 @@ export class AutoscalingPolicyServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  createAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest,
+  getBatch(
+    request?: protos.google.cloud.dataproc.v1.IGetBatchRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      (
-        | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.dataproc.v1.IBatch,
+      protos.google.cloud.dataproc.v1.IGetBatchRequest | undefined,
       {} | undefined
     ]
   >;
-  createAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest,
+  getBatch(
+    request: protos.google.cloud.dataproc.v1.IGetBatchRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
-      | null
-      | undefined,
+      protos.google.cloud.dataproc.v1.IBatch,
+      protos.google.cloud.dataproc.v1.IGetBatchRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest,
+  getBatch(
+    request: protos.google.cloud.dataproc.v1.IGetBatchRequest,
     callback: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
-      | null
-      | undefined,
+      protos.google.cloud.dataproc.v1.IBatch,
+      protos.google.cloud.dataproc.v1.IGetBatchRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Creates new autoscaling policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The "resource name" of the region or location, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.create`, the resource name
-   *     of the region has the following format:
-   *     `projects/{project_id}/regions/{region}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.create`, the resource name
-   *     of the location has the following format:
-   *     `projects/{project_id}/locations/{location}`
-   * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
-   *   Required. The autoscaling policy to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createAutoscalingPolicy(request);
-   */
-  createAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-          | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      (
-        | protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createAutoscalingPolicy(
-      request,
-      options,
-      callback
-    );
-  }
-  updateAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      (
-        | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  updateAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates (replaces) autoscaling policy.
-   *
-   * Disabled check for update_mask, because all updates will be full
-   * replacements.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
-   *   Required. The updated autoscaling policy.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateAutoscalingPolicy(request);
-   */
-  updateAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-          | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      (
-        | protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'policy.name': request.policy!.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateAutoscalingPolicy(
-      request,
-      options,
-      callback
-    );
-  }
-  getAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves autoscaling policy.
+   * Gets the batch workload resource representation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The "resource name" of the autoscaling policy, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.get`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.get`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+   *   Required. The name of the batch to retrieve.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
+   *   The first element of the array is an object representing [Batch]{@link google.cloud.dataproc.v1.Batch}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
-   * const [response] = await client.getAutoscalingPolicy(request);
+   * const [response] = await client.getBatch(request);
    */
-  getAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest,
+  getBatch(
+    request?: protos.google.cloud.dataproc.v1.IGetBatchRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-          | protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest
-          | null
-          | undefined,
+          protos.google.cloud.dataproc.v1.IBatch,
+          protos.google.cloud.dataproc.v1.IGetBatchRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      | protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest
-      | null
-      | undefined,
+      protos.google.cloud.dataproc.v1.IBatch,
+      protos.google.cloud.dataproc.v1.IGetBatchRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy,
-      protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest | undefined,
+      protos.google.cloud.dataproc.v1.IBatch,
+      protos.google.cloud.dataproc.v1.IGetBatchRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -656,59 +451,43 @@ export class AutoscalingPolicyServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.getAutoscalingPolicy(request, options, callback);
+    return this.innerApiCalls.getBatch(request, options, callback);
   }
-  deleteAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest,
+  deleteBatch(
+    request?: protos.google.cloud.dataproc.v1.IDeleteBatchRequest,
     options?: CallOptions
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.dataproc.v1.IDeleteBatchRequest | undefined,
       {} | undefined
     ]
   >;
-  deleteAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest,
+  deleteBatch(
+    request: protos.google.cloud.dataproc.v1.IDeleteBatchRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
-      | null
-      | undefined,
+      protos.google.cloud.dataproc.v1.IDeleteBatchRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteAutoscalingPolicy(
-    request: protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest,
+  deleteBatch(
+    request: protos.google.cloud.dataproc.v1.IDeleteBatchRequest,
     callback: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
-      | null
-      | undefined,
+      protos.google.cloud.dataproc.v1.IDeleteBatchRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Deletes an autoscaling policy. It is an error to delete an autoscaling
-   * policy that is in use by one or more clusters.
+   * Deletes the batch workload resource. If the batch is not in terminal state,
+   * the delete fails and the response returns `FAILED_PRECONDITION`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The "resource name" of the autoscaling policy, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.delete`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.delete`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+   *   Required. The name of the batch resource to delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -717,33 +496,28 @@ export class AutoscalingPolicyServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
-   * const [response] = await client.deleteAutoscalingPolicy(request);
+   * const [response] = await client.deleteBatch(request);
    */
-  deleteAutoscalingPolicy(
-    request?: protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest,
+  deleteBatch(
+    request?: protos.google.cloud.dataproc.v1.IDeleteBatchRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
+          | protos.google.cloud.dataproc.v1.IDeleteBatchRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
-      | null
-      | undefined,
+      protos.google.cloud.dataproc.v1.IDeleteBatchRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest
-        | undefined
-      ),
+      protos.google.cloud.dataproc.v1.IDeleteBatchRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -763,102 +537,113 @@ export class AutoscalingPolicyServiceClient {
         name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAutoscalingPolicy(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.deleteBatch(request, options, callback);
   }
 
-  listAutoscalingPolicies(
-    request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+  createBatch(
+    request?: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
     ]
   >;
-  listAutoscalingPolicies(
-    request: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+  createBatch(
+    request: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listAutoscalingPolicies(
-    request: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+  createBatch(
+    request: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
   /**
-   * Lists autoscaling policies in the project.
+   * Creates a batch workload that executes asynchronously.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The "resource name" of the region or location, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
+   *   Required. The parent resource where this batch will be created.
+   * @param {google.cloud.dataproc.v1.Batch} request.batch
+   *   Required. The batch to create.
+   * @param {string} [request.batchId]
+   *   Optional. The ID to use for the batch, which will become the final component of
+   *   the batch's resource name.
    *
-   *   * For `projects.regions.autoscalingPolicies.list`, the resource name
-   *     of the region has the following format:
-   *     `projects/{project_id}/regions/{region}`
+   *   This value must be 4-63 characters. Valid characters are `/{@link 0-9|a-z}-/`.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the service
+   *   receives two
+   *   [CreateBatchRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateBatchRequest)s
+   *   with the same request_id, the second request is ignored and the
+   *   Operation that corresponds to the first Batch created and stored
+   *   in the backend is returned.
    *
-   *   * For `projects.locations.autoscalingPolicies.list`, the resource name
-   *     of the location has the following format:
-   *     `projects/{project_id}/locations/{location}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return in each response.
-   *   Must be less than or equal to 1000. Defaults to 100.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token, returned by a previous call, to request the
-   *   next page of results.
+   *   Recommendation: Set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The value must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAutoscalingPoliciesAsync()`
-   *   method described below for async iteration which you can stop as needed.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   * @example
+   * const [operation] = await client.createBatch(request);
+   * const [response] = await operation.promise();
    */
-  listAutoscalingPolicies(
-    request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+  createBatch(
+    request?: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-          | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.IBatch,
+            protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -877,11 +662,139 @@ export class AutoscalingPolicyServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
-    return this.innerApiCalls.listAutoscalingPolicies(
-      request,
-      options,
-      callback
+    return this.innerApiCalls.createBatch(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createBatch()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateBatchProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateBatchProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Batch,
+      protos.google.cloud.dataproc.v1.BatchOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
     );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createBatch,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Batch,
+      protos.google.cloud.dataproc.v1.BatchOperationMetadata
+    >;
+  }
+  listBatches(
+    request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.IBatch[],
+      protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse
+    ]
+  >;
+  listBatches(
+    request: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListBatchesRequest,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.IBatch
+    >
+  ): void;
+  listBatches(
+    request: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListBatchesRequest,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.IBatch
+    >
+  ): void;
+  /**
+   * Lists batch workloads.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of batches.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of batches to return in each response.
+   *   The service may return fewer than this value.
+   *   The default page size is 20; the maximum page size is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListBatches` call.
+   *   Provide this token to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Batch]{@link google.cloud.dataproc.v1.Batch}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBatchesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBatches(
+    request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListBatchesRequest,
+          | protos.google.cloud.dataproc.v1.IListBatchesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1.IBatch
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListBatchesRequest,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.IBatch
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.IBatch[],
+      protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBatches(request, options, callback);
   }
 
   /**
@@ -889,36 +802,28 @@ export class AutoscalingPolicyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The "resource name" of the region or location, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.list`, the resource name
-   *     of the region has the following format:
-   *     `projects/{project_id}/regions/{region}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.list`, the resource name
-   *     of the location has the following format:
-   *     `projects/{project_id}/locations/{location}`
+   *   Required. The parent, which owns this collection of batches.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return in each response.
-   *   Must be less than or equal to 1000. Defaults to 100.
+   *   Optional. The maximum number of batches to return in each response.
+   *   The service may return fewer than this value.
+   *   The default page size is 20; the maximum page size is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The page token, returned by a previous call, to request the
-   *   next page of results.
+   *   Optional. A page token received from a previous `ListBatches` call.
+   *   Provide this token to retrieve the subsequent page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy} on 'data' event.
+   *   An object stream which emits an object representing [Batch]{@link google.cloud.dataproc.v1.Batch} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAutoscalingPoliciesAsync()`
+   *   We recommend using `listBatchesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
-  listAutoscalingPoliciesStream(
-    request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+  listBatchesStream(
+    request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -929,59 +834,51 @@ export class AutoscalingPolicyServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
+    const defaultCallSettings = this._defaults['listBatches'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listAutoscalingPolicies.createStream(
-      this.innerApiCalls.listAutoscalingPolicies as gax.GaxCall,
+    return this.descriptors.page.listBatches.createStream(
+      this.innerApiCalls.listBatches as gax.GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listAutoscalingPolicies`, but returns an iterable object.
+   * Equivalent to `listBatches`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The "resource name" of the region or location, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.list`, the resource name
-   *     of the region has the following format:
-   *     `projects/{project_id}/regions/{region}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.list`, the resource name
-   *     of the location has the following format:
-   *     `projects/{project_id}/locations/{location}`
+   *   Required. The parent, which owns this collection of batches.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of results to return in each response.
-   *   Must be less than or equal to 1000. Defaults to 100.
+   *   Optional. The maximum number of batches to return in each response.
+   *   The service may return fewer than this value.
+   *   The default page size is 20; the maximum page size is 1000.
    * @param {string} [request.pageToken]
-   *   Optional. The page token, returned by a previous call, to request the
-   *   next page of results.
+   *   Optional. A page token received from a previous `ListBatches` call.
+   *   Provide this token to retrieve the subsequent page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}. The API will be called under the hood as needed, once per the page,
+   *   [Batch]{@link google.cloud.dataproc.v1.Batch}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
-   * const iterable = client.listAutoscalingPoliciesAsync(request);
+   * const iterable = client.listBatchesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
    */
-  listAutoscalingPoliciesAsync(
-    request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+  listBatchesAsync(
+    request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataproc.v1.IAutoscalingPolicy> {
+  ): AsyncIterable<protos.google.cloud.dataproc.v1.IBatch> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -991,14 +888,14 @@ export class AutoscalingPolicyServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
+    const defaultCallSettings = this._defaults['listBatches'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listAutoscalingPolicies.asyncIterate(
-      this.innerApiCalls['listAutoscalingPolicies'] as GaxCall,
+    return this.descriptors.page.listBatches.asyncIterate(
+      this.innerApiCalls['listBatches'] as GaxCall,
       request as unknown as RequestType,
       callSettings
-    ) as AsyncIterable<protos.google.cloud.dataproc.v1.IAutoscalingPolicy>;
+    ) as AsyncIterable<protos.google.cloud.dataproc.v1.IBatch>;
   }
   // --------------------
   // -- Path templates --
@@ -1387,9 +1284,10 @@ export class AutoscalingPolicyServiceClient {
   close(): Promise<void> {
     this.initialize();
     if (!this._terminated) {
-      return this.autoscalingPolicyServiceStub!.then(stub => {
+      return this.batchControllerStub!.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

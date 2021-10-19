@@ -1778,6 +1778,70 @@ describe('v1.ClusterControllerClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('batch', () => {
+      const fakePath = '/rendered/path/batch';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        batch: 'batchValue',
+      };
+      const client = new clustercontrollerModule.v1.ClusterControllerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.batchPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.batchPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('batchPath', () => {
+        const result = client.batchPath(
+          'projectValue',
+          'locationValue',
+          'batchValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.batchPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBatchName', () => {
+        const result = client.matchProjectFromBatchName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.batchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBatchName', () => {
+        const result = client.matchLocationFromBatchName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.batchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBatchFromBatchName', () => {
+        const result = client.matchBatchFromBatchName(fakePath);
+        assert.strictEqual(result, 'batchValue');
+        assert(
+          (client.pathTemplates.batchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationAutoscalingPolicy', () => {
       const fakePath = '/rendered/path/projectLocationAutoscalingPolicy';
       const expectedParameters = {

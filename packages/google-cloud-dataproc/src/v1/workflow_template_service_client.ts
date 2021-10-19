@@ -168,6 +168,9 @@ export class WorkflowTemplateServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      batchPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/batches/{batch}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -1440,6 +1443,55 @@ export class WorkflowTemplateServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified batch resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} batch
+   * @returns {string} Resource name string.
+   */
+  batchPath(project: string, location: string, batch: string) {
+    return this.pathTemplates.batchPathTemplate.render({
+      project: project,
+      location: location,
+      batch: batch,
+    });
+  }
+
+  /**
+   * Parse the project from Batch resource.
+   *
+   * @param {string} batchName
+   *   A fully-qualified path representing Batch resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBatchName(batchName: string) {
+    return this.pathTemplates.batchPathTemplate.match(batchName).project;
+  }
+
+  /**
+   * Parse the location from Batch resource.
+   *
+   * @param {string} batchName
+   *   A fully-qualified path representing Batch resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBatchName(batchName: string) {
+    return this.pathTemplates.batchPathTemplate.match(batchName).location;
+  }
+
+  /**
+   * Parse the batch from Batch resource.
+   *
+   * @param {string} batchName
+   *   A fully-qualified path representing Batch resource.
+   * @returns {string} A string representing the batch.
+   */
+  matchBatchFromBatchName(batchName: string) {
+    return this.pathTemplates.batchPathTemplate.match(batchName).batch;
+  }
 
   /**
    * Return a fully-qualified project resource name string.

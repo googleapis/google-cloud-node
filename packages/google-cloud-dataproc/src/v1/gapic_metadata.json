@@ -73,6 +73,64 @@
         }
       }
     },
+    "BatchController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BatchControllerClient",
+          "rpcs": {
+            "GetBatch": {
+              "methods": [
+                "getBatch"
+              ]
+            },
+            "DeleteBatch": {
+              "methods": [
+                "deleteBatch"
+              ]
+            },
+            "CreateBatch": {
+              "methods": [
+                "createBatch"
+              ]
+            },
+            "ListBatches": {
+              "methods": [
+                "listBatches",
+                "listBatchesStream",
+                "listBatchesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BatchControllerClient",
+          "rpcs": {
+            "GetBatch": {
+              "methods": [
+                "getBatch"
+              ]
+            },
+            "DeleteBatch": {
+              "methods": [
+                "deleteBatch"
+              ]
+            },
+            "CreateBatch": {
+              "methods": [
+                "createBatch"
+              ]
+            },
+            "ListBatches": {
+              "methods": [
+                "listBatches",
+                "listBatchesStream",
+                "listBatchesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ClusterController": {
       "clients": {
         "grpc": {

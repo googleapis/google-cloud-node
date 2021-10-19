@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 export {AutoscalingPolicyServiceClient} from './autoscaling_policy_service_client';
+export {BatchControllerClient} from './batch_controller_client';
 export {ClusterControllerClient} from './cluster_controller_client';
 export {JobControllerClient} from './job_controller_client';
 export {WorkflowTemplateServiceClient} from './workflow_template_service_client';

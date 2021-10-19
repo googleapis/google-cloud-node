@@ -20,6 +20,8 @@ import * as v1 from './v1';
 
 const AutoscalingPolicyServiceClient = v1.AutoscalingPolicyServiceClient;
 type AutoscalingPolicyServiceClient = v1.AutoscalingPolicyServiceClient;
+const BatchControllerClient = v1.BatchControllerClient;
+type BatchControllerClient = v1.BatchControllerClient;
 const ClusterControllerClient = v1.ClusterControllerClient;
 type ClusterControllerClient = v1.ClusterControllerClient;
 const JobControllerClient = v1.JobControllerClient;
@@ -30,6 +32,7 @@ type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 export {
   v1,
   AutoscalingPolicyServiceClient,
+  BatchControllerClient,
   ClusterControllerClient,
   JobControllerClient,
   WorkflowTemplateServiceClient,
@@ -37,6 +40,7 @@ export {
 export default {
   v1,
   AutoscalingPolicyServiceClient,
+  BatchControllerClient,
   ClusterControllerClient,
   JobControllerClient,
   WorkflowTemplateServiceClient,
