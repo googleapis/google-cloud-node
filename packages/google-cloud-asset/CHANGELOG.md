@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.20.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.19.0...v3.20.0) (2021-10-19)
+
+
+### Features
+
+* Update osconfig v1 and v1alpha RecurringSchedule.Frequency with DAILY frequency ([#569](https://www.github.com/googleapis/nodejs-asset/issues/569)) ([af03fd5](https://www.github.com/googleapis/nodejs-asset/commit/af03fd5c4fba4a258acf4c0332991bcb619fa10b))
+
 ## [3.19.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.18.0...v3.19.0) (2021-09-07)
 
 
