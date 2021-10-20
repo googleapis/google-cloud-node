@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.9.1...v1.10.0) (2021-10-20)
+
+
+### Features
+
+* Update osconfig v1 and v1alpha RecurringSchedule.Frequency with DAILY frequency ([0a79eba](https://www.github.com/googleapis/nodejs-os-config/commit/0a79eba9f2a3e0939a74c9aa437b8890801ebd2a))
+
 ### [1.9.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.9.0...v1.9.1) (2021-09-09)
 
 
