@@ -197,8 +197,17 @@ export class DatasetServiceClient {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
+      entityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
+      ),
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
+      ),
+      featurePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
+      ),
+      featurestorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/featurestores/{featurestore}'
       ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
@@ -211,6 +220,12 @@ export class DatasetServiceClient {
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
+      ),
+      metadataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}'
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
@@ -2673,6 +2688,77 @@ export class DatasetServiceClient {
   }
 
   /**
+   * Return a fully-qualified entityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  entityTypePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.entityTypePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the featurestore from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .featurestore;
+  }
+
+  /**
+   * Parse the entity_type from EntityType resource.
+   *
+   * @param {string} entityTypeName
+   *   A fully-qualified path representing EntityType resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromEntityTypeName(entityTypeName: string) {
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
+  }
+
+  /**
    * Return a fully-qualified execution resource name string.
    *
    * @param {string} project
@@ -2741,6 +2827,141 @@ export class DatasetServiceClient {
   matchExecutionFromExecutionName(executionName: string) {
     return this.pathTemplates.executionPathTemplate.match(executionName)
       .execution;
+  }
+
+  /**
+   * Return a fully-qualified feature resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @param {string} entity_type
+   * @param {string} feature
+   * @returns {string} Resource name string.
+   */
+  featurePath(
+    project: string,
+    location: string,
+    featurestore: string,
+    entityType: string,
+    feature: string
+  ) {
+    return this.pathTemplates.featurePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+      entity_type: entityType,
+      feature: feature,
+    });
+  }
+
+  /**
+   * Parse the project from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).project;
+  }
+
+  /**
+   * Parse the location from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).location;
+  }
+
+  /**
+   * Parse the featurestore from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName)
+      .featurestore;
+  }
+
+  /**
+   * Parse the entity_type from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName)
+      .entity_type;
+  }
+
+  /**
+   * Parse the feature from Feature resource.
+   *
+   * @param {string} featureName
+   *   A fully-qualified path representing Feature resource.
+   * @returns {string} A string representing the feature.
+   */
+  matchFeatureFromFeatureName(featureName: string) {
+    return this.pathTemplates.featurePathTemplate.match(featureName).feature;
+  }
+
+  /**
+   * Return a fully-qualified featurestore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} featurestore
+   * @returns {string} Resource name string.
+   */
+  featurestorePath(project: string, location: string, featurestore: string) {
+    return this.pathTemplates.featurestorePathTemplate.render({
+      project: project,
+      location: location,
+      featurestore: featurestore,
+    });
+  }
+
+  /**
+   * Parse the project from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .location;
+  }
+
+  /**
+   * Parse the featurestore from Featurestore resource.
+   *
+   * @param {string} featurestoreName
+   *   A fully-qualified path representing Featurestore resource.
+   * @returns {string} A string representing the featurestore.
+   */
+  matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
+    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
+      .featurestore;
   }
 
   /**
@@ -2943,6 +3164,133 @@ export class DatasetServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} metadata_schema
+   * @returns {string} Resource name string.
+   */
+  metadataSchemaPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    metadataSchema: string
+  ) {
+    return this.pathTemplates.metadataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      metadata_schema: metadataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).location;
+  }
+
+  /**
+   * Parse the metadata_store from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_store;
+  }
+
+  /**
+   * Parse the metadata_schema from MetadataSchema resource.
+   *
+   * @param {string} metadataSchemaName
+   *   A fully-qualified path representing MetadataSchema resource.
+   * @returns {string} A string representing the metadata_schema.
+   */
+  matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
+    return this.pathTemplates.metadataSchemaPathTemplate.match(
+      metadataSchemaName
+    ).metadata_schema;
+  }
+
+  /**
+   * Return a fully-qualified metadataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @returns {string} Resource name string.
+   */
+  metadataStorePath(project: string, location: string, metadataStore: string) {
+    return this.pathTemplates.metadataStorePathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from MetadataStore resource.
+   *
+   * @param {string} metadataStoreName
+   *   A fully-qualified path representing MetadataStore resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
+    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
+      .metadata_store;
   }
 
   /**

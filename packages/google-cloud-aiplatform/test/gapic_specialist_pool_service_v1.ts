@@ -2006,6 +2006,83 @@ describe('v1.SpecialistPoolServiceClient', () => {
       });
     });
 
+    describe('entityType', () => {
+      const fakePath = '/rendered/path/entityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.entityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entityTypePath', () => {
+        const result = client.entityTypePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntityTypeName', () => {
+        const result = client.matchProjectFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntityTypeName', () => {
+        const result = client.matchLocationFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromEntityTypeName', () => {
+        const result = client.matchFeaturestoreFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromEntityTypeName', () => {
+        const result = client.matchEntityTypeFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('execution', () => {
       const fakePath = '/rendered/path/execution';
       const expectedParameters = {
@@ -2077,6 +2154,160 @@ describe('v1.SpecialistPoolServiceClient', () => {
         assert.strictEqual(result, 'executionValue');
         assert(
           (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('feature', () => {
+      const fakePath = '/rendered/path/feature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+        feature: 'featureValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.featurePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featurePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featurePath', () => {
+        const result = client.featurePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue',
+          'featureValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featurePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureName', () => {
+        const result = client.matchProjectFromFeatureName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureName', () => {
+        const result = client.matchLocationFromFeatureName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromFeatureName', () => {
+        const result = client.matchFeaturestoreFromFeatureName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromFeatureName', () => {
+        const result = client.matchEntityTypeFromFeatureName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromFeatureName', () => {
+        const result = client.matchFeatureFromFeatureName(fakePath);
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featurestore', () => {
+      const fakePath = '/rendered/path/featurestore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.featurestorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featurestorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featurestorePath', () => {
+        const result = client.featurestorePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeaturestoreName', () => {
+        const result = client.matchProjectFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeaturestoreName', () => {
+        const result = client.matchLocationFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromFeaturestoreName', () => {
+        const result = client.matchFeaturestoreFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2339,6 +2570,150 @@ describe('v1.SpecialistPoolServiceClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataSchema', () => {
+      const fakePath = '/rendered/path/metadataSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        metadata_schema: 'metadataSchemaValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.metadataSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataSchemaPath', () => {
+        const result = client.metadataSchemaPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'metadataSchemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataSchemaName', () => {
+        const result = client.matchProjectFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataSchemaName', () => {
+        const result = client.matchLocationFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataSchemaName', () => {
+        const result =
+          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataSchemaFromMetadataSchemaName', () => {
+        const result =
+          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataSchemaValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataStore', () => {
+      const fakePath = '/rendered/path/metadataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+      };
+      const client =
+        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.metadataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataStorePath', () => {
+        const result = client.metadataStorePath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataStoreName', () => {
+        const result = client.matchProjectFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataStoreName', () => {
+        const result = client.matchLocationFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataStoreName', () => {
+        const result = client.matchMetadataStoreFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

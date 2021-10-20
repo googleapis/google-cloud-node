@@ -41,6 +41,14 @@ const IndexServiceClient = v1.IndexServiceClient;
 type IndexServiceClient = v1.IndexServiceClient;
 const VizierServiceClient = v1.VizierServiceClient;
 type VizierServiceClient = v1.VizierServiceClient;
+const FeaturestoreServiceClient = v1.FeaturestoreServiceClient;
+type FeaturestoreServiceClient = v1.FeaturestoreServiceClient;
+const FeaturestoreOnlineServingServiceClient =
+  v1.FeaturestoreOnlineServingServiceClient;
+type FeaturestoreOnlineServingServiceClient =
+  v1.FeaturestoreOnlineServingServiceClient;
+const MetadataServiceClient = v1.MetadataServiceClient;
+type MetadataServiceClient = v1.MetadataServiceClient;
 
 export {
   v1beta1,
@@ -56,6 +64,9 @@ export {
   IndexEndpointServiceClient,
   IndexServiceClient,
   VizierServiceClient,
+  FeaturestoreServiceClient,
+  FeaturestoreOnlineServingServiceClient,
+  MetadataServiceClient,
 };
 export default {
   v1beta1,
@@ -71,6 +82,9 @@ export default {
   IndexEndpointServiceClient,
   IndexServiceClient,
   VizierServiceClient,
+  FeaturestoreServiceClient,
+  FeaturestoreOnlineServingServiceClient,
+  MetadataServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

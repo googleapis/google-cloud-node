@@ -22,10 +22,14 @@ const aiplatform = require('@google-cloud/aiplatform');
 function main() {
   const datasetServiceClient = new aiplatform.DatasetServiceClient();
   const endpointServiceClient = new aiplatform.EndpointServiceClient();
+  const featurestoreOnlineServingServiceClient =
+    new aiplatform.FeaturestoreOnlineServingServiceClient();
+  const featurestoreServiceClient = new aiplatform.FeaturestoreServiceClient();
   const indexEndpointServiceClient =
     new aiplatform.IndexEndpointServiceClient();
   const indexServiceClient = new aiplatform.IndexServiceClient();
   const jobServiceClient = new aiplatform.JobServiceClient();
+  const metadataServiceClient = new aiplatform.MetadataServiceClient();
   const migrationServiceClient = new aiplatform.MigrationServiceClient();
   const modelServiceClient = new aiplatform.ModelServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();

@@ -21,7 +21,6 @@ function main(name, outputConfig) {
    */
   /**
    *  Required. The resource name of the Model to export.
-   *  Format: `projects/{project}/locations/{location}/models/{model}`
    */
   // const name = 'abc123'
   /**

@@ -19,9 +19,12 @@
 import {
   DatasetServiceClient,
   EndpointServiceClient,
+  FeaturestoreOnlineServingServiceClient,
+  FeaturestoreServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
   JobServiceClient,
+  MetadataServiceClient,
   MigrationServiceClient,
   ModelServiceClient,
   PipelineServiceClient,
@@ -37,6 +40,16 @@ function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
   client.close();
 }
+function doStuffWithFeaturestoreOnlineServingServiceClient(
+  client: FeaturestoreOnlineServingServiceClient
+) {
+  client.close();
+}
+function doStuffWithFeaturestoreServiceClient(
+  client: FeaturestoreServiceClient
+) {
+  client.close();
+}
 function doStuffWithIndexEndpointServiceClient(
   client: IndexEndpointServiceClient
 ) {
@@ -46,6 +59,9 @@ function doStuffWithIndexServiceClient(client: IndexServiceClient) {
   client.close();
 }
 function doStuffWithJobServiceClient(client: JobServiceClient) {
+  client.close();
+}
+function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
   client.close();
 }
 function doStuffWithMigrationServiceClient(client: MigrationServiceClient) {
@@ -77,6 +93,15 @@ function main() {
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
   // check that the client instance can be created
+  const featurestoreOnlineServingServiceClient =
+    new FeaturestoreOnlineServingServiceClient();
+  doStuffWithFeaturestoreOnlineServingServiceClient(
+    featurestoreOnlineServingServiceClient
+  );
+  // check that the client instance can be created
+  const featurestoreServiceClient = new FeaturestoreServiceClient();
+  doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
+  // check that the client instance can be created
   const indexEndpointServiceClient = new IndexEndpointServiceClient();
   doStuffWithIndexEndpointServiceClient(indexEndpointServiceClient);
   // check that the client instance can be created
@@ -85,6 +110,9 @@ function main() {
   // check that the client instance can be created
   const jobServiceClient = new JobServiceClient();
   doStuffWithJobServiceClient(jobServiceClient);
+  // check that the client instance can be created
+  const metadataServiceClient = new MetadataServiceClient();
+  doStuffWithMetadataServiceClient(metadataServiceClient);
   // check that the client instance can be created
   const migrationServiceClient = new MigrationServiceClient();
   doStuffWithMigrationServiceClient(migrationServiceClient);

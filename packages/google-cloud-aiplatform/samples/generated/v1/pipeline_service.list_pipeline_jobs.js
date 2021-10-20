@@ -28,6 +28,10 @@ function main(parent) {
    *  Lists the PipelineJobs that match the filter expression. The following
    *  fields are supported:
    *  * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *  * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *  * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
+   *   for example, can check if pipeline's display_name contains *step* by doing
+   *    display_name:\"*step*\"
    *  * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *    Values must be in RFC 3339 format.
    *  * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
@@ -59,6 +63,21 @@ function main(parent) {
    *  [PipelineService.ListPipelineJobs][google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs] call.
    */
   // const pageToken = 'abc123'
+  /**
+   *  A comma-separated list of fields to order by. The default sort order is in
+   *  ascending order. Use "desc" after a field name for descending. You can have
+   *  multiple order_by fields provided e.g. "create_time desc, end_time",
+   *  "end_time, start_time, update_time" For example, using "create_time desc,
+   *  end_time" will order results by create time in descending order, and if
+   *  there are multiple jobs having the same create time, order them by the end
+   *  time in ascending order. if order_by is not specified, it will order by
+   *  default order is create time in descending order. Supported fields:
+   *    * `create_time`
+   *    * `update_time`
+   *    * `end_time`
+   *    * `start_time`
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Aiplatform library
   const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1;
