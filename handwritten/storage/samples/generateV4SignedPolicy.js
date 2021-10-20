@@ -53,15 +53,14 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
     const [response] = await file.generateSignedPostPolicyV4(options);
 
     // Create an HTML form with the provided policy
-    let output = `<form action='${response.url}' method='POST' enctype="multipart/form-data">\n`;
+    let output = `<form action="${response.url}" method="POST" enctype="multipart/form-data">\n`;
     // Include all fields returned in the HTML form as they're required
     for (const name of Object.keys(response.fields)) {
       const value = response.fields[name];
-      output += `  <input name='${name}' value='${value}' type='hidden'/>\n`;
+      output += `  <input name="${name}" value="${value}" type="hidden"/>\n`;
     }
-    output += "  <input type='file' name='file'/><br />\n";
-    output +=
-      "  <input type='submit' value='Upload File' name='submit'/><br />\n";
+    output += '  <input type="file" name="file"/><br />\n';
+    output += '  <input type="submit" value="Upload File"/><br />\n';
     output += '</form>';
 
     console.log(output);
