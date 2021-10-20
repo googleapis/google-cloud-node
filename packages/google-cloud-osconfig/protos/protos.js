@@ -5576,6 +5576,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.weekly != null && message.hasOwnProperty("weekly")) {
@@ -5653,6 +5654,10 @@
                             case "MONTHLY":
                             case 2:
                                 message.frequency = 2;
+                                break;
+                            case "DAILY":
+                            case 3:
+                                message.frequency = 3;
                                 break;
                             }
                             if (object.weekly != null) {
@@ -5745,12 +5750,14 @@
                          * @property {number} FREQUENCY_UNSPECIFIED=0 FREQUENCY_UNSPECIFIED value
                          * @property {number} WEEKLY=1 WEEKLY value
                          * @property {number} MONTHLY=2 MONTHLY value
+                         * @property {number} DAILY=3 DAILY value
                          */
                         RecurringSchedule.Frequency = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "FREQUENCY_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "WEEKLY"] = 1;
                             values[valuesById[2] = "MONTHLY"] = 2;
+                            values[valuesById[3] = "DAILY"] = 3;
                             return values;
                         })();
     

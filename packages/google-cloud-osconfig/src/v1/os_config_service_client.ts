@@ -1049,7 +1049,8 @@ export class OsConfigServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPatchJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchJobs.createStream(
       this.innerApiCalls.listPatchJobs as gax.GaxCall,
@@ -1104,7 +1105,8 @@ export class OsConfigServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPatchJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchJobs.asyncIterate(
       this.innerApiCalls['listPatchJobs'] as GaxCall,
@@ -1261,7 +1263,8 @@ export class OsConfigServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPatchJobInstanceDetails'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchJobInstanceDetails.createStream(
       this.innerApiCalls.listPatchJobInstanceDetails as gax.GaxCall,
@@ -1317,7 +1320,8 @@ export class OsConfigServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPatchJobInstanceDetails'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchJobInstanceDetails.asyncIterate(
       this.innerApiCalls['listPatchJobInstanceDetails'] as GaxCall,
@@ -1464,7 +1468,8 @@ export class OsConfigServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPatchDeployments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchDeployments.createStream(
       this.innerApiCalls.listPatchDeployments as gax.GaxCall,
@@ -1517,7 +1522,8 @@ export class OsConfigServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPatchDeployments'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPatchDeployments.asyncIterate(
       this.innerApiCalls['listPatchDeployments'] as GaxCall,

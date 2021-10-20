@@ -2239,7 +2239,8 @@ export namespace google {
                     enum Frequency {
                         FREQUENCY_UNSPECIFIED = 0,
                         WEEKLY = 1,
-                        MONTHLY = 2
+                        MONTHLY = 2,
+                        DAILY = 3
                     }
                 }
 

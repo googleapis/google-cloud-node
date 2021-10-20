@@ -696,7 +696,8 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInventories'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInventories.createStream(
       this.innerApiCalls.listInventories as gax.GaxCall,
@@ -758,7 +759,8 @@ export class OsConfigZonalServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInventories'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInventories.asyncIterate(
       this.innerApiCalls['listInventories'] as GaxCall,
@@ -921,7 +923,8 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listVulnerabilityReports'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVulnerabilityReports.createStream(
       this.innerApiCalls.listVulnerabilityReports as gax.GaxCall,
@@ -980,7 +983,8 @@ export class OsConfigZonalServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listVulnerabilityReports'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listVulnerabilityReports.asyncIterate(
       this.innerApiCalls['listVulnerabilityReports'] as GaxCall,

@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.osconfig.v1alpha",
-  "libraryPackage": "@google-cloud/osconfig",
+  "libraryPackage": "@google-cloud/os-config",
   "services": {
     "OsConfigZonalService": {
       "clients": {
