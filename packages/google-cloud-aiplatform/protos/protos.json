@@ -8830,18 +8830,12 @@
                         "artifacts": {
                           "rule": "repeated",
                           "type": "Artifact",
-                          "id": 1,
-                          "options": {
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Artifact"
-                          }
+                          "id": 1
                         },
                         "executions": {
                           "rule": "repeated",
                           "type": "Execution",
-                          "id": 2,
-                          "options": {
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Execution"
-                          }
+                          "id": 2
                         },
                         "events": {
                           "rule": "repeated",
