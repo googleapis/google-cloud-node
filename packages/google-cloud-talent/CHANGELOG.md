@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.5.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.5.0...v3.5.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* flaky sample test two ways ([#375](https://www.github.com/googleapis/nodejs-talent/issues/375)) ([d722bdb](https://www.github.com/googleapis/nodejs-talent/commit/d722bdb0523e8fb5907d4760b33ba75901572747))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.4.1...v3.5.0) (2021-09-15)
 
 
