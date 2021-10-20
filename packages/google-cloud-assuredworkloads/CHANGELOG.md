@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.8.0...v2.0.0) (2021-10-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* set v1 as the default version of the API (#110)
+
+### Features
+
+* set v1 as the default version of the API ([#110](https://www.github.com/googleapis/nodejs-assured-workloads/issues/110)) ([746db25](https://www.github.com/googleapis/nodejs-assured-workloads/commit/746db25e12932938467e4f14c573b838d06217e2))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.7.0...v1.8.0) (2021-09-17)
 
 
