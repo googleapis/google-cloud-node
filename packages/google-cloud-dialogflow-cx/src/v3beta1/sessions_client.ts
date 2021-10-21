@@ -163,6 +163,9 @@ export class SessionsClient {
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
       ),
+      changelogPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}'
+      ),
       continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
       ),
@@ -848,6 +851,76 @@ export class SessionsClient {
     return this.pathTemplates.agentValidationResultPathTemplate.match(
       agentValidationResultName
     ).agent;
+  }
+
+  /**
+   * Return a fully-qualified changelog resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} changelog
+   * @returns {string} Resource name string.
+   */
+  changelogPath(
+    project: string,
+    location: string,
+    agent: string,
+    changelog: string
+  ) {
+    return this.pathTemplates.changelogPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      changelog: changelog,
+    });
+  }
+
+  /**
+   * Parse the project from Changelog resource.
+   *
+   * @param {string} changelogName
+   *   A fully-qualified path representing Changelog resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromChangelogName(changelogName: string) {
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Changelog resource.
+   *
+   * @param {string} changelogName
+   *   A fully-qualified path representing Changelog resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromChangelogName(changelogName: string) {
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from Changelog resource.
+   *
+   * @param {string} changelogName
+   *   A fully-qualified path representing Changelog resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromChangelogName(changelogName: string) {
+    return this.pathTemplates.changelogPathTemplate.match(changelogName).agent;
+  }
+
+  /**
+   * Parse the changelog from Changelog resource.
+   *
+   * @param {string} changelogName
+   *   A fully-qualified path representing Changelog resource.
+   * @returns {string} A string representing the changelog.
+   */
+  matchChangelogFromChangelogName(changelogName: string) {
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**

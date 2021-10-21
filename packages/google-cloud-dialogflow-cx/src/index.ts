@@ -21,6 +21,8 @@ import * as v3beta1 from './v3beta1';
 
 const AgentsClient = v3.AgentsClient;
 type AgentsClient = v3.AgentsClient;
+const ChangelogsClient = v3.ChangelogsClient;
+type ChangelogsClient = v3.ChangelogsClient;
 const DeploymentsClient = v3.DeploymentsClient;
 type DeploymentsClient = v3.DeploymentsClient;
 const EntityTypesClient = v3.EntityTypesClient;
@@ -54,6 +56,7 @@ export {
   v3,
   v3beta1,
   AgentsClient,
+  ChangelogsClient,
   DeploymentsClient,
   EntityTypesClient,
   EnvironmentsClient,
@@ -73,6 +76,7 @@ export default {
   v3,
   v3beta1,
   AgentsClient,
+  ChangelogsClient,
   DeploymentsClient,
   EntityTypesClient,
   EnvironmentsClient,

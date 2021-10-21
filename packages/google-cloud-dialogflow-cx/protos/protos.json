@@ -2155,6 +2155,18 @@
                             }
                           }
                         },
+                        "AudioEncoding": {
+                          "values": {
+                            "AUDIO_ENCODING_UNSPECIFIED": 0,
+                            "AUDIO_ENCODING_LINEAR_16": 1,
+                            "AUDIO_ENCODING_FLAC": 2,
+                            "AUDIO_ENCODING_MULAW": 3,
+                            "AUDIO_ENCODING_AMR": 4,
+                            "AUDIO_ENCODING_AMR_WB": 5,
+                            "AUDIO_ENCODING_OGG_OPUS": 6,
+                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                          }
+                        },
                         "SpeechWordInfo": {
                           "fields": {
                             "word": {
@@ -2173,18 +2185,6 @@
                               "type": "float",
                               "id": 4
                             }
-                          }
-                        },
-                        "AudioEncoding": {
-                          "values": {
-                            "AUDIO_ENCODING_UNSPECIFIED": 0,
-                            "AUDIO_ENCODING_LINEAR_16": 1,
-                            "AUDIO_ENCODING_FLAC": 2,
-                            "AUDIO_ENCODING_MULAW": 3,
-                            "AUDIO_ENCODING_AMR": 4,
-                            "AUDIO_ENCODING_AMR_WB": 5,
-                            "AUDIO_ENCODING_OGG_OPUS": 6,
-                            "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                           }
                         },
                         "InputAudioConfig": {
@@ -2303,6 +2303,135 @@
                             "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                             "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
                             "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                          }
+                        },
+                        "Changelogs": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "ListChangelogs": {
+                              "requestType": "ListChangelogsRequest",
+                              "responseType": "ListChangelogsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*}/changelogs",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*}/changelogs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetChangelog": {
+                              "requestType": "GetChangelogRequest",
+                              "responseType": "Changelog",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/changelogs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/changelogs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ListChangelogsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Changelog"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ListChangelogsResponse": {
+                          "fields": {
+                            "changelogs": {
+                              "rule": "repeated",
+                              "type": "Changelog",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GetChangelogRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Changelog"
+                              }
+                            }
+                          }
+                        },
+                        "Changelog": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/Changelog",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "userEmail": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "action": {
+                              "type": "string",
+                              "id": 11
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "resource": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            }
                           }
                         },
                         "Deployments": {
@@ -9553,6 +9682,135 @@
                             "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                             "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
                             "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                          }
+                        },
+                        "Changelogs": {
+                          "options": {
+                            "(google.api.default_host)": "dialogflow.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/dialogflow"
+                          },
+                          "methods": {
+                            "ListChangelogs": {
+                              "requestType": "ListChangelogsRequest",
+                              "responseType": "ListChangelogsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/changelogs",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/changelogs"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetChangelog": {
+                              "requestType": "GetChangelogRequest",
+                              "responseType": "Changelog",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/changelogs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/changelogs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ListChangelogsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Changelog"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ListChangelogsResponse": {
+                          "fields": {
+                            "changelogs": {
+                              "rule": "repeated",
+                              "type": "Changelog",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GetChangelogRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Changelog"
+                              }
+                            }
+                          }
+                        },
+                        "Changelog": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/Changelog",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "userEmail": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "action": {
+                              "type": "string",
+                              "id": 11
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "resource": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            }
                           }
                         },
                         "Deployments": {

@@ -1160,6 +1160,83 @@ describe('v3.TransitionRouteGroupsClient', () => {
       });
     });
 
+    describe('changelog', () => {
+      const fakePath = '/rendered/path/changelog';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        changelog: 'changelogValue',
+      };
+      const client =
+        new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.changelogPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.changelogPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('changelogPath', () => {
+        const result = client.changelogPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'changelogValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.changelogPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromChangelogName', () => {
+        const result = client.matchProjectFromChangelogName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromChangelogName', () => {
+        const result = client.matchLocationFromChangelogName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromChangelogName', () => {
+        const result = client.matchAgentFromChangelogName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChangelogFromChangelogName', () => {
+        const result = client.matchChangelogFromChangelogName(fakePath);
+        assert.strictEqual(result, 'changelogValue');
+        assert(
+          (client.pathTemplates.changelogPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('continuousTestResult', () => {
       const fakePath = '/rendered/path/continuousTestResult';
       const expectedParameters = {

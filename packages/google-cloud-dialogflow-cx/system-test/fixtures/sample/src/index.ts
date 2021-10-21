@@ -18,6 +18,7 @@
 
 import {
   AgentsClient,
+  ChangelogsClient,
   DeploymentsClient,
   EntityTypesClient,
   EnvironmentsClient,
@@ -36,6 +37,9 @@ import {
 
 // check that the client class type name can be used
 function doStuffWithAgentsClient(client: AgentsClient) {
+  client.close();
+}
+function doStuffWithChangelogsClient(client: ChangelogsClient) {
   client.close();
 }
 function doStuffWithDeploymentsClient(client: DeploymentsClient) {
@@ -89,6 +93,9 @@ function main() {
   // check that the client instance can be created
   const agentsClient = new AgentsClient();
   doStuffWithAgentsClient(agentsClient);
+  // check that the client instance can be created
+  const changelogsClient = new ChangelogsClient();
+  doStuffWithChangelogsClient(changelogsClient);
   // check that the client instance can be created
   const deploymentsClient = new DeploymentsClient();
   doStuffWithDeploymentsClient(deploymentsClient);
