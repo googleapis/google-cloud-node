@@ -3977,6 +3977,46 @@ describe('File', () => {
         done();
       });
     });
+
+    it('should not set any headers when there are no interceptors', done => {
+      fakeUtil.makeRequest = function (
+        reqOpts: DecorateRequestOptions,
+        config: object,
+        callback: BodyResponseCallback
+      ) {
+        assert.deepStrictEqual(reqOpts.headers, {});
+        callback(null);
+      };
+      file.isPublic((err: ApiError) => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('should set headers when an interceptor is defined', done => {
+      const expectedHeader = {hello: 'world'};
+      file.storage.interceptors = [];
+      file.storage.interceptors.push({
+        request: (requestConfig: DecorateRequestOptions) => {
+          requestConfig.headers = requestConfig.headers || {};
+          Object.assign(requestConfig.headers, expectedHeader);
+          return requestConfig as DecorateRequestOptions;
+        },
+      });
+
+      fakeUtil.makeRequest = function (
+        reqOpts: DecorateRequestOptions,
+        config: object,
+        callback: BodyResponseCallback
+      ) {
+        assert.deepStrictEqual(reqOpts.headers, expectedHeader);
+        callback(null);
+      };
+      file.isPublic((err: ApiError) => {
+        assert.ifError(err);
+        done();
+      });
+    });
   });
 
   describe('move', () => {

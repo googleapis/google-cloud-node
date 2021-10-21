@@ -1,0 +1,96 @@
+{
+    "storage.buckets.delete": [
+        "deleteBucket"
+    ],
+    "storage.buckets.patch": [
+        "bucketMakePrivate",
+        "deleteLabels",
+        "disableRequesterPays",
+        "enableRequesterPays",
+        "enableLogging",
+        "removeRetentionPeriod",
+        "setCorsConfiguration",
+        "setLabels",
+        "setRetentionPeriod",
+        "bucketSetStorageClass",
+        "bucketSetMetadata"
+    ],
+    "storage.buckets.insert": [
+        "create",
+        "createBucket"
+    ],
+    "storage.buckets.get": [
+        "bucketGet",
+        "getLabels",
+        "bucketGetMetadata",
+        "bucketExists"
+    ],
+    "storage.objects.list": [
+        "getFilesStream"
+    ],
+    "storage.notifications.list": [
+        "getNotifications"
+    ],
+    "storage.buckets.lockRententionPolicy": [
+        "lock"
+    ],
+    "storage.objects.patch": [
+        "fileMakePrivate",
+        "setMetadata"
+    ],
+    "storage.object_acl.insert": [
+        "bucketMakePublic",
+        "fileMakePublic"
+    ],
+    "storage.objects.rewrite": [
+        "copy",
+        "move",
+        "rename",
+        "rotateEncryptionKey",
+        "setStorageClass"
+    ],
+    "storage.objects.insert": [
+        "bucketUploadMultipart",
+        "saveMultipart"
+    ],
+    "storage.objects.delete": [
+        "deleteFiles",
+        "fileDelete"
+    ],
+    "storage.objects.get": [
+        "download",
+        "exists",
+        "getExpirationDate",
+        "getMetadata",
+        "isPublic",
+        "createReadStream"
+    ],
+    "storage.notifications.delete": [
+        "notificationDelete"
+    ],
+    "storage.notifications.insert": [
+        "createNotification",
+        "notificationCreate"
+    ],
+    "storage.notifications.get": [
+        "notificationExists",
+        "notificationGet",
+        "notificationGetMetadata"
+    ],
+    "storage.buckets.getIamPolicy": [
+        "iamGetPolicy"
+    ],
+    "storage.buckets.setIamPolicy": [
+        "iamSetPolicy"
+    ],
+    "storage.buckets.testIamPermission": [
+        "iamTestPermissions"
+    ],
+    "storage.buckets.list": [
+        "getBuckets",
+        "getBucketsStream"
+    ],
+    "storage.objects.compose": [
+        "combine"
+    ]
+}
