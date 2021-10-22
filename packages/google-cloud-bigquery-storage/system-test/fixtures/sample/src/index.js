@@ -21,7 +21,7 @@ const storage = require('@google-cloud/bigquery-storage');
 
 function main() {
   const bigQueryReadClient = new storage.BigQueryReadClient();
-  const bigQueryStorageClient = new storage.BigQueryStorageClient();
+  const bigQueryWriteClient = new storage.BigQueryWriteClient();
 }
 
 main();

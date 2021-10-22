@@ -20,11 +20,19 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 const BigQueryReadClient = v1.BigQueryReadClient;
 type BigQueryReadClient = v1.BigQueryReadClient;
+const BigQueryWriteClient = v1.BigQueryWriteClient;
+type BigQueryWriteClient = v1.BigQueryWriteClient;
 const BigQueryStorageClient = v1beta1.BigQueryStorageClient;
 type BigQueryStorageClient = v1beta1.BigQueryStorageClient;
-export {v1, BigQueryReadClient, v1beta1, BigQueryStorageClient};
+export {
+  v1,
+  BigQueryReadClient,
+  v1beta1,
+  BigQueryStorageClient,
+  BigQueryWriteClient,
+};
 // For compatibility with JavaScript libraries we need to provide this default export:
 // tslint:disable-next-line no-default-export
-export default {v1, BigQueryReadClient};
+export default {v1, BigQueryReadClient, BigQueryWriteClient};
 import * as protos from '../protos/protos';
 export {protos};

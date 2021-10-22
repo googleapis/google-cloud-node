@@ -18,14 +18,14 @@
 
 import {
   BigQueryReadClient,
-  BigQueryStorageClient,
+  BigQueryWriteClient,
 } from '@google-cloud/bigquery-storage';
 
 // check that the client class type name can be used
 function doStuffWithBigQueryReadClient(client: BigQueryReadClient) {
   client.close();
 }
-function doStuffWithBigQueryStorageClient(client: BigQueryStorageClient) {
+function doStuffWithBigQueryWriteClient(client: BigQueryWriteClient) {
   client.close();
 }
 
@@ -34,8 +34,8 @@ function main() {
   const bigQueryReadClient = new BigQueryReadClient();
   doStuffWithBigQueryReadClient(bigQueryReadClient);
   // check that the client instance can be created
-  const bigQueryStorageClient = new BigQueryStorageClient();
-  doStuffWithBigQueryStorageClient(bigQueryStorageClient);
+  const bigQueryWriteClient = new BigQueryWriteClient();
+  doStuffWithBigQueryWriteClient(bigQueryWriteClient);
 }
 
 main();
