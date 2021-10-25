@@ -24,6 +24,7 @@
   * [List Training Phrases](#list-training-phrases)
   * [Quickstart](#quickstart)
   * [Update-intent](#update-intent)
+  * [Webhooks](#webhooks)
 
 ## Before you begin
 
@@ -237,6 +238,23 @@ __Usage:__
 
 
 `node samples/update-intent.js`
+
+
+-----
+
+
+
+
+### Webhooks
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhooks.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhooks.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/webhooks.js`
 
 
 

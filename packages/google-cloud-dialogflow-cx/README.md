@@ -151,6 +151,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dialogflow-
 | List Training Phrases | [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/listTrainingPhrases.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/listTrainingPhrases.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Update-intent | [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/update-intent.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/update-intent.js,samples/README.md) |
+| Webhooks | [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/webhooks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/webhooks.js,samples/README.md) |
 
 
 
