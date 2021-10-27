@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^8.0.3",
-    "@types/node": "^14.14.6",
+    "@types/node": "^16.0.0",
     "@types/sinon": "^10.0.0",
     "c8": "^7.3.5",
     "gts": "^3.0.2",
