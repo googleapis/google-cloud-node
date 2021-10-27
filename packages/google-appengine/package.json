@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^8.2.1",
-    "@types/node": "^14.14.32",
+    "@types/node": "^16.0.0",
     "@types/sinon": "^10.0.0",
     "c8": "^7.6.0",
     "gts": "^3.1.0",
