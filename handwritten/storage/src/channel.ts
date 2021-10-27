@@ -32,9 +32,11 @@ export interface StopCallback {
  * @param {string} resourceId The resource ID of the channel.
  *
  * @example
+ * ```
  * const {Storage} = require('@google-cloud/storage');
  * const storage = new Storage();
  * const channel = storage.channel('id', 'resource-id');
+ * ```
  */
 class Channel extends ServiceObject {
   constructor(storage: Storage, id: string, resourceId: string) {
@@ -79,6 +81,7 @@ class Channel extends ServiceObject {
    * @returns {Promise<StopResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const channel = storage.channel('id', 'resource-id');
@@ -94,6 +97,7 @@ class Channel extends ServiceObject {
    * channel.stop().then(function(data) {
    *   const apiResponse = data[0];
    * });
+   * ```
    */
   stop(callback?: StopCallback): Promise<Metadata> | void {
     callback = callback || util.noop;

@@ -114,11 +114,13 @@ export interface DeleteNotificationCallback {
  * @param {string} id The ID of the notification.
  *
  * @example
+ * ```
  * const {Storage} = require('@google-cloud/storage');
  * const storage = new Storage();
  * const myBucket = storage.bucket('my-bucket');
  *
  * const notification = myBucket.notification('1');
+ * ```
  */
 class Notification extends ServiceObject {
   constructor(bucket: Bucket, id: string) {
@@ -144,6 +146,7 @@ class Notification extends ServiceObject {
        * @throws {Error} If a valid topic is not provided.
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -162,6 +165,7 @@ class Notification extends ServiceObject {
        *   const notification = data[0];
        *   const apiResponse = data[1];
        * });
+       * ```
        */
       create: true,
 
@@ -182,6 +186,7 @@ class Notification extends ServiceObject {
        * @returns {Promise<NotificationExistsResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -195,6 +200,7 @@ class Notification extends ServiceObject {
        * notification.exists().then(function(data) {
        *   const exists = data[0];
        * });
+       * ```
        */
       exists: true,
     };
@@ -230,6 +236,7 @@ class Notification extends ServiceObject {
    * @returns {Promise<DeleteNotificationResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -244,6 +251,7 @@ class Notification extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    *
+   * ```
    * @example <caption>include:samples/deleteNotification.js</caption>
    * region_tag:storage_delete_bucket_notification
    * Another example:
@@ -284,6 +292,7 @@ class Notification extends ServiceObject {
    * @return {Promise<GetNotificationCallback>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -300,6 +309,7 @@ class Notification extends ServiceObject {
    *   const notification = data[0];
    *   const apiResponse = data[1];
    * });
+   * ```
    */
   get(
     optionsOrCallback?: GetNotificationOptions | GetNotificationCallback,
@@ -375,6 +385,7 @@ class Notification extends ServiceObject {
    * @returns {Promise<GetNotificationMetadataResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -390,6 +401,7 @@ class Notification extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    *
+   * ```
    * @example <caption>include:samples/getMetadataNotifications.js</caption>
    * region_tag:storage_print_pubsub_bucket_notification
    * Another example:

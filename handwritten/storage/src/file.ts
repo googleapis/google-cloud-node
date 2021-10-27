@@ -448,6 +448,7 @@ class File extends ServiceObject<File> {
    * @mixes Acl
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -470,6 +471,7 @@ class File extends ServiceObject<File> {
    *   const aclObject = data[0];
    *   const apiResponse = data[1];
    * });
+   * ```
    */
   /**
    * The API-formatted resource description of the file.
@@ -503,11 +505,13 @@ class File extends ServiceObject<File> {
    * @param {string} name The name of the remote file.
    * @param {FileOptions} [options] Configuration options.
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
    *
    * const file = myBucket.file('my-file');
+   * ```
    */
   constructor(bucket: Bucket, name: string, options: FileOptions = {}) {
     const requestQueryObject: {
@@ -563,6 +567,7 @@ class File extends ServiceObject<File> {
        * @returns {Promise<DeleteFileResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -577,6 +582,7 @@ class File extends ServiceObject<File> {
        *   const apiResponse = data[0];
        * });
        *
+       * ```
        * @example <caption>include:samples/files.js</caption>
        * region_tag:storage_delete_file
        * Another example:
@@ -606,6 +612,7 @@ class File extends ServiceObject<File> {
        * @returns {Promise<FileExistsResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -620,6 +627,7 @@ class File extends ServiceObject<File> {
        * file.exists().then(function(data) {
        *   const exists = data[0];
        * });
+       * ```
        */
       exists: {
         reqOpts: {
@@ -648,6 +656,7 @@ class File extends ServiceObject<File> {
        * @returns {Promise<GetFileResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -665,6 +674,7 @@ class File extends ServiceObject<File> {
        *   const file = data[0];
        *   const apiResponse = data[1];
        * });
+       * ```
        */
       get: {
         reqOpts: {
@@ -695,6 +705,7 @@ class File extends ServiceObject<File> {
        * @returns {Promise<GetFileMetadataResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -711,6 +722,7 @@ class File extends ServiceObject<File> {
        *   const apiResponse = data[1];
        * });
        *
+       * ```
        * @example <caption>include:samples/files.js</caption>
        * region_tag:storage_get_metadata
        * Another example:
@@ -754,6 +766,7 @@ class File extends ServiceObject<File> {
        * @returns {Promise<SetFileMetadataResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        * const myBucket = storage.bucket('my-bucket');
@@ -805,6 +818,7 @@ class File extends ServiceObject<File> {
        * file.setMetadata(metadata).then(function(data) {
        *   const apiResponse = data[0];
        * });
+       * ```
        */
       setMetadata: {
         reqOpts: {
@@ -932,6 +946,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<CopyResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    *
@@ -1013,6 +1028,7 @@ class File extends ServiceObject<File> {
    *   const apiResponse = data[1];
    * });
    *
+   * ```
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_copy_file
    * Another example:
@@ -1195,6 +1211,7 @@ class File extends ServiceObject<File> {
    * @returns {ReadableStream}
    *
    * @example
+   * ```
    * //-
    * // <h4>Downloading a File</h4>
    * //
@@ -1242,6 +1259,7 @@ class File extends ServiceObject<File> {
    *   })
    *   .on('error', function(err) {})
    *   .pipe(fs.createWriteStream('/Users/stephen/logfile.txt'));
+   * ```
    */
   createReadStream(options: CreateReadStreamOptions = {}): Readable {
     options = Object.assign({decompress: true}, options);
@@ -1562,6 +1580,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<CreateResumableUploadResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -1579,6 +1598,7 @@ class File extends ServiceObject<File> {
    * file.createResumableUpload().then(function(data) {
    *   const uri = data[0];
    * });
+   * ```
    */
   createResumableUpload(
     optionsOrCallback?:
@@ -1729,6 +1749,7 @@ class File extends ServiceObject<File> {
    * @returns {WritableStream}
    *
    * @example
+   * ```
    * const fs = require('fs');
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
@@ -1786,6 +1807,7 @@ class File extends ServiceObject<File> {
    *   .on('finish', function() {
    *     // The file upload is complete.
    *   });
+   * ```
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createWriteStream(options: CreateWriteStreamOptions = {}): Writable {
@@ -2006,6 +2028,7 @@ class File extends ServiceObject<File> {
    * file with the new generation number.
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -2019,6 +2042,7 @@ class File extends ServiceObject<File> {
    *   }
    * });
    *
+   * ```
    */
   deleteResumableCache() {
     const uploadStream = resumableUpload.upload({
@@ -2056,6 +2080,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<DownloadResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -2083,6 +2108,7 @@ class File extends ServiceObject<File> {
    *   const contents = data[0];
    * });
    *
+   * ```
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_download_file
    * Another example:
@@ -2141,6 +2167,7 @@ class File extends ServiceObject<File> {
    * @returns {File}
    *
    * @example
+   * ```
    * const crypto = require('crypto');
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
@@ -2167,6 +2194,7 @@ class File extends ServiceObject<File> {
    *   });
    * });
    *
+   * ```
    * @example <caption>include:samples/encryption.js</caption>
    * region_tag:storage_upload_encrypted_file
    * Example of uploading an encrypted file:
@@ -2223,6 +2251,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<GetExpirationDateResponse>}
    *
    * @example
+   * ```
    * const storage = require('@google-cloud/storage')();
    * const myBucket = storage.bucket('my-bucket');
    *
@@ -2231,6 +2260,7 @@ class File extends ServiceObject<File> {
    * file.getExpirationDate(function(err, expirationDate) {
    *   // expirationDate is a Date object.
    * });
+   * ```
    */
   getExpirationDate(
     callback?: GetExpirationDateCallback
@@ -2333,6 +2363,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<GetSignedPolicyResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -2359,6 +2390,7 @@ class File extends ServiceObject<File> {
    * file.getSignedPolicy(options).then(function(data) {
    *   const policy = data[0];
    * });
+   * ```
    */
   getSignedPolicy(
     optionsOrCallback?: GetSignedPolicyOptions | GetSignedPolicyCallback,
@@ -2444,6 +2476,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<GenerateSignedPostPolicyV2Response>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -2470,6 +2503,7 @@ class File extends ServiceObject<File> {
    * file.generateSignedPostPolicyV2(options).then(function(data) {
    *   const policy = data[0];
    * });
+   * ```
    */
   generateSignedPostPolicyV2(
     optionsOrCallback?:
@@ -2644,6 +2678,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<GenerateSignedPostPolicyV4Response>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -2677,6 +2712,7 @@ class File extends ServiceObject<File> {
    *   // response.fields The form fields (including the signature) to include
    *   //     to be used to upload objects by HTML forms.
    * });
+   * ```
    */
   generateSignedPostPolicyV4(
     optionsOrCallback?:
@@ -2864,6 +2900,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<GetSignedUrlResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -2950,6 +2987,7 @@ class File extends ServiceObject<File> {
    *   const url = data[0];
    * });
    *
+   * ```
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_generate_signed_url
    * Another example:
@@ -3037,6 +3075,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<IsPublicResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -3059,6 +3098,7 @@ class File extends ServiceObject<File> {
    * file.isPublic().then(function(data) {
    *   const resp = data[0];
    * });
+   * ```
    */
 
   isPublic(callback?: IsPublicCallback): Promise<IsPublicResponse> | void {
@@ -3141,6 +3181,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<MakeFilePrivateResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -3163,6 +3204,7 @@ class File extends ServiceObject<File> {
    * file.makePrivate().then(function(data) {
    *   const apiResponse = data[0];
    * });
+   * ```
    */
   makePrivate(
     optionsOrCallback?: MakeFilePrivateOptions | MakeFilePrivateCallback,
@@ -3216,6 +3258,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<MakeFilePublicResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -3231,6 +3274,7 @@ class File extends ServiceObject<File> {
    *   const apiResponse = data[0];
    * });
    *
+   * ```
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_make_public
    * Another example:
@@ -3257,6 +3301,7 @@ class File extends ServiceObject<File> {
    * @returns {string}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const bucket = storage.bucket('albums');
@@ -3264,6 +3309,7 @@ class File extends ServiceObject<File> {
    *
    * // publicUrl will be "https://storage.googleapis.com/albums/my-file"
    * const publicUrl = file.publicUrl();
+   * ```
    */
   publicUrl(): string {
     return `${this.storage.apiEndpoint}/${this.bucket.name}/${this.name}`;
@@ -3321,6 +3367,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<MoveResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * //-
@@ -3404,6 +3451,7 @@ class File extends ServiceObject<File> {
    *   const apiResponse = data[1];
    * });
    *
+   * ```
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_move_file
    * Another example:
@@ -3491,6 +3539,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<RenameResponse>}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    *
@@ -3537,6 +3586,7 @@ class File extends ServiceObject<File> {
    *   const renamedFile = data[0];
    *   const apiResponse = data[1];
    * });
+   * ```
    */
   rename(
     destinationFile: string | File,
@@ -3677,6 +3727,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise}
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const myBucket = storage.bucket('my-bucket');
@@ -3694,6 +3745,7 @@ class File extends ServiceObject<File> {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * file.save(contents).then(function() {});
+   * ```
    */
   save(
     data: string | Buffer,
@@ -3800,6 +3852,7 @@ class File extends ServiceObject<File> {
    * @returns {Promise<SetStorageClassResponse>}
    *
    * @example
+   * ```
    * file.setStorageClass('nearline', function(err, apiResponse) {
    *   if (err) {
    *     // Error handling omitted.
@@ -3812,6 +3865,7 @@ class File extends ServiceObject<File> {
    * // If the callback is omitted, we'll return a Promise.
    * //-
    * file.setStorageClass('nearline').then(function() {});
+   * ```
    */
   setStorageClass(
     storageClass: string,
@@ -3855,12 +3909,14 @@ class File extends ServiceObject<File> {
    * @param {string} userProject The user project.
    *
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    * const file = bucket.file('my-file');
    *
    * file.setUserProject('grape-spaceship-123');
+   * ```
    */
   setUserProject(userProject: string): void {
     this.bucket.setUserProject.call(this, userProject);

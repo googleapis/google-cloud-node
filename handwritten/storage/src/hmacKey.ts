@@ -86,9 +86,11 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
    * @param {string} accessId The unique accessId for this HMAC key.
    * @param {HmacKeyOptions} options Constructor configurations.
    * @example
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const hmacKey = storage.hmacKey('access-id');
+   * ```
    */
   constructor(storage: Storage, accessId: string, options?: HmacKeyOptions) {
     const methods = {
@@ -118,6 +120,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        * @returns {Promise<DeleteHmacKeyResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        *
@@ -149,6 +152,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        *   .then(() => {
        *     return hmacKey.delete();
        *   });
+       * ```
        */
       delete: true,
       /**
@@ -182,6 +186,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        * @returns {Promise<GetHmacKeyResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        *
@@ -206,6 +211,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        *   .then((data) => {
        *     const hmacKey = data[0];
        *   });
+       * ```
        */
       get: true,
       /**
@@ -228,6 +234,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        * @returns {Promise<HmacKeyMetadataResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        *
@@ -253,6 +260,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        *     const hmacKeyMetadata = data[0];
        *     console.log(hmacKeyMetadata);
        *   });
+       * ```
        */
       getMetadata: true,
       /**
@@ -287,6 +295,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        * @returns {Promise<HmacKeyMetadataResponse>}
        *
        * @example
+       * ```
        * const {Storage} = require('@google-cloud/storage');
        * const storage = new Storage();
        *
@@ -313,6 +322,7 @@ export class HmacKey extends ServiceObject<HmacKeyMetadata | undefined> {
        *     const hmacKeyMetadata = data[0];
        *     console.log(hmacKeyMetadata);
        *   });
+       * ```
        */
       setMetadata: {
         reqOpts: {
