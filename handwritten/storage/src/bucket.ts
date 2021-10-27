@@ -3060,7 +3060,9 @@ class Bucket extends ServiceObject {
     this.setMetadata(metadata, query)
       .then(() => {
         if (options.includeFiles) {
-          return promisify(this.makeAllFilesPublicPrivate_).call(this, options);
+          return promisify<MakeAllFilesPublicPrivateOptions, File[]>(
+            this.makeAllFilesPublicPrivate_
+          ).call(this, options);
         }
         return [];
       })
@@ -3195,7 +3197,9 @@ class Bucket extends ServiceObject {
       })
       .then(() => {
         if (req.includeFiles) {
-          return promisify(this.makeAllFilesPublicPrivate_).call(this, req);
+          return promisify<MakeAllFilesPublicPrivateOptions, File[]>(
+            this.makeAllFilesPublicPrivate_
+          ).call(this, req);
         }
         return [];
       })
