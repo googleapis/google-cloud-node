@@ -411,7 +411,7 @@ const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
  * and allow other users to access your buckets and files.
  *
  * To learn more about ACLs, read this overview on
- * [Access Control](https://cloud.google.com/storage/docs/access-control).
+ * {@link https://cloud.google.com/storage/docs/access-control| Access Control}.
  *
  * See {@link https://cloud.google.com/storage/docs/overview| Cloud Storage overview}
  * See {@link https://cloud.google.com/storage/docs/access-control| Access Control}
@@ -748,8 +748,7 @@ export class Storage extends Service {
    *
    * Cloud Storage uses a flat namespace, so you can't create a bucket with
    * a name that is already in use. For more information, see
-   * [Bucket Naming
-   * Guidelines](https://cloud.google.com/storage/docs/bucketnaming.html#requirements).
+   * {@link https://cloud.google.com/storage/docs/bucketnaming.html#requirements| Bucket Naming Guidelines}.
    *
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert| Buckets: insert API Documentation}
    * See {@link https://cloud.google.com/storage/docs/storage-classes| Storage Classes}
@@ -1291,8 +1290,7 @@ export class Storage extends Service {
    * @typedef {array} GetServiceAccountResponse
    * @property {object} 0 The service account resource.
    * @property {object} 1 The full
-   * [API
-   * response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   * {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| API response}.
    */
   /**
    * @callback GetServiceAccountCallback
@@ -1301,8 +1299,7 @@ export class Storage extends Service {
    * @param {string} serviceAccount.emailAddress The service account email
    *     address.
    * @param {object} apiResponse The full
-   * [API
-   * response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   * {@link https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource| API response}.
    */
   /**
    * Get the email address of this project's Google Cloud Storage service

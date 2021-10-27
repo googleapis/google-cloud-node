@@ -394,7 +394,7 @@ class AclRoleAccessorMethods {
  *     "example.com", the entity would be `domain-example.com`.
  *
  * For more detailed information, see
- * [About Access Control Lists](http://goo.gl/6qBBPO).
+ * {@link http://goo.gl/6qBBPO| About Access Control Lists}.
  *
  * @constructor Acl
  * @mixin

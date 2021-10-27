@@ -122,9 +122,9 @@ interface GetPolicyRequest {
 /**
  * Get and set IAM policies for your Cloud Storage bucket.
  *
- * @see [Cloud Storage IAM Management](https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management)
- * @see [Granting, Changing, and Revoking Access](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
- * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
+ * See {@link https://cloud.google.com/storage/docs/access-control/iam#short_title_iam_management| Cloud Storage IAM Management}
+ * See {@link https://cloud.google.com/iam/docs/granting-changing-revoking-access| Granting, Changing, and Revoking Access}
+ * See {@link https://cloud.google.com/iam/docs/understanding-roles| IAM Roles}
  *
  * @constructor Iam
  *
@@ -288,7 +288,7 @@ class Iam {
    * @returns {Promise<SetPolicyResponse>}
    *
    * See {@link https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy| Buckets: setIamPolicy API Documentation}
-   * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
+   * See {@link https://cloud.google.com/iam/docs/understanding-roles| IAM Roles}
    *
    * @example
    * ```

@@ -752,7 +752,7 @@ class File extends ServiceObject<File> {
        *
        * You can set custom key/value pairs in the metadata key of the given
        * object, however the other properties outside of this object must adhere
-       * to the [official API documentation](https://goo.gl/BOnnCK).
+       * to the {@link https://goo.gl/BOnnCK| official API documentation}.
        *
        *
        * See the examples below for more information.
@@ -913,8 +913,7 @@ class File extends ServiceObject<File> {
    */
   /**
    * @typedef {object} CopyOptions Configuration options for File#copy(). See an
-   *     [Object
-   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects#resource| Object resource}.
    * @property {string} [cacheControl] The cacheControl setting for the new file.
    * @property {string} [contentEncoding] The contentEncoding setting for the new file.
    * @property {string} [contentType] The contentType setting for the new file.
@@ -1200,7 +1199,7 @@ class File extends ServiceObject<File> {
    * recourse is to try downloading the file again.
    *
    * For faster crc32c computation, you must manually install
-   * [`fast-crc32c`](https://www.npmjs.com/package/fast-crc32c):
+   * {@link https://www.npmjs.com/package/fast-crc32c| `fast-crc32c`}:
    *
    *     $ npm install --save fast-crc32c
    *
@@ -1527,9 +1526,7 @@ class File extends ServiceObject<File> {
   /**
    * @typedef {object} CreateResumableUploadOptions
    * @property {string} [configPath] A full JSON file path to use with
-   *     `gcs-resumable-upload`. This maps to the [configstore option by the
-   *     same
-   * name](https://github.com/yeoman/configstore/tree/0df1ec950d952b1f0dfb39ce22af8e505dffc71a#configpath).
+   *     `gcs-resumable-upload`. This maps to the {@link https://github.com/yeoman/configstore/tree/0df1ec950d952b1f0dfb39ce22af8e505dffc71a#configpath| configstore option by the same name}.
    * @property {object} [metadata] Metadata to set on the file.
    * @property {string} [origin] Origin header to set for the upload.
    * @property {string} [predefinedAcl] Apply a predefined set of access
@@ -1563,8 +1560,7 @@ class File extends ServiceObject<File> {
    * Create a unique resumable upload session URI. This is the first step when
    * performing a resumable upload.
    *
-   * See the [Resumable upload
-   * guide](https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload)
+   * See the {@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload| Resumable upload guide}
    * for more on how the entire process works.
    *
    * <h4>Note</h4>
@@ -1652,8 +1648,7 @@ class File extends ServiceObject<File> {
    * @typedef {object} CreateWriteStreamOptions Configuration options for File#createWriteStream().
    * @property {string} [configPath] **This only applies to resumable
    *     uploads.** A full JSON file path to use with `gcs-resumable-upload`.
-   *     This maps to the [configstore option by the same
-   * name](https://github.com/yeoman/configstore/tree/0df1ec950d952b1f0dfb39ce22af8e505dffc71a#configpath).
+   *     This maps to the {@link https://github.com/yeoman/configstore/tree/0df1ec950d952b1f0dfb39ce22af8e505dffc71a#configpath| configstore option by the same name}.
    * @property {string} [contentType] Alias for
    *     `options.metadata.contentType`. If set to `auto`, the file name is used
    *     to determine the contentType.
@@ -1662,8 +1657,7 @@ class File extends ServiceObject<File> {
    * should be gzipped. This will set `options.metadata.contentEncoding` to
    * `gzip` if necessary.
    * @property {object} [metadata] See the examples below or
-   *     [Objects: insert request
-   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON| Objects: insert request body}
    *     for more details.
    * @property {number} [offset] The starting byte of the upload stream, for
    *     resuming an interrupted upload. Defaults to 0.
@@ -1721,7 +1715,7 @@ class File extends ServiceObject<File> {
    * by setting `options.resumable` to `false`.
    *
    * Resumable uploads require write access to the $HOME directory. Through
-   * [`config-store`](https://www.npmjs.com/package/configstore), some metadata
+   * {@link https://www.npmjs.com/package/configstore| `config-store`}, some metadata
    * is stored. By default, if the directory is not writable, we will fall back
    * to a simple upload. However, if you explicitly request a resumable upload,
    * and we cannot write to the config directory, we will return a
@@ -1735,7 +1729,7 @@ class File extends ServiceObject<File> {
    * </p>
    *
    * For faster crc32c computation, you must manually install
-   * [`fast-crc32c`](https://www.npmjs.com/package/fast-crc32c):
+   * {@link https://www.npmjs.com/package/fast-crc32c| `fast-crc32c`}:
    *
    *     $ npm install --save fast-crc32c
    *
@@ -2311,8 +2305,7 @@ class File extends ServiceObject<File> {
    * In Google Cloud Platform environments, such as Cloud Functions and App
    * Engine, you usually don't provide a `keyFilename` or `credentials` during
    * instantiation. In those environments, we call the
-   * [signBlob
-   * API](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+   * {@link https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob| signBlob API}
    * to create a signed policy. That API requires either the
    * `https://www.googleapis.com/auth/iam` or
    * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
@@ -2431,8 +2424,7 @@ class File extends ServiceObject<File> {
    * In Google Cloud Platform environments, such as Cloud Functions and App
    * Engine, you usually don't provide a `keyFilename` or `credentials` during
    * instantiation. In those environments, we call the
-   * [signBlob
-   * API](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+   * {@link https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob| signBlob API}
    * to create a signed policy. That API requires either the
    * `https://www.googleapis.com/auth/iam` or
    * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
@@ -2646,8 +2638,7 @@ class File extends ServiceObject<File> {
    * In Google Cloud Platform environments, such as Cloud Functions and App
    * Engine, you usually don't provide a `keyFilename` or `credentials` during
    * instantiation. In those environments, we call the
-   * [signBlob
-   * API](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+   * {@link https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob| signBlob API}
    * to create a signed policy. That API requires either the
    * `https://www.googleapis.com/auth/iam` or
    * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
@@ -2832,8 +2823,7 @@ class File extends ServiceObject<File> {
    * In Google Cloud Platform environments, such as Cloud Functions and App
    * Engine, you usually don't provide a `keyFilename` or `credentials` during
    * instantiation. In those environments, we call the
-   * [signBlob
-   * API](https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob)
+   * {@link https://cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signBlob| signBlob API}
    * to create a signed URL. That API requires either the
    * `https://www.googleapis.com/auth/iam` or
    * `https://www.googleapis.com/auth/cloud-platform` scope, so be sure they are
@@ -2872,8 +2862,7 @@ class File extends ServiceObject<File> {
    *     for this HTTP header in its request.
    * @param {object} [config.extensionHeaders] If these headers are used, the
    * server will check to make sure that the client provides matching
-   * values. See [Canonical extension
-   * headers](https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers)
+   * values. See {@link https://cloud.google.com/storage/docs/access-control/signed-urls#about-canonical-extension-headers| Canonical extension headers}
    * for the requirements of this feature, most notably:
    * - The header name must be prefixed with `x-goog-`
    * - The header name must be all lowercase
@@ -2889,7 +2878,7 @@ class File extends ServiceObject<File> {
    *     save the file as when the signed url is accessed. This is ignored if
    *     `config.responseDisposition` is set.
    * @param {string} [config.responseDisposition] The
-   *     [response-content-disposition parameter](http://goo.gl/yMWxQV) of the
+   *     {@link http://goo.gl/yMWxQV| response-content-disposition parameter} of the
    *     signed url.
    * @param {*} [config.accessibleAt=Date.now()] A timestamp when this link became usable. Any value
    *     given is passed to `new Date()`.
@@ -3338,8 +3327,7 @@ class File extends ServiceObject<File> {
    */
   /**
    * @typedef {object} MoveOptions Configuration options for File#move(). See an
-   *     [Object
-   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects#resource| Object resource}.
    * @param {string} [userProject] The ID of the project which will be
    *     billed for the request.
    */
@@ -3516,8 +3504,7 @@ class File extends ServiceObject<File> {
    */
   /**
    * @typedef {object} RenameOptions Configuration options for File#move(). See an
-   *     [Object
-   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects#resource| Object resource}.
    * @param {string} [userProject] The ID of the project which will be
    *     billed for the request.
    */
