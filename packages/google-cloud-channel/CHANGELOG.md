@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.4.0...v1.5.0) (2021-10-27)
+
+
+### Features
+
+* add resource type to ChannelPartnerLink ([#103](https://www.github.com/googleapis/nodejs-channel/issues/103)) ([f8d5b31](https://www.github.com/googleapis/nodejs-channel/commit/f8d5b3197062591ce38c2d648412e7c80f0d5fc3))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.3.0...v1.4.0) (2021-09-07)
 
 
