@@ -38,8 +38,10 @@
         "fileMakePrivate",
         "setMetadata"
     ],
+    "storage.bucket_acl.insert": [
+        "bucketMakePublic"
+    ],
     "storage.object_acl.insert": [
-        "bucketMakePublic",
         "fileMakePublic"
     ],
     "storage.objects.rewrite": [

@@ -105,7 +105,12 @@ describe('retry conformance testing', () => {
 });
 
 function excecuteScenario(testCase: RetryTestCase) {
-  testCase.cases.forEach((instructionSet: RetryCase) => {
+  for (
+    let instructionNumber = 0;
+    instructionNumber < testCase.cases.length;
+    instructionNumber++
+  ) {
+    const instructionSet: RetryCase = testCase.cases[instructionNumber];
     testCase.methods.forEach(async jsonMethod => {
       const functionList = methodMap.get(jsonMethod?.name);
       functionList?.forEach(storageMethodString => {
@@ -149,15 +154,18 @@ function excecuteScenario(testCase: RetryTestCase) {
           });
         });
 
-        it(`${storageMethodString}`, async () => {
+        it(`${storageMethodString}${instructionNumber}`, async () => {
           if (testCase.expectSuccess) {
             assert.ifError(
               await storageMethodObject(bucket, file, notification, storage)
             );
           } else {
-            assert.throws(async () => {
+            try {
               await storageMethodObject(bucket, file, notification, storage);
-            });
+              throw Error(`${storageMethodString} was supposed to throw.`);
+            } catch (e) {
+              assert.notStrictEqual(e, undefined);
+            }
           }
           const testBenchResult = await getTestBenchRetryTest(
             creationResult.id
@@ -166,7 +174,7 @@ function excecuteScenario(testCase: RetryTestCase) {
         });
       });
     });
-  });
+  }
 }
 
 async function createBucketForTest(
