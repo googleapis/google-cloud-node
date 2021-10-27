@@ -3123,7 +3123,7 @@ describe('storage', () => {
   });
 
   describe('channels', () => {
-    it('should create a channel', done => {
+    it.skip('should create a channel', done => {
       const config = {
         address: 'https://yahoo.com',
       };
