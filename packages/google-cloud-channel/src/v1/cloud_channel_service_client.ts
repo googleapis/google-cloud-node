@@ -184,6 +184,9 @@ export class CloudChannelServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      channelPartnerLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/channelPartnerLinks/{channel_partner_link}'
+      ),
       customerPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/customers/{customer}'
       ),
@@ -6551,6 +6554,48 @@ export class CloudChannelServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified channelPartnerLink resource name string.
+   *
+   * @param {string} account
+   * @param {string} channel_partner_link
+   * @returns {string} Resource name string.
+   */
+  channelPartnerLinkPath(account: string, channelPartnerLink: string) {
+    return this.pathTemplates.channelPartnerLinkPathTemplate.render({
+      account: account,
+      channel_partner_link: channelPartnerLink,
+    });
+  }
+
+  /**
+   * Parse the account from ChannelPartnerLink resource.
+   *
+   * @param {string} channelPartnerLinkName
+   *   A fully-qualified path representing ChannelPartnerLink resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromChannelPartnerLinkName(channelPartnerLinkName: string) {
+    return this.pathTemplates.channelPartnerLinkPathTemplate.match(
+      channelPartnerLinkName
+    ).account;
+  }
+
+  /**
+   * Parse the channel_partner_link from ChannelPartnerLink resource.
+   *
+   * @param {string} channelPartnerLinkName
+   *   A fully-qualified path representing ChannelPartnerLink resource.
+   * @returns {string} A string representing the channel_partner_link.
+   */
+  matchChannelPartnerLinkFromChannelPartnerLinkName(
+    channelPartnerLinkName: string
+  ) {
+    return this.pathTemplates.channelPartnerLinkPathTemplate.match(
+      channelPartnerLinkName
+    ).channel_partner_link;
+  }
 
   /**
    * Return a fully-qualified customer resource name string.

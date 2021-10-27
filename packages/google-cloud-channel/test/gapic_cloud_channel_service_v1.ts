@@ -7373,6 +7373,70 @@ describe('v1.CloudChannelServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('channelPartnerLink', () => {
+      const fakePath = '/rendered/path/channelPartnerLink';
+      const expectedParameters = {
+        account: 'accountValue',
+        channel_partner_link: 'channelPartnerLinkValue',
+      };
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.channelPartnerLinkPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.channelPartnerLinkPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('channelPartnerLinkPath', () => {
+        const result = client.channelPartnerLinkPath(
+          'accountValue',
+          'channelPartnerLinkValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.channelPartnerLinkPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromChannelPartnerLinkName', () => {
+        const result = client.matchAccountFromChannelPartnerLinkName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (
+            client.pathTemplates.channelPartnerLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelPartnerLinkFromChannelPartnerLinkName', () => {
+        const result =
+          client.matchChannelPartnerLinkFromChannelPartnerLinkName(fakePath);
+        assert.strictEqual(result, 'channelPartnerLinkValue');
+        assert(
+          (
+            client.pathTemplates.channelPartnerLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('customer', () => {
       const fakePath = '/rendered/path/customer';
       const expectedParameters = {
