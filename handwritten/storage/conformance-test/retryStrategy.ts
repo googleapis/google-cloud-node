@@ -77,6 +77,7 @@ const TESTBENCH_HOST =
 
 const CONF_TEST_PROJECT_ID = 'my-project-id';
 const TIMEOUT_FOR_DOCKER_OPS = 60000;
+const TIMEOUT_FOR_INDIVIDUAL_TEST = 20000;
 
 describe('retry conformance testing', () => {
   before(async function () {
@@ -171,7 +172,7 @@ function excecuteScenario(testCase: RetryTestCase) {
             creationResult.id
           );
           assert.strictEqual(testBenchResult.completed, true);
-        });
+        }).timeout(TIMEOUT_FOR_INDIVIDUAL_TEST);
       });
     });
   }
