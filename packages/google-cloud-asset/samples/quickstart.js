@@ -49,7 +49,7 @@ async function main(assetNames) {
     console.log(util.inspect(result, {depth: null}));
     // [END asset_quickstart]
   }
-  quickstart();
+  await quickstart();
 }
 
 main(...process.argv.slice(2));
