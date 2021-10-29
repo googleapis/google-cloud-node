@@ -3123,19 +3123,6 @@ describe('storage', () => {
   });
 
   describe('channels', () => {
-    it.skip('should create a channel', done => {
-      const config = {
-        address: 'https://yahoo.com',
-      };
-
-      bucket.createChannel('new-channel', config, (err: Error | null) => {
-        // Actually creating a channel is pretty complicated. This will at least
-        // let us know we reached the right endpoint and it received "yahoo.com".
-        assert(err!.message.includes(config.address));
-        done();
-      });
-    });
-
     it('should stop a channel', done => {
       // We can't actually create a channel. But we can test to see that we're
       // reaching the right endpoint with the API request.
