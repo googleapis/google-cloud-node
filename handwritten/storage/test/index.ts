@@ -362,6 +362,23 @@ describe('Storage', () => {
       );
     });
 
+    it('should return false if reason and code are both undefined', () => {
+      const storage = new Storage({
+        projectId: PROJECT_ID,
+      });
+      const calledWith = storage.calledWith_[0];
+      const error = new ApiError('error without a code');
+      error.errors = [
+        {
+          message: 'some error message',
+        },
+      ];
+      assert.strictEqual(
+        calledWith.retryOptions.retryableErrorFn(error),
+        false
+      );
+    });
+
     it('should retry a 999 error if dictated by custom function', () => {
       const customRetryFunc = function (err?: ApiError) {
         if (err) {
