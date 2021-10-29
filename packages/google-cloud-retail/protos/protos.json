@@ -2743,6 +2743,23 @@
                         }
                       }
                     },
+                    "LocalInventory": {
+                      "fields": {
+                        "placeId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "priceInfo": {
+                          "type": "PriceInfo",
+                          "id": 2
+                        },
+                        "attributes": {
+                          "keyType": "string",
+                          "type": "CustomAttribute",
+                          "id": 3
+                        }
+                      }
+                    },
                     "GcsSource": {
                       "fields": {
                         "inputUris": {
@@ -4118,6 +4135,62 @@
                               }
                             }
                           ]
+                        },
+                        "AddLocalInventories": {
+                          "requestType": "AddLocalInventoriesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{product=projects/*/locations/*/catalogs/*/branches/*/products/**}:addLocalInventories",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "product",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.AddLocalInventoriesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2alpha.AddLocalInventoriesMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{product=projects/*/locations/*/catalogs/*/branches/*/products/**}:addLocalInventories",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "product"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2alpha.AddLocalInventoriesResponse",
+                                "metadata_type": "google.cloud.retail.v2alpha.AddLocalInventoriesMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveLocalInventories": {
+                          "requestType": "RemoveLocalInventoriesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{product=projects/*/locations/*/catalogs/*/branches/*/products/**}:removeLocalInventories",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "product",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.RemoveLocalInventoriesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{product=projects/*/locations/*/catalogs/*/branches/*/products/**}:removeLocalInventories",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "product"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2alpha.RemoveLocalInventoriesResponse",
+                                "metadata_type": "google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -4307,6 +4380,78 @@
                       "fields": {}
                     },
                     "AddFulfillmentPlacesResponse": {
+                      "fields": {}
+                    },
+                    "AddLocalInventoriesRequest": {
+                      "fields": {
+                        "product": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Product"
+                          }
+                        },
+                        "localInventories": {
+                          "rule": "repeated",
+                          "type": "LocalInventory",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "addMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4
+                        },
+                        "addTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AddLocalInventoriesMetadata": {
+                      "fields": {}
+                    },
+                    "AddLocalInventoriesResponse": {
+                      "fields": {}
+                    },
+                    "RemoveLocalInventoriesRequest": {
+                      "fields": {
+                        "product": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Product"
+                          }
+                        },
+                        "placeIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "removeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RemoveLocalInventoriesMetadata": {
+                      "fields": {}
+                    },
+                    "RemoveLocalInventoriesResponse": {
                       "fields": {}
                     },
                     "RemoveFulfillmentPlacesRequest": {

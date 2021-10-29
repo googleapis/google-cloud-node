@@ -166,6 +166,16 @@
                 "removeFulfillmentPlaces"
               ]
             },
+            "AddLocalInventories": {
+              "methods": [
+                "addLocalInventories"
+              ]
+            },
+            "RemoveLocalInventories": {
+              "methods": [
+                "removeLocalInventories"
+              ]
+            },
             "ListProducts": {
               "methods": [
                 "listProducts",
@@ -216,6 +226,16 @@
             "RemoveFulfillmentPlaces": {
               "methods": [
                 "removeFulfillmentPlaces"
+              ]
+            },
+            "AddLocalInventories": {
+              "methods": [
+                "addLocalInventories"
+              ]
+            },
+            "RemoveLocalInventories": {
+              "methods": [
+                "removeLocalInventories"
               ]
             },
             "ListProducts": {

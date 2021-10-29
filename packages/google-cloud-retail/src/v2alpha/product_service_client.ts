@@ -225,6 +225,18 @@ export class ProductServiceClient {
     const removeFulfillmentPlacesMetadata = protoFilesRoot.lookup(
       '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata'
     ) as gax.protobuf.Type;
+    const addLocalInventoriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.AddLocalInventoriesResponse'
+    ) as gax.protobuf.Type;
+    const addLocalInventoriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.AddLocalInventoriesMetadata'
+    ) as gax.protobuf.Type;
+    const removeLocalInventoriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.RemoveLocalInventoriesResponse'
+    ) as gax.protobuf.Type;
+    const removeLocalInventoriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importProducts: new this._gaxModule.LongrunningDescriptor(
@@ -249,6 +261,20 @@ export class ProductServiceClient {
         ),
         removeFulfillmentPlacesMetadata.decode.bind(
           removeFulfillmentPlacesMetadata
+        )
+      ),
+      addLocalInventories: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        addLocalInventoriesResponse.decode.bind(addLocalInventoriesResponse),
+        addLocalInventoriesMetadata.decode.bind(addLocalInventoriesMetadata)
+      ),
+      removeLocalInventories: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        removeLocalInventoriesResponse.decode.bind(
+          removeLocalInventoriesResponse
+        ),
+        removeLocalInventoriesMetadata.decode.bind(
+          removeLocalInventoriesMetadata
         )
       ),
     };
@@ -312,6 +338,8 @@ export class ProductServiceClient {
       'setInventory',
       'addFulfillmentPlaces',
       'removeFulfillmentPlaces',
+      'addLocalInventories',
+      'removeLocalInventories',
     ];
     for (const methodName of productServiceStubMethods) {
       const callPromise = this.productServiceStub.then(
@@ -1655,6 +1683,389 @@ export class ProductServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesResponse,
       protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata
+    >;
+  }
+  addLocalInventories(
+    request?: protos.google.cloud.retail.v2alpha.IAddLocalInventoriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  addLocalInventories(
+    request: protos.google.cloud.retail.v2alpha.IAddLocalInventoriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addLocalInventories(
+    request: protos.google.cloud.retail.v2alpha.IAddLocalInventoriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates local inventory information for a
+   * {@link google.cloud.retail.v2alpha.Product|Product} at a list of places, while
+   * respecting the last update timestamps of each inventory field.
+   *
+   * This process is asynchronous and does not require the
+   * {@link google.cloud.retail.v2alpha.Product|Product} to exist before updating
+   * inventory information. If the request is valid, the update will be enqueued
+   * and processed downstream. As a consequence, when a response is returned,
+   * updates are not immediately manifested in the
+   * {@link google.cloud.retail.v2alpha.Product|Product} queried by
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
+   *
+   * Store inventory information can only be modified using this method.
+   * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|CreateProduct}
+   * and
+   * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|UpdateProduct}
+   * has no effect on local inventories.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * Cloud sales if you are interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.product
+   *   Required. Full resource name of
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, regardless of whether or
+   *   not it exists, a PERMISSION_DENIED error is returned.
+   * @param {number[]} request.localInventories
+   *   Required. A list of inventory information at difference places. Each place
+   *   is identified by its place ID. At most 1000 inventories are allowed per
+   *   request.
+   * @param {google.protobuf.FieldMask} request.addMask
+   *   Indicates which inventory fields in the provided list of
+   *   {@link google.cloud.retail.v2alpha.LocalInventory|LocalInventory} to update. The
+   *   field is updated to the provided value.
+   *
+   *   If a field is set while the place does not have a previous local inventory,
+   *   the local inventory at that store is created.
+   *
+   *   If a field is set while the value of that field is not provided, the
+   *   original field value, if it exists, is deleted.
+   *
+   *   If the mask is not set or set with empty paths, all inventory fields will
+   *   be updated.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned and the entire update will be ignored.
+   * @param {google.protobuf.Timestamp} request.addTime
+   *   The time when the inventory updates are issued. Used to prevent
+   *   out-of-order updates on local inventory fields. If not provided, the
+   *   internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2alpha.Product|Product} is
+   *   not found, the local inventory will still be processed and retained for at
+   *   most 1 day and processed once the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is created. If set to false,
+   *   an INVALID_ARGUMENT error is returned if the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.addLocalInventories(request);
+   * const [response] = await operation.promise();
+   */
+  addLocalInventories(
+    request?: protos.google.cloud.retail.v2alpha.IAddLocalInventoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+            protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        product: request.product || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.addLocalInventories(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `addLocalInventories()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkAddLocalInventoriesProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkAddLocalInventoriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.AddLocalInventoriesResponse,
+      protos.google.cloud.retail.v2alpha.AddLocalInventoriesMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.addLocalInventories,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.AddLocalInventoriesResponse,
+      protos.google.cloud.retail.v2alpha.AddLocalInventoriesMetadata
+    >;
+  }
+  removeLocalInventories(
+    request?: protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  removeLocalInventories(
+    request: protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeLocalInventories(
+    request: protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Remove local inventory information for a
+   * {@link google.cloud.retail.v2alpha.Product|Product} at a list of places at a
+   * removal timestamp.
+   *
+   * This process is asynchronous. If the request is valid, the removal will be
+   * enqueued and processed downstream. As a consequence, when a response is
+   * returned, removals are not immediately manifested in the
+   * {@link google.cloud.retail.v2alpha.Product|Product} queried by
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
+   *
+   * Store inventory information can only be removed using this method.
+   * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|CreateProduct}
+   * and
+   * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|UpdateProduct}
+   * has no effect on local inventories.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * Cloud sales if you are interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.product
+   *   Required. Full resource name of
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, regardless of whether or
+   *   not it exists, a PERMISSION_DENIED error is returned.
+   * @param {string[]} request.placeIds
+   *   Required. A list of place IDs to have their inventory deleted.
+   *   At most 1000 place IDs are allowed per request.
+   * @param {google.protobuf.Timestamp} request.removeTime
+   *   The time when the inventory deletions are issued. Used to prevent
+   *   out-of-order updates and deletions on local inventory fields. If not
+   *   provided, the internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2alpha.Product|Product} is
+   *   not found, the local inventory removal request will still be processed and
+   *   retained for at most 1 day and processed once the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is created. If set to false,
+   *   a NOT_FOUND error is returned if the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.removeLocalInventories(request);
+   * const [response] = await operation.promise();
+   */
+  removeLocalInventories(
+    request?: protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+            protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        product: request.product || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeLocalInventories(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `removeLocalInventories()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRemoveLocalInventoriesProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkRemoveLocalInventoriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesResponse,
+      protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.removeLocalInventories,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesResponse,
+      protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesMetadata
     >;
   }
   listProducts(

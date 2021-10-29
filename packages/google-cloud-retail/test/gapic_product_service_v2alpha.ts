@@ -1454,6 +1454,397 @@ describe('v2alpha.ProductServiceClient', () => {
     });
   });
 
+  describe('addLocalInventories', () => {
+    it('invokes addLocalInventories without error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.addLocalInventories =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addLocalInventories(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.addLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes addLocalInventories without error using callback', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.addLocalInventories =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addLocalInventories(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+              protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IAddLocalInventoriesMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.addLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes addLocalInventories with call error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addLocalInventories = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.addLocalInventories(request), expectedError);
+      assert(
+        (client.innerApiCalls.addLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes addLocalInventories with LRO error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addLocalInventories = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.addLocalInventories(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.addLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkAddLocalInventoriesProgress without error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddLocalInventoriesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddLocalInventoriesProgress with error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkAddLocalInventoriesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('removeLocalInventories', () => {
+    it('invokes removeLocalInventories without error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.removeLocalInventories =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.removeLocalInventories(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeLocalInventories without error using callback', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.removeLocalInventories =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeLocalInventories(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+              protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveLocalInventoriesMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes removeLocalInventories with call error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeLocalInventories = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.removeLocalInventories(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.removeLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeLocalInventories with LRO error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeLocalInventories = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.removeLocalInventories(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.removeLocalInventories as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkRemoveLocalInventoriesProgress without error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRemoveLocalInventoriesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRemoveLocalInventoriesProgress with error', async () => {
+      const client = new productserviceModule.v2alpha.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRemoveLocalInventoriesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listProducts', () => {
     it('invokes listProducts without error', async () => {
       const client = new productserviceModule.v2alpha.ProductServiceClient({
