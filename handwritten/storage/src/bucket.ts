@@ -2129,18 +2129,24 @@ class Bucket extends ServiceObject {
    * });
    *
    * ```
-   * @example <caption>Optionally, provide a destination bucket.</caption>
+   * @example
+   * Optionally, provide a destination bucket.
+   * ```
    * const config = {
    *   prefix: 'log',
    *   bucket: 'destination-bucket'
    * };
    *
    * bucket.enableLogging(config, function(err, apiResponse) {});
+   * ```
    *
-   * @example <caption>If the callback is omitted, we'll return a Promise.</caption>
+   * @example
+   * If the callback is omitted, we'll return a Promise.
+   * ```
    * bucket.enableLogging(config).then(function(data) {
    *   const apiResponse = data[0];
    * });
+   * ```
    */
   enableLogging(
     config: EnableLoggingOptions,
@@ -2440,7 +2446,9 @@ class Bucket extends ServiceObject {
    * });
    *
    * ```
-   * @example <caption><h6>Simulating a File System</h6><p>With `autoPaginate: false`, it's possible to iterate over files which incorporate a common structure using a delimiter.</p><p>Consider the following remote objects:</p><ol><li>"a"</li><li>"a/b/c/d"</li><li>"b/d/e"</li></ol><p>Using a delimiter of `/` will return a single file, "a".</p><p>`apiResponse.prefixes` will return the "sub-directories" that were found:</p><ol><li>"a/"</li><li>"b/"</li></ol></caption>
+   * @example
+   * <h6>Simulating a File System</h6><p>With `autoPaginate: false`, it's possible to iterate over files which incorporate a common structure using a delimiter.</p><p>Consider the following remote objects:</p><ol><li>"a"</li><li>"a/b/c/d"</li><li>"b/d/e"</li></ol><p>Using a delimiter of `/` will return a single file, "a".</p><p>`apiResponse.prefixes` will return the "sub-directories" that were found:</p><ol><li>"a/"</li><li>"b/"</li></ol>
+   * ```
    * bucket.getFiles({
    *   autoPaginate: false,
    *   delimiter: '/'
@@ -2454,8 +2462,11 @@ class Bucket extends ServiceObject {
    *   //   'b/'
    *   // ]
    * });
+   * ```
    *
-   * @example <caption>Using prefixes, it's now possible to simulate a file system with follow-up requests.</caption>
+   * @example
+   * Using prefixes, it's now possible to simulate a file system with follow-up requests.
+   * ```
    * bucket.getFiles({
    *   autoPaginate: false,
    *   delimiter: '/',
@@ -2470,6 +2481,7 @@ class Bucket extends ServiceObject {
    *   //   'a/b/'
    *   // ]
    * });
+   * ```
    *
    * @example <caption>include:samples/files.js</caption>
    * region_tag:storage_list_files

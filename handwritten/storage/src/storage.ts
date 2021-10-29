@@ -528,17 +528,23 @@ export class Storage extends Service {
   /**
    * Constructs the Storage client.
    *
-   * @example <caption>Create a client that uses Application Default Credentials
-   * (ADC)</caption>
+   * @example
+   * Create a client that uses Application Default Credentials
+   * (ADC)
+   * ```
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
+   * ```
    *
-   * @example <caption>Create a client with explicit credentials</caption>
+   * @example
+   * Create a client with explicit credentials
+   * ```
    * const storage = new Storage({
    *   projectId: 'your-project-id',
    *   keyFilename: '/path/to/keyfile.json'
    * });
-   *
+   * ```
+
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {

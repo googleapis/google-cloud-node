@@ -22,22 +22,35 @@
  * @module {Storage} @google-cloud/storage
  * @alias nodejs-storage
  *
- * @example <caption>Install the client library with <a
- * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
- * @google-cloud/storage
+ * @example
+ * Install the client library with <a href="https://www.npmjs.com/">npm</a>:
+ * ```
+ * npm install --save @google-cloud/storage
+ * ```
  *
- * @example <caption>Import the client library</caption>
+ * @example
+ * Import the client library
+ * ```
  * const {Storage} = require('@google-cloud/storage');
+ * ```
  *
- * @example <caption>Create a client that uses <a
+ * @example
+ * Create a client that uses <a
  * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
- * Default Credentials (ADC)</a>:</caption> const storage = new Storage();
+ * Default Credentials (ADC)</a>:
+ * ```
+ * const storage = new Storage();
+ * ```
  *
- * @example <caption>Create a client with <a
+ * @example
+ * Create a client with <a
  * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
- * credentials</a>:</caption> const storage = new Storage({ projectId:
+ * credentials</a>:
+ * ```
+ * const storage = new Storage({ projectId:
  * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
+ * ```
  *
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:storage_quickstart
