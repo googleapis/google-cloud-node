@@ -57,7 +57,7 @@ function main(parent, requestMetadata) {
    *  * `count(numeric_histogram_facet, list of buckets)`: Count the number of
    *  matching entities within each bucket.
    *  Data types:
-   *  * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+   *  * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
    *  * String: string like "any string with backslash escape for quote(\")."
    *  * Number: whole number and floating point number like 10, -1 and -0.01.
    *  * List: list of elements with comma(,) separator surrounded by square

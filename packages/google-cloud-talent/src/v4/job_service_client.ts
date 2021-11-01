@@ -822,7 +822,7 @@ export class JobServiceClient {
    *
    *   Data types:
    *
-   *   * Histogram facet: facet names with format {@link a-zA-Z0-9_|a-zA-Z}+.
+   *   * Histogram facet: facet names with format `{@link a-zA-Z0-9_|a-zA-Z}+`.
    *   * String: string like "any string with backslash escape for quote(\")."
    *   * Number: whole number and floating point number like 10, -1 and -0.01.
    *   * List: list of elements with comma(,) separator surrounded by square
@@ -1148,7 +1148,7 @@ export class JobServiceClient {
    *
    *   Data types:
    *
-   *   * Histogram facet: facet names with format {@link a-zA-Z0-9_|a-zA-Z}+.
+   *   * Histogram facet: facet names with format `{@link a-zA-Z0-9_|a-zA-Z}+`.
    *   * String: string like "any string with backslash escape for quote(\")."
    *   * Number: whole number and floating point number like 10, -1 and -0.01.
    *   * List: list of elements with comma(,) separator surrounded by square
