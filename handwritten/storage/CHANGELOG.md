@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.15.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.3...v5.15.4) (2021-11-01)
+
+
+### Bug Fixes
+
+* check e is not null ([#1692](https://www.github.com/googleapis/nodejs-storage/issues/1692)) ([56ff485](https://www.github.com/googleapis/nodejs-storage/commit/56ff485cbe28ba048c9a689711b034c416853b1f))
+
 ### [5.15.3](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.2...v5.15.3) (2021-10-14)
 
 
