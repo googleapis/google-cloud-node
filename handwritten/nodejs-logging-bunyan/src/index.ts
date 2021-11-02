@@ -129,21 +129,25 @@ export function getCurrentTraceFromAgent() {
  * @param {constructor} [options.promise] Custom promise module to use instead
  *     of native Promises.
  *
- * @example <caption>Import the client library</caption>
+ * @example Import the client library
+ * ```
  * const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
  *
- * @example <caption>Create a client that uses <a
- * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
- * Default Credentials (ADC)</a>:</caption> const loggingBunyan = new
+ * ```
+ * @example Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:
+ * ```
+ * const loggingBunyan = new
  * LoggingBunyan();
  *
- * @example <caption>Create a client with <a
- * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
- * credentials</a>:</caption> const loggingBunyan = new LoggingBunyan({
+ * ```
+ * @example Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:
+ * ```
+ *   const loggingBunyan = new LoggingBunyan({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json'
  * });
  *
+ * ```
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:logging_bunyan_quickstart
  * Full quickstart example:
