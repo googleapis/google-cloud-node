@@ -2,13 +2,18 @@
   "../../protos/grafeas/v1/attestation.proto",
   "../../protos/grafeas/v1/build.proto",
   "../../protos/grafeas/v1/common.proto",
+  "../../protos/grafeas/v1/compliance.proto",
   "../../protos/grafeas/v1/cvss.proto",
   "../../protos/grafeas/v1/deployment.proto",
   "../../protos/grafeas/v1/discovery.proto",
+  "../../protos/grafeas/v1/dsse_attestation.proto",
   "../../protos/grafeas/v1/grafeas.proto",
   "../../protos/grafeas/v1/image.proto",
+  "../../protos/grafeas/v1/intoto_provenance.proto",
+  "../../protos/grafeas/v1/intoto_statement.proto",
   "../../protos/grafeas/v1/package.proto",
   "../../protos/grafeas/v1/provenance.proto",
+  "../../protos/grafeas/v1/slsa_provenance.proto",
   "../../protos/grafeas/v1/upgrade.proto",
   "../../protos/grafeas/v1/vulnerability.proto"
 ]
