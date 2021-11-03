@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.15.5](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.4...v5.15.5) (2021-11-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mime to v3 ([#1696](https://www.github.com/googleapis/nodejs-storage/issues/1696)) ([f337208](https://www.github.com/googleapis/nodejs-storage/commit/f33720883bb6d797d2fb89d5e6ff9584d216be74))
+* explicitly define function type of getFilesStream ([#1697](https://www.github.com/googleapis/nodejs-storage/issues/1697)) ([c950c23](https://www.github.com/googleapis/nodejs-storage/commit/c950c23742bb9291a3e15b95ae0ee4a13466c361))
+
 ### [5.15.4](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.3...v5.15.4) (2021-11-01)
 
 
