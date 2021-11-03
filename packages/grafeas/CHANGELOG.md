@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.6.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.5.0...v3.6.0) (2021-11-03)
+
+
+### Features
+
+* Updating the grafeas protos to include compliance and intoto attestation protos ([#304](https://www.github.com/googleapis/nodejs-grafeas/issues/304)) ([858689d](https://www.github.com/googleapis/nodejs-grafeas/commit/858689d0c2d3e387b1e0a154fd4ff1a22b127859))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.6...v3.5.0) (2021-08-23)
 
 

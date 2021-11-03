@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-grafeas",
   "name": "@google-cloud/grafeas",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "author": "Google LLC",
   "description": "Grafeas API client for Node.js",
   "main": "build/src/index.js",
