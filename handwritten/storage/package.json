@@ -62,7 +62,7 @@
     "gcs-resumable-upload": "^3.3.0",
     "get-stream": "^6.0.0",
     "hash-stream-validation": "^0.2.2",
-    "mime": "^2.2.0",
+    "mime": "^3.0.0",
     "mime-types": "^2.0.8",
     "p-limit": "^3.0.1",
     "pumpify": "^2.0.0",
