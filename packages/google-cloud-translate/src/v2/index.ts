@@ -103,7 +103,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
  *     native Promises.
  */
 /**
- * With [Google Translate](https://cloud.google.com/translate), you can
+ * With {@link https://cloud.google.com/translate| Google Translate}, you can
  * dynamically translate text between thousands of language pairs.
  *
  * The Google Cloud Translation API lets websites and programs integrate with
@@ -293,7 +293,7 @@ export class Translate extends Service {
   /**
    * @typedef {object} LanguageResult
    * @memberof v2
-   * @property {string} code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+   * @property {string} code The {@link https://en.wikipedia.org/wiki/ISO_639-1| ISO 639-1}
    *     language code.
    * @property {string} name The language name. This can be translated into your
    *     preferred language with the `target` option.
@@ -303,7 +303,7 @@ export class Translate extends Service {
    * @memberof v2
    * @param {?Error} err Request error, if any.
    * @param {object[]} results The languages supported by the API.
-   * @param {string} results.code The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+   * @param {string} results.code The {@link https://en.wikipedia.org/wiki/ISO_639-1| ISO 639-1}
    *     language code.
    * @param {string} results.name The language name. This can be translated into your
    *     preferred language with the `target` option.
@@ -425,7 +425,7 @@ export class Translate extends Service {
   /**
    * Translate a string or multiple strings into another language.
    *
-   * @see [Translate Text](https://cloud.google.com/translate/v2/using_rest#Translate)
+   * @see {@link https://cloud.google.com/translate/v2/using_rest#Translate| Translate Text}
    *
    * @throws {Error} If `options` is provided as an object without a `to`
    *     property.
