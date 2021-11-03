@@ -55,9 +55,11 @@ export interface Filter {
  * @param {string[]} kinds Kind to query.
  *
  * @example
+ * ```
  * const {Datastore} = require('@google-cloud/datastore');
  * const datastore = new Datastore();
  * const query = datastore.createQuery('AnimalNamespace', 'Lion');
+ * ```
  */
 class Query {
   scope?: Datastore | Transaction;
@@ -167,6 +169,7 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const query = datastore.createQuery('Company');
@@ -189,6 +192,7 @@ class Query {
    * //-
    * const key = datastore.key(['Company', 'Google']);
    * const keyQuery = query.filter('__key__', key);
+   * ```
    */
   filter(property: string, operatorOrValue: Operator, value?: {}): Query {
     let operator = operatorOrValue as Operator;
@@ -214,10 +218,12 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const query = datastore.createQuery('MyKind');
    * const ancestoryQuery = query.hasAncestor(datastore.key(['Parent', 123]));
+   * ```
    */
   hasAncestor(key: Key) {
     this.filters.push({name: '__key__', op: 'HAS_ANCESTOR', val: key});
@@ -237,6 +243,7 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
@@ -248,6 +255,7 @@ class Query {
    * const companiesDescending = companyQuery.order('size', {
    *   descending: true
    * });
+   * ```
    */
   order(property: string, options?: OrderOptions) {
     const sign = options && options.descending ? '-' : '+';
@@ -262,10 +270,12 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
    * const groupedQuery = companyQuery.groupBy(['name', 'size']);
+   * ```
    */
   groupBy(fieldNames: string | string[]) {
     this.groupByVal = arrify(fieldNames);
@@ -284,6 +294,7 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
@@ -293,6 +304,7 @@ class Query {
    *
    * // Only retrieve the name and size properties.
    * const selectQuery = companyQuery.select(['name', 'size']);
+   * ```
    */
   select(fieldNames: string | string[]) {
     this.selectVal = arrify(fieldNames);
@@ -308,6 +320,7 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
@@ -316,6 +329,7 @@ class Query {
    *
    * // Retrieve results starting from cursorToken.
    * const startQuery = companyQuery.start(cursorToken);
+   * ```
    */
   start(start: string | Buffer) {
     this.startVal = start;
@@ -331,6 +345,7 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
@@ -339,6 +354,7 @@ class Query {
    *
    * // Retrieve results limited to the extent of cursorToken.
    * const endQuery = companyQuery.end(cursorToken);
+   * ```
    */
   end(end: string | Buffer) {
     this.endVal = end;
@@ -354,12 +370,14 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
    *
    * // Limit the results to 10 entities.
    * const limitQuery = companyQuery.limit(10);
+   * ```
    */
   limit(n: number) {
     this.limitVal = n;
@@ -375,12 +393,14 @@ class Query {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const companyQuery = datastore.createQuery('Company');
    *
    * // Start from the 101st result.
    * const offsetQuery = companyQuery.offset(100);
+   * ```
    */
   offset(n: number) {
     this.offsetVal = n;
@@ -422,6 +442,7 @@ class Query {
    *     - {@link Datastore#NO_MORE_RESULTS}: There are no more results.
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const query = datastore.createQuery('Company');
@@ -452,6 +473,7 @@ class Query {
    * query.run().then((data) => {
    *   const entities = data[0];
    * });
+   * ```
    */
   run(
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
@@ -474,6 +496,7 @@ class Query {
    * @returns {stream}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const query = datastore.createQuery('Company');
@@ -497,6 +520,7 @@ class Query {
    *   .on('data', function (entity) {
    *     this.end();
    *   });
+   * ```
    */
   runStream(options?: RunQueryStreamOptions) {
     return this.scope!.runQueryStream(this, options);

@@ -148,6 +148,7 @@ class DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    *
    * @example
+   * ```
    * const incompleteKey = datastore.key(['Company']);
    *
    * //-
@@ -204,6 +205,7 @@ class DatastoreRequest {
    *   const keys = data[0];
    *   const apiResponse = data[1];
    * });
+   * ```
    */
   allocateIds(
     key: entity.Key,
@@ -245,6 +247,7 @@ class DatastoreRequest {
    *     for a complete list of options.
    *
    * @example
+   * ```
    * const keys = [
    *   datastore.key(['Company', 123]),
    *   datastore.key(['Product', 'Computer'])
@@ -258,6 +261,7 @@ class DatastoreRequest {
    *   .on('end', () => {
    *     // All entities retrieved.
    *   });
+   * ```
    */
   createReadStream(
     keys: Entities,
@@ -350,6 +354,7 @@ class DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    *
    * @example
+   * ```
    * const key = datastore.key(['Company', 123]);
    * datastore.delete(key, (err, apiResp) => {});
    *
@@ -386,6 +391,7 @@ class DatastoreRequest {
    * datastore.delete().then((data) => {
    *   const apiResponse = data[0];
    * });
+   * ```
    */
   delete(
     keys: entity.Key | entity.Key[],
@@ -459,6 +465,7 @@ class DatastoreRequest {
    *     the provided keys.
    *
    * @example
+   * ```
    * //-
    * // Get a single entity.
    * //-
@@ -522,6 +529,7 @@ class DatastoreRequest {
    * datastore.get(keys).then((data) => {
    *   const entities = data[0];
    * });
+   * ```
    */
   get(
     keys: entity.Key | entity.Key[],
@@ -592,6 +600,7 @@ class DatastoreRequest {
    *     - {@link Datastore#NO_MORE_RESULTS}: There are no more results.
    *
    * @example
+   * ```
    * //-
    * // Where you see `transaction`, assume this is the context that's relevant
    * to
@@ -648,6 +657,7 @@ class DatastoreRequest {
    * datastore.runQuery(query).then((data) => {
    *   const entities = data[0];
    * });
+   * ```
    */
   runQuery(
     query: Query,
@@ -684,6 +694,7 @@ class DatastoreRequest {
    *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.
    *
    * @example
+   * ```
    * datastore.runQueryStream(query)
    *   .on('error', console.error)
    *   .on('data', (entity) => {
@@ -703,6 +714,7 @@ class DatastoreRequest {
    *   .on('data', (entity) => {
    *     this.end();
    *   });
+   * ```
    */
   runQueryStream(query: Query, options: RunQueryStreamOptions = {}): Transform {
     query = extend(true, new Query(), query);

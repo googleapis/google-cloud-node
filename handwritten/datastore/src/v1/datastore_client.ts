@@ -344,7 +344,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.lookup(request);
+   * ```
    */
   lookup(
     request?: protos.google.datastore.v1.ILookupRequest,
@@ -438,7 +440,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.runQuery(request);
+   * ```
    */
   runQuery(
     request?: protos.google.datastore.v1.IRunQueryRequest,
@@ -523,7 +527,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.beginTransaction(request);
+   * ```
    */
   beginTransaction(
     request?: protos.google.datastore.v1.IBeginTransactionRequest,
@@ -629,7 +635,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.commit(request);
+   * ```
    */
   commit(
     request?: protos.google.datastore.v1.ICommitRequest,
@@ -715,7 +723,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.rollback(request);
+   * ```
    */
   rollback(
     request?: protos.google.datastore.v1.IRollbackRequest,
@@ -802,7 +812,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.allocateIds(request);
+   * ```
    */
   allocateIds(
     request?: protos.google.datastore.v1.IAllocateIdsRequest,
@@ -891,7 +903,9 @@ export class DatastoreClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.reserveIds(request);
+   * ```
    */
   reserveIds(
     request?: protos.google.datastore.v1.IReserveIdsRequest,

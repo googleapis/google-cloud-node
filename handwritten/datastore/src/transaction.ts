@@ -45,9 +45,11 @@ import {
  * @mixes module:datastore/request
  *
  * @example
+ * ```
  * const {Datastore} = require('@google-cloud/datastore');
  * const datastore = new Datastore();
  * const transaction = datastore.transaction();
+ * ```
  */
 class Transaction extends DatastoreRequest {
   namespace?: string;
@@ -115,6 +117,7 @@ class Transaction extends DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
@@ -131,6 +134,7 @@ class Transaction extends DatastoreRequest {
    * transaction.commit().then((data) => {
    *   const apiResponse = data[0];
    * });
+   * ```
    */
   commit(
     gaxOptionsOrCallback?: CallOptions | CommitCallback,
@@ -274,6 +278,7 @@ class Transaction extends DatastoreRequest {
    * @returns {Query}
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
@@ -323,6 +328,7 @@ class Transaction extends DatastoreRequest {
    *     });
    *   });
    * });
+   * ```
    */
   createQuery(
     namespaceOrKind?: string | string[],
@@ -342,6 +348,7 @@ class Transaction extends DatastoreRequest {
    * @param {Key|Key[]} key Datastore key object(s).
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
@@ -366,6 +373,7 @@ class Transaction extends DatastoreRequest {
    *     }
    *   });
    * });
+   * ```
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   delete(entities?: Entities): any {
@@ -416,6 +424,7 @@ class Transaction extends DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
@@ -438,6 +447,7 @@ class Transaction extends DatastoreRequest {
    * transaction.rollback().then((data) => {
    *   const apiResponse = data[0];
    * });
+   * ```
    */
   rollback(
     gaxOptionsOrCallback?: CallOptions | RollbackCallback,
@@ -482,6 +492,7 @@ class Transaction extends DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    *
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
@@ -513,6 +524,7 @@ class Transaction extends DatastoreRequest {
    *   const transaction = data[0];
    *   const apiResponse = data[1];
    * });
+   * ```
    */
   run(
     optionsOrCallback?: RunOptions | RunCallback,
@@ -583,6 +595,7 @@ class Transaction extends DatastoreRequest {
    * @param {object} entities.data Data to save with the provided key.
    *
    * @example
+   * ```
    * <caption>Save a single entity.</caption>
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
@@ -613,7 +626,9 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    *
+   * ```
    * @example
+   * ```
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
@@ -653,7 +668,9 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    *
+   * ```
    * @example
+   * ```
    * <caption>Save multiple entities at once.</caption>
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
@@ -687,6 +704,7 @@ class Transaction extends DatastoreRequest {
    *     }
    *   });
    * });
+   * ```
    */
   save(entities: Entities): void {
     arrify(entities).forEach((ent: Entity) => {
