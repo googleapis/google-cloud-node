@@ -62,9 +62,11 @@ export type IIndex = google.datastore.admin.v1.IIndex;
  * @param {string} id The index name or id.
  *
  * @example
+ * ```
  * const {Datastore} = require('@google-cloud/datastore');
  * const datastore = new Datastore();
  * const index = datastore.index('my-index');
+ * ```
  */
 export class Index {
   datastore: Datastore;

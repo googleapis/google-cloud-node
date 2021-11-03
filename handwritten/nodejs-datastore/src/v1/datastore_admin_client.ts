@@ -480,7 +480,9 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIndex(request);
+   * ```
    */
   getIndex(
     request?: protos.google.datastore.admin.v1.IGetIndexRequest,
@@ -605,8 +607,10 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.exportEntities(request);
    * const [response] = await operation.promise();
+   * ```
    */
   exportEntities(
     request?: protos.google.datastore.admin.v1.IExportEntitiesRequest,
@@ -666,10 +670,12 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkExportEntitiesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkExportEntitiesProgress(
     name: string
@@ -771,8 +777,10 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.importEntities(request);
    * const [response] = await operation.promise();
+   * ```
    */
   importEntities(
     request?: protos.google.datastore.admin.v1.IImportEntitiesRequest,
@@ -832,10 +840,12 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkImportEntitiesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkImportEntitiesProgress(
     name: string
@@ -928,8 +938,10 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createIndex(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createIndex(
     request?: protos.google.datastore.admin.v1.ICreateIndexRequest,
@@ -989,10 +1001,12 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateIndexProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateIndexProgress(
     name: string
@@ -1080,8 +1094,10 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteIndex(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteIndex(
     request?: protos.google.datastore.admin.v1.IDeleteIndexRequest,
@@ -1141,10 +1157,12 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteIndexProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteIndexProgress(
     name: string
@@ -1336,10 +1354,12 @@ export class DatastoreAdminClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listIndexesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listIndexesAsync(
     request?: protos.google.datastore.admin.v1.IListIndexesRequest,
