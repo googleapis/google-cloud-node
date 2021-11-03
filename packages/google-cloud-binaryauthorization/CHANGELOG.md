@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.3.0...v1.4.0) (2021-11-03)
+
+
+### Features
+
+* Updating the grafeas protos to include compliance and intoto attestation protos ([#106](https://www.github.com/googleapis/nodejs-binary-authorization/issues/106)) ([f1407cc](https://www.github.com/googleapis/nodejs-binary-authorization/commit/f1407ccc83b93a41aa2065fc2bd0ea91aa93e0e4))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.2.0...v1.3.0) (2021-09-27)
 
 
