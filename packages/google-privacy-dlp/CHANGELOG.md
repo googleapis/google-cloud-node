@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-dlp/compare/v3.2.0...v3.2.1) (2021-11-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mime to v3 ([#663](https://www.github.com/googleapis/nodejs-dlp/issues/663)) ([5d33ead](https://www.github.com/googleapis/nodejs-dlp/commit/5d33ead5c207511a2ef3d268dd804eabc20408d8))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.8...v3.2.0) (2021-08-23)
 
 
