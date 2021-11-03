@@ -21177,6 +21177,193 @@
                 return AttestationNote;
             })();
     
+            v1.Jwt = (function() {
+    
+                /**
+                 * Properties of a Jwt.
+                 * @memberof grafeas.v1
+                 * @interface IJwt
+                 * @property {string|null} [compactJwt] Jwt compactJwt
+                 */
+    
+                /**
+                 * Constructs a new Jwt.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a Jwt.
+                 * @implements IJwt
+                 * @constructor
+                 * @param {grafeas.v1.IJwt=} [properties] Properties to set
+                 */
+                function Jwt(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Jwt compactJwt.
+                 * @member {string} compactJwt
+                 * @memberof grafeas.v1.Jwt
+                 * @instance
+                 */
+                Jwt.prototype.compactJwt = "";
+    
+                /**
+                 * Creates a new Jwt instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {grafeas.v1.IJwt=} [properties] Properties to set
+                 * @returns {grafeas.v1.Jwt} Jwt instance
+                 */
+                Jwt.create = function create(properties) {
+                    return new Jwt(properties);
+                };
+    
+                /**
+                 * Encodes the specified Jwt message. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {grafeas.v1.IJwt} message Jwt message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Jwt.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.compactJwt != null && Object.hasOwnProperty.call(message, "compactJwt"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.compactJwt);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Jwt message, length delimited. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {grafeas.v1.IJwt} message Jwt message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Jwt.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Jwt message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Jwt} Jwt
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Jwt.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Jwt();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.compactJwt = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Jwt message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Jwt} Jwt
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Jwt.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Jwt message.
+                 * @function verify
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Jwt.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.compactJwt != null && message.hasOwnProperty("compactJwt"))
+                        if (!$util.isString(message.compactJwt))
+                            return "compactJwt: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Jwt message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Jwt} Jwt
+                 */
+                Jwt.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Jwt)
+                        return object;
+                    var message = new $root.grafeas.v1.Jwt();
+                    if (object.compactJwt != null)
+                        message.compactJwt = String(object.compactJwt);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Jwt message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Jwt
+                 * @static
+                 * @param {grafeas.v1.Jwt} message Jwt
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Jwt.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.compactJwt = "";
+                    if (message.compactJwt != null && message.hasOwnProperty("compactJwt"))
+                        object.compactJwt = message.compactJwt;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Jwt to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Jwt
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Jwt.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Jwt;
+            })();
+    
             v1.AttestationOccurrence = (function() {
     
                 /**
@@ -21185,6 +21372,7 @@
                  * @interface IAttestationOccurrence
                  * @property {Uint8Array|null} [serializedPayload] AttestationOccurrence serializedPayload
                  * @property {Array.<grafeas.v1.ISignature>|null} [signatures] AttestationOccurrence signatures
+                 * @property {Array.<grafeas.v1.IJwt>|null} [jwts] AttestationOccurrence jwts
                  */
     
                 /**
@@ -21197,6 +21385,7 @@
                  */
                 function AttestationOccurrence(properties) {
                     this.signatures = [];
+                    this.jwts = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -21218,6 +21407,14 @@
                  * @instance
                  */
                 AttestationOccurrence.prototype.signatures = $util.emptyArray;
+    
+                /**
+                 * AttestationOccurrence jwts.
+                 * @member {Array.<grafeas.v1.IJwt>} jwts
+                 * @memberof grafeas.v1.AttestationOccurrence
+                 * @instance
+                 */
+                AttestationOccurrence.prototype.jwts = $util.emptyArray;
     
                 /**
                  * Creates a new AttestationOccurrence instance using the specified properties.
@@ -21248,6 +21445,9 @@
                     if (message.signatures != null && message.signatures.length)
                         for (var i = 0; i < message.signatures.length; ++i)
                             $root.grafeas.v1.Signature.encode(message.signatures[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.jwts != null && message.jwts.length)
+                        for (var i = 0; i < message.jwts.length; ++i)
+                            $root.grafeas.v1.Jwt.encode(message.jwts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -21289,6 +21489,11 @@
                             if (!(message.signatures && message.signatures.length))
                                 message.signatures = [];
                             message.signatures.push($root.grafeas.v1.Signature.decode(reader, reader.uint32()));
+                            break;
+                        case 3:
+                            if (!(message.jwts && message.jwts.length))
+                                message.jwts = [];
+                            message.jwts.push($root.grafeas.v1.Jwt.decode(reader, reader.uint32()));
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -21337,6 +21542,15 @@
                                 return "signatures." + error;
                         }
                     }
+                    if (message.jwts != null && message.hasOwnProperty("jwts")) {
+                        if (!Array.isArray(message.jwts))
+                            return "jwts: array expected";
+                        for (var i = 0; i < message.jwts.length; ++i) {
+                            var error = $root.grafeas.v1.Jwt.verify(message.jwts[i]);
+                            if (error)
+                                return "jwts." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -21367,6 +21581,16 @@
                             message.signatures[i] = $root.grafeas.v1.Signature.fromObject(object.signatures[i]);
                         }
                     }
+                    if (object.jwts) {
+                        if (!Array.isArray(object.jwts))
+                            throw TypeError(".grafeas.v1.AttestationOccurrence.jwts: array expected");
+                        message.jwts = [];
+                        for (var i = 0; i < object.jwts.length; ++i) {
+                            if (typeof object.jwts[i] !== "object")
+                                throw TypeError(".grafeas.v1.AttestationOccurrence.jwts: object expected");
+                            message.jwts[i] = $root.grafeas.v1.Jwt.fromObject(object.jwts[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -21383,8 +21607,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.signatures = [];
+                        object.jwts = [];
+                    }
                     if (options.defaults)
                         if (options.bytes === String)
                             object.serializedPayload = "";
@@ -21399,6 +21625,11 @@
                         object.signatures = [];
                         for (var j = 0; j < message.signatures.length; ++j)
                             object.signatures[j] = $root.grafeas.v1.Signature.toObject(message.signatures[j], options);
+                    }
+                    if (message.jwts && message.jwts.length) {
+                        object.jwts = [];
+                        for (var j = 0; j < message.jwts.length; ++j)
+                            object.jwts[j] = $root.grafeas.v1.Jwt.toObject(message.jwts[j], options);
                     }
                     return object;
                 };
@@ -21430,6 +21661,8 @@
              * @property {number} DISCOVERY=6 DISCOVERY value
              * @property {number} ATTESTATION=7 ATTESTATION value
              * @property {number} UPGRADE=8 UPGRADE value
+             * @property {number} COMPLIANCE=9 COMPLIANCE value
+             * @property {number} DSSE_ATTESTATION=10 DSSE_ATTESTATION value
              */
             v1.NoteKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -21442,6 +21675,8 @@
                 values[valuesById[6] = "DISCOVERY"] = 6;
                 values[valuesById[7] = "ATTESTATION"] = 7;
                 values[valuesById[8] = "UPGRADE"] = 8;
+                values[valuesById[9] = "COMPLIANCE"] = 9;
+                values[valuesById[10] = "DSSE_ATTESTATION"] = 10;
                 return values;
             })();
     
@@ -21872,6 +22107,488 @@
                 };
     
                 return Signature;
+            })();
+    
+            v1.Envelope = (function() {
+    
+                /**
+                 * Properties of an Envelope.
+                 * @memberof grafeas.v1
+                 * @interface IEnvelope
+                 * @property {Uint8Array|null} [payload] Envelope payload
+                 * @property {string|null} [payloadType] Envelope payloadType
+                 * @property {Array.<grafeas.v1.IEnvelopeSignature>|null} [signatures] Envelope signatures
+                 */
+    
+                /**
+                 * Constructs a new Envelope.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an Envelope.
+                 * @implements IEnvelope
+                 * @constructor
+                 * @param {grafeas.v1.IEnvelope=} [properties] Properties to set
+                 */
+                function Envelope(properties) {
+                    this.signatures = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Envelope payload.
+                 * @member {Uint8Array} payload
+                 * @memberof grafeas.v1.Envelope
+                 * @instance
+                 */
+                Envelope.prototype.payload = $util.newBuffer([]);
+    
+                /**
+                 * Envelope payloadType.
+                 * @member {string} payloadType
+                 * @memberof grafeas.v1.Envelope
+                 * @instance
+                 */
+                Envelope.prototype.payloadType = "";
+    
+                /**
+                 * Envelope signatures.
+                 * @member {Array.<grafeas.v1.IEnvelopeSignature>} signatures
+                 * @memberof grafeas.v1.Envelope
+                 * @instance
+                 */
+                Envelope.prototype.signatures = $util.emptyArray;
+    
+                /**
+                 * Creates a new Envelope instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {grafeas.v1.IEnvelope=} [properties] Properties to set
+                 * @returns {grafeas.v1.Envelope} Envelope instance
+                 */
+                Envelope.create = function create(properties) {
+                    return new Envelope(properties);
+                };
+    
+                /**
+                 * Encodes the specified Envelope message. Does not implicitly {@link grafeas.v1.Envelope.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {grafeas.v1.IEnvelope} message Envelope message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Envelope.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.payload);
+                    if (message.payloadType != null && Object.hasOwnProperty.call(message, "payloadType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.payloadType);
+                    if (message.signatures != null && message.signatures.length)
+                        for (var i = 0; i < message.signatures.length; ++i)
+                            $root.grafeas.v1.EnvelopeSignature.encode(message.signatures[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Envelope message, length delimited. Does not implicitly {@link grafeas.v1.Envelope.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {grafeas.v1.IEnvelope} message Envelope message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Envelope.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Envelope message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.Envelope} Envelope
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Envelope.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.Envelope();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.payload = reader.bytes();
+                            break;
+                        case 2:
+                            message.payloadType = reader.string();
+                            break;
+                        case 3:
+                            if (!(message.signatures && message.signatures.length))
+                                message.signatures = [];
+                            message.signatures.push($root.grafeas.v1.EnvelopeSignature.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Envelope message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.Envelope} Envelope
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Envelope.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Envelope message.
+                 * @function verify
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Envelope.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.payload != null && message.hasOwnProperty("payload"))
+                        if (!(message.payload && typeof message.payload.length === "number" || $util.isString(message.payload)))
+                            return "payload: buffer expected";
+                    if (message.payloadType != null && message.hasOwnProperty("payloadType"))
+                        if (!$util.isString(message.payloadType))
+                            return "payloadType: string expected";
+                    if (message.signatures != null && message.hasOwnProperty("signatures")) {
+                        if (!Array.isArray(message.signatures))
+                            return "signatures: array expected";
+                        for (var i = 0; i < message.signatures.length; ++i) {
+                            var error = $root.grafeas.v1.EnvelopeSignature.verify(message.signatures[i]);
+                            if (error)
+                                return "signatures." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Envelope message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.Envelope} Envelope
+                 */
+                Envelope.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.Envelope)
+                        return object;
+                    var message = new $root.grafeas.v1.Envelope();
+                    if (object.payload != null)
+                        if (typeof object.payload === "string")
+                            $util.base64.decode(object.payload, message.payload = $util.newBuffer($util.base64.length(object.payload)), 0);
+                        else if (object.payload.length)
+                            message.payload = object.payload;
+                    if (object.payloadType != null)
+                        message.payloadType = String(object.payloadType);
+                    if (object.signatures) {
+                        if (!Array.isArray(object.signatures))
+                            throw TypeError(".grafeas.v1.Envelope.signatures: array expected");
+                        message.signatures = [];
+                        for (var i = 0; i < object.signatures.length; ++i) {
+                            if (typeof object.signatures[i] !== "object")
+                                throw TypeError(".grafeas.v1.Envelope.signatures: object expected");
+                            message.signatures[i] = $root.grafeas.v1.EnvelopeSignature.fromObject(object.signatures[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Envelope message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.Envelope
+                 * @static
+                 * @param {grafeas.v1.Envelope} message Envelope
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Envelope.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.signatures = [];
+                    if (options.defaults) {
+                        if (options.bytes === String)
+                            object.payload = "";
+                        else {
+                            object.payload = [];
+                            if (options.bytes !== Array)
+                                object.payload = $util.newBuffer(object.payload);
+                        }
+                        object.payloadType = "";
+                    }
+                    if (message.payload != null && message.hasOwnProperty("payload"))
+                        object.payload = options.bytes === String ? $util.base64.encode(message.payload, 0, message.payload.length) : options.bytes === Array ? Array.prototype.slice.call(message.payload) : message.payload;
+                    if (message.payloadType != null && message.hasOwnProperty("payloadType"))
+                        object.payloadType = message.payloadType;
+                    if (message.signatures && message.signatures.length) {
+                        object.signatures = [];
+                        for (var j = 0; j < message.signatures.length; ++j)
+                            object.signatures[j] = $root.grafeas.v1.EnvelopeSignature.toObject(message.signatures[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Envelope to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.Envelope
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Envelope.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Envelope;
+            })();
+    
+            v1.EnvelopeSignature = (function() {
+    
+                /**
+                 * Properties of an EnvelopeSignature.
+                 * @memberof grafeas.v1
+                 * @interface IEnvelopeSignature
+                 * @property {Uint8Array|null} [sig] EnvelopeSignature sig
+                 * @property {string|null} [keyid] EnvelopeSignature keyid
+                 */
+    
+                /**
+                 * Constructs a new EnvelopeSignature.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an EnvelopeSignature.
+                 * @implements IEnvelopeSignature
+                 * @constructor
+                 * @param {grafeas.v1.IEnvelopeSignature=} [properties] Properties to set
+                 */
+                function EnvelopeSignature(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * EnvelopeSignature sig.
+                 * @member {Uint8Array} sig
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @instance
+                 */
+                EnvelopeSignature.prototype.sig = $util.newBuffer([]);
+    
+                /**
+                 * EnvelopeSignature keyid.
+                 * @member {string} keyid
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @instance
+                 */
+                EnvelopeSignature.prototype.keyid = "";
+    
+                /**
+                 * Creates a new EnvelopeSignature instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {grafeas.v1.IEnvelopeSignature=} [properties] Properties to set
+                 * @returns {grafeas.v1.EnvelopeSignature} EnvelopeSignature instance
+                 */
+                EnvelopeSignature.create = function create(properties) {
+                    return new EnvelopeSignature(properties);
+                };
+    
+                /**
+                 * Encodes the specified EnvelopeSignature message. Does not implicitly {@link grafeas.v1.EnvelopeSignature.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {grafeas.v1.IEnvelopeSignature} message EnvelopeSignature message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnvelopeSignature.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.sig != null && Object.hasOwnProperty.call(message, "sig"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.sig);
+                    if (message.keyid != null && Object.hasOwnProperty.call(message, "keyid"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.keyid);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified EnvelopeSignature message, length delimited. Does not implicitly {@link grafeas.v1.EnvelopeSignature.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {grafeas.v1.IEnvelopeSignature} message EnvelopeSignature message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                EnvelopeSignature.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an EnvelopeSignature message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.EnvelopeSignature} EnvelopeSignature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnvelopeSignature.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.EnvelopeSignature();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.sig = reader.bytes();
+                            break;
+                        case 2:
+                            message.keyid = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an EnvelopeSignature message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.EnvelopeSignature} EnvelopeSignature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                EnvelopeSignature.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an EnvelopeSignature message.
+                 * @function verify
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                EnvelopeSignature.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.sig != null && message.hasOwnProperty("sig"))
+                        if (!(message.sig && typeof message.sig.length === "number" || $util.isString(message.sig)))
+                            return "sig: buffer expected";
+                    if (message.keyid != null && message.hasOwnProperty("keyid"))
+                        if (!$util.isString(message.keyid))
+                            return "keyid: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an EnvelopeSignature message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.EnvelopeSignature} EnvelopeSignature
+                 */
+                EnvelopeSignature.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.EnvelopeSignature)
+                        return object;
+                    var message = new $root.grafeas.v1.EnvelopeSignature();
+                    if (object.sig != null)
+                        if (typeof object.sig === "string")
+                            $util.base64.decode(object.sig, message.sig = $util.newBuffer($util.base64.length(object.sig)), 0);
+                        else if (object.sig.length)
+                            message.sig = object.sig;
+                    if (object.keyid != null)
+                        message.keyid = String(object.keyid);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an EnvelopeSignature message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @static
+                 * @param {grafeas.v1.EnvelopeSignature} message EnvelopeSignature
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                EnvelopeSignature.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if (options.bytes === String)
+                            object.sig = "";
+                        else {
+                            object.sig = [];
+                            if (options.bytes !== Array)
+                                object.sig = $util.newBuffer(object.sig);
+                        }
+                        object.keyid = "";
+                    }
+                    if (message.sig != null && message.hasOwnProperty("sig"))
+                        object.sig = options.bytes === String ? $util.base64.encode(message.sig, 0, message.sig.length) : options.bytes === Array ? Array.prototype.slice.call(message.sig) : message.sig;
+                    if (message.keyid != null && message.hasOwnProperty("keyid"))
+                        object.keyid = message.keyid;
+                    return object;
+                };
+    
+                /**
+                 * Converts this EnvelopeSignature to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.EnvelopeSignature
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                EnvelopeSignature.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return EnvelopeSignature;
             })();
     
             return v1;

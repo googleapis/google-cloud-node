@@ -8380,6 +8380,96 @@ export namespace grafeas {
             }
         }
 
+        /** Properties of a Jwt. */
+        interface IJwt {
+
+            /** Jwt compactJwt */
+            compactJwt?: (string|null);
+        }
+
+        /** Represents a Jwt. */
+        class Jwt implements IJwt {
+
+            /**
+             * Constructs a new Jwt.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IJwt);
+
+            /** Jwt compactJwt. */
+            public compactJwt: string;
+
+            /**
+             * Creates a new Jwt instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Jwt instance
+             */
+            public static create(properties?: grafeas.v1.IJwt): grafeas.v1.Jwt;
+
+            /**
+             * Encodes the specified Jwt message. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
+             * @param message Jwt message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IJwt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Jwt message, length delimited. Does not implicitly {@link grafeas.v1.Jwt.verify|verify} messages.
+             * @param message Jwt message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IJwt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Jwt message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Jwt
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Jwt;
+
+            /**
+             * Decodes a Jwt message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Jwt
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Jwt;
+
+            /**
+             * Verifies a Jwt message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Jwt message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Jwt
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Jwt;
+
+            /**
+             * Creates a plain object from a Jwt message. Also converts values to other types if specified.
+             * @param message Jwt
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Jwt, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Jwt to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of an AttestationOccurrence. */
         interface IAttestationOccurrence {
 
@@ -8388,6 +8478,9 @@ export namespace grafeas {
 
             /** AttestationOccurrence signatures */
             signatures?: (grafeas.v1.ISignature[]|null);
+
+            /** AttestationOccurrence jwts */
+            jwts?: (grafeas.v1.IJwt[]|null);
         }
 
         /** Represents an AttestationOccurrence. */
@@ -8404,6 +8497,9 @@ export namespace grafeas {
 
             /** AttestationOccurrence signatures. */
             public signatures: grafeas.v1.ISignature[];
+
+            /** AttestationOccurrence jwts. */
+            public jwts: grafeas.v1.IJwt[];
 
             /**
              * Creates a new AttestationOccurrence instance using the specified properties.
@@ -8486,7 +8582,9 @@ export namespace grafeas {
             DEPLOYMENT = 5,
             DISCOVERY = 6,
             ATTESTATION = 7,
-            UPGRADE = 8
+            UPGRADE = 8,
+            COMPLIANCE = 9,
+            DSSE_ATTESTATION = 10
         }
 
         /** Properties of a RelatedUrl. */
@@ -8676,6 +8774,204 @@ export namespace grafeas {
 
             /**
              * Converts this Signature to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an Envelope. */
+        interface IEnvelope {
+
+            /** Envelope payload */
+            payload?: (Uint8Array|string|null);
+
+            /** Envelope payloadType */
+            payloadType?: (string|null);
+
+            /** Envelope signatures */
+            signatures?: (grafeas.v1.IEnvelopeSignature[]|null);
+        }
+
+        /** Represents an Envelope. */
+        class Envelope implements IEnvelope {
+
+            /**
+             * Constructs a new Envelope.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IEnvelope);
+
+            /** Envelope payload. */
+            public payload: (Uint8Array|string);
+
+            /** Envelope payloadType. */
+            public payloadType: string;
+
+            /** Envelope signatures. */
+            public signatures: grafeas.v1.IEnvelopeSignature[];
+
+            /**
+             * Creates a new Envelope instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Envelope instance
+             */
+            public static create(properties?: grafeas.v1.IEnvelope): grafeas.v1.Envelope;
+
+            /**
+             * Encodes the specified Envelope message. Does not implicitly {@link grafeas.v1.Envelope.verify|verify} messages.
+             * @param message Envelope message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IEnvelope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Envelope message, length delimited. Does not implicitly {@link grafeas.v1.Envelope.verify|verify} messages.
+             * @param message Envelope message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IEnvelope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Envelope message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Envelope
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Envelope;
+
+            /**
+             * Decodes an Envelope message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Envelope
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Envelope;
+
+            /**
+             * Verifies an Envelope message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Envelope message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Envelope
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Envelope;
+
+            /**
+             * Creates a plain object from an Envelope message. Also converts values to other types if specified.
+             * @param message Envelope
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Envelope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Envelope to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an EnvelopeSignature. */
+        interface IEnvelopeSignature {
+
+            /** EnvelopeSignature sig */
+            sig?: (Uint8Array|string|null);
+
+            /** EnvelopeSignature keyid */
+            keyid?: (string|null);
+        }
+
+        /** Represents an EnvelopeSignature. */
+        class EnvelopeSignature implements IEnvelopeSignature {
+
+            /**
+             * Constructs a new EnvelopeSignature.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IEnvelopeSignature);
+
+            /** EnvelopeSignature sig. */
+            public sig: (Uint8Array|string);
+
+            /** EnvelopeSignature keyid. */
+            public keyid: string;
+
+            /**
+             * Creates a new EnvelopeSignature instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns EnvelopeSignature instance
+             */
+            public static create(properties?: grafeas.v1.IEnvelopeSignature): grafeas.v1.EnvelopeSignature;
+
+            /**
+             * Encodes the specified EnvelopeSignature message. Does not implicitly {@link grafeas.v1.EnvelopeSignature.verify|verify} messages.
+             * @param message EnvelopeSignature message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IEnvelopeSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified EnvelopeSignature message, length delimited. Does not implicitly {@link grafeas.v1.EnvelopeSignature.verify|verify} messages.
+             * @param message EnvelopeSignature message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IEnvelopeSignature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an EnvelopeSignature message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns EnvelopeSignature
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.EnvelopeSignature;
+
+            /**
+             * Decodes an EnvelopeSignature message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns EnvelopeSignature
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.EnvelopeSignature;
+
+            /**
+             * Verifies an EnvelopeSignature message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an EnvelopeSignature message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns EnvelopeSignature
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.EnvelopeSignature;
+
+            /**
+             * Creates a plain object from an EnvelopeSignature message. Also converts values to other types if specified.
+             * @param message EnvelopeSignature
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.EnvelopeSignature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this EnvelopeSignature to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

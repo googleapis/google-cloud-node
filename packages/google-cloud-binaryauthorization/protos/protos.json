@@ -2440,6 +2440,14 @@
                 }
               }
             },
+            "Jwt": {
+              "fields": {
+                "compactJwt": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "AttestationOccurrence": {
               "fields": {
                 "serializedPayload": {
@@ -2450,6 +2458,11 @@
                   "rule": "repeated",
                   "type": "Signature",
                   "id": 2
+                },
+                "jwts": {
+                  "rule": "repeated",
+                  "type": "Jwt",
+                  "id": 3
                 }
               }
             },
@@ -2463,7 +2476,9 @@
                 "DEPLOYMENT": 5,
                 "DISCOVERY": 6,
                 "ATTESTATION": 7,
-                "UPGRADE": 8
+                "UPGRADE": 8,
+                "COMPLIANCE": 9,
+                "DSSE_ATTESTATION": 10
               }
             },
             "RelatedUrl": {
@@ -2485,6 +2500,35 @@
                   "id": 1
                 },
                 "publicKeyId": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Envelope": {
+              "fields": {
+                "payload": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "payloadType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "signatures": {
+                  "rule": "repeated",
+                  "type": "EnvelopeSignature",
+                  "id": 3
+                }
+              }
+            },
+            "EnvelopeSignature": {
+              "fields": {
+                "sig": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "keyid": {
                   "type": "string",
                   "id": 2
                 }
