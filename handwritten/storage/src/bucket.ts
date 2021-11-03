@@ -63,6 +63,7 @@ import {
   URLSigner,
   Query,
 } from './signer';
+import {Readable} from 'stream';
 
 interface SourceObject {
   name: string;
@@ -628,7 +629,7 @@ class Bucket extends ServiceObject {
   acl: Acl;
   iam: Iam;
 
-  getFilesStream: Function;
+  getFilesStream: (query?: GetFilesOptions) => Readable;
   signer?: URLSigner;
 
   private instanceRetryValue?: boolean;
