@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.3.0...v1.4.0) (2021-11-04)
+
+
+### Features
+
+* Add local inventory ingestion APIs to product service in alpha channel ([#112](https://www.github.com/googleapis/nodejs-retail/issues/112)) ([8387781](https://www.github.com/googleapis/nodejs-retail/commit/8387781135ddb02b43af222bbbd3d5852e0147d3))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.2.2...v1.3.0) (2021-10-19)
 
 
