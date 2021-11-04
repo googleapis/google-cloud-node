@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.6.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.6.0...v6.6.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency sinon to v12 ([#894](https://www.github.com/googleapis/nodejs-datastore/issues/894)) ([6010464](https://www.github.com/googleapis/nodejs-datastore/commit/60104649455aefdfba100a9e5c57543faf9278fb))
+
 ## [6.6.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.5.0...v6.6.0) (2021-10-13)
 
 
