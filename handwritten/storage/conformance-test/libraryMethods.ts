@@ -20,7 +20,13 @@ import {ApiError} from '@google-cloud/common';
 //////////////////// BUCKET /////////////////////
 /////////////////////////////////////////////////
 
-export async function addLifecycleRule(bucket: Bucket) {
+export async function addLifecycleRule(
+  bucket: Bucket,
+  _file: File,
+  _notification: Notification,
+  _storage: Storage,
+  _hmacKey: HmacKey
+) {
   await bucket.addLifecycleRule({
     action: 'delete',
     condition: {
@@ -388,16 +394,6 @@ export async function fileDelete(
   _hmacKey: HmacKey
 ) {
   await file.delete();
-}
-
-export async function deleteResumableCache(
-  _bucket: Bucket,
-  file: File,
-  _notification: Notification,
-  _storage: Storage,
-  _hmacKey: HmacKey
-) {
-  await file.deleteResumableCache();
 }
 
 export async function download(

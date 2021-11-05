@@ -3,6 +3,7 @@
         "deleteBucket"
     ],
     "storage.buckets.patch": [
+        "addLifecycleRule",
         "bucketMakePrivate",
         "deleteLabels",
         "disableRequesterPays",
@@ -63,6 +64,7 @@
         "fileDelete"
     ],
     "storage.objects.get": [
+        "get",
         "download",
         "exists",
         "getExpirationDate",
@@ -110,5 +112,8 @@
     ],
     "storage.hmacKey.list": [
         "getHMACKeyStream"
+    ],
+    "storage.serviceaccount.get": [
+        "getServiceAccount"
     ]
 }
