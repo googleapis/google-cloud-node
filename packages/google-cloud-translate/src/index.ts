@@ -29,28 +29,35 @@ import * as v2 from './v2';
  * @module {constructor} @google-cloud/translate
  * @alias nodejs-translate
  *
- * @example <caption>Install the v3 client library with <a
- * href="https://www.npmjs.com/">npm</a>:</caption>
+ * @example Install the v3 client library with <a href="https://www.npmjs.com/">npm</a>:
+ * ```
  * npm install --save @google-cloud/translate
  *
- * @example <caption>Import the v3 client library:</caption>
+ * ```
+ * @example Import the v3 client library:
+ * ```
  * const {TranslationServiceClient} = require('@google-cloud/translate');
  *
- * @example <caption>Create a v3 client that uses <a
- * href="https://goo.gl/64dyYX">Application Default Credentials
- * (ADC)</a>:</caption>
+ * ```
+ * @example Create a v3 client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:
+ * ```
  * const client = new TranslationServiceClient();
  *
+ * ```
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:translate_quickstart
  * Full quickstart example:
  *
- * @example <caption>Install the v3beta1 client library:</caption>
+ * @example Install the v3beta1 client library:
+ * ```
  * npm install --save @google-cloud/translate
  *
- * @example <caption>Import the v3beta1 client library:</caption>
+ * ```
+ * @example Import the v3beta1 client library:
+ * ```
  * const {TranslationServiceClient} =
  * require('@google-cloud/translate').v3beta1;
+ * ```
  */
 import * as v3beta1 from './v3beta1';
 import * as v3 from './v3';

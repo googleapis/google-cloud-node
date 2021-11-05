@@ -118,6 +118,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
  * @param {ClientConfig} [options] Configuration options.
  *
  * @example
+ * ```
  * //-
  * // <h3>Custom Translation API</h3>
  * //
@@ -125,6 +126,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
  * // a custom backend which our library will send requests to.
  * //-
  *
+ * ```
  * @example <caption>include:samples/quickstart.js</caption>
  * region_tag:translate_quickstart
  * Full quickstart example:
@@ -188,6 +190,7 @@ export class Translate extends Service {
    * @returns {Promise<DetectResponse>}
    *
    * @example
+   * ```
    * const {Translate} = require('@google-cloud/translate');
    *
    * const translate = new Translate();
@@ -237,6 +240,7 @@ export class Translate extends Service {
    *   const apiResponse = data[2];
    * });
    *
+   * ```
    * @example <caption>include:samples/translate.js</caption>
    * region_tag:translate_detect_language
    * Here's a full example:
@@ -439,6 +443,7 @@ export class Translate extends Service {
    * @returns {Promise<TranslateResponse>}
    *
    * @example
+   * ```
    * //-
    * // Pass a string and a language code to get the translation.
    * //-
@@ -489,6 +494,7 @@ export class Translate extends Service {
    *   const apiResponse = data[1];
    * });
    *
+   * ```
    * @example <caption>include:samples/translate.js</caption>
    * region_tag:translate_translate_text
    * Full translation example:

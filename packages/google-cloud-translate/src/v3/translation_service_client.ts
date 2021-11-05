@@ -504,7 +504,9 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.translateText(request);
+   * ```
    */
   translateText(
     request?: protos.google.cloud.translation.v3.ITranslateTextRequest,
@@ -630,7 +632,9 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.detectLanguage(request);
+   * ```
    */
   detectLanguage(
     request?: protos.google.cloud.translation.v3.IDetectLanguageRequest,
@@ -754,7 +758,9 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getSupportedLanguages(request);
+   * ```
    */
   getSupportedLanguages(
     request?: protos.google.cloud.translation.v3.IGetSupportedLanguagesRequest,
@@ -905,7 +911,9 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.translateDocument(request);
+   * ```
    */
   translateDocument(
     request?: protos.google.cloud.translation.v3.ITranslateDocumentRequest,
@@ -993,7 +1001,9 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getGlossary(request);
+   * ```
    */
   getGlossary(
     request?: protos.google.cloud.translation.v3.IGetGlossaryRequest,
@@ -1146,8 +1156,10 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.batchTranslateText(request);
    * const [response] = await operation.promise();
+   * ```
    */
   batchTranslateText(
     request?: protos.google.cloud.translation.v3.IBatchTranslateTextRequest,
@@ -1207,10 +1219,12 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkBatchTranslateTextProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkBatchTranslateTextProgress(
     name: string
@@ -1346,8 +1360,10 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.batchTranslateDocument(request);
    * const [response] = await operation.promise();
+   * ```
    */
   batchTranslateDocument(
     request?: protos.google.cloud.translation.v3.IBatchTranslateDocumentRequest,
@@ -1411,10 +1427,12 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkBatchTranslateDocumentProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkBatchTranslateDocumentProgress(
     name: string
@@ -1494,8 +1512,10 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createGlossary(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createGlossary(
     request?: protos.google.cloud.translation.v3.ICreateGlossaryRequest,
@@ -1555,10 +1575,12 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateGlossaryProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateGlossaryProgress(
     name: string
@@ -1637,8 +1659,10 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteGlossary(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteGlossary(
     request?: protos.google.cloud.translation.v3.IDeleteGlossaryRequest,
@@ -1698,10 +1722,12 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteGlossaryProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteGlossaryProgress(
     name: string
@@ -1955,10 +1981,12 @@ export class TranslationServiceClient {
    *   {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination| documentation}
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listGlossariesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listGlossariesAsync(
     request?: protos.google.cloud.translation.v3.IListGlossariesRequest,
