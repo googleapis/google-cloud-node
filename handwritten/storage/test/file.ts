@@ -97,6 +97,7 @@ const fakePromisify = {
       'request',
       'save',
       'setEncryptionKey',
+      'shouldRetryBasedOnPreconditionAndIdempotencyStrat',
     ]);
   },
 };

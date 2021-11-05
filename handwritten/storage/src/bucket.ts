@@ -3922,6 +3922,12 @@ class Bucket extends ServiceObject {
       const returnValue = retry(
         async (bail: (err: Error) => void) => {
           await new Promise<void>((resolve, reject) => {
+            if (
+              numberOfRetries === 0 &&
+              newFile?.storage?.retryOptions?.autoRetry
+            ) {
+              newFile.storage.retryOptions.autoRetry = false;
+            }
             const writable = newFile.createWriteStream(options);
             if (options.onUploadProgress) {
               writable.on('progress', options.onUploadProgress);

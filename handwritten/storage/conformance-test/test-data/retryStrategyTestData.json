@@ -236,13 +236,28 @@
       },
       {
         "id": 3,
-        "description": "conditionally idempotent no retries when precondition is absent",
+        "description": "conditionally_idempotent_no_retries_when_precondition_is_absent",
         "cases": [
           {
-            "instructions": []
+            "instructions": ["return-503"]
+          },
+          {
+            "instructions": ["return-reset-connection"]
           }
         ],
-        "methods": [],
+        "methods": [
+          {"name": "storage.buckets.patch",         "resources": ["BUCKET"]},
+          {"name": "storage.buckets.setIamPolicy",  "resources": ["BUCKET"]},
+          {"name": "storage.buckets.update",        "resources": ["BUCKET"]},
+          {"name": "storage.hmacKey.update",        "resources": ["HMAC_KEY"]},
+          {"name": "storage.objects.compose",       "resources": ["BUCKET", "OBJECT"]},
+          {"name": "storage.objects.copy",          "resources": ["BUCKET", "OBJECT"]},
+          {"name": "storage.objects.delete",        "resources": ["BUCKET", "OBJECT"]},
+          {"name": "storage.objects.insert",        "resources": ["BUCKET"]},
+          {"name": "storage.objects.patch",         "resources": ["BUCKET", "OBJECT"]},
+          {"name": "storage.objects.rewrite",       "resources": ["BUCKET", "OBJECT"]},
+          {"name": "storage.objects.update",        "resources": ["BUCKET", "OBJECT"]}
+        ],
         "preconditionProvided": false,
         "expectSuccess": false
       },
