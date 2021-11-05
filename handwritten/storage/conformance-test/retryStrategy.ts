@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as libraryMethods from './libraryMethods';
 import fetch from 'node-fetch';
 
-import {Bucket, File, Iam, Notification, Storage} from '../src/';
+import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
 import {
   getTestBenchDockerImage,
   runTestBenchDockerImage,
@@ -122,6 +122,7 @@ function excecuteScenario(testCase: RetryTestCase) {
         let notification: Notification;
         let creationResult: any;
         let storage: Storage;
+        let hmacKey: HmacKey;
         before(async () => {
           storage = new Storage({
             apiEndpoint: TESTBENCH_HOST,
@@ -148,6 +149,8 @@ function excecuteScenario(testCase: RetryTestCase) {
           notification = bucket.notification(`${TESTS_PREFIX}`);
           await notification.create();
 
+          [hmacKey] = await storage.createHmacKey(`${TESTS_PREFIX}@email.com`);
+
           storage.interceptors.push({
             request: requestConfig => {
               requestConfig.headers = requestConfig.headers || {};
@@ -166,11 +169,23 @@ function excecuteScenario(testCase: RetryTestCase) {
         it(`${storageMethodString}${instructionNumber}`, async () => {
           if (testCase.expectSuccess) {
             assert.ifError(
-              await storageMethodObject(bucket, file, notification, storage)
+              await storageMethodObject(
+                bucket,
+                file,
+                notification,
+                storage,
+                hmacKey
+              )
             );
           } else {
             try {
-              await storageMethodObject(bucket, file, notification, storage);
+              await storageMethodObject(
+                bucket,
+                file,
+                notification,
+                storage,
+                hmacKey
+              );
               throw Error(`${storageMethodString} was supposed to throw.`);
             } catch (e) {
               assert.notStrictEqual(e, undefined);

@@ -94,5 +94,21 @@
     ],
     "storage.objects.compose": [
         "combine"
+    ],
+    "storage.hmacKey.delete": [
+        "deleteHMAC"
+    ],
+    "storage.hmacKey.get": [
+        "getHMAC",
+        "getMetadataHMAC"
+    ],
+    "storage.hmacKey.update": [
+        "setMetadataHMAC"
+    ],
+    "storage.hmacKey.create": [
+        "createHMACKey"
+    ],
+    "storage.hmacKey.list": [
+        "getHMACKeyStream"
     ]
 }
