@@ -38,11 +38,13 @@ function main() {
    *  can be used along with the suffix wildcard symbol `*`.
    *  The `displayName` field in a query expression should use escaped quotes
    *  for values that include whitespace to prevent unexpected behavior.
+   *  ```
    *  | Field                   | Description                            |
    *  |-------------------------|----------------------------------------|
    *  | displayName             | Filters by displayName.                |
    *  | parent                  | Filters by parent (for example: folders/123). |
    *  | state, lifecycleState   | Filters by state.                      |
+   *  ```
    *  Some example queries are:
    *  * Query `displayName=Test*` returns Folder resources whose display name
    *  starts with "Test".
