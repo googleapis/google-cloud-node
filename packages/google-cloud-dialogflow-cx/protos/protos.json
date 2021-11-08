@@ -14024,6 +14024,26 @@
                                   }
                                 }
                               ]
+                            },
+                            "CompareVersions": {
+                              "requestType": "CompareVersionsRequest",
+                              "responseType": "CompareVersionsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{base_version=projects/*/locations/*/agents/*/flows/*/versions/*}:compareVersions",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "base_version"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{base_version=projects/*/locations/*/agents/*/flows/*/versions/*}:compareVersions",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "base_version"
+                                }
+                              ]
                             }
                           }
                         },
@@ -14199,6 +14219,46 @@
                             "allowOverrideAgentResources": {
                               "type": "bool",
                               "id": 2
+                            }
+                          }
+                        },
+                        "CompareVersionsRequest": {
+                          "fields": {
+                            "baseVersion": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                              }
+                            },
+                            "targetVersion": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "CompareVersionsResponse": {
+                          "fields": {
+                            "baseVersionContentJson": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "targetVersionContentJson": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "compareTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
                             }
                           }
                         },

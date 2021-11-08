@@ -341,6 +341,7 @@ export class VersionsClient {
       'updateVersion',
       'deleteVersion',
       'loadVersion',
+      'compareVersions',
     ];
     for (const methodName of versionsStubMethods) {
       const callPromise = this.versionsStub.then(
@@ -720,6 +721,120 @@ export class VersionsClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteVersion(request, options, callback);
+  }
+  compareVersions(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsResponse,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  compareVersions(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsResponse,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  compareVersions(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsResponse,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Compares the specified base version with target version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.baseVersion
+   *   Required. Name of the base flow version to compare with the target version. Use
+   *   version ID `0` to indicate the draft version of the specified flow.
+   *
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/
+   *   <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   * @param {string} request.targetVersion
+   *   Required. Name of the target flow version to compare with the
+   *   base version. Use version ID `0` to indicate the draft version of the
+   *   specified flow. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   * @param {string} request.languageCode
+   *   The language to compare the flow versions for.
+   *
+   *   If not specified, the agent's default language is used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language) are
+   *   supported. Note: languages must be enabled in the agent before they can be
+   *   used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CompareVersionsResponse]{@link google.cloud.dialogflow.cx.v3beta1.CompareVersionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.compareVersions(request);
+   */
+  compareVersions(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsResponse,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsResponse,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsResponse,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.ICompareVersionsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        base_version: request.baseVersion || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.compareVersions(request, options, callback);
   }
 
   createVersion(
