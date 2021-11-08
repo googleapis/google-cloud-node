@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-automl/compare/v2.5.0...v2.5.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mathjs to v10 ([#559](https://www.github.com/googleapis/nodejs-automl/issues/559)) ([120a457](https://www.github.com/googleapis/nodejs-automl/commit/120a457211590c48c0e8d81e35e364f6c098dbce))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.5...v2.5.0) (2021-10-14)
 
 
