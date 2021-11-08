@@ -509,8 +509,6 @@ class Datastore extends DatastoreRequest {
     this.auth = new GoogleAuth(this.options);
   }
 
-  export(config: ExportEntitiesConfig): Promise<LongRunningResponse>;
-  export(config: ExportEntitiesConfig, callback: LongRunningCallback): void;
   /**
    * Export entities from this project to a Google Cloud Storage bucket.
    *
@@ -527,6 +525,8 @@ class Datastore extends DatastoreRequest {
    * @param {Operation} callback.operation An operation object that can be used
    *     to check the status of the request.
    */
+  export(config: ExportEntitiesConfig): Promise<LongRunningResponse>;
+  export(config: ExportEntitiesConfig, callback: LongRunningCallback): void;
   export(
     config: ExportEntitiesConfig,
     callback?: LongRunningCallback
@@ -581,9 +581,6 @@ class Datastore extends DatastoreRequest {
     );
   }
 
-  getIndexes(options?: GetIndexesOptions): Promise<GetIndexesResponse>;
-  getIndexes(options: GetIndexesOptions, callback: GetIndexesCallback): void;
-  getIndexes(callback: GetIndexesCallback): void;
   /**
    * Get all of the indexes in this project.
    *
@@ -597,6 +594,9 @@ class Datastore extends DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    * @return {void | Promise<GetIndexesResponse>}
    */
+  getIndexes(options?: GetIndexesOptions): Promise<GetIndexesResponse>;
+  getIndexes(options: GetIndexesOptions, callback: GetIndexesCallback): void;
+  getIndexes(callback: GetIndexesCallback): void;
   getIndexes(
     optionsOrCallback?: GetIndexesOptions | GetIndexesCallback,
     cb?: GetIndexesCallback
@@ -687,8 +687,6 @@ class Datastore extends DatastoreRequest {
     return this.auth.getProjectId();
   }
 
-  import(config: ImportEntitiesConfig): Promise<LongRunningResponse>;
-  import(config: ImportEntitiesConfig, callback: LongRunningCallback): void;
   /**
    * Import entities into this project from a remote file.
    *
@@ -705,6 +703,8 @@ class Datastore extends DatastoreRequest {
    * @param {Operation} callback.operation An operation object that can be used
    *     to check the status of the request.
    */
+  import(config: ImportEntitiesConfig): Promise<LongRunningResponse>;
+  import(config: ImportEntitiesConfig, callback: LongRunningCallback): void;
   import(
     config: ImportEntitiesConfig,
     callback?: LongRunningCallback
@@ -769,8 +769,6 @@ class Datastore extends DatastoreRequest {
     return new Index(this, id);
   }
 
-  insert(entities: Entities): Promise<InsertResponse>;
-  insert(entities: Entities, callback: InsertCallback): void;
   /**
    * Maps to {@link Datastore#save}, forcing the method to be `insert`.
    *
@@ -785,6 +783,8 @@ class Datastore extends DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
+  insert(entities: Entities): Promise<InsertResponse>;
+  insert(entities: Entities, callback: InsertCallback): void;
   insert(
     entities: Entities,
     callback?: InsertCallback
@@ -799,13 +799,6 @@ class Datastore extends DatastoreRequest {
     this.save(entities, callback!);
   }
 
-  save(entities: Entities, gaxOptions?: CallOptions): Promise<SaveResponse>;
-  save(
-    entities: Entities,
-    gaxOptions: CallOptions,
-    callback: SaveCallback
-  ): void;
-  save(entities: Entities, callback: SaveCallback): void;
   /**
    * Insert or update the specified object(s). If a key is incomplete, its
    * associated object is inserted and the original Key object is updated to
@@ -1041,6 +1034,13 @@ class Datastore extends DatastoreRequest {
    * });
    * ```
    */
+  save(entities: Entities, gaxOptions?: CallOptions): Promise<SaveResponse>;
+  save(
+    entities: Entities,
+    gaxOptions: CallOptions,
+    callback: SaveCallback
+  ): void;
+  save(entities: Entities, callback: SaveCallback): void;
   save(
     entities: Entities,
     gaxOptionsOrCallback?: CallOptions | SaveCallback,
@@ -1178,8 +1178,6 @@ class Datastore extends DatastoreRequest {
     );
   }
 
-  update(entities: Entities): Promise<UpdateResponse>;
-  update(entities: Entities, callback: UpdateCallback): void;
   /**
    * Maps to {@link Datastore#save}, forcing the method to be `update`.
    *
@@ -1194,6 +1192,8 @@ class Datastore extends DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
+  update(entities: Entities): Promise<UpdateResponse>;
+  update(entities: Entities, callback: UpdateCallback): void;
   update(
     entities: Entities,
     callback?: UpdateCallback
@@ -1208,8 +1208,6 @@ class Datastore extends DatastoreRequest {
     this.save(entities, callback!);
   }
 
-  upsert(entities: Entities): Promise<UpsertResponse>;
-  upsert(entities: Entities, callback: UpsertCallback): void;
   /**
    * Maps to {@link Datastore#save}, forcing the method to be `upsert`.
    *
@@ -1224,6 +1222,8 @@ class Datastore extends DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
+  upsert(entities: Entities): Promise<UpsertResponse>;
+  upsert(entities: Entities, callback: UpsertCallback): void;
   upsert(
     entities: Entities,
     callback?: UpsertCallback
@@ -1450,10 +1450,6 @@ class Datastore extends DatastoreRequest {
   static NO_MORE_RESULTS = 'NO_MORE_RESULTS';
   NO_MORE_RESULTS = Datastore.NO_MORE_RESULTS;
 
-  createQuery(kind?: string): Query;
-  createQuery(kind?: string[]): Query;
-  createQuery(namespace: string, kind: string): Query;
-  createQuery(namespace: string, kind: string[]): Query;
   /**
    * Create a query for the specified kind. See {@link Query} for all
    * of the available methods.
@@ -1472,6 +1468,10 @@ class Datastore extends DatastoreRequest {
    * const query = datastore.createQuery('Company');
    * ```
    */
+  createQuery(kind?: string): Query;
+  createQuery(kind?: string[]): Query;
+  createQuery(namespace: string, kind: string): Query;
+  createQuery(namespace: string, kind: string[]): Query;
   createQuery(
     namespaceOrKind?: string | string[],
     kind?: string | string[]
@@ -1484,9 +1484,6 @@ class Datastore extends DatastoreRequest {
     return new Query(this, namespace, arrify(kind) as string[]);
   }
 
-  key(options: entity.KeyOptions): entity.Key;
-  key(path: PathType[]): entity.Key;
-  key(path: string): entity.Key;
   /**
    * Helper to create a Key object, scoped to the instance's namespace by
    * default.
@@ -1567,6 +1564,9 @@ class Datastore extends DatastoreRequest {
    * const key = datastore.key(['Company', 'Google', 'Employee']);
    * ```
    */
+  key(options: entity.KeyOptions): entity.Key;
+  key(path: PathType[]): entity.Key;
+  key(path: string): entity.Key;
   key(options: string | entity.KeyOptions | PathType[]): entity.Key {
     const keyOptions = is.object(options)
       ? (options as entity.KeyOptions)
@@ -1598,16 +1598,6 @@ class Datastore extends DatastoreRequest {
     return Datastore.isKey(value);
   }
 
-  keyToLegacyUrlSafe(key: entity.Key, locationPrefix?: string): Promise<string>;
-  keyToLegacyUrlSafe(
-    key: entity.Key,
-    callback: KeyToLegacyUrlSafeCallback
-  ): void;
-  keyToLegacyUrlSafe(
-    key: entity.Key,
-    locationPrefix: string,
-    callback: KeyToLegacyUrlSafeCallback
-  ): void;
   /**
    * Helper to create a URL safe key.
    *
@@ -1660,6 +1650,16 @@ class Datastore extends DatastoreRequest {
    * });
    * ```
    */
+  keyToLegacyUrlSafe(key: entity.Key, locationPrefix?: string): Promise<string>;
+  keyToLegacyUrlSafe(
+    key: entity.Key,
+    callback: KeyToLegacyUrlSafeCallback
+  ): void;
+  keyToLegacyUrlSafe(
+    key: entity.Key,
+    locationPrefix: string,
+    callback: KeyToLegacyUrlSafeCallback
+  ): void;
   keyToLegacyUrlSafe(
     key: entity.Key,
     locationPrefixOrCallback?: string | KeyToLegacyUrlSafeCallback,

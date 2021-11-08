@@ -98,9 +98,6 @@ class Transaction extends DatastoreRequest {
    *      the final commit request with.
    */
 
-  commit(gaxOptions?: CallOptions): Promise<CommitResponse>;
-  commit(callback: CommitCallback): void;
-  commit(gaxOptions: CallOptions, callback: CommitCallback): void;
   /**
    * Commit the remote transaction and finalize the current transaction
    * instance.
@@ -136,6 +133,9 @@ class Transaction extends DatastoreRequest {
    * });
    * ```
    */
+  commit(gaxOptions?: CallOptions): Promise<CommitResponse>;
+  commit(callback: CommitCallback): void;
+  commit(gaxOptions: CallOptions, callback: CommitCallback): void;
   commit(
     gaxOptionsOrCallback?: CallOptions | CommitCallback,
     cb?: CommitCallback
@@ -261,10 +261,6 @@ class Transaction extends DatastoreRequest {
     );
   }
 
-  createQuery(kind?: string): Query;
-  createQuery(kind?: string[]): Query;
-  createQuery(namespace: string, kind: string): Query;
-  createQuery(namespace: string, kind: string[]): Query;
   /**
    * Create a query for the specified kind. See {module:datastore/query} for all
    * of the available methods.
@@ -330,6 +326,10 @@ class Transaction extends DatastoreRequest {
    * });
    * ```
    */
+  createQuery(kind?: string): Query;
+  createQuery(kind?: string[]): Query;
+  createQuery(namespace: string, kind: string): Query;
+  createQuery(namespace: string, kind: string[]): Query;
   createQuery(
     namespaceOrKind?: string | string[],
     kind?: string | string[]
@@ -410,9 +410,6 @@ class Transaction extends DatastoreRequest {
     this.save(entities);
   }
 
-  rollback(callback: RollbackCallback): void;
-  rollback(gaxOptions?: CallOptions): Promise<RollbackResponse>;
-  rollback(gaxOptions: CallOptions, callback: RollbackCallback): void;
   /**
    * Reverse a transaction remotely and finalize the current transaction
    * instance.
@@ -449,6 +446,9 @@ class Transaction extends DatastoreRequest {
    * });
    * ```
    */
+  rollback(callback: RollbackCallback): void;
+  rollback(gaxOptions?: CallOptions): Promise<RollbackResponse>;
+  rollback(gaxOptions: CallOptions, callback: RollbackCallback): void;
   rollback(
     gaxOptionsOrCallback?: CallOptions | RollbackCallback,
     cb?: RollbackCallback
@@ -471,9 +471,6 @@ class Transaction extends DatastoreRequest {
     );
   }
 
-  run(options?: RunOptions): Promise<RunResponse>;
-  run(callback: RunCallback): void;
-  run(options: RunOptions, callback: RunCallback): void;
   /**
    * Begin a remote transaction. In the callback provided, run your
    * transactional commands.
@@ -526,6 +523,9 @@ class Transaction extends DatastoreRequest {
    * });
    * ```
    */
+  run(options?: RunOptions): Promise<RunResponse>;
+  run(callback: RunCallback): void;
+  run(options: RunOptions, callback: RunCallback): void;
   run(
     optionsOrCallback?: RunOptions | RunCallback,
     cb?: RunCallback

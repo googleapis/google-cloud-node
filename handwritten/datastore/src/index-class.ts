@@ -78,9 +78,6 @@ export class Index {
     this.id = id.split('/').pop()!;
   }
 
-  get(gaxOptions?: CallOptions): Promise<GetIndexResponse>;
-  get(callback: GetIndexCallback): void;
-  get(gaxOptions: CallOptions, callback: GetIndexCallback): void;
   /**
    * Get an index if it exists.
    *
@@ -91,6 +88,9 @@ export class Index {
    * @param {Index} callback.index The Index instance.
    * @param {object} callback.apiResponse The full API response.
    */
+  get(gaxOptions?: CallOptions): Promise<GetIndexResponse>;
+  get(callback: GetIndexCallback): void;
+  get(gaxOptions: CallOptions, callback: GetIndexCallback): void;
   get(
     gaxOptionsOrCallback?: CallOptions | GetIndexCallback,
     cb?: GetIndexCallback
@@ -105,12 +105,6 @@ export class Index {
     });
   }
 
-  getMetadata(gaxOptions?: CallOptions): Promise<IndexGetMetadataResponse>;
-  getMetadata(callback: IndexGetMetadataCallback): void;
-  getMetadata(
-    gaxOptions: CallOptions,
-    callback: IndexGetMetadataCallback
-  ): void;
   /**
    * Get the metadata of this index.
    *
@@ -120,6 +114,12 @@ export class Index {
    * @param {?error} callback.err An error returned while making this request.
    * @param {object} callback.metadata The metadata.
    */
+  getMetadata(gaxOptions?: CallOptions): Promise<IndexGetMetadataResponse>;
+  getMetadata(callback: IndexGetMetadataCallback): void;
+  getMetadata(
+    gaxOptions: CallOptions,
+    callback: IndexGetMetadataCallback
+  ): void;
   getMetadata(
     gaxOptionsOrCallback?: CallOptions | IndexGetMetadataCallback,
     cb?: IndexGetMetadataCallback
