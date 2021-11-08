@@ -160,9 +160,56 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "callLogLevel": {
+                              "type": "CallLogLevel",
+                              "id": 9
                             }
                           },
                           "nested": {
+                            "StackTraceElement": {
+                              "fields": {
+                                "step": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "routine": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "position": {
+                                  "type": "Position",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Position": {
+                                  "fields": {
+                                    "line": {
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "column": {
+                                      "type": "int64",
+                                      "id": 2
+                                    },
+                                    "length": {
+                                      "type": "int64",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "StackTrace": {
+                              "fields": {
+                                "elements": {
+                                  "rule": "repeated",
+                                  "type": "StackTraceElement",
+                                  "id": 1
+                                }
+                              }
+                            },
                             "Error": {
                               "fields": {
                                 "payload": {
@@ -172,6 +219,10 @@
                                 "context": {
                                   "type": "string",
                                   "id": 2
+                                },
+                                "stackTrace": {
+                                  "type": "StackTrace",
+                                  "id": 3
                                 }
                               }
                             },
@@ -182,6 +233,13 @@
                                 "SUCCEEDED": 2,
                                 "FAILED": 3,
                                 "CANCELLED": 4
+                              }
+                            },
+                            "CallLogLevel": {
+                              "values": {
+                                "CALL_LOG_LEVEL_UNSPECIFIED": 0,
+                                "LOG_ALL_CALLS": 1,
+                                "LOG_ERRORS_ONLY": 2
                               }
                             }
                           }

@@ -163,6 +163,9 @@ export namespace google {
 
                         /** Execution workflowRevisionId */
                         workflowRevisionId?: (string|null);
+
+                        /** Execution callLogLevel */
+                        callLogLevel?: (google.cloud.workflows.executions.v1.Execution.CallLogLevel|keyof typeof google.cloud.workflows.executions.v1.Execution.CallLogLevel|null);
                     }
 
                     /** Represents an Execution. */
@@ -197,6 +200,9 @@ export namespace google {
 
                         /** Execution workflowRevisionId. */
                         public workflowRevisionId: string;
+
+                        /** Execution callLogLevel. */
+                        public callLogLevel: (google.cloud.workflows.executions.v1.Execution.CallLogLevel|keyof typeof google.cloud.workflows.executions.v1.Execution.CallLogLevel);
 
                         /**
                          * Creates a new Execution instance using the specified properties.
@@ -271,6 +277,303 @@ export namespace google {
 
                     namespace Execution {
 
+                        /** Properties of a StackTraceElement. */
+                        interface IStackTraceElement {
+
+                            /** StackTraceElement step */
+                            step?: (string|null);
+
+                            /** StackTraceElement routine */
+                            routine?: (string|null);
+
+                            /** StackTraceElement position */
+                            position?: (google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition|null);
+                        }
+
+                        /** Represents a StackTraceElement. */
+                        class StackTraceElement implements IStackTraceElement {
+
+                            /**
+                             * Constructs a new StackTraceElement.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workflows.executions.v1.Execution.IStackTraceElement);
+
+                            /** StackTraceElement step. */
+                            public step: string;
+
+                            /** StackTraceElement routine. */
+                            public routine: string;
+
+                            /** StackTraceElement position. */
+                            public position?: (google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition|null);
+
+                            /**
+                             * Creates a new StackTraceElement instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StackTraceElement instance
+                             */
+                            public static create(properties?: google.cloud.workflows.executions.v1.Execution.IStackTraceElement): google.cloud.workflows.executions.v1.Execution.StackTraceElement;
+
+                            /**
+                             * Encodes the specified StackTraceElement message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.verify|verify} messages.
+                             * @param message StackTraceElement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workflows.executions.v1.Execution.IStackTraceElement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StackTraceElement message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.verify|verify} messages.
+                             * @param message StackTraceElement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workflows.executions.v1.Execution.IStackTraceElement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StackTraceElement message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StackTraceElement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.executions.v1.Execution.StackTraceElement;
+
+                            /**
+                             * Decodes a StackTraceElement message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StackTraceElement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.executions.v1.Execution.StackTraceElement;
+
+                            /**
+                             * Verifies a StackTraceElement message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StackTraceElement message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StackTraceElement
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workflows.executions.v1.Execution.StackTraceElement;
+
+                            /**
+                             * Creates a plain object from a StackTraceElement message. Also converts values to other types if specified.
+                             * @param message StackTraceElement
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workflows.executions.v1.Execution.StackTraceElement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StackTraceElement to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace StackTraceElement {
+
+                            /** Properties of a Position. */
+                            interface IPosition {
+
+                                /** Position line */
+                                line?: (number|Long|string|null);
+
+                                /** Position column */
+                                column?: (number|Long|string|null);
+
+                                /** Position length */
+                                length?: (number|Long|string|null);
+                            }
+
+                            /** Represents a Position. */
+                            class Position implements IPosition {
+
+                                /**
+                                 * Constructs a new Position.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition);
+
+                                /** Position line. */
+                                public line: (number|Long|string);
+
+                                /** Position column. */
+                                public column: (number|Long|string);
+
+                                /** Position length. */
+                                public length: (number|Long|string);
+
+                                /**
+                                 * Creates a new Position instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Position instance
+                                 */
+                                public static create(properties?: google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition): google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position;
+
+                                /**
+                                 * Encodes the specified Position message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.verify|verify} messages.
+                                 * @param message Position message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.verify|verify} messages.
+                                 * @param message Position message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Position message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Position
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position;
+
+                                /**
+                                 * Decodes a Position message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Position
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position;
+
+                                /**
+                                 * Verifies a Position message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Position
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position;
+
+                                /**
+                                 * Creates a plain object from a Position message. Also converts values to other types if specified.
+                                 * @param message Position
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Position to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+
+                        /** Properties of a StackTrace. */
+                        interface IStackTrace {
+
+                            /** StackTrace elements */
+                            elements?: (google.cloud.workflows.executions.v1.Execution.IStackTraceElement[]|null);
+                        }
+
+                        /** Represents a StackTrace. */
+                        class StackTrace implements IStackTrace {
+
+                            /**
+                             * Constructs a new StackTrace.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workflows.executions.v1.Execution.IStackTrace);
+
+                            /** StackTrace elements. */
+                            public elements: google.cloud.workflows.executions.v1.Execution.IStackTraceElement[];
+
+                            /**
+                             * Creates a new StackTrace instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StackTrace instance
+                             */
+                            public static create(properties?: google.cloud.workflows.executions.v1.Execution.IStackTrace): google.cloud.workflows.executions.v1.Execution.StackTrace;
+
+                            /**
+                             * Encodes the specified StackTrace message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTrace.verify|verify} messages.
+                             * @param message StackTrace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workflows.executions.v1.Execution.IStackTrace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StackTrace message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTrace.verify|verify} messages.
+                             * @param message StackTrace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workflows.executions.v1.Execution.IStackTrace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StackTrace message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StackTrace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.executions.v1.Execution.StackTrace;
+
+                            /**
+                             * Decodes a StackTrace message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StackTrace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.executions.v1.Execution.StackTrace;
+
+                            /**
+                             * Verifies a StackTrace message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StackTrace message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StackTrace
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workflows.executions.v1.Execution.StackTrace;
+
+                            /**
+                             * Creates a plain object from a StackTrace message. Also converts values to other types if specified.
+                             * @param message StackTrace
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workflows.executions.v1.Execution.StackTrace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StackTrace to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
                         /** Properties of an Error. */
                         interface IError {
 
@@ -279,6 +582,9 @@ export namespace google {
 
                             /** Error context */
                             context?: (string|null);
+
+                            /** Error stackTrace */
+                            stackTrace?: (google.cloud.workflows.executions.v1.Execution.IStackTrace|null);
                         }
 
                         /** Represents an Error. */
@@ -295,6 +601,9 @@ export namespace google {
 
                             /** Error context. */
                             public context: string;
+
+                            /** Error stackTrace. */
+                            public stackTrace?: (google.cloud.workflows.executions.v1.Execution.IStackTrace|null);
 
                             /**
                              * Creates a new Error instance using the specified properties.
@@ -374,6 +683,13 @@ export namespace google {
                             SUCCEEDED = 2,
                             FAILED = 3,
                             CANCELLED = 4
+                        }
+
+                        /** CallLogLevel enum. */
+                        enum CallLogLevel {
+                            CALL_LOG_LEVEL_UNSPECIFIED = 0,
+                            LOG_ALL_CALLS = 1,
+                            LOG_ERRORS_ONLY = 2
                         }
                     }
 

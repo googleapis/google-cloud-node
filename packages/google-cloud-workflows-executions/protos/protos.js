@@ -256,6 +256,7 @@
                              * @property {string|null} [result] Execution result
                              * @property {google.cloud.workflows.executions.v1.Execution.IError|null} [error] Execution error
                              * @property {string|null} [workflowRevisionId] Execution workflowRevisionId
+                             * @property {google.cloud.workflows.executions.v1.Execution.CallLogLevel|null} [callLogLevel] Execution callLogLevel
                              */
     
                             /**
@@ -338,6 +339,14 @@
                             Execution.prototype.workflowRevisionId = "";
     
                             /**
+                             * Execution callLogLevel.
+                             * @member {google.cloud.workflows.executions.v1.Execution.CallLogLevel} callLogLevel
+                             * @memberof google.cloud.workflows.executions.v1.Execution
+                             * @instance
+                             */
+                            Execution.prototype.callLogLevel = 0;
+    
+                            /**
                              * Creates a new Execution instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.workflows.executions.v1.Execution
@@ -377,6 +386,8 @@
                                     $root.google.cloud.workflows.executions.v1.Execution.Error.encode(message.error, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.workflowRevisionId != null && Object.hasOwnProperty.call(message, "workflowRevisionId"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.workflowRevisionId);
+                                if (message.callLogLevel != null && Object.hasOwnProperty.call(message, "callLogLevel"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.callLogLevel);
                                 return writer;
                             };
     
@@ -434,6 +445,9 @@
                                         break;
                                     case 8:
                                         message.workflowRevisionId = reader.string();
+                                        break;
+                                    case 9:
+                                        message.callLogLevel = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -508,6 +522,15 @@
                                 if (message.workflowRevisionId != null && message.hasOwnProperty("workflowRevisionId"))
                                     if (!$util.isString(message.workflowRevisionId))
                                         return "workflowRevisionId: string expected";
+                                if (message.callLogLevel != null && message.hasOwnProperty("callLogLevel"))
+                                    switch (message.callLogLevel) {
+                                    default:
+                                        return "callLogLevel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -568,6 +591,20 @@
                                 }
                                 if (object.workflowRevisionId != null)
                                     message.workflowRevisionId = String(object.workflowRevisionId);
+                                switch (object.callLogLevel) {
+                                case "CALL_LOG_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.callLogLevel = 0;
+                                    break;
+                                case "LOG_ALL_CALLS":
+                                case 1:
+                                    message.callLogLevel = 1;
+                                    break;
+                                case "LOG_ERRORS_ONLY":
+                                case 2:
+                                    message.callLogLevel = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -593,6 +630,7 @@
                                     object.result = "";
                                     object.error = null;
                                     object.workflowRevisionId = "";
+                                    object.callLogLevel = options.enums === String ? "CALL_LOG_LEVEL_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -610,6 +648,8 @@
                                     object.error = $root.google.cloud.workflows.executions.v1.Execution.Error.toObject(message.error, options);
                                 if (message.workflowRevisionId != null && message.hasOwnProperty("workflowRevisionId"))
                                     object.workflowRevisionId = message.workflowRevisionId;
+                                if (message.callLogLevel != null && message.hasOwnProperty("callLogLevel"))
+                                    object.callLogLevel = options.enums === String ? $root.google.cloud.workflows.executions.v1.Execution.CallLogLevel[message.callLogLevel] : message.callLogLevel;
                                 return object;
                             };
     
@@ -624,6 +664,725 @@
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
+                            Execution.StackTraceElement = (function() {
+    
+                                /**
+                                 * Properties of a StackTraceElement.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @interface IStackTraceElement
+                                 * @property {string|null} [step] StackTraceElement step
+                                 * @property {string|null} [routine] StackTraceElement routine
+                                 * @property {google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition|null} [position] StackTraceElement position
+                                 */
+    
+                                /**
+                                 * Constructs a new StackTraceElement.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @classdesc Represents a StackTraceElement.
+                                 * @implements IStackTraceElement
+                                 * @constructor
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTraceElement=} [properties] Properties to set
+                                 */
+                                function StackTraceElement(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StackTraceElement step.
+                                 * @member {string} step
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @instance
+                                 */
+                                StackTraceElement.prototype.step = "";
+    
+                                /**
+                                 * StackTraceElement routine.
+                                 * @member {string} routine
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @instance
+                                 */
+                                StackTraceElement.prototype.routine = "";
+    
+                                /**
+                                 * StackTraceElement position.
+                                 * @member {google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition|null|undefined} position
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @instance
+                                 */
+                                StackTraceElement.prototype.position = null;
+    
+                                /**
+                                 * Creates a new StackTraceElement instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTraceElement=} [properties] Properties to set
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement} StackTraceElement instance
+                                 */
+                                StackTraceElement.create = function create(properties) {
+                                    return new StackTraceElement(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StackTraceElement message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTraceElement} message StackTraceElement message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StackTraceElement.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.step != null && Object.hasOwnProperty.call(message, "step"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.step);
+                                    if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.routine);
+                                    if (message.position != null && Object.hasOwnProperty.call(message, "position"))
+                                        $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.encode(message.position, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StackTraceElement message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTraceElement} message StackTraceElement message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StackTraceElement.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StackTraceElement message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement} StackTraceElement
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StackTraceElement.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.step = reader.string();
+                                            break;
+                                        case 2:
+                                            message.routine = reader.string();
+                                            break;
+                                        case 3:
+                                            message.position = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StackTraceElement message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement} StackTraceElement
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StackTraceElement.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StackTraceElement message.
+                                 * @function verify
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StackTraceElement.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.step != null && message.hasOwnProperty("step"))
+                                        if (!$util.isString(message.step))
+                                            return "step: string expected";
+                                    if (message.routine != null && message.hasOwnProperty("routine"))
+                                        if (!$util.isString(message.routine))
+                                            return "routine: string expected";
+                                    if (message.position != null && message.hasOwnProperty("position")) {
+                                        var error = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.verify(message.position);
+                                        if (error)
+                                            return "position." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StackTraceElement message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement} StackTraceElement
+                                 */
+                                StackTraceElement.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement)
+                                        return object;
+                                    var message = new $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement();
+                                    if (object.step != null)
+                                        message.step = String(object.step);
+                                    if (object.routine != null)
+                                        message.routine = String(object.routine);
+                                    if (object.position != null) {
+                                        if (typeof object.position !== "object")
+                                            throw TypeError(".google.cloud.workflows.executions.v1.Execution.StackTraceElement.position: object expected");
+                                        message.position = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.fromObject(object.position);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StackTraceElement message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.StackTraceElement} message StackTraceElement
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StackTraceElement.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.step = "";
+                                        object.routine = "";
+                                        object.position = null;
+                                    }
+                                    if (message.step != null && message.hasOwnProperty("step"))
+                                        object.step = message.step;
+                                    if (message.routine != null && message.hasOwnProperty("routine"))
+                                        object.routine = message.routine;
+                                    if (message.position != null && message.hasOwnProperty("position"))
+                                        object.position = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.toObject(message.position, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StackTraceElement to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StackTraceElement.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                StackTraceElement.Position = (function() {
+    
+                                    /**
+                                     * Properties of a Position.
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                     * @interface IPosition
+                                     * @property {number|Long|null} [line] Position line
+                                     * @property {number|Long|null} [column] Position column
+                                     * @property {number|Long|null} [length] Position length
+                                     */
+    
+                                    /**
+                                     * Constructs a new Position.
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement
+                                     * @classdesc Represents a Position.
+                                     * @implements IPosition
+                                     * @constructor
+                                     * @param {google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition=} [properties] Properties to set
+                                     */
+                                    function Position(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Position line.
+                                     * @member {number|Long} line
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @instance
+                                     */
+                                    Position.prototype.line = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                    /**
+                                     * Position column.
+                                     * @member {number|Long} column
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @instance
+                                     */
+                                    Position.prototype.column = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                    /**
+                                     * Position length.
+                                     * @member {number|Long} length
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @instance
+                                     */
+                                    Position.prototype.length = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                    /**
+                                     * Creates a new Position instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition=} [properties] Properties to set
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position} Position instance
+                                     */
+                                    Position.create = function create(properties) {
+                                        return new Position(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Position message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition} message Position message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Position.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.line != null && Object.hasOwnProperty.call(message, "line"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.line);
+                                        if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).int64(message.column);
+                                        if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).int64(message.length);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.StackTraceElement.IPosition} message Position message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Position.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Position message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position} Position
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Position.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.line = reader.int64();
+                                                break;
+                                            case 2:
+                                                message.column = reader.int64();
+                                                break;
+                                            case 3:
+                                                message.length = reader.int64();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Position message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position} Position
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Position.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Position message.
+                                     * @function verify
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Position.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.line != null && message.hasOwnProperty("line"))
+                                            if (!$util.isInteger(message.line) && !(message.line && $util.isInteger(message.line.low) && $util.isInteger(message.line.high)))
+                                                return "line: integer|Long expected";
+                                        if (message.column != null && message.hasOwnProperty("column"))
+                                            if (!$util.isInteger(message.column) && !(message.column && $util.isInteger(message.column.low) && $util.isInteger(message.column.high)))
+                                                return "column: integer|Long expected";
+                                        if (message.length != null && message.hasOwnProperty("length"))
+                                            if (!$util.isInteger(message.length) && !(message.length && $util.isInteger(message.length.low) && $util.isInteger(message.length.high)))
+                                                return "length: integer|Long expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position} Position
+                                     */
+                                    Position.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position)
+                                            return object;
+                                        var message = new $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position();
+                                        if (object.line != null)
+                                            if ($util.Long)
+                                                (message.line = $util.Long.fromValue(object.line)).unsigned = false;
+                                            else if (typeof object.line === "string")
+                                                message.line = parseInt(object.line, 10);
+                                            else if (typeof object.line === "number")
+                                                message.line = object.line;
+                                            else if (typeof object.line === "object")
+                                                message.line = new $util.LongBits(object.line.low >>> 0, object.line.high >>> 0).toNumber();
+                                        if (object.column != null)
+                                            if ($util.Long)
+                                                (message.column = $util.Long.fromValue(object.column)).unsigned = false;
+                                            else if (typeof object.column === "string")
+                                                message.column = parseInt(object.column, 10);
+                                            else if (typeof object.column === "number")
+                                                message.column = object.column;
+                                            else if (typeof object.column === "object")
+                                                message.column = new $util.LongBits(object.column.low >>> 0, object.column.high >>> 0).toNumber();
+                                        if (object.length != null)
+                                            if ($util.Long)
+                                                (message.length = $util.Long.fromValue(object.length)).unsigned = false;
+                                            else if (typeof object.length === "string")
+                                                message.length = parseInt(object.length, 10);
+                                            else if (typeof object.length === "number")
+                                                message.length = object.length;
+                                            else if (typeof object.length === "object")
+                                                message.length = new $util.LongBits(object.length.low >>> 0, object.length.high >>> 0).toNumber();
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Position message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position} message Position
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Position.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            if ($util.Long) {
+                                                var long = new $util.Long(0, 0, false);
+                                                object.line = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                            } else
+                                                object.line = options.longs === String ? "0" : 0;
+                                            if ($util.Long) {
+                                                var long = new $util.Long(0, 0, false);
+                                                object.column = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                            } else
+                                                object.column = options.longs === String ? "0" : 0;
+                                            if ($util.Long) {
+                                                var long = new $util.Long(0, 0, false);
+                                                object.length = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                            } else
+                                                object.length = options.longs === String ? "0" : 0;
+                                        }
+                                        if (message.line != null && message.hasOwnProperty("line"))
+                                            if (typeof message.line === "number")
+                                                object.line = options.longs === String ? String(message.line) : message.line;
+                                            else
+                                                object.line = options.longs === String ? $util.Long.prototype.toString.call(message.line) : options.longs === Number ? new $util.LongBits(message.line.low >>> 0, message.line.high >>> 0).toNumber() : message.line;
+                                        if (message.column != null && message.hasOwnProperty("column"))
+                                            if (typeof message.column === "number")
+                                                object.column = options.longs === String ? String(message.column) : message.column;
+                                            else
+                                                object.column = options.longs === String ? $util.Long.prototype.toString.call(message.column) : options.longs === Number ? new $util.LongBits(message.column.low >>> 0, message.column.high >>> 0).toNumber() : message.column;
+                                        if (message.length != null && message.hasOwnProperty("length"))
+                                            if (typeof message.length === "number")
+                                                object.length = options.longs === String ? String(message.length) : message.length;
+                                            else
+                                                object.length = options.longs === String ? $util.Long.prototype.toString.call(message.length) : options.longs === Number ? new $util.LongBits(message.length.low >>> 0, message.length.high >>> 0).toNumber() : message.length;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Position to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Position.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return Position;
+                                })();
+    
+                                return StackTraceElement;
+                            })();
+    
+                            Execution.StackTrace = (function() {
+    
+                                /**
+                                 * Properties of a StackTrace.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @interface IStackTrace
+                                 * @property {Array.<google.cloud.workflows.executions.v1.Execution.IStackTraceElement>|null} [elements] StackTrace elements
+                                 */
+    
+                                /**
+                                 * Constructs a new StackTrace.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @classdesc Represents a StackTrace.
+                                 * @implements IStackTrace
+                                 * @constructor
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTrace=} [properties] Properties to set
+                                 */
+                                function StackTrace(properties) {
+                                    this.elements = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StackTrace elements.
+                                 * @member {Array.<google.cloud.workflows.executions.v1.Execution.IStackTraceElement>} elements
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @instance
+                                 */
+                                StackTrace.prototype.elements = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new StackTrace instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTrace=} [properties] Properties to set
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTrace} StackTrace instance
+                                 */
+                                StackTrace.create = function create(properties) {
+                                    return new StackTrace(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StackTrace message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTrace.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTrace} message StackTrace message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StackTrace.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.elements != null && message.elements.length)
+                                        for (var i = 0; i < message.elements.length; ++i)
+                                            $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.encode(message.elements[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StackTrace message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StackTrace.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStackTrace} message StackTrace message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StackTrace.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StackTrace message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTrace} StackTrace
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StackTrace.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution.StackTrace();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            if (!(message.elements && message.elements.length))
+                                                message.elements = [];
+                                            message.elements.push($root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.decode(reader, reader.uint32()));
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StackTrace message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTrace} StackTrace
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StackTrace.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StackTrace message.
+                                 * @function verify
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StackTrace.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.elements != null && message.hasOwnProperty("elements")) {
+                                        if (!Array.isArray(message.elements))
+                                            return "elements: array expected";
+                                        for (var i = 0; i < message.elements.length; ++i) {
+                                            var error = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.verify(message.elements[i]);
+                                            if (error)
+                                                return "elements." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StackTrace message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StackTrace} StackTrace
+                                 */
+                                StackTrace.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.workflows.executions.v1.Execution.StackTrace)
+                                        return object;
+                                    var message = new $root.google.cloud.workflows.executions.v1.Execution.StackTrace();
+                                    if (object.elements) {
+                                        if (!Array.isArray(object.elements))
+                                            throw TypeError(".google.cloud.workflows.executions.v1.Execution.StackTrace.elements: array expected");
+                                        message.elements = [];
+                                        for (var i = 0; i < object.elements.length; ++i) {
+                                            if (typeof object.elements[i] !== "object")
+                                                throw TypeError(".google.cloud.workflows.executions.v1.Execution.StackTrace.elements: object expected");
+                                            message.elements[i] = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.fromObject(object.elements[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StackTrace message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.StackTrace} message StackTrace
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StackTrace.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.elements = [];
+                                    if (message.elements && message.elements.length) {
+                                        object.elements = [];
+                                        for (var j = 0; j < message.elements.length; ++j)
+                                            object.elements[j] = $root.google.cloud.workflows.executions.v1.Execution.StackTraceElement.toObject(message.elements[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StackTrace to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StackTrace
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StackTrace.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return StackTrace;
+                            })();
+    
                             Execution.Error = (function() {
     
                                 /**
@@ -632,6 +1391,7 @@
                                  * @interface IError
                                  * @property {string|null} [payload] Error payload
                                  * @property {string|null} [context] Error context
+                                 * @property {google.cloud.workflows.executions.v1.Execution.IStackTrace|null} [stackTrace] Error stackTrace
                                  */
     
                                 /**
@@ -666,6 +1426,14 @@
                                 Error.prototype.context = "";
     
                                 /**
+                                 * Error stackTrace.
+                                 * @member {google.cloud.workflows.executions.v1.Execution.IStackTrace|null|undefined} stackTrace
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Error
+                                 * @instance
+                                 */
+                                Error.prototype.stackTrace = null;
+    
+                                /**
                                  * Creates a new Error instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.workflows.executions.v1.Execution.Error
@@ -693,6 +1461,8 @@
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.payload);
                                     if (message.context != null && Object.hasOwnProperty.call(message, "context"))
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.context);
+                                    if (message.stackTrace != null && Object.hasOwnProperty.call(message, "stackTrace"))
+                                        $root.google.cloud.workflows.executions.v1.Execution.StackTrace.encode(message.stackTrace, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -732,6 +1502,9 @@
                                             break;
                                         case 2:
                                             message.context = reader.string();
+                                            break;
+                                        case 3:
+                                            message.stackTrace = $root.google.cloud.workflows.executions.v1.Execution.StackTrace.decode(reader, reader.uint32());
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -774,6 +1547,11 @@
                                     if (message.context != null && message.hasOwnProperty("context"))
                                         if (!$util.isString(message.context))
                                             return "context: string expected";
+                                    if (message.stackTrace != null && message.hasOwnProperty("stackTrace")) {
+                                        var error = $root.google.cloud.workflows.executions.v1.Execution.StackTrace.verify(message.stackTrace);
+                                        if (error)
+                                            return "stackTrace." + error;
+                                    }
                                     return null;
                                 };
     
@@ -793,6 +1571,11 @@
                                         message.payload = String(object.payload);
                                     if (object.context != null)
                                         message.context = String(object.context);
+                                    if (object.stackTrace != null) {
+                                        if (typeof object.stackTrace !== "object")
+                                            throw TypeError(".google.cloud.workflows.executions.v1.Execution.Error.stackTrace: object expected");
+                                        message.stackTrace = $root.google.cloud.workflows.executions.v1.Execution.StackTrace.fromObject(object.stackTrace);
+                                    }
                                     return message;
                                 };
     
@@ -812,11 +1595,14 @@
                                     if (options.defaults) {
                                         object.payload = "";
                                         object.context = "";
+                                        object.stackTrace = null;
                                     }
                                     if (message.payload != null && message.hasOwnProperty("payload"))
                                         object.payload = message.payload;
                                     if (message.context != null && message.hasOwnProperty("context"))
                                         object.context = message.context;
+                                    if (message.stackTrace != null && message.hasOwnProperty("stackTrace"))
+                                        object.stackTrace = $root.google.cloud.workflows.executions.v1.Execution.StackTrace.toObject(message.stackTrace, options);
                                     return object;
                                 };
     
@@ -851,6 +1637,22 @@
                                 values[valuesById[2] = "SUCCEEDED"] = 2;
                                 values[valuesById[3] = "FAILED"] = 3;
                                 values[valuesById[4] = "CANCELLED"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * CallLogLevel enum.
+                             * @name google.cloud.workflows.executions.v1.Execution.CallLogLevel
+                             * @enum {number}
+                             * @property {number} CALL_LOG_LEVEL_UNSPECIFIED=0 CALL_LOG_LEVEL_UNSPECIFIED value
+                             * @property {number} LOG_ALL_CALLS=1 LOG_ALL_CALLS value
+                             * @property {number} LOG_ERRORS_ONLY=2 LOG_ERRORS_ONLY value
+                             */
+                            Execution.CallLogLevel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CALL_LOG_LEVEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LOG_ALL_CALLS"] = 1;
+                                values[valuesById[2] = "LOG_ERRORS_ONLY"] = 2;
                                 return values;
                             })();
     
