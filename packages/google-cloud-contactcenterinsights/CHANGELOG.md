@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.7.0...v1.8.0) (2021-11-08)
+
+
+### Features
+
+* Add ability to update phrase matchers feat: Add issue model stats to time series feat: Add display name to issue model stats ([#74](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/74)) ([2b9db34](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/2b9db341f3d999762a5f7a79ff179854eb8fbd05))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.6.0...v1.7.0) (2021-10-01)
 
 
