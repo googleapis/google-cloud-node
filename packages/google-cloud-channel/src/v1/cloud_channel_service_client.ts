@@ -2423,6 +2423,9 @@ export class CloudChannelServiceClient {
    *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
    * @param {number[]} request.parameters
    *   Required. Entitlement parameters to update. You can only change editable parameters.
+   *
+   *   To view the available Parameters for a request, refer to the
+   *   {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions} from the desired offer.
    * @param {string} [request.requestId]
    *   Optional. You can specify an optional unique request ID, and if you need to retry
    *   your request, the server will know to ignore the request if it's complete.
@@ -2783,7 +2786,8 @@ export class CloudChannelServiceClient {
    *   Required. New Offer.
    *   Format: accounts/{account_id}/offers/{offer_id}.
    * @param {number[]} [request.parameters]
-   *   Optional. Parameters needed to purchase the Offer.
+   *   Optional. Parameters needed to purchase the Offer. To view the available Parameters
+   *   refer to the {@link google.cloud.channel.v1.Offer.parameter_definitions|Offer.parameter_definitions} from the desired offer.
    * @param {string} [request.purchaseOrderId]
    *   Optional. Purchase order id provided by the reseller.
    * @param {string} [request.requestId]

@@ -31,7 +31,8 @@ function main(name, offer) {
    */
   // const offer = 'abc123'
   /**
-   *  Optional. Parameters needed to purchase the Offer.
+   *  Optional. Parameters needed to purchase the Offer. To view the available Parameters
+   *  refer to the [Offer.parameter_definitions][google.cloud.channel.v1.Offer.parameter_definitions] from the desired offer.
    */
   // const parameters = 1234
   /**

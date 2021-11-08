@@ -27,6 +27,8 @@ function main(name, parameters) {
   // const name = 'abc123'
   /**
    *  Required. Entitlement parameters to update. You can only change editable parameters.
+   *  To view the available Parameters for a request, refer to the
+   *  [Offer.parameter_definitions][google.cloud.channel.v1.Offer.parameter_definitions] from the desired offer.
    */
   // const parameters = 1234
   /**
