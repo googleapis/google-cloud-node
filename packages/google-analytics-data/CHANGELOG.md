@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.7.0...v2.8.0) (2021-11-08)
+
+
+### Features
+
+* add the `schema_restriction_response` field to the `ResponseMetaData` type that contains the schema restrictions actively enforced in creating a report feat: add the `currency_code`, `time_zone` fields to the `ResponseMetaData` type feat: add the... ([#154](https://www.github.com/googleapis/nodejs-analytics-data/issues/154)) ([37f6077](https://www.github.com/googleapis/nodejs-analytics-data/commit/37f6077a2f86e0814495d3282866cacf6458a839))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.6.0...v2.7.0) (2021-09-01)
 
 
