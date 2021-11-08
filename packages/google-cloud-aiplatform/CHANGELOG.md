@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.12.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.11.0...v1.12.0) (2021-10-27)
+
+
+### Features
+
+* add featurestore service to aiplatform v1 feat: add metadata service to aiplatform v1 ([#211](https://www.github.com/googleapis/nodejs-ai-platform/issues/211)) ([b8a92f2](https://www.github.com/googleapis/nodejs-ai-platform/commit/b8a92f2db9ed21ace33beaae3560e8c48ff2dbf9))
+* add Similarity to explanation in aiplatform v1beta1 feat: add EncryptionSpec to featurestore in aiplatform v1beta1 feat: add PipelineTaskStatus to pipeline_job in aiplatform v1beta1 feat: add BatchReadTensorboardTimeSeriesData to tensorboard_serv... ([#210](https://www.github.com/googleapis/nodejs-ai-platform/issues/210)) ([ae37fb8](https://www.github.com/googleapis/nodejs-ai-platform/commit/ae37fb8bc56c4b4c9eb668cd87e85b307b331798))
+* add vizier service to aiplatform v1 ([#205](https://www.github.com/googleapis/nodejs-ai-platform/issues/205)) ([4d37e14](https://www.github.com/googleapis/nodejs-ai-platform/commit/4d37e14eb75e5e5b8c5a0d34a7901484edf64fce))
+
+
+### Bug Fixes
+
+* Remove invalid resource annotations ([#213](https://www.github.com/googleapis/nodejs-ai-platform/issues/213)) ([2f32395](https://www.github.com/googleapis/nodejs-ai-platform/commit/2f3239515bc4e8203c76f38f0830e80ea0f57507))
+
 ## [1.11.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.10.1...v1.11.0) (2021-09-22)
 
 

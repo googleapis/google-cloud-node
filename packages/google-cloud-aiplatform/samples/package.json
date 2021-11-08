@@ -13,7 +13,7 @@
     "test": "mocha --timeout 1200000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/aiplatform": "^1.11.0",
+    "@google-cloud/aiplatform": "^1.12.0",
     "@google-cloud/storage": "^5.5.0"
   },
   "devDependencies": {
