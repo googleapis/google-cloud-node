@@ -164,6 +164,9 @@ export class ConversationProfilesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cXSecuritySettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/securitySettings/{security_settings}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -1067,6 +1070,67 @@ export class ConversationProfilesClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified cXSecuritySettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} security_settings
+   * @returns {string} Resource name string.
+   */
+  cXSecuritySettingsPath(
+    project: string,
+    location: string,
+    securitySettings: string
+  ) {
+    return this.pathTemplates.cXSecuritySettingsPathTemplate.render({
+      project: project,
+      location: location,
+      security_settings: securitySettings,
+    });
+  }
+
+  /**
+   * Parse the project from CXSecuritySettings resource.
+   *
+   * @param {string} cXSecuritySettingsName
+   *   A fully-qualified path representing CXSecuritySettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCXSecuritySettingsName(cXSecuritySettingsName: string) {
+    return this.pathTemplates.cXSecuritySettingsPathTemplate.match(
+      cXSecuritySettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CXSecuritySettings resource.
+   *
+   * @param {string} cXSecuritySettingsName
+   *   A fully-qualified path representing CXSecuritySettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCXSecuritySettingsName(cXSecuritySettingsName: string) {
+    return this.pathTemplates.cXSecuritySettingsPathTemplate.match(
+      cXSecuritySettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the security_settings from CXSecuritySettings resource.
+   *
+   * @param {string} cXSecuritySettingsName
+   *   A fully-qualified path representing CXSecuritySettings resource.
+   * @returns {string} A string representing the security_settings.
+   */
+  matchSecuritySettingsFromCXSecuritySettingsName(
+    cXSecuritySettingsName: string
+  ) {
+    return this.pathTemplates.cXSecuritySettingsPathTemplate.match(
+      cXSecuritySettingsName
+    ).security_settings;
+  }
 
   /**
    * Return a fully-qualified project resource name string.

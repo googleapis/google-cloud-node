@@ -5583,6 +5583,17 @@
                         "languageCode": {
                           "type": "string",
                           "id": 10
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "securitySettings": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/CXSecuritySettings"
+                          }
                         }
                       }
                     },

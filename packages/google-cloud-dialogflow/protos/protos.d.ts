@@ -16896,6 +16896,12 @@ export namespace google {
 
                     /** ConversationProfile languageCode */
                     languageCode?: (string|null);
+
+                    /** ConversationProfile timeZone */
+                    timeZone?: (string|null);
+
+                    /** ConversationProfile securitySettings */
+                    securitySettings?: (string|null);
                 }
 
                 /** Represents a ConversationProfile. */
@@ -16942,6 +16948,12 @@ export namespace google {
 
                     /** ConversationProfile languageCode. */
                     public languageCode: string;
+
+                    /** ConversationProfile timeZone. */
+                    public timeZone: string;
+
+                    /** ConversationProfile securitySettings. */
+                    public securitySettings: string;
 
                     /**
                      * Creates a new ConversationProfile instance using the specified properties.

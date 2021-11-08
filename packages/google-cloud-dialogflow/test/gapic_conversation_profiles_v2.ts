@@ -1016,6 +1016,84 @@ describe('v2.ConversationProfilesClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('cXSecuritySettings', () => {
+      const fakePath = '/rendered/path/cXSecuritySettings';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        security_settings: 'securitySettingsValue',
+      };
+      const client =
+        new conversationprofilesModule.v2.ConversationProfilesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.cXSecuritySettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cXSecuritySettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cXSecuritySettingsPath', () => {
+        const result = client.cXSecuritySettingsPath(
+          'projectValue',
+          'locationValue',
+          'securitySettingsValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.cXSecuritySettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCXSecuritySettingsName', () => {
+        const result = client.matchProjectFromCXSecuritySettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.cXSecuritySettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCXSecuritySettingsName', () => {
+        const result = client.matchLocationFromCXSecuritySettingsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.cXSecuritySettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecuritySettingsFromCXSecuritySettingsName', () => {
+        const result =
+          client.matchSecuritySettingsFromCXSecuritySettingsName(fakePath);
+        assert.strictEqual(result, 'securitySettingsValue');
+        assert(
+          (
+            client.pathTemplates.cXSecuritySettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
