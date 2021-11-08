@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.3.1...v1.4.0) (2021-11-08)
+
+
+### Features
+
+* add a stack_trace field to the Error messages specifying where the error occured feat: add call_log_level field to Execution messages doc: clarify requirement to escape strings within JSON arguments ([#106](https://www.github.com/googleapis/nodejs-workflows/issues/106)) ([7ba49ae](https://www.github.com/googleapis/nodejs-workflows/commit/7ba49ae965a80e5a44e7add4d626524635c2f3e1))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-workflows/compare/v1.3.0...v1.3.1) (2021-09-09)
 
 
