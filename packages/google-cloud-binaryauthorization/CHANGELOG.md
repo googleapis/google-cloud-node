@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.4.0...v1.5.0) (2021-11-08)
+
+
+### Features
+
+* add new admission rule types to Policy feat: update SignatureAlgorithm enum to match algorithm names in KMS feat: add SystemPolicyV1Beta1 service ([#109](https://www.github.com/googleapis/nodejs-binary-authorization/issues/109)) ([c99878c](https://www.github.com/googleapis/nodejs-binary-authorization/commit/c99878c99a19b80301cdd9219390d00984e78c14))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.3.0...v1.4.0) (2021-11-03)
 
 
