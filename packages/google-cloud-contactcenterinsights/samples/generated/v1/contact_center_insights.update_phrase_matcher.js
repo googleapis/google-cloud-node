@@ -14,22 +14,19 @@
 
 'use strict';
 
-function main(parent, phraseMatcher) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_CreatePhraseMatcher_async]
+function main(phraseMatcher) {
+  // [START contactcenterinsights_v1_generated_ContactCenterInsights_UpdatePhraseMatcher_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the phrase matcher. Required. The location
-   *  to create a phrase matcher for. Format: `projects/<Project
-   *  ID>/locations/<Location ID>` or `projects/<Project
-   *  Number>/locations/<Location ID>`
-   */
-  // const parent = 'abc123'
-  /**
-   *  Required. The phrase matcher resource to create.
+   *  Required. The new values for the phrase matcher.
    */
   // const phraseMatcher = ''
+  /**
+   *  The list of fields to be updated.
+   */
+  // const updateMask = ''
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -38,22 +35,21 @@ function main(parent, phraseMatcher) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function createPhraseMatcher() {
+  async function updatePhraseMatcher() {
     // Construct request
     const request = {
-      parent,
       phraseMatcher,
     };
 
     // Run request
-    const response = await contactcenterinsightsClient.createPhraseMatcher(
+    const response = await contactcenterinsightsClient.updatePhraseMatcher(
       request
     );
     console.log(response);
   }
 
-  createPhraseMatcher();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_CreatePhraseMatcher_async]
+  updatePhraseMatcher();
+  // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdatePhraseMatcher_async]
 }
 
 process.on('unhandledRejection', err => {

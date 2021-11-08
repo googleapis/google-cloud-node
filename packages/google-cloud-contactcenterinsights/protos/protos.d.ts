@@ -397,6 +397,20 @@ export namespace google {
                     public deletePhraseMatcher(request: google.cloud.contactcenterinsights.v1.IDeletePhraseMatcherRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls UpdatePhraseMatcher.
+                     * @param request UpdatePhraseMatcherRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PhraseMatcher
+                     */
+                    public updatePhraseMatcher(request: google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdatePhraseMatcherCallback): void;
+
+                    /**
+                     * Calls UpdatePhraseMatcher.
+                     * @param request UpdatePhraseMatcherRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePhraseMatcher(request: google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest): Promise<google.cloud.contactcenterinsights.v1.PhraseMatcher>;
+
+                    /**
                      * Calls CalculateStats.
                      * @param request CalculateStatsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and CalculateStatsResponse
@@ -617,6 +631,13 @@ export namespace google {
                     type DeletePhraseMatcherCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#updatePhraseMatcher}.
+                     * @param error Error, if any
+                     * @param [response] PhraseMatcher
+                     */
+                    type UpdatePhraseMatcherCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.PhraseMatcher) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#calculateStats}.
                      * @param error Error, if any
                      * @param [response] CalculateStatsResponse
@@ -762,6 +783,9 @@ export namespace google {
                     /** CalculateStatsResponse issueMatches */
                     issueMatches?: ({ [k: string]: number }|null);
 
+                    /** CalculateStatsResponse issueMatchesStats */
+                    issueMatchesStats?: ({ [k: string]: google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IIssueStats }|null);
+
                     /** CalculateStatsResponse conversationCountTimeSeries */
                     conversationCountTimeSeries?: (google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null);
                 }
@@ -792,6 +816,9 @@ export namespace google {
 
                     /** CalculateStatsResponse issueMatches. */
                     public issueMatches: { [k: string]: number };
+
+                    /** CalculateStatsResponse issueMatchesStats. */
+                    public issueMatchesStats: { [k: string]: google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IIssueStats };
 
                     /** CalculateStatsResponse conversationCountTimeSeries. */
                     public conversationCountTimeSeries?: (google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null);
@@ -4989,6 +5016,102 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of an UpdatePhraseMatcherRequest. */
+                interface IUpdatePhraseMatcherRequest {
+
+                    /** UpdatePhraseMatcherRequest phraseMatcher */
+                    phraseMatcher?: (google.cloud.contactcenterinsights.v1.IPhraseMatcher|null);
+
+                    /** UpdatePhraseMatcherRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePhraseMatcherRequest. */
+                class UpdatePhraseMatcherRequest implements IUpdatePhraseMatcherRequest {
+
+                    /**
+                     * Constructs a new UpdatePhraseMatcherRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest);
+
+                    /** UpdatePhraseMatcherRequest phraseMatcher. */
+                    public phraseMatcher?: (google.cloud.contactcenterinsights.v1.IPhraseMatcher|null);
+
+                    /** UpdatePhraseMatcherRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePhraseMatcherRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePhraseMatcherRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest): google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest;
+
+                    /**
+                     * Encodes the specified UpdatePhraseMatcherRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest.verify|verify} messages.
+                     * @param message UpdatePhraseMatcherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePhraseMatcherRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest.verify|verify} messages.
+                     * @param message UpdatePhraseMatcherRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePhraseMatcherRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePhraseMatcherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest;
+
+                    /**
+                     * Decodes an UpdatePhraseMatcherRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePhraseMatcherRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest;
+
+                    /**
+                     * Verifies an UpdatePhraseMatcherRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePhraseMatcherRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePhraseMatcherRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePhraseMatcherRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePhraseMatcherRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePhraseMatcherRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a GetSettingsRequest. */
                 interface IGetSettingsRequest {
 
@@ -8499,6 +8622,9 @@ export namespace google {
 
                         /** IssueStats labeledConversationsCount */
                         labeledConversationsCount?: (number|Long|string|null);
+
+                        /** IssueStats displayName */
+                        displayName?: (string|null);
                     }
 
                     /** Represents an IssueStats. */
@@ -8515,6 +8641,9 @@ export namespace google {
 
                         /** IssueStats labeledConversationsCount. */
                         public labeledConversationsCount: (number|Long|string);
+
+                        /** IssueStats displayName. */
+                        public displayName: string;
 
                         /**
                          * Creates a new IssueStats instance using the specified properties.

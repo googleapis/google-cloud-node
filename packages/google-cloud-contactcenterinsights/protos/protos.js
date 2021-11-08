@@ -924,6 +924,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#updatePhraseMatcher}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef UpdatePhraseMatcherCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.contactcenterinsights.v1.PhraseMatcher} [response] PhraseMatcher
+                         */
+    
+                        /**
+                         * Calls UpdatePhraseMatcher.
+                         * @function updatePhraseMatcher
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest} request UpdatePhraseMatcherRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdatePhraseMatcherCallback} callback Node-style callback called with the error, if any, and PhraseMatcher
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.updatePhraseMatcher = function updatePhraseMatcher(request, callback) {
+                            return this.rpcCall(updatePhraseMatcher, $root.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest, $root.google.cloud.contactcenterinsights.v1.PhraseMatcher, request, callback);
+                        }, "name", { value: "UpdatePhraseMatcher" });
+    
+                        /**
+                         * Calls UpdatePhraseMatcher.
+                         * @function updatePhraseMatcher
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest} request UpdatePhraseMatcherRequest message or plain object
+                         * @returns {Promise<google.cloud.contactcenterinsights.v1.PhraseMatcher>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#calculateStats}.
                          * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
                          * @typedef CalculateStatsCallback
@@ -1263,6 +1296,7 @@
                          * @property {Object.<string,number>|null} [smartHighlighterMatches] CalculateStatsResponse smartHighlighterMatches
                          * @property {Object.<string,number>|null} [customHighlighterMatches] CalculateStatsResponse customHighlighterMatches
                          * @property {Object.<string,number>|null} [issueMatches] CalculateStatsResponse issueMatches
+                         * @property {Object.<string,google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IIssueStats>|null} [issueMatchesStats] CalculateStatsResponse issueMatchesStats
                          * @property {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null} [conversationCountTimeSeries] CalculateStatsResponse conversationCountTimeSeries
                          */
     
@@ -1278,6 +1312,7 @@
                             this.smartHighlighterMatches = {};
                             this.customHighlighterMatches = {};
                             this.issueMatches = {};
+                            this.issueMatchesStats = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1333,6 +1368,14 @@
                         CalculateStatsResponse.prototype.issueMatches = $util.emptyObject;
     
                         /**
+                         * CalculateStatsResponse issueMatchesStats.
+                         * @member {Object.<string,google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IIssueStats>} issueMatchesStats
+                         * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse
+                         * @instance
+                         */
+                        CalculateStatsResponse.prototype.issueMatchesStats = $util.emptyObject;
+    
+                        /**
                          * CalculateStatsResponse conversationCountTimeSeries.
                          * @member {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null|undefined} conversationCountTimeSeries
                          * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse
@@ -1381,6 +1424,11 @@
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int32(message.issueMatches[keys[i]]).ldelim();
                             if (message.conversationCountTimeSeries != null && Object.hasOwnProperty.call(message, "conversationCountTimeSeries"))
                                 $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.encode(message.conversationCountTimeSeries, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.issueMatchesStats != null && Object.hasOwnProperty.call(message, "issueMatchesStats"))
+                                for (var keys = Object.keys(message.issueMatchesStats), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats.encode(message.issueMatchesStats[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             return writer;
                         };
     
@@ -1490,6 +1538,28 @@
                                     }
                                     message.issueMatches[key] = value;
                                     break;
+                                case 8:
+                                    if (message.issueMatchesStats === $util.emptyObject)
+                                        message.issueMatchesStats = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.issueMatchesStats[key] = value;
+                                    break;
                                 case 7:
                                     message.conversationCountTimeSeries = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.decode(reader, reader.uint32());
                                     break;
@@ -1563,6 +1633,16 @@
                                     if (!$util.isInteger(message.issueMatches[key[i]]))
                                         return "issueMatches: integer{k:string} expected";
                             }
+                            if (message.issueMatchesStats != null && message.hasOwnProperty("issueMatchesStats")) {
+                                if (!$util.isObject(message.issueMatchesStats))
+                                    return "issueMatchesStats: object expected";
+                                var key = Object.keys(message.issueMatchesStats);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats.verify(message.issueMatchesStats[key[i]]);
+                                    if (error)
+                                        return "issueMatchesStats." + error;
+                                }
+                            }
                             if (message.conversationCountTimeSeries != null && message.hasOwnProperty("conversationCountTimeSeries")) {
                                 var error = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.verify(message.conversationCountTimeSeries);
                                 if (error)
@@ -1613,6 +1693,16 @@
                                 for (var keys = Object.keys(object.issueMatches), i = 0; i < keys.length; ++i)
                                     message.issueMatches[keys[i]] = object.issueMatches[keys[i]] | 0;
                             }
+                            if (object.issueMatchesStats) {
+                                if (typeof object.issueMatchesStats !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.issueMatchesStats: object expected");
+                                message.issueMatchesStats = {};
+                                for (var keys = Object.keys(object.issueMatchesStats), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.issueMatchesStats[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.issueMatchesStats: object expected");
+                                    message.issueMatchesStats[keys[i]] = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats.fromObject(object.issueMatchesStats[keys[i]]);
+                                }
+                            }
                             if (object.conversationCountTimeSeries != null) {
                                 if (typeof object.conversationCountTimeSeries !== "object")
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.conversationCountTimeSeries: object expected");
@@ -1638,6 +1728,7 @@
                                 object.smartHighlighterMatches = {};
                                 object.customHighlighterMatches = {};
                                 object.issueMatches = {};
+                                object.issueMatchesStats = {};
                             }
                             if (options.defaults) {
                                 object.averageDuration = null;
@@ -1669,6 +1760,11 @@
                             }
                             if (message.conversationCountTimeSeries != null && message.hasOwnProperty("conversationCountTimeSeries"))
                                 object.conversationCountTimeSeries = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.toObject(message.conversationCountTimeSeries, options);
+                            if (message.issueMatchesStats && (keys2 = Object.keys(message.issueMatchesStats)).length) {
+                                object.issueMatchesStats = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.issueMatchesStats[keys2[j]] = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats.toObject(message.issueMatchesStats[keys2[j]], options);
+                            }
                             return object;
                         };
     
@@ -10976,6 +11072,226 @@
                         return DeletePhraseMatcherRequest;
                     })();
     
+                    v1.UpdatePhraseMatcherRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdatePhraseMatcherRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUpdatePhraseMatcherRequest
+                         * @property {google.cloud.contactcenterinsights.v1.IPhraseMatcher|null} [phraseMatcher] UpdatePhraseMatcherRequest phraseMatcher
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdatePhraseMatcherRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdatePhraseMatcherRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UpdatePhraseMatcherRequest.
+                         * @implements IUpdatePhraseMatcherRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest=} [properties] Properties to set
+                         */
+                        function UpdatePhraseMatcherRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdatePhraseMatcherRequest phraseMatcher.
+                         * @member {google.cloud.contactcenterinsights.v1.IPhraseMatcher|null|undefined} phraseMatcher
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @instance
+                         */
+                        UpdatePhraseMatcherRequest.prototype.phraseMatcher = null;
+    
+                        /**
+                         * UpdatePhraseMatcherRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @instance
+                         */
+                        UpdatePhraseMatcherRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdatePhraseMatcherRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest} UpdatePhraseMatcherRequest instance
+                         */
+                        UpdatePhraseMatcherRequest.create = function create(properties) {
+                            return new UpdatePhraseMatcherRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePhraseMatcherRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest} message UpdatePhraseMatcherRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePhraseMatcherRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.phraseMatcher != null && Object.hasOwnProperty.call(message, "phraseMatcher"))
+                                $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.encode(message.phraseMatcher, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdatePhraseMatcherRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdatePhraseMatcherRequest} message UpdatePhraseMatcherRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdatePhraseMatcherRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdatePhraseMatcherRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest} UpdatePhraseMatcherRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePhraseMatcherRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.phraseMatcher = $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdatePhraseMatcherRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest} UpdatePhraseMatcherRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdatePhraseMatcherRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdatePhraseMatcherRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdatePhraseMatcherRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.phraseMatcher != null && message.hasOwnProperty("phraseMatcher")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.verify(message.phraseMatcher);
+                                if (error)
+                                    return "phraseMatcher." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdatePhraseMatcherRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest} UpdatePhraseMatcherRequest
+                         */
+                        UpdatePhraseMatcherRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest();
+                            if (object.phraseMatcher != null) {
+                                if (typeof object.phraseMatcher !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest.phraseMatcher: object expected");
+                                message.phraseMatcher = $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.fromObject(object.phraseMatcher);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdatePhraseMatcherRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest} message UpdatePhraseMatcherRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdatePhraseMatcherRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.phraseMatcher = null;
+                                object.updateMask = null;
+                            }
+                            if (message.phraseMatcher != null && message.hasOwnProperty("phraseMatcher"))
+                                object.phraseMatcher = $root.google.cloud.contactcenterinsights.v1.PhraseMatcher.toObject(message.phraseMatcher, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdatePhraseMatcherRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdatePhraseMatcherRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdatePhraseMatcherRequest;
+                    })();
+    
                     v1.GetSettingsRequest = (function() {
     
                         /**
@@ -19898,6 +20214,7 @@
                              * @interface IIssueStats
                              * @property {string|null} [issue] IssueStats issue
                              * @property {number|Long|null} [labeledConversationsCount] IssueStats labeledConversationsCount
+                             * @property {string|null} [displayName] IssueStats displayName
                              */
     
                             /**
@@ -19932,6 +20249,14 @@
                             IssueStats.prototype.labeledConversationsCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * IssueStats displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats
+                             * @instance
+                             */
+                            IssueStats.prototype.displayName = "";
+    
+                            /**
                              * Creates a new IssueStats instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats
@@ -19959,6 +20284,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.issue);
                                 if (message.labeledConversationsCount != null && Object.hasOwnProperty.call(message, "labeledConversationsCount"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.labeledConversationsCount);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
                                 return writer;
                             };
     
@@ -19998,6 +20325,9 @@
                                         break;
                                     case 2:
                                         message.labeledConversationsCount = reader.int64();
+                                        break;
+                                    case 3:
+                                        message.displayName = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -20040,6 +20370,9 @@
                                 if (message.labeledConversationsCount != null && message.hasOwnProperty("labeledConversationsCount"))
                                     if (!$util.isInteger(message.labeledConversationsCount) && !(message.labeledConversationsCount && $util.isInteger(message.labeledConversationsCount.low) && $util.isInteger(message.labeledConversationsCount.high)))
                                         return "labeledConversationsCount: integer|Long expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
                                 return null;
                             };
     
@@ -20066,6 +20399,8 @@
                                         message.labeledConversationsCount = object.labeledConversationsCount;
                                     else if (typeof object.labeledConversationsCount === "object")
                                         message.labeledConversationsCount = new $util.LongBits(object.labeledConversationsCount.low >>> 0, object.labeledConversationsCount.high >>> 0).toNumber();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
                                 return message;
                             };
     
@@ -20089,6 +20424,7 @@
                                         object.labeledConversationsCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                     } else
                                         object.labeledConversationsCount = options.longs === String ? "0" : 0;
+                                    object.displayName = "";
                                 }
                                 if (message.issue != null && message.hasOwnProperty("issue"))
                                     object.issue = message.issue;
@@ -20097,6 +20433,8 @@
                                         object.labeledConversationsCount = options.longs === String ? String(message.labeledConversationsCount) : message.labeledConversationsCount;
                                     else
                                         object.labeledConversationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.labeledConversationsCount) : options.longs === Number ? new $util.LongBits(message.labeledConversationsCount.low >>> 0, message.labeledConversationsCount.high >>> 0).toNumber() : message.labeledConversationsCount;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
                                 return object;
                             };
     

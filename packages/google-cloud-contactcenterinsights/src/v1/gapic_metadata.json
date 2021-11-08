@@ -90,6 +90,11 @@
                 "deletePhraseMatcher"
               ]
             },
+            "UpdatePhraseMatcher": {
+              "methods": [
+                "updatePhraseMatcher"
+              ]
+            },
             "CalculateStats": {
               "methods": [
                 "calculateStats"
@@ -239,6 +244,11 @@
             "DeletePhraseMatcher": {
               "methods": [
                 "deletePhraseMatcher"
+              ]
+            },
+            "UpdatePhraseMatcher": {
+              "methods": [
+                "updatePhraseMatcher"
               ]
             },
             "CalculateStats": {

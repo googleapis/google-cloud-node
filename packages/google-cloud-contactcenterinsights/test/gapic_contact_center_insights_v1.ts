@@ -2073,6 +2073,124 @@ describe('v1.ContactCenterInsightsClient', () => {
     });
   });
 
+  describe('updatePhraseMatcher', () => {
+    it('invokes updatePhraseMatcher without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
+      );
+      request.phraseMatcher = {};
+      request.phraseMatcher.name = '';
+      const expectedHeaderRequestParams = 'phrase_matcher.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
+      );
+      client.innerApiCalls.updatePhraseMatcher =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updatePhraseMatcher(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updatePhraseMatcher as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updatePhraseMatcher without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
+      );
+      request.phraseMatcher = {};
+      request.phraseMatcher.name = '';
+      const expectedHeaderRequestParams = 'phrase_matcher.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
+      );
+      client.innerApiCalls.updatePhraseMatcher =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePhraseMatcher(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IPhraseMatcher | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updatePhraseMatcher as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updatePhraseMatcher with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
+      );
+      request.phraseMatcher = {};
+      request.phraseMatcher.name = '';
+      const expectedHeaderRequestParams = 'phrase_matcher.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePhraseMatcher = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updatePhraseMatcher(request), expectedError);
+      assert(
+        (client.innerApiCalls.updatePhraseMatcher as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('calculateStats', () => {
     it('invokes calculateStats without error', async () => {
       const client =

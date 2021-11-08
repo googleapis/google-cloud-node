@@ -543,6 +543,26 @@
                             }
                           ]
                         },
+                        "UpdatePhraseMatcher": {
+                          "requestType": "UpdatePhraseMatcherRequest",
+                          "responseType": "PhraseMatcher",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{phrase_matcher.name=projects/*/locations/*/phraseMatchers/*}",
+                            "(google.api.http).body": "phrase_matcher",
+                            "(google.api.method_signature)": "phrase_matcher,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{phrase_matcher.name=projects/*/locations/*/phraseMatchers/*}",
+                                "body": "phrase_matcher"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "phrase_matcher,update_mask"
+                            }
+                          ]
+                        },
                         "CalculateStats": {
                           "requestType": "CalculateStatsRequest",
                           "responseType": "CalculateStatsResponse",
@@ -655,6 +675,11 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "issueMatchesStats": {
+                          "keyType": "string",
+                          "type": "IssueModelLabelStats.IssueStats",
+                          "id": 8
                         },
                         "conversationCountTimeSeries": {
                           "type": "TimeSeries",
@@ -1332,6 +1357,21 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/PhraseMatcher"
                           }
+                        }
+                      }
+                    },
+                    "UpdatePhraseMatcherRequest": {
+                      "fields": {
+                        "phraseMatcher": {
+                          "type": "PhraseMatcher",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     },
@@ -2131,6 +2171,10 @@
                             "labeledConversationsCount": {
                               "type": "int64",
                               "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
