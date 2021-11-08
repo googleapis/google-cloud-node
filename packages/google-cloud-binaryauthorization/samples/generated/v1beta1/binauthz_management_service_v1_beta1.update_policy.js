@@ -20,11 +20,9 @@ function main(policy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A new or updated
-   *  [policy][google.cloud.binaryauthorization.v1beta1.Policy] value. The
-   *  service will overwrite the [policy
-   *  name][google.cloud.binaryauthorization.v1beta1.Policy.name] field with the
-   *  resource name in the request URL, in the format `projects/* /policy`.
+   *  Required. A new or updated [policy][google.cloud.binaryauthorization.v1beta1.Policy] value. The service will
+   *  overwrite the [policy name][google.cloud.binaryauthorization.v1beta1.Policy.name] field with the resource name in
+   *  the request URL, in the format `projects/* /policy`.
    */
   // const policy = ''
 

@@ -1327,10 +1327,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
     });
 
-    describe('policy', () => {
-      const fakePath = '/rendered/path/policy';
+    describe('locationPolicy', () => {
+      const fakePath = '/rendered/path/locationPolicy';
       const expectedParameters = {
-        project: 'projectValue',
+        location: 'locationValue',
       };
       const client =
         new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
@@ -1340,28 +1340,28 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           }
         );
       client.initialize();
-      client.pathTemplates.policyPathTemplate.render = sinon
+      client.pathTemplates.locationPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.policyPathTemplate.match = sinon
+      client.pathTemplates.locationPolicyPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('policyPath', () => {
-        const result = client.policyPath('projectValue');
+      it('locationPolicyPath', () => {
+        const result = client.locationPolicyPath('locationValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.policyPathTemplate.render as SinonStub)
+          (client.pathTemplates.locationPolicyPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromPolicyName', () => {
-        const result = client.matchProjectFromPolicyName(fakePath);
-        assert.strictEqual(result, 'projectValue');
+      it('matchLocationFromLocationPolicyName', () => {
+        const result = client.matchLocationFromLocationPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.policyPathTemplate.match as SinonStub)
+          (client.pathTemplates.locationPolicyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1403,6 +1403,47 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectPolicy', () => {
+      const fakePath = '/rendered/path/projectPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPolicyPath', () => {
+        const result = client.projectPolicyPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectPolicyName', () => {
+        const result = client.matchProjectFromProjectPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

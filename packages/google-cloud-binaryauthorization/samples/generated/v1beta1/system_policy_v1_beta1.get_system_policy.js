@@ -15,37 +15,36 @@
 'use strict';
 
 function main(name) {
-  // [START binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_GetAttestor_async]
+  // [START binaryauthorization_v1beta1_generated_SystemPolicyV1Beta1_GetSystemPolicy_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] to retrieve, in the format
-   *  `projects/* /attestors/*`.
+   *  Required. The resource name, in the format `locations/* /policy`.
+   *  Note that the system policy is not associated with a project.
    */
   // const name = 'abc123'
 
   // Imports the Binaryauthorization library
-  const {BinauthzManagementServiceV1Beta1Client} =
+  const {SystemPolicyV1Beta1Client} =
     require('@google-cloud/binary-authorization').v1beta1;
 
   // Instantiates a client
-  const binaryauthorizationClient =
-    new BinauthzManagementServiceV1Beta1Client();
+  const binaryauthorizationClient = new SystemPolicyV1Beta1Client();
 
-  async function getAttestor() {
+  async function getSystemPolicy() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await binaryauthorizationClient.getAttestor(request);
+    const response = await binaryauthorizationClient.getSystemPolicy(request);
     console.log(response);
   }
 
-  getAttestor();
-  // [END binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_GetAttestor_async]
+  getSystemPolicy();
+  // [END binaryauthorization_v1beta1_generated_SystemPolicyV1Beta1_GetSystemPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

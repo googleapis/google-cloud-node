@@ -6140,6 +6140,9 @@
                          * @property {google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode|null} [globalPolicyEvaluationMode] Policy globalPolicyEvaluationMode
                          * @property {Array.<google.cloud.binaryauthorization.v1beta1.IAdmissionWhitelistPattern>|null} [admissionWhitelistPatterns] Policy admissionWhitelistPatterns
                          * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [clusterAdmissionRules] Policy clusterAdmissionRules
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [kubernetesNamespaceAdmissionRules] Policy kubernetesNamespaceAdmissionRules
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [kubernetesServiceAccountAdmissionRules] Policy kubernetesServiceAccountAdmissionRules
+                         * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [istioServiceIdentityAdmissionRules] Policy istioServiceIdentityAdmissionRules
                          * @property {google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null} [defaultAdmissionRule] Policy defaultAdmissionRule
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Policy updateTime
                          */
@@ -6155,6 +6158,9 @@
                         function Policy(properties) {
                             this.admissionWhitelistPatterns = [];
                             this.clusterAdmissionRules = {};
+                            this.kubernetesNamespaceAdmissionRules = {};
+                            this.kubernetesServiceAccountAdmissionRules = {};
+                            this.istioServiceIdentityAdmissionRules = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6200,6 +6206,30 @@
                          * @instance
                          */
                         Policy.prototype.clusterAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy kubernetesNamespaceAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} kubernetesNamespaceAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.kubernetesNamespaceAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy kubernetesServiceAccountAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} kubernetesServiceAccountAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.kubernetesServiceAccountAdmissionRules = $util.emptyObject;
+    
+                        /**
+                         * Policy istioServiceIdentityAdmissionRules.
+                         * @member {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>} istioServiceIdentityAdmissionRules
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.istioServiceIdentityAdmissionRules = $util.emptyObject;
     
                         /**
                          * Policy defaultAdmissionRule.
@@ -6259,6 +6289,21 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
                             if (message.globalPolicyEvaluationMode != null && Object.hasOwnProperty.call(message, "globalPolicyEvaluationMode"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.globalPolicyEvaluationMode);
+                            if (message.kubernetesServiceAccountAdmissionRules != null && Object.hasOwnProperty.call(message, "kubernetesServiceAccountAdmissionRules"))
+                                for (var keys = Object.keys(message.kubernetesServiceAccountAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.kubernetesServiceAccountAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.istioServiceIdentityAdmissionRules != null && Object.hasOwnProperty.call(message, "istioServiceIdentityAdmissionRules"))
+                                for (var keys = Object.keys(message.istioServiceIdentityAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.istioServiceIdentityAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.kubernetesNamespaceAdmissionRules != null && Object.hasOwnProperty.call(message, "kubernetesNamespaceAdmissionRules"))
+                                for (var keys = Object.keys(message.kubernetesNamespaceAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.kubernetesNamespaceAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             return writer;
                         };
     
@@ -6328,6 +6373,72 @@
                                         }
                                     }
                                     message.clusterAdmissionRules[key] = value;
+                                    break;
+                                case 10:
+                                    if (message.kubernetesNamespaceAdmissionRules === $util.emptyObject)
+                                        message.kubernetesNamespaceAdmissionRules = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.kubernetesNamespaceAdmissionRules[key] = value;
+                                    break;
+                                case 8:
+                                    if (message.kubernetesServiceAccountAdmissionRules === $util.emptyObject)
+                                        message.kubernetesServiceAccountAdmissionRules = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.kubernetesServiceAccountAdmissionRules[key] = value;
+                                    break;
+                                case 9:
+                                    if (message.istioServiceIdentityAdmissionRules === $util.emptyObject)
+                                        message.istioServiceIdentityAdmissionRules = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.istioServiceIdentityAdmissionRules[key] = value;
                                     break;
                                 case 4:
                                     message.defaultAdmissionRule = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.decode(reader, reader.uint32());
@@ -6404,6 +6515,36 @@
                                         return "clusterAdmissionRules." + error;
                                 }
                             }
+                            if (message.kubernetesNamespaceAdmissionRules != null && message.hasOwnProperty("kubernetesNamespaceAdmissionRules")) {
+                                if (!$util.isObject(message.kubernetesNamespaceAdmissionRules))
+                                    return "kubernetesNamespaceAdmissionRules: object expected";
+                                var key = Object.keys(message.kubernetesNamespaceAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.kubernetesNamespaceAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "kubernetesNamespaceAdmissionRules." + error;
+                                }
+                            }
+                            if (message.kubernetesServiceAccountAdmissionRules != null && message.hasOwnProperty("kubernetesServiceAccountAdmissionRules")) {
+                                if (!$util.isObject(message.kubernetesServiceAccountAdmissionRules))
+                                    return "kubernetesServiceAccountAdmissionRules: object expected";
+                                var key = Object.keys(message.kubernetesServiceAccountAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.kubernetesServiceAccountAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "kubernetesServiceAccountAdmissionRules." + error;
+                                }
+                            }
+                            if (message.istioServiceIdentityAdmissionRules != null && message.hasOwnProperty("istioServiceIdentityAdmissionRules")) {
+                                if (!$util.isObject(message.istioServiceIdentityAdmissionRules))
+                                    return "istioServiceIdentityAdmissionRules: object expected";
+                                var key = Object.keys(message.istioServiceIdentityAdmissionRules);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.istioServiceIdentityAdmissionRules[key[i]]);
+                                    if (error)
+                                        return "istioServiceIdentityAdmissionRules." + error;
+                                }
+                            }
                             if (message.defaultAdmissionRule != null && message.hasOwnProperty("defaultAdmissionRule")) {
                                 var error = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.verify(message.defaultAdmissionRule);
                                 if (error)
@@ -6467,6 +6608,36 @@
                                     message.clusterAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.clusterAdmissionRules[keys[i]]);
                                 }
                             }
+                            if (object.kubernetesNamespaceAdmissionRules) {
+                                if (typeof object.kubernetesNamespaceAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesNamespaceAdmissionRules: object expected");
+                                message.kubernetesNamespaceAdmissionRules = {};
+                                for (var keys = Object.keys(object.kubernetesNamespaceAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.kubernetesNamespaceAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesNamespaceAdmissionRules: object expected");
+                                    message.kubernetesNamespaceAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.kubernetesNamespaceAdmissionRules[keys[i]]);
+                                }
+                            }
+                            if (object.kubernetesServiceAccountAdmissionRules) {
+                                if (typeof object.kubernetesServiceAccountAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesServiceAccountAdmissionRules: object expected");
+                                message.kubernetesServiceAccountAdmissionRules = {};
+                                for (var keys = Object.keys(object.kubernetesServiceAccountAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.kubernetesServiceAccountAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.kubernetesServiceAccountAdmissionRules: object expected");
+                                    message.kubernetesServiceAccountAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.kubernetesServiceAccountAdmissionRules[keys[i]]);
+                                }
+                            }
+                            if (object.istioServiceIdentityAdmissionRules) {
+                                if (typeof object.istioServiceIdentityAdmissionRules !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.istioServiceIdentityAdmissionRules: object expected");
+                                message.istioServiceIdentityAdmissionRules = {};
+                                for (var keys = Object.keys(object.istioServiceIdentityAdmissionRules), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.istioServiceIdentityAdmissionRules[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.istioServiceIdentityAdmissionRules: object expected");
+                                    message.istioServiceIdentityAdmissionRules[keys[i]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.fromObject(object.istioServiceIdentityAdmissionRules[keys[i]]);
+                                }
+                            }
                             if (object.defaultAdmissionRule != null) {
                                 if (typeof object.defaultAdmissionRule !== "object")
                                     throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.defaultAdmissionRule: object expected");
@@ -6495,8 +6666,12 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.admissionWhitelistPatterns = [];
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.clusterAdmissionRules = {};
+                                object.kubernetesServiceAccountAdmissionRules = {};
+                                object.istioServiceIdentityAdmissionRules = {};
+                                object.kubernetesNamespaceAdmissionRules = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.defaultAdmissionRule = null;
@@ -6525,6 +6700,21 @@
                                 object.description = message.description;
                             if (message.globalPolicyEvaluationMode != null && message.hasOwnProperty("globalPolicyEvaluationMode"))
                                 object.globalPolicyEvaluationMode = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.Policy.GlobalPolicyEvaluationMode[message.globalPolicyEvaluationMode] : message.globalPolicyEvaluationMode;
+                            if (message.kubernetesServiceAccountAdmissionRules && (keys2 = Object.keys(message.kubernetesServiceAccountAdmissionRules)).length) {
+                                object.kubernetesServiceAccountAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.kubernetesServiceAccountAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.kubernetesServiceAccountAdmissionRules[keys2[j]], options);
+                            }
+                            if (message.istioServiceIdentityAdmissionRules && (keys2 = Object.keys(message.istioServiceIdentityAdmissionRules)).length) {
+                                object.istioServiceIdentityAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.istioServiceIdentityAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.istioServiceIdentityAdmissionRules[keys2[j]], options);
+                            }
+                            if (message.kubernetesNamespaceAdmissionRules && (keys2 = Object.keys(message.kubernetesNamespaceAdmissionRules)).length) {
+                                object.kubernetesNamespaceAdmissionRules = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.kubernetesNamespaceAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.kubernetesNamespaceAdmissionRules[keys2[j]], options);
+                            }
                             return object;
                         };
     
@@ -7768,7 +7958,10 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 9:
                                 case 10:
+                                case 10:
+                                case 11:
                                 case 11:
                                     break;
                                 }
@@ -7830,11 +8023,23 @@
                             case 9:
                                 message.signatureAlgorithm = 9;
                                 break;
+                            case "EC_SIGN_P256_SHA256":
+                            case 9:
+                                message.signatureAlgorithm = 9;
+                                break;
                             case "ECDSA_P384_SHA384":
                             case 10:
                                 message.signatureAlgorithm = 10;
                                 break;
+                            case "EC_SIGN_P384_SHA384":
+                            case 10:
+                                message.signatureAlgorithm = 10;
+                                break;
                             case "ECDSA_P521_SHA512":
+                            case 11:
+                                message.signatureAlgorithm = 11;
+                                break;
+                            case "EC_SIGN_P521_SHA512":
                             case 11:
                                 message.signatureAlgorithm = 11;
                                 break;
@@ -7891,8 +8096,11 @@
                          * @property {number} RSA_SIGN_PKCS1_4096_SHA256=7 RSA_SIGN_PKCS1_4096_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_4096_SHA512=8 RSA_SIGN_PKCS1_4096_SHA512 value
                          * @property {number} ECDSA_P256_SHA256=9 ECDSA_P256_SHA256 value
+                         * @property {number} EC_SIGN_P256_SHA256=9 EC_SIGN_P256_SHA256 value
                          * @property {number} ECDSA_P384_SHA384=10 ECDSA_P384_SHA384 value
+                         * @property {number} EC_SIGN_P384_SHA384=10 EC_SIGN_P384_SHA384 value
                          * @property {number} ECDSA_P521_SHA512=11 ECDSA_P521_SHA512 value
+                         * @property {number} EC_SIGN_P521_SHA512=11 EC_SIGN_P521_SHA512 value
                          */
                         PkixPublicKey.SignatureAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7906,8 +8114,11 @@
                             values[valuesById[7] = "RSA_SIGN_PKCS1_4096_SHA256"] = 7;
                             values[valuesById[8] = "RSA_SIGN_PKCS1_4096_SHA512"] = 8;
                             values[valuesById[9] = "ECDSA_P256_SHA256"] = 9;
+                            values["EC_SIGN_P256_SHA256"] = 9;
                             values[valuesById[10] = "ECDSA_P384_SHA384"] = 10;
+                            values["EC_SIGN_P384_SHA384"] = 10;
                             values[valuesById[11] = "ECDSA_P521_SHA512"] = 11;
+                            values["EC_SIGN_P521_SHA512"] = 11;
                             return values;
                         })();
     
@@ -8650,6 +8861,74 @@
                         };
     
                         return GetPolicyRequest;
+                    })();
+    
+                    v1beta1.SystemPolicyV1Beta1 = (function() {
+    
+                        /**
+                         * Constructs a new SystemPolicyV1Beta1 service.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a SystemPolicyV1Beta1
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SystemPolicyV1Beta1(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SystemPolicyV1Beta1.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SystemPolicyV1Beta1;
+    
+                        /**
+                         * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SystemPolicyV1Beta1} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SystemPolicyV1Beta1.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1#getSystemPolicy}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @typedef GetSystemPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetSystemPolicy.
+                         * @function getSystemPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SystemPolicyV1Beta1.prototype.getSystemPolicy = function getSystemPolicy(request, callback) {
+                            return this.rpcCall(getSystemPolicy, $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest, $root.google.cloud.binaryauthorization.v1beta1.Policy, request, callback);
+                        }, "name", { value: "GetSystemPolicy" });
+    
+                        /**
+                         * Calls GetSystemPolicy.
+                         * @function getSystemPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        return SystemPolicyV1Beta1;
                     })();
     
                     v1beta1.UpdatePolicyRequest = (function() {
@@ -10108,6 +10387,193 @@
                         };
     
                         return DeleteAttestorRequest;
+                    })();
+    
+                    v1beta1.GetSystemPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSystemPolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @interface IGetSystemPolicyRequest
+                         * @property {string|null} [name] GetSystemPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSystemPolicyRequest.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a GetSystemPolicyRequest.
+                         * @implements IGetSystemPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetSystemPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSystemPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @instance
+                         */
+                        GetSystemPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSystemPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest instance
+                         */
+                        GetSystemPolicyRequest.create = function create(properties) {
+                            return new GetSystemPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSystemPolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} message GetSystemPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSystemPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSystemPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} message GetSystemPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSystemPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSystemPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSystemPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSystemPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSystemPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSystemPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSystemPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSystemPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} GetSystemPolicyRequest
+                         */
+                        GetSystemPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSystemPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @static
+                         * @param {google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest} message GetSystemPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSystemPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSystemPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSystemPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetSystemPolicyRequest;
                     })();
     
                     return v1beta1;

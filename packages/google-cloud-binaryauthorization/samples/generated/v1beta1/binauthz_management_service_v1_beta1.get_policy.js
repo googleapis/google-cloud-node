@@ -20,9 +20,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the
-   *  [policy][google.cloud.binaryauthorization.v1beta1.Policy] to retrieve, in
-   *  the format `projects/* /policy`.
+   *  Required. The resource name of the [policy][google.cloud.binaryauthorization.v1beta1.Policy] to retrieve,
+   *  in the format `projects/* /policy`.
    */
   // const name = 'abc123'
 

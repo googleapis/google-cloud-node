@@ -20,9 +20,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the
-   *  [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] to delete,
-   *  in the format `projects/* /attestors/*`.
+   *  Required. The name of the [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] to delete, in the format
+   *  `projects/* /attestors/*`.
    */
   // const name = 'abc123'
 

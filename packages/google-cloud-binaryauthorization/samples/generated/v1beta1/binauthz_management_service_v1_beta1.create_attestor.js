@@ -20,21 +20,17 @@ function main(parent, attestorId, attestor) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent of this
-   *  [attestor][google.cloud.binaryauthorization.v1beta1.Attestor].
+   *  Required. The parent of this [attestor][google.cloud.binaryauthorization.v1beta1.Attestor].
    */
   // const parent = 'abc123'
   /**
-   *  Required. The
-   *  [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] ID.
+   *  Required. The [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] ID.
    */
   // const attestorId = 'abc123'
   /**
-   *  Required. The initial
-   *  [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] value. The
-   *  service will overwrite the [attestor
-   *  name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
-   *  the resource name, in the format `projects/* /attestors/*`.
+   *  Required. The initial [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] value. The service will
+   *  overwrite the [attestor name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with the resource name,
+   *  in the format `projects/* /attestors/*`.
    */
   // const attestor = ''
 

@@ -20,12 +20,9 @@ function main(attestor) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The updated
-   *  [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] value. The
-   *  service will overwrite the [attestor
-   *  name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
-   *  the resource name in the request URL, in the format
-   *  `projects/* /attestors/*`.
+   *  Required. The updated [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] value. The service will
+   *  overwrite the [attestor name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with the resource name
+   *  in the request URL, in the format `projects/* /attestors/*`.
    */
   // const attestor = ''
 

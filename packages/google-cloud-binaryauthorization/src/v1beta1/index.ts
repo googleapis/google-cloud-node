@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {BinauthzManagementServiceV1Beta1Client} from './binauthz_management_service_v1_beta1_client';
+export {SystemPolicyV1Beta1Client} from './system_policy_v1_beta1_client';

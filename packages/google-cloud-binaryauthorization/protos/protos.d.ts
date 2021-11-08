@@ -2596,6 +2596,15 @@ export namespace google {
                     /** Policy clusterAdmissionRules */
                     clusterAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
 
+                    /** Policy kubernetesNamespaceAdmissionRules */
+                    kubernetesNamespaceAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
+                    /** Policy kubernetesServiceAccountAdmissionRules */
+                    kubernetesServiceAccountAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
+                    /** Policy istioServiceIdentityAdmissionRules */
+                    istioServiceIdentityAdmissionRules?: ({ [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule }|null);
+
                     /** Policy defaultAdmissionRule */
                     defaultAdmissionRule?: (google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null);
 
@@ -2626,6 +2635,15 @@ export namespace google {
 
                     /** Policy clusterAdmissionRules. */
                     public clusterAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy kubernetesNamespaceAdmissionRules. */
+                    public kubernetesNamespaceAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy kubernetesServiceAccountAdmissionRules. */
+                    public kubernetesServiceAccountAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
+
+                    /** Policy istioServiceIdentityAdmissionRules. */
+                    public istioServiceIdentityAdmissionRules: { [k: string]: google.cloud.binaryauthorization.v1beta1.IAdmissionRule };
 
                     /** Policy defaultAdmissionRule. */
                     public defaultAdmissionRule?: (google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null);
@@ -3247,8 +3265,11 @@ export namespace google {
                         RSA_SIGN_PKCS1_4096_SHA256 = 7,
                         RSA_SIGN_PKCS1_4096_SHA512 = 8,
                         ECDSA_P256_SHA256 = 9,
+                        EC_SIGN_P256_SHA256 = 9,
                         ECDSA_P384_SHA384 = 10,
-                        ECDSA_P521_SHA512 = 11
+                        EC_SIGN_P384_SHA384 = 10,
+                        ECDSA_P521_SHA512 = 11,
+                        EC_SIGN_P521_SHA512 = 11
                     }
                 }
 
@@ -3622,6 +3643,51 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a SystemPolicyV1Beta1 */
+                class SystemPolicyV1Beta1 extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SystemPolicyV1Beta1 service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SystemPolicyV1Beta1;
+
+                    /**
+                     * Calls GetSystemPolicy.
+                     * @param request GetSystemPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, callback: google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback): void;
+
+                    /**
+                     * Calls GetSystemPolicy.
+                     * @param request GetSystemPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSystemPolicy(request: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest): Promise<google.cloud.binaryauthorization.v1beta1.Policy>;
+                }
+
+                namespace SystemPolicyV1Beta1 {
+
+                    /**
+                     * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1#getSystemPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetSystemPolicyCallback = (error: (Error|null), response?: google.cloud.binaryauthorization.v1beta1.Policy) => void;
                 }
 
                 /** Properties of an UpdatePolicyRequest. */
@@ -4279,6 +4345,96 @@ export namespace google {
 
                     /**
                      * Converts this DeleteAttestorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetSystemPolicyRequest. */
+                interface IGetSystemPolicyRequest {
+
+                    /** GetSystemPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSystemPolicyRequest. */
+                class GetSystemPolicyRequest implements IGetSystemPolicyRequest {
+
+                    /**
+                     * Constructs a new GetSystemPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest);
+
+                    /** GetSystemPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSystemPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSystemPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetSystemPolicyRequest message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                     * @param message GetSystemPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSystemPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest.verify|verify} messages.
+                     * @param message GetSystemPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSystemPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSystemPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Decodes a GetSystemPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSystemPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Verifies a GetSystemPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSystemPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSystemPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetSystemPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetSystemPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSystemPolicyRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
