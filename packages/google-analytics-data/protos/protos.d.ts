@@ -9675,6 +9675,18 @@ export namespace google {
 
                     /** ResponseMetaData dataLossFromOtherRow */
                     dataLossFromOtherRow?: (boolean|null);
+
+                    /** ResponseMetaData schemaRestrictionResponse */
+                    schemaRestrictionResponse?: (google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse|null);
+
+                    /** ResponseMetaData currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** ResponseMetaData timeZone */
+                    timeZone?: (string|null);
+
+                    /** ResponseMetaData emptyReason */
+                    emptyReason?: (string|null);
                 }
 
                 /** Represents a ResponseMetaData. */
@@ -9688,6 +9700,30 @@ export namespace google {
 
                     /** ResponseMetaData dataLossFromOtherRow. */
                     public dataLossFromOtherRow: boolean;
+
+                    /** ResponseMetaData schemaRestrictionResponse. */
+                    public schemaRestrictionResponse?: (google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse|null);
+
+                    /** ResponseMetaData currencyCode. */
+                    public currencyCode?: (string|null);
+
+                    /** ResponseMetaData timeZone. */
+                    public timeZone?: (string|null);
+
+                    /** ResponseMetaData emptyReason. */
+                    public emptyReason?: (string|null);
+
+                    /** ResponseMetaData _schemaRestrictionResponse. */
+                    public _schemaRestrictionResponse?: "schemaRestrictionResponse";
+
+                    /** ResponseMetaData _currencyCode. */
+                    public _currencyCode?: "currencyCode";
+
+                    /** ResponseMetaData _timeZone. */
+                    public _timeZone?: "timeZone";
+
+                    /** ResponseMetaData _emptyReason. */
+                    public _emptyReason?: "emptyReason";
 
                     /**
                      * Creates a new ResponseMetaData instance using the specified properties.
@@ -9758,6 +9794,201 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace ResponseMetaData {
+
+                    /** Properties of a SchemaRestrictionResponse. */
+                    interface ISchemaRestrictionResponse {
+
+                        /** SchemaRestrictionResponse activeMetricRestrictions */
+                        activeMetricRestrictions?: (google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction[]|null);
+                    }
+
+                    /** Represents a SchemaRestrictionResponse. */
+                    class SchemaRestrictionResponse implements ISchemaRestrictionResponse {
+
+                        /**
+                         * Constructs a new SchemaRestrictionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse);
+
+                        /** SchemaRestrictionResponse activeMetricRestrictions. */
+                        public activeMetricRestrictions: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction[];
+
+                        /**
+                         * Creates a new SchemaRestrictionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SchemaRestrictionResponse instance
+                         */
+                        public static create(properties?: google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse;
+
+                        /**
+                         * Encodes the specified SchemaRestrictionResponse message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.verify|verify} messages.
+                         * @param message SchemaRestrictionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SchemaRestrictionResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.verify|verify} messages.
+                         * @param message SchemaRestrictionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SchemaRestrictionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SchemaRestrictionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse;
+
+                        /**
+                         * Decodes a SchemaRestrictionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SchemaRestrictionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse;
+
+                        /**
+                         * Verifies a SchemaRestrictionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SchemaRestrictionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SchemaRestrictionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse;
+
+                        /**
+                         * Creates a plain object from a SchemaRestrictionResponse message. Also converts values to other types if specified.
+                         * @param message SchemaRestrictionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SchemaRestrictionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace SchemaRestrictionResponse {
+
+                        /** Properties of an ActiveMetricRestriction. */
+                        interface IActiveMetricRestriction {
+
+                            /** ActiveMetricRestriction metricName */
+                            metricName?: (string|null);
+
+                            /** ActiveMetricRestriction restrictedMetricTypes */
+                            restrictedMetricTypes?: (google.analytics.data.v1beta.RestrictedMetricType[]|null);
+                        }
+
+                        /** Represents an ActiveMetricRestriction. */
+                        class ActiveMetricRestriction implements IActiveMetricRestriction {
+
+                            /**
+                             * Constructs a new ActiveMetricRestriction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction);
+
+                            /** ActiveMetricRestriction metricName. */
+                            public metricName?: (string|null);
+
+                            /** ActiveMetricRestriction restrictedMetricTypes. */
+                            public restrictedMetricTypes: google.analytics.data.v1beta.RestrictedMetricType[];
+
+                            /** ActiveMetricRestriction _metricName. */
+                            public _metricName?: "metricName";
+
+                            /**
+                             * Creates a new ActiveMetricRestriction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ActiveMetricRestriction instance
+                             */
+                            public static create(properties?: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction;
+
+                            /**
+                             * Encodes the specified ActiveMetricRestriction message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.verify|verify} messages.
+                             * @param message ActiveMetricRestriction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ActiveMetricRestriction message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.verify|verify} messages.
+                             * @param message ActiveMetricRestriction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ActiveMetricRestriction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ActiveMetricRestriction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction;
+
+                            /**
+                             * Decodes an ActiveMetricRestriction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ActiveMetricRestriction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction;
+
+                            /**
+                             * Verifies an ActiveMetricRestriction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ActiveMetricRestriction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ActiveMetricRestriction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction;
+
+                            /**
+                             * Creates a plain object from an ActiveMetricRestriction message. Also converts values to other types if specified.
+                             * @param message ActiveMetricRestriction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ActiveMetricRestriction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
                 }
 
                 /** Properties of a DimensionHeader. */
@@ -10867,6 +11098,9 @@ export namespace google {
                     /** MetricMetadata customDefinition */
                     customDefinition?: (boolean|null);
 
+                    /** MetricMetadata blockedReasons */
+                    blockedReasons?: (google.analytics.data.v1beta.MetricMetadata.BlockedReason[]|null);
+
                     /** MetricMetadata category */
                     category?: (string|null);
                 }
@@ -10900,6 +11134,9 @@ export namespace google {
 
                     /** MetricMetadata customDefinition. */
                     public customDefinition: boolean;
+
+                    /** MetricMetadata blockedReasons. */
+                    public blockedReasons: google.analytics.data.v1beta.MetricMetadata.BlockedReason[];
 
                     /** MetricMetadata category. */
                     public category: string;
@@ -10973,6 +11210,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace MetricMetadata {
+
+                    /** BlockedReason enum. */
+                    enum BlockedReason {
+                        BLOCKED_REASON_UNSPECIFIED = 0,
+                        NO_REVENUE_METRICS = 1,
+                        NO_COST_METRICS = 2
+                    }
                 }
 
                 /** Properties of a DimensionCompatibility. */
@@ -11203,6 +11450,13 @@ export namespace google {
                     TYPE_MILES = 11,
                     TYPE_METERS = 12,
                     TYPE_KILOMETERS = 13
+                }
+
+                /** RestrictedMetricType enum. */
+                enum RestrictedMetricType {
+                    RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0,
+                    COST_DATA = 1,
+                    REVENUE_DATA = 2
                 }
 
                 /** Compatibility enum. */

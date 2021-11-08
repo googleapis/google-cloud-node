@@ -25503,6 +25503,10 @@
                          * @memberof google.analytics.data.v1beta
                          * @interface IResponseMetaData
                          * @property {boolean|null} [dataLossFromOtherRow] ResponseMetaData dataLossFromOtherRow
+                         * @property {google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse|null} [schemaRestrictionResponse] ResponseMetaData schemaRestrictionResponse
+                         * @property {string|null} [currencyCode] ResponseMetaData currencyCode
+                         * @property {string|null} [timeZone] ResponseMetaData timeZone
+                         * @property {string|null} [emptyReason] ResponseMetaData emptyReason
                          */
     
                         /**
@@ -25527,6 +25531,85 @@
                          * @instance
                          */
                         ResponseMetaData.prototype.dataLossFromOtherRow = false;
+    
+                        /**
+                         * ResponseMetaData schemaRestrictionResponse.
+                         * @member {google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse|null|undefined} schemaRestrictionResponse
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.schemaRestrictionResponse = null;
+    
+                        /**
+                         * ResponseMetaData currencyCode.
+                         * @member {string|null|undefined} currencyCode
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.currencyCode = null;
+    
+                        /**
+                         * ResponseMetaData timeZone.
+                         * @member {string|null|undefined} timeZone
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.timeZone = null;
+    
+                        /**
+                         * ResponseMetaData emptyReason.
+                         * @member {string|null|undefined} emptyReason
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.emptyReason = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ResponseMetaData _schemaRestrictionResponse.
+                         * @member {"schemaRestrictionResponse"|undefined} _schemaRestrictionResponse
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        Object.defineProperty(ResponseMetaData.prototype, "_schemaRestrictionResponse", {
+                            get: $util.oneOfGetter($oneOfFields = ["schemaRestrictionResponse"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ResponseMetaData _currencyCode.
+                         * @member {"currencyCode"|undefined} _currencyCode
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        Object.defineProperty(ResponseMetaData.prototype, "_currencyCode", {
+                            get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ResponseMetaData _timeZone.
+                         * @member {"timeZone"|undefined} _timeZone
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        Object.defineProperty(ResponseMetaData.prototype, "_timeZone", {
+                            get: $util.oneOfGetter($oneOfFields = ["timeZone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ResponseMetaData _emptyReason.
+                         * @member {"emptyReason"|undefined} _emptyReason
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        Object.defineProperty(ResponseMetaData.prototype, "_emptyReason", {
+                            get: $util.oneOfGetter($oneOfFields = ["emptyReason"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ResponseMetaData instance using the specified properties.
@@ -25554,6 +25637,14 @@
                                 writer = $Writer.create();
                             if (message.dataLossFromOtherRow != null && Object.hasOwnProperty.call(message, "dataLossFromOtherRow"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.dataLossFromOtherRow);
+                            if (message.schemaRestrictionResponse != null && Object.hasOwnProperty.call(message, "schemaRestrictionResponse"))
+                                $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.encode(message.schemaRestrictionResponse, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.currencyCode);
+                            if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.timeZone);
+                            if (message.emptyReason != null && Object.hasOwnProperty.call(message, "emptyReason"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.emptyReason);
                             return writer;
                         };
     
@@ -25591,6 +25682,18 @@
                                 case 3:
                                     message.dataLossFromOtherRow = reader.bool();
                                     break;
+                                case 4:
+                                    message.schemaRestrictionResponse = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.currencyCode = reader.string();
+                                    break;
+                                case 6:
+                                    message.timeZone = reader.string();
+                                    break;
+                                case 7:
+                                    message.emptyReason = reader.string();
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -25626,9 +25729,33 @@
                         ResponseMetaData.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.dataLossFromOtherRow != null && message.hasOwnProperty("dataLossFromOtherRow"))
                                 if (typeof message.dataLossFromOtherRow !== "boolean")
                                     return "dataLossFromOtherRow: boolean expected";
+                            if (message.schemaRestrictionResponse != null && message.hasOwnProperty("schemaRestrictionResponse")) {
+                                properties._schemaRestrictionResponse = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.verify(message.schemaRestrictionResponse);
+                                    if (error)
+                                        return "schemaRestrictionResponse." + error;
+                                }
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                                properties._currencyCode = 1;
+                                if (!$util.isString(message.currencyCode))
+                                    return "currencyCode: string expected";
+                            }
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                                properties._timeZone = 1;
+                                if (!$util.isString(message.timeZone))
+                                    return "timeZone: string expected";
+                            }
+                            if (message.emptyReason != null && message.hasOwnProperty("emptyReason")) {
+                                properties._emptyReason = 1;
+                                if (!$util.isString(message.emptyReason))
+                                    return "emptyReason: string expected";
+                            }
                             return null;
                         };
     
@@ -25646,6 +25773,17 @@
                             var message = new $root.google.analytics.data.v1beta.ResponseMetaData();
                             if (object.dataLossFromOtherRow != null)
                                 message.dataLossFromOtherRow = Boolean(object.dataLossFromOtherRow);
+                            if (object.schemaRestrictionResponse != null) {
+                                if (typeof object.schemaRestrictionResponse !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.ResponseMetaData.schemaRestrictionResponse: object expected");
+                                message.schemaRestrictionResponse = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.fromObject(object.schemaRestrictionResponse);
+                            }
+                            if (object.currencyCode != null)
+                                message.currencyCode = String(object.currencyCode);
+                            if (object.timeZone != null)
+                                message.timeZone = String(object.timeZone);
+                            if (object.emptyReason != null)
+                                message.emptyReason = String(object.emptyReason);
                             return message;
                         };
     
@@ -25666,6 +25804,26 @@
                                 object.dataLossFromOtherRow = false;
                             if (message.dataLossFromOtherRow != null && message.hasOwnProperty("dataLossFromOtherRow"))
                                 object.dataLossFromOtherRow = message.dataLossFromOtherRow;
+                            if (message.schemaRestrictionResponse != null && message.hasOwnProperty("schemaRestrictionResponse")) {
+                                object.schemaRestrictionResponse = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.toObject(message.schemaRestrictionResponse, options);
+                                if (options.oneofs)
+                                    object._schemaRestrictionResponse = "schemaRestrictionResponse";
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                                object.currencyCode = message.currencyCode;
+                                if (options.oneofs)
+                                    object._currencyCode = "currencyCode";
+                            }
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                                object.timeZone = message.timeZone;
+                                if (options.oneofs)
+                                    object._timeZone = "timeZone";
+                            }
+                            if (message.emptyReason != null && message.hasOwnProperty("emptyReason")) {
+                                object.emptyReason = message.emptyReason;
+                                if (options.oneofs)
+                                    object._emptyReason = "emptyReason";
+                            }
                             return object;
                         };
     
@@ -25679,6 +25837,486 @@
                         ResponseMetaData.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        ResponseMetaData.SchemaRestrictionResponse = (function() {
+    
+                            /**
+                             * Properties of a SchemaRestrictionResponse.
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData
+                             * @interface ISchemaRestrictionResponse
+                             * @property {Array.<google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction>|null} [activeMetricRestrictions] SchemaRestrictionResponse activeMetricRestrictions
+                             */
+    
+                            /**
+                             * Constructs a new SchemaRestrictionResponse.
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData
+                             * @classdesc Represents a SchemaRestrictionResponse.
+                             * @implements ISchemaRestrictionResponse
+                             * @constructor
+                             * @param {google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse=} [properties] Properties to set
+                             */
+                            function SchemaRestrictionResponse(properties) {
+                                this.activeMetricRestrictions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SchemaRestrictionResponse activeMetricRestrictions.
+                             * @member {Array.<google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction>} activeMetricRestrictions
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @instance
+                             */
+                            SchemaRestrictionResponse.prototype.activeMetricRestrictions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SchemaRestrictionResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse=} [properties] Properties to set
+                             * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse} SchemaRestrictionResponse instance
+                             */
+                            SchemaRestrictionResponse.create = function create(properties) {
+                                return new SchemaRestrictionResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaRestrictionResponse message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse} message SchemaRestrictionResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaRestrictionResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.activeMetricRestrictions != null && message.activeMetricRestrictions.length)
+                                    for (var i = 0; i < message.activeMetricRestrictions.length; ++i)
+                                        $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.encode(message.activeMetricRestrictions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SchemaRestrictionResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {google.analytics.data.v1beta.ResponseMetaData.ISchemaRestrictionResponse} message SchemaRestrictionResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchemaRestrictionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SchemaRestrictionResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse} SchemaRestrictionResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaRestrictionResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.activeMetricRestrictions && message.activeMetricRestrictions.length))
+                                            message.activeMetricRestrictions = [];
+                                        message.activeMetricRestrictions.push($root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SchemaRestrictionResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse} SchemaRestrictionResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchemaRestrictionResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SchemaRestrictionResponse message.
+                             * @function verify
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SchemaRestrictionResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.activeMetricRestrictions != null && message.hasOwnProperty("activeMetricRestrictions")) {
+                                    if (!Array.isArray(message.activeMetricRestrictions))
+                                        return "activeMetricRestrictions: array expected";
+                                    for (var i = 0; i < message.activeMetricRestrictions.length; ++i) {
+                                        var error = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.verify(message.activeMetricRestrictions[i]);
+                                        if (error)
+                                            return "activeMetricRestrictions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SchemaRestrictionResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse} SchemaRestrictionResponse
+                             */
+                            SchemaRestrictionResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse)
+                                    return object;
+                                var message = new $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse();
+                                if (object.activeMetricRestrictions) {
+                                    if (!Array.isArray(object.activeMetricRestrictions))
+                                        throw TypeError(".google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.activeMetricRestrictions: array expected");
+                                    message.activeMetricRestrictions = [];
+                                    for (var i = 0; i < object.activeMetricRestrictions.length; ++i) {
+                                        if (typeof object.activeMetricRestrictions[i] !== "object")
+                                            throw TypeError(".google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.activeMetricRestrictions: object expected");
+                                        message.activeMetricRestrictions[i] = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.fromObject(object.activeMetricRestrictions[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SchemaRestrictionResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @static
+                             * @param {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse} message SchemaRestrictionResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SchemaRestrictionResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.activeMetricRestrictions = [];
+                                if (message.activeMetricRestrictions && message.activeMetricRestrictions.length) {
+                                    object.activeMetricRestrictions = [];
+                                    for (var j = 0; j < message.activeMetricRestrictions.length; ++j)
+                                        object.activeMetricRestrictions[j] = $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.toObject(message.activeMetricRestrictions[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SchemaRestrictionResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SchemaRestrictionResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            SchemaRestrictionResponse.ActiveMetricRestriction = (function() {
+    
+                                /**
+                                 * Properties of an ActiveMetricRestriction.
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                                 * @interface IActiveMetricRestriction
+                                 * @property {string|null} [metricName] ActiveMetricRestriction metricName
+                                 * @property {Array.<google.analytics.data.v1beta.RestrictedMetricType>|null} [restrictedMetricTypes] ActiveMetricRestriction restrictedMetricTypes
+                                 */
+    
+                                /**
+                                 * Constructs a new ActiveMetricRestriction.
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse
+                                 * @classdesc Represents an ActiveMetricRestriction.
+                                 * @implements IActiveMetricRestriction
+                                 * @constructor
+                                 * @param {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction=} [properties] Properties to set
+                                 */
+                                function ActiveMetricRestriction(properties) {
+                                    this.restrictedMetricTypes = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ActiveMetricRestriction metricName.
+                                 * @member {string|null|undefined} metricName
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @instance
+                                 */
+                                ActiveMetricRestriction.prototype.metricName = null;
+    
+                                /**
+                                 * ActiveMetricRestriction restrictedMetricTypes.
+                                 * @member {Array.<google.analytics.data.v1beta.RestrictedMetricType>} restrictedMetricTypes
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @instance
+                                 */
+                                ActiveMetricRestriction.prototype.restrictedMetricTypes = $util.emptyArray;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * ActiveMetricRestriction _metricName.
+                                 * @member {"metricName"|undefined} _metricName
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @instance
+                                 */
+                                Object.defineProperty(ActiveMetricRestriction.prototype, "_metricName", {
+                                    get: $util.oneOfGetter($oneOfFields = ["metricName"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new ActiveMetricRestriction instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction=} [properties] Properties to set
+                                 * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction} ActiveMetricRestriction instance
+                                 */
+                                ActiveMetricRestriction.create = function create(properties) {
+                                    return new ActiveMetricRestriction(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ActiveMetricRestriction message. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction} message ActiveMetricRestriction message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActiveMetricRestriction.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.metricName != null && Object.hasOwnProperty.call(message, "metricName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.metricName);
+                                    if (message.restrictedMetricTypes != null && message.restrictedMetricTypes.length) {
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                        for (var i = 0; i < message.restrictedMetricTypes.length; ++i)
+                                            writer.int32(message.restrictedMetricTypes[i]);
+                                        writer.ldelim();
+                                    }
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ActiveMetricRestriction message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.IActiveMetricRestriction} message ActiveMetricRestriction message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ActiveMetricRestriction.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ActiveMetricRestriction message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction} ActiveMetricRestriction
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActiveMetricRestriction.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.metricName = reader.string();
+                                            break;
+                                        case 2:
+                                            if (!(message.restrictedMetricTypes && message.restrictedMetricTypes.length))
+                                                message.restrictedMetricTypes = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.restrictedMetricTypes.push(reader.int32());
+                                            } else
+                                                message.restrictedMetricTypes.push(reader.int32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ActiveMetricRestriction message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction} ActiveMetricRestriction
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ActiveMetricRestriction.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ActiveMetricRestriction message.
+                                 * @function verify
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ActiveMetricRestriction.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.metricName != null && message.hasOwnProperty("metricName")) {
+                                        properties._metricName = 1;
+                                        if (!$util.isString(message.metricName))
+                                            return "metricName: string expected";
+                                    }
+                                    if (message.restrictedMetricTypes != null && message.hasOwnProperty("restrictedMetricTypes")) {
+                                        if (!Array.isArray(message.restrictedMetricTypes))
+                                            return "restrictedMetricTypes: array expected";
+                                        for (var i = 0; i < message.restrictedMetricTypes.length; ++i)
+                                            switch (message.restrictedMetricTypes[i]) {
+                                            default:
+                                                return "restrictedMetricTypes: enum value[] expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                                break;
+                                            }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ActiveMetricRestriction message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction} ActiveMetricRestriction
+                                 */
+                                ActiveMetricRestriction.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction)
+                                        return object;
+                                    var message = new $root.google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction();
+                                    if (object.metricName != null)
+                                        message.metricName = String(object.metricName);
+                                    if (object.restrictedMetricTypes) {
+                                        if (!Array.isArray(object.restrictedMetricTypes))
+                                            throw TypeError(".google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction.restrictedMetricTypes: array expected");
+                                        message.restrictedMetricTypes = [];
+                                        for (var i = 0; i < object.restrictedMetricTypes.length; ++i)
+                                            switch (object.restrictedMetricTypes[i]) {
+                                            default:
+                                            case "RESTRICTED_METRIC_TYPE_UNSPECIFIED":
+                                            case 0:
+                                                message.restrictedMetricTypes[i] = 0;
+                                                break;
+                                            case "COST_DATA":
+                                            case 1:
+                                                message.restrictedMetricTypes[i] = 1;
+                                                break;
+                                            case "REVENUE_DATA":
+                                            case 2:
+                                                message.restrictedMetricTypes[i] = 2;
+                                                break;
+                                            }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ActiveMetricRestriction message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @static
+                                 * @param {google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction} message ActiveMetricRestriction
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ActiveMetricRestriction.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.restrictedMetricTypes = [];
+                                    if (message.metricName != null && message.hasOwnProperty("metricName")) {
+                                        object.metricName = message.metricName;
+                                        if (options.oneofs)
+                                            object._metricName = "metricName";
+                                    }
+                                    if (message.restrictedMetricTypes && message.restrictedMetricTypes.length) {
+                                        object.restrictedMetricTypes = [];
+                                        for (var j = 0; j < message.restrictedMetricTypes.length; ++j)
+                                            object.restrictedMetricTypes[j] = options.enums === String ? $root.google.analytics.data.v1beta.RestrictedMetricType[message.restrictedMetricTypes[j]] : message.restrictedMetricTypes[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ActiveMetricRestriction to JSON.
+                                 * @function toJSON
+                                 * @memberof google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ActiveMetricRestriction.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return ActiveMetricRestriction;
+                            })();
+    
+                            return SchemaRestrictionResponse;
+                        })();
     
                         return ResponseMetaData;
                     })();
@@ -28331,6 +28969,7 @@
                          * @property {google.analytics.data.v1beta.MetricType|null} [type] MetricMetadata type
                          * @property {string|null} [expression] MetricMetadata expression
                          * @property {boolean|null} [customDefinition] MetricMetadata customDefinition
+                         * @property {Array.<google.analytics.data.v1beta.MetricMetadata.BlockedReason>|null} [blockedReasons] MetricMetadata blockedReasons
                          * @property {string|null} [category] MetricMetadata category
                          */
     
@@ -28344,6 +28983,7 @@
                          */
                         function MetricMetadata(properties) {
                             this.deprecatedApiNames = [];
+                            this.blockedReasons = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -28407,6 +29047,14 @@
                         MetricMetadata.prototype.customDefinition = false;
     
                         /**
+                         * MetricMetadata blockedReasons.
+                         * @member {Array.<google.analytics.data.v1beta.MetricMetadata.BlockedReason>} blockedReasons
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.blockedReasons = $util.emptyArray;
+    
+                        /**
                          * MetricMetadata category.
                          * @member {string} category
                          * @memberof google.analytics.data.v1beta.MetricMetadata
@@ -28453,6 +29101,12 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.expression);
                             if (message.customDefinition != null && Object.hasOwnProperty.call(message, "customDefinition"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.customDefinition);
+                            if (message.blockedReasons != null && message.blockedReasons.length) {
+                                writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                                for (var i = 0; i < message.blockedReasons.length; ++i)
+                                    writer.int32(message.blockedReasons[i]);
+                                writer.ldelim();
+                            }
                             if (message.category != null && Object.hasOwnProperty.call(message, "category"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.category);
                             return writer;
@@ -28511,6 +29165,16 @@
                                     break;
                                 case 7:
                                     message.customDefinition = reader.bool();
+                                    break;
+                                case 8:
+                                    if (!(message.blockedReasons && message.blockedReasons.length))
+                                        message.blockedReasons = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.blockedReasons.push(reader.int32());
+                                    } else
+                                        message.blockedReasons.push(reader.int32());
                                     break;
                                 case 10:
                                     message.category = reader.string();
@@ -28591,6 +29255,19 @@
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
                                 if (typeof message.customDefinition !== "boolean")
                                     return "customDefinition: boolean expected";
+                            if (message.blockedReasons != null && message.hasOwnProperty("blockedReasons")) {
+                                if (!Array.isArray(message.blockedReasons))
+                                    return "blockedReasons: array expected";
+                                for (var i = 0; i < message.blockedReasons.length; ++i)
+                                    switch (message.blockedReasons[i]) {
+                                    default:
+                                        return "blockedReasons: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
                             if (message.category != null && message.hasOwnProperty("category"))
                                 if (!$util.isString(message.category))
                                     return "category: string expected";
@@ -28680,6 +29357,27 @@
                                 message.expression = String(object.expression);
                             if (object.customDefinition != null)
                                 message.customDefinition = Boolean(object.customDefinition);
+                            if (object.blockedReasons) {
+                                if (!Array.isArray(object.blockedReasons))
+                                    throw TypeError(".google.analytics.data.v1beta.MetricMetadata.blockedReasons: array expected");
+                                message.blockedReasons = [];
+                                for (var i = 0; i < object.blockedReasons.length; ++i)
+                                    switch (object.blockedReasons[i]) {
+                                    default:
+                                    case "BLOCKED_REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.blockedReasons[i] = 0;
+                                        break;
+                                    case "NO_REVENUE_METRICS":
+                                    case 1:
+                                        message.blockedReasons[i] = 1;
+                                        break;
+                                    case "NO_COST_METRICS":
+                                    case 2:
+                                        message.blockedReasons[i] = 2;
+                                        break;
+                                    }
+                            }
                             if (object.category != null)
                                 message.category = String(object.category);
                             return message;
@@ -28698,8 +29396,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.deprecatedApiNames = [];
+                                object.blockedReasons = [];
+                            }
                             if (options.defaults) {
                                 object.apiName = "";
                                 object.uiName = "";
@@ -28726,6 +29426,11 @@
                                 object.expression = message.expression;
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
                                 object.customDefinition = message.customDefinition;
+                            if (message.blockedReasons && message.blockedReasons.length) {
+                                object.blockedReasons = [];
+                                for (var j = 0; j < message.blockedReasons.length; ++j)
+                                    object.blockedReasons[j] = options.enums === String ? $root.google.analytics.data.v1beta.MetricMetadata.BlockedReason[message.blockedReasons[j]] : message.blockedReasons[j];
+                            }
                             if (message.category != null && message.hasOwnProperty("category"))
                                 object.category = message.category;
                             return object;
@@ -28741,6 +29446,22 @@
                         MetricMetadata.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * BlockedReason enum.
+                         * @name google.analytics.data.v1beta.MetricMetadata.BlockedReason
+                         * @enum {number}
+                         * @property {number} BLOCKED_REASON_UNSPECIFIED=0 BLOCKED_REASON_UNSPECIFIED value
+                         * @property {number} NO_REVENUE_METRICS=1 NO_REVENUE_METRICS value
+                         * @property {number} NO_COST_METRICS=2 NO_COST_METRICS value
+                         */
+                        MetricMetadata.BlockedReason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BLOCKED_REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NO_REVENUE_METRICS"] = 1;
+                            values[valuesById[2] = "NO_COST_METRICS"] = 2;
+                            return values;
+                        })();
     
                         return MetricMetadata;
                     })();
@@ -29330,6 +30051,22 @@
                         values[valuesById[11] = "TYPE_MILES"] = 11;
                         values[valuesById[12] = "TYPE_METERS"] = 12;
                         values[valuesById[13] = "TYPE_KILOMETERS"] = 13;
+                        return values;
+                    })();
+    
+                    /**
+                     * RestrictedMetricType enum.
+                     * @name google.analytics.data.v1beta.RestrictedMetricType
+                     * @enum {number}
+                     * @property {number} RESTRICTED_METRIC_TYPE_UNSPECIFIED=0 RESTRICTED_METRIC_TYPE_UNSPECIFIED value
+                     * @property {number} COST_DATA=1 COST_DATA value
+                     * @property {number} REVENUE_DATA=2 REVENUE_DATA value
+                     */
+                    v1beta.RestrictedMetricType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "RESTRICTED_METRIC_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "COST_DATA"] = 1;
+                        values[valuesById[2] = "REVENUE_DATA"] = 2;
                         return values;
                     })();
     

@@ -2181,10 +2181,96 @@
                       }
                     },
                     "ResponseMetaData": {
+                      "oneofs": {
+                        "_schemaRestrictionResponse": {
+                          "oneof": [
+                            "schemaRestrictionResponse"
+                          ]
+                        },
+                        "_currencyCode": {
+                          "oneof": [
+                            "currencyCode"
+                          ]
+                        },
+                        "_timeZone": {
+                          "oneof": [
+                            "timeZone"
+                          ]
+                        },
+                        "_emptyReason": {
+                          "oneof": [
+                            "emptyReason"
+                          ]
+                        }
+                      },
                       "fields": {
                         "dataLossFromOtherRow": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "schemaRestrictionResponse": {
+                          "type": "SchemaRestrictionResponse",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "emptyReason": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SchemaRestrictionResponse": {
+                          "fields": {
+                            "activeMetricRestrictions": {
+                              "rule": "repeated",
+                              "type": "ActiveMetricRestriction",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "ActiveMetricRestriction": {
+                              "oneofs": {
+                                "_metricName": {
+                                  "oneof": [
+                                    "metricName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "metricName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "restrictedMetricTypes": {
+                                  "rule": "repeated",
+                                  "type": "RestrictedMetricType",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -2390,9 +2476,23 @@
                           "type": "bool",
                           "id": 7
                         },
+                        "blockedReasons": {
+                          "rule": "repeated",
+                          "type": "BlockedReason",
+                          "id": 8
+                        },
                         "category": {
                           "type": "string",
                           "id": 10
+                        }
+                      },
+                      "nested": {
+                        "BlockedReason": {
+                          "values": {
+                            "BLOCKED_REASON_UNSPECIFIED": 0,
+                            "NO_REVENUE_METRICS": 1,
+                            "NO_COST_METRICS": 2
+                          }
                         }
                       }
                     },
@@ -2480,6 +2580,13 @@
                         "TYPE_MILES": 11,
                         "TYPE_METERS": 12,
                         "TYPE_KILOMETERS": 13
+                      }
+                    },
+                    "RestrictedMetricType": {
+                      "values": {
+                        "RESTRICTED_METRIC_TYPE_UNSPECIFIED": 0,
+                        "COST_DATA": 1,
+                        "REVENUE_DATA": 2
                       }
                     },
                     "Compatibility": {
