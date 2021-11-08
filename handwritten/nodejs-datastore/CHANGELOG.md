@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.6.2](https://www.github.com/googleapis/nodejs-datastore/compare/v6.6.1...v6.6.2) (2021-11-08)
+
+
+### Bug Fixes
+
+* **cloud-rad:** move comments for TSDoc ([#896](https://www.github.com/googleapis/nodejs-datastore/issues/896)) ([2941f2f](https://www.github.com/googleapis/nodejs-datastore/commit/2941f2f0f132b41534e303d441d837051ce88fd7))
+
 ### [6.6.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.6.0...v6.6.1) (2021-11-04)
 
 
