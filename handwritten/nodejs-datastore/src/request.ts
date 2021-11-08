@@ -124,15 +124,6 @@ class DatastoreRequest {
     return entityObject;
   }
 
-  allocateIds(
-    key: entity.Key,
-    options: AllocateIdsOptions | number
-  ): Promise<AllocateIdsResponse>;
-  allocateIds(
-    key: entity.Key,
-    options: AllocateIdsOptions | number,
-    callback: AllocateIdsCallback
-  ): void;
   /**
    * Generate IDs without creating entities.
    *
@@ -207,6 +198,15 @@ class DatastoreRequest {
    * });
    * ```
    */
+  allocateIds(
+    key: entity.Key,
+    options: AllocateIdsOptions | number
+  ): Promise<AllocateIdsResponse>;
+  allocateIds(
+    key: entity.Key,
+    options: AllocateIdsOptions | number,
+    callback: AllocateIdsCallback
+  ): void;
   allocateIds(
     key: entity.Key,
     options: AllocateIdsOptions | number,
@@ -336,13 +336,6 @@ class DatastoreRequest {
     return stream;
   }
 
-  delete(keys: Entities, gaxOptions?: CallOptions): Promise<DeleteResponse>;
-  delete(keys: Entities, callback: DeleteCallback): void;
-  delete(
-    keys: Entities,
-    gaxOptions: CallOptions,
-    callback: DeleteCallback
-  ): void;
   /**
    * Delete all entities identified with the specified key(s).
    *
@@ -393,6 +386,13 @@ class DatastoreRequest {
    * });
    * ```
    */
+  delete(keys: Entities, gaxOptions?: CallOptions): Promise<DeleteResponse>;
+  delete(keys: Entities, callback: DeleteCallback): void;
+  delete(
+    keys: Entities,
+    gaxOptions: CallOptions,
+    callback: DeleteCallback
+  ): void;
   delete(
     keys: entity.Key | entity.Key[],
     gaxOptionsOrCallback?: CallOptions | DeleteCallback,
@@ -428,16 +428,6 @@ class DatastoreRequest {
     );
   }
 
-  get(
-    keys: entity.Key | entity.Key[],
-    options?: CreateReadStreamOptions
-  ): Promise<GetResponse>;
-  get(keys: entity.Key | entity.Key[], callback: GetCallback): void;
-  get(
-    keys: entity.Key | entity.Key[],
-    options: CreateReadStreamOptions,
-    callback: GetCallback
-  ): void;
   /**
    * Retrieve the entities identified with the specified key(s) in the current
    * transaction. Get operations require a valid key to retrieve the
@@ -533,6 +523,16 @@ class DatastoreRequest {
    */
   get(
     keys: entity.Key | entity.Key[],
+    options?: CreateReadStreamOptions
+  ): Promise<GetResponse>;
+  get(keys: entity.Key | entity.Key[], callback: GetCallback): void;
+  get(
+    keys: entity.Key | entity.Key[],
+    options: CreateReadStreamOptions,
+    callback: GetCallback
+  ): void;
+  get(
+    keys: entity.Key | entity.Key[],
     optionsOrCallback?: CreateReadStreamOptions | GetCallback,
     cb?: GetCallback
   ): void | Promise<GetResponse> {
@@ -553,13 +553,6 @@ class DatastoreRequest {
       );
   }
 
-  runQuery(query: Query, options?: RunQueryOptions): Promise<RunQueryResponse>;
-  runQuery(
-    query: Query,
-    options: RunQueryOptions,
-    callback: RunQueryCallback
-  ): void;
-  runQuery(query: Query, callback: RunQueryCallback): void;
   /**
    * Datastore allows you to query entities by kind, filter them by property
    * filters, and sort them by a property name. Projection and pagination are
@@ -659,6 +652,13 @@ class DatastoreRequest {
    * });
    * ```
    */
+  runQuery(query: Query, options?: RunQueryOptions): Promise<RunQueryResponse>;
+  runQuery(
+    query: Query,
+    options: RunQueryOptions,
+    callback: RunQueryCallback
+  ): void;
+  runQuery(query: Query, callback: RunQueryCallback): void;
   runQuery(
     query: Query,
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
@@ -816,8 +816,6 @@ class DatastoreRequest {
     return stream;
   }
 
-  merge(entities: Entities): Promise<CommitResponse>;
-  merge(entities: Entities, callback: SaveCallback): void;
   /**
    * Merge the specified object(s). If a key is incomplete, its associated object
    * is inserted and the original Key object is updated to contain the generated ID.
@@ -841,6 +839,8 @@ class DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
+  merge(entities: Entities): Promise<CommitResponse>;
+  merge(entities: Entities, callback: SaveCallback): void;
   merge(
     entities: Entities,
     callback?: SaveCallback
@@ -945,7 +945,6 @@ class DatastoreRequest {
     });
   }
 
-  request_(config: RequestConfig, callback: RequestCallback): void;
   /**
    * Make a request to the API endpoint. Properties to indicate a transactional
    * or non-transactional operation are added automatically.
@@ -959,6 +958,7 @@ class DatastoreRequest {
    *
    * @private
    */
+  request_(config: RequestConfig, callback: RequestCallback): void;
   request_(config: RequestConfig, callback: RequestCallback): void {
     this.prepareGaxRequest_(config, (err: Error, requestFn: Function) => {
       if (err) {
