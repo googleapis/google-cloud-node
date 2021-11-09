@@ -395,6 +395,105 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#listRelatedAccountGroups}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef ListRelatedAccountGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse} [response] ListRelatedAccountGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListRelatedAccountGroups.
+                         * @function listRelatedAccountGroups
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest} request ListRelatedAccountGroupsRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroupsCallback} callback Node-style callback called with the error, if any, and ListRelatedAccountGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.listRelatedAccountGroups = function listRelatedAccountGroups(request, callback) {
+                            return this.rpcCall(listRelatedAccountGroups, $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest, $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse, request, callback);
+                        }, "name", { value: "ListRelatedAccountGroups" });
+    
+                        /**
+                         * Calls ListRelatedAccountGroups.
+                         * @function listRelatedAccountGroups
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest} request ListRelatedAccountGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#listRelatedAccountGroupMemberships}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef ListRelatedAccountGroupMembershipsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse} [response] ListRelatedAccountGroupMembershipsResponse
+                         */
+    
+                        /**
+                         * Calls ListRelatedAccountGroupMemberships.
+                         * @function listRelatedAccountGroupMemberships
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest} request ListRelatedAccountGroupMembershipsRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroupMembershipsCallback} callback Node-style callback called with the error, if any, and ListRelatedAccountGroupMembershipsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.listRelatedAccountGroupMemberships = function listRelatedAccountGroupMemberships(request, callback) {
+                            return this.rpcCall(listRelatedAccountGroupMemberships, $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest, $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse, request, callback);
+                        }, "name", { value: "ListRelatedAccountGroupMemberships" });
+    
+                        /**
+                         * Calls ListRelatedAccountGroupMemberships.
+                         * @function listRelatedAccountGroupMemberships
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest} request ListRelatedAccountGroupMembershipsRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#searchRelatedAccountGroupMemberships}.
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @typedef SearchRelatedAccountGroupMembershipsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse} [response] SearchRelatedAccountGroupMembershipsResponse
+                         */
+    
+                        /**
+                         * Calls SearchRelatedAccountGroupMemberships.
+                         * @function searchRelatedAccountGroupMemberships
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest} request SearchRelatedAccountGroupMembershipsRequest message or plain object
+                         * @param {google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.SearchRelatedAccountGroupMembershipsCallback} callback Node-style callback called with the error, if any, and SearchRelatedAccountGroupMembershipsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RecaptchaEnterpriseService.prototype.searchRelatedAccountGroupMemberships = function searchRelatedAccountGroupMemberships(request, callback) {
+                            return this.rpcCall(searchRelatedAccountGroupMemberships, $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest, $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse, request, callback);
+                        }, "name", { value: "SearchRelatedAccountGroupMemberships" });
+    
+                        /**
+                         * Calls SearchRelatedAccountGroupMemberships.
+                         * @function searchRelatedAccountGroupMemberships
+                         * @memberof google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService
+                         * @instance
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest} request SearchRelatedAccountGroupMembershipsRequest message or plain object
+                         * @returns {Promise<google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return RecaptchaEnterpriseService;
                     })();
     
@@ -622,6 +721,7 @@
                          * @property {string|null} [name] AnnotateAssessmentRequest name
                          * @property {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation|null} [annotation] AnnotateAssessmentRequest annotation
                          * @property {Array.<google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason>|null} [reasons] AnnotateAssessmentRequest reasons
+                         * @property {Uint8Array|null} [hashedAccountId] AnnotateAssessmentRequest hashedAccountId
                          */
     
                         /**
@@ -665,6 +765,14 @@
                         AnnotateAssessmentRequest.prototype.reasons = $util.emptyArray;
     
                         /**
+                         * AnnotateAssessmentRequest hashedAccountId.
+                         * @member {Uint8Array} hashedAccountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest
+                         * @instance
+                         */
+                        AnnotateAssessmentRequest.prototype.hashedAccountId = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new AnnotateAssessmentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest
@@ -698,6 +806,8 @@
                                     writer.int32(message.reasons[i]);
                                 writer.ldelim();
                             }
+                            if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.hashedAccountId);
                             return writer;
                         };
     
@@ -747,6 +857,9 @@
                                             message.reasons.push(reader.int32());
                                     } else
                                         message.reasons.push(reader.int32());
+                                    break;
+                                case 4:
+                                    message.hashedAccountId = reader.bytes();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -815,6 +928,9 @@
                                         break;
                                     }
                             }
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
+                                    return "hashedAccountId: buffer expected";
                             return null;
                         };
     
@@ -895,6 +1011,11 @@
                                         break;
                                     }
                             }
+                            if (object.hashedAccountId != null)
+                                if (typeof object.hashedAccountId === "string")
+                                    $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
+                                else if (object.hashedAccountId.length)
+                                    message.hashedAccountId = object.hashedAccountId;
                             return message;
                         };
     
@@ -916,6 +1037,13 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.annotation = options.enums === String ? "ANNOTATION_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.hashedAccountId = "";
+                                else {
+                                    object.hashedAccountId = [];
+                                    if (options.bytes !== Array)
+                                        object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
+                                }
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -926,6 +1054,8 @@
                                 for (var j = 0; j < message.reasons.length; ++j)
                                     object.reasons[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[message.reasons[j]] : message.reasons[j];
                             }
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
                             return object;
                         };
     
@@ -1159,6 +1289,7 @@
                          * @property {google.cloud.recaptchaenterprise.v1.IEvent|null} [event] Assessment event
                          * @property {google.cloud.recaptchaenterprise.v1.IRiskAnalysis|null} [riskAnalysis] Assessment riskAnalysis
                          * @property {google.cloud.recaptchaenterprise.v1.ITokenProperties|null} [tokenProperties] Assessment tokenProperties
+                         * @property {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null} [accountDefenderAssessment] Assessment accountDefenderAssessment
                          */
     
                         /**
@@ -1209,6 +1340,14 @@
                         Assessment.prototype.tokenProperties = null;
     
                         /**
+                         * Assessment accountDefenderAssessment.
+                         * @member {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null|undefined} accountDefenderAssessment
+                         * @memberof google.cloud.recaptchaenterprise.v1.Assessment
+                         * @instance
+                         */
+                        Assessment.prototype.accountDefenderAssessment = null;
+    
+                        /**
                          * Creates a new Assessment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.Assessment
@@ -1240,6 +1379,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.encode(message.riskAnalysis, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.tokenProperties != null && Object.hasOwnProperty.call(message, "tokenProperties"))
                                 $root.google.cloud.recaptchaenterprise.v1.TokenProperties.encode(message.tokenProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.accountDefenderAssessment != null && Object.hasOwnProperty.call(message, "accountDefenderAssessment"))
+                                $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.encode(message.accountDefenderAssessment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -1285,6 +1426,9 @@
                                     break;
                                 case 4:
                                     message.tokenProperties = $root.google.cloud.recaptchaenterprise.v1.TokenProperties.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.accountDefenderAssessment = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1339,6 +1483,11 @@
                                 if (error)
                                     return "tokenProperties." + error;
                             }
+                            if (message.accountDefenderAssessment != null && message.hasOwnProperty("accountDefenderAssessment")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.verify(message.accountDefenderAssessment);
+                                if (error)
+                                    return "accountDefenderAssessment." + error;
+                            }
                             return null;
                         };
     
@@ -1371,6 +1520,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.tokenProperties: object expected");
                                 message.tokenProperties = $root.google.cloud.recaptchaenterprise.v1.TokenProperties.fromObject(object.tokenProperties);
                             }
+                            if (object.accountDefenderAssessment != null) {
+                                if (typeof object.accountDefenderAssessment !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.accountDefenderAssessment: object expected");
+                                message.accountDefenderAssessment = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.fromObject(object.accountDefenderAssessment);
+                            }
                             return message;
                         };
     
@@ -1392,6 +1546,7 @@
                                 object.event = null;
                                 object.riskAnalysis = null;
                                 object.tokenProperties = null;
+                                object.accountDefenderAssessment = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1401,6 +1556,8 @@
                                 object.riskAnalysis = $root.google.cloud.recaptchaenterprise.v1.RiskAnalysis.toObject(message.riskAnalysis, options);
                             if (message.tokenProperties != null && message.hasOwnProperty("tokenProperties"))
                                 object.tokenProperties = $root.google.cloud.recaptchaenterprise.v1.TokenProperties.toObject(message.tokenProperties, options);
+                            if (message.accountDefenderAssessment != null && message.hasOwnProperty("accountDefenderAssessment"))
+                                object.accountDefenderAssessment = $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.toObject(message.accountDefenderAssessment, options);
                             return object;
                         };
     
@@ -1429,6 +1586,7 @@
                          * @property {string|null} [userAgent] Event userAgent
                          * @property {string|null} [userIpAddress] Event userIpAddress
                          * @property {string|null} [expectedAction] Event expectedAction
+                         * @property {Uint8Array|null} [hashedAccountId] Event hashedAccountId
                          */
     
                         /**
@@ -1487,6 +1645,14 @@
                         Event.prototype.expectedAction = "";
     
                         /**
+                         * Event hashedAccountId.
+                         * @member {Uint8Array} hashedAccountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.hashedAccountId = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new Event instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.Event
@@ -1520,6 +1686,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.userIpAddress);
                             if (message.expectedAction != null && Object.hasOwnProperty.call(message, "expectedAction"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.expectedAction);
+                            if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.hashedAccountId);
                             return writer;
                         };
     
@@ -1568,6 +1736,9 @@
                                     break;
                                 case 5:
                                     message.expectedAction = reader.string();
+                                    break;
+                                case 6:
+                                    message.hashedAccountId = reader.bytes();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1619,6 +1790,9 @@
                             if (message.expectedAction != null && message.hasOwnProperty("expectedAction"))
                                 if (!$util.isString(message.expectedAction))
                                     return "expectedAction: string expected";
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
+                                    return "hashedAccountId: buffer expected";
                             return null;
                         };
     
@@ -1644,6 +1818,11 @@
                                 message.userIpAddress = String(object.userIpAddress);
                             if (object.expectedAction != null)
                                 message.expectedAction = String(object.expectedAction);
+                            if (object.hashedAccountId != null)
+                                if (typeof object.hashedAccountId === "string")
+                                    $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
+                                else if (object.hashedAccountId.length)
+                                    message.hashedAccountId = object.hashedAccountId;
                             return message;
                         };
     
@@ -1666,6 +1845,13 @@
                                 object.userAgent = "";
                                 object.userIpAddress = "";
                                 object.expectedAction = "";
+                                if (options.bytes === String)
+                                    object.hashedAccountId = "";
+                                else {
+                                    object.hashedAccountId = [];
+                                    if (options.bytes !== Array)
+                                        object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
+                                }
                             }
                             if (message.token != null && message.hasOwnProperty("token"))
                                 object.token = message.token;
@@ -1677,6 +1863,8 @@
                                 object.userIpAddress = message.userIpAddress;
                             if (message.expectedAction != null && message.hasOwnProperty("expectedAction"))
                                 object.expectedAction = message.expectedAction;
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
                             return object;
                         };
     
@@ -2326,6 +2514,267 @@
                         })();
     
                         return TokenProperties;
+                    })();
+    
+                    v1.AccountDefenderAssessment = (function() {
+    
+                        /**
+                         * Properties of an AccountDefenderAssessment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IAccountDefenderAssessment
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel>|null} [labels] AccountDefenderAssessment labels
+                         */
+    
+                        /**
+                         * Constructs a new AccountDefenderAssessment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents an AccountDefenderAssessment.
+                         * @implements IAccountDefenderAssessment
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment=} [properties] Properties to set
+                         */
+                        function AccountDefenderAssessment(properties) {
+                            this.labels = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccountDefenderAssessment labels.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel>} labels
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @instance
+                         */
+                        AccountDefenderAssessment.prototype.labels = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AccountDefenderAssessment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment} AccountDefenderAssessment instance
+                         */
+                        AccountDefenderAssessment.create = function create(properties) {
+                            return new AccountDefenderAssessment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccountDefenderAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment} message AccountDefenderAssessment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccountDefenderAssessment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.labels != null && message.labels.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.labels.length; ++i)
+                                    writer.int32(message.labels[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccountDefenderAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment} message AccountDefenderAssessment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccountDefenderAssessment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccountDefenderAssessment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment} AccountDefenderAssessment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccountDefenderAssessment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.labels && message.labels.length))
+                                        message.labels = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.labels.push(reader.int32());
+                                    } else
+                                        message.labels.push(reader.int32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccountDefenderAssessment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment} AccountDefenderAssessment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccountDefenderAssessment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccountDefenderAssessment message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccountDefenderAssessment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!Array.isArray(message.labels))
+                                    return "labels: array expected";
+                                for (var i = 0; i < message.labels.length; ++i)
+                                    switch (message.labels[i]) {
+                                    default:
+                                        return "labels: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccountDefenderAssessment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment} AccountDefenderAssessment
+                         */
+                        AccountDefenderAssessment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment();
+                            if (object.labels) {
+                                if (!Array.isArray(object.labels))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.labels: array expected");
+                                message.labels = [];
+                                for (var i = 0; i < object.labels.length; ++i)
+                                    switch (object.labels[i]) {
+                                    default:
+                                    case "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED":
+                                    case 0:
+                                        message.labels[i] = 0;
+                                        break;
+                                    case "PROFILE_MATCH":
+                                    case 1:
+                                        message.labels[i] = 1;
+                                        break;
+                                    case "SUSPICIOUS_LOGIN_ACTIVITY":
+                                    case 2:
+                                        message.labels[i] = 2;
+                                        break;
+                                    case "SUSPICIOUS_ACCOUNT_CREATION":
+                                    case 3:
+                                        message.labels[i] = 3;
+                                        break;
+                                    case "RELATED_ACCOUNTS_NUMBER_HIGH":
+                                    case 4:
+                                        message.labels[i] = 4;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccountDefenderAssessment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment} message AccountDefenderAssessment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccountDefenderAssessment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.labels = [];
+                            if (message.labels && message.labels.length) {
+                                object.labels = [];
+                                for (var j = 0; j < message.labels.length; ++j)
+                                    object.labels[j] = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel[message.labels[j]] : message.labels[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccountDefenderAssessment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccountDefenderAssessment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * AccountDefenderLabel enum.
+                         * @name google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel
+                         * @enum {number}
+                         * @property {number} ACCOUNT_DEFENDER_LABEL_UNSPECIFIED=0 ACCOUNT_DEFENDER_LABEL_UNSPECIFIED value
+                         * @property {number} PROFILE_MATCH=1 PROFILE_MATCH value
+                         * @property {number} SUSPICIOUS_LOGIN_ACTIVITY=2 SUSPICIOUS_LOGIN_ACTIVITY value
+                         * @property {number} SUSPICIOUS_ACCOUNT_CREATION=3 SUSPICIOUS_ACCOUNT_CREATION value
+                         * @property {number} RELATED_ACCOUNTS_NUMBER_HIGH=4 RELATED_ACCOUNTS_NUMBER_HIGH value
+                         */
+                        AccountDefenderAssessment.AccountDefenderLabel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROFILE_MATCH"] = 1;
+                            values[valuesById[2] = "SUSPICIOUS_LOGIN_ACTIVITY"] = 2;
+                            values[valuesById[3] = "SUSPICIOUS_ACCOUNT_CREATION"] = 3;
+                            values[valuesById[4] = "RELATED_ACCOUNTS_NUMBER_HIGH"] = 4;
+                            return values;
+                        })();
+    
+                        return AccountDefenderAssessment;
                     })();
     
                     v1.CreateKeyRequest = (function() {
@@ -6585,6 +7034,1832 @@
                         };
     
                         return ChallengeMetrics;
+                    })();
+    
+                    v1.ListRelatedAccountGroupMembershipsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRelatedAccountGroupMembershipsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IListRelatedAccountGroupMembershipsRequest
+                         * @property {string|null} [parent] ListRelatedAccountGroupMembershipsRequest parent
+                         * @property {number|null} [pageSize] ListRelatedAccountGroupMembershipsRequest pageSize
+                         * @property {string|null} [pageToken] ListRelatedAccountGroupMembershipsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRelatedAccountGroupMembershipsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ListRelatedAccountGroupMembershipsRequest.
+                         * @implements IListRelatedAccountGroupMembershipsRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest=} [properties] Properties to set
+                         */
+                        function ListRelatedAccountGroupMembershipsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRelatedAccountGroupMembershipsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRelatedAccountGroupMembershipsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRelatedAccountGroupMembershipsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRelatedAccountGroupMembershipsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest} ListRelatedAccountGroupMembershipsRequest instance
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.create = function create(properties) {
+                            return new ListRelatedAccountGroupMembershipsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupMembershipsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest} message ListRelatedAccountGroupMembershipsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest} message ListRelatedAccountGroupMembershipsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupMembershipsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest} ListRelatedAccountGroupMembershipsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupMembershipsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest} ListRelatedAccountGroupMembershipsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRelatedAccountGroupMembershipsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRelatedAccountGroupMembershipsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest} ListRelatedAccountGroupMembershipsRequest
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRelatedAccountGroupMembershipsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest} message ListRelatedAccountGroupMembershipsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRelatedAccountGroupMembershipsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRelatedAccountGroupMembershipsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRelatedAccountGroupMembershipsRequest;
+                    })();
+    
+                    v1.ListRelatedAccountGroupMembershipsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRelatedAccountGroupMembershipsResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IListRelatedAccountGroupMembershipsResponse
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>|null} [relatedAccountGroupMemberships] ListRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships
+                         * @property {string|null} [nextPageToken] ListRelatedAccountGroupMembershipsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRelatedAccountGroupMembershipsResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ListRelatedAccountGroupMembershipsResponse.
+                         * @implements IListRelatedAccountGroupMembershipsResponse
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse=} [properties] Properties to set
+                         */
+                        function ListRelatedAccountGroupMembershipsResponse(properties) {
+                            this.relatedAccountGroupMemberships = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>} relatedAccountGroupMemberships
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @instance
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.prototype.relatedAccountGroupMemberships = $util.emptyArray;
+    
+                        /**
+                         * ListRelatedAccountGroupMembershipsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @instance
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRelatedAccountGroupMembershipsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse} ListRelatedAccountGroupMembershipsResponse instance
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.create = function create(properties) {
+                            return new ListRelatedAccountGroupMembershipsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupMembershipsResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse} message ListRelatedAccountGroupMembershipsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relatedAccountGroupMemberships != null && message.relatedAccountGroupMemberships.length)
+                                for (var i = 0; i < message.relatedAccountGroupMemberships.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.encode(message.relatedAccountGroupMemberships[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse} message ListRelatedAccountGroupMembershipsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupMembershipsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse} ListRelatedAccountGroupMembershipsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.relatedAccountGroupMemberships && message.relatedAccountGroupMemberships.length))
+                                        message.relatedAccountGroupMemberships = [];
+                                    message.relatedAccountGroupMemberships.push($root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupMembershipsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse} ListRelatedAccountGroupMembershipsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRelatedAccountGroupMembershipsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relatedAccountGroupMemberships != null && message.hasOwnProperty("relatedAccountGroupMemberships")) {
+                                if (!Array.isArray(message.relatedAccountGroupMemberships))
+                                    return "relatedAccountGroupMemberships: array expected";
+                                for (var i = 0; i < message.relatedAccountGroupMemberships.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.verify(message.relatedAccountGroupMemberships[i]);
+                                    if (error)
+                                        return "relatedAccountGroupMemberships." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRelatedAccountGroupMembershipsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse} ListRelatedAccountGroupMembershipsResponse
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse();
+                            if (object.relatedAccountGroupMemberships) {
+                                if (!Array.isArray(object.relatedAccountGroupMemberships))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse.relatedAccountGroupMemberships: array expected");
+                                message.relatedAccountGroupMemberships = [];
+                                for (var i = 0; i < object.relatedAccountGroupMemberships.length; ++i) {
+                                    if (typeof object.relatedAccountGroupMemberships[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse.relatedAccountGroupMemberships: object expected");
+                                    message.relatedAccountGroupMemberships[i] = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.fromObject(object.relatedAccountGroupMemberships[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRelatedAccountGroupMembershipsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse} message ListRelatedAccountGroupMembershipsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedAccountGroupMemberships = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.relatedAccountGroupMemberships && message.relatedAccountGroupMemberships.length) {
+                                object.relatedAccountGroupMemberships = [];
+                                for (var j = 0; j < message.relatedAccountGroupMemberships.length; ++j)
+                                    object.relatedAccountGroupMemberships[j] = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.toObject(message.relatedAccountGroupMemberships[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRelatedAccountGroupMembershipsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRelatedAccountGroupMembershipsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRelatedAccountGroupMembershipsResponse;
+                    })();
+    
+                    v1.ListRelatedAccountGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRelatedAccountGroupsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IListRelatedAccountGroupsRequest
+                         * @property {string|null} [parent] ListRelatedAccountGroupsRequest parent
+                         * @property {number|null} [pageSize] ListRelatedAccountGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListRelatedAccountGroupsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRelatedAccountGroupsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ListRelatedAccountGroupsRequest.
+                         * @implements IListRelatedAccountGroupsRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListRelatedAccountGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRelatedAccountGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @instance
+                         */
+                        ListRelatedAccountGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRelatedAccountGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @instance
+                         */
+                        ListRelatedAccountGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRelatedAccountGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @instance
+                         */
+                        ListRelatedAccountGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRelatedAccountGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest} ListRelatedAccountGroupsRequest instance
+                         */
+                        ListRelatedAccountGroupsRequest.create = function create(properties) {
+                            return new ListRelatedAccountGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest} message ListRelatedAccountGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest} message ListRelatedAccountGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest} ListRelatedAccountGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest} ListRelatedAccountGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRelatedAccountGroupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRelatedAccountGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRelatedAccountGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest} ListRelatedAccountGroupsRequest
+                         */
+                        ListRelatedAccountGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRelatedAccountGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest} message ListRelatedAccountGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRelatedAccountGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRelatedAccountGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRelatedAccountGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRelatedAccountGroupsRequest;
+                    })();
+    
+                    v1.ListRelatedAccountGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRelatedAccountGroupsResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IListRelatedAccountGroupsResponse
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>|null} [relatedAccountGroups] ListRelatedAccountGroupsResponse relatedAccountGroups
+                         * @property {string|null} [nextPageToken] ListRelatedAccountGroupsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRelatedAccountGroupsResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a ListRelatedAccountGroupsResponse.
+                         * @implements IListRelatedAccountGroupsResponse
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListRelatedAccountGroupsResponse(properties) {
+                            this.relatedAccountGroups = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRelatedAccountGroupsResponse relatedAccountGroups.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>} relatedAccountGroups
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @instance
+                         */
+                        ListRelatedAccountGroupsResponse.prototype.relatedAccountGroups = $util.emptyArray;
+    
+                        /**
+                         * ListRelatedAccountGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @instance
+                         */
+                        ListRelatedAccountGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRelatedAccountGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse} ListRelatedAccountGroupsResponse instance
+                         */
+                        ListRelatedAccountGroupsResponse.create = function create(properties) {
+                            return new ListRelatedAccountGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupsResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse} message ListRelatedAccountGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relatedAccountGroups != null && message.relatedAccountGroups.length)
+                                for (var i = 0; i < message.relatedAccountGroups.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.encode(message.relatedAccountGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRelatedAccountGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse} message ListRelatedAccountGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRelatedAccountGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse} ListRelatedAccountGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.relatedAccountGroups && message.relatedAccountGroups.length))
+                                        message.relatedAccountGroups = [];
+                                    message.relatedAccountGroups.push($root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRelatedAccountGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse} ListRelatedAccountGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRelatedAccountGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRelatedAccountGroupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRelatedAccountGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relatedAccountGroups != null && message.hasOwnProperty("relatedAccountGroups")) {
+                                if (!Array.isArray(message.relatedAccountGroups))
+                                    return "relatedAccountGroups: array expected";
+                                for (var i = 0; i < message.relatedAccountGroups.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.verify(message.relatedAccountGroups[i]);
+                                    if (error)
+                                        return "relatedAccountGroups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRelatedAccountGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse} ListRelatedAccountGroupsResponse
+                         */
+                        ListRelatedAccountGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse();
+                            if (object.relatedAccountGroups) {
+                                if (!Array.isArray(object.relatedAccountGroups))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse.relatedAccountGroups: array expected");
+                                message.relatedAccountGroups = [];
+                                for (var i = 0; i < object.relatedAccountGroups.length; ++i) {
+                                    if (typeof object.relatedAccountGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse.relatedAccountGroups: object expected");
+                                    message.relatedAccountGroups[i] = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.fromObject(object.relatedAccountGroups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRelatedAccountGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse} message ListRelatedAccountGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRelatedAccountGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedAccountGroups = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.relatedAccountGroups && message.relatedAccountGroups.length) {
+                                object.relatedAccountGroups = [];
+                                for (var j = 0; j < message.relatedAccountGroups.length; ++j)
+                                    object.relatedAccountGroups[j] = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.toObject(message.relatedAccountGroups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRelatedAccountGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRelatedAccountGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListRelatedAccountGroupsResponse;
+                    })();
+    
+                    v1.SearchRelatedAccountGroupMembershipsRequest = (function() {
+    
+                        /**
+                         * Properties of a SearchRelatedAccountGroupMembershipsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface ISearchRelatedAccountGroupMembershipsRequest
+                         * @property {string|null} [parent] SearchRelatedAccountGroupMembershipsRequest parent
+                         * @property {Uint8Array|null} [hashedAccountId] SearchRelatedAccountGroupMembershipsRequest hashedAccountId
+                         * @property {number|null} [pageSize] SearchRelatedAccountGroupMembershipsRequest pageSize
+                         * @property {string|null} [pageToken] SearchRelatedAccountGroupMembershipsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new SearchRelatedAccountGroupMembershipsRequest.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a SearchRelatedAccountGroupMembershipsRequest.
+                         * @implements ISearchRelatedAccountGroupMembershipsRequest
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest=} [properties] Properties to set
+                         */
+                        function SearchRelatedAccountGroupMembershipsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.parent = "";
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsRequest hashedAccountId.
+                         * @member {Uint8Array} hashedAccountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.hashedAccountId = $util.newBuffer([]);
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new SearchRelatedAccountGroupMembershipsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest} SearchRelatedAccountGroupMembershipsRequest instance
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.create = function create(properties) {
+                            return new SearchRelatedAccountGroupMembershipsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchRelatedAccountGroupMembershipsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest} message SearchRelatedAccountGroupMembershipsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.hashedAccountId);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchRelatedAccountGroupMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest} message SearchRelatedAccountGroupMembershipsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchRelatedAccountGroupMembershipsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest} SearchRelatedAccountGroupMembershipsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.hashedAccountId = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 4:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchRelatedAccountGroupMembershipsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest} SearchRelatedAccountGroupMembershipsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchRelatedAccountGroupMembershipsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
+                                    return "hashedAccountId: buffer expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchRelatedAccountGroupMembershipsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest} SearchRelatedAccountGroupMembershipsRequest
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.hashedAccountId != null)
+                                if (typeof object.hashedAccountId === "string")
+                                    $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
+                                else if (object.hashedAccountId.length)
+                                    message.hashedAccountId = object.hashedAccountId;
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchRelatedAccountGroupMembershipsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest} message SearchRelatedAccountGroupMembershipsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                if (options.bytes === String)
+                                    object.hashedAccountId = "";
+                                else {
+                                    object.hashedAccountId = [];
+                                    if (options.bytes !== Array)
+                                        object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
+                                }
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchRelatedAccountGroupMembershipsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchRelatedAccountGroupMembershipsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchRelatedAccountGroupMembershipsRequest;
+                    })();
+    
+                    v1.SearchRelatedAccountGroupMembershipsResponse = (function() {
+    
+                        /**
+                         * Properties of a SearchRelatedAccountGroupMembershipsResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface ISearchRelatedAccountGroupMembershipsResponse
+                         * @property {Array.<google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>|null} [relatedAccountGroupMemberships] SearchRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships
+                         * @property {string|null} [nextPageToken] SearchRelatedAccountGroupMembershipsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new SearchRelatedAccountGroupMembershipsResponse.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a SearchRelatedAccountGroupMembershipsResponse.
+                         * @implements ISearchRelatedAccountGroupMembershipsResponse
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse=} [properties] Properties to set
+                         */
+                        function SearchRelatedAccountGroupMembershipsResponse(properties) {
+                            this.relatedAccountGroupMemberships = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships.
+                         * @member {Array.<google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>} relatedAccountGroupMemberships
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.prototype.relatedAccountGroupMemberships = $util.emptyArray;
+    
+                        /**
+                         * SearchRelatedAccountGroupMembershipsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @instance
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new SearchRelatedAccountGroupMembershipsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse} SearchRelatedAccountGroupMembershipsResponse instance
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.create = function create(properties) {
+                            return new SearchRelatedAccountGroupMembershipsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SearchRelatedAccountGroupMembershipsResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse} message SearchRelatedAccountGroupMembershipsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relatedAccountGroupMemberships != null && message.relatedAccountGroupMemberships.length)
+                                for (var i = 0; i < message.relatedAccountGroupMemberships.length; ++i)
+                                    $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.encode(message.relatedAccountGroupMemberships[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SearchRelatedAccountGroupMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse} message SearchRelatedAccountGroupMembershipsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SearchRelatedAccountGroupMembershipsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse} SearchRelatedAccountGroupMembershipsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.relatedAccountGroupMemberships && message.relatedAccountGroupMemberships.length))
+                                        message.relatedAccountGroupMemberships = [];
+                                    message.relatedAccountGroupMemberships.push($root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SearchRelatedAccountGroupMembershipsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse} SearchRelatedAccountGroupMembershipsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SearchRelatedAccountGroupMembershipsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relatedAccountGroupMemberships != null && message.hasOwnProperty("relatedAccountGroupMemberships")) {
+                                if (!Array.isArray(message.relatedAccountGroupMemberships))
+                                    return "relatedAccountGroupMemberships: array expected";
+                                for (var i = 0; i < message.relatedAccountGroupMemberships.length; ++i) {
+                                    var error = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.verify(message.relatedAccountGroupMemberships[i]);
+                                    if (error)
+                                        return "relatedAccountGroupMemberships." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SearchRelatedAccountGroupMembershipsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse} SearchRelatedAccountGroupMembershipsResponse
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse();
+                            if (object.relatedAccountGroupMemberships) {
+                                if (!Array.isArray(object.relatedAccountGroupMemberships))
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse.relatedAccountGroupMemberships: array expected");
+                                message.relatedAccountGroupMemberships = [];
+                                for (var i = 0; i < object.relatedAccountGroupMemberships.length; ++i) {
+                                    if (typeof object.relatedAccountGroupMemberships[i] !== "object")
+                                        throw TypeError(".google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse.relatedAccountGroupMemberships: object expected");
+                                    message.relatedAccountGroupMemberships[i] = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.fromObject(object.relatedAccountGroupMemberships[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SearchRelatedAccountGroupMembershipsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse} message SearchRelatedAccountGroupMembershipsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedAccountGroupMemberships = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.relatedAccountGroupMemberships && message.relatedAccountGroupMemberships.length) {
+                                object.relatedAccountGroupMemberships = [];
+                                for (var j = 0; j < message.relatedAccountGroupMemberships.length; ++j)
+                                    object.relatedAccountGroupMemberships[j] = $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.toObject(message.relatedAccountGroupMemberships[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SearchRelatedAccountGroupMembershipsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SearchRelatedAccountGroupMembershipsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SearchRelatedAccountGroupMembershipsResponse;
+                    })();
+    
+                    v1.RelatedAccountGroupMembership = (function() {
+    
+                        /**
+                         * Properties of a RelatedAccountGroupMembership.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IRelatedAccountGroupMembership
+                         * @property {string|null} [name] RelatedAccountGroupMembership name
+                         * @property {Uint8Array|null} [hashedAccountId] RelatedAccountGroupMembership hashedAccountId
+                         */
+    
+                        /**
+                         * Constructs a new RelatedAccountGroupMembership.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a RelatedAccountGroupMembership.
+                         * @implements IRelatedAccountGroupMembership
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership=} [properties] Properties to set
+                         */
+                        function RelatedAccountGroupMembership(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelatedAccountGroupMembership name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @instance
+                         */
+                        RelatedAccountGroupMembership.prototype.name = "";
+    
+                        /**
+                         * RelatedAccountGroupMembership hashedAccountId.
+                         * @member {Uint8Array} hashedAccountId
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @instance
+                         */
+                        RelatedAccountGroupMembership.prototype.hashedAccountId = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new RelatedAccountGroupMembership instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} RelatedAccountGroupMembership instance
+                         */
+                        RelatedAccountGroupMembership.create = function create(properties) {
+                            return new RelatedAccountGroupMembership(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAccountGroupMembership message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership} message RelatedAccountGroupMembership message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAccountGroupMembership.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.hashedAccountId != null && Object.hasOwnProperty.call(message, "hashedAccountId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.hashedAccountId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAccountGroupMembership message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership} message RelatedAccountGroupMembership message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAccountGroupMembership.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelatedAccountGroupMembership message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} RelatedAccountGroupMembership
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAccountGroupMembership.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.hashedAccountId = reader.bytes();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelatedAccountGroupMembership message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} RelatedAccountGroupMembership
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAccountGroupMembership.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelatedAccountGroupMembership message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelatedAccountGroupMembership.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                if (!(message.hashedAccountId && typeof message.hashedAccountId.length === "number" || $util.isString(message.hashedAccountId)))
+                                    return "hashedAccountId: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelatedAccountGroupMembership message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} RelatedAccountGroupMembership
+                         */
+                        RelatedAccountGroupMembership.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.hashedAccountId != null)
+                                if (typeof object.hashedAccountId === "string")
+                                    $util.base64.decode(object.hashedAccountId, message.hashedAccountId = $util.newBuffer($util.base64.length(object.hashedAccountId)), 0);
+                                else if (object.hashedAccountId.length)
+                                    message.hashedAccountId = object.hashedAccountId;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelatedAccountGroupMembership message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} message RelatedAccountGroupMembership
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelatedAccountGroupMembership.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.hashedAccountId = "";
+                                else {
+                                    object.hashedAccountId = [];
+                                    if (options.bytes !== Array)
+                                        object.hashedAccountId = $util.newBuffer(object.hashedAccountId);
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.hashedAccountId != null && message.hasOwnProperty("hashedAccountId"))
+                                object.hashedAccountId = options.bytes === String ? $util.base64.encode(message.hashedAccountId, 0, message.hashedAccountId.length) : options.bytes === Array ? Array.prototype.slice.call(message.hashedAccountId) : message.hashedAccountId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelatedAccountGroupMembership to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelatedAccountGroupMembership.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelatedAccountGroupMembership;
+                    })();
+    
+                    v1.RelatedAccountGroup = (function() {
+    
+                        /**
+                         * Properties of a RelatedAccountGroup.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IRelatedAccountGroup
+                         * @property {string|null} [name] RelatedAccountGroup name
+                         */
+    
+                        /**
+                         * Constructs a new RelatedAccountGroup.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents a RelatedAccountGroup.
+                         * @implements IRelatedAccountGroup
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup=} [properties] Properties to set
+                         */
+                        function RelatedAccountGroup(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelatedAccountGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @instance
+                         */
+                        RelatedAccountGroup.prototype.name = "";
+    
+                        /**
+                         * Creates a new RelatedAccountGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroup} RelatedAccountGroup instance
+                         */
+                        RelatedAccountGroup.create = function create(properties) {
+                            return new RelatedAccountGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAccountGroup message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup} message RelatedAccountGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAccountGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAccountGroup message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup} message RelatedAccountGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAccountGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelatedAccountGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroup} RelatedAccountGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAccountGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelatedAccountGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroup} RelatedAccountGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAccountGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelatedAccountGroup message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelatedAccountGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelatedAccountGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.RelatedAccountGroup} RelatedAccountGroup
+                         */
+                        RelatedAccountGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelatedAccountGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.RelatedAccountGroup} message RelatedAccountGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelatedAccountGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelatedAccountGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelatedAccountGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelatedAccountGroup;
                     })();
     
                     return v1;

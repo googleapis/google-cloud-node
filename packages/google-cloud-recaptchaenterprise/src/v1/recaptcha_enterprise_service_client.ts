@@ -177,6 +177,13 @@ export class RecaptchaEnterpriseServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      relatedAccountGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/relatedaccountgroups/{relatedaccountgroup}'
+      ),
+      relatedAccountGroupMembershipPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}'
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -187,6 +194,21 @@ export class RecaptchaEnterpriseServiceClient {
         'pageToken',
         'nextPageToken',
         'keys'
+      ),
+      listRelatedAccountGroups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'relatedAccountGroups'
+      ),
+      listRelatedAccountGroupMemberships: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'relatedAccountGroupMemberships'
+      ),
+      searchRelatedAccountGroupMemberships: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'relatedAccountGroupMemberships'
       ),
     };
 
@@ -250,6 +272,9 @@ export class RecaptchaEnterpriseServiceClient {
       'deleteKey',
       'migrateKey',
       'getMetrics',
+      'listRelatedAccountGroups',
+      'listRelatedAccountGroupMemberships',
+      'searchRelatedAccountGroupMemberships',
     ];
     for (const methodName of recaptchaEnterpriseServiceStubMethods) {
       const callPromise = this.recaptchaEnterpriseServiceStub.then(
@@ -481,6 +506,12 @@ export class RecaptchaEnterpriseServiceClient {
    *   the event is legitimate or fraudulent.
    * @param {number[]} [request.reasons]
    *   Optional. Optional reasons for the annotation that will be assigned to the Event.
+   * @param {Buffer} [request.hashedAccountId]
+   *   Optional. Optional unique stable hashed user identifier to apply to the assessment.
+   *   This is an alternative to setting the hashed_account_id in
+   *   CreateAssessment, for example when the account identifier is not yet known
+   *   in the initial request. It is recommended that the identifier is hashed
+   *   using hmac-sha256 with stable secret.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1239,7 +1270,8 @@ export class RecaptchaEnterpriseServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listKeys'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listKeys.createStream(
       this.innerApiCalls.listKeys as gax.GaxCall,
@@ -1292,13 +1324,705 @@ export class RecaptchaEnterpriseServiceClient {
         parent: request.parent || '',
       });
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listKeys'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>;
+  }
+  listRelatedAccountGroups(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+    ]
+  >;
+  listRelatedAccountGroups(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
+    >
+  ): void;
+  listRelatedAccountGroups(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
+    >
+  ): void;
+  /**
+   * List groups of related accounts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list related account groups from, in the format
+   *   "projects/{project}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of groups to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRelatedAccountGroups` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [RelatedAccountGroup]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRelatedAccountGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listRelatedAccountGroups(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listRelatedAccountGroups(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list related account groups from, in the format
+   *   "projects/{project}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of groups to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRelatedAccountGroups` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [RelatedAccountGroup]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRelatedAccountGroupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listRelatedAccountGroupsStream(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRelatedAccountGroups.createStream(
+      this.innerApiCalls.listRelatedAccountGroups as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listRelatedAccountGroups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list related account groups from, in the format
+   *   "projects/{project}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of groups to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRelatedAccountGroups` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [RelatedAccountGroup]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listRelatedAccountGroupsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listRelatedAccountGroupsAsync(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRelatedAccountGroups.asyncIterate(
+      this.innerApiCalls['listRelatedAccountGroups'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup>;
+  }
+  listRelatedAccountGroupMemberships(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+    ]
+  >;
+  listRelatedAccountGroupMemberships(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+    >
+  ): void;
+  listRelatedAccountGroupMemberships(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+    >
+  ): void;
+  /**
+   * Get the memberships in a group of related accounts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name for the related account group in the format
+   *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of accounts to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 accounts will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+   *   call.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRelatedAccountGroupMemberships` must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [RelatedAccountGroupMembership]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listRelatedAccountGroupMemberships(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listRelatedAccountGroupMemberships(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name for the related account group in the format
+   *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of accounts to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 accounts will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+   *   call.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRelatedAccountGroupMemberships` must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [RelatedAccountGroupMembership]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listRelatedAccountGroupMembershipsStream(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings =
+      this._defaults['listRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRelatedAccountGroupMemberships.createStream(
+      this.innerApiCalls.listRelatedAccountGroupMemberships as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listRelatedAccountGroupMemberships`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name for the related account group in the format
+   *   `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of accounts to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 accounts will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+   *   call.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListRelatedAccountGroupMemberships` must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [RelatedAccountGroupMembership]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listRelatedAccountGroupMembershipsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listRelatedAccountGroupMembershipsAsync(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const defaultCallSettings =
+      this._defaults['listRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate(
+      this.innerApiCalls['listRelatedAccountGroupMemberships'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>;
+  }
+  searchRelatedAccountGroupMemberships(
+    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+    ]
+  >;
+  searchRelatedAccountGroupMemberships(
+    request: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+    >
+  ): void;
+  searchRelatedAccountGroupMemberships(
+    request: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+    >
+  ): void;
+  /**
+   * Search group memberships related to a given account.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to search related account group memberships from,
+   *   in the format "projects/{project}".
+   * @param {Buffer} [request.hashedAccountId]
+   *   Optional. The unique stable hashed user identifier we should search connections to.
+   *   The identifier should correspond to a `hashed_account_id` provided in a
+   *   previous CreateAssessment or AnnotateAssessment call.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of groups to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SearchRelatedAccountGroupMemberships` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [RelatedAccountGroupMembership]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchRelatedAccountGroupMemberships(
+    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchRelatedAccountGroupMemberships(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to search related account group memberships from,
+   *   in the format "projects/{project}".
+   * @param {Buffer} [request.hashedAccountId]
+   *   Optional. The unique stable hashed user identifier we should search connections to.
+   *   The identifier should correspond to a `hashed_account_id` provided in a
+   *   previous CreateAssessment or AnnotateAssessment call.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of groups to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SearchRelatedAccountGroupMemberships` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [RelatedAccountGroupMembership]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchRelatedAccountGroupMembershipsStream(
+    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const defaultCallSettings =
+      this._defaults['searchRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.searchRelatedAccountGroupMemberships.createStream(
+      this.innerApiCalls.searchRelatedAccountGroupMemberships as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchRelatedAccountGroupMemberships`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to search related account group memberships from,
+   *   in the format "projects/{project}".
+   * @param {Buffer} [request.hashedAccountId]
+   *   Optional. The unique stable hashed user identifier we should search connections to.
+   *   The identifier should correspond to a `hashed_account_id` provided in a
+   *   previous CreateAssessment or AnnotateAssessment call.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of groups to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 50 groups will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `SearchRelatedAccountGroupMemberships` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [RelatedAccountGroupMembership]{@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.searchRelatedAccountGroupMembershipsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  searchRelatedAccountGroupMembershipsAsync(
+    request?: protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const defaultCallSettings =
+      this._defaults['searchRelatedAccountGroupMemberships'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate(
+      this.innerApiCalls['searchRelatedAccountGroupMemberships'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership>;
   }
   // --------------------
   // -- Path templates --
@@ -1435,6 +2159,113 @@ export class RecaptchaEnterpriseServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified relatedAccountGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} relatedaccountgroup
+   * @returns {string} Resource name string.
+   */
+  relatedAccountGroupPath(project: string, relatedaccountgroup: string) {
+    return this.pathTemplates.relatedAccountGroupPathTemplate.render({
+      project: project,
+      relatedaccountgroup: relatedaccountgroup,
+    });
+  }
+
+  /**
+   * Parse the project from RelatedAccountGroup resource.
+   *
+   * @param {string} relatedAccountGroupName
+   *   A fully-qualified path representing RelatedAccountGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRelatedAccountGroupName(relatedAccountGroupName: string) {
+    return this.pathTemplates.relatedAccountGroupPathTemplate.match(
+      relatedAccountGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the relatedaccountgroup from RelatedAccountGroup resource.
+   *
+   * @param {string} relatedAccountGroupName
+   *   A fully-qualified path representing RelatedAccountGroup resource.
+   * @returns {string} A string representing the relatedaccountgroup.
+   */
+  matchRelatedaccountgroupFromRelatedAccountGroupName(
+    relatedAccountGroupName: string
+  ) {
+    return this.pathTemplates.relatedAccountGroupPathTemplate.match(
+      relatedAccountGroupName
+    ).relatedaccountgroup;
+  }
+
+  /**
+   * Return a fully-qualified relatedAccountGroupMembership resource name string.
+   *
+   * @param {string} project
+   * @param {string} relatedaccountgroup
+   * @param {string} membership
+   * @returns {string} Resource name string.
+   */
+  relatedAccountGroupMembershipPath(
+    project: string,
+    relatedaccountgroup: string,
+    membership: string
+  ) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.render({
+      project: project,
+      relatedaccountgroup: relatedaccountgroup,
+      membership: membership,
+    });
+  }
+
+  /**
+   * Parse the project from RelatedAccountGroupMembership resource.
+   *
+   * @param {string} relatedAccountGroupMembershipName
+   *   A fully-qualified path representing RelatedAccountGroupMembership resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRelatedAccountGroupMembershipName(
+    relatedAccountGroupMembershipName: string
+  ) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(
+      relatedAccountGroupMembershipName
+    ).project;
+  }
+
+  /**
+   * Parse the relatedaccountgroup from RelatedAccountGroupMembership resource.
+   *
+   * @param {string} relatedAccountGroupMembershipName
+   *   A fully-qualified path representing RelatedAccountGroupMembership resource.
+   * @returns {string} A string representing the relatedaccountgroup.
+   */
+  matchRelatedaccountgroupFromRelatedAccountGroupMembershipName(
+    relatedAccountGroupMembershipName: string
+  ) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(
+      relatedAccountGroupMembershipName
+    ).relatedaccountgroup;
+  }
+
+  /**
+   * Parse the membership from RelatedAccountGroupMembership resource.
+   *
+   * @param {string} relatedAccountGroupMembershipName
+   *   A fully-qualified path representing RelatedAccountGroupMembership resource.
+   * @returns {string} A string representing the membership.
+   */
+  matchMembershipFromRelatedAccountGroupMembershipName(
+    relatedAccountGroupMembershipName: string
+  ) {
+    return this.pathTemplates.relatedAccountGroupMembershipPathTemplate.match(
+      relatedAccountGroupMembershipName
+    ).membership;
   }
 
   /**

@@ -171,6 +171,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public getMetrics(request: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest): Promise<google.cloud.recaptchaenterprise.v1.Metrics>;
+
+                    /**
+                     * Calls ListRelatedAccountGroups.
+                     * @param request ListRelatedAccountGroupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRelatedAccountGroupsResponse
+                     */
+                    public listRelatedAccountGroups(request: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroupsCallback): void;
+
+                    /**
+                     * Calls ListRelatedAccountGroups.
+                     * @param request ListRelatedAccountGroupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRelatedAccountGroups(request: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest): Promise<google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse>;
+
+                    /**
+                     * Calls ListRelatedAccountGroupMemberships.
+                     * @param request ListRelatedAccountGroupMembershipsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRelatedAccountGroupMembershipsResponse
+                     */
+                    public listRelatedAccountGroupMemberships(request: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListRelatedAccountGroupMembershipsCallback): void;
+
+                    /**
+                     * Calls ListRelatedAccountGroupMemberships.
+                     * @param request ListRelatedAccountGroupMembershipsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRelatedAccountGroupMemberships(request: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest): Promise<google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse>;
+
+                    /**
+                     * Calls SearchRelatedAccountGroupMemberships.
+                     * @param request SearchRelatedAccountGroupMembershipsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchRelatedAccountGroupMembershipsResponse
+                     */
+                    public searchRelatedAccountGroupMemberships(request: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.SearchRelatedAccountGroupMembershipsCallback): void;
+
+                    /**
+                     * Calls SearchRelatedAccountGroupMemberships.
+                     * @param request SearchRelatedAccountGroupMembershipsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchRelatedAccountGroupMemberships(request: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest): Promise<google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse>;
                 }
 
                 namespace RecaptchaEnterpriseService {
@@ -237,6 +279,27 @@ export namespace google {
                      * @param [response] Metrics
                      */
                     type GetMetricsCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.Metrics) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#listRelatedAccountGroups}.
+                     * @param error Error, if any
+                     * @param [response] ListRelatedAccountGroupsResponse
+                     */
+                    type ListRelatedAccountGroupsCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#listRelatedAccountGroupMemberships}.
+                     * @param error Error, if any
+                     * @param [response] ListRelatedAccountGroupMembershipsResponse
+                     */
+                    type ListRelatedAccountGroupMembershipsCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService#searchRelatedAccountGroupMemberships}.
+                     * @param error Error, if any
+                     * @param [response] SearchRelatedAccountGroupMembershipsResponse
+                     */
+                    type SearchRelatedAccountGroupMembershipsCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse) => void;
                 }
 
                 /** Properties of a CreateAssessmentRequest. */
@@ -346,6 +409,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest reasons */
                     reasons?: (google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[]|null);
+
+                    /** AnnotateAssessmentRequest hashedAccountId */
+                    hashedAccountId?: (Uint8Array|string|null);
                 }
 
                 /** Represents an AnnotateAssessmentRequest. */
@@ -365,6 +431,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest reasons. */
                     public reasons: google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[];
+
+                    /** AnnotateAssessmentRequest hashedAccountId. */
+                    public hashedAccountId: (Uint8Array|string);
 
                     /**
                      * Creates a new AnnotateAssessmentRequest instance using the specified properties.
@@ -559,6 +628,9 @@ export namespace google {
 
                     /** Assessment tokenProperties */
                     tokenProperties?: (google.cloud.recaptchaenterprise.v1.ITokenProperties|null);
+
+                    /** Assessment accountDefenderAssessment */
+                    accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null);
                 }
 
                 /** Represents an Assessment. */
@@ -581,6 +653,9 @@ export namespace google {
 
                     /** Assessment tokenProperties. */
                     public tokenProperties?: (google.cloud.recaptchaenterprise.v1.ITokenProperties|null);
+
+                    /** Assessment accountDefenderAssessment. */
+                    public accountDefenderAssessment?: (google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -670,6 +745,9 @@ export namespace google {
 
                     /** Event expectedAction */
                     expectedAction?: (string|null);
+
+                    /** Event hashedAccountId */
+                    hashedAccountId?: (Uint8Array|string|null);
                 }
 
                 /** Represents an Event. */
@@ -695,6 +773,9 @@ export namespace google {
 
                     /** Event expectedAction. */
                     public expectedAction: string;
+
+                    /** Event hashedAccountId. */
+                    public hashedAccountId: (Uint8Array|string);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -1001,6 +1082,108 @@ export namespace google {
                         DUPE = 4,
                         MISSING = 5,
                         BROWSER_ERROR = 6
+                    }
+                }
+
+                /** Properties of an AccountDefenderAssessment. */
+                interface IAccountDefenderAssessment {
+
+                    /** AccountDefenderAssessment labels */
+                    labels?: (google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel[]|null);
+                }
+
+                /** Represents an AccountDefenderAssessment. */
+                class AccountDefenderAssessment implements IAccountDefenderAssessment {
+
+                    /**
+                     * Constructs a new AccountDefenderAssessment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment);
+
+                    /** AccountDefenderAssessment labels. */
+                    public labels: google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel[];
+
+                    /**
+                     * Creates a new AccountDefenderAssessment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccountDefenderAssessment instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment): google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment;
+
+                    /**
+                     * Encodes the specified AccountDefenderAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.verify|verify} messages.
+                     * @param message AccountDefenderAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccountDefenderAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.verify|verify} messages.
+                     * @param message AccountDefenderAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IAccountDefenderAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccountDefenderAssessment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccountDefenderAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment;
+
+                    /**
+                     * Decodes an AccountDefenderAssessment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccountDefenderAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment;
+
+                    /**
+                     * Verifies an AccountDefenderAssessment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccountDefenderAssessment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccountDefenderAssessment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment;
+
+                    /**
+                     * Creates a plain object from an AccountDefenderAssessment message. Also converts values to other types if specified.
+                     * @param message AccountDefenderAssessment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccountDefenderAssessment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace AccountDefenderAssessment {
+
+                    /** AccountDefenderLabel enum. */
+                    enum AccountDefenderLabel {
+                        ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0,
+                        PROFILE_MATCH = 1,
+                        SUSPICIOUS_LOGIN_ACTIVITY = 2,
+                        SUSPICIOUS_ACCOUNT_CREATION = 3,
+                        RELATED_ACCOUNTS_NUMBER_HIGH = 4
                     }
                 }
 
@@ -2717,6 +2900,792 @@ export namespace google {
 
                     /**
                      * Converts this ChallengeMetrics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRelatedAccountGroupMembershipsRequest. */
+                interface IListRelatedAccountGroupMembershipsRequest {
+
+                    /** ListRelatedAccountGroupMembershipsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRelatedAccountGroupMembershipsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRelatedAccountGroupMembershipsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListRelatedAccountGroupMembershipsRequest. */
+                class ListRelatedAccountGroupMembershipsRequest implements IListRelatedAccountGroupMembershipsRequest {
+
+                    /**
+                     * Constructs a new ListRelatedAccountGroupMembershipsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest);
+
+                    /** ListRelatedAccountGroupMembershipsRequest parent. */
+                    public parent: string;
+
+                    /** ListRelatedAccountGroupMembershipsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRelatedAccountGroupMembershipsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListRelatedAccountGroupMembershipsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRelatedAccountGroupMembershipsRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupMembershipsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupMembershipsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupMembershipsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupMembershipsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRelatedAccountGroupMembershipsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupMembershipsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRelatedAccountGroupMembershipsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Verifies a ListRelatedAccountGroupMembershipsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRelatedAccountGroupMembershipsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRelatedAccountGroupMembershipsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRelatedAccountGroupMembershipsRequest message. Also converts values to other types if specified.
+                     * @param message ListRelatedAccountGroupMembershipsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRelatedAccountGroupMembershipsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRelatedAccountGroupMembershipsResponse. */
+                interface IListRelatedAccountGroupMembershipsResponse {
+
+                    /** ListRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships */
+                    relatedAccountGroupMemberships?: (google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[]|null);
+
+                    /** ListRelatedAccountGroupMembershipsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRelatedAccountGroupMembershipsResponse. */
+                class ListRelatedAccountGroupMembershipsResponse implements IListRelatedAccountGroupMembershipsResponse {
+
+                    /**
+                     * Constructs a new ListRelatedAccountGroupMembershipsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse);
+
+                    /** ListRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships. */
+                    public relatedAccountGroupMemberships: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[];
+
+                    /** ListRelatedAccountGroupMembershipsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRelatedAccountGroupMembershipsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRelatedAccountGroupMembershipsResponse instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupMembershipsResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupMembershipsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupMembershipsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupMembershipsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRelatedAccountGroupMembershipsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupMembershipsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRelatedAccountGroupMembershipsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Verifies a ListRelatedAccountGroupMembershipsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRelatedAccountGroupMembershipsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRelatedAccountGroupMembershipsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRelatedAccountGroupMembershipsResponse message. Also converts values to other types if specified.
+                     * @param message ListRelatedAccountGroupMembershipsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRelatedAccountGroupMembershipsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRelatedAccountGroupsRequest. */
+                interface IListRelatedAccountGroupsRequest {
+
+                    /** ListRelatedAccountGroupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRelatedAccountGroupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRelatedAccountGroupsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListRelatedAccountGroupsRequest. */
+                class ListRelatedAccountGroupsRequest implements IListRelatedAccountGroupsRequest {
+
+                    /**
+                     * Constructs a new ListRelatedAccountGroupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest);
+
+                    /** ListRelatedAccountGroupsRequest parent. */
+                    public parent: string;
+
+                    /** ListRelatedAccountGroupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRelatedAccountGroupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListRelatedAccountGroupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRelatedAccountGroupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRelatedAccountGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRelatedAccountGroupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest;
+
+                    /**
+                     * Verifies a ListRelatedAccountGroupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRelatedAccountGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRelatedAccountGroupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRelatedAccountGroupsRequest message. Also converts values to other types if specified.
+                     * @param message ListRelatedAccountGroupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRelatedAccountGroupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListRelatedAccountGroupsResponse. */
+                interface IListRelatedAccountGroupsResponse {
+
+                    /** ListRelatedAccountGroupsResponse relatedAccountGroups */
+                    relatedAccountGroups?: (google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[]|null);
+
+                    /** ListRelatedAccountGroupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRelatedAccountGroupsResponse. */
+                class ListRelatedAccountGroupsResponse implements IListRelatedAccountGroupsResponse {
+
+                    /**
+                     * Constructs a new ListRelatedAccountGroupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse);
+
+                    /** ListRelatedAccountGroupsResponse relatedAccountGroups. */
+                    public relatedAccountGroups: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[];
+
+                    /** ListRelatedAccountGroupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRelatedAccountGroupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRelatedAccountGroupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupsResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRelatedAccountGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse.verify|verify} messages.
+                     * @param message ListRelatedAccountGroupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRelatedAccountGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse;
+
+                    /**
+                     * Decodes a ListRelatedAccountGroupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRelatedAccountGroupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse;
+
+                    /**
+                     * Verifies a ListRelatedAccountGroupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRelatedAccountGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRelatedAccountGroupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRelatedAccountGroupsResponse message. Also converts values to other types if specified.
+                     * @param message ListRelatedAccountGroupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRelatedAccountGroupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchRelatedAccountGroupMembershipsRequest. */
+                interface ISearchRelatedAccountGroupMembershipsRequest {
+
+                    /** SearchRelatedAccountGroupMembershipsRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId */
+                    hashedAccountId?: (Uint8Array|string|null);
+
+                    /** SearchRelatedAccountGroupMembershipsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchRelatedAccountGroupMembershipsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a SearchRelatedAccountGroupMembershipsRequest. */
+                class SearchRelatedAccountGroupMembershipsRequest implements ISearchRelatedAccountGroupMembershipsRequest {
+
+                    /**
+                     * Constructs a new SearchRelatedAccountGroupMembershipsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest);
+
+                    /** SearchRelatedAccountGroupMembershipsRequest parent. */
+                    public parent: string;
+
+                    /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId. */
+                    public hashedAccountId: (Uint8Array|string);
+
+                    /** SearchRelatedAccountGroupMembershipsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchRelatedAccountGroupMembershipsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new SearchRelatedAccountGroupMembershipsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchRelatedAccountGroupMembershipsRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Encodes the specified SearchRelatedAccountGroupMembershipsRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                     * @param message SearchRelatedAccountGroupMembershipsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchRelatedAccountGroupMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest.verify|verify} messages.
+                     * @param message SearchRelatedAccountGroupMembershipsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchRelatedAccountGroupMembershipsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchRelatedAccountGroupMembershipsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Decodes a SearchRelatedAccountGroupMembershipsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchRelatedAccountGroupMembershipsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Verifies a SearchRelatedAccountGroupMembershipsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchRelatedAccountGroupMembershipsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchRelatedAccountGroupMembershipsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchRelatedAccountGroupMembershipsRequest message. Also converts values to other types if specified.
+                     * @param message SearchRelatedAccountGroupMembershipsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchRelatedAccountGroupMembershipsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SearchRelatedAccountGroupMembershipsResponse. */
+                interface ISearchRelatedAccountGroupMembershipsResponse {
+
+                    /** SearchRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships */
+                    relatedAccountGroupMemberships?: (google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[]|null);
+
+                    /** SearchRelatedAccountGroupMembershipsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SearchRelatedAccountGroupMembershipsResponse. */
+                class SearchRelatedAccountGroupMembershipsResponse implements ISearchRelatedAccountGroupMembershipsResponse {
+
+                    /**
+                     * Constructs a new SearchRelatedAccountGroupMembershipsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse);
+
+                    /** SearchRelatedAccountGroupMembershipsResponse relatedAccountGroupMemberships. */
+                    public relatedAccountGroupMemberships: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[];
+
+                    /** SearchRelatedAccountGroupMembershipsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SearchRelatedAccountGroupMembershipsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchRelatedAccountGroupMembershipsResponse instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Encodes the specified SearchRelatedAccountGroupMembershipsResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                     * @param message SearchRelatedAccountGroupMembershipsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchRelatedAccountGroupMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse.verify|verify} messages.
+                     * @param message SearchRelatedAccountGroupMembershipsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchRelatedAccountGroupMembershipsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchRelatedAccountGroupMembershipsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Decodes a SearchRelatedAccountGroupMembershipsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchRelatedAccountGroupMembershipsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Verifies a SearchRelatedAccountGroupMembershipsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchRelatedAccountGroupMembershipsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchRelatedAccountGroupMembershipsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchRelatedAccountGroupMembershipsResponse message. Also converts values to other types if specified.
+                     * @param message SearchRelatedAccountGroupMembershipsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchRelatedAccountGroupMembershipsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RelatedAccountGroupMembership. */
+                interface IRelatedAccountGroupMembership {
+
+                    /** RelatedAccountGroupMembership name */
+                    name?: (string|null);
+
+                    /** RelatedAccountGroupMembership hashedAccountId */
+                    hashedAccountId?: (Uint8Array|string|null);
+                }
+
+                /** Represents a RelatedAccountGroupMembership. */
+                class RelatedAccountGroupMembership implements IRelatedAccountGroupMembership {
+
+                    /**
+                     * Constructs a new RelatedAccountGroupMembership.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership);
+
+                    /** RelatedAccountGroupMembership name. */
+                    public name: string;
+
+                    /** RelatedAccountGroupMembership hashedAccountId. */
+                    public hashedAccountId: (Uint8Array|string);
+
+                    /**
+                     * Creates a new RelatedAccountGroupMembership instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RelatedAccountGroupMembership instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership): google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership;
+
+                    /**
+                     * Encodes the specified RelatedAccountGroupMembership message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.verify|verify} messages.
+                     * @param message RelatedAccountGroupMembership message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RelatedAccountGroupMembership message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership.verify|verify} messages.
+                     * @param message RelatedAccountGroupMembership message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RelatedAccountGroupMembership message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RelatedAccountGroupMembership
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership;
+
+                    /**
+                     * Decodes a RelatedAccountGroupMembership message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RelatedAccountGroupMembership
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership;
+
+                    /**
+                     * Verifies a RelatedAccountGroupMembership message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RelatedAccountGroupMembership message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RelatedAccountGroupMembership
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership;
+
+                    /**
+                     * Creates a plain object from a RelatedAccountGroupMembership message. Also converts values to other types if specified.
+                     * @param message RelatedAccountGroupMembership
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RelatedAccountGroupMembership to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RelatedAccountGroup. */
+                interface IRelatedAccountGroup {
+
+                    /** RelatedAccountGroup name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RelatedAccountGroup. */
+                class RelatedAccountGroup implements IRelatedAccountGroup {
+
+                    /**
+                     * Constructs a new RelatedAccountGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup);
+
+                    /** RelatedAccountGroup name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new RelatedAccountGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RelatedAccountGroup instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup): google.cloud.recaptchaenterprise.v1.RelatedAccountGroup;
+
+                    /**
+                     * Encodes the specified RelatedAccountGroup message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.verify|verify} messages.
+                     * @param message RelatedAccountGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RelatedAccountGroup message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup.verify|verify} messages.
+                     * @param message RelatedAccountGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RelatedAccountGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RelatedAccountGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.RelatedAccountGroup;
+
+                    /**
+                     * Decodes a RelatedAccountGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RelatedAccountGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.RelatedAccountGroup;
+
+                    /**
+                     * Verifies a RelatedAccountGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RelatedAccountGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RelatedAccountGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.RelatedAccountGroup;
+
+                    /**
+                     * Creates a plain object from a RelatedAccountGroup message. Also converts values to other types if specified.
+                     * @param message RelatedAccountGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.RelatedAccountGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RelatedAccountGroup to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

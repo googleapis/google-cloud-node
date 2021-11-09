@@ -56,6 +56,27 @@
                 "listKeysStream",
                 "listKeysAsync"
               ]
+            },
+            "ListRelatedAccountGroups": {
+              "methods": [
+                "listRelatedAccountGroups",
+                "listRelatedAccountGroupsStream",
+                "listRelatedAccountGroupsAsync"
+              ]
+            },
+            "ListRelatedAccountGroupMemberships": {
+              "methods": [
+                "listRelatedAccountGroupMemberships",
+                "listRelatedAccountGroupMembershipsStream",
+                "listRelatedAccountGroupMembershipsAsync"
+              ]
+            },
+            "SearchRelatedAccountGroupMemberships": {
+              "methods": [
+                "searchRelatedAccountGroupMemberships",
+                "searchRelatedAccountGroupMembershipsStream",
+                "searchRelatedAccountGroupMembershipsAsync"
+              ]
             }
           }
         },
@@ -107,6 +128,27 @@
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListRelatedAccountGroups": {
+              "methods": [
+                "listRelatedAccountGroups",
+                "listRelatedAccountGroupsStream",
+                "listRelatedAccountGroupsAsync"
+              ]
+            },
+            "ListRelatedAccountGroupMemberships": {
+              "methods": [
+                "listRelatedAccountGroupMemberships",
+                "listRelatedAccountGroupMembershipsStream",
+                "listRelatedAccountGroupMembershipsAsync"
+              ]
+            },
+            "SearchRelatedAccountGroupMemberships": {
+              "methods": [
+                "searchRelatedAccountGroupMemberships",
+                "searchRelatedAccountGroupMembershipsStream",
+                "searchRelatedAccountGroupMembershipsAsync"
               ]
             }
           }

@@ -1477,6 +1477,1078 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     });
   });
 
+  describe('listRelatedAccountGroups', () => {
+    it('invokes listRelatedAccountGroups without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+      ];
+      client.innerApiCalls.listRelatedAccountGroups =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listRelatedAccountGroups(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listRelatedAccountGroups as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listRelatedAccountGroups without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+      ];
+      client.innerApiCalls.listRelatedAccountGroups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRelatedAccountGroups(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listRelatedAccountGroups as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listRelatedAccountGroups with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRelatedAccountGroups = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listRelatedAccountGroups(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listRelatedAccountGroups as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listRelatedAccountGroupsStream without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+      ];
+      client.descriptors.page.listRelatedAccountGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRelatedAccountGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRelatedAccountGroups, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listRelatedAccountGroupsStream with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRelatedAccountGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRelatedAccountGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRelatedAccountGroups, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listRelatedAccountGroups without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup()
+        ),
+      ];
+      client.descriptors.page.listRelatedAccountGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[] =
+        [];
+      const iterable = client.listRelatedAccountGroupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listRelatedAccountGroups with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRelatedAccountGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRelatedAccountGroupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listRelatedAccountGroupMemberships', () => {
+    it('invokes listRelatedAccountGroupMemberships without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.innerApiCalls.listRelatedAccountGroupMemberships =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listRelatedAccountGroupMemberships(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listRelatedAccountGroupMemberships as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listRelatedAccountGroupMemberships without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.innerApiCalls.listRelatedAccountGroupMemberships =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRelatedAccountGroupMemberships(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listRelatedAccountGroupMemberships as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listRelatedAccountGroupMemberships with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRelatedAccountGroupMemberships = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listRelatedAccountGroupMemberships(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listRelatedAccountGroupMemberships as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listRelatedAccountGroupMembershipsStream without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.descriptors.page.listRelatedAccountGroupMemberships.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRelatedAccountGroupMembershipsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRelatedAccountGroupMemberships,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listRelatedAccountGroupMembershipsStream with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRelatedAccountGroupMemberships.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRelatedAccountGroupMembershipsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listRelatedAccountGroupMemberships,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listRelatedAccountGroupMemberships without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[] =
+        [];
+      const iterable = client.listRelatedAccountGroupMembershipsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listRelatedAccountGroupMemberships with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRelatedAccountGroupMembershipsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('searchRelatedAccountGroupMemberships', () => {
+    it('invokes searchRelatedAccountGroupMemberships without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.innerApiCalls.searchRelatedAccountGroupMemberships =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.searchRelatedAccountGroupMemberships(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchRelatedAccountGroupMemberships as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchRelatedAccountGroupMemberships without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.innerApiCalls.searchRelatedAccountGroupMemberships =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchRelatedAccountGroupMemberships(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchRelatedAccountGroupMemberships as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes searchRelatedAccountGroupMemberships with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchRelatedAccountGroupMemberships =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.searchRelatedAccountGroupMemberships(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.searchRelatedAccountGroupMemberships as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchRelatedAccountGroupMembershipsStream without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.descriptors.page.searchRelatedAccountGroupMemberships.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchRelatedAccountGroupMembershipsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.searchRelatedAccountGroupMemberships,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes searchRelatedAccountGroupMembershipsStream with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchRelatedAccountGroupMemberships.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.searchRelatedAccountGroupMembershipsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.searchRelatedAccountGroupMemberships,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchRelatedAccountGroupMemberships without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership()
+        ),
+      ];
+      client.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[] =
+        [];
+      const iterable =
+        client.searchRelatedAccountGroupMembershipsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchRelatedAccountGroupMemberships with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.searchRelatedAccountGroupMembershipsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchRelatedAccountGroupMemberships
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('assessment', () => {
       const fakePath = '/rendered/path/assessment';
@@ -1669,6 +2741,153 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('relatedAccountGroup', () => {
+      const fakePath = '/rendered/path/relatedAccountGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        relatedaccountgroup: 'relatedaccountgroupValue',
+      };
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.relatedAccountGroupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.relatedAccountGroupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('relatedAccountGroupPath', () => {
+        const result = client.relatedAccountGroupPath(
+          'projectValue',
+          'relatedaccountgroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRelatedAccountGroupName', () => {
+        const result = client.matchProjectFromRelatedAccountGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRelatedaccountgroupFromRelatedAccountGroupName', () => {
+        const result =
+          client.matchRelatedaccountgroupFromRelatedAccountGroupName(fakePath);
+        assert.strictEqual(result, 'relatedaccountgroupValue');
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('relatedAccountGroupMembership', () => {
+      const fakePath = '/rendered/path/relatedAccountGroupMembership';
+      const expectedParameters = {
+        project: 'projectValue',
+        relatedaccountgroup: 'relatedaccountgroupValue',
+        membership: 'membershipValue',
+      };
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.relatedAccountGroupMembershipPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.relatedAccountGroupMembershipPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('relatedAccountGroupMembershipPath', () => {
+        const result = client.relatedAccountGroupMembershipPath(
+          'projectValue',
+          'relatedaccountgroupValue',
+          'membershipValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupMembershipPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRelatedAccountGroupMembershipName', () => {
+        const result =
+          client.matchProjectFromRelatedAccountGroupMembershipName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupMembershipPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRelatedaccountgroupFromRelatedAccountGroupMembershipName', () => {
+        const result =
+          client.matchRelatedaccountgroupFromRelatedAccountGroupMembershipName(
+            fakePath
+          );
+        assert.strictEqual(result, 'relatedaccountgroupValue');
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupMembershipPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMembershipFromRelatedAccountGroupMembershipName', () => {
+        const result =
+          client.matchMembershipFromRelatedAccountGroupMembershipName(fakePath);
+        assert.strictEqual(result, 'membershipValue');
+        assert(
+          (
+            client.pathTemplates.relatedAccountGroupMembershipPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

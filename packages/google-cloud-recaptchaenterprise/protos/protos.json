@@ -171,6 +171,62 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "ListRelatedAccountGroups": {
+                          "requestType": "ListRelatedAccountGroupsRequest",
+                          "responseType": "ListRelatedAccountGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/relatedaccountgroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/relatedaccountgroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListRelatedAccountGroupMemberships": {
+                          "requestType": "ListRelatedAccountGroupMembershipsRequest",
+                          "responseType": "ListRelatedAccountGroupMembershipsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/relatedaccountgroups/*}/memberships",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/relatedaccountgroups/*}/memberships"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "SearchRelatedAccountGroupMemberships": {
+                          "requestType": "SearchRelatedAccountGroupMembershipsRequest",
+                          "responseType": "SearchRelatedAccountGroupMembershipsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/relatedaccountgroupmemberships:search",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,hashed_account_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/relatedaccountgroupmemberships:search",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,hashed_account_id"
+                            }
+                          ]
                         }
                       }
                     },
@@ -214,6 +270,13 @@
                           "rule": "repeated",
                           "type": "Reason",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hashedAccountId": {
+                          "type": "bytes",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -276,6 +339,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "accountDefenderAssessment": {
+                          "type": "AccountDefenderAssessment",
+                          "id": 6
                         }
                       }
                     },
@@ -312,6 +379,13 @@
                         "expectedAction": {
                           "type": "string",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hashedAccountId": {
+                          "type": "bytes",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -376,6 +450,26 @@
                             "DUPE": 4,
                             "MISSING": 5,
                             "BROWSER_ERROR": 6
+                          }
+                        }
+                      }
+                    },
+                    "AccountDefenderAssessment": {
+                      "fields": {
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "AccountDefenderLabel",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "AccountDefenderLabel": {
+                          "values": {
+                            "ACCOUNT_DEFENDER_LABEL_UNSPECIFIED": 0,
+                            "PROFILE_MATCH": 1,
+                            "SUSPICIOUS_LOGIN_ACTIVITY": 2,
+                            "SUSPICIOUS_ACCOUNT_CREATION": 3,
+                            "RELATED_ACCOUNTS_NUMBER_HIGH": 4
                           }
                         }
                       }
@@ -617,10 +711,7 @@
                         },
                         "allowAmpTraffic": {
                           "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 2
                         },
                         "integrationType": {
                           "type": "IntegrationType",
@@ -718,6 +809,166 @@
                         "passedCount": {
                           "type": "int64",
                           "id": 4
+                        }
+                      }
+                    },
+                    "ListRelatedAccountGroupMembershipsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRelatedAccountGroupMembershipsResponse": {
+                      "fields": {
+                        "relatedAccountGroupMemberships": {
+                          "rule": "repeated",
+                          "type": "RelatedAccountGroupMembership",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListRelatedAccountGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRelatedAccountGroupsResponse": {
+                      "fields": {
+                        "relatedAccountGroups": {
+                          "rule": "repeated",
+                          "type": "RelatedAccountGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchRelatedAccountGroupMembershipsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+                          }
+                        },
+                        "hashedAccountId": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchRelatedAccountGroupMembershipsResponse": {
+                      "fields": {
+                        "relatedAccountGroupMemberships": {
+                          "rule": "repeated",
+                          "type": "RelatedAccountGroupMembership",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RelatedAccountGroupMembership": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership",
+                        "(google.api.resource).pattern": "projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+                          }
+                        },
+                        "hashedAccountId": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RelatedAccountGroup": {
+                      "options": {
+                        "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroup",
+                        "(google.api.resource).pattern": "projects/{project}/relatedaccountgroups/{relatedaccountgroup}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
+                          }
                         }
                       }
                     }
