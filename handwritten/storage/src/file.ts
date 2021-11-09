@@ -282,6 +282,7 @@ export enum ActionToHTTPMethod {
  */
 class ResumableUploadError extends Error {
   name = 'ResumableUploadError';
+  additionalInfo?: string;
 }
 
 /**
@@ -1914,6 +1915,9 @@ class File extends ServiceObject<File> {
           if (options.resumable) {
             // The user wanted a resumable upload, but we couldn't create a
             // configuration directory, which means gcs-resumable-upload will fail.
+
+            // Determine if the issue is that the directory does not exist or
+            // if the directory exists, but is not writable.
             const error = new ResumableUploadError(
               [
                 'A resumable upload could not be performed. The directory,',
@@ -1921,7 +1925,14 @@ class File extends ServiceObject<File> {
                 'this time setting `options.resumable` to `false`.',
               ].join(' ')
             );
-            stream.destroy(error);
+            fs.access(configDir, fs.constants.R_OK, noReadErr => {
+              if (noReadErr) {
+                error.additionalInfo = 'The directory does not exist.';
+              } else {
+                error.additionalInfo = 'The directory is read-only.';
+              }
+              stream.destroy(error);
+            });
           } else {
             // The user didn't care, resumable or not. Fall back to simple upload.
             this.startSimpleUpload_(fileWriteStream, options);

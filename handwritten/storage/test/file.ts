@@ -65,6 +65,10 @@ class HTTPError extends Error {
   }
 }
 
+class ResumableUploadError extends Error {
+  additionalInfo?: string;
+}
+
 let promisified = false;
 let makeWritableStreamOverride: Function | null;
 let handleRespOverride: Function | null;
@@ -2131,7 +2135,7 @@ describe('File', () => {
 
         const writable = file.createWriteStream({resumable: true});
 
-        writable.on('error', (err: Error) => {
+        writable.on('error', (err: ResumableUploadError) => {
           assert.strictEqual(err.name, 'ResumableUploadError');
           assert.strictEqual(
             err.message,
@@ -2140,6 +2144,10 @@ describe('File', () => {
               `${CONFIG_DIR}, is not writable. You may try another upload,`,
               'this time setting `options.resumable` to `false`.',
             ].join(' ')
+          );
+          assert.strictEqual(
+            err.additionalInfo,
+            'The directory does not exist.'
           );
 
           done();
