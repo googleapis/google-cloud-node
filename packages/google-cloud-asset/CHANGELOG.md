@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.21.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.20.0...v3.21.0) (2021-11-09)
+
+
+### Features
+
+* OSConfig: add OS policy assignment rpcs ([#574](https://www.github.com/googleapis/nodejs-asset/issues/574)) ([ff9491d](https://www.github.com/googleapis/nodejs-asset/commit/ff9491d55bd527c451914b487ce08fed3068dbd8))
+
 ## [3.20.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.19.0...v3.20.0) (2021-10-19)
 
 
