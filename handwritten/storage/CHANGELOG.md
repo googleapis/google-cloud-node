@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.16.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.5...v5.16.0) (2021-11-09)
+
+
+### Features
+
+* improved error messages for resumable uploads ([#1708](https://www.github.com/googleapis/nodejs-storage/issues/1708)) ([50cdbb6](https://www.github.com/googleapis/nodejs-storage/commit/50cdbb6f730ee7f96cb598c4cda412fc4bcc8807))
+
+
+### Bug Fixes
+
+* add scenario 3 conformance tests ([#1702](https://www.github.com/googleapis/nodejs-storage/issues/1702)) ([e16a3a5](https://www.github.com/googleapis/nodejs-storage/commit/e16a3a5eb09a388743259d54c31e62d7fc220bf0))
+* retry uri creation dep update & conformance tests ([#1700](https://www.github.com/googleapis/nodejs-storage/issues/1700)) ([d265f8c](https://www.github.com/googleapis/nodejs-storage/commit/d265f8c5e4e6a8c8239e959dfb4d0acbf4cdfe0a))
+
 ### [5.15.6](https://www.github.com/googleapis/nodejs-storage/compare/v5.15.5...v5.15.6) (2021-11-05)
 
 
