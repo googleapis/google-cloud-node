@@ -294,33 +294,6 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  predict(
-    request?: protos.google.cloud.retail.v2beta.IPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IPredictResponse,
-      protos.google.cloud.retail.v2beta.IPredictRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  predict(
-    request: protos.google.cloud.retail.v2beta.IPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IPredictResponse,
-      protos.google.cloud.retail.v2beta.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request: protos.google.cloud.retail.v2beta.IPredictRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IPredictResponse,
-      protos.google.cloud.retail.v2beta.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Makes a recommendation prediction.
    *
@@ -431,9 +404,36 @@ export class PredictionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.predict(request);
+   * @example <caption>include:samples/generated/v2beta/prediction_service.predict.js</caption>
+   * region_tag:retail_v2beta_generated_PredictionService_Predict_async
    */
+  predict(
+    request?: protos.google.cloud.retail.v2beta.IPredictRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2beta.IPredictResponse,
+      protos.google.cloud.retail.v2beta.IPredictRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  predict(
+    request: protos.google.cloud.retail.v2beta.IPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2beta.IPredictResponse,
+      protos.google.cloud.retail.v2beta.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  predict(
+    request: protos.google.cloud.retail.v2beta.IPredictRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2beta.IPredictResponse,
+      protos.google.cloud.retail.v2beta.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   predict(
     request?: protos.google.cloud.retail.v2beta.IPredictRequest,
     optionsOrCallback?:

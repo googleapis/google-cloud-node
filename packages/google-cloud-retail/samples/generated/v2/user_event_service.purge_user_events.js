@@ -30,7 +30,7 @@ function main(parent, filter) {
    *  length limit of 5,000 characters. Empty string filter is not allowed. The
    *  eligible fields for filtering are:
    *  * `eventType`: Double quoted
-   *  [UserEvent.event_type][google.cloud.retail.v2.UserEvent.event_type] string.
+   *  UserEvent.event_type google.cloud.retail.v2.UserEvent.event_type  string.
    *  * `eventTime`: in ISO 8601 "zulu" format.
    *  * `visitorId`: Double quoted string. Specifying this will delete all
    *    events associated with a visitor.
@@ -60,7 +60,7 @@ function main(parent, filter) {
   // Instantiates a client
   const retailClient = new UserEventServiceClient();
 
-  async function purgeUserEvents() {
+  async function callPurgeUserEvents() {
     // Construct request
     const request = {
       parent,
@@ -73,7 +73,7 @@ function main(parent, filter) {
     console.log(response);
   }
 
-  purgeUserEvents();
+  callPurgeUserEvents();
   // [END retail_v2_generated_UserEventService_PurgeUserEvents_async]
 }
 

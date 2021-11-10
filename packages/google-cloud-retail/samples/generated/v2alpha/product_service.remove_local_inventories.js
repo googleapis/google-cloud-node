@@ -21,10 +21,10 @@ function main(product, placeIds) {
    */
   /**
    *  Required. Full resource name of
-   *  [Product][google.cloud.retail.v2alpha.Product], such as
+   *  Product google.cloud.retail.v2alpha.Product, such as
    *  `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *  If the caller does not have permission to access the
-   *  [Product][google.cloud.retail.v2alpha.Product], regardless of whether or
+   *  Product google.cloud.retail.v2alpha.Product, regardless of whether or
    *  not it exists, a PERMISSION_DENIED error is returned.
    */
   // const product = 'abc123'
@@ -38,14 +38,14 @@ function main(product, placeIds) {
    *  out-of-order updates and deletions on local inventory fields. If not
    *  provided, the internal system time will be used.
    */
-  // const removeTime = ''
+  // const removeTime = {}
   /**
-   *  If set to true, and the [Product][google.cloud.retail.v2alpha.Product] is
+   *  If set to true, and the Product google.cloud.retail.v2alpha.Product  is
    *  not found, the local inventory removal request will still be processed and
    *  retained for at most 1 day and processed once the
-   *  [Product][google.cloud.retail.v2alpha.Product] is created. If set to false,
+   *  Product google.cloud.retail.v2alpha.Product  is created. If set to false,
    *  a NOT_FOUND error is returned if the
-   *  [Product][google.cloud.retail.v2alpha.Product] is not found.
+   *  Product google.cloud.retail.v2alpha.Product  is not found.
    */
   // const allowMissing = true
 
@@ -55,7 +55,7 @@ function main(product, placeIds) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function removeLocalInventories() {
+  async function callRemoveLocalInventories() {
     // Construct request
     const request = {
       product,
@@ -68,7 +68,7 @@ function main(product, placeIds) {
     console.log(response);
   }
 
-  removeLocalInventories();
+  callRemoveLocalInventories();
   // [END retail_v2alpha_generated_ProductService_RemoveLocalInventories_async]
 }
 

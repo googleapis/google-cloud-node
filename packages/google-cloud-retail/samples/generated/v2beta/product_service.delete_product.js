@@ -21,23 +21,23 @@ function main(name) {
    */
   /**
    *  Required. Full resource name of
-   *  [Product][google.cloud.retail.v2beta.Product], such as
+   *  Product google.cloud.retail.v2beta.Product, such as
    *  `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *  If the caller does not have permission to delete the
-   *  [Product][google.cloud.retail.v2beta.Product], regardless of whether or not
+   *  Product google.cloud.retail.v2beta.Product, regardless of whether or not
    *  it exists, a PERMISSION_DENIED error is returned.
-   *  If the [Product][google.cloud.retail.v2beta.Product] to delete does not
+   *  If the Product google.cloud.retail.v2beta.Product  to delete does not
    *  exist, a NOT_FOUND error is returned.
-   *  The [Product][google.cloud.retail.v2beta.Product] to delete can neither be
+   *  The Product google.cloud.retail.v2beta.Product  to delete can neither be
    *  a
-   *  [Product.Type.COLLECTION][google.cloud.retail.v2beta.Product.Type.COLLECTION]
-   *  [Product][google.cloud.retail.v2beta.Product] member nor a
-   *  [Product.Type.PRIMARY][google.cloud.retail.v2beta.Product.Type.PRIMARY]
-   *  [Product][google.cloud.retail.v2beta.Product] with more than one
-   *  [variants][google.cloud.retail.v2beta.Product.Type.VARIANT]. Otherwise, an
+   *  Product.Type.COLLECTION google.cloud.retail.v2beta.Product.Type.COLLECTION
+   *  Product google.cloud.retail.v2beta.Product  member nor a
+   *  Product.Type.PRIMARY google.cloud.retail.v2beta.Product.Type.PRIMARY
+   *  Product google.cloud.retail.v2beta.Product  with more than one
+   *  variants google.cloud.retail.v2beta.Product.Type.VARIANT. Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    *  All inventory information for the named
-   *  [Product][google.cloud.retail.v2beta.Product] will be deleted.
+   *  Product google.cloud.retail.v2beta.Product  will be deleted.
    */
   // const name = 'abc123'
 
@@ -47,7 +47,7 @@ function main(name) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function deleteProduct() {
+  async function callDeleteProduct() {
     // Construct request
     const request = {
       name,
@@ -58,7 +58,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteProduct();
+  callDeleteProduct();
   // [END retail_v2beta_generated_ProductService_DeleteProduct_async]
 }
 

@@ -31,39 +31,39 @@ function main(parent, inputConfig) {
    *  dataset scope. Ensures idempotency and used for request deduplication.
    *  Server-generated if unspecified. Up to 128 characters long and must match
    *  the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
-   *  [ImportMetadata][google.cloud.retail.v2alpha.ImportMetadata].
+   *  ImportMetadata google.cloud.retail.v2alpha.ImportMetadata.
    *  Only supported when
-   *  [ImportProductsRequest.reconciliation_mode][google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode]
+   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode
    *  is set to `FULL`.
    */
   // const requestId = 'abc123'
   /**
    *  Required. The desired input location of the data.
    */
-  // const inputConfig = ''
+  // const inputConfig = {}
   /**
    *  The desired location of errors incurred during the Import.
    */
-  // const errorsConfig = ''
+  // const errorsConfig = {}
   /**
    *  Indicates which fields in the provided imported 'products' to update. If
    *  not set, will by default update all fields.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  The mode of reconciliation between existing products and the products to be
    *  imported. Defaults to
-   *  [ReconciliationMode.INCREMENTAL][google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode.INCREMENTAL].
+   *  ReconciliationMode.INCREMENTAL google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode.INCREMENTAL.
    */
-  // const reconciliationMode = ''
+  // const reconciliationMode = {}
   /**
    *  Pub/Sub topic for receiving notification. If this field is set,
    *  when the import is finished, a notification will be sent to
    *  specified Pub/Sub topic. The message data will be JSON string of a
-   *  [Operation][google.longrunning.Operation].
+   *  Operation google.longrunning.Operation.
    *  Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
    *  Only supported when
-   *  [ImportProductsRequest.reconciliation_mode][google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode]
+   *  ImportProductsRequest.reconciliation_mode google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode
    *  is set to `FULL`.
    */
   // const notificationPubsubTopic = 'abc123'
@@ -74,7 +74,7 @@ function main(parent, inputConfig) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function importProducts() {
+  async function callImportProducts() {
     // Construct request
     const request = {
       parent,
@@ -87,7 +87,7 @@ function main(parent, inputConfig) {
     console.log(response);
   }
 
-  importProducts();
+  callImportProducts();
   // [END retail_v2alpha_generated_ProductService_ImportProducts_async]
 }
 

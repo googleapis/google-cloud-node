@@ -325,6 +325,36 @@ export class CatalogServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Updates the {@link google.cloud.retail.v2alpha.Catalog|Catalog}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.retail.v2alpha.Catalog} request.catalog
+   *   Required. The {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update.
+   *
+   *   If the caller does not have permission to update the
+   *   {@link google.cloud.retail.v2alpha.Catalog|Catalog}, regardless of whether or
+   *   not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update does not
+   *   exist, a NOT_FOUND error is returned.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided
+   *   {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Catalog]{@link google.cloud.retail.v2alpha.Catalog}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/catalog_service.update_catalog.js</caption>
+   * region_tag:retail_v2alpha_generated_CatalogService_UpdateCatalog_async
+   */
   updateCatalog(
     request?: protos.google.cloud.retail.v2alpha.IUpdateCatalogRequest,
     options?: CallOptions
@@ -356,36 +386,6 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the {@link google.cloud.retail.v2alpha.Catalog|Catalog}s.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2alpha.Catalog} request.catalog
-   *   Required. The {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update.
-   *
-   *   If the caller does not have permission to update the
-   *   {@link google.cloud.retail.v2alpha.Catalog|Catalog}, regardless of whether or
-   *   not it exists, a PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update does not
-   *   exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update.
-   *
-   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
-   *   is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Catalog]{@link google.cloud.retail.v2alpha.Catalog}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateCatalog(request);
-   */
   updateCatalog(
     request?: protos.google.cloud.retail.v2alpha.IUpdateCatalogRequest,
     optionsOrCallback?:
@@ -429,37 +429,6 @@ export class CatalogServiceClient {
     this.initialize();
     return this.innerApiCalls.updateCatalog(request, options, callback);
   }
-  setDefaultBranch(
-    request?: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setDefaultBranch(
-    request: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setDefaultBranch(
-    request: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Set a specified branch id as default branch. API methods such as
    * {@link google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search},
@@ -523,9 +492,40 @@ export class CatalogServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setDefaultBranch(request);
+   * @example <caption>include:samples/generated/v2alpha/catalog_service.set_default_branch.js</caption>
+   * region_tag:retail_v2alpha_generated_CatalogService_SetDefaultBranch_async
    */
+  setDefaultBranch(
+    request?: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setDefaultBranch(
+    request: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setDefaultBranch(
+    request: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setDefaultBranch(
     request?: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
     optionsOrCallback?:
@@ -569,6 +569,30 @@ export class CatalogServiceClient {
     this.initialize();
     return this.innerApiCalls.setDefaultBranch(request, options, callback);
   }
+  /**
+   * Get which branch is currently default branch set by
+   * {@link google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
+   * method under a specified parent catalog.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * cloud sales if you are interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.catalog
+   *   The parent catalog resource name, such as
+   *   `projects/* /locations/global/catalogs/default_catalog`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GetDefaultBranchResponse]{@link google.cloud.retail.v2alpha.GetDefaultBranchResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/catalog_service.get_default_branch.js</caption>
+   * region_tag:retail_v2alpha_generated_CatalogService_GetDefaultBranch_async
+   */
   getDefaultBranch(
     request?: protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest,
     options?: CallOptions
@@ -600,30 +624,6 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get which branch is currently default branch set by
-   * {@link google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
-   * method under a specified parent catalog.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.catalog
-   *   The parent catalog resource name, such as
-   *   `projects/* /locations/global/catalogs/default_catalog`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GetDefaultBranchResponse]{@link google.cloud.retail.v2alpha.GetDefaultBranchResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDefaultBranch(request);
-   */
   getDefaultBranch(
     request?: protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest,
     optionsOrCallback?:
@@ -668,37 +668,6 @@ export class CatalogServiceClient {
     return this.innerApiCalls.getDefaultBranch(request, options, callback);
   }
 
-  listCatalogs(
-    request?: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.ICatalog[],
-      protos.google.cloud.retail.v2alpha.IListCatalogsRequest | null,
-      protos.google.cloud.retail.v2alpha.IListCatalogsResponse
-    ]
-  >;
-  listCatalogs(
-    request: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
-      | protos.google.cloud.retail.v2alpha.IListCatalogsResponse
-      | null
-      | undefined,
-      protos.google.cloud.retail.v2alpha.ICatalog
-    >
-  ): void;
-  listCatalogs(
-    request: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
-      | protos.google.cloud.retail.v2alpha.IListCatalogsResponse
-      | null
-      | undefined,
-      protos.google.cloud.retail.v2alpha.ICatalog
-    >
-  ): void;
   /**
    * Lists all the {@link google.cloud.retail.v2alpha.Catalog|Catalog}s associated
    * with the project.
@@ -742,6 +711,37 @@ export class CatalogServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listCatalogs(
+    request?: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.ICatalog[],
+      protos.google.cloud.retail.v2alpha.IListCatalogsRequest | null,
+      protos.google.cloud.retail.v2alpha.IListCatalogsResponse
+    ]
+  >;
+  listCatalogs(
+    request: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
+      | protos.google.cloud.retail.v2alpha.IListCatalogsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2alpha.ICatalog
+    >
+  ): void;
+  listCatalogs(
+    request: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
+      | protos.google.cloud.retail.v2alpha.IListCatalogsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2alpha.ICatalog
+    >
+  ): void;
   listCatalogs(
     request?: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
     optionsOrCallback?:
@@ -888,11 +888,8 @@ export class CatalogServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listCatalogsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2alpha/catalog_service.list_catalogs.js</caption>
+   * region_tag:retail_v2alpha_generated_CatalogService_ListCatalogs_async
    */
   listCatalogsAsync(
     request?: protos.google.cloud.retail.v2alpha.IListCatalogsRequest,
@@ -906,7 +903,6 @@ export class CatalogServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

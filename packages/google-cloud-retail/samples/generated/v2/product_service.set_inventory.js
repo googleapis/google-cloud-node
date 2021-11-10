@@ -22,56 +22,56 @@ function main(inventory) {
   /**
    *  Required. The inventory information to update. The allowable fields to
    *  update are:
-   *  * [Product.price_info][google.cloud.retail.v2.Product.price_info]
-   *  * [Product.availability][google.cloud.retail.v2.Product.availability]
-   *  * [Product.available_quantity][google.cloud.retail.v2.Product.available_quantity]
-   *  * [Product.fulfillment_info][google.cloud.retail.v2.Product.fulfillment_info]
+   *  * Product.price_info google.cloud.retail.v2.Product.price_info
+   *  * Product.availability google.cloud.retail.v2.Product.availability
+   *  * Product.available_quantity google.cloud.retail.v2.Product.available_quantity
+   *  * Product.fulfillment_info google.cloud.retail.v2.Product.fulfillment_info
    *  The updated inventory fields must be specified in
-   *  [SetInventoryRequest.set_mask][google.cloud.retail.v2.SetInventoryRequest.set_mask].
-   *  If [SetInventoryRequest.inventory.name][] is empty or invalid, an
+   *  SetInventoryRequest.set_mask google.cloud.retail.v2.SetInventoryRequest.set_mask.
+   *  If SetInventoryRequest.inventory.name   is empty or invalid, an
    *  INVALID_ARGUMENT error is returned.
    *  If the caller does not have permission to update the
-   *  [Product][google.cloud.retail.v2.Product] named in
-   *  [Product.name][google.cloud.retail.v2.Product.name], regardless of whether
+   *  Product google.cloud.retail.v2.Product  named in
+   *  Product.name google.cloud.retail.v2.Product.name, regardless of whether
    *  or not it exists, a PERMISSION_DENIED error is returned.
-   *  If the [Product][google.cloud.retail.v2.Product] to update does not have
+   *  If the Product google.cloud.retail.v2.Product  to update does not have
    *  existing inventory information, the provided inventory information will be
    *  inserted.
-   *  If the [Product][google.cloud.retail.v2.Product] to update has existing
+   *  If the Product google.cloud.retail.v2.Product  to update has existing
    *  inventory information, the provided inventory information will be merged
    *  while respecting the last update time for each inventory field, using the
    *  provided or default value for
-   *  [SetInventoryRequest.set_time][google.cloud.retail.v2.SetInventoryRequest.set_time].
+   *  SetInventoryRequest.set_time google.cloud.retail.v2.SetInventoryRequest.set_time.
    *  The last update time is recorded for the following inventory fields:
-   *  * [Product.price_info][google.cloud.retail.v2.Product.price_info]
-   *  * [Product.availability][google.cloud.retail.v2.Product.availability]
-   *  * [Product.available_quantity][google.cloud.retail.v2.Product.available_quantity]
-   *  * [Product.fulfillment_info][google.cloud.retail.v2.Product.fulfillment_info]
+   *  * Product.price_info google.cloud.retail.v2.Product.price_info
+   *  * Product.availability google.cloud.retail.v2.Product.availability
+   *  * Product.available_quantity google.cloud.retail.v2.Product.available_quantity
+   *  * Product.fulfillment_info google.cloud.retail.v2.Product.fulfillment_info
    *  If a full overwrite of inventory information while ignoring timestamps is
-   *  needed, [UpdateProduct][] should be invoked instead.
+   *  needed, UpdateProduct   should be invoked instead.
    */
-  // const inventory = ''
+  // const inventory = {}
   /**
    *  Indicates which inventory fields in the provided
-   *  [Product][google.cloud.retail.v2.Product] to update. If not set or set with
+   *  Product google.cloud.retail.v2.Product  to update. If not set or set with
    *  empty paths, all inventory fields will be updated.
    *  If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *  is returned and the entire update will be ignored.
    */
-  // const setMask = ''
+  // const setMask = {}
   /**
    *  The time when the request is issued, used to prevent
    *  out-of-order updates on inventory fields with the last update time
    *  recorded. If not provided, the internal system time will be used.
    */
-  // const setTime = ''
+  // const setTime = {}
   /**
-   *  If set to true, and the [Product][google.cloud.retail.v2.Product] with name
-   *  [Product.name][google.cloud.retail.v2.Product.name] is not found, the
+   *  If set to true, and the Product google.cloud.retail.v2.Product  with name
+   *  Product.name google.cloud.retail.v2.Product.name  is not found, the
    *  inventory update will still be processed and retained for at most 1 day
-   *  until the [Product][google.cloud.retail.v2.Product] is created. If set to
+   *  until the Product google.cloud.retail.v2.Product  is created. If set to
    *  false, a NOT_FOUND error is returned if the
-   *  [Product][google.cloud.retail.v2.Product] is not found.
+   *  Product google.cloud.retail.v2.Product  is not found.
    */
   // const allowMissing = true
 
@@ -81,7 +81,7 @@ function main(inventory) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function setInventory() {
+  async function callSetInventory() {
     // Construct request
     const request = {
       inventory,
@@ -93,7 +93,7 @@ function main(inventory) {
     console.log(response);
   }
 
-  setInventory();
+  callSetInventory();
   // [END retail_v2_generated_ProductService_SetInventory_async]
 }
 

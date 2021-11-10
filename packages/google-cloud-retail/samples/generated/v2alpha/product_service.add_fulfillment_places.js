@@ -21,10 +21,10 @@ function main(product, type, placeIds) {
    */
   /**
    *  Required. Full resource name of
-   *  [Product][google.cloud.retail.v2alpha.Product], such as
+   *  Product google.cloud.retail.v2alpha.Product, such as
    *  `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *  If the caller does not have permission to access the
-   *  [Product][google.cloud.retail.v2alpha.Product], regardless of whether or
+   *  Product google.cloud.retail.v2alpha.Product, regardless of whether or
    *  not it exists, a PERMISSION_DENIED error is returned.
    */
   // const product = 'abc123'
@@ -43,22 +43,22 @@ function main(product, type, placeIds) {
    *  * "custom-type-5"
    *  If this field is set to an invalid value other than these, an
    *  INVALID_ARGUMENT error is returned.
-   *  This field directly corresponds to [Product.fulfillment_info.type][].
+   *  This field directly corresponds to Product.fulfillment_info.type .
    */
   // const type = 'abc123'
   /**
    *  Required. The IDs for this
-   *  [type][google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type], such
+   *  type google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type, such
    *  as the store IDs for "pickup-in-store" or the region IDs for
    *  "same-day-delivery" to be added for this
-   *  [type][google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type].
+   *  type google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type.
    *  Duplicate IDs will be automatically ignored.
    *  At least 1 value is required, and a maximum of 2000 values are allowed.
    *  Each value must be a string with a length limit of 10 characters, matching
    *  the pattern `[a-zA-Z0-9_-]+`, such as "store1" or "REGION-2". Otherwise, an
    *  INVALID_ARGUMENT error is returned.
    *  If the total number of place IDs exceeds 2000 for this
-   *  [type][google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type] after
+   *  type google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type  after
    *  adding, then the update will be rejected.
    */
   // const placeIds = 'abc123'
@@ -67,14 +67,14 @@ function main(product, type, placeIds) {
    *  out-of-order updates on fulfillment information. If not provided, the
    *  internal system time will be used.
    */
-  // const addTime = ''
+  // const addTime = {}
   /**
-   *  If set to true, and the [Product][google.cloud.retail.v2alpha.Product] is
+   *  If set to true, and the Product google.cloud.retail.v2alpha.Product  is
    *  not found, the fulfillment information will still be processed and retained
    *  for at most 1 day and processed once the
-   *  [Product][google.cloud.retail.v2alpha.Product] is created. If set to false,
+   *  Product google.cloud.retail.v2alpha.Product  is created. If set to false,
    *  a NOT_FOUND error is returned if the
-   *  [Product][google.cloud.retail.v2alpha.Product] is not found.
+   *  Product google.cloud.retail.v2alpha.Product  is not found.
    */
   // const allowMissing = true
 
@@ -84,7 +84,7 @@ function main(product, type, placeIds) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function addFulfillmentPlaces() {
+  async function callAddFulfillmentPlaces() {
     // Construct request
     const request = {
       product,
@@ -98,7 +98,7 @@ function main(product, type, placeIds) {
     console.log(response);
   }
 
-  addFulfillmentPlaces();
+  callAddFulfillmentPlaces();
   // [END retail_v2alpha_generated_ProductService_AddFulfillmentPlaces_async]
 }
 

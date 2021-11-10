@@ -24,8 +24,8 @@ function main(placement, userEvent) {
    *  {name=projects/* /locations/global/catalogs/default_catalog/placements/*}
    *  The ID of the Recommendations AI placement. Before you can request
    *  predictions from your model, you must create at least one placement for it.
-   *  For more information, see [Managing
-   *  placements](https://cloud.google.com/retail/recommendations-ai/docs/manage-placements).
+   *  For more information, see Managing
+   *  placements (https://cloud.google.com/retail/recommendations-ai/docs/manage-placements).
    *  The full list of available placements can be seen at
    *  https://console.cloud.google.com/recommendation/catalogs/default_catalog/placements
    */
@@ -36,7 +36,7 @@ function main(placement, userEvent) {
    *  won't be ingested to userEvent logs. Thus, a separate userEvent write
    *  request is required for event logging.
    */
-  // const userEvent = ''
+  // const userEvent = {}
   /**
    *  Maximum number of results to return per page. Set this property
    *  to the number of prediction results needed. If zero, the service will
@@ -117,8 +117,8 @@ function main(placement, userEvent) {
    *  * The key portion of a label must be unique. However, you can use the same
    *    key with multiple resources.
    *  * Keys must start with a lowercase letter or international character.
-   *  See [Google Cloud
-   *  Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *  See Google Cloud
+   *  Document (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *  for more details.
    */
   // const labels = 1234
@@ -129,7 +129,7 @@ function main(placement, userEvent) {
   // Instantiates a client
   const retailClient = new PredictionServiceClient();
 
-  async function predict() {
+  async function callPredict() {
     // Construct request
     const request = {
       placement,
@@ -141,7 +141,7 @@ function main(placement, userEvent) {
     console.log(response);
   }
 
-  predict();
+  callPredict();
   // [END retail_v2_generated_PredictionService_Predict_async]
 }
 

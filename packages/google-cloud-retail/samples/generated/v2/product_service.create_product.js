@@ -25,19 +25,19 @@ function main(parent, product, productId) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The [Product][google.cloud.retail.v2.Product] to create.
+   *  Required. The Product google.cloud.retail.v2.Product  to create.
    */
-  // const product = ''
+  // const product = {}
   /**
-   *  Required. The ID to use for the [Product][google.cloud.retail.v2.Product],
+   *  Required. The ID to use for the Product google.cloud.retail.v2.Product,
    *  which will become the final component of the
-   *  [Product.name][google.cloud.retail.v2.Product.name].
+   *  Product.name google.cloud.retail.v2.Product.name.
    *  If the caller does not have permission to create the
-   *  [Product][google.cloud.retail.v2.Product], regardless of whether or not it
+   *  Product google.cloud.retail.v2.Product, regardless of whether or not it
    *  exists, a PERMISSION_DENIED error is returned.
    *  This field must be unique among all
-   *  [Product][google.cloud.retail.v2.Product]s with the same
-   *  [parent][google.cloud.retail.v2.CreateProductRequest.parent]. Otherwise, an
+   *  Product google.cloud.retail.v2.Product s with the same
+   *  parent google.cloud.retail.v2.CreateProductRequest.parent. Otherwise, an
    *  ALREADY_EXISTS error is returned.
    *  This field must be a UTF-8 encoded string with a length limit of 128
    *  characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -50,7 +50,7 @@ function main(parent, product, productId) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function createProduct() {
+  async function callCreateProduct() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent, product, productId) {
     console.log(response);
   }
 
-  createProduct();
+  callCreateProduct();
   // [END retail_v2_generated_ProductService_CreateProduct_async]
 }
 

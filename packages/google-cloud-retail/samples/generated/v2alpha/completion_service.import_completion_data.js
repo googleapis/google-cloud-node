@@ -27,12 +27,12 @@ function main(parent, inputConfig) {
   /**
    *  Required. The desired input location of the data.
    */
-  // const inputConfig = ''
+  // const inputConfig = {}
   /**
    *  Pub/Sub topic for receiving notification. If this field is set,
    *  when the import is finished, a notification will be sent to
    *  specified Pub/Sub topic. The message data will be JSON string of a
-   *  [Operation][google.longrunning.Operation].
+   *  Operation google.longrunning.Operation.
    *  Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
    */
   // const notificationPubsubTopic = 'abc123'
@@ -43,7 +43,7 @@ function main(parent, inputConfig) {
   // Instantiates a client
   const retailClient = new CompletionServiceClient();
 
-  async function importCompletionData() {
+  async function callImportCompletionData() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, inputConfig) {
     console.log(response);
   }
 
-  importCompletionData();
+  callImportCompletionData();
   // [END retail_v2alpha_generated_CompletionService_ImportCompletionData_async]
 }
 

@@ -22,26 +22,26 @@ function main(product) {
   /**
    *  Required. The product to update/create.
    *  If the caller does not have permission to update the
-   *  [Product][google.cloud.retail.v2beta.Product], regardless of whether or not
+   *  Product google.cloud.retail.v2beta.Product, regardless of whether or not
    *  it exists, a PERMISSION_DENIED error is returned.
-   *  If the [Product][google.cloud.retail.v2beta.Product] to update does not
+   *  If the Product google.cloud.retail.v2beta.Product  to update does not
    *  exist and
-   *  [allow_missing][google.cloud.retail.v2beta.UpdateProductRequest.allow_missing]
+   *  allow_missing google.cloud.retail.v2beta.UpdateProductRequest.allow_missing
    *  is not set, a NOT_FOUND error is returned.
    */
-  // const product = ''
+  // const product = {}
   /**
    *  Indicates which fields in the provided
-   *  [Product][google.cloud.retail.v2beta.Product] to update. The immutable and
+   *  Product google.cloud.retail.v2beta.Product  to update. The immutable and
    *  output only fields are NOT supported. If not set, all supported fields (the
    *  fields that are neither immutable nor output only) are updated.
    *  If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *  is returned.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
-   *  If set to true, and the [Product][google.cloud.retail.v2beta.Product] is
-   *  not found, a new [Product][google.cloud.retail.v2beta.Product] will be
+   *  If set to true, and the Product google.cloud.retail.v2beta.Product  is
+   *  not found, a new Product google.cloud.retail.v2beta.Product  will be
    *  created. In this situation, `update_mask` is ignored.
    */
   // const allowMissing = true
@@ -52,7 +52,7 @@ function main(product) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function updateProduct() {
+  async function callUpdateProduct() {
     // Construct request
     const request = {
       product,
@@ -63,7 +63,7 @@ function main(product) {
     console.log(response);
   }
 
-  updateProduct();
+  callUpdateProduct();
   // [END retail_v2beta_generated_ProductService_UpdateProduct_async]
 }
 

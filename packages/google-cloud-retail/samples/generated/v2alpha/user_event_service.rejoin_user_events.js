@@ -30,7 +30,7 @@ function main(parent) {
    *  USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
    *  invalid integer value.
    */
-  // const userEventRejoinScope = ''
+  // const userEventRejoinScope = {}
 
   // Imports the Retail library
   const {UserEventServiceClient} = require('@google-cloud/retail').v2alpha;
@@ -38,7 +38,7 @@ function main(parent) {
   // Instantiates a client
   const retailClient = new UserEventServiceClient();
 
-  async function rejoinUserEvents() {
+  async function callRejoinUserEvents() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent) {
     console.log(response);
   }
 
-  rejoinUserEvents();
+  callRejoinUserEvents();
   // [END retail_v2alpha_generated_UserEventService_RejoinUserEvents_async]
 }
 

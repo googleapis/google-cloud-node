@@ -335,37 +335,6 @@ export class CompletionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  completeQuery(
-    request?: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-      protos.google.cloud.retail.v2beta.ICompleteQueryRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  completeQuery(
-    request: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-      | protos.google.cloud.retail.v2beta.ICompleteQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeQuery(
-    request: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
-      | protos.google.cloud.retail.v2beta.ICompleteQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Completes the specified prefix with keyword suggestions.
    *
@@ -442,9 +411,40 @@ export class CompletionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.completeQuery(request);
+   * @example <caption>include:samples/generated/v2beta/completion_service.complete_query.js</caption>
+   * region_tag:retail_v2beta_generated_CompletionService_CompleteQuery_async
    */
+  completeQuery(
+    request?: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
+      protos.google.cloud.retail.v2beta.ICompleteQueryRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  completeQuery(
+    request: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
+      | protos.google.cloud.retail.v2beta.ICompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  completeQuery(
+    request: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2beta.ICompleteQueryResponse,
+      | protos.google.cloud.retail.v2beta.ICompleteQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   completeQuery(
     request?: protos.google.cloud.retail.v2beta.ICompleteQueryRequest,
     optionsOrCallback?:
@@ -489,6 +489,41 @@ export class CompletionServiceClient {
     return this.innerApiCalls.completeQuery(request, options, callback);
   }
 
+  /**
+   * Bulk import of processed completion dataset.
+   *
+   * Request processing may be synchronous. Partial updating is not supported.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * cloud sales if you are interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The catalog which the suggestions dataset belongs to.
+   *
+   *   Format: `projects/1234/locations/global/catalogs/default_catalog`.
+   * @param {google.cloud.retail.v2beta.CompletionDataInputConfig} request.inputConfig
+   *   Required. The desired input location of the data.
+   * @param {string} request.notificationPubsubTopic
+   *   Pub/Sub topic for receiving notification. If this field is set,
+   *   when the import is finished, a notification will be sent to
+   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   {@link google.longrunning.Operation|Operation}.
+   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/completion_service.import_completion_data.js</caption>
+   * region_tag:retail_v2beta_generated_CompletionService_ImportCompletionData_async
+   */
   importCompletionData(
     request?: protos.google.cloud.retail.v2beta.IImportCompletionDataRequest,
     options?: CallOptions
@@ -525,42 +560,6 @@ export class CompletionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Bulk import of processed completion dataset.
-   *
-   * Request processing may be synchronous. Partial updating is not supported.
-   *
-   * This feature is only available for users who have Retail Search enabled.
-   * Please submit a form [here](https://cloud.google.com/contact) to contact
-   * cloud sales if you are interested in using Retail Search.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The catalog which the suggestions dataset belongs to.
-   *
-   *   Format: `projects/1234/locations/global/catalogs/default_catalog`.
-   * @param {google.cloud.retail.v2beta.CompletionDataInputConfig} request.inputConfig
-   *   Required. The desired input location of the data.
-   * @param {string} request.notificationPubsubTopic
-   *   Pub/Sub topic for receiving notification. If this field is set,
-   *   when the import is finished, a notification will be sent to
-   *   specified Pub/Sub topic. The message data will be JSON string of a
-   *   {@link google.longrunning.Operation|Operation}.
-   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.importCompletionData(request);
-   * const [response] = await operation.promise();
-   */
   importCompletionData(
     request?: protos.google.cloud.retail.v2beta.IImportCompletionDataRequest,
     optionsOrCallback?:
@@ -618,11 +617,8 @@ export class CompletionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkImportCompletionDataProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2beta/completion_service.import_completion_data.js</caption>
+   * region_tag:retail_v2beta_generated_CompletionService_ImportCompletionData_async
    */
   async checkImportCompletionDataProgress(
     name: string

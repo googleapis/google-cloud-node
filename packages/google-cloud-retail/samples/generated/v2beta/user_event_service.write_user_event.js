@@ -27,7 +27,7 @@ function main(parent, userEvent) {
   /**
    *  Required. User event to write.
    */
-  // const userEvent = ''
+  // const userEvent = {}
 
   // Imports the Retail library
   const {UserEventServiceClient} = require('@google-cloud/retail').v2beta;
@@ -35,7 +35,7 @@ function main(parent, userEvent) {
   // Instantiates a client
   const retailClient = new UserEventServiceClient();
 
-  async function writeUserEvent() {
+  async function callWriteUserEvent() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, userEvent) {
     console.log(response);
   }
 
-  writeUserEvent();
+  callWriteUserEvent();
   // [END retail_v2beta_generated_UserEventService_WriteUserEvent_async]
 }
 

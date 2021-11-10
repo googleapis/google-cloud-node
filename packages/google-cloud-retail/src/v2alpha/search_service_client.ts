@@ -322,33 +322,6 @@ export class SearchServiceClient {
   // -- Service calls --
   // -------------------
 
-  search(
-    request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
-      protos.google.cloud.retail.v2alpha.ISearchRequest | null,
-      protos.google.cloud.retail.v2alpha.ISearchResponse
-    ]
-  >;
-  search(
-    request: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.ISearchRequest,
-      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-    >
-  ): void;
-  search(
-    request: protos.google.cloud.retail.v2alpha.ISearchRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.retail.v2alpha.ISearchRequest,
-      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
-      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
-    >
-  ): void;
   /**
    * Performs a search.
    *
@@ -569,6 +542,33 @@ export class SearchServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  search(
+    request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult[],
+      protos.google.cloud.retail.v2alpha.ISearchRequest | null,
+      protos.google.cloud.retail.v2alpha.ISearchResponse
+    ]
+  >;
+  search(
+    request: protos.google.cloud.retail.v2alpha.ISearchRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.ISearchRequest,
+      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
+      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
+    >
+  ): void;
+  search(
+    request: protos.google.cloud.retail.v2alpha.ISearchRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.ISearchRequest,
+      protos.google.cloud.retail.v2alpha.ISearchResponse | null | undefined,
+      protos.google.cloud.retail.v2alpha.SearchResponse.ISearchResult
+    >
+  ): void;
   search(
     request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
     optionsOrCallback?:
@@ -1059,11 +1059,8 @@ export class SearchServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.searchAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2alpha/search_service.search.js</caption>
+   * region_tag:retail_v2alpha_generated_SearchService_Search_async
    */
   searchAsync(
     request?: protos.google.cloud.retail.v2alpha.ISearchRequest,
@@ -1077,7 +1074,6 @@ export class SearchServiceClient {
       gax.routingHeader.fromParams({
         placement: request.placement || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

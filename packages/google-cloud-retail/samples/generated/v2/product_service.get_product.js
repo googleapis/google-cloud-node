@@ -20,13 +20,13 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Full resource name of [Product][google.cloud.retail.v2.Product],
+   *  Required. Full resource name of Product google.cloud.retail.v2.Product,
    *  such as
    *  `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *  If the caller does not have permission to access the
-   *  [Product][google.cloud.retail.v2.Product], regardless of whether or not it
+   *  Product google.cloud.retail.v2.Product, regardless of whether or not it
    *  exists, a PERMISSION_DENIED error is returned.
-   *  If the requested [Product][google.cloud.retail.v2.Product] does not exist,
+   *  If the requested Product google.cloud.retail.v2.Product  does not exist,
    *  a NOT_FOUND error is returned.
    */
   // const name = 'abc123'
@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function getProduct() {
+  async function callGetProduct() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  getProduct();
+  callGetProduct();
   // [END retail_v2_generated_ProductService_GetProduct_async]
 }
 

@@ -20,21 +20,21 @@ function main(catalog) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [Catalog][google.cloud.retail.v2alpha.Catalog] to update.
+   *  Required. The Catalog google.cloud.retail.v2alpha.Catalog  to update.
    *  If the caller does not have permission to update the
-   *  [Catalog][google.cloud.retail.v2alpha.Catalog], regardless of whether or
+   *  Catalog google.cloud.retail.v2alpha.Catalog, regardless of whether or
    *  not it exists, a PERMISSION_DENIED error is returned.
-   *  If the [Catalog][google.cloud.retail.v2alpha.Catalog] to update does not
+   *  If the Catalog google.cloud.retail.v2alpha.Catalog  to update does not
    *  exist, a NOT_FOUND error is returned.
    */
-  // const catalog = ''
+  // const catalog = {}
   /**
    *  Indicates which fields in the provided
-   *  [Catalog][google.cloud.retail.v2alpha.Catalog] to update.
+   *  Catalog google.cloud.retail.v2alpha.Catalog  to update.
    *  If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *  is returned.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Retail library
   const {CatalogServiceClient} = require('@google-cloud/retail').v2alpha;
@@ -42,7 +42,7 @@ function main(catalog) {
   // Instantiates a client
   const retailClient = new CatalogServiceClient();
 
-  async function updateCatalog() {
+  async function callUpdateCatalog() {
     // Construct request
     const request = {
       catalog,
@@ -53,7 +53,7 @@ function main(catalog) {
     console.log(response);
   }
 
-  updateCatalog();
+  callUpdateCatalog();
   // [END retail_v2alpha_generated_CatalogService_UpdateCatalog_async]
 }
 

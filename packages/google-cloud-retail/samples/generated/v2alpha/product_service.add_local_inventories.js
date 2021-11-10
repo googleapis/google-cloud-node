@@ -21,10 +21,10 @@ function main(product, localInventories) {
    */
   /**
    *  Required. Full resource name of
-   *  [Product][google.cloud.retail.v2alpha.Product], such as
+   *  Product google.cloud.retail.v2alpha.Product, such as
    *  `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *  If the caller does not have permission to access the
-   *  [Product][google.cloud.retail.v2alpha.Product], regardless of whether or
+   *  Product google.cloud.retail.v2alpha.Product, regardless of whether or
    *  not it exists, a PERMISSION_DENIED error is returned.
    */
   // const product = 'abc123'
@@ -36,7 +36,7 @@ function main(product, localInventories) {
   // const localInventories = 1234
   /**
    *  Indicates which inventory fields in the provided list of
-   *  [LocalInventory][google.cloud.retail.v2alpha.LocalInventory] to update. The
+   *  LocalInventory google.cloud.retail.v2alpha.LocalInventory  to update. The
    *  field is updated to the provided value.
    *  If a field is set while the place does not have a previous local inventory,
    *  the local inventory at that store is created.
@@ -47,20 +47,20 @@ function main(product, localInventories) {
    *  If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *  is returned and the entire update will be ignored.
    */
-  // const addMask = ''
+  // const addMask = {}
   /**
    *  The time when the inventory updates are issued. Used to prevent
    *  out-of-order updates on local inventory fields. If not provided, the
    *  internal system time will be used.
    */
-  // const addTime = ''
+  // const addTime = {}
   /**
-   *  If set to true, and the [Product][google.cloud.retail.v2alpha.Product] is
+   *  If set to true, and the Product google.cloud.retail.v2alpha.Product  is
    *  not found, the local inventory will still be processed and retained for at
    *  most 1 day and processed once the
-   *  [Product][google.cloud.retail.v2alpha.Product] is created. If set to false,
+   *  Product google.cloud.retail.v2alpha.Product  is created. If set to false,
    *  an INVALID_ARGUMENT error is returned if the
-   *  [Product][google.cloud.retail.v2alpha.Product] is not found.
+   *  Product google.cloud.retail.v2alpha.Product  is not found.
    */
   // const allowMissing = true
 
@@ -70,7 +70,7 @@ function main(product, localInventories) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function addLocalInventories() {
+  async function callAddLocalInventories() {
     // Construct request
     const request = {
       product,
@@ -83,7 +83,7 @@ function main(product, localInventories) {
     console.log(response);
   }
 
-  addLocalInventories();
+  callAddLocalInventories();
   // [END retail_v2alpha_generated_ProductService_AddLocalInventories_async]
 }
 

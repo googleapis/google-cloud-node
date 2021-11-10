@@ -20,11 +20,11 @@ function main(product, type, placeIds) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Full resource name of [Product][google.cloud.retail.v2.Product],
+   *  Required. Full resource name of Product google.cloud.retail.v2.Product,
    *  such as
    *  `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *  If the caller does not have permission to access the
-   *  [Product][google.cloud.retail.v2.Product], regardless of whether or not it
+   *  Product google.cloud.retail.v2.Product, regardless of whether or not it
    *  exists, a PERMISSION_DENIED error is returned.
    */
   // const product = 'abc123'
@@ -43,15 +43,15 @@ function main(product, type, placeIds) {
    *  * "custom-type-5"
    *  If this field is set to an invalid value other than these, an
    *  INVALID_ARGUMENT error is returned.
-   *  This field directly corresponds to [Product.fulfillment_info.type][].
+   *  This field directly corresponds to Product.fulfillment_info.type .
    */
   // const type = 'abc123'
   /**
    *  Required. The IDs for this
-   *  [type][google.cloud.retail.v2.RemoveFulfillmentPlacesRequest.type], such as
+   *  type google.cloud.retail.v2.RemoveFulfillmentPlacesRequest.type, such as
    *  the store IDs for "pickup-in-store" or the region IDs for
    *  "same-day-delivery", to be removed for this
-   *  [type][google.cloud.retail.v2.RemoveFulfillmentPlacesRequest.type].
+   *  type google.cloud.retail.v2.RemoveFulfillmentPlacesRequest.type.
    *  At least 1 value is required, and a maximum of 2000 values are allowed.
    *  Each value must be a string with a length limit of 10 characters, matching
    *  the pattern `[a-zA-Z0-9_-]+`, such as "store1" or "REGION-2". Otherwise, an
@@ -63,14 +63,14 @@ function main(product, type, placeIds) {
    *  out-of-order updates on fulfillment information. If not provided, the
    *  internal system time will be used.
    */
-  // const removeTime = ''
+  // const removeTime = {}
   /**
-   *  If set to true, and the [Product][google.cloud.retail.v2.Product] is not
+   *  If set to true, and the Product google.cloud.retail.v2.Product  is not
    *  found, the fulfillment information will still be processed and retained for
    *  at most 1 day and processed once the
-   *  [Product][google.cloud.retail.v2.Product] is created. If set to false, a
+   *  Product google.cloud.retail.v2.Product  is created. If set to false, a
    *  NOT_FOUND error is returned if the
-   *  [Product][google.cloud.retail.v2.Product] is not found.
+   *  Product google.cloud.retail.v2.Product  is not found.
    */
   // const allowMissing = true
 
@@ -80,7 +80,7 @@ function main(product, type, placeIds) {
   // Instantiates a client
   const retailClient = new ProductServiceClient();
 
-  async function removeFulfillmentPlaces() {
+  async function callRemoveFulfillmentPlaces() {
     // Construct request
     const request = {
       product,
@@ -94,7 +94,7 @@ function main(product, type, placeIds) {
     console.log(response);
   }
 
-  removeFulfillmentPlaces();
+  callRemoveFulfillmentPlaces();
   // [END retail_v2_generated_ProductService_RemoveFulfillmentPlaces_async]
 }
 

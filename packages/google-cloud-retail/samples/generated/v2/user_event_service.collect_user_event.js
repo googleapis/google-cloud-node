@@ -49,7 +49,7 @@ function main(parent, userEvent) {
   // Instantiates a client
   const retailClient = new UserEventServiceClient();
 
-  async function collectUserEvent() {
+  async function callCollectUserEvent() {
     // Construct request
     const request = {
       parent,
@@ -61,7 +61,7 @@ function main(parent, userEvent) {
     console.log(response);
   }
 
-  collectUserEvent();
+  callCollectUserEvent();
   // [END retail_v2_generated_UserEventService_CollectUserEvent_async]
 }
 

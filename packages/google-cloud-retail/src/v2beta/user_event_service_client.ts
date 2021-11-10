@@ -356,6 +356,26 @@ export class UserEventServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Writes a single user event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent catalog resource name, such as
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
+   * @param {google.cloud.retail.v2beta.UserEvent} request.userEvent
+   *   Required. User event to write.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UserEvent]{@link google.cloud.retail.v2beta.UserEvent}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/user_event_service.write_user_event.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_WriteUserEvent_async
+   */
   writeUserEvent(
     request?: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
     options?: CallOptions
@@ -387,26 +407,6 @@ export class UserEventServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Writes a single user event.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent catalog resource name, such as
-   *   `projects/1234/locations/global/catalogs/default_catalog`.
-   * @param {google.cloud.retail.v2beta.UserEvent} request.userEvent
-   *   Required. User event to write.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UserEvent]{@link google.cloud.retail.v2beta.UserEvent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.writeUserEvent(request);
-   */
   writeUserEvent(
     request?: protos.google.cloud.retail.v2beta.IWriteUserEventRequest,
     optionsOrCallback?:
@@ -450,37 +450,6 @@ export class UserEventServiceClient {
     this.initialize();
     return this.innerApiCalls.writeUserEvent(request, options, callback);
   }
-  collectUserEvent(
-    request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.cloud.retail.v2beta.ICollectUserEventRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  collectUserEvent(
-    request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  collectUserEvent(
-    request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Writes a single user event from the browser. This uses a GET request to
    * due to browser restriction of POST-ing to a 3rd party domain.
@@ -512,9 +481,40 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.collectUserEvent(request);
+   * @example <caption>include:samples/generated/v2beta/user_event_service.collect_user_event.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_CollectUserEvent_async
    */
+  collectUserEvent(
+    request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.cloud.retail.v2beta.ICollectUserEventRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  collectUserEvent(
+    request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  collectUserEvent(
+    request: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.retail.v2beta.ICollectUserEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   collectUserEvent(
     request?: protos.google.cloud.retail.v2beta.ICollectUserEventRequest,
     optionsOrCallback?:
@@ -559,42 +559,6 @@ export class UserEventServiceClient {
     return this.innerApiCalls.collectUserEvent(request, options, callback);
   }
 
-  purgeUserEvents(
-    request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  purgeUserEvents(
-    request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  purgeUserEvents(
-    request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
-        protos.google.cloud.retail.v2beta.IPurgeMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Deletes permanently all user events specified by the filter provided.
    * Depending on the number of events specified by the filter, this operation
@@ -645,10 +609,45 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.purgeUserEvents(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2beta/user_event_service.purge_user_events.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_PurgeUserEvents_async
    */
+  purgeUserEvents(
+    request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeUserEvents(
+    request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeUserEvents(
+    request: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2beta.IPurgeUserEventsResponse,
+        protos.google.cloud.retail.v2beta.IPurgeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   purgeUserEvents(
     request?: protos.google.cloud.retail.v2beta.IPurgeUserEventsRequest,
     optionsOrCallback?:
@@ -706,11 +705,8 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkPurgeUserEventsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2beta/user_event_service.purge_user_events.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_PurgeUserEvents_async
    */
   async checkPurgeUserEventsProgress(
     name: string
@@ -734,6 +730,36 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2beta.PurgeMetadata
     >;
   }
+  /**
+   * Bulk import of User events. Request processing might be
+   * synchronous. Events that already exist are skipped.
+   * Use this method for backfilling historical user events.
+   *
+   * Operation.response is of type ImportResponse. Note that it is
+   * possible for a subset of the items to be successfully inserted.
+   * Operation.metadata is of type ImportMetadata.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. `projects/1234/locations/global/catalogs/default_catalog`
+   * @param {google.cloud.retail.v2beta.UserEventInputConfig} request.inputConfig
+   *   Required. The desired input location of the data.
+   * @param {google.cloud.retail.v2beta.ImportErrorsConfig} request.errorsConfig
+   *   The desired location of errors incurred during the Import. Cannot be set
+   *   for inline user event imports.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/user_event_service.import_user_events.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_ImportUserEvents_async
+   */
   importUserEvents(
     request?: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
     options?: CallOptions
@@ -770,37 +796,6 @@ export class UserEventServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Bulk import of User events. Request processing might be
-   * synchronous. Events that already exist are skipped.
-   * Use this method for backfilling historical user events.
-   *
-   * Operation.response is of type ImportResponse. Note that it is
-   * possible for a subset of the items to be successfully inserted.
-   * Operation.metadata is of type ImportMetadata.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. `projects/1234/locations/global/catalogs/default_catalog`
-   * @param {google.cloud.retail.v2beta.UserEventInputConfig} request.inputConfig
-   *   Required. The desired input location of the data.
-   * @param {google.cloud.retail.v2beta.ImportErrorsConfig} request.errorsConfig
-   *   The desired location of errors incurred during the Import. Cannot be set
-   *   for inline user event imports.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.importUserEvents(request);
-   * const [response] = await operation.promise();
-   */
   importUserEvents(
     request?: protos.google.cloud.retail.v2beta.IImportUserEventsRequest,
     optionsOrCallback?:
@@ -858,11 +853,8 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkImportUserEventsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2beta/user_event_service.import_user_events.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_ImportUserEvents_async
    */
   async checkImportUserEventsProgress(
     name: string
@@ -886,6 +878,37 @@ export class UserEventServiceClient {
       protos.google.cloud.retail.v2beta.ImportMetadata
     >;
   }
+  /**
+   * Triggers a user event rejoin operation with latest product catalog. Events
+   * will not be annotated with detailed product information if product is
+   * missing from the catalog at the time the user event is ingested, and these
+   * events are stored as unjoined events with a limited usage on training and
+   * serving. This API can be used to trigger a 'join' operation on specified
+   * events with latest version of product catalog. It can also be used to
+   * correct events joined with wrong product catalog.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent catalog resource name, such as
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
+   * @param {google.cloud.retail.v2beta.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
+   *   The type of the user event rejoin to define the scope and range of the user
+   *   events to be rejoined with the latest product catalog. Defaults to
+   *   USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
+   *   invalid integer value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/user_event_service.rejoin_user_events.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_RejoinUserEvents_async
+   */
   rejoinUserEvents(
     request?: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
     options?: CallOptions
@@ -922,38 +945,6 @@ export class UserEventServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Triggers a user event rejoin operation with latest product catalog. Events
-   * will not be annotated with detailed product information if product is
-   * missing from the catalog at the time the user event is ingested, and these
-   * events are stored as unjoined events with a limited usage on training and
-   * serving. This API can be used to trigger a 'join' operation on specified
-   * events with latest version of product catalog. It can also be used to
-   * correct events joined with wrong product catalog.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent catalog resource name, such as
-   *   `projects/1234/locations/global/catalogs/default_catalog`.
-   * @param {google.cloud.retail.v2beta.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
-   *   The type of the user event rejoin to define the scope and range of the user
-   *   events to be rejoined with the latest product catalog. Defaults to
-   *   USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
-   *   invalid integer value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.rejoinUserEvents(request);
-   * const [response] = await operation.promise();
-   */
   rejoinUserEvents(
     request?: protos.google.cloud.retail.v2beta.IRejoinUserEventsRequest,
     optionsOrCallback?:
@@ -1011,11 +1002,8 @@ export class UserEventServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRejoinUserEventsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2beta/user_event_service.rejoin_user_events.js</caption>
+   * region_tag:retail_v2beta_generated_UserEventService_RejoinUserEvents_async
    */
   async checkRejoinUserEventsProgress(
     name: string

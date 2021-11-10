@@ -31,7 +31,7 @@ function main() {
   // Instantiates a client
   const retailClient = new CatalogServiceClient();
 
-  async function getDefaultBranch() {
+  async function callGetDefaultBranch() {
     // Construct request
     const request = {};
 
@@ -40,7 +40,7 @@ function main() {
     console.log(response);
   }
 
-  getDefaultBranch();
+  callGetDefaultBranch();
   // [END retail_v2alpha_generated_CatalogService_GetDefaultBranch_async]
 }
 
