@@ -478,6 +478,31 @@ export class CloudBuildClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Returns information about a previously requested build.
+   *
+   * The `Build` that is returned includes its status (such as `SUCCESS`,
+   * `FAILURE`, or `WORKING`), and timing information.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Build` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/builds/{build}`
+   * @param {string} request.projectId
+   *   Required. ID of the project.
+   * @param {string} request.id
+   *   Required. ID of the build.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.get_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_GetBuild_async
+   */
   getBuild(
     request?: protos.google.devtools.cloudbuild.v1.IGetBuildRequest,
     options?: CallOptions
@@ -505,31 +530,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns information about a previously requested build.
-   *
-   * The `Build` that is returned includes its status (such as `SUCCESS`,
-   * `FAILURE`, or `WORKING`), and timing information.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the `Build` to retrieve.
-   *   Format: `projects/{project}/locations/{location}/builds/{build}`
-   * @param {string} request.projectId
-   *   Required. ID of the project.
-   * @param {string} request.id
-   *   Required. ID of the build.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getBuild(request);
-   */
   getBuild(
     request?: protos.google.devtools.cloudbuild.v1.IGetBuildRequest,
     optionsOrCallback?:
@@ -572,6 +572,28 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.getBuild(request, options, callback);
   }
+  /**
+   * Cancels a build in progress.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Build` to cancel.
+   *   Format: `projects/{project}/locations/{location}/builds/{build}`
+   * @param {string} request.projectId
+   *   Required. ID of the project.
+   * @param {string} request.id
+   *   Required. ID of the build.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.cancel_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_CancelBuild_async
+   */
   cancelBuild(
     request?: protos.google.devtools.cloudbuild.v1.ICancelBuildRequest,
     options?: CallOptions
@@ -603,28 +625,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Cancels a build in progress.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the `Build` to cancel.
-   *   Format: `projects/{project}/locations/{location}/builds/{build}`
-   * @param {string} request.projectId
-   *   Required. ID of the project.
-   * @param {string} request.id
-   *   Required. ID of the build.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Build]{@link google.devtools.cloudbuild.v1.Build}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.cancelBuild(request);
-   */
   cancelBuild(
     request?: protos.google.devtools.cloudbuild.v1.ICancelBuildRequest,
     optionsOrCallback?:
@@ -669,6 +669,30 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.cancelBuild(request, options, callback);
   }
+  /**
+   * Creates a new `BuildTrigger`.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource where this trigger will be created.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.projectId
+   *   Required. ID of the project for which to configure automatic builds.
+   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
+   *   Required. `BuildTrigger` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.create_build_trigger.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_CreateBuildTrigger_async
+   */
   createBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
     options?: CallOptions
@@ -703,30 +727,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new `BuildTrigger`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent resource where this trigger will be created.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.projectId
-   *   Required. ID of the project for which to configure automatic builds.
-   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
-   *   Required. `BuildTrigger` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createBuildTrigger(request);
-   */
   createBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
     optionsOrCallback?:
@@ -774,6 +774,30 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.createBuildTrigger(request, options, callback);
   }
+  /**
+   * Returns information about a `BuildTrigger`.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Trigger` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
+   * @param {string} request.projectId
+   *   Required. ID of the project that owns the trigger.
+   * @param {string} request.triggerId
+   *   Required. Identifier (`id` or `name`) of the `BuildTrigger` to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.get_build_trigger.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_GetBuildTrigger_async
+   */
   getBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
     options?: CallOptions
@@ -805,30 +829,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns information about a `BuildTrigger`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the `Trigger` to retrieve.
-   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
-   * @param {string} request.projectId
-   *   Required. ID of the project that owns the trigger.
-   * @param {string} request.triggerId
-   *   Required. Identifier (`id` or `name`) of the `BuildTrigger` to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getBuildTrigger(request);
-   */
   getBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
     optionsOrCallback?:
@@ -873,6 +873,30 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.getBuildTrigger(request, options, callback);
   }
+  /**
+   * Deletes a `BuildTrigger` by its project ID and trigger ID.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Trigger` to delete.
+   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
+   * @param {string} request.projectId
+   *   Required. ID of the project that owns the trigger.
+   * @param {string} request.triggerId
+   *   Required. ID of the `BuildTrigger` to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.delete_build_trigger.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_DeleteBuildTrigger_async
+   */
   deleteBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
     options?: CallOptions
@@ -907,30 +931,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a `BuildTrigger` by its project ID and trigger ID.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the `Trigger` to delete.
-   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
-   * @param {string} request.projectId
-   *   Required. ID of the project that owns the trigger.
-   * @param {string} request.triggerId
-   *   Required. ID of the `BuildTrigger` to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteBuildTrigger(request);
-   */
   deleteBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
     optionsOrCallback?:
@@ -978,6 +978,29 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.deleteBuildTrigger(request, options, callback);
   }
+  /**
+   * Updates a `BuildTrigger` by its project ID and trigger ID.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. ID of the project that owns the trigger.
+   * @param {string} request.triggerId
+   *   Required. ID of the `BuildTrigger` to update.
+   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
+   *   Required. `BuildTrigger` to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.update_build_trigger.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_async
+   */
   updateBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
     options?: CallOptions
@@ -1012,29 +1035,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a `BuildTrigger` by its project ID and trigger ID.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. ID of the project that owns the trigger.
-   * @param {string} request.triggerId
-   *   Required. ID of the `BuildTrigger` to update.
-   * @param {google.devtools.cloudbuild.v1.BuildTrigger} request.trigger
-   *   Required. `BuildTrigger` to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateBuildTrigger(request);
-   */
   updateBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
     optionsOrCallback?:
@@ -1082,6 +1082,33 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.updateBuildTrigger(request, options, callback);
   }
+  /**
+   * ReceiveTriggerWebhook [Experimental] is called when the API receives a
+   * webhook request targeted at a specific trigger.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `ReceiveTriggerWebhook` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
+   * @param {google.api.HttpBody} request.body
+   *   HTTP request body.
+   * @param {string} request.projectId
+   *   Project in which the specified trigger lives
+   * @param {string} request.trigger
+   *   Name of the trigger to run the payload against
+   * @param {string} request.secret
+   *   Secret token used for authorization if an OAuth token isn't provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ReceiveTriggerWebhookResponse]{@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.receive_trigger_webhook.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_ReceiveTriggerWebhook_async
+   */
   receiveTriggerWebhook(
     request?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
     options?: CallOptions
@@ -1116,33 +1143,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * ReceiveTriggerWebhook [Experimental] is called when the API receives a
-   * webhook request targeted at a specific trigger.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the `ReceiveTriggerWebhook` to retrieve.
-   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
-   * @param {google.api.HttpBody} request.body
-   *   HTTP request body.
-   * @param {string} request.projectId
-   *   Project in which the specified trigger lives
-   * @param {string} request.trigger
-   *   Name of the trigger to run the payload against
-   * @param {string} request.secret
-   *   Secret token used for authorization if an OAuth token isn't provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReceiveTriggerWebhookResponse]{@link google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.receiveTriggerWebhook(request);
-   */
   receiveTriggerWebhook(
     request?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
     optionsOrCallback?:
@@ -1190,6 +1190,24 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.receiveTriggerWebhook(request, options, callback);
   }
+  /**
+   * Returns details of a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `WorkerPool` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.get_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_GetWorkerPool_async
+   */
   getWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     options?: CallOptions
@@ -1221,24 +1239,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns details of a `WorkerPool`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `WorkerPool` to retrieve.
-   *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getWorkerPool(request);
-   */
   getWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     optionsOrCallback?:
@@ -1283,6 +1283,34 @@ export class CloudBuildClient {
     return this.innerApiCalls.getWorkerPool(request, options, callback);
   }
 
+  /**
+   * Starts a build with the specified configuration.
+   *
+   * This method returns a long-running `Operation`, which includes the build
+   * ID. Pass the build ID to `GetBuild` to determine the build status (such as
+   * `SUCCESS` or `FAILURE`).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource where this build will be created.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.projectId
+   *   Required. ID of the project.
+   * @param {google.devtools.cloudbuild.v1.Build} request.build
+   *   Required. Build resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.create_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_CreateBuild_async
+   */
   createBuild(
     request?: protos.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     options?: CallOptions
@@ -1319,35 +1347,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Starts a build with the specified configuration.
-   *
-   * This method returns a long-running `Operation`, which includes the build
-   * ID. Pass the build ID to `GetBuild` to determine the build status (such as
-   * `SUCCESS` or `FAILURE`).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent resource where this build will be created.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.projectId
-   *   Required. ID of the project.
-   * @param {google.devtools.cloudbuild.v1.Build} request.build
-   *   Required. Build resource to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createBuild(request);
-   * const [response] = await operation.promise();
-   */
   createBuild(
     request?: protos.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     optionsOrCallback?:
@@ -1406,11 +1405,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateBuildProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.create_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_CreateBuild_async
    */
   async checkCreateBuildProgress(
     name: string
@@ -1434,42 +1430,6 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >;
   }
-  retryBuild(
-    request?: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  retryBuild(
-    request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  retryBuild(
-    request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.devtools.cloudbuild.v1.IBuild,
-        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a new build based on the specified build.
    *
@@ -1517,10 +1477,45 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.retryBuild(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_build.retry_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_RetryBuild_async
    */
+  retryBuild(
+    request?: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IBuild,
+        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  retryBuild(
+    request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IBuild,
+        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  retryBuild(
+    request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IBuild,
+        protos.google.devtools.cloudbuild.v1.IBuildOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   retryBuild(
     request?: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
     optionsOrCallback?:
@@ -1579,11 +1574,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRetryBuildProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.retry_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_RetryBuild_async
    */
   async checkRetryBuildProgress(
     name: string
@@ -1607,6 +1599,33 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >;
   }
+  /**
+   * Approves or rejects a pending build.
+   *
+   * If approved, the returned LRO will be analogous to the LRO returned from
+   * a CreateBuild call.
+   *
+   * If rejected, the returned LRO will be immediately done.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the target build.
+   *   For example: "projects/{$project_id}/builds/{$build_id}"
+   * @param {google.devtools.cloudbuild.v1.ApprovalResult} request.approvalResult
+   *   Approval decision and metadata.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.approve_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_ApproveBuild_async
+   */
   approveBuild(
     request?: protos.google.devtools.cloudbuild.v1.IApproveBuildRequest,
     options?: CallOptions
@@ -1643,34 +1662,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Approves or rejects a pending build.
-   *
-   * If approved, the returned LRO will be analogous to the LRO returned from
-   * a CreateBuild call.
-   *
-   * If rejected, the returned LRO will be immediately done.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the target build.
-   *   For example: "projects/{$project_id}/builds/{$build_id}"
-   * @param {google.devtools.cloudbuild.v1.ApprovalResult} request.approvalResult
-   *   Approval decision and metadata.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.approveBuild(request);
-   * const [response] = await operation.promise();
-   */
   approveBuild(
     request?: protos.google.devtools.cloudbuild.v1.IApproveBuildRequest,
     optionsOrCallback?:
@@ -1728,11 +1719,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkApproveBuildProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.approve_build.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_ApproveBuild_async
    */
   async checkApproveBuildProgress(
     name: string
@@ -1756,6 +1744,32 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >;
   }
+  /**
+   * Runs a `BuildTrigger` at a particular source revision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the `Trigger` to run.
+   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
+   * @param {string} request.projectId
+   *   Required. ID of the project.
+   * @param {string} request.triggerId
+   *   Required. ID of the trigger.
+   * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
+   *   Source to build against this trigger.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.run_build_trigger.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_RunBuildTrigger_async
+   */
   runBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     options?: CallOptions
@@ -1792,33 +1806,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Runs a `BuildTrigger` at a particular source revision.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the `Trigger` to run.
-   *   Format: `projects/{project}/locations/{location}/triggers/{trigger}`
-   * @param {string} request.projectId
-   *   Required. ID of the project.
-   * @param {string} request.triggerId
-   *   Required. ID of the trigger.
-   * @param {google.devtools.cloudbuild.v1.RepoSource} request.source
-   *   Source to build against this trigger.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.runBuildTrigger(request);
-   * const [response] = await operation.promise();
-   */
   runBuildTrigger(
     request?: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     optionsOrCallback?:
@@ -1877,11 +1864,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRunBuildTriggerProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.run_build_trigger.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_RunBuildTrigger_async
    */
   async checkRunBuildTriggerProgress(
     name: string
@@ -1905,6 +1889,37 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >;
   }
+  /**
+   * Creates a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this worker pool will be created.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
+   *   Required. `WorkerPool` resource to create.
+   * @param {string} request.workerPoolId
+   *   Required. Immutable. The ID to use for the `WorkerPool`, which will become
+   *   the final component of the resource name.
+   *
+   *   This value should be 1-63 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the response, but do not actually
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.create_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_CreateWorkerPool_async
+   */
   createWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
     options?: CallOptions
@@ -1941,38 +1956,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a `WorkerPool`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this worker pool will be created.
-   *   Format: `projects/{project}/locations/{location}`.
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
-   *   Required. `WorkerPool` resource to create.
-   * @param {string} request.workerPoolId
-   *   Required. Immutable. The ID to use for the `WorkerPool`, which will become
-   *   the final component of the resource name.
-   *
-   *   This value should be 1-63 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the response, but do not actually
-   *   post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createWorkerPool(request);
-   * const [response] = await operation.promise();
-   */
   createWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
     optionsOrCallback?:
@@ -2030,11 +2013,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateWorkerPoolProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.create_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_CreateWorkerPool_async
    */
   async checkCreateWorkerPoolProgress(
     name: string
@@ -2058,6 +2038,36 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata
     >;
   }
+  /**
+   * Deletes a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `WorkerPool` to delete.
+   *   Format:
+   *   `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+   * @param {string} request.etag
+   *   Optional. If this is provided, it must match the server's etag on the
+   *   workerpool for the request to be processed.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the `WorkerPool` is not found, the request will succeed
+   *   but no action will be taken on the server.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the response, but do not actually
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.delete_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_async
+   */
   deleteWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
     options?: CallOptions
@@ -2094,37 +2104,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a `WorkerPool`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `WorkerPool` to delete.
-   *   Format:
-   *   `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
-   * @param {string} request.etag
-   *   Optional. If this is provided, it must match the server's etag on the
-   *   workerpool for the request to be processed.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the `WorkerPool` is not found, the request will succeed
-   *   but no action will be taken on the server.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the response, but do not actually
-   *   post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteWorkerPool(request);
-   * const [response] = await operation.promise();
-   */
   deleteWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
     optionsOrCallback?:
@@ -2182,11 +2161,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteWorkerPoolProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.delete_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_async
    */
   async checkDeleteWorkerPoolProgress(
     name: string
@@ -2210,6 +2186,33 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata
     >;
   }
+  /**
+   * Updates a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
+   *   Required. The `WorkerPool` to update.
+   *
+   *   The `name` field is used to identify the `WorkerPool` to update.
+   *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A mask specifying which fields in `worker_pool` to update.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the response, but do not actually
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_build.update_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_UpdateWorkerPool_async
+   */
   updateWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
     options?: CallOptions
@@ -2246,34 +2249,6 @@ export class CloudBuildClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a `WorkerPool`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
-   *   Required. The `WorkerPool` to update.
-   *
-   *   The `name` field is used to identify the `WorkerPool` to update.
-   *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A mask specifying which fields in `worker_pool` to update.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the response, but do not actually
-   *   post it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateWorkerPool(request);
-   * const [response] = await operation.promise();
-   */
   updateWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
     optionsOrCallback?:
@@ -2331,11 +2306,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateWorkerPoolProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_build.update_worker_pool.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_UpdateWorkerPool_async
    */
   async checkUpdateWorkerPoolProgress(
     name: string
@@ -2359,37 +2331,6 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata
     >;
   }
-  listBuilds(
-    request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IBuild[],
-      protos.google.devtools.cloudbuild.v1.IListBuildsRequest | null,
-      protos.google.devtools.cloudbuild.v1.IListBuildsResponse
-    ]
-  >;
-  listBuilds(
-    request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
-      | protos.google.devtools.cloudbuild.v1.IListBuildsResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v1.IBuild
-    >
-  ): void;
-  listBuilds(
-    request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
-      | protos.google.devtools.cloudbuild.v1.IListBuildsResponse
-      | null
-      | undefined,
-      protos.google.devtools.cloudbuild.v1.IBuild
-    >
-  ): void;
   /**
    * Lists previously requested builds.
    *
@@ -2430,6 +2371,37 @@ export class CloudBuildClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listBuilds(
+    request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v1.IBuild[],
+      protos.google.devtools.cloudbuild.v1.IListBuildsRequest | null,
+      protos.google.devtools.cloudbuild.v1.IListBuildsResponse
+    ]
+  >;
+  listBuilds(
+    request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+      | protos.google.devtools.cloudbuild.v1.IListBuildsResponse
+      | null
+      | undefined,
+      protos.google.devtools.cloudbuild.v1.IBuild
+    >
+  ): void;
+  listBuilds(
+    request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+      | protos.google.devtools.cloudbuild.v1.IListBuildsResponse
+      | null
+      | undefined,
+      protos.google.devtools.cloudbuild.v1.IBuild
+    >
+  ): void;
   listBuilds(
     request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
     optionsOrCallback?:
@@ -2523,7 +2495,8 @@ export class CloudBuildClient {
         project_id: request.projectId || '',
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBuilds'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBuilds.createStream(
       this.innerApiCalls.listBuilds as gax.GaxCall,
@@ -2567,11 +2540,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listBuildsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_build.list_builds.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_ListBuilds_async
    */
   listBuildsAsync(
     request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
@@ -2586,8 +2556,8 @@ export class CloudBuildClient {
         project_id: request.projectId || '',
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBuilds'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBuilds.asyncIterate(
       this.innerApiCalls['listBuilds'] as GaxCall,
@@ -2595,6 +2565,35 @@ export class CloudBuildClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuild>;
   }
+  /**
+   * Lists existing `BuildTrigger`s.
+   *
+   * This API is experimental.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent of the collection of `Triggers`.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.projectId
+   *   Required. ID of the project for which to list BuildTriggers.
+   * @param {number} request.pageSize
+   *   Number of results to return in the list.
+   * @param {string} request.pageToken
+   *   Token to provide to skip to a particular spot in the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBuildTriggersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listBuildTriggers(
     request?: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     options?: CallOptions
@@ -2626,35 +2625,6 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.IBuildTrigger
     >
   ): void;
-  /**
-   * Lists existing `BuildTrigger`s.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The parent of the collection of `Triggers`.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.projectId
-   *   Required. ID of the project for which to list BuildTriggers.
-   * @param {number} request.pageSize
-   *   Number of results to return in the list.
-   * @param {string} request.pageToken
-   *   Token to provide to skip to a particular spot in the list.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [BuildTrigger]{@link google.devtools.cloudbuild.v1.BuildTrigger}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listBuildTriggersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listBuildTriggers(
     request?: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     optionsOrCallback?:
@@ -2738,7 +2708,8 @@ export class CloudBuildClient {
         project_id: request.projectId || '',
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBuildTriggers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBuildTriggers.createStream(
       this.innerApiCalls.listBuildTriggers as gax.GaxCall,
@@ -2772,11 +2743,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listBuildTriggersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_build.list_build_triggers.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_ListBuildTriggers_async
    */
   listBuildTriggersAsync(
     request?: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
@@ -2791,8 +2759,8 @@ export class CloudBuildClient {
         project_id: request.projectId || '',
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listBuildTriggers'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBuildTriggers.asyncIterate(
       this.innerApiCalls['listBuildTriggers'] as GaxCall,
@@ -2800,6 +2768,33 @@ export class CloudBuildClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuildTrigger>;
   }
+  /**
+   * Lists `WorkerPool`s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the collection of `WorkerPools`.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   The maximum number of `WorkerPool`s to return. The service may return
+   *   fewer than this value. If omitted, the server will use a sensible default.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkerPools` call. Provide this
+   *   to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkerPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listWorkerPools(
     request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
     options?: CallOptions
@@ -2831,33 +2826,6 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.IWorkerPool
     >
   ): void;
-  /**
-   * Lists `WorkerPool`s.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the collection of `WorkerPools`.
-   *   Format: `projects/{project}/locations/{location}`.
-   * @param {number} request.pageSize
-   *   The maximum number of `WorkerPool`s to return. The service may return
-   *   fewer than this value. If omitted, the server will use a sensible default.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkerPools` call. Provide this
-   *   to retrieve the subsequent page.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkerPoolsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listWorkerPools(
     request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
     optionsOrCallback?:
@@ -2939,7 +2907,8 @@ export class CloudBuildClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listWorkerPools'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkerPools.createStream(
       this.innerApiCalls.listWorkerPools as gax.GaxCall,
@@ -2973,11 +2942,8 @@ export class CloudBuildClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listWorkerPoolsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_build.list_worker_pools.js</caption>
+   * region_tag:cloudbuild_v1_generated_CloudBuild_ListWorkerPools_async
    */
   listWorkerPoolsAsync(
     request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
@@ -2991,8 +2957,8 @@ export class CloudBuildClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listWorkerPools'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listWorkerPools.asyncIterate(
       this.innerApiCalls['listWorkerPools'] as GaxCall,
