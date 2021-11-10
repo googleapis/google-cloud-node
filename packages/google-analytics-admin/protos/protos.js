@@ -1320,39 +1320,6 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateFirebaseLink}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef UpdateFirebaseLinkCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.analytics.admin.v1alpha.FirebaseLink} [response] FirebaseLink
-                         */
-    
-                        /**
-                         * Calls UpdateFirebaseLink.
-                         * @function updateFirebaseLink
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest} request UpdateFirebaseLinkRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateFirebaseLinkCallback} callback Node-style callback called with the error, if any, and FirebaseLink
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.updateFirebaseLink = function updateFirebaseLink(request, callback) {
-                            return this.rpcCall(updateFirebaseLink, $root.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest, $root.google.analytics.admin.v1alpha.FirebaseLink, request, callback);
-                        }, "name", { value: "UpdateFirebaseLink" });
-    
-                        /**
-                         * Calls UpdateFirebaseLink.
-                         * @function updateFirebaseLink
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest} request UpdateFirebaseLinkRequest message or plain object
-                         * @returns {Promise<google.analytics.admin.v1alpha.FirebaseLink>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
                          * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteFirebaseLink}.
                          * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
                          * @typedef DeleteFirebaseLinkCallback
@@ -2013,6 +1980,369 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDisplayVideo360AdvertiserLink}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetDisplayVideo360AdvertiserLinkCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} [response] DisplayVideo360AdvertiserLink
+                         */
+    
+                        /**
+                         * Calls GetDisplayVideo360AdvertiserLink.
+                         * @function getDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest} request GetDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetDisplayVideo360AdvertiserLinkCallback} callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLink
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getDisplayVideo360AdvertiserLink = function getDisplayVideo360AdvertiserLink(request, callback) {
+                            return this.rpcCall(getDisplayVideo360AdvertiserLink, $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest, $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink, request, callback);
+                        }, "name", { value: "GetDisplayVideo360AdvertiserLink" });
+    
+                        /**
+                         * Calls GetDisplayVideo360AdvertiserLink.
+                         * @function getDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest} request GetDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listDisplayVideo360AdvertiserLinks}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListDisplayVideo360AdvertiserLinksCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse} [response] ListDisplayVideo360AdvertiserLinksResponse
+                         */
+    
+                        /**
+                         * Calls ListDisplayVideo360AdvertiserLinks.
+                         * @function listDisplayVideo360AdvertiserLinks
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest} request ListDisplayVideo360AdvertiserLinksRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListDisplayVideo360AdvertiserLinksCallback} callback Node-style callback called with the error, if any, and ListDisplayVideo360AdvertiserLinksResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listDisplayVideo360AdvertiserLinks = function listDisplayVideo360AdvertiserLinks(request, callback) {
+                            return this.rpcCall(listDisplayVideo360AdvertiserLinks, $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest, $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse, request, callback);
+                        }, "name", { value: "ListDisplayVideo360AdvertiserLinks" });
+    
+                        /**
+                         * Calls ListDisplayVideo360AdvertiserLinks.
+                         * @function listDisplayVideo360AdvertiserLinks
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest} request ListDisplayVideo360AdvertiserLinksRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createDisplayVideo360AdvertiserLink}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CreateDisplayVideo360AdvertiserLinkCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} [response] DisplayVideo360AdvertiserLink
+                         */
+    
+                        /**
+                         * Calls CreateDisplayVideo360AdvertiserLink.
+                         * @function createDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest} request CreateDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateDisplayVideo360AdvertiserLinkCallback} callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLink
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.createDisplayVideo360AdvertiserLink = function createDisplayVideo360AdvertiserLink(request, callback) {
+                            return this.rpcCall(createDisplayVideo360AdvertiserLink, $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest, $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink, request, callback);
+                        }, "name", { value: "CreateDisplayVideo360AdvertiserLink" });
+    
+                        /**
+                         * Calls CreateDisplayVideo360AdvertiserLink.
+                         * @function createDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest} request CreateDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteDisplayVideo360AdvertiserLink}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef DeleteDisplayVideo360AdvertiserLinkCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDisplayVideo360AdvertiserLink.
+                         * @function deleteDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest} request DeleteDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteDisplayVideo360AdvertiserLinkCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.deleteDisplayVideo360AdvertiserLink = function deleteDisplayVideo360AdvertiserLink(request, callback) {
+                            return this.rpcCall(deleteDisplayVideo360AdvertiserLink, $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDisplayVideo360AdvertiserLink" });
+    
+                        /**
+                         * Calls DeleteDisplayVideo360AdvertiserLink.
+                         * @function deleteDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest} request DeleteDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateDisplayVideo360AdvertiserLink}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateDisplayVideo360AdvertiserLinkCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} [response] DisplayVideo360AdvertiserLink
+                         */
+    
+                        /**
+                         * Calls UpdateDisplayVideo360AdvertiserLink.
+                         * @function updateDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest} request UpdateDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateDisplayVideo360AdvertiserLinkCallback} callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLink
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateDisplayVideo360AdvertiserLink = function updateDisplayVideo360AdvertiserLink(request, callback) {
+                            return this.rpcCall(updateDisplayVideo360AdvertiserLink, $root.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest, $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink, request, callback);
+                        }, "name", { value: "UpdateDisplayVideo360AdvertiserLink" });
+    
+                        /**
+                         * Calls UpdateDisplayVideo360AdvertiserLink.
+                         * @function updateDisplayVideo360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest} request UpdateDisplayVideo360AdvertiserLinkRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDisplayVideo360AdvertiserLinkProposal}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetDisplayVideo360AdvertiserLinkProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} [response] DisplayVideo360AdvertiserLinkProposal
+                         */
+    
+                        /**
+                         * Calls GetDisplayVideo360AdvertiserLinkProposal.
+                         * @function getDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest} request GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetDisplayVideo360AdvertiserLinkProposalCallback} callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLinkProposal
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getDisplayVideo360AdvertiserLinkProposal = function getDisplayVideo360AdvertiserLinkProposal(request, callback) {
+                            return this.rpcCall(getDisplayVideo360AdvertiserLinkProposal, $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest, $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal, request, callback);
+                        }, "name", { value: "GetDisplayVideo360AdvertiserLinkProposal" });
+    
+                        /**
+                         * Calls GetDisplayVideo360AdvertiserLinkProposal.
+                         * @function getDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest} request GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listDisplayVideo360AdvertiserLinkProposals}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListDisplayVideo360AdvertiserLinkProposalsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse} [response] ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         */
+    
+                        /**
+                         * Calls ListDisplayVideo360AdvertiserLinkProposals.
+                         * @function listDisplayVideo360AdvertiserLinkProposals
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest} request ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListDisplayVideo360AdvertiserLinkProposalsCallback} callback Node-style callback called with the error, if any, and ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listDisplayVideo360AdvertiserLinkProposals = function listDisplayVideo360AdvertiserLinkProposals(request, callback) {
+                            return this.rpcCall(listDisplayVideo360AdvertiserLinkProposals, $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest, $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse, request, callback);
+                        }, "name", { value: "ListDisplayVideo360AdvertiserLinkProposals" });
+    
+                        /**
+                         * Calls ListDisplayVideo360AdvertiserLinkProposals.
+                         * @function listDisplayVideo360AdvertiserLinkProposals
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest} request ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createDisplayVideo360AdvertiserLinkProposal}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CreateDisplayVideo360AdvertiserLinkProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} [response] DisplayVideo360AdvertiserLinkProposal
+                         */
+    
+                        /**
+                         * Calls CreateDisplayVideo360AdvertiserLinkProposal.
+                         * @function createDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest} request CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateDisplayVideo360AdvertiserLinkProposalCallback} callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLinkProposal
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.createDisplayVideo360AdvertiserLinkProposal = function createDisplayVideo360AdvertiserLinkProposal(request, callback) {
+                            return this.rpcCall(createDisplayVideo360AdvertiserLinkProposal, $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest, $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal, request, callback);
+                        }, "name", { value: "CreateDisplayVideo360AdvertiserLinkProposal" });
+    
+                        /**
+                         * Calls CreateDisplayVideo360AdvertiserLinkProposal.
+                         * @function createDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest} request CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteDisplayVideo360AdvertiserLinkProposal}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef DeleteDisplayVideo360AdvertiserLinkProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteDisplayVideo360AdvertiserLinkProposal.
+                         * @function deleteDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest} request DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteDisplayVideo360AdvertiserLinkProposalCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.deleteDisplayVideo360AdvertiserLinkProposal = function deleteDisplayVideo360AdvertiserLinkProposal(request, callback) {
+                            return this.rpcCall(deleteDisplayVideo360AdvertiserLinkProposal, $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteDisplayVideo360AdvertiserLinkProposal" });
+    
+                        /**
+                         * Calls DeleteDisplayVideo360AdvertiserLinkProposal.
+                         * @function deleteDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest} request DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#approveDisplayVideo360AdvertiserLinkProposal}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ApproveDisplayVideo360AdvertiserLinkProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse} [response] ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         */
+    
+                        /**
+                         * Calls ApproveDisplayVideo360AdvertiserLinkProposal.
+                         * @function approveDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest} request ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ApproveDisplayVideo360AdvertiserLinkProposalCallback} callback Node-style callback called with the error, if any, and ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.approveDisplayVideo360AdvertiserLinkProposal = function approveDisplayVideo360AdvertiserLinkProposal(request, callback) {
+                            return this.rpcCall(approveDisplayVideo360AdvertiserLinkProposal, $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest, $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse, request, callback);
+                        }, "name", { value: "ApproveDisplayVideo360AdvertiserLinkProposal" });
+    
+                        /**
+                         * Calls ApproveDisplayVideo360AdvertiserLinkProposal.
+                         * @function approveDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest} request ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#cancelDisplayVideo360AdvertiserLinkProposal}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CancelDisplayVideo360AdvertiserLinkProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} [response] DisplayVideo360AdvertiserLinkProposal
+                         */
+    
+                        /**
+                         * Calls CancelDisplayVideo360AdvertiserLinkProposal.
+                         * @function cancelDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest} request CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CancelDisplayVideo360AdvertiserLinkProposalCallback} callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLinkProposal
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.cancelDisplayVideo360AdvertiserLinkProposal = function cancelDisplayVideo360AdvertiserLinkProposal(request, callback) {
+                            return this.rpcCall(cancelDisplayVideo360AdvertiserLinkProposal, $root.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest, $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal, request, callback);
+                        }, "name", { value: "CancelDisplayVideo360AdvertiserLinkProposal" });
+    
+                        /**
+                         * Calls CancelDisplayVideo360AdvertiserLinkProposal.
+                         * @function cancelDisplayVideo360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest} request CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createCustomDimension}.
                          * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
                          * @typedef CreateCustomDimensionCallback
@@ -2339,6 +2669,72 @@
                          * @instance
                          * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest} request GetCustomMetricRequest message or plain object
                          * @returns {Promise<google.analytics.admin.v1alpha.CustomMetric>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDataRetentionSettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetDataRetentionSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DataRetentionSettings} [response] DataRetentionSettings
+                         */
+    
+                        /**
+                         * Calls GetDataRetentionSettings.
+                         * @function getDataRetentionSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest} request GetDataRetentionSettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetDataRetentionSettingsCallback} callback Node-style callback called with the error, if any, and DataRetentionSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getDataRetentionSettings = function getDataRetentionSettings(request, callback) {
+                            return this.rpcCall(getDataRetentionSettings, $root.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest, $root.google.analytics.admin.v1alpha.DataRetentionSettings, request, callback);
+                        }, "name", { value: "GetDataRetentionSettings" });
+    
+                        /**
+                         * Calls GetDataRetentionSettings.
+                         * @function getDataRetentionSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest} request GetDataRetentionSettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DataRetentionSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateDataRetentionSettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateDataRetentionSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.DataRetentionSettings} [response] DataRetentionSettings
+                         */
+    
+                        /**
+                         * Calls UpdateDataRetentionSettings.
+                         * @function updateDataRetentionSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest} request UpdateDataRetentionSettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateDataRetentionSettingsCallback} callback Node-style callback called with the error, if any, and DataRetentionSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateDataRetentionSettings = function updateDataRetentionSettings(request, callback) {
+                            return this.rpcCall(updateDataRetentionSettings, $root.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest, $root.google.analytics.admin.v1alpha.DataRetentionSettings, request, callback);
+                        }, "name", { value: "UpdateDataRetentionSettings" });
+    
+                        /**
+                         * Calls UpdateDataRetentionSettings.
+                         * @function updateDataRetentionSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest} request UpdateDataRetentionSettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.DataRetentionSettings>} Promise
                          * @variation 2
                          */
     
@@ -12378,226 +12774,6 @@
                         return CreateFirebaseLinkRequest;
                     })();
     
-                    v1alpha.UpdateFirebaseLinkRequest = (function() {
-    
-                        /**
-                         * Properties of an UpdateFirebaseLinkRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IUpdateFirebaseLinkRequest
-                         * @property {google.analytics.admin.v1alpha.IFirebaseLink|null} [firebaseLink] UpdateFirebaseLinkRequest firebaseLink
-                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateFirebaseLinkRequest updateMask
-                         */
-    
-                        /**
-                         * Constructs a new UpdateFirebaseLinkRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents an UpdateFirebaseLinkRequest.
-                         * @implements IUpdateFirebaseLinkRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest=} [properties] Properties to set
-                         */
-                        function UpdateFirebaseLinkRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * UpdateFirebaseLinkRequest firebaseLink.
-                         * @member {google.analytics.admin.v1alpha.IFirebaseLink|null|undefined} firebaseLink
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @instance
-                         */
-                        UpdateFirebaseLinkRequest.prototype.firebaseLink = null;
-    
-                        /**
-                         * UpdateFirebaseLinkRequest updateMask.
-                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @instance
-                         */
-                        UpdateFirebaseLinkRequest.prototype.updateMask = null;
-    
-                        /**
-                         * Creates a new UpdateFirebaseLinkRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest} UpdateFirebaseLinkRequest instance
-                         */
-                        UpdateFirebaseLinkRequest.create = function create(properties) {
-                            return new UpdateFirebaseLinkRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateFirebaseLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest} message UpdateFirebaseLinkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateFirebaseLinkRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.firebaseLink != null && Object.hasOwnProperty.call(message, "firebaseLink"))
-                                $root.google.analytics.admin.v1alpha.FirebaseLink.encode(message.firebaseLink, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
-                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified UpdateFirebaseLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest} message UpdateFirebaseLinkRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        UpdateFirebaseLinkRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an UpdateFirebaseLinkRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest} UpdateFirebaseLinkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateFirebaseLinkRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.firebaseLink = $root.google.analytics.admin.v1alpha.FirebaseLink.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an UpdateFirebaseLinkRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest} UpdateFirebaseLinkRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        UpdateFirebaseLinkRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an UpdateFirebaseLinkRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        UpdateFirebaseLinkRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.firebaseLink != null && message.hasOwnProperty("firebaseLink")) {
-                                var error = $root.google.analytics.admin.v1alpha.FirebaseLink.verify(message.firebaseLink);
-                                if (error)
-                                    return "firebaseLink." + error;
-                            }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
-                                if (error)
-                                    return "updateMask." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an UpdateFirebaseLinkRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest} UpdateFirebaseLinkRequest
-                         */
-                        UpdateFirebaseLinkRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest();
-                            if (object.firebaseLink != null) {
-                                if (typeof object.firebaseLink !== "object")
-                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest.firebaseLink: object expected");
-                                message.firebaseLink = $root.google.analytics.admin.v1alpha.FirebaseLink.fromObject(object.firebaseLink);
-                            }
-                            if (object.updateMask != null) {
-                                if (typeof object.updateMask !== "object")
-                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an UpdateFirebaseLinkRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest} message UpdateFirebaseLinkRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        UpdateFirebaseLinkRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.firebaseLink = null;
-                                object.updateMask = null;
-                            }
-                            if (message.firebaseLink != null && message.hasOwnProperty("firebaseLink"))
-                                object.firebaseLink = $root.google.analytics.admin.v1alpha.FirebaseLink.toObject(message.firebaseLink, options);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
-                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this UpdateFirebaseLinkRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        UpdateFirebaseLinkRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return UpdateFirebaseLinkRequest;
-                    })();
-    
                     v1alpha.DeleteFirebaseLinkRequest = (function() {
     
                         /**
@@ -15444,6 +15620,7 @@
                                     case 10:
                                     case 11:
                                     case 12:
+                                    case 13:
                                         break;
                                     }
                             }
@@ -15561,6 +15738,10 @@
                                     case "CUSTOM_METRIC":
                                     case 12:
                                         message.resourceType[i] = 12;
+                                        break;
+                                    case "DATA_RETENTION_SETTINGS":
+                                    case 13:
+                                        message.resourceType[i] = 13;
                                         break;
                                     }
                             }
@@ -18645,6 +18826,2896 @@
                         return ListConversionEventsResponse;
                     })();
     
+                    v1alpha.GetDisplayVideo360AdvertiserLinkRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetDisplayVideo360AdvertiserLinkRequest
+                         * @property {string|null} [name] GetDisplayVideo360AdvertiserLinkRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetDisplayVideo360AdvertiserLinkRequest.
+                         * @implements IGetDisplayVideo360AdvertiserLinkRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         */
+                        function GetDisplayVideo360AdvertiserLinkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDisplayVideo360AdvertiserLinkRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest} GetDisplayVideo360AdvertiserLinkRequest instance
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.create = function create(properties) {
+                            return new GetDisplayVideo360AdvertiserLinkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest} message GetDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest} message GetDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest} GetDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest} GetDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDisplayVideo360AdvertiserLinkRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest} GetDisplayVideo360AdvertiserLinkRequest
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest} message GetDisplayVideo360AdvertiserLinkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDisplayVideo360AdvertiserLinkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDisplayVideo360AdvertiserLinkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetDisplayVideo360AdvertiserLinkRequest;
+                    })();
+    
+                    v1alpha.ListDisplayVideo360AdvertiserLinksRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDisplayVideo360AdvertiserLinksRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListDisplayVideo360AdvertiserLinksRequest
+                         * @property {string|null} [parent] ListDisplayVideo360AdvertiserLinksRequest parent
+                         * @property {number|null} [pageSize] ListDisplayVideo360AdvertiserLinksRequest pageSize
+                         * @property {string|null} [pageToken] ListDisplayVideo360AdvertiserLinksRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDisplayVideo360AdvertiserLinksRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListDisplayVideo360AdvertiserLinksRequest.
+                         * @implements IListDisplayVideo360AdvertiserLinksRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest=} [properties] Properties to set
+                         */
+                        function ListDisplayVideo360AdvertiserLinksRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinksRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinksRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinksRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDisplayVideo360AdvertiserLinksRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest} ListDisplayVideo360AdvertiserLinksRequest instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.create = function create(properties) {
+                            return new ListDisplayVideo360AdvertiserLinksRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinksRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest} message ListDisplayVideo360AdvertiserLinksRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinksRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest} message ListDisplayVideo360AdvertiserLinksRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinksRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest} ListDisplayVideo360AdvertiserLinksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinksRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest} ListDisplayVideo360AdvertiserLinksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDisplayVideo360AdvertiserLinksRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDisplayVideo360AdvertiserLinksRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest} ListDisplayVideo360AdvertiserLinksRequest
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDisplayVideo360AdvertiserLinksRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest} message ListDisplayVideo360AdvertiserLinksRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDisplayVideo360AdvertiserLinksRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDisplayVideo360AdvertiserLinksRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDisplayVideo360AdvertiserLinksRequest;
+                    })();
+    
+                    v1alpha.ListDisplayVideo360AdvertiserLinksResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDisplayVideo360AdvertiserLinksResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListDisplayVideo360AdvertiserLinksResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink>|null} [displayVideo_360AdvertiserLinks] ListDisplayVideo360AdvertiserLinksResponse displayVideo_360AdvertiserLinks
+                         * @property {string|null} [nextPageToken] ListDisplayVideo360AdvertiserLinksResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDisplayVideo360AdvertiserLinksResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListDisplayVideo360AdvertiserLinksResponse.
+                         * @implements IListDisplayVideo360AdvertiserLinksResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse=} [properties] Properties to set
+                         */
+                        function ListDisplayVideo360AdvertiserLinksResponse(properties) {
+                            this.displayVideo_360AdvertiserLinks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinksResponse displayVideo_360AdvertiserLinks.
+                         * @member {Array.<google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink>} displayVideo_360AdvertiserLinks
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.prototype.displayVideo_360AdvertiserLinks = $util.emptyArray;
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinksResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDisplayVideo360AdvertiserLinksResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse} ListDisplayVideo360AdvertiserLinksResponse instance
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.create = function create(properties) {
+                            return new ListDisplayVideo360AdvertiserLinksResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinksResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse} message ListDisplayVideo360AdvertiserLinksResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayVideo_360AdvertiserLinks != null && message.displayVideo_360AdvertiserLinks.length)
+                                for (var i = 0; i < message.displayVideo_360AdvertiserLinks.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.encode(message.displayVideo_360AdvertiserLinks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinksResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse} message ListDisplayVideo360AdvertiserLinksResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinksResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse} ListDisplayVideo360AdvertiserLinksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.displayVideo_360AdvertiserLinks && message.displayVideo_360AdvertiserLinks.length))
+                                        message.displayVideo_360AdvertiserLinks = [];
+                                    message.displayVideo_360AdvertiserLinks.push($root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinksResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse} ListDisplayVideo360AdvertiserLinksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDisplayVideo360AdvertiserLinksResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayVideo_360AdvertiserLinks != null && message.hasOwnProperty("displayVideo_360AdvertiserLinks")) {
+                                if (!Array.isArray(message.displayVideo_360AdvertiserLinks))
+                                    return "displayVideo_360AdvertiserLinks: array expected";
+                                for (var i = 0; i < message.displayVideo_360AdvertiserLinks.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify(message.displayVideo_360AdvertiserLinks[i]);
+                                    if (error)
+                                        return "displayVideo_360AdvertiserLinks." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDisplayVideo360AdvertiserLinksResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse} ListDisplayVideo360AdvertiserLinksResponse
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse();
+                            if (object.displayVideo_360AdvertiserLinks) {
+                                if (!Array.isArray(object.displayVideo_360AdvertiserLinks))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse.displayVideo_360AdvertiserLinks: array expected");
+                                message.displayVideo_360AdvertiserLinks = [];
+                                for (var i = 0; i < object.displayVideo_360AdvertiserLinks.length; ++i) {
+                                    if (typeof object.displayVideo_360AdvertiserLinks[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse.displayVideo_360AdvertiserLinks: object expected");
+                                    message.displayVideo_360AdvertiserLinks[i] = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.fromObject(object.displayVideo_360AdvertiserLinks[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDisplayVideo360AdvertiserLinksResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse} message ListDisplayVideo360AdvertiserLinksResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.displayVideo_360AdvertiserLinks = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.displayVideo_360AdvertiserLinks && message.displayVideo_360AdvertiserLinks.length) {
+                                object.displayVideo_360AdvertiserLinks = [];
+                                for (var j = 0; j < message.displayVideo_360AdvertiserLinks.length; ++j)
+                                    object.displayVideo_360AdvertiserLinks[j] = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.toObject(message.displayVideo_360AdvertiserLinks[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDisplayVideo360AdvertiserLinksResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDisplayVideo360AdvertiserLinksResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDisplayVideo360AdvertiserLinksResponse;
+                    })();
+    
+                    v1alpha.CreateDisplayVideo360AdvertiserLinkRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICreateDisplayVideo360AdvertiserLinkRequest
+                         * @property {string|null} [parent] CreateDisplayVideo360AdvertiserLinkRequest parent
+                         * @property {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null} [displayVideo_360AdvertiserLink] CreateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink
+                         */
+    
+                        /**
+                         * Constructs a new CreateDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CreateDisplayVideo360AdvertiserLinkRequest.
+                         * @implements ICreateDisplayVideo360AdvertiserLinkRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         */
+                        function CreateDisplayVideo360AdvertiserLinkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDisplayVideo360AdvertiserLinkRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink.
+                         * @member {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null|undefined} displayVideo_360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.prototype.displayVideo_360AdvertiserLink = null;
+    
+                        /**
+                         * Creates a new CreateDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest} CreateDisplayVideo360AdvertiserLinkRequest instance
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.create = function create(properties) {
+                            return new CreateDisplayVideo360AdvertiserLinkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest} message CreateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.displayVideo_360AdvertiserLink != null && Object.hasOwnProperty.call(message, "displayVideo_360AdvertiserLink"))
+                                $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.encode(message.displayVideo_360AdvertiserLink, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest} message CreateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest} CreateDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest} CreateDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDisplayVideo360AdvertiserLinkRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink")) {
+                                var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify(message.displayVideo_360AdvertiserLink);
+                                if (error)
+                                    return "displayVideo_360AdvertiserLink." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest} CreateDisplayVideo360AdvertiserLinkRequest
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.displayVideo_360AdvertiserLink != null) {
+                                if (typeof object.displayVideo_360AdvertiserLink !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest.displayVideo_360AdvertiserLink: object expected");
+                                message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.fromObject(object.displayVideo_360AdvertiserLink);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest} message CreateDisplayVideo360AdvertiserLinkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.displayVideo_360AdvertiserLink = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink"))
+                                object.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.toObject(message.displayVideo_360AdvertiserLink, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDisplayVideo360AdvertiserLinkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDisplayVideo360AdvertiserLinkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateDisplayVideo360AdvertiserLinkRequest;
+                    })();
+    
+                    v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDeleteDisplayVideo360AdvertiserLinkRequest
+                         * @property {string|null} [name] DeleteDisplayVideo360AdvertiserLinkRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DeleteDisplayVideo360AdvertiserLinkRequest.
+                         * @implements IDeleteDisplayVideo360AdvertiserLinkRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         */
+                        function DeleteDisplayVideo360AdvertiserLinkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDisplayVideo360AdvertiserLinkRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest} DeleteDisplayVideo360AdvertiserLinkRequest instance
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.create = function create(properties) {
+                            return new DeleteDisplayVideo360AdvertiserLinkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest} message DeleteDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest} message DeleteDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest} DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest} DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDisplayVideo360AdvertiserLinkRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest} DeleteDisplayVideo360AdvertiserLinkRequest
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest} message DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDisplayVideo360AdvertiserLinkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteDisplayVideo360AdvertiserLinkRequest;
+                    })();
+    
+                    v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateDisplayVideo360AdvertiserLinkRequest
+                         * @property {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null} [displayVideo_360AdvertiserLink] UpdateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDisplayVideo360AdvertiserLinkRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDisplayVideo360AdvertiserLinkRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateDisplayVideo360AdvertiserLinkRequest.
+                         * @implements IUpdateDisplayVideo360AdvertiserLinkRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         */
+                        function UpdateDisplayVideo360AdvertiserLinkRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink.
+                         * @member {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null|undefined} displayVideo_360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.prototype.displayVideo_360AdvertiserLink = null;
+    
+                        /**
+                         * UpdateDisplayVideo360AdvertiserLinkRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest} UpdateDisplayVideo360AdvertiserLinkRequest instance
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.create = function create(properties) {
+                            return new UpdateDisplayVideo360AdvertiserLinkRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest} message UpdateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayVideo_360AdvertiserLink != null && Object.hasOwnProperty.call(message, "displayVideo_360AdvertiserLink"))
+                                $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.encode(message.displayVideo_360AdvertiserLink, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest} message UpdateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest} UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest} UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDisplayVideo360AdvertiserLinkRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink")) {
+                                var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify(message.displayVideo_360AdvertiserLink);
+                                if (error)
+                                    return "displayVideo_360AdvertiserLink." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest} UpdateDisplayVideo360AdvertiserLinkRequest
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest();
+                            if (object.displayVideo_360AdvertiserLink != null) {
+                                if (typeof object.displayVideo_360AdvertiserLink !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest.displayVideo_360AdvertiserLink: object expected");
+                                message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.fromObject(object.displayVideo_360AdvertiserLink);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest} message UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayVideo_360AdvertiserLink = null;
+                                object.updateMask = null;
+                            }
+                            if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink"))
+                                object.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.toObject(message.displayVideo_360AdvertiserLink, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDisplayVideo360AdvertiserLinkRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDisplayVideo360AdvertiserLinkRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateDisplayVideo360AdvertiserLinkRequest;
+                    })();
+    
+                    v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @property {string|null} [name] GetDisplayVideo360AdvertiserLinkProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @implements IGetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         */
+                        function GetDisplayVideo360AdvertiserLinkProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDisplayVideo360AdvertiserLinkProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest} GetDisplayVideo360AdvertiserLinkProposalRequest instance
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.create = function create(properties) {
+                            return new GetDisplayVideo360AdvertiserLinkProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest} message GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest} message GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest} GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest} GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDisplayVideo360AdvertiserLinkProposalRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest} GetDisplayVideo360AdvertiserLinkProposalRequest
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest} message GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDisplayVideo360AdvertiserLinkProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetDisplayVideo360AdvertiserLinkProposalRequest;
+                    })();
+    
+                    v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDisplayVideo360AdvertiserLinkProposalsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @property {string|null} [parent] ListDisplayVideo360AdvertiserLinkProposalsRequest parent
+                         * @property {number|null} [pageSize] ListDisplayVideo360AdvertiserLinkProposalsRequest pageSize
+                         * @property {string|null} [pageToken] ListDisplayVideo360AdvertiserLinkProposalsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDisplayVideo360AdvertiserLinkProposalsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListDisplayVideo360AdvertiserLinkProposalsRequest.
+                         * @implements IListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest=} [properties] Properties to set
+                         */
+                        function ListDisplayVideo360AdvertiserLinkProposalsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinkProposalsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinkProposalsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinkProposalsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDisplayVideo360AdvertiserLinkProposalsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest} ListDisplayVideo360AdvertiserLinkProposalsRequest instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.create = function create(properties) {
+                            return new ListDisplayVideo360AdvertiserLinkProposalsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest} message ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest} message ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinkProposalsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest} ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinkProposalsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest} ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDisplayVideo360AdvertiserLinkProposalsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDisplayVideo360AdvertiserLinkProposalsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest} ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDisplayVideo360AdvertiserLinkProposalsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest} message ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDisplayVideo360AdvertiserLinkProposalsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDisplayVideo360AdvertiserLinkProposalsRequest;
+                    })();
+    
+                    v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDisplayVideo360AdvertiserLinkProposalsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal>|null} [displayVideo_360AdvertiserLinkProposals] ListDisplayVideo360AdvertiserLinkProposalsResponse displayVideo_360AdvertiserLinkProposals
+                         * @property {string|null} [nextPageToken] ListDisplayVideo360AdvertiserLinkProposalsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDisplayVideo360AdvertiserLinkProposalsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListDisplayVideo360AdvertiserLinkProposalsResponse.
+                         * @implements IListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse=} [properties] Properties to set
+                         */
+                        function ListDisplayVideo360AdvertiserLinkProposalsResponse(properties) {
+                            this.displayVideo_360AdvertiserLinkProposals = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinkProposalsResponse displayVideo_360AdvertiserLinkProposals.
+                         * @member {Array.<google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal>} displayVideo_360AdvertiserLinkProposals
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.prototype.displayVideo_360AdvertiserLinkProposals = $util.emptyArray;
+    
+                        /**
+                         * ListDisplayVideo360AdvertiserLinkProposalsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDisplayVideo360AdvertiserLinkProposalsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse} ListDisplayVideo360AdvertiserLinkProposalsResponse instance
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.create = function create(properties) {
+                            return new ListDisplayVideo360AdvertiserLinkProposalsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse} message ListDisplayVideo360AdvertiserLinkProposalsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayVideo_360AdvertiserLinkProposals != null && message.displayVideo_360AdvertiserLinkProposals.length)
+                                for (var i = 0; i < message.displayVideo_360AdvertiserLinkProposals.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.encode(message.displayVideo_360AdvertiserLinkProposals[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse} message ListDisplayVideo360AdvertiserLinkProposalsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinkProposalsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse} ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.displayVideo_360AdvertiserLinkProposals && message.displayVideo_360AdvertiserLinkProposals.length))
+                                        message.displayVideo_360AdvertiserLinkProposals = [];
+                                    message.displayVideo_360AdvertiserLinkProposals.push($root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDisplayVideo360AdvertiserLinkProposalsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse} ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDisplayVideo360AdvertiserLinkProposalsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayVideo_360AdvertiserLinkProposals != null && message.hasOwnProperty("displayVideo_360AdvertiserLinkProposals")) {
+                                if (!Array.isArray(message.displayVideo_360AdvertiserLinkProposals))
+                                    return "displayVideo_360AdvertiserLinkProposals: array expected";
+                                for (var i = 0; i < message.displayVideo_360AdvertiserLinkProposals.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify(message.displayVideo_360AdvertiserLinkProposals[i]);
+                                    if (error)
+                                        return "displayVideo_360AdvertiserLinkProposals." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDisplayVideo360AdvertiserLinkProposalsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse} ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse();
+                            if (object.displayVideo_360AdvertiserLinkProposals) {
+                                if (!Array.isArray(object.displayVideo_360AdvertiserLinkProposals))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse.displayVideo_360AdvertiserLinkProposals: array expected");
+                                message.displayVideo_360AdvertiserLinkProposals = [];
+                                for (var i = 0; i < object.displayVideo_360AdvertiserLinkProposals.length; ++i) {
+                                    if (typeof object.displayVideo_360AdvertiserLinkProposals[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse.displayVideo_360AdvertiserLinkProposals: object expected");
+                                    message.displayVideo_360AdvertiserLinkProposals[i] = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.fromObject(object.displayVideo_360AdvertiserLinkProposals[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDisplayVideo360AdvertiserLinkProposalsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse} message ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.displayVideo_360AdvertiserLinkProposals = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.displayVideo_360AdvertiserLinkProposals && message.displayVideo_360AdvertiserLinkProposals.length) {
+                                object.displayVideo_360AdvertiserLinkProposals = [];
+                                for (var j = 0; j < message.displayVideo_360AdvertiserLinkProposals.length; ++j)
+                                    object.displayVideo_360AdvertiserLinkProposals[j] = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.toObject(message.displayVideo_360AdvertiserLinkProposals[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDisplayVideo360AdvertiserLinkProposalsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDisplayVideo360AdvertiserLinkProposalsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListDisplayVideo360AdvertiserLinkProposalsResponse;
+                    })();
+    
+                    v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @property {string|null} [parent] CreateDisplayVideo360AdvertiserLinkProposalRequest parent
+                         * @property {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null} [displayVideo_360AdvertiserLinkProposal] CreateDisplayVideo360AdvertiserLinkProposalRequest displayVideo_360AdvertiserLinkProposal
+                         */
+    
+                        /**
+                         * Constructs a new CreateDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CreateDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @implements ICreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         */
+                        function CreateDisplayVideo360AdvertiserLinkProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDisplayVideo360AdvertiserLinkProposalRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDisplayVideo360AdvertiserLinkProposalRequest displayVideo_360AdvertiserLinkProposal.
+                         * @member {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null|undefined} displayVideo_360AdvertiserLinkProposal
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.prototype.displayVideo_360AdvertiserLinkProposal = null;
+    
+                        /**
+                         * Creates a new CreateDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest} CreateDisplayVideo360AdvertiserLinkProposalRequest instance
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.create = function create(properties) {
+                            return new CreateDisplayVideo360AdvertiserLinkProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest} message CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.displayVideo_360AdvertiserLinkProposal != null && Object.hasOwnProperty.call(message, "displayVideo_360AdvertiserLinkProposal"))
+                                $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.encode(message.displayVideo_360AdvertiserLinkProposal, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest} message CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest} CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayVideo_360AdvertiserLinkProposal = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest} CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDisplayVideo360AdvertiserLinkProposalRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.displayVideo_360AdvertiserLinkProposal != null && message.hasOwnProperty("displayVideo_360AdvertiserLinkProposal")) {
+                                var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify(message.displayVideo_360AdvertiserLinkProposal);
+                                if (error)
+                                    return "displayVideo_360AdvertiserLinkProposal." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest} CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.displayVideo_360AdvertiserLinkProposal != null) {
+                                if (typeof object.displayVideo_360AdvertiserLinkProposal !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest.displayVideo_360AdvertiserLinkProposal: object expected");
+                                message.displayVideo_360AdvertiserLinkProposal = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.fromObject(object.displayVideo_360AdvertiserLinkProposal);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest} message CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.displayVideo_360AdvertiserLinkProposal = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.displayVideo_360AdvertiserLinkProposal != null && message.hasOwnProperty("displayVideo_360AdvertiserLinkProposal"))
+                                object.displayVideo_360AdvertiserLinkProposal = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.toObject(message.displayVideo_360AdvertiserLinkProposal, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDisplayVideo360AdvertiserLinkProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateDisplayVideo360AdvertiserLinkProposalRequest;
+                    })();
+    
+                    v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @property {string|null} [name] DeleteDisplayVideo360AdvertiserLinkProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DeleteDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @implements IDeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         */
+                        function DeleteDisplayVideo360AdvertiserLinkProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDisplayVideo360AdvertiserLinkProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest} DeleteDisplayVideo360AdvertiserLinkProposalRequest instance
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.create = function create(properties) {
+                            return new DeleteDisplayVideo360AdvertiserLinkProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest} message DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest} message DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest} DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest} DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDisplayVideo360AdvertiserLinkProposalRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest} DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest} message DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDisplayVideo360AdvertiserLinkProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteDisplayVideo360AdvertiserLinkProposalRequest;
+                    })();
+    
+                    v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest = (function() {
+    
+                        /**
+                         * Properties of an ApproveDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @property {string|null} [name] ApproveDisplayVideo360AdvertiserLinkProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ApproveDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an ApproveDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @implements IApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         */
+                        function ApproveDisplayVideo360AdvertiserLinkProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApproveDisplayVideo360AdvertiserLinkProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ApproveDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest} ApproveDisplayVideo360AdvertiserLinkProposalRequest instance
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.create = function create(properties) {
+                            return new ApproveDisplayVideo360AdvertiserLinkProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest} message ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest} message ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest} ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest} ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApproveDisplayVideo360AdvertiserLinkProposalRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApproveDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest} ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApproveDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest} message ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApproveDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApproveDisplayVideo360AdvertiserLinkProposalRequest;
+                    })();
+    
+                    v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse = (function() {
+    
+                        /**
+                         * Properties of an ApproveDisplayVideo360AdvertiserLinkProposalResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @property {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null} [displayVideo_360AdvertiserLink] ApproveDisplayVideo360AdvertiserLinkProposalResponse displayVideo_360AdvertiserLink
+                         */
+    
+                        /**
+                         * Constructs a new ApproveDisplayVideo360AdvertiserLinkProposalResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an ApproveDisplayVideo360AdvertiserLinkProposalResponse.
+                         * @implements IApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse=} [properties] Properties to set
+                         */
+                        function ApproveDisplayVideo360AdvertiserLinkProposalResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApproveDisplayVideo360AdvertiserLinkProposalResponse displayVideo_360AdvertiserLink.
+                         * @member {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null|undefined} displayVideo_360AdvertiserLink
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @instance
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.prototype.displayVideo_360AdvertiserLink = null;
+    
+                        /**
+                         * Creates a new ApproveDisplayVideo360AdvertiserLinkProposalResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse} ApproveDisplayVideo360AdvertiserLinkProposalResponse instance
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.create = function create(properties) {
+                            return new ApproveDisplayVideo360AdvertiserLinkProposalResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse} message ApproveDisplayVideo360AdvertiserLinkProposalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayVideo_360AdvertiserLink != null && Object.hasOwnProperty.call(message, "displayVideo_360AdvertiserLink"))
+                                $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.encode(message.displayVideo_360AdvertiserLink, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse} message ApproveDisplayVideo360AdvertiserLinkProposalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse} ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse} ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApproveDisplayVideo360AdvertiserLinkProposalResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink")) {
+                                var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify(message.displayVideo_360AdvertiserLink);
+                                if (error)
+                                    return "displayVideo_360AdvertiserLink." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApproveDisplayVideo360AdvertiserLinkProposalResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse} ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse();
+                            if (object.displayVideo_360AdvertiserLink != null) {
+                                if (typeof object.displayVideo_360AdvertiserLink !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse.displayVideo_360AdvertiserLink: object expected");
+                                message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.fromObject(object.displayVideo_360AdvertiserLink);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApproveDisplayVideo360AdvertiserLinkProposalResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse} message ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.displayVideo_360AdvertiserLink = null;
+                            if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink"))
+                                object.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.toObject(message.displayVideo_360AdvertiserLink, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApproveDisplayVideo360AdvertiserLinkProposalResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApproveDisplayVideo360AdvertiserLinkProposalResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApproveDisplayVideo360AdvertiserLinkProposalResponse;
+                    })();
+    
+                    v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a CancelDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @property {string|null} [name] CancelDisplayVideo360AdvertiserLinkProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new CancelDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CancelDisplayVideo360AdvertiserLinkProposalRequest.
+                         * @implements ICancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         */
+                        function CancelDisplayVideo360AdvertiserLinkProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CancelDisplayVideo360AdvertiserLinkProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new CancelDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest} CancelDisplayVideo360AdvertiserLinkProposalRequest instance
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.create = function create(properties) {
+                            return new CancelDisplayVideo360AdvertiserLinkProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest} message CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest} message CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest} CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest} CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelDisplayVideo360AdvertiserLinkProposalRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest} CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest} message CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CancelDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelDisplayVideo360AdvertiserLinkProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CancelDisplayVideo360AdvertiserLinkProposalRequest;
+                    })();
+    
                     v1alpha.CreateCustomDimensionRequest = (function() {
     
                         /**
@@ -21189,24 +24260,411 @@
                         return GetCustomMetricRequest;
                     })();
     
-                    /**
-                     * MaximumUserAccess enum.
-                     * @name google.analytics.admin.v1alpha.MaximumUserAccess
-                     * @enum {number}
-                     * @property {number} MAXIMUM_USER_ACCESS_UNSPECIFIED=0 MAXIMUM_USER_ACCESS_UNSPECIFIED value
-                     * @property {number} NO_ACCESS=1 NO_ACCESS value
-                     * @property {number} READ_AND_ANALYZE=2 READ_AND_ANALYZE value
-                     * @property {number} EDITOR_WITHOUT_LINK_MANAGEMENT=3 EDITOR_WITHOUT_LINK_MANAGEMENT value
-                     * @property {number} EDITOR_INCLUDING_LINK_MANAGEMENT=4 EDITOR_INCLUDING_LINK_MANAGEMENT value
-                     */
-                    v1alpha.MaximumUserAccess = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "MAXIMUM_USER_ACCESS_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "NO_ACCESS"] = 1;
-                        values[valuesById[2] = "READ_AND_ANALYZE"] = 2;
-                        values[valuesById[3] = "EDITOR_WITHOUT_LINK_MANAGEMENT"] = 3;
-                        values[valuesById[4] = "EDITOR_INCLUDING_LINK_MANAGEMENT"] = 4;
-                        return values;
+                    v1alpha.GetDataRetentionSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDataRetentionSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetDataRetentionSettingsRequest
+                         * @property {string|null} [name] GetDataRetentionSettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDataRetentionSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetDataRetentionSettingsRequest.
+                         * @implements IGetDataRetentionSettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest=} [properties] Properties to set
+                         */
+                        function GetDataRetentionSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDataRetentionSettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @instance
+                         */
+                        GetDataRetentionSettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDataRetentionSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest} GetDataRetentionSettingsRequest instance
+                         */
+                        GetDataRetentionSettingsRequest.create = function create(properties) {
+                            return new GetDataRetentionSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataRetentionSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest} message GetDataRetentionSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataRetentionSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataRetentionSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest} message GetDataRetentionSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataRetentionSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDataRetentionSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest} GetDataRetentionSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataRetentionSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDataRetentionSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest} GetDataRetentionSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataRetentionSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDataRetentionSettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDataRetentionSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDataRetentionSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest} GetDataRetentionSettingsRequest
+                         */
+                        GetDataRetentionSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDataRetentionSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest} message GetDataRetentionSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDataRetentionSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDataRetentionSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDataRetentionSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetDataRetentionSettingsRequest;
+                    })();
+    
+                    v1alpha.UpdateDataRetentionSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDataRetentionSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateDataRetentionSettingsRequest
+                         * @property {google.analytics.admin.v1alpha.IDataRetentionSettings|null} [dataRetentionSettings] UpdateDataRetentionSettingsRequest dataRetentionSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDataRetentionSettingsRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDataRetentionSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateDataRetentionSettingsRequest.
+                         * @implements IUpdateDataRetentionSettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest=} [properties] Properties to set
+                         */
+                        function UpdateDataRetentionSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDataRetentionSettingsRequest dataRetentionSettings.
+                         * @member {google.analytics.admin.v1alpha.IDataRetentionSettings|null|undefined} dataRetentionSettings
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @instance
+                         */
+                        UpdateDataRetentionSettingsRequest.prototype.dataRetentionSettings = null;
+    
+                        /**
+                         * UpdateDataRetentionSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @instance
+                         */
+                        UpdateDataRetentionSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateDataRetentionSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest} UpdateDataRetentionSettingsRequest instance
+                         */
+                        UpdateDataRetentionSettingsRequest.create = function create(properties) {
+                            return new UpdateDataRetentionSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDataRetentionSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest} message UpdateDataRetentionSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDataRetentionSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataRetentionSettings != null && Object.hasOwnProperty.call(message, "dataRetentionSettings"))
+                                $root.google.analytics.admin.v1alpha.DataRetentionSettings.encode(message.dataRetentionSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDataRetentionSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest} message UpdateDataRetentionSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDataRetentionSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDataRetentionSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest} UpdateDataRetentionSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDataRetentionSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDataRetentionSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest} UpdateDataRetentionSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDataRetentionSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDataRetentionSettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDataRetentionSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataRetentionSettings != null && message.hasOwnProperty("dataRetentionSettings")) {
+                                var error = $root.google.analytics.admin.v1alpha.DataRetentionSettings.verify(message.dataRetentionSettings);
+                                if (error)
+                                    return "dataRetentionSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDataRetentionSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest} UpdateDataRetentionSettingsRequest
+                         */
+                        UpdateDataRetentionSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest();
+                            if (object.dataRetentionSettings != null) {
+                                if (typeof object.dataRetentionSettings !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest.dataRetentionSettings: object expected");
+                                message.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.fromObject(object.dataRetentionSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDataRetentionSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest} message UpdateDataRetentionSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDataRetentionSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataRetentionSettings = null;
+                                object.updateMask = null;
+                            }
+                            if (message.dataRetentionSettings != null && message.hasOwnProperty("dataRetentionSettings"))
+                                object.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.toObject(message.dataRetentionSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDataRetentionSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDataRetentionSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateDataRetentionSettingsRequest;
                     })();
     
                     /**
@@ -21274,6 +24732,22 @@
                     })();
     
                     /**
+                     * ServiceLevel enum.
+                     * @name google.analytics.admin.v1alpha.ServiceLevel
+                     * @enum {number}
+                     * @property {number} SERVICE_LEVEL_UNSPECIFIED=0 SERVICE_LEVEL_UNSPECIFIED value
+                     * @property {number} GOOGLE_ANALYTICS_STANDARD=1 GOOGLE_ANALYTICS_STANDARD value
+                     * @property {number} GOOGLE_ANALYTICS_360=2 GOOGLE_ANALYTICS_360 value
+                     */
+                    v1alpha.ServiceLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SERVICE_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GOOGLE_ANALYTICS_STANDARD"] = 1;
+                        values[valuesById[2] = "GOOGLE_ANALYTICS_360"] = 2;
+                        return values;
+                    })();
+    
+                    /**
                      * ActorType enum.
                      * @name google.analytics.admin.v1alpha.ActorType
                      * @enum {number}
@@ -21326,6 +24800,7 @@
                      * @property {number} MEASUREMENT_PROTOCOL_SECRET=10 MEASUREMENT_PROTOCOL_SECRET value
                      * @property {number} CUSTOM_DIMENSION=11 CUSTOM_DIMENSION value
                      * @property {number} CUSTOM_METRIC=12 CUSTOM_METRIC value
+                     * @property {number} DATA_RETENTION_SETTINGS=13 DATA_RETENTION_SETTINGS value
                      */
                     v1alpha.ChangeHistoryResourceType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -21342,6 +24817,7 @@
                         values[valuesById[10] = "MEASUREMENT_PROTOCOL_SECRET"] = 10;
                         values[valuesById[11] = "CUSTOM_DIMENSION"] = 11;
                         values[valuesById[12] = "CUSTOM_METRIC"] = 12;
+                        values[valuesById[13] = "DATA_RETENTION_SETTINGS"] = 13;
                         return values;
                     })();
     
@@ -21374,6 +24850,46 @@
                         values[valuesById[0] = "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED"] = 0;
                         values[valuesById[2] = "GOOGLE_SIGNALS_CONSENT_CONSENTED"] = 2;
                         values[valuesById[1] = "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED"] = 1;
+                        return values;
+                    })();
+    
+                    /**
+                     * LinkProposalInitiatingProduct enum.
+                     * @name google.analytics.admin.v1alpha.LinkProposalInitiatingProduct
+                     * @enum {number}
+                     * @property {number} LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED=0 LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED value
+                     * @property {number} GOOGLE_ANALYTICS=1 GOOGLE_ANALYTICS value
+                     * @property {number} LINKED_PRODUCT=2 LINKED_PRODUCT value
+                     */
+                    v1alpha.LinkProposalInitiatingProduct = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GOOGLE_ANALYTICS"] = 1;
+                        values[valuesById[2] = "LINKED_PRODUCT"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * LinkProposalState enum.
+                     * @name google.analytics.admin.v1alpha.LinkProposalState
+                     * @enum {number}
+                     * @property {number} LINK_PROPOSAL_STATE_UNSPECIFIED=0 LINK_PROPOSAL_STATE_UNSPECIFIED value
+                     * @property {number} AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS=1 AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS value
+                     * @property {number} AWAITING_REVIEW_FROM_LINKED_PRODUCT=2 AWAITING_REVIEW_FROM_LINKED_PRODUCT value
+                     * @property {number} WITHDRAWN=3 WITHDRAWN value
+                     * @property {number} DECLINED=4 DECLINED value
+                     * @property {number} EXPIRED=5 EXPIRED value
+                     * @property {number} OBSOLETE=6 OBSOLETE value
+                     */
+                    v1alpha.LinkProposalState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LINK_PROPOSAL_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS"] = 1;
+                        values[valuesById[2] = "AWAITING_REVIEW_FROM_LINKED_PRODUCT"] = 2;
+                        values[valuesById[3] = "WITHDRAWN"] = 3;
+                        values[valuesById[4] = "DECLINED"] = 4;
+                        values[valuesById[5] = "EXPIRED"] = 5;
+                        values[valuesById[6] = "OBSOLETE"] = 6;
                         return values;
                     })();
     
@@ -21699,6 +25215,7 @@
                          * @property {google.analytics.admin.v1alpha.IndustryCategory|null} [industryCategory] Property industryCategory
                          * @property {string|null} [timeZone] Property timeZone
                          * @property {string|null} [currencyCode] Property currencyCode
+                         * @property {google.analytics.admin.v1alpha.ServiceLevel|null} [serviceLevel] Property serviceLevel
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] Property deleteTime
                          * @property {google.protobuf.ITimestamp|null} [expireTime] Property expireTime
                          */
@@ -21783,6 +25300,14 @@
                         Property.prototype.currencyCode = "";
     
                         /**
+                         * Property serviceLevel.
+                         * @member {google.analytics.admin.v1alpha.ServiceLevel} serviceLevel
+                         * @memberof google.analytics.admin.v1alpha.Property
+                         * @instance
+                         */
+                        Property.prototype.serviceLevel = 0;
+    
+                        /**
                          * Property deleteTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
                          * @memberof google.analytics.admin.v1alpha.Property
@@ -21838,6 +25363,8 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.timeZone);
                             if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.currencyCode);
+                            if (message.serviceLevel != null && Object.hasOwnProperty.call(message, "serviceLevel"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.serviceLevel);
                             if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
                                 $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
@@ -21899,6 +25426,9 @@
                                     break;
                                 case 8:
                                     message.currencyCode = reader.string();
+                                    break;
+                                case 10:
+                                    message.serviceLevel = reader.int32();
                                     break;
                                 case 11:
                                     message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -21999,6 +25529,15 @@
                             if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
                                 if (!$util.isString(message.currencyCode))
                                     return "currencyCode: string expected";
+                            if (message.serviceLevel != null && message.hasOwnProperty("serviceLevel"))
+                                switch (message.serviceLevel) {
+                                default:
+                                    return "serviceLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
                                 if (error)
@@ -22154,6 +25693,20 @@
                                 message.timeZone = String(object.timeZone);
                             if (object.currencyCode != null)
                                 message.currencyCode = String(object.currencyCode);
+                            switch (object.serviceLevel) {
+                            case "SERVICE_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.serviceLevel = 0;
+                                break;
+                            case "GOOGLE_ANALYTICS_STANDARD":
+                            case 1:
+                                message.serviceLevel = 1;
+                                break;
+                            case "GOOGLE_ANALYTICS_360":
+                            case 2:
+                                message.serviceLevel = 2;
+                                break;
+                            }
                             if (object.deleteTime != null) {
                                 if (typeof object.deleteTime !== "object")
                                     throw TypeError(".google.analytics.admin.v1alpha.Property.deleteTime: object expected");
@@ -22189,6 +25742,7 @@
                                 object.industryCategory = options.enums === String ? "INDUSTRY_CATEGORY_UNSPECIFIED" : 0;
                                 object.timeZone = "";
                                 object.currencyCode = "";
+                                object.serviceLevel = options.enums === String ? "SERVICE_LEVEL_UNSPECIFIED" : 0;
                                 object.deleteTime = null;
                                 object.expireTime = null;
                             }
@@ -22208,6 +25762,8 @@
                                 object.timeZone = message.timeZone;
                             if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
                                 object.currencyCode = message.currencyCode;
+                            if (message.serviceLevel != null && message.hasOwnProperty("serviceLevel"))
+                                object.serviceLevel = options.enums === String ? $root.google.analytics.admin.v1alpha.ServiceLevel[message.serviceLevel] : message.serviceLevel;
                             if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
                                 object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
                             if (message.expireTime != null && message.hasOwnProperty("expireTime"))
@@ -24151,7 +27707,6 @@
                          * @property {string|null} [name] FirebaseLink name
                          * @property {string|null} [project] FirebaseLink project
                          * @property {google.protobuf.ITimestamp|null} [createTime] FirebaseLink createTime
-                         * @property {google.analytics.admin.v1alpha.MaximumUserAccess|null} [maximumUserAccess] FirebaseLink maximumUserAccess
                          */
     
                         /**
@@ -24194,14 +27749,6 @@
                         FirebaseLink.prototype.createTime = null;
     
                         /**
-                         * FirebaseLink maximumUserAccess.
-                         * @member {google.analytics.admin.v1alpha.MaximumUserAccess} maximumUserAccess
-                         * @memberof google.analytics.admin.v1alpha.FirebaseLink
-                         * @instance
-                         */
-                        FirebaseLink.prototype.maximumUserAccess = 0;
-    
-                        /**
                          * Creates a new FirebaseLink instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.admin.v1alpha.FirebaseLink
@@ -24231,8 +27778,6 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.maximumUserAccess != null && Object.hasOwnProperty.call(message, "maximumUserAccess"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.maximumUserAccess);
                             return writer;
                         };
     
@@ -24275,9 +27820,6 @@
                                     break;
                                 case 3:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 4:
-                                    message.maximumUserAccess = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -24325,17 +27867,6 @@
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.maximumUserAccess != null && message.hasOwnProperty("maximumUserAccess"))
-                                switch (message.maximumUserAccess) {
-                                default:
-                                    return "maximumUserAccess: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                    break;
-                                }
                             return null;
                         };
     
@@ -24360,28 +27891,6 @@
                                     throw TypeError(".google.analytics.admin.v1alpha.FirebaseLink.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
-                            switch (object.maximumUserAccess) {
-                            case "MAXIMUM_USER_ACCESS_UNSPECIFIED":
-                            case 0:
-                                message.maximumUserAccess = 0;
-                                break;
-                            case "NO_ACCESS":
-                            case 1:
-                                message.maximumUserAccess = 1;
-                                break;
-                            case "READ_AND_ANALYZE":
-                            case 2:
-                                message.maximumUserAccess = 2;
-                                break;
-                            case "EDITOR_WITHOUT_LINK_MANAGEMENT":
-                            case 3:
-                                message.maximumUserAccess = 3;
-                                break;
-                            case "EDITOR_INCLUDING_LINK_MANAGEMENT":
-                            case 4:
-                                message.maximumUserAccess = 4;
-                                break;
-                            }
                             return message;
                         };
     
@@ -24402,7 +27911,6 @@
                                 object.name = "";
                                 object.project = "";
                                 object.createTime = null;
-                                object.maximumUserAccess = options.enums === String ? "MAXIMUM_USER_ACCESS_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -24410,8 +27918,6 @@
                                 object.project = message.project;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.maximumUserAccess != null && message.hasOwnProperty("maximumUserAccess"))
-                                object.maximumUserAccess = options.enums === String ? $root.google.analytics.admin.v1alpha.MaximumUserAccess[message.maximumUserAccess] : message.maximumUserAccess;
                             return object;
                         };
     
@@ -24649,9 +28155,9 @@
                          * @property {string|null} [customerId] GoogleAdsLink customerId
                          * @property {boolean|null} [canManageClients] GoogleAdsLink canManageClients
                          * @property {google.protobuf.IBoolValue|null} [adsPersonalizationEnabled] GoogleAdsLink adsPersonalizationEnabled
-                         * @property {string|null} [emailAddress] GoogleAdsLink emailAddress
                          * @property {google.protobuf.ITimestamp|null} [createTime] GoogleAdsLink createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] GoogleAdsLink updateTime
+                         * @property {string|null} [creatorEmailAddress] GoogleAdsLink creatorEmailAddress
                          */
     
                         /**
@@ -24702,14 +28208,6 @@
                         GoogleAdsLink.prototype.adsPersonalizationEnabled = null;
     
                         /**
-                         * GoogleAdsLink emailAddress.
-                         * @member {string} emailAddress
-                         * @memberof google.analytics.admin.v1alpha.GoogleAdsLink
-                         * @instance
-                         */
-                        GoogleAdsLink.prototype.emailAddress = "";
-    
-                        /**
                          * GoogleAdsLink createTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} createTime
                          * @memberof google.analytics.admin.v1alpha.GoogleAdsLink
@@ -24724,6 +28222,14 @@
                          * @instance
                          */
                         GoogleAdsLink.prototype.updateTime = null;
+    
+                        /**
+                         * GoogleAdsLink creatorEmailAddress.
+                         * @member {string} creatorEmailAddress
+                         * @memberof google.analytics.admin.v1alpha.GoogleAdsLink
+                         * @instance
+                         */
+                        GoogleAdsLink.prototype.creatorEmailAddress = "";
     
                         /**
                          * Creates a new GoogleAdsLink instance using the specified properties.
@@ -24757,12 +28263,12 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.canManageClients);
                             if (message.adsPersonalizationEnabled != null && Object.hasOwnProperty.call(message, "adsPersonalizationEnabled"))
                                 $root.google.protobuf.BoolValue.encode(message.adsPersonalizationEnabled, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.emailAddress != null && Object.hasOwnProperty.call(message, "emailAddress"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.emailAddress);
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.creatorEmailAddress != null && Object.hasOwnProperty.call(message, "creatorEmailAddress"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.creatorEmailAddress);
                             return writer;
                         };
     
@@ -24809,14 +28315,14 @@
                                 case 5:
                                     message.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
                                     break;
-                                case 6:
-                                    message.emailAddress = reader.string();
-                                    break;
                                 case 7:
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 8:
                                     message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.creatorEmailAddress = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -24867,9 +28373,6 @@
                                 if (error)
                                     return "adsPersonalizationEnabled." + error;
                             }
-                            if (message.emailAddress != null && message.hasOwnProperty("emailAddress"))
-                                if (!$util.isString(message.emailAddress))
-                                    return "emailAddress: string expected";
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -24880,6 +28383,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.creatorEmailAddress != null && message.hasOwnProperty("creatorEmailAddress"))
+                                if (!$util.isString(message.creatorEmailAddress))
+                                    return "creatorEmailAddress: string expected";
                             return null;
                         };
     
@@ -24906,8 +28412,6 @@
                                     throw TypeError(".google.analytics.admin.v1alpha.GoogleAdsLink.adsPersonalizationEnabled: object expected");
                                 message.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.fromObject(object.adsPersonalizationEnabled);
                             }
-                            if (object.emailAddress != null)
-                                message.emailAddress = String(object.emailAddress);
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.analytics.admin.v1alpha.GoogleAdsLink.createTime: object expected");
@@ -24918,6 +28422,8 @@
                                     throw TypeError(".google.analytics.admin.v1alpha.GoogleAdsLink.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.creatorEmailAddress != null)
+                                message.creatorEmailAddress = String(object.creatorEmailAddress);
                             return message;
                         };
     
@@ -24939,9 +28445,9 @@
                                 object.customerId = "";
                                 object.canManageClients = false;
                                 object.adsPersonalizationEnabled = null;
-                                object.emailAddress = "";
                                 object.createTime = null;
                                 object.updateTime = null;
+                                object.creatorEmailAddress = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -24951,12 +28457,12 @@
                                 object.canManageClients = message.canManageClients;
                             if (message.adsPersonalizationEnabled != null && message.hasOwnProperty("adsPersonalizationEnabled"))
                                 object.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.toObject(message.adsPersonalizationEnabled, options);
-                            if (message.emailAddress != null && message.hasOwnProperty("emailAddress"))
-                                object.emailAddress = message.emailAddress;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.creatorEmailAddress != null && message.hasOwnProperty("creatorEmailAddress"))
+                                object.creatorEmailAddress = message.creatorEmailAddress;
                             return object;
                         };
     
@@ -26636,10 +30142,13 @@
                              * @property {google.analytics.admin.v1alpha.IFirebaseLink|null} [firebaseLink] ChangeHistoryResource firebaseLink
                              * @property {google.analytics.admin.v1alpha.IGoogleAdsLink|null} [googleAdsLink] ChangeHistoryResource googleAdsLink
                              * @property {google.analytics.admin.v1alpha.IGoogleSignalsSettings|null} [googleSignalsSettings] ChangeHistoryResource googleSignalsSettings
+                             * @property {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null} [displayVideo_360AdvertiserLink] ChangeHistoryResource displayVideo_360AdvertiserLink
+                             * @property {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null} [displayVideo_360AdvertiserLinkProposal] ChangeHistoryResource displayVideo_360AdvertiserLinkProposal
                              * @property {google.analytics.admin.v1alpha.IConversionEvent|null} [conversionEvent] ChangeHistoryResource conversionEvent
                              * @property {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null} [measurementProtocolSecret] ChangeHistoryResource measurementProtocolSecret
                              * @property {google.analytics.admin.v1alpha.ICustomDimension|null} [customDimension] ChangeHistoryResource customDimension
                              * @property {google.analytics.admin.v1alpha.ICustomMetric|null} [customMetric] ChangeHistoryResource customMetric
+                             * @property {google.analytics.admin.v1alpha.IDataRetentionSettings|null} [dataRetentionSettings] ChangeHistoryResource dataRetentionSettings
                              */
     
                             /**
@@ -26722,6 +30231,22 @@
                             ChangeHistoryResource.prototype.googleSignalsSettings = null;
     
                             /**
+                             * ChangeHistoryResource displayVideo_360AdvertiserLink.
+                             * @member {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null|undefined} displayVideo_360AdvertiserLink
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.displayVideo_360AdvertiserLink = null;
+    
+                            /**
+                             * ChangeHistoryResource displayVideo_360AdvertiserLinkProposal.
+                             * @member {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null|undefined} displayVideo_360AdvertiserLinkProposal
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.displayVideo_360AdvertiserLinkProposal = null;
+    
+                            /**
                              * ChangeHistoryResource conversionEvent.
                              * @member {google.analytics.admin.v1alpha.IConversionEvent|null|undefined} conversionEvent
                              * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
@@ -26753,17 +30278,25 @@
                              */
                             ChangeHistoryResource.prototype.customMetric = null;
     
+                            /**
+                             * ChangeHistoryResource dataRetentionSettings.
+                             * @member {google.analytics.admin.v1alpha.IDataRetentionSettings|null|undefined} dataRetentionSettings
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.dataRetentionSettings = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * ChangeHistoryResource resource.
-                             * @member {"account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|undefined} resource
+                             * @member {"account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|undefined} resource
                              * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
                              * @instance
                              */
                             Object.defineProperty(ChangeHistoryResource.prototype, "resource", {
-                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "webDataStream", "androidAppDataStream", "iosAppDataStream", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric"]),
+                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "webDataStream", "androidAppDataStream", "iosAppDataStream", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -26807,6 +30340,10 @@
                                     $root.google.analytics.admin.v1alpha.GoogleAdsLink.encode(message.googleAdsLink, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.googleSignalsSettings != null && Object.hasOwnProperty.call(message, "googleSignalsSettings"))
                                     $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.encode(message.googleSignalsSettings, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.displayVideo_360AdvertiserLink != null && Object.hasOwnProperty.call(message, "displayVideo_360AdvertiserLink"))
+                                    $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.encode(message.displayVideo_360AdvertiserLink, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.displayVideo_360AdvertiserLinkProposal != null && Object.hasOwnProperty.call(message, "displayVideo_360AdvertiserLinkProposal"))
+                                    $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.encode(message.displayVideo_360AdvertiserLinkProposal, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 if (message.conversionEvent != null && Object.hasOwnProperty.call(message, "conversionEvent"))
                                     $root.google.analytics.admin.v1alpha.ConversionEvent.encode(message.conversionEvent, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 if (message.measurementProtocolSecret != null && Object.hasOwnProperty.call(message, "measurementProtocolSecret"))
@@ -26815,6 +30352,8 @@
                                     $root.google.analytics.admin.v1alpha.CustomDimension.encode(message.customDimension, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 if (message.customMetric != null && Object.hasOwnProperty.call(message, "customMetric"))
                                     $root.google.analytics.admin.v1alpha.CustomMetric.encode(message.customMetric, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.dataRetentionSettings != null && Object.hasOwnProperty.call(message, "dataRetentionSettings"))
+                                    $root.google.analytics.admin.v1alpha.DataRetentionSettings.encode(message.dataRetentionSettings, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                                 return writer;
                             };
     
@@ -26873,6 +30412,12 @@
                                     case 8:
                                         message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.decode(reader, reader.uint32());
                                         break;
+                                    case 9:
+                                        message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.decode(reader, reader.uint32());
+                                        break;
+                                    case 10:
+                                        message.displayVideo_360AdvertiserLinkProposal = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.decode(reader, reader.uint32());
+                                        break;
                                     case 11:
                                         message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.decode(reader, reader.uint32());
                                         break;
@@ -26884,6 +30429,9 @@
                                         break;
                                     case 14:
                                         message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.decode(reader, reader.uint32());
+                                        break;
+                                    case 15:
+                                        message.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -26999,6 +30547,26 @@
                                             return "googleSignalsSettings." + error;
                                     }
                                 }
+                                if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify(message.displayVideo_360AdvertiserLink);
+                                        if (error)
+                                            return "displayVideo_360AdvertiserLink." + error;
+                                    }
+                                }
+                                if (message.displayVideo_360AdvertiserLinkProposal != null && message.hasOwnProperty("displayVideo_360AdvertiserLinkProposal")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify(message.displayVideo_360AdvertiserLinkProposal);
+                                        if (error)
+                                            return "displayVideo_360AdvertiserLinkProposal." + error;
+                                    }
+                                }
                                 if (message.conversionEvent != null && message.hasOwnProperty("conversionEvent")) {
                                     if (properties.resource === 1)
                                         return "resource: multiple values";
@@ -27037,6 +30605,16 @@
                                         var error = $root.google.analytics.admin.v1alpha.CustomMetric.verify(message.customMetric);
                                         if (error)
                                             return "customMetric." + error;
+                                    }
+                                }
+                                if (message.dataRetentionSettings != null && message.hasOwnProperty("dataRetentionSettings")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.DataRetentionSettings.verify(message.dataRetentionSettings);
+                                        if (error)
+                                            return "dataRetentionSettings." + error;
                                     }
                                 }
                                 return null;
@@ -27094,6 +30672,16 @@
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.googleSignalsSettings: object expected");
                                     message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.fromObject(object.googleSignalsSettings);
                                 }
+                                if (object.displayVideo_360AdvertiserLink != null) {
+                                    if (typeof object.displayVideo_360AdvertiserLink !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.displayVideo_360AdvertiserLink: object expected");
+                                    message.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.fromObject(object.displayVideo_360AdvertiserLink);
+                                }
+                                if (object.displayVideo_360AdvertiserLinkProposal != null) {
+                                    if (typeof object.displayVideo_360AdvertiserLinkProposal !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.displayVideo_360AdvertiserLinkProposal: object expected");
+                                    message.displayVideo_360AdvertiserLinkProposal = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.fromObject(object.displayVideo_360AdvertiserLinkProposal);
+                                }
                                 if (object.conversionEvent != null) {
                                     if (typeof object.conversionEvent !== "object")
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.conversionEvent: object expected");
@@ -27113,6 +30701,11 @@
                                     if (typeof object.customMetric !== "object")
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.customMetric: object expected");
                                     message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.fromObject(object.customMetric);
+                                }
+                                if (object.dataRetentionSettings != null) {
+                                    if (typeof object.dataRetentionSettings !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.dataRetentionSettings: object expected");
+                                    message.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.fromObject(object.dataRetentionSettings);
                                 }
                                 return message;
                             };
@@ -27170,6 +30763,16 @@
                                     if (options.oneofs)
                                         object.resource = "googleSignalsSettings";
                                 }
+                                if (message.displayVideo_360AdvertiserLink != null && message.hasOwnProperty("displayVideo_360AdvertiserLink")) {
+                                    object.displayVideo_360AdvertiserLink = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.toObject(message.displayVideo_360AdvertiserLink, options);
+                                    if (options.oneofs)
+                                        object.resource = "displayVideo_360AdvertiserLink";
+                                }
+                                if (message.displayVideo_360AdvertiserLinkProposal != null && message.hasOwnProperty("displayVideo_360AdvertiserLinkProposal")) {
+                                    object.displayVideo_360AdvertiserLinkProposal = $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.toObject(message.displayVideo_360AdvertiserLinkProposal, options);
+                                    if (options.oneofs)
+                                        object.resource = "displayVideo_360AdvertiserLinkProposal";
+                                }
                                 if (message.conversionEvent != null && message.hasOwnProperty("conversionEvent")) {
                                     object.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.toObject(message.conversionEvent, options);
                                     if (options.oneofs)
@@ -27189,6 +30792,11 @@
                                     object.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.toObject(message.customMetric, options);
                                     if (options.oneofs)
                                         object.resource = "customMetric";
+                                }
+                                if (message.dataRetentionSettings != null && message.hasOwnProperty("dataRetentionSettings")) {
+                                    object.dataRetentionSettings = $root.google.analytics.admin.v1alpha.DataRetentionSettings.toObject(message.dataRetentionSettings, options);
+                                    if (options.oneofs)
+                                        object.resource = "dataRetentionSettings";
                                 }
                                 return object;
                             };
@@ -27210,6 +30818,969 @@
                         return ChangeHistoryChange;
                     })();
     
+                    v1alpha.DisplayVideo360AdvertiserLink = (function() {
+    
+                        /**
+                         * Properties of a DisplayVideo360AdvertiserLink.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDisplayVideo360AdvertiserLink
+                         * @property {string|null} [name] DisplayVideo360AdvertiserLink name
+                         * @property {string|null} [advertiserId] DisplayVideo360AdvertiserLink advertiserId
+                         * @property {string|null} [advertiserDisplayName] DisplayVideo360AdvertiserLink advertiserDisplayName
+                         * @property {google.protobuf.IBoolValue|null} [adsPersonalizationEnabled] DisplayVideo360AdvertiserLink adsPersonalizationEnabled
+                         * @property {google.protobuf.IBoolValue|null} [campaignDataSharingEnabled] DisplayVideo360AdvertiserLink campaignDataSharingEnabled
+                         * @property {google.protobuf.IBoolValue|null} [costDataSharingEnabled] DisplayVideo360AdvertiserLink costDataSharingEnabled
+                         */
+    
+                        /**
+                         * Constructs a new DisplayVideo360AdvertiserLink.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DisplayVideo360AdvertiserLink.
+                         * @implements IDisplayVideo360AdvertiserLink
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink=} [properties] Properties to set
+                         */
+                        function DisplayVideo360AdvertiserLink(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DisplayVideo360AdvertiserLink name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.name = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLink advertiserId.
+                         * @member {string} advertiserId
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.advertiserId = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLink advertiserDisplayName.
+                         * @member {string} advertiserDisplayName
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.advertiserDisplayName = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLink adsPersonalizationEnabled.
+                         * @member {google.protobuf.IBoolValue|null|undefined} adsPersonalizationEnabled
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.adsPersonalizationEnabled = null;
+    
+                        /**
+                         * DisplayVideo360AdvertiserLink campaignDataSharingEnabled.
+                         * @member {google.protobuf.IBoolValue|null|undefined} campaignDataSharingEnabled
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.campaignDataSharingEnabled = null;
+    
+                        /**
+                         * DisplayVideo360AdvertiserLink costDataSharingEnabled.
+                         * @member {google.protobuf.IBoolValue|null|undefined} costDataSharingEnabled
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.costDataSharingEnabled = null;
+    
+                        /**
+                         * Creates a new DisplayVideo360AdvertiserLink instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} DisplayVideo360AdvertiserLink instance
+                         */
+                        DisplayVideo360AdvertiserLink.create = function create(properties) {
+                            return new DisplayVideo360AdvertiserLink(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DisplayVideo360AdvertiserLink message. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink} message DisplayVideo360AdvertiserLink message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisplayVideo360AdvertiserLink.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.advertiserId != null && Object.hasOwnProperty.call(message, "advertiserId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.advertiserId);
+                            if (message.advertiserDisplayName != null && Object.hasOwnProperty.call(message, "advertiserDisplayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.advertiserDisplayName);
+                            if (message.adsPersonalizationEnabled != null && Object.hasOwnProperty.call(message, "adsPersonalizationEnabled"))
+                                $root.google.protobuf.BoolValue.encode(message.adsPersonalizationEnabled, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.campaignDataSharingEnabled != null && Object.hasOwnProperty.call(message, "campaignDataSharingEnabled"))
+                                $root.google.protobuf.BoolValue.encode(message.campaignDataSharingEnabled, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.costDataSharingEnabled != null && Object.hasOwnProperty.call(message, "costDataSharingEnabled"))
+                                $root.google.protobuf.BoolValue.encode(message.costDataSharingEnabled, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DisplayVideo360AdvertiserLink message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink} message DisplayVideo360AdvertiserLink message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisplayVideo360AdvertiserLink.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DisplayVideo360AdvertiserLink message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} DisplayVideo360AdvertiserLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisplayVideo360AdvertiserLink.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.advertiserId = reader.string();
+                                    break;
+                                case 3:
+                                    message.advertiserDisplayName = reader.string();
+                                    break;
+                                case 4:
+                                    message.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.campaignDataSharingEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.costDataSharingEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DisplayVideo360AdvertiserLink message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} DisplayVideo360AdvertiserLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisplayVideo360AdvertiserLink.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DisplayVideo360AdvertiserLink message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DisplayVideo360AdvertiserLink.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.advertiserId != null && message.hasOwnProperty("advertiserId"))
+                                if (!$util.isString(message.advertiserId))
+                                    return "advertiserId: string expected";
+                            if (message.advertiserDisplayName != null && message.hasOwnProperty("advertiserDisplayName"))
+                                if (!$util.isString(message.advertiserDisplayName))
+                                    return "advertiserDisplayName: string expected";
+                            if (message.adsPersonalizationEnabled != null && message.hasOwnProperty("adsPersonalizationEnabled")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.adsPersonalizationEnabled);
+                                if (error)
+                                    return "adsPersonalizationEnabled." + error;
+                            }
+                            if (message.campaignDataSharingEnabled != null && message.hasOwnProperty("campaignDataSharingEnabled")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.campaignDataSharingEnabled);
+                                if (error)
+                                    return "campaignDataSharingEnabled." + error;
+                            }
+                            if (message.costDataSharingEnabled != null && message.hasOwnProperty("costDataSharingEnabled")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.costDataSharingEnabled);
+                                if (error)
+                                    return "costDataSharingEnabled." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DisplayVideo360AdvertiserLink message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} DisplayVideo360AdvertiserLink
+                         */
+                        DisplayVideo360AdvertiserLink.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.advertiserId != null)
+                                message.advertiserId = String(object.advertiserId);
+                            if (object.advertiserDisplayName != null)
+                                message.advertiserDisplayName = String(object.advertiserDisplayName);
+                            if (object.adsPersonalizationEnabled != null) {
+                                if (typeof object.adsPersonalizationEnabled !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.adsPersonalizationEnabled: object expected");
+                                message.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.fromObject(object.adsPersonalizationEnabled);
+                            }
+                            if (object.campaignDataSharingEnabled != null) {
+                                if (typeof object.campaignDataSharingEnabled !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.campaignDataSharingEnabled: object expected");
+                                message.campaignDataSharingEnabled = $root.google.protobuf.BoolValue.fromObject(object.campaignDataSharingEnabled);
+                            }
+                            if (object.costDataSharingEnabled != null) {
+                                if (typeof object.costDataSharingEnabled !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.costDataSharingEnabled: object expected");
+                                message.costDataSharingEnabled = $root.google.protobuf.BoolValue.fromObject(object.costDataSharingEnabled);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DisplayVideo360AdvertiserLink message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink} message DisplayVideo360AdvertiserLink
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DisplayVideo360AdvertiserLink.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.advertiserId = "";
+                                object.advertiserDisplayName = "";
+                                object.adsPersonalizationEnabled = null;
+                                object.campaignDataSharingEnabled = null;
+                                object.costDataSharingEnabled = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.advertiserId != null && message.hasOwnProperty("advertiserId"))
+                                object.advertiserId = message.advertiserId;
+                            if (message.advertiserDisplayName != null && message.hasOwnProperty("advertiserDisplayName"))
+                                object.advertiserDisplayName = message.advertiserDisplayName;
+                            if (message.adsPersonalizationEnabled != null && message.hasOwnProperty("adsPersonalizationEnabled"))
+                                object.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.toObject(message.adsPersonalizationEnabled, options);
+                            if (message.campaignDataSharingEnabled != null && message.hasOwnProperty("campaignDataSharingEnabled"))
+                                object.campaignDataSharingEnabled = $root.google.protobuf.BoolValue.toObject(message.campaignDataSharingEnabled, options);
+                            if (message.costDataSharingEnabled != null && message.hasOwnProperty("costDataSharingEnabled"))
+                                object.costDataSharingEnabled = $root.google.protobuf.BoolValue.toObject(message.costDataSharingEnabled, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DisplayVideo360AdvertiserLink to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DisplayVideo360AdvertiserLink.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DisplayVideo360AdvertiserLink;
+                    })();
+    
+                    v1alpha.DisplayVideo360AdvertiserLinkProposal = (function() {
+    
+                        /**
+                         * Properties of a DisplayVideo360AdvertiserLinkProposal.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDisplayVideo360AdvertiserLinkProposal
+                         * @property {string|null} [name] DisplayVideo360AdvertiserLinkProposal name
+                         * @property {string|null} [advertiserId] DisplayVideo360AdvertiserLinkProposal advertiserId
+                         * @property {google.analytics.admin.v1alpha.ILinkProposalStatusDetails|null} [linkProposalStatusDetails] DisplayVideo360AdvertiserLinkProposal linkProposalStatusDetails
+                         * @property {string|null} [advertiserDisplayName] DisplayVideo360AdvertiserLinkProposal advertiserDisplayName
+                         * @property {string|null} [validationEmail] DisplayVideo360AdvertiserLinkProposal validationEmail
+                         * @property {google.protobuf.IBoolValue|null} [adsPersonalizationEnabled] DisplayVideo360AdvertiserLinkProposal adsPersonalizationEnabled
+                         * @property {google.protobuf.IBoolValue|null} [campaignDataSharingEnabled] DisplayVideo360AdvertiserLinkProposal campaignDataSharingEnabled
+                         * @property {google.protobuf.IBoolValue|null} [costDataSharingEnabled] DisplayVideo360AdvertiserLinkProposal costDataSharingEnabled
+                         */
+    
+                        /**
+                         * Constructs a new DisplayVideo360AdvertiserLinkProposal.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DisplayVideo360AdvertiserLinkProposal.
+                         * @implements IDisplayVideo360AdvertiserLinkProposal
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal=} [properties] Properties to set
+                         */
+                        function DisplayVideo360AdvertiserLinkProposal(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.name = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal advertiserId.
+                         * @member {string} advertiserId
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.advertiserId = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal linkProposalStatusDetails.
+                         * @member {google.analytics.admin.v1alpha.ILinkProposalStatusDetails|null|undefined} linkProposalStatusDetails
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.linkProposalStatusDetails = null;
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal advertiserDisplayName.
+                         * @member {string} advertiserDisplayName
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.advertiserDisplayName = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal validationEmail.
+                         * @member {string} validationEmail
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.validationEmail = "";
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal adsPersonalizationEnabled.
+                         * @member {google.protobuf.IBoolValue|null|undefined} adsPersonalizationEnabled
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.adsPersonalizationEnabled = null;
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal campaignDataSharingEnabled.
+                         * @member {google.protobuf.IBoolValue|null|undefined} campaignDataSharingEnabled
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.campaignDataSharingEnabled = null;
+    
+                        /**
+                         * DisplayVideo360AdvertiserLinkProposal costDataSharingEnabled.
+                         * @member {google.protobuf.IBoolValue|null|undefined} costDataSharingEnabled
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.costDataSharingEnabled = null;
+    
+                        /**
+                         * Creates a new DisplayVideo360AdvertiserLinkProposal instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} DisplayVideo360AdvertiserLinkProposal instance
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.create = function create(properties) {
+                            return new DisplayVideo360AdvertiserLinkProposal(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DisplayVideo360AdvertiserLinkProposal message. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal} message DisplayVideo360AdvertiserLinkProposal message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.advertiserId != null && Object.hasOwnProperty.call(message, "advertiserId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.advertiserId);
+                            if (message.linkProposalStatusDetails != null && Object.hasOwnProperty.call(message, "linkProposalStatusDetails"))
+                                $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails.encode(message.linkProposalStatusDetails, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.advertiserDisplayName != null && Object.hasOwnProperty.call(message, "advertiserDisplayName"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.advertiserDisplayName);
+                            if (message.validationEmail != null && Object.hasOwnProperty.call(message, "validationEmail"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.validationEmail);
+                            if (message.adsPersonalizationEnabled != null && Object.hasOwnProperty.call(message, "adsPersonalizationEnabled"))
+                                $root.google.protobuf.BoolValue.encode(message.adsPersonalizationEnabled, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.campaignDataSharingEnabled != null && Object.hasOwnProperty.call(message, "campaignDataSharingEnabled"))
+                                $root.google.protobuf.BoolValue.encode(message.campaignDataSharingEnabled, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.costDataSharingEnabled != null && Object.hasOwnProperty.call(message, "costDataSharingEnabled"))
+                                $root.google.protobuf.BoolValue.encode(message.costDataSharingEnabled, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DisplayVideo360AdvertiserLinkProposal message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal} message DisplayVideo360AdvertiserLinkProposal message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DisplayVideo360AdvertiserLinkProposal message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} DisplayVideo360AdvertiserLinkProposal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.advertiserId = reader.string();
+                                    break;
+                                case 3:
+                                    message.linkProposalStatusDetails = $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.advertiserDisplayName = reader.string();
+                                    break;
+                                case 5:
+                                    message.validationEmail = reader.string();
+                                    break;
+                                case 6:
+                                    message.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    message.campaignDataSharingEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.costDataSharingEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DisplayVideo360AdvertiserLinkProposal message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} DisplayVideo360AdvertiserLinkProposal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DisplayVideo360AdvertiserLinkProposal message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.advertiserId != null && message.hasOwnProperty("advertiserId"))
+                                if (!$util.isString(message.advertiserId))
+                                    return "advertiserId: string expected";
+                            if (message.linkProposalStatusDetails != null && message.hasOwnProperty("linkProposalStatusDetails")) {
+                                var error = $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails.verify(message.linkProposalStatusDetails);
+                                if (error)
+                                    return "linkProposalStatusDetails." + error;
+                            }
+                            if (message.advertiserDisplayName != null && message.hasOwnProperty("advertiserDisplayName"))
+                                if (!$util.isString(message.advertiserDisplayName))
+                                    return "advertiserDisplayName: string expected";
+                            if (message.validationEmail != null && message.hasOwnProperty("validationEmail"))
+                                if (!$util.isString(message.validationEmail))
+                                    return "validationEmail: string expected";
+                            if (message.adsPersonalizationEnabled != null && message.hasOwnProperty("adsPersonalizationEnabled")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.adsPersonalizationEnabled);
+                                if (error)
+                                    return "adsPersonalizationEnabled." + error;
+                            }
+                            if (message.campaignDataSharingEnabled != null && message.hasOwnProperty("campaignDataSharingEnabled")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.campaignDataSharingEnabled);
+                                if (error)
+                                    return "campaignDataSharingEnabled." + error;
+                            }
+                            if (message.costDataSharingEnabled != null && message.hasOwnProperty("costDataSharingEnabled")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.costDataSharingEnabled);
+                                if (error)
+                                    return "costDataSharingEnabled." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DisplayVideo360AdvertiserLinkProposal message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} DisplayVideo360AdvertiserLinkProposal
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.advertiserId != null)
+                                message.advertiserId = String(object.advertiserId);
+                            if (object.linkProposalStatusDetails != null) {
+                                if (typeof object.linkProposalStatusDetails !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.linkProposalStatusDetails: object expected");
+                                message.linkProposalStatusDetails = $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails.fromObject(object.linkProposalStatusDetails);
+                            }
+                            if (object.advertiserDisplayName != null)
+                                message.advertiserDisplayName = String(object.advertiserDisplayName);
+                            if (object.validationEmail != null)
+                                message.validationEmail = String(object.validationEmail);
+                            if (object.adsPersonalizationEnabled != null) {
+                                if (typeof object.adsPersonalizationEnabled !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.adsPersonalizationEnabled: object expected");
+                                message.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.fromObject(object.adsPersonalizationEnabled);
+                            }
+                            if (object.campaignDataSharingEnabled != null) {
+                                if (typeof object.campaignDataSharingEnabled !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.campaignDataSharingEnabled: object expected");
+                                message.campaignDataSharingEnabled = $root.google.protobuf.BoolValue.fromObject(object.campaignDataSharingEnabled);
+                            }
+                            if (object.costDataSharingEnabled != null) {
+                                if (typeof object.costDataSharingEnabled !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.costDataSharingEnabled: object expected");
+                                message.costDataSharingEnabled = $root.google.protobuf.BoolValue.fromObject(object.costDataSharingEnabled);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DisplayVideo360AdvertiserLinkProposal message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal} message DisplayVideo360AdvertiserLinkProposal
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.advertiserId = "";
+                                object.linkProposalStatusDetails = null;
+                                object.advertiserDisplayName = "";
+                                object.validationEmail = "";
+                                object.adsPersonalizationEnabled = null;
+                                object.campaignDataSharingEnabled = null;
+                                object.costDataSharingEnabled = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.advertiserId != null && message.hasOwnProperty("advertiserId"))
+                                object.advertiserId = message.advertiserId;
+                            if (message.linkProposalStatusDetails != null && message.hasOwnProperty("linkProposalStatusDetails"))
+                                object.linkProposalStatusDetails = $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails.toObject(message.linkProposalStatusDetails, options);
+                            if (message.advertiserDisplayName != null && message.hasOwnProperty("advertiserDisplayName"))
+                                object.advertiserDisplayName = message.advertiserDisplayName;
+                            if (message.validationEmail != null && message.hasOwnProperty("validationEmail"))
+                                object.validationEmail = message.validationEmail;
+                            if (message.adsPersonalizationEnabled != null && message.hasOwnProperty("adsPersonalizationEnabled"))
+                                object.adsPersonalizationEnabled = $root.google.protobuf.BoolValue.toObject(message.adsPersonalizationEnabled, options);
+                            if (message.campaignDataSharingEnabled != null && message.hasOwnProperty("campaignDataSharingEnabled"))
+                                object.campaignDataSharingEnabled = $root.google.protobuf.BoolValue.toObject(message.campaignDataSharingEnabled, options);
+                            if (message.costDataSharingEnabled != null && message.hasOwnProperty("costDataSharingEnabled"))
+                                object.costDataSharingEnabled = $root.google.protobuf.BoolValue.toObject(message.costDataSharingEnabled, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DisplayVideo360AdvertiserLinkProposal to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DisplayVideo360AdvertiserLinkProposal.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DisplayVideo360AdvertiserLinkProposal;
+                    })();
+    
+                    v1alpha.LinkProposalStatusDetails = (function() {
+    
+                        /**
+                         * Properties of a LinkProposalStatusDetails.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ILinkProposalStatusDetails
+                         * @property {google.analytics.admin.v1alpha.LinkProposalInitiatingProduct|null} [linkProposalInitiatingProduct] LinkProposalStatusDetails linkProposalInitiatingProduct
+                         * @property {string|null} [requestorEmail] LinkProposalStatusDetails requestorEmail
+                         * @property {google.analytics.admin.v1alpha.LinkProposalState|null} [linkProposalState] LinkProposalStatusDetails linkProposalState
+                         */
+    
+                        /**
+                         * Constructs a new LinkProposalStatusDetails.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a LinkProposalStatusDetails.
+                         * @implements ILinkProposalStatusDetails
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ILinkProposalStatusDetails=} [properties] Properties to set
+                         */
+                        function LinkProposalStatusDetails(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LinkProposalStatusDetails linkProposalInitiatingProduct.
+                         * @member {google.analytics.admin.v1alpha.LinkProposalInitiatingProduct} linkProposalInitiatingProduct
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @instance
+                         */
+                        LinkProposalStatusDetails.prototype.linkProposalInitiatingProduct = 0;
+    
+                        /**
+                         * LinkProposalStatusDetails requestorEmail.
+                         * @member {string} requestorEmail
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @instance
+                         */
+                        LinkProposalStatusDetails.prototype.requestorEmail = "";
+    
+                        /**
+                         * LinkProposalStatusDetails linkProposalState.
+                         * @member {google.analytics.admin.v1alpha.LinkProposalState} linkProposalState
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @instance
+                         */
+                        LinkProposalStatusDetails.prototype.linkProposalState = 0;
+    
+                        /**
+                         * Creates a new LinkProposalStatusDetails instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ILinkProposalStatusDetails=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.LinkProposalStatusDetails} LinkProposalStatusDetails instance
+                         */
+                        LinkProposalStatusDetails.create = function create(properties) {
+                            return new LinkProposalStatusDetails(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LinkProposalStatusDetails message. Does not implicitly {@link google.analytics.admin.v1alpha.LinkProposalStatusDetails.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ILinkProposalStatusDetails} message LinkProposalStatusDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkProposalStatusDetails.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.linkProposalInitiatingProduct != null && Object.hasOwnProperty.call(message, "linkProposalInitiatingProduct"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.linkProposalInitiatingProduct);
+                            if (message.requestorEmail != null && Object.hasOwnProperty.call(message, "requestorEmail"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestorEmail);
+                            if (message.linkProposalState != null && Object.hasOwnProperty.call(message, "linkProposalState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.linkProposalState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LinkProposalStatusDetails message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.LinkProposalStatusDetails.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ILinkProposalStatusDetails} message LinkProposalStatusDetails message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkProposalStatusDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LinkProposalStatusDetails message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.LinkProposalStatusDetails} LinkProposalStatusDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkProposalStatusDetails.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.linkProposalInitiatingProduct = reader.int32();
+                                    break;
+                                case 2:
+                                    message.requestorEmail = reader.string();
+                                    break;
+                                case 3:
+                                    message.linkProposalState = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LinkProposalStatusDetails message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.LinkProposalStatusDetails} LinkProposalStatusDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkProposalStatusDetails.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LinkProposalStatusDetails message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LinkProposalStatusDetails.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.linkProposalInitiatingProduct != null && message.hasOwnProperty("linkProposalInitiatingProduct"))
+                                switch (message.linkProposalInitiatingProduct) {
+                                default:
+                                    return "linkProposalInitiatingProduct: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.requestorEmail != null && message.hasOwnProperty("requestorEmail"))
+                                if (!$util.isString(message.requestorEmail))
+                                    return "requestorEmail: string expected";
+                            if (message.linkProposalState != null && message.hasOwnProperty("linkProposalState"))
+                                switch (message.linkProposalState) {
+                                default:
+                                    return "linkProposalState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LinkProposalStatusDetails message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.LinkProposalStatusDetails} LinkProposalStatusDetails
+                         */
+                        LinkProposalStatusDetails.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.LinkProposalStatusDetails();
+                            switch (object.linkProposalInitiatingProduct) {
+                            case "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED":
+                            case 0:
+                                message.linkProposalInitiatingProduct = 0;
+                                break;
+                            case "GOOGLE_ANALYTICS":
+                            case 1:
+                                message.linkProposalInitiatingProduct = 1;
+                                break;
+                            case "LINKED_PRODUCT":
+                            case 2:
+                                message.linkProposalInitiatingProduct = 2;
+                                break;
+                            }
+                            if (object.requestorEmail != null)
+                                message.requestorEmail = String(object.requestorEmail);
+                            switch (object.linkProposalState) {
+                            case "LINK_PROPOSAL_STATE_UNSPECIFIED":
+                            case 0:
+                                message.linkProposalState = 0;
+                                break;
+                            case "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS":
+                            case 1:
+                                message.linkProposalState = 1;
+                                break;
+                            case "AWAITING_REVIEW_FROM_LINKED_PRODUCT":
+                            case 2:
+                                message.linkProposalState = 2;
+                                break;
+                            case "WITHDRAWN":
+                            case 3:
+                                message.linkProposalState = 3;
+                                break;
+                            case "DECLINED":
+                            case 4:
+                                message.linkProposalState = 4;
+                                break;
+                            case "EXPIRED":
+                            case 5:
+                                message.linkProposalState = 5;
+                                break;
+                            case "OBSOLETE":
+                            case 6:
+                                message.linkProposalState = 6;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LinkProposalStatusDetails message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.LinkProposalStatusDetails} message LinkProposalStatusDetails
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LinkProposalStatusDetails.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.linkProposalInitiatingProduct = options.enums === String ? "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED" : 0;
+                                object.requestorEmail = "";
+                                object.linkProposalState = options.enums === String ? "LINK_PROPOSAL_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.linkProposalInitiatingProduct != null && message.hasOwnProperty("linkProposalInitiatingProduct"))
+                                object.linkProposalInitiatingProduct = options.enums === String ? $root.google.analytics.admin.v1alpha.LinkProposalInitiatingProduct[message.linkProposalInitiatingProduct] : message.linkProposalInitiatingProduct;
+                            if (message.requestorEmail != null && message.hasOwnProperty("requestorEmail"))
+                                object.requestorEmail = message.requestorEmail;
+                            if (message.linkProposalState != null && message.hasOwnProperty("linkProposalState"))
+                                object.linkProposalState = options.enums === String ? $root.google.analytics.admin.v1alpha.LinkProposalState[message.linkProposalState] : message.linkProposalState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LinkProposalStatusDetails to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.LinkProposalStatusDetails
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LinkProposalStatusDetails.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LinkProposalStatusDetails;
+                    })();
+    
                     v1alpha.ConversionEvent = (function() {
     
                         /**
@@ -27219,7 +31790,8 @@
                          * @property {string|null} [name] ConversionEvent name
                          * @property {string|null} [eventName] ConversionEvent eventName
                          * @property {google.protobuf.ITimestamp|null} [createTime] ConversionEvent createTime
-                         * @property {boolean|null} [isDeletable] ConversionEvent isDeletable
+                         * @property {boolean|null} [deletable] ConversionEvent deletable
+                         * @property {boolean|null} [custom] ConversionEvent custom
                          */
     
                         /**
@@ -27262,12 +31834,20 @@
                         ConversionEvent.prototype.createTime = null;
     
                         /**
-                         * ConversionEvent isDeletable.
-                         * @member {boolean} isDeletable
+                         * ConversionEvent deletable.
+                         * @member {boolean} deletable
                          * @memberof google.analytics.admin.v1alpha.ConversionEvent
                          * @instance
                          */
-                        ConversionEvent.prototype.isDeletable = false;
+                        ConversionEvent.prototype.deletable = false;
+    
+                        /**
+                         * ConversionEvent custom.
+                         * @member {boolean} custom
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @instance
+                         */
+                        ConversionEvent.prototype.custom = false;
     
                         /**
                          * Creates a new ConversionEvent instance using the specified properties.
@@ -27299,8 +31879,10 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.eventName);
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.isDeletable != null && Object.hasOwnProperty.call(message, "isDeletable"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isDeletable);
+                            if (message.deletable != null && Object.hasOwnProperty.call(message, "deletable"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.deletable);
+                            if (message.custom != null && Object.hasOwnProperty.call(message, "custom"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.custom);
                             return writer;
                         };
     
@@ -27345,7 +31927,10 @@
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 case 4:
-                                    message.isDeletable = reader.bool();
+                                    message.deletable = reader.bool();
+                                    break;
+                                case 5:
+                                    message.custom = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -27393,9 +31978,12 @@
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.isDeletable != null && message.hasOwnProperty("isDeletable"))
-                                if (typeof message.isDeletable !== "boolean")
-                                    return "isDeletable: boolean expected";
+                            if (message.deletable != null && message.hasOwnProperty("deletable"))
+                                if (typeof message.deletable !== "boolean")
+                                    return "deletable: boolean expected";
+                            if (message.custom != null && message.hasOwnProperty("custom"))
+                                if (typeof message.custom !== "boolean")
+                                    return "custom: boolean expected";
                             return null;
                         };
     
@@ -27420,8 +32008,10 @@
                                     throw TypeError(".google.analytics.admin.v1alpha.ConversionEvent.createTime: object expected");
                                 message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                             }
-                            if (object.isDeletable != null)
-                                message.isDeletable = Boolean(object.isDeletable);
+                            if (object.deletable != null)
+                                message.deletable = Boolean(object.deletable);
+                            if (object.custom != null)
+                                message.custom = Boolean(object.custom);
                             return message;
                         };
     
@@ -27442,7 +32032,8 @@
                                 object.name = "";
                                 object.eventName = "";
                                 object.createTime = null;
-                                object.isDeletable = false;
+                                object.deletable = false;
+                                object.custom = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -27450,8 +32041,10 @@
                                 object.eventName = message.eventName;
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.isDeletable != null && message.hasOwnProperty("isDeletable"))
-                                object.isDeletable = message.isDeletable;
+                            if (message.deletable != null && message.hasOwnProperty("deletable"))
+                                object.deletable = message.deletable;
+                            if (message.custom != null && message.hasOwnProperty("custom"))
+                                object.custom = message.custom;
                             return object;
                         };
     
@@ -28482,6 +33075,293 @@
                         })();
     
                         return CustomMetric;
+                    })();
+    
+                    v1alpha.DataRetentionSettings = (function() {
+    
+                        /**
+                         * Properties of a DataRetentionSettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDataRetentionSettings
+                         * @property {string|null} [name] DataRetentionSettings name
+                         * @property {google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration|null} [eventDataRetention] DataRetentionSettings eventDataRetention
+                         * @property {boolean|null} [resetUserDataOnNewActivity] DataRetentionSettings resetUserDataOnNewActivity
+                         */
+    
+                        /**
+                         * Constructs a new DataRetentionSettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DataRetentionSettings.
+                         * @implements IDataRetentionSettings
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDataRetentionSettings=} [properties] Properties to set
+                         */
+                        function DataRetentionSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataRetentionSettings name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @instance
+                         */
+                        DataRetentionSettings.prototype.name = "";
+    
+                        /**
+                         * DataRetentionSettings eventDataRetention.
+                         * @member {google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration} eventDataRetention
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @instance
+                         */
+                        DataRetentionSettings.prototype.eventDataRetention = 0;
+    
+                        /**
+                         * DataRetentionSettings resetUserDataOnNewActivity.
+                         * @member {boolean} resetUserDataOnNewActivity
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @instance
+                         */
+                        DataRetentionSettings.prototype.resetUserDataOnNewActivity = false;
+    
+                        /**
+                         * Creates a new DataRetentionSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDataRetentionSettings=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DataRetentionSettings} DataRetentionSettings instance
+                         */
+                        DataRetentionSettings.create = function create(properties) {
+                            return new DataRetentionSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataRetentionSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.DataRetentionSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDataRetentionSettings} message DataRetentionSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataRetentionSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.eventDataRetention != null && Object.hasOwnProperty.call(message, "eventDataRetention"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.eventDataRetention);
+                            if (message.resetUserDataOnNewActivity != null && Object.hasOwnProperty.call(message, "resetUserDataOnNewActivity"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.resetUserDataOnNewActivity);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataRetentionSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DataRetentionSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDataRetentionSettings} message DataRetentionSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataRetentionSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataRetentionSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DataRetentionSettings} DataRetentionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataRetentionSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DataRetentionSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.eventDataRetention = reader.int32();
+                                    break;
+                                case 3:
+                                    message.resetUserDataOnNewActivity = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataRetentionSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DataRetentionSettings} DataRetentionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataRetentionSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataRetentionSettings message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataRetentionSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.eventDataRetention != null && message.hasOwnProperty("eventDataRetention"))
+                                switch (message.eventDataRetention) {
+                                default:
+                                    return "eventDataRetention: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.resetUserDataOnNewActivity != null && message.hasOwnProperty("resetUserDataOnNewActivity"))
+                                if (typeof message.resetUserDataOnNewActivity !== "boolean")
+                                    return "resetUserDataOnNewActivity: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataRetentionSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DataRetentionSettings} DataRetentionSettings
+                         */
+                        DataRetentionSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DataRetentionSettings)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DataRetentionSettings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.eventDataRetention) {
+                            case "RETENTION_DURATION_UNSPECIFIED":
+                            case 0:
+                                message.eventDataRetention = 0;
+                                break;
+                            case "TWO_MONTHS":
+                            case 1:
+                                message.eventDataRetention = 1;
+                                break;
+                            case "FOURTEEN_MONTHS":
+                            case 3:
+                                message.eventDataRetention = 3;
+                                break;
+                            case "TWENTY_SIX_MONTHS":
+                            case 4:
+                                message.eventDataRetention = 4;
+                                break;
+                            case "THIRTY_EIGHT_MONTHS":
+                            case 5:
+                                message.eventDataRetention = 5;
+                                break;
+                            case "FIFTY_MONTHS":
+                            case 6:
+                                message.eventDataRetention = 6;
+                                break;
+                            }
+                            if (object.resetUserDataOnNewActivity != null)
+                                message.resetUserDataOnNewActivity = Boolean(object.resetUserDataOnNewActivity);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataRetentionSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DataRetentionSettings} message DataRetentionSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataRetentionSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.eventDataRetention = options.enums === String ? "RETENTION_DURATION_UNSPECIFIED" : 0;
+                                object.resetUserDataOnNewActivity = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.eventDataRetention != null && message.hasOwnProperty("eventDataRetention"))
+                                object.eventDataRetention = options.enums === String ? $root.google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration[message.eventDataRetention] : message.eventDataRetention;
+                            if (message.resetUserDataOnNewActivity != null && message.hasOwnProperty("resetUserDataOnNewActivity"))
+                                object.resetUserDataOnNewActivity = message.resetUserDataOnNewActivity;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataRetentionSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DataRetentionSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataRetentionSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * RetentionDuration enum.
+                         * @name google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration
+                         * @enum {number}
+                         * @property {number} RETENTION_DURATION_UNSPECIFIED=0 RETENTION_DURATION_UNSPECIFIED value
+                         * @property {number} TWO_MONTHS=1 TWO_MONTHS value
+                         * @property {number} FOURTEEN_MONTHS=3 FOURTEEN_MONTHS value
+                         * @property {number} TWENTY_SIX_MONTHS=4 TWENTY_SIX_MONTHS value
+                         * @property {number} THIRTY_EIGHT_MONTHS=5 THIRTY_EIGHT_MONTHS value
+                         * @property {number} FIFTY_MONTHS=6 FIFTY_MONTHS value
+                         */
+                        DataRetentionSettings.RetentionDuration = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RETENTION_DURATION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TWO_MONTHS"] = 1;
+                            values[valuesById[3] = "FOURTEEN_MONTHS"] = 3;
+                            values[valuesById[4] = "TWENTY_SIX_MONTHS"] = 4;
+                            values[valuesById[5] = "THIRTY_EIGHT_MONTHS"] = 5;
+                            values[valuesById[6] = "FIFTY_MONTHS"] = 6;
+                            return values;
+                        })();
+    
+                        return DataRetentionSettings;
                     })();
     
                     return v1alpha;

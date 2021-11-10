@@ -734,26 +734,6 @@
                             }
                           ]
                         },
-                        "UpdateFirebaseLink": {
-                          "requestType": "UpdateFirebaseLinkRequest",
-                          "responseType": "FirebaseLink",
-                          "options": {
-                            "(google.api.http).patch": "/v1alpha/{firebase_link.name=properties/*/firebaseLinks/*}",
-                            "(google.api.http).body": "firebase_link",
-                            "(google.api.method_signature)": "firebase_link,update_mask"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1alpha/{firebase_link.name=properties/*/firebaseLinks/*}",
-                                "body": "firebase_link"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "firebase_link,update_mask"
-                            }
-                          ]
-                        },
                         "DeleteFirebaseLink": {
                           "requestType": "DeleteFirebaseLinkRequest",
                           "responseType": "google.protobuf.Empty",
@@ -1175,6 +1155,206 @@
                             }
                           ]
                         },
+                        "GetDisplayVideo360AdvertiserLink": {
+                          "requestType": "GetDisplayVideo360AdvertiserLinkRequest",
+                          "responseType": "DisplayVideo360AdvertiserLink",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDisplayVideo360AdvertiserLinks": {
+                          "requestType": "ListDisplayVideo360AdvertiserLinksRequest",
+                          "responseType": "ListDisplayVideo360AdvertiserLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateDisplayVideo360AdvertiserLink": {
+                          "requestType": "CreateDisplayVideo360AdvertiserLinkRequest",
+                          "responseType": "DisplayVideo360AdvertiserLink",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinks",
+                            "(google.api.http).body": "display_video_360_advertiser_link",
+                            "(google.api.method_signature)": "parent,display_video_360_advertiser_link"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinks",
+                                "body": "display_video_360_advertiser_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,display_video_360_advertiser_link"
+                            }
+                          ]
+                        },
+                        "DeleteDisplayVideo360AdvertiserLink": {
+                          "requestType": "DeleteDisplayVideo360AdvertiserLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDisplayVideo360AdvertiserLink": {
+                          "requestType": "UpdateDisplayVideo360AdvertiserLinkRequest",
+                          "responseType": "DisplayVideo360AdvertiserLink",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{display_video_360_advertiser_link.name=properties/*/displayVideo360AdvertiserLinks/*}",
+                            "(google.api.http).body": "display_video_360_advertiser_link",
+                            "(google.api.method_signature)": "display_video_360_advertiser_link,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{display_video_360_advertiser_link.name=properties/*/displayVideo360AdvertiserLinks/*}",
+                                "body": "display_video_360_advertiser_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "display_video_360_advertiser_link,update_mask"
+                            }
+                          ]
+                        },
+                        "GetDisplayVideo360AdvertiserLinkProposal": {
+                          "requestType": "GetDisplayVideo360AdvertiserLinkProposalRequest",
+                          "responseType": "DisplayVideo360AdvertiserLinkProposal",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDisplayVideo360AdvertiserLinkProposals": {
+                          "requestType": "ListDisplayVideo360AdvertiserLinkProposalsRequest",
+                          "responseType": "ListDisplayVideo360AdvertiserLinkProposalsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinkProposals",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinkProposals"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateDisplayVideo360AdvertiserLinkProposal": {
+                          "requestType": "CreateDisplayVideo360AdvertiserLinkProposalRequest",
+                          "responseType": "DisplayVideo360AdvertiserLinkProposal",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinkProposals",
+                            "(google.api.http).body": "display_video_360_advertiser_link_proposal",
+                            "(google.api.method_signature)": "parent,display_video_360_advertiser_link_proposal"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/displayVideo360AdvertiserLinkProposals",
+                                "body": "display_video_360_advertiser_link_proposal"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,display_video_360_advertiser_link_proposal"
+                            }
+                          ]
+                        },
+                        "DeleteDisplayVideo360AdvertiserLinkProposal": {
+                          "requestType": "DeleteDisplayVideo360AdvertiserLinkProposalRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ApproveDisplayVideo360AdvertiserLinkProposal": {
+                          "requestType": "ApproveDisplayVideo360AdvertiserLinkProposalRequest",
+                          "responseType": "ApproveDisplayVideo360AdvertiserLinkProposalResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}:approve",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}:approve",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelDisplayVideo360AdvertiserLinkProposal": {
+                          "requestType": "CancelDisplayVideo360AdvertiserLinkProposalRequest",
+                          "responseType": "DisplayVideo360AdvertiserLinkProposal",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}:cancel",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/displayVideo360AdvertiserLinkProposals/*}:cancel",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "CreateCustomDimension": {
                           "requestType": "CreateCustomDimensionRequest",
                           "responseType": "CustomDimension",
@@ -1364,6 +1544,44 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetDataRetentionSettings": {
+                          "requestType": "GetDataRetentionSettingsRequest",
+                          "responseType": "DataRetentionSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataRetentionSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataRetentionSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateDataRetentionSettings": {
+                          "requestType": "UpdateDataRetentionSettingsRequest",
+                          "responseType": "DataRetentionSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{data_retention_settings.name=properties/*/dataRetentionSettings}",
+                            "(google.api.http).body": "data_retention_settings",
+                            "(google.api.method_signature)": "data_retention_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{data_retention_settings.name=properties/*/dataRetentionSettings}",
+                                "body": "data_retention_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_retention_settings,update_mask"
                             }
                           ]
                         }
@@ -2084,24 +2302,6 @@
                         }
                       }
                     },
-                    "UpdateFirebaseLinkRequest": {
-                      "fields": {
-                        "firebaseLink": {
-                          "type": "FirebaseLink",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
                     "DeleteFirebaseLinkRequest": {
                       "fields": {
                         "name": {
@@ -2557,6 +2757,205 @@
                         }
                       }
                     },
+                    "GetDisplayVideo360AdvertiserLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLink"
+                          }
+                        }
+                      }
+                    },
+                    "ListDisplayVideo360AdvertiserLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDisplayVideo360AdvertiserLinksResponse": {
+                      "fields": {
+                        "displayVideo_360AdvertiserLinks": {
+                          "rule": "repeated",
+                          "type": "DisplayVideo360AdvertiserLink",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateDisplayVideo360AdvertiserLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLink"
+                          }
+                        },
+                        "displayVideo_360AdvertiserLink": {
+                          "type": "DisplayVideo360AdvertiserLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDisplayVideo360AdvertiserLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLink"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDisplayVideo360AdvertiserLinkRequest": {
+                      "fields": {
+                        "displayVideo_360AdvertiserLink": {
+                          "type": "DisplayVideo360AdvertiserLink",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetDisplayVideo360AdvertiserLinkProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ListDisplayVideo360AdvertiserLinkProposalsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDisplayVideo360AdvertiserLinkProposalsResponse": {
+                      "fields": {
+                        "displayVideo_360AdvertiserLinkProposals": {
+                          "rule": "repeated",
+                          "type": "DisplayVideo360AdvertiserLinkProposal",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateDisplayVideo360AdvertiserLinkProposalRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal"
+                          }
+                        },
+                        "displayVideo_360AdvertiserLinkProposal": {
+                          "type": "DisplayVideo360AdvertiserLinkProposal",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDisplayVideo360AdvertiserLinkProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ApproveDisplayVideo360AdvertiserLinkProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ApproveDisplayVideo360AdvertiserLinkProposalResponse": {
+                      "fields": {
+                        "displayVideo_360AdvertiserLink": {
+                          "type": "DisplayVideo360AdvertiserLink",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CancelDisplayVideo360AdvertiserLinkProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal"
+                          }
+                        }
+                      }
+                    },
                     "CreateCustomDimensionRequest": {
                       "fields": {
                         "parent": {
@@ -2739,13 +3138,34 @@
                         }
                       }
                     },
-                    "MaximumUserAccess": {
-                      "values": {
-                        "MAXIMUM_USER_ACCESS_UNSPECIFIED": 0,
-                        "NO_ACCESS": 1,
-                        "READ_AND_ANALYZE": 2,
-                        "EDITOR_WITHOUT_LINK_MANAGEMENT": 3,
-                        "EDITOR_INCLUDING_LINK_MANAGEMENT": 4
+                    "GetDataRetentionSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DataRetentionSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDataRetentionSettingsRequest": {
+                      "fields": {
+                        "dataRetentionSettings": {
+                          "type": "DataRetentionSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
                       }
                     },
                     "IndustryCategory": {
@@ -2779,6 +3199,13 @@
                         "SHOPPING": 26
                       }
                     },
+                    "ServiceLevel": {
+                      "values": {
+                        "SERVICE_LEVEL_UNSPECIFIED": 0,
+                        "GOOGLE_ANALYTICS_STANDARD": 1,
+                        "GOOGLE_ANALYTICS_360": 2
+                      }
+                    },
                     "ActorType": {
                       "values": {
                         "ACTOR_TYPE_UNSPECIFIED": 0,
@@ -2809,7 +3236,8 @@
                         "CONVERSION_EVENT": 9,
                         "MEASUREMENT_PROTOCOL_SECRET": 10,
                         "CUSTOM_DIMENSION": 11,
-                        "CUSTOM_METRIC": 12
+                        "CUSTOM_METRIC": 12,
+                        "DATA_RETENTION_SETTINGS": 13
                       }
                     },
                     "GoogleSignalsState": {
@@ -2824,6 +3252,24 @@
                         "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED": 0,
                         "GOOGLE_SIGNALS_CONSENT_CONSENTED": 2,
                         "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED": 1
+                      }
+                    },
+                    "LinkProposalInitiatingProduct": {
+                      "values": {
+                        "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED": 0,
+                        "GOOGLE_ANALYTICS": 1,
+                        "LINKED_PRODUCT": 2
+                      }
+                    },
+                    "LinkProposalState": {
+                      "values": {
+                        "LINK_PROPOSAL_STATE_UNSPECIFIED": 0,
+                        "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS": 1,
+                        "AWAITING_REVIEW_FROM_LINKED_PRODUCT": 2,
+                        "WITHDRAWN": 3,
+                        "DECLINED": 4,
+                        "EXPIRED": 5,
+                        "OBSOLETE": 6
                       }
                     },
                     "Account": {
@@ -2928,6 +3374,13 @@
                         "currencyCode": {
                           "type": "string",
                           "id": 8
+                        },
+                        "serviceLevel": {
+                          "type": "ServiceLevel",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "deleteTime": {
                           "type": "google.protobuf.Timestamp",
@@ -3239,10 +3692,6 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
-                        },
-                        "maximumUserAccess": {
-                          "type": "MaximumUserAccess",
-                          "id": 4
                         }
                       }
                     },
@@ -3299,13 +3748,6 @@
                           "type": "google.protobuf.BoolValue",
                           "id": 5
                         },
-                        "emailAddress": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7,
@@ -3316,6 +3758,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "creatorEmailAddress": {
+                          "type": "string",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3490,10 +3939,13 @@
                                 "firebaseLink",
                                 "googleAdsLink",
                                 "googleSignalsSettings",
+                                "displayVideo_360AdvertiserLink",
+                                "displayVideo_360AdvertiserLinkProposal",
                                 "conversionEvent",
                                 "measurementProtocolSecret",
                                 "customDimension",
-                                "customMetric"
+                                "customMetric",
+                                "dataRetentionSettings"
                               ]
                             }
                           },
@@ -3530,6 +3982,14 @@
                               "type": "GoogleSignalsSettings",
                               "id": 8
                             },
+                            "displayVideo_360AdvertiserLink": {
+                              "type": "DisplayVideo360AdvertiserLink",
+                              "id": 9
+                            },
+                            "displayVideo_360AdvertiserLinkProposal": {
+                              "type": "DisplayVideo360AdvertiserLinkProposal",
+                              "id": 10
+                            },
                             "conversionEvent": {
                               "type": "ConversionEvent",
                               "id": 11
@@ -3545,7 +4005,147 @@
                             "customMetric": {
                               "type": "CustomMetric",
                               "id": 14
+                            },
+                            "dataRetentionSettings": {
+                              "type": "DataRetentionSettings",
+                              "id": 15
                             }
+                          }
+                        }
+                      }
+                    },
+                    "DisplayVideo360AdvertiserLink": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLink",
+                        "(google.api.resource).pattern": "properties/{property}/displayVideo360AdvertiserLinks/{display_video_360_advertiser_link}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advertiserId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "advertiserDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adsPersonalizationEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 4
+                        },
+                        "campaignDataSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "costDataSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "DisplayVideo360AdvertiserLinkProposal": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/DisplayVideo360AdvertiserLinkProposal",
+                        "(google.api.resource).pattern": "properties/{property}/displayVideo360AdvertiserLinkProposals/{display_video_360_advertiser_link_proposal}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advertiserId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "linkProposalStatusDetails": {
+                          "type": "LinkProposalStatusDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "advertiserDisplayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "validationEmail": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "adsPersonalizationEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "campaignDataSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "costDataSharingEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "LinkProposalStatusDetails": {
+                      "fields": {
+                        "linkProposalInitiatingProduct": {
+                          "type": "LinkProposalInitiatingProduct",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestorEmail": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "linkProposalState": {
+                          "type": "LinkProposalState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -3577,9 +4177,16 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "isDeletable": {
+                        "deletable": {
                           "type": "bool",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "custom": {
+                          "type": "bool",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3709,7 +4316,7 @@
                           "type": "MeasurementUnit",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "scope": {
@@ -3740,6 +4347,41 @@
                           "values": {
                             "METRIC_SCOPE_UNSPECIFIED": 0,
                             "EVENT": 1
+                          }
+                        }
+                      }
+                    },
+                    "DataRetentionSettings": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/DataRetentionSettings",
+                        "(google.api.resource).pattern": "properties/{property}/dataRetentionSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "eventDataRetention": {
+                          "type": "RetentionDuration",
+                          "id": 2
+                        },
+                        "resetUserDataOnNewActivity": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "RetentionDuration": {
+                          "values": {
+                            "RETENTION_DURATION_UNSPECIFIED": 0,
+                            "TWO_MONTHS": 1,
+                            "FOURTEEN_MONTHS": 3,
+                            "TWENTY_SIX_MONTHS": 4,
+                            "THIRTY_EIGHT_MONTHS": 5,
+                            "FIFTY_MONTHS": 6
                           }
                         }
                       }

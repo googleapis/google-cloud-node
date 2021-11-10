@@ -565,20 +565,6 @@ export namespace google {
                     public createFirebaseLink(request: google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest): Promise<google.analytics.admin.v1alpha.FirebaseLink>;
 
                     /**
-                     * Calls UpdateFirebaseLink.
-                     * @param request UpdateFirebaseLinkRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and FirebaseLink
-                     */
-                    public updateFirebaseLink(request: google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateFirebaseLinkCallback): void;
-
-                    /**
-                     * Calls UpdateFirebaseLink.
-                     * @param request UpdateFirebaseLinkRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateFirebaseLink(request: google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest): Promise<google.analytics.admin.v1alpha.FirebaseLink>;
-
-                    /**
                      * Calls DeleteFirebaseLink.
                      * @param request DeleteFirebaseLinkRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -859,6 +845,160 @@ export namespace google {
                     public listConversionEvents(request: google.analytics.admin.v1alpha.IListConversionEventsRequest): Promise<google.analytics.admin.v1alpha.ListConversionEventsResponse>;
 
                     /**
+                     * Calls GetDisplayVideo360AdvertiserLink.
+                     * @param request GetDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLink
+                     */
+                    public getDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetDisplayVideo360AdvertiserLinkCallback): void;
+
+                    /**
+                     * Calls GetDisplayVideo360AdvertiserLink.
+                     * @param request GetDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest): Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink>;
+
+                    /**
+                     * Calls ListDisplayVideo360AdvertiserLinks.
+                     * @param request ListDisplayVideo360AdvertiserLinksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDisplayVideo360AdvertiserLinksResponse
+                     */
+                    public listDisplayVideo360AdvertiserLinks(request: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListDisplayVideo360AdvertiserLinksCallback): void;
+
+                    /**
+                     * Calls ListDisplayVideo360AdvertiserLinks.
+                     * @param request ListDisplayVideo360AdvertiserLinksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDisplayVideo360AdvertiserLinks(request: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest): Promise<google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse>;
+
+                    /**
+                     * Calls CreateDisplayVideo360AdvertiserLink.
+                     * @param request CreateDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLink
+                     */
+                    public createDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateDisplayVideo360AdvertiserLinkCallback): void;
+
+                    /**
+                     * Calls CreateDisplayVideo360AdvertiserLink.
+                     * @param request CreateDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest): Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink>;
+
+                    /**
+                     * Calls DeleteDisplayVideo360AdvertiserLink.
+                     * @param request DeleteDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteDisplayVideo360AdvertiserLinkCallback): void;
+
+                    /**
+                     * Calls DeleteDisplayVideo360AdvertiserLink.
+                     * @param request DeleteDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateDisplayVideo360AdvertiserLink.
+                     * @param request UpdateDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLink
+                     */
+                    public updateDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateDisplayVideo360AdvertiserLinkCallback): void;
+
+                    /**
+                     * Calls UpdateDisplayVideo360AdvertiserLink.
+                     * @param request UpdateDisplayVideo360AdvertiserLinkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDisplayVideo360AdvertiserLink(request: google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest): Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink>;
+
+                    /**
+                     * Calls GetDisplayVideo360AdvertiserLinkProposal.
+                     * @param request GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLinkProposal
+                     */
+                    public getDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetDisplayVideo360AdvertiserLinkProposalCallback): void;
+
+                    /**
+                     * Calls GetDisplayVideo360AdvertiserLinkProposal.
+                     * @param request GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest): Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal>;
+
+                    /**
+                     * Calls ListDisplayVideo360AdvertiserLinkProposals.
+                     * @param request ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDisplayVideo360AdvertiserLinkProposalsResponse
+                     */
+                    public listDisplayVideo360AdvertiserLinkProposals(request: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListDisplayVideo360AdvertiserLinkProposalsCallback): void;
+
+                    /**
+                     * Calls ListDisplayVideo360AdvertiserLinkProposals.
+                     * @param request ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDisplayVideo360AdvertiserLinkProposals(request: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest): Promise<google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse>;
+
+                    /**
+                     * Calls CreateDisplayVideo360AdvertiserLinkProposal.
+                     * @param request CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLinkProposal
+                     */
+                    public createDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateDisplayVideo360AdvertiserLinkProposalCallback): void;
+
+                    /**
+                     * Calls CreateDisplayVideo360AdvertiserLinkProposal.
+                     * @param request CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest): Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal>;
+
+                    /**
+                     * Calls DeleteDisplayVideo360AdvertiserLinkProposal.
+                     * @param request DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteDisplayVideo360AdvertiserLinkProposalCallback): void;
+
+                    /**
+                     * Calls DeleteDisplayVideo360AdvertiserLinkProposal.
+                     * @param request DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ApproveDisplayVideo360AdvertiserLinkProposal.
+                     * @param request ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                     */
+                    public approveDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ApproveDisplayVideo360AdvertiserLinkProposalCallback): void;
+
+                    /**
+                     * Calls ApproveDisplayVideo360AdvertiserLinkProposal.
+                     * @param request ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public approveDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest): Promise<google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse>;
+
+                    /**
+                     * Calls CancelDisplayVideo360AdvertiserLinkProposal.
+                     * @param request CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DisplayVideo360AdvertiserLinkProposal
+                     */
+                    public cancelDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CancelDisplayVideo360AdvertiserLinkProposalCallback): void;
+
+                    /**
+                     * Calls CancelDisplayVideo360AdvertiserLinkProposal.
+                     * @param request CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelDisplayVideo360AdvertiserLinkProposal(request: google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest): Promise<google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal>;
+
+                    /**
                      * Calls CreateCustomDimension.
                      * @param request CreateCustomDimensionRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and CustomDimension
@@ -997,6 +1137,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public getCustomMetric(request: google.analytics.admin.v1alpha.IGetCustomMetricRequest): Promise<google.analytics.admin.v1alpha.CustomMetric>;
+
+                    /**
+                     * Calls GetDataRetentionSettings.
+                     * @param request GetDataRetentionSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataRetentionSettings
+                     */
+                    public getDataRetentionSettings(request: google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetDataRetentionSettingsCallback): void;
+
+                    /**
+                     * Calls GetDataRetentionSettings.
+                     * @param request GetDataRetentionSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataRetentionSettings(request: google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest): Promise<google.analytics.admin.v1alpha.DataRetentionSettings>;
+
+                    /**
+                     * Calls UpdateDataRetentionSettings.
+                     * @param request UpdateDataRetentionSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DataRetentionSettings
+                     */
+                    public updateDataRetentionSettings(request: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateDataRetentionSettingsCallback): void;
+
+                    /**
+                     * Calls UpdateDataRetentionSettings.
+                     * @param request UpdateDataRetentionSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDataRetentionSettings(request: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest): Promise<google.analytics.admin.v1alpha.DataRetentionSettings>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -1261,13 +1429,6 @@ export namespace google {
                     type CreateFirebaseLinkCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.FirebaseLink) => void;
 
                     /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateFirebaseLink}.
-                     * @param error Error, if any
-                     * @param [response] FirebaseLink
-                     */
-                    type UpdateFirebaseLinkCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.FirebaseLink) => void;
-
-                    /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteFirebaseLink}.
                      * @param error Error, if any
                      * @param [response] Empty
@@ -1408,6 +1569,83 @@ export namespace google {
                     type ListConversionEventsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListConversionEventsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDisplayVideo360AdvertiserLink}.
+                     * @param error Error, if any
+                     * @param [response] DisplayVideo360AdvertiserLink
+                     */
+                    type GetDisplayVideo360AdvertiserLinkCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listDisplayVideo360AdvertiserLinks}.
+                     * @param error Error, if any
+                     * @param [response] ListDisplayVideo360AdvertiserLinksResponse
+                     */
+                    type ListDisplayVideo360AdvertiserLinksCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createDisplayVideo360AdvertiserLink}.
+                     * @param error Error, if any
+                     * @param [response] DisplayVideo360AdvertiserLink
+                     */
+                    type CreateDisplayVideo360AdvertiserLinkCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteDisplayVideo360AdvertiserLink}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDisplayVideo360AdvertiserLinkCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateDisplayVideo360AdvertiserLink}.
+                     * @param error Error, if any
+                     * @param [response] DisplayVideo360AdvertiserLink
+                     */
+                    type UpdateDisplayVideo360AdvertiserLinkCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDisplayVideo360AdvertiserLinkProposal}.
+                     * @param error Error, if any
+                     * @param [response] DisplayVideo360AdvertiserLinkProposal
+                     */
+                    type GetDisplayVideo360AdvertiserLinkProposalCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listDisplayVideo360AdvertiserLinkProposals}.
+                     * @param error Error, if any
+                     * @param [response] ListDisplayVideo360AdvertiserLinkProposalsResponse
+                     */
+                    type ListDisplayVideo360AdvertiserLinkProposalsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createDisplayVideo360AdvertiserLinkProposal}.
+                     * @param error Error, if any
+                     * @param [response] DisplayVideo360AdvertiserLinkProposal
+                     */
+                    type CreateDisplayVideo360AdvertiserLinkProposalCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteDisplayVideo360AdvertiserLinkProposal}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDisplayVideo360AdvertiserLinkProposalCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#approveDisplayVideo360AdvertiserLinkProposal}.
+                     * @param error Error, if any
+                     * @param [response] ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                     */
+                    type ApproveDisplayVideo360AdvertiserLinkProposalCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#cancelDisplayVideo360AdvertiserLinkProposal}.
+                     * @param error Error, if any
+                     * @param [response] DisplayVideo360AdvertiserLinkProposal
+                     */
+                    type CancelDisplayVideo360AdvertiserLinkProposalCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal) => void;
+
+                    /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createCustomDimension}.
                      * @param error Error, if any
                      * @param [response] CustomDimension
@@ -1476,6 +1714,20 @@ export namespace google {
                      * @param [response] CustomMetric
                      */
                     type GetCustomMetricCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CustomMetric) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getDataRetentionSettings}.
+                     * @param error Error, if any
+                     * @param [response] DataRetentionSettings
+                     */
+                    type GetDataRetentionSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataRetentionSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateDataRetentionSettings}.
+                     * @param error Error, if any
+                     * @param [response] DataRetentionSettings
+                     */
+                    type UpdateDataRetentionSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataRetentionSettings) => void;
                 }
 
                 /** Properties of a GetAccountRequest. */
@@ -5936,102 +6188,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** Properties of an UpdateFirebaseLinkRequest. */
-                interface IUpdateFirebaseLinkRequest {
-
-                    /** UpdateFirebaseLinkRequest firebaseLink */
-                    firebaseLink?: (google.analytics.admin.v1alpha.IFirebaseLink|null);
-
-                    /** UpdateFirebaseLinkRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-                }
-
-                /** Represents an UpdateFirebaseLinkRequest. */
-                class UpdateFirebaseLinkRequest implements IUpdateFirebaseLinkRequest {
-
-                    /**
-                     * Constructs a new UpdateFirebaseLinkRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest);
-
-                    /** UpdateFirebaseLinkRequest firebaseLink. */
-                    public firebaseLink?: (google.analytics.admin.v1alpha.IFirebaseLink|null);
-
-                    /** UpdateFirebaseLinkRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /**
-                     * Creates a new UpdateFirebaseLinkRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateFirebaseLinkRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest): google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest;
-
-                    /**
-                     * Encodes the specified UpdateFirebaseLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest.verify|verify} messages.
-                     * @param message UpdateFirebaseLinkRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateFirebaseLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest.verify|verify} messages.
-                     * @param message UpdateFirebaseLinkRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateFirebaseLinkRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateFirebaseLinkRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest;
-
-                    /**
-                     * Decodes an UpdateFirebaseLinkRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateFirebaseLinkRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest;
-
-                    /**
-                     * Verifies an UpdateFirebaseLinkRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateFirebaseLinkRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateFirebaseLinkRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateFirebaseLinkRequest message. Also converts values to other types if specified.
-                     * @param message UpdateFirebaseLinkRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateFirebaseLinkRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
                 /** Properties of a DeleteFirebaseLinkRequest. */
                 interface IDeleteFirebaseLinkRequest {
 
@@ -8636,6 +8792,1320 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a GetDisplayVideo360AdvertiserLinkRequest. */
+                interface IGetDisplayVideo360AdvertiserLinkRequest {
+
+                    /** GetDisplayVideo360AdvertiserLinkRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDisplayVideo360AdvertiserLinkRequest. */
+                class GetDisplayVideo360AdvertiserLinkRequest implements IGetDisplayVideo360AdvertiserLinkRequest {
+
+                    /**
+                     * Constructs a new GetDisplayVideo360AdvertiserLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest);
+
+                    /** GetDisplayVideo360AdvertiserLinkRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDisplayVideo360AdvertiserLinkRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Encodes the specified GetDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message GetDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message GetDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Decodes a GetDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Verifies a GetDisplayVideo360AdvertiserLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDisplayVideo360AdvertiserLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Creates a plain object from a GetDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                     * @param message GetDisplayVideo360AdvertiserLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDisplayVideo360AdvertiserLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDisplayVideo360AdvertiserLinksRequest. */
+                interface IListDisplayVideo360AdvertiserLinksRequest {
+
+                    /** ListDisplayVideo360AdvertiserLinksRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDisplayVideo360AdvertiserLinksRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDisplayVideo360AdvertiserLinksRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDisplayVideo360AdvertiserLinksRequest. */
+                class ListDisplayVideo360AdvertiserLinksRequest implements IListDisplayVideo360AdvertiserLinksRequest {
+
+                    /**
+                     * Constructs a new ListDisplayVideo360AdvertiserLinksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest);
+
+                    /** ListDisplayVideo360AdvertiserLinksRequest parent. */
+                    public parent: string;
+
+                    /** ListDisplayVideo360AdvertiserLinksRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDisplayVideo360AdvertiserLinksRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDisplayVideo360AdvertiserLinksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDisplayVideo360AdvertiserLinksRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinksRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinksRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDisplayVideo360AdvertiserLinksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDisplayVideo360AdvertiserLinksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest;
+
+                    /**
+                     * Verifies a ListDisplayVideo360AdvertiserLinksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDisplayVideo360AdvertiserLinksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDisplayVideo360AdvertiserLinksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest;
+
+                    /**
+                     * Creates a plain object from a ListDisplayVideo360AdvertiserLinksRequest message. Also converts values to other types if specified.
+                     * @param message ListDisplayVideo360AdvertiserLinksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDisplayVideo360AdvertiserLinksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDisplayVideo360AdvertiserLinksResponse. */
+                interface IListDisplayVideo360AdvertiserLinksResponse {
+
+                    /** ListDisplayVideo360AdvertiserLinksResponse displayVideo_360AdvertiserLinks */
+                    displayVideo_360AdvertiserLinks?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[]|null);
+
+                    /** ListDisplayVideo360AdvertiserLinksResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDisplayVideo360AdvertiserLinksResponse. */
+                class ListDisplayVideo360AdvertiserLinksResponse implements IListDisplayVideo360AdvertiserLinksResponse {
+
+                    /**
+                     * Constructs a new ListDisplayVideo360AdvertiserLinksResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse);
+
+                    /** ListDisplayVideo360AdvertiserLinksResponse displayVideo_360AdvertiserLinks. */
+                    public displayVideo_360AdvertiserLinks: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[];
+
+                    /** ListDisplayVideo360AdvertiserLinksResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDisplayVideo360AdvertiserLinksResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDisplayVideo360AdvertiserLinksResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinksResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinksResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinksResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDisplayVideo360AdvertiserLinksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinksResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDisplayVideo360AdvertiserLinksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse;
+
+                    /**
+                     * Verifies a ListDisplayVideo360AdvertiserLinksResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDisplayVideo360AdvertiserLinksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDisplayVideo360AdvertiserLinksResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse;
+
+                    /**
+                     * Creates a plain object from a ListDisplayVideo360AdvertiserLinksResponse message. Also converts values to other types if specified.
+                     * @param message ListDisplayVideo360AdvertiserLinksResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDisplayVideo360AdvertiserLinksResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateDisplayVideo360AdvertiserLinkRequest. */
+                interface ICreateDisplayVideo360AdvertiserLinkRequest {
+
+                    /** CreateDisplayVideo360AdvertiserLinkRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink */
+                    displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+                }
+
+                /** Represents a CreateDisplayVideo360AdvertiserLinkRequest. */
+                class CreateDisplayVideo360AdvertiserLinkRequest implements ICreateDisplayVideo360AdvertiserLinkRequest {
+
+                    /**
+                     * Constructs a new CreateDisplayVideo360AdvertiserLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest);
+
+                    /** CreateDisplayVideo360AdvertiserLinkRequest parent. */
+                    public parent: string;
+
+                    /** CreateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink. */
+                    public displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+
+                    /**
+                     * Creates a new CreateDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDisplayVideo360AdvertiserLinkRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Encodes the specified CreateDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message CreateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message CreateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Decodes a CreateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Verifies a CreateDisplayVideo360AdvertiserLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDisplayVideo360AdvertiserLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                     * @param message CreateDisplayVideo360AdvertiserLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDisplayVideo360AdvertiserLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteDisplayVideo360AdvertiserLinkRequest. */
+                interface IDeleteDisplayVideo360AdvertiserLinkRequest {
+
+                    /** DeleteDisplayVideo360AdvertiserLinkRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDisplayVideo360AdvertiserLinkRequest. */
+                class DeleteDisplayVideo360AdvertiserLinkRequest implements IDeleteDisplayVideo360AdvertiserLinkRequest {
+
+                    /**
+                     * Constructs a new DeleteDisplayVideo360AdvertiserLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest);
+
+                    /** DeleteDisplayVideo360AdvertiserLinkRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDisplayVideo360AdvertiserLinkRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Encodes the specified DeleteDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message DeleteDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message DeleteDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Decodes a DeleteDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Verifies a DeleteDisplayVideo360AdvertiserLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDisplayVideo360AdvertiserLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDisplayVideo360AdvertiserLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDisplayVideo360AdvertiserLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateDisplayVideo360AdvertiserLinkRequest. */
+                interface IUpdateDisplayVideo360AdvertiserLinkRequest {
+
+                    /** UpdateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink */
+                    displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+
+                    /** UpdateDisplayVideo360AdvertiserLinkRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDisplayVideo360AdvertiserLinkRequest. */
+                class UpdateDisplayVideo360AdvertiserLinkRequest implements IUpdateDisplayVideo360AdvertiserLinkRequest {
+
+                    /**
+                     * Constructs a new UpdateDisplayVideo360AdvertiserLinkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest);
+
+                    /** UpdateDisplayVideo360AdvertiserLinkRequest displayVideo_360AdvertiserLink. */
+                    public displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+
+                    /** UpdateDisplayVideo360AdvertiserLinkRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDisplayVideo360AdvertiserLinkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDisplayVideo360AdvertiserLinkRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest): google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Encodes the specified UpdateDisplayVideo360AdvertiserLinkRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message UpdateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDisplayVideo360AdvertiserLinkRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest.verify|verify} messages.
+                     * @param message UpdateDisplayVideo360AdvertiserLinkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateDisplayVideo360AdvertiserLinkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Decodes an UpdateDisplayVideo360AdvertiserLinkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDisplayVideo360AdvertiserLinkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Verifies an UpdateDisplayVideo360AdvertiserLinkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDisplayVideo360AdvertiserLinkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDisplayVideo360AdvertiserLinkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDisplayVideo360AdvertiserLinkRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDisplayVideo360AdvertiserLinkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDisplayVideo360AdvertiserLinkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetDisplayVideo360AdvertiserLinkProposalRequest. */
+                interface IGetDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /** GetDisplayVideo360AdvertiserLinkProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDisplayVideo360AdvertiserLinkProposalRequest. */
+                class GetDisplayVideo360AdvertiserLinkProposalRequest implements IGetDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /**
+                     * Constructs a new GetDisplayVideo360AdvertiserLinkProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest);
+
+                    /** GetDisplayVideo360AdvertiserLinkProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDisplayVideo360AdvertiserLinkProposalRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Encodes the specified GetDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message GetDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Decodes a GetDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Verifies a GetDisplayVideo360AdvertiserLinkProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDisplayVideo360AdvertiserLinkProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Creates a plain object from a GetDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                     * @param message GetDisplayVideo360AdvertiserLinkProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDisplayVideo360AdvertiserLinkProposalsRequest. */
+                interface IListDisplayVideo360AdvertiserLinkProposalsRequest {
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDisplayVideo360AdvertiserLinkProposalsRequest. */
+                class ListDisplayVideo360AdvertiserLinkProposalsRequest implements IListDisplayVideo360AdvertiserLinkProposalsRequest {
+
+                    /**
+                     * Constructs a new ListDisplayVideo360AdvertiserLinkProposalsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest);
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsRequest parent. */
+                    public parent: string;
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDisplayVideo360AdvertiserLinkProposalsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinkProposalsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinkProposalsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinkProposalsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest;
+
+                    /**
+                     * Verifies a ListDisplayVideo360AdvertiserLinkProposalsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDisplayVideo360AdvertiserLinkProposalsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDisplayVideo360AdvertiserLinkProposalsRequest message. Also converts values to other types if specified.
+                     * @param message ListDisplayVideo360AdvertiserLinkProposalsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDisplayVideo360AdvertiserLinkProposalsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDisplayVideo360AdvertiserLinkProposalsResponse. */
+                interface IListDisplayVideo360AdvertiserLinkProposalsResponse {
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsResponse displayVideo_360AdvertiserLinkProposals */
+                    displayVideo_360AdvertiserLinkProposals?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[]|null);
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDisplayVideo360AdvertiserLinkProposalsResponse. */
+                class ListDisplayVideo360AdvertiserLinkProposalsResponse implements IListDisplayVideo360AdvertiserLinkProposalsResponse {
+
+                    /**
+                     * Constructs a new ListDisplayVideo360AdvertiserLinkProposalsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse);
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsResponse displayVideo_360AdvertiserLinkProposals. */
+                    public displayVideo_360AdvertiserLinkProposals: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[];
+
+                    /** ListDisplayVideo360AdvertiserLinkProposalsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDisplayVideo360AdvertiserLinkProposalsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinkProposalsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDisplayVideo360AdvertiserLinkProposalsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse.verify|verify} messages.
+                     * @param message ListDisplayVideo360AdvertiserLinkProposalsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListDisplayVideo360AdvertiserLinkProposalsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinkProposalsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse;
+
+                    /**
+                     * Decodes a ListDisplayVideo360AdvertiserLinkProposalsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse;
+
+                    /**
+                     * Verifies a ListDisplayVideo360AdvertiserLinkProposalsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDisplayVideo360AdvertiserLinkProposalsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDisplayVideo360AdvertiserLinkProposalsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDisplayVideo360AdvertiserLinkProposalsResponse message. Also converts values to other types if specified.
+                     * @param message ListDisplayVideo360AdvertiserLinkProposalsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDisplayVideo360AdvertiserLinkProposalsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateDisplayVideo360AdvertiserLinkProposalRequest. */
+                interface ICreateDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /** CreateDisplayVideo360AdvertiserLinkProposalRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDisplayVideo360AdvertiserLinkProposalRequest displayVideo_360AdvertiserLinkProposal */
+                    displayVideo_360AdvertiserLinkProposal?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null);
+                }
+
+                /** Represents a CreateDisplayVideo360AdvertiserLinkProposalRequest. */
+                class CreateDisplayVideo360AdvertiserLinkProposalRequest implements ICreateDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /**
+                     * Constructs a new CreateDisplayVideo360AdvertiserLinkProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest);
+
+                    /** CreateDisplayVideo360AdvertiserLinkProposalRequest parent. */
+                    public parent: string;
+
+                    /** CreateDisplayVideo360AdvertiserLinkProposalRequest displayVideo_360AdvertiserLinkProposal. */
+                    public displayVideo_360AdvertiserLinkProposal?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null);
+
+                    /**
+                     * Creates a new CreateDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDisplayVideo360AdvertiserLinkProposalRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Encodes the specified CreateDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message CreateDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Decodes a CreateDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Verifies a CreateDisplayVideo360AdvertiserLinkProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDisplayVideo360AdvertiserLinkProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                     * @param message CreateDisplayVideo360AdvertiserLinkProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteDisplayVideo360AdvertiserLinkProposalRequest. */
+                interface IDeleteDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /** DeleteDisplayVideo360AdvertiserLinkProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDisplayVideo360AdvertiserLinkProposalRequest. */
+                class DeleteDisplayVideo360AdvertiserLinkProposalRequest implements IDeleteDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /**
+                     * Constructs a new DeleteDisplayVideo360AdvertiserLinkProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest);
+
+                    /** DeleteDisplayVideo360AdvertiserLinkProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDisplayVideo360AdvertiserLinkProposalRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Encodes the specified DeleteDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message DeleteDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Decodes a DeleteDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Verifies a DeleteDisplayVideo360AdvertiserLinkProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDisplayVideo360AdvertiserLinkProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApproveDisplayVideo360AdvertiserLinkProposalRequest. */
+                interface IApproveDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /** ApproveDisplayVideo360AdvertiserLinkProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ApproveDisplayVideo360AdvertiserLinkProposalRequest. */
+                class ApproveDisplayVideo360AdvertiserLinkProposalRequest implements IApproveDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /**
+                     * Constructs a new ApproveDisplayVideo360AdvertiserLinkProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest);
+
+                    /** ApproveDisplayVideo360AdvertiserLinkProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ApproveDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message ApproveDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Verifies an ApproveDisplayVideo360AdvertiserLinkProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApproveDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Creates a plain object from an ApproveDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                     * @param message ApproveDisplayVideo360AdvertiserLinkProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApproveDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApproveDisplayVideo360AdvertiserLinkProposalResponse. */
+                interface IApproveDisplayVideo360AdvertiserLinkProposalResponse {
+
+                    /** ApproveDisplayVideo360AdvertiserLinkProposalResponse displayVideo_360AdvertiserLink */
+                    displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+                }
+
+                /** Represents an ApproveDisplayVideo360AdvertiserLinkProposalResponse. */
+                class ApproveDisplayVideo360AdvertiserLinkProposalResponse implements IApproveDisplayVideo360AdvertiserLinkProposalResponse {
+
+                    /**
+                     * Constructs a new ApproveDisplayVideo360AdvertiserLinkProposalResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse);
+
+                    /** ApproveDisplayVideo360AdvertiserLinkProposalResponse displayVideo_360AdvertiserLink. */
+                    public displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+
+                    /**
+                     * Creates a new ApproveDisplayVideo360AdvertiserLinkProposalResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse;
+
+                    /**
+                     * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse.verify|verify} messages.
+                     * @param message ApproveDisplayVideo360AdvertiserLinkProposalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApproveDisplayVideo360AdvertiserLinkProposalResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse.verify|verify} messages.
+                     * @param message ApproveDisplayVideo360AdvertiserLinkProposalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse;
+
+                    /**
+                     * Decodes an ApproveDisplayVideo360AdvertiserLinkProposalResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse;
+
+                    /**
+                     * Verifies an ApproveDisplayVideo360AdvertiserLinkProposalResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApproveDisplayVideo360AdvertiserLinkProposalResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse;
+
+                    /**
+                     * Creates a plain object from an ApproveDisplayVideo360AdvertiserLinkProposalResponse message. Also converts values to other types if specified.
+                     * @param message ApproveDisplayVideo360AdvertiserLinkProposalResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApproveDisplayVideo360AdvertiserLinkProposalResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CancelDisplayVideo360AdvertiserLinkProposalRequest. */
+                interface ICancelDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /** CancelDisplayVideo360AdvertiserLinkProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a CancelDisplayVideo360AdvertiserLinkProposalRequest. */
+                class CancelDisplayVideo360AdvertiserLinkProposalRequest implements ICancelDisplayVideo360AdvertiserLinkProposalRequest {
+
+                    /**
+                     * Constructs a new CancelDisplayVideo360AdvertiserLinkProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest);
+
+                    /** CancelDisplayVideo360AdvertiserLinkProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new CancelDisplayVideo360AdvertiserLinkProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelDisplayVideo360AdvertiserLinkProposalRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest): google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Encodes the specified CancelDisplayVideo360AdvertiserLinkProposalRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelDisplayVideo360AdvertiserLinkProposalRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest.verify|verify} messages.
+                     * @param message CancelDisplayVideo360AdvertiserLinkProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICancelDisplayVideo360AdvertiserLinkProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Decodes a CancelDisplayVideo360AdvertiserLinkProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelDisplayVideo360AdvertiserLinkProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Verifies a CancelDisplayVideo360AdvertiserLinkProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelDisplayVideo360AdvertiserLinkProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelDisplayVideo360AdvertiserLinkProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest;
+
+                    /**
+                     * Creates a plain object from a CancelDisplayVideo360AdvertiserLinkProposalRequest message. Also converts values to other types if specified.
+                     * @param message CancelDisplayVideo360AdvertiserLinkProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelDisplayVideo360AdvertiserLinkProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a CreateCustomDimensionRequest. */
                 interface ICreateCustomDimensionRequest {
 
@@ -9776,13 +11246,190 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** MaximumUserAccess enum. */
-                enum MaximumUserAccess {
-                    MAXIMUM_USER_ACCESS_UNSPECIFIED = 0,
-                    NO_ACCESS = 1,
-                    READ_AND_ANALYZE = 2,
-                    EDITOR_WITHOUT_LINK_MANAGEMENT = 3,
-                    EDITOR_INCLUDING_LINK_MANAGEMENT = 4
+                /** Properties of a GetDataRetentionSettingsRequest. */
+                interface IGetDataRetentionSettingsRequest {
+
+                    /** GetDataRetentionSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDataRetentionSettingsRequest. */
+                class GetDataRetentionSettingsRequest implements IGetDataRetentionSettingsRequest {
+
+                    /**
+                     * Constructs a new GetDataRetentionSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest);
+
+                    /** GetDataRetentionSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDataRetentionSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDataRetentionSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest): google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetDataRetentionSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest.verify|verify} messages.
+                     * @param message GetDataRetentionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDataRetentionSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest.verify|verify} messages.
+                     * @param message GetDataRetentionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetDataRetentionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDataRetentionSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDataRetentionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest;
+
+                    /**
+                     * Decodes a GetDataRetentionSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDataRetentionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest;
+
+                    /**
+                     * Verifies a GetDataRetentionSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDataRetentionSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDataRetentionSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetDataRetentionSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetDataRetentionSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDataRetentionSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateDataRetentionSettingsRequest. */
+                interface IUpdateDataRetentionSettingsRequest {
+
+                    /** UpdateDataRetentionSettingsRequest dataRetentionSettings */
+                    dataRetentionSettings?: (google.analytics.admin.v1alpha.IDataRetentionSettings|null);
+
+                    /** UpdateDataRetentionSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateDataRetentionSettingsRequest. */
+                class UpdateDataRetentionSettingsRequest implements IUpdateDataRetentionSettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateDataRetentionSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest);
+
+                    /** UpdateDataRetentionSettingsRequest dataRetentionSettings. */
+                    public dataRetentionSettings?: (google.analytics.admin.v1alpha.IDataRetentionSettings|null);
+
+                    /** UpdateDataRetentionSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateDataRetentionSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDataRetentionSettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest): google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateDataRetentionSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest.verify|verify} messages.
+                     * @param message UpdateDataRetentionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDataRetentionSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest.verify|verify} messages.
+                     * @param message UpdateDataRetentionSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateDataRetentionSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDataRetentionSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDataRetentionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest;
+
+                    /**
+                     * Decodes an UpdateDataRetentionSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDataRetentionSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest;
+
+                    /**
+                     * Verifies an UpdateDataRetentionSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDataRetentionSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDataRetentionSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDataRetentionSettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDataRetentionSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDataRetentionSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** IndustryCategory enum. */
@@ -9816,6 +11463,13 @@ export namespace google {
                     SHOPPING = 26
                 }
 
+                /** ServiceLevel enum. */
+                enum ServiceLevel {
+                    SERVICE_LEVEL_UNSPECIFIED = 0,
+                    GOOGLE_ANALYTICS_STANDARD = 1,
+                    GOOGLE_ANALYTICS_360 = 2
+                }
+
                 /** ActorType enum. */
                 enum ActorType {
                     ACTOR_TYPE_UNSPECIFIED = 0,
@@ -9846,7 +11500,8 @@ export namespace google {
                     CONVERSION_EVENT = 9,
                     MEASUREMENT_PROTOCOL_SECRET = 10,
                     CUSTOM_DIMENSION = 11,
-                    CUSTOM_METRIC = 12
+                    CUSTOM_METRIC = 12,
+                    DATA_RETENTION_SETTINGS = 13
                 }
 
                 /** GoogleSignalsState enum. */
@@ -9861,6 +11516,24 @@ export namespace google {
                     GOOGLE_SIGNALS_CONSENT_UNSPECIFIED = 0,
                     GOOGLE_SIGNALS_CONSENT_CONSENTED = 2,
                     GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED = 1
+                }
+
+                /** LinkProposalInitiatingProduct enum. */
+                enum LinkProposalInitiatingProduct {
+                    LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED = 0,
+                    GOOGLE_ANALYTICS = 1,
+                    LINKED_PRODUCT = 2
+                }
+
+                /** LinkProposalState enum. */
+                enum LinkProposalState {
+                    LINK_PROPOSAL_STATE_UNSPECIFIED = 0,
+                    AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS = 1,
+                    AWAITING_REVIEW_FROM_LINKED_PRODUCT = 2,
+                    WITHDRAWN = 3,
+                    DECLINED = 4,
+                    EXPIRED = 5,
+                    OBSOLETE = 6
                 }
 
                 /** Properties of an Account. */
@@ -10010,6 +11683,9 @@ export namespace google {
                     /** Property currencyCode */
                     currencyCode?: (string|null);
 
+                    /** Property serviceLevel */
+                    serviceLevel?: (google.analytics.admin.v1alpha.ServiceLevel|keyof typeof google.analytics.admin.v1alpha.ServiceLevel|null);
+
                     /** Property deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
 
@@ -10049,6 +11725,9 @@ export namespace google {
 
                     /** Property currencyCode. */
                     public currencyCode: string;
+
+                    /** Property serviceLevel. */
+                    public serviceLevel: (google.analytics.admin.v1alpha.ServiceLevel|keyof typeof google.analytics.admin.v1alpha.ServiceLevel);
 
                     /** Property deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
@@ -10870,9 +12549,6 @@ export namespace google {
 
                     /** FirebaseLink createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** FirebaseLink maximumUserAccess */
-                    maximumUserAccess?: (google.analytics.admin.v1alpha.MaximumUserAccess|keyof typeof google.analytics.admin.v1alpha.MaximumUserAccess|null);
                 }
 
                 /** Represents a FirebaseLink. */
@@ -10892,9 +12568,6 @@ export namespace google {
 
                     /** FirebaseLink createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** FirebaseLink maximumUserAccess. */
-                    public maximumUserAccess: (google.analytics.admin.v1alpha.MaximumUserAccess|keyof typeof google.analytics.admin.v1alpha.MaximumUserAccess);
 
                     /**
                      * Creates a new FirebaseLink instance using the specified properties.
@@ -11078,14 +12751,14 @@ export namespace google {
                     /** GoogleAdsLink adsPersonalizationEnabled */
                     adsPersonalizationEnabled?: (google.protobuf.IBoolValue|null);
 
-                    /** GoogleAdsLink emailAddress */
-                    emailAddress?: (string|null);
-
                     /** GoogleAdsLink createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
                     /** GoogleAdsLink updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoogleAdsLink creatorEmailAddress */
+                    creatorEmailAddress?: (string|null);
                 }
 
                 /** Represents a GoogleAdsLink. */
@@ -11109,14 +12782,14 @@ export namespace google {
                     /** GoogleAdsLink adsPersonalizationEnabled. */
                     public adsPersonalizationEnabled?: (google.protobuf.IBoolValue|null);
 
-                    /** GoogleAdsLink emailAddress. */
-                    public emailAddress: string;
-
                     /** GoogleAdsLink createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
                     /** GoogleAdsLink updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoogleAdsLink creatorEmailAddress. */
+                    public creatorEmailAddress: string;
 
                     /**
                      * Creates a new GoogleAdsLink instance using the specified properties.
@@ -11872,6 +13545,12 @@ export namespace google {
                         /** ChangeHistoryResource googleSignalsSettings */
                         googleSignalsSettings?: (google.analytics.admin.v1alpha.IGoogleSignalsSettings|null);
 
+                        /** ChangeHistoryResource displayVideo_360AdvertiserLink */
+                        displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+
+                        /** ChangeHistoryResource displayVideo_360AdvertiserLinkProposal */
+                        displayVideo_360AdvertiserLinkProposal?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null);
+
                         /** ChangeHistoryResource conversionEvent */
                         conversionEvent?: (google.analytics.admin.v1alpha.IConversionEvent|null);
 
@@ -11883,6 +13562,9 @@ export namespace google {
 
                         /** ChangeHistoryResource customMetric */
                         customMetric?: (google.analytics.admin.v1alpha.ICustomMetric|null);
+
+                        /** ChangeHistoryResource dataRetentionSettings */
+                        dataRetentionSettings?: (google.analytics.admin.v1alpha.IDataRetentionSettings|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -11918,6 +13600,12 @@ export namespace google {
                         /** ChangeHistoryResource googleSignalsSettings. */
                         public googleSignalsSettings?: (google.analytics.admin.v1alpha.IGoogleSignalsSettings|null);
 
+                        /** ChangeHistoryResource displayVideo_360AdvertiserLink. */
+                        public displayVideo_360AdvertiserLink?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink|null);
+
+                        /** ChangeHistoryResource displayVideo_360AdvertiserLinkProposal. */
+                        public displayVideo_360AdvertiserLinkProposal?: (google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal|null);
+
                         /** ChangeHistoryResource conversionEvent. */
                         public conversionEvent?: (google.analytics.admin.v1alpha.IConversionEvent|null);
 
@@ -11930,8 +13618,11 @@ export namespace google {
                         /** ChangeHistoryResource customMetric. */
                         public customMetric?: (google.analytics.admin.v1alpha.ICustomMetric|null);
 
+                        /** ChangeHistoryResource dataRetentionSettings. */
+                        public dataRetentionSettings?: (google.analytics.admin.v1alpha.IDataRetentionSettings|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric");
+                        public resource?: ("account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -12005,6 +13696,360 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a DisplayVideo360AdvertiserLink. */
+                interface IDisplayVideo360AdvertiserLink {
+
+                    /** DisplayVideo360AdvertiserLink name */
+                    name?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLink advertiserId */
+                    advertiserId?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLink advertiserDisplayName */
+                    advertiserDisplayName?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLink adsPersonalizationEnabled */
+                    adsPersonalizationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLink campaignDataSharingEnabled */
+                    campaignDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLink costDataSharingEnabled */
+                    costDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+                }
+
+                /** Represents a DisplayVideo360AdvertiserLink. */
+                class DisplayVideo360AdvertiserLink implements IDisplayVideo360AdvertiserLink {
+
+                    /**
+                     * Constructs a new DisplayVideo360AdvertiserLink.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink);
+
+                    /** DisplayVideo360AdvertiserLink name. */
+                    public name: string;
+
+                    /** DisplayVideo360AdvertiserLink advertiserId. */
+                    public advertiserId: string;
+
+                    /** DisplayVideo360AdvertiserLink advertiserDisplayName. */
+                    public advertiserDisplayName: string;
+
+                    /** DisplayVideo360AdvertiserLink adsPersonalizationEnabled. */
+                    public adsPersonalizationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLink campaignDataSharingEnabled. */
+                    public campaignDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLink costDataSharingEnabled. */
+                    public costDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /**
+                     * Creates a new DisplayVideo360AdvertiserLink instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisplayVideo360AdvertiserLink instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink;
+
+                    /**
+                     * Encodes the specified DisplayVideo360AdvertiserLink message. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify|verify} messages.
+                     * @param message DisplayVideo360AdvertiserLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisplayVideo360AdvertiserLink message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink.verify|verify} messages.
+                     * @param message DisplayVideo360AdvertiserLink message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisplayVideo360AdvertiserLink message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisplayVideo360AdvertiserLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink;
+
+                    /**
+                     * Decodes a DisplayVideo360AdvertiserLink message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisplayVideo360AdvertiserLink
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink;
+
+                    /**
+                     * Verifies a DisplayVideo360AdvertiserLink message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisplayVideo360AdvertiserLink message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisplayVideo360AdvertiserLink
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink;
+
+                    /**
+                     * Creates a plain object from a DisplayVideo360AdvertiserLink message. Also converts values to other types if specified.
+                     * @param message DisplayVideo360AdvertiserLink
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisplayVideo360AdvertiserLink to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DisplayVideo360AdvertiserLinkProposal. */
+                interface IDisplayVideo360AdvertiserLinkProposal {
+
+                    /** DisplayVideo360AdvertiserLinkProposal name */
+                    name?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal advertiserId */
+                    advertiserId?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal linkProposalStatusDetails */
+                    linkProposalStatusDetails?: (google.analytics.admin.v1alpha.ILinkProposalStatusDetails|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal advertiserDisplayName */
+                    advertiserDisplayName?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal validationEmail */
+                    validationEmail?: (string|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal adsPersonalizationEnabled */
+                    adsPersonalizationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal campaignDataSharingEnabled */
+                    campaignDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal costDataSharingEnabled */
+                    costDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+                }
+
+                /** Represents a DisplayVideo360AdvertiserLinkProposal. */
+                class DisplayVideo360AdvertiserLinkProposal implements IDisplayVideo360AdvertiserLinkProposal {
+
+                    /**
+                     * Constructs a new DisplayVideo360AdvertiserLinkProposal.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal);
+
+                    /** DisplayVideo360AdvertiserLinkProposal name. */
+                    public name: string;
+
+                    /** DisplayVideo360AdvertiserLinkProposal advertiserId. */
+                    public advertiserId: string;
+
+                    /** DisplayVideo360AdvertiserLinkProposal linkProposalStatusDetails. */
+                    public linkProposalStatusDetails?: (google.analytics.admin.v1alpha.ILinkProposalStatusDetails|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal advertiserDisplayName. */
+                    public advertiserDisplayName: string;
+
+                    /** DisplayVideo360AdvertiserLinkProposal validationEmail. */
+                    public validationEmail: string;
+
+                    /** DisplayVideo360AdvertiserLinkProposal adsPersonalizationEnabled. */
+                    public adsPersonalizationEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal campaignDataSharingEnabled. */
+                    public campaignDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /** DisplayVideo360AdvertiserLinkProposal costDataSharingEnabled. */
+                    public costDataSharingEnabled?: (google.protobuf.IBoolValue|null);
+
+                    /**
+                     * Creates a new DisplayVideo360AdvertiserLinkProposal instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisplayVideo360AdvertiserLinkProposal instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal;
+
+                    /**
+                     * Encodes the specified DisplayVideo360AdvertiserLinkProposal message. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify|verify} messages.
+                     * @param message DisplayVideo360AdvertiserLinkProposal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisplayVideo360AdvertiserLinkProposal message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal.verify|verify} messages.
+                     * @param message DisplayVideo360AdvertiserLinkProposal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisplayVideo360AdvertiserLinkProposal message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisplayVideo360AdvertiserLinkProposal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal;
+
+                    /**
+                     * Decodes a DisplayVideo360AdvertiserLinkProposal message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisplayVideo360AdvertiserLinkProposal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal;
+
+                    /**
+                     * Verifies a DisplayVideo360AdvertiserLinkProposal message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisplayVideo360AdvertiserLinkProposal message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisplayVideo360AdvertiserLinkProposal
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal;
+
+                    /**
+                     * Creates a plain object from a DisplayVideo360AdvertiserLinkProposal message. Also converts values to other types if specified.
+                     * @param message DisplayVideo360AdvertiserLinkProposal
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisplayVideo360AdvertiserLinkProposal to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LinkProposalStatusDetails. */
+                interface ILinkProposalStatusDetails {
+
+                    /** LinkProposalStatusDetails linkProposalInitiatingProduct */
+                    linkProposalInitiatingProduct?: (google.analytics.admin.v1alpha.LinkProposalInitiatingProduct|keyof typeof google.analytics.admin.v1alpha.LinkProposalInitiatingProduct|null);
+
+                    /** LinkProposalStatusDetails requestorEmail */
+                    requestorEmail?: (string|null);
+
+                    /** LinkProposalStatusDetails linkProposalState */
+                    linkProposalState?: (google.analytics.admin.v1alpha.LinkProposalState|keyof typeof google.analytics.admin.v1alpha.LinkProposalState|null);
+                }
+
+                /** Represents a LinkProposalStatusDetails. */
+                class LinkProposalStatusDetails implements ILinkProposalStatusDetails {
+
+                    /**
+                     * Constructs a new LinkProposalStatusDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ILinkProposalStatusDetails);
+
+                    /** LinkProposalStatusDetails linkProposalInitiatingProduct. */
+                    public linkProposalInitiatingProduct: (google.analytics.admin.v1alpha.LinkProposalInitiatingProduct|keyof typeof google.analytics.admin.v1alpha.LinkProposalInitiatingProduct);
+
+                    /** LinkProposalStatusDetails requestorEmail. */
+                    public requestorEmail: string;
+
+                    /** LinkProposalStatusDetails linkProposalState. */
+                    public linkProposalState: (google.analytics.admin.v1alpha.LinkProposalState|keyof typeof google.analytics.admin.v1alpha.LinkProposalState);
+
+                    /**
+                     * Creates a new LinkProposalStatusDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkProposalStatusDetails instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ILinkProposalStatusDetails): google.analytics.admin.v1alpha.LinkProposalStatusDetails;
+
+                    /**
+                     * Encodes the specified LinkProposalStatusDetails message. Does not implicitly {@link google.analytics.admin.v1alpha.LinkProposalStatusDetails.verify|verify} messages.
+                     * @param message LinkProposalStatusDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ILinkProposalStatusDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkProposalStatusDetails message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.LinkProposalStatusDetails.verify|verify} messages.
+                     * @param message LinkProposalStatusDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ILinkProposalStatusDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkProposalStatusDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkProposalStatusDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.LinkProposalStatusDetails;
+
+                    /**
+                     * Decodes a LinkProposalStatusDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkProposalStatusDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.LinkProposalStatusDetails;
+
+                    /**
+                     * Verifies a LinkProposalStatusDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkProposalStatusDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkProposalStatusDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.LinkProposalStatusDetails;
+
+                    /**
+                     * Creates a plain object from a LinkProposalStatusDetails message. Also converts values to other types if specified.
+                     * @param message LinkProposalStatusDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.LinkProposalStatusDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkProposalStatusDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a ConversionEvent. */
                 interface IConversionEvent {
 
@@ -12017,8 +14062,11 @@ export namespace google {
                     /** ConversionEvent createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** ConversionEvent isDeletable */
-                    isDeletable?: (boolean|null);
+                    /** ConversionEvent deletable */
+                    deletable?: (boolean|null);
+
+                    /** ConversionEvent custom */
+                    custom?: (boolean|null);
                 }
 
                 /** Represents a ConversionEvent. */
@@ -12039,8 +14087,11 @@ export namespace google {
                     /** ConversionEvent createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
-                    /** ConversionEvent isDeletable. */
-                    public isDeletable: boolean;
+                    /** ConversionEvent deletable. */
+                    public deletable: boolean;
+
+                    /** ConversionEvent custom. */
+                    public custom: boolean;
 
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
@@ -12486,6 +14537,121 @@ export namespace google {
                     enum MetricScope {
                         METRIC_SCOPE_UNSPECIFIED = 0,
                         EVENT = 1
+                    }
+                }
+
+                /** Properties of a DataRetentionSettings. */
+                interface IDataRetentionSettings {
+
+                    /** DataRetentionSettings name */
+                    name?: (string|null);
+
+                    /** DataRetentionSettings eventDataRetention */
+                    eventDataRetention?: (google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration|keyof typeof google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration|null);
+
+                    /** DataRetentionSettings resetUserDataOnNewActivity */
+                    resetUserDataOnNewActivity?: (boolean|null);
+                }
+
+                /** Represents a DataRetentionSettings. */
+                class DataRetentionSettings implements IDataRetentionSettings {
+
+                    /**
+                     * Constructs a new DataRetentionSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDataRetentionSettings);
+
+                    /** DataRetentionSettings name. */
+                    public name: string;
+
+                    /** DataRetentionSettings eventDataRetention. */
+                    public eventDataRetention: (google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration|keyof typeof google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration);
+
+                    /** DataRetentionSettings resetUserDataOnNewActivity. */
+                    public resetUserDataOnNewActivity: boolean;
+
+                    /**
+                     * Creates a new DataRetentionSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataRetentionSettings instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDataRetentionSettings): google.analytics.admin.v1alpha.DataRetentionSettings;
+
+                    /**
+                     * Encodes the specified DataRetentionSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.DataRetentionSettings.verify|verify} messages.
+                     * @param message DataRetentionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDataRetentionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataRetentionSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DataRetentionSettings.verify|verify} messages.
+                     * @param message DataRetentionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDataRetentionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataRetentionSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataRetentionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DataRetentionSettings;
+
+                    /**
+                     * Decodes a DataRetentionSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataRetentionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DataRetentionSettings;
+
+                    /**
+                     * Verifies a DataRetentionSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataRetentionSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataRetentionSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DataRetentionSettings;
+
+                    /**
+                     * Creates a plain object from a DataRetentionSettings message. Also converts values to other types if specified.
+                     * @param message DataRetentionSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DataRetentionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataRetentionSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace DataRetentionSettings {
+
+                    /** RetentionDuration enum. */
+                    enum RetentionDuration {
+                        RETENTION_DURATION_UNSPECIFIED = 0,
+                        TWO_MONTHS = 1,
+                        FOURTEEN_MONTHS = 3,
+                        TWENTY_SIX_MONTHS = 4,
+                        THIRTY_EIGHT_MONTHS = 5,
+                        FIFTY_MONTHS = 6
                     }
                 }
             }

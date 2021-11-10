@@ -155,11 +155,6 @@
                 "createFirebaseLink"
               ]
             },
-            "UpdateFirebaseLink": {
-              "methods": [
-                "updateFirebaseLink"
-              ]
-            },
             "DeleteFirebaseLink": {
               "methods": [
                 "deleteFirebaseLink"
@@ -235,6 +230,51 @@
                 "deleteConversionEvent"
               ]
             },
+            "GetDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "getDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "createDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "deleteDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "UpdateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "updateDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "getDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "createDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "deleteDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "ApproveDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "approveDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "CancelDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "cancelDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
             "CreateCustomDimension": {
               "methods": [
                 "createCustomDimension"
@@ -273,6 +313,16 @@
             "GetCustomMetric": {
               "methods": [
                 "getCustomMetric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "getDataRetentionSettings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "updateDataRetentionSettings"
               ]
             },
             "ListAccounts": {
@@ -364,6 +414,20 @@
                 "listConversionEvents",
                 "listConversionEventsStream",
                 "listConversionEventsAsync"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinks": {
+              "methods": [
+                "listDisplayVideo360AdvertiserLinks",
+                "listDisplayVideo360AdvertiserLinksStream",
+                "listDisplayVideo360AdvertiserLinksAsync"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinkProposals": {
+              "methods": [
+                "listDisplayVideo360AdvertiserLinkProposals",
+                "listDisplayVideo360AdvertiserLinkProposalsStream",
+                "listDisplayVideo360AdvertiserLinkProposalsAsync"
               ]
             },
             "ListCustomDimensions": {
@@ -530,11 +594,6 @@
                 "createFirebaseLink"
               ]
             },
-            "UpdateFirebaseLink": {
-              "methods": [
-                "updateFirebaseLink"
-              ]
-            },
             "DeleteFirebaseLink": {
               "methods": [
                 "deleteFirebaseLink"
@@ -610,6 +669,51 @@
                 "deleteConversionEvent"
               ]
             },
+            "GetDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "getDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "createDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "deleteDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "UpdateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "updateDisplayVideo360AdvertiserLink"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "getDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "createDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "deleteDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "ApproveDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "approveDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
+            "CancelDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "cancelDisplayVideo360AdvertiserLinkProposal"
+              ]
+            },
             "CreateCustomDimension": {
               "methods": [
                 "createCustomDimension"
@@ -648,6 +752,16 @@
             "GetCustomMetric": {
               "methods": [
                 "getCustomMetric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "getDataRetentionSettings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "updateDataRetentionSettings"
               ]
             },
             "ListAccounts": {
@@ -739,6 +853,20 @@
                 "listConversionEvents",
                 "listConversionEventsStream",
                 "listConversionEventsAsync"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinks": {
+              "methods": [
+                "listDisplayVideo360AdvertiserLinks",
+                "listDisplayVideo360AdvertiserLinksStream",
+                "listDisplayVideo360AdvertiserLinksAsync"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinkProposals": {
+              "methods": [
+                "listDisplayVideo360AdvertiserLinkProposals",
+                "listDisplayVideo360AdvertiserLinkProposalsStream",
+                "listDisplayVideo360AdvertiserLinkProposalsAsync"
               ]
             },
             "ListCustomDimensions": {

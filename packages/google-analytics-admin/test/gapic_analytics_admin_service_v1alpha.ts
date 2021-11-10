@@ -560,7 +560,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketResponse()
       );
@@ -585,7 +585,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketResponse()
       );
@@ -625,7 +625,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.provisionAccountTicket = stubSimpleCall(
         undefined,
@@ -768,7 +768,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreatePropertyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
@@ -792,7 +792,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreatePropertyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
@@ -832,7 +832,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreatePropertyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createProperty = stubSimpleCall(
         undefined,
@@ -3525,124 +3525,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
-  describe('updateFirebaseLink', () => {
-    it('invokes updateFirebaseLink without error', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest()
-      );
-      request.firebaseLink = {};
-      request.firebaseLink.name = '';
-      const expectedHeaderRequestParams = 'firebase_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.FirebaseLink()
-      );
-      client.innerApiCalls.updateFirebaseLink =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateFirebaseLink(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes updateFirebaseLink without error using callback', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest()
-      );
-      request.firebaseLink = {};
-      request.firebaseLink.name = '';
-      const expectedHeaderRequestParams = 'firebase_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.FirebaseLink()
-      );
-      client.innerApiCalls.updateFirebaseLink =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateFirebaseLink(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.analytics.admin.v1alpha.IFirebaseLink | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes updateFirebaseLink with error', async () => {
-      const client =
-        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.analytics.admin.v1alpha.UpdateFirebaseLinkRequest()
-      );
-      request.firebaseLink = {};
-      request.firebaseLink.name = '';
-      const expectedHeaderRequestParams = 'firebase_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateFirebaseLink = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateFirebaseLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('deleteFirebaseLink', () => {
     it('invokes deleteFirebaseLink without error', async () => {
       const client =
@@ -5403,6 +5285,1121 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('getDisplayVideo360AdvertiserLink', () => {
+    it('invokes getDisplayVideo360AdvertiserLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+      );
+      client.innerApiCalls.getDisplayVideo360AdvertiserLink =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getDisplayVideo360AdvertiserLink(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getDisplayVideo360AdvertiserLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+      );
+      client.innerApiCalls.getDisplayVideo360AdvertiserLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDisplayVideo360AdvertiserLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getDisplayVideo360AdvertiserLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDisplayVideo360AdvertiserLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getDisplayVideo360AdvertiserLink(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('createDisplayVideo360AdvertiserLink', () => {
+    it('invokes createDisplayVideo360AdvertiserLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+      );
+      client.innerApiCalls.createDisplayVideo360AdvertiserLink =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createDisplayVideo360AdvertiserLink(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createDisplayVideo360AdvertiserLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+      );
+      client.innerApiCalls.createDisplayVideo360AdvertiserLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDisplayVideo360AdvertiserLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createDisplayVideo360AdvertiserLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDisplayVideo360AdvertiserLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createDisplayVideo360AdvertiserLink(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('deleteDisplayVideo360AdvertiserLink', () => {
+    it('invokes deleteDisplayVideo360AdvertiserLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteDisplayVideo360AdvertiserLink =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteDisplayVideo360AdvertiserLink(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteDisplayVideo360AdvertiserLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteDisplayVideo360AdvertiserLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDisplayVideo360AdvertiserLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteDisplayVideo360AdvertiserLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDisplayVideo360AdvertiserLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteDisplayVideo360AdvertiserLink(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('updateDisplayVideo360AdvertiserLink', () => {
+    it('invokes updateDisplayVideo360AdvertiserLink without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.displayVideo_360AdvertiserLink = {};
+      request.displayVideo_360AdvertiserLink.name = '';
+      const expectedHeaderRequestParams =
+        'display_video_360_advertiser_link.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+      );
+      client.innerApiCalls.updateDisplayVideo360AdvertiserLink =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateDisplayVideo360AdvertiserLink(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateDisplayVideo360AdvertiserLink without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.displayVideo_360AdvertiserLink = {};
+      request.displayVideo_360AdvertiserLink.name = '';
+      const expectedHeaderRequestParams =
+        'display_video_360_advertiser_link.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+      );
+      client.innerApiCalls.updateDisplayVideo360AdvertiserLink =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDisplayVideo360AdvertiserLink(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateDisplayVideo360AdvertiserLink with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
+      );
+      request.displayVideo_360AdvertiserLink = {};
+      request.displayVideo_360AdvertiserLink.name = '';
+      const expectedHeaderRequestParams =
+        'display_video_360_advertiser_link.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDisplayVideo360AdvertiserLink = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateDisplayVideo360AdvertiserLink(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getDisplayVideo360AdvertiserLinkProposal', () => {
+    it('invokes getDisplayVideo360AdvertiserLinkProposal without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+      );
+      client.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getDisplayVideo360AdvertiserLinkProposal(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+      );
+      client.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDisplayVideo360AdvertiserLinkProposal(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getDisplayVideo360AdvertiserLinkProposal with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getDisplayVideo360AdvertiserLinkProposal(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('createDisplayVideo360AdvertiserLinkProposal', () => {
+    it('invokes createDisplayVideo360AdvertiserLinkProposal without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+      );
+      client.innerApiCalls.createDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.createDisplayVideo360AdvertiserLinkProposal(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+      );
+      client.innerApiCalls.createDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDisplayVideo360AdvertiserLinkProposal(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createDisplayVideo360AdvertiserLinkProposal with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.createDisplayVideo360AdvertiserLinkProposal(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('deleteDisplayVideo360AdvertiserLinkProposal', () => {
+    it('invokes deleteDisplayVideo360AdvertiserLinkProposal without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.deleteDisplayVideo360AdvertiserLinkProposal(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDisplayVideo360AdvertiserLinkProposal(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteDisplayVideo360AdvertiserLinkProposal with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.deleteDisplayVideo360AdvertiserLinkProposal(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('approveDisplayVideo360AdvertiserLinkProposal', () => {
+    it('invokes approveDisplayVideo360AdvertiserLinkProposal without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse()
+      );
+      client.innerApiCalls.approveDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.approveDisplayVideo360AdvertiserLinkProposal(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes approveDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse()
+      );
+      client.innerApiCalls.approveDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.approveDisplayVideo360AdvertiserLinkProposal(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IApproveDisplayVideo360AdvertiserLinkProposalResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes approveDisplayVideo360AdvertiserLinkProposal with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.approveDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.approveDisplayVideo360AdvertiserLinkProposal(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('cancelDisplayVideo360AdvertiserLinkProposal', () => {
+    it('invokes cancelDisplayVideo360AdvertiserLinkProposal without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+      );
+      client.innerApiCalls.cancelDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.cancelDisplayVideo360AdvertiserLinkProposal(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes cancelDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+      );
+      client.innerApiCalls.cancelDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelDisplayVideo360AdvertiserLinkProposal(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes cancelDisplayVideo360AdvertiserLinkProposal with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelDisplayVideo360AdvertiserLinkProposal =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.cancelDisplayVideo360AdvertiserLinkProposal(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('createCustomDimension', () => {
     it('invokes createCustomDimension without error', async () => {
       const client =
@@ -6337,6 +7334,245 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('getDataRetentionSettings', () => {
+    it('invokes getDataRetentionSettings without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
+      );
+      client.innerApiCalls.getDataRetentionSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getDataRetentionSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getDataRetentionSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getDataRetentionSettings without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
+      );
+      client.innerApiCalls.getDataRetentionSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDataRetentionSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDataRetentionSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getDataRetentionSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getDataRetentionSettings with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDataRetentionSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getDataRetentionSettings(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getDataRetentionSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('updateDataRetentionSettings', () => {
+    it('invokes updateDataRetentionSettings without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
+      );
+      request.dataRetentionSettings = {};
+      request.dataRetentionSettings.name = '';
+      const expectedHeaderRequestParams = 'data_retention_settings.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
+      );
+      client.innerApiCalls.updateDataRetentionSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateDataRetentionSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateDataRetentionSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateDataRetentionSettings without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
+      );
+      request.dataRetentionSettings = {};
+      request.dataRetentionSettings.name = '';
+      const expectedHeaderRequestParams = 'data_retention_settings.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
+      );
+      client.innerApiCalls.updateDataRetentionSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDataRetentionSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IDataRetentionSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateDataRetentionSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateDataRetentionSettings with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
+      );
+      request.dataRetentionSettings = {};
+      request.dataRetentionSettings.name = '';
+      const expectedHeaderRequestParams = 'data_retention_settings.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDataRetentionSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateDataRetentionSettings(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateDataRetentionSettings as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('listAccounts', () => {
     it('invokes listAccounts without error', async () => {
       const client =
@@ -6348,7 +7584,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Account()
@@ -6380,7 +7616,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Account()
@@ -6428,7 +7664,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccounts = stubSimpleCall(
         undefined,
@@ -6606,7 +7842,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AccountSummary()
@@ -6639,7 +7875,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AccountSummary()
@@ -6689,7 +7925,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccountSummaries = stubSimpleCall(
         undefined,
@@ -6869,7 +8105,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListPropertiesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Property()
@@ -6901,7 +8137,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListPropertiesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Property()
@@ -6949,7 +8185,7 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListPropertiesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listProperties = stubSimpleCall(
         undefined,
@@ -10377,6 +11613,708 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listDisplayVideo360AdvertiserLinks', () => {
+    it('invokes listDisplayVideo360AdvertiserLinks without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+      ];
+      client.innerApiCalls.listDisplayVideo360AdvertiserLinks =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listDisplayVideo360AdvertiserLinks(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinks without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+      ];
+      client.innerApiCalls.listDisplayVideo360AdvertiserLinks =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDisplayVideo360AdvertiserLinks(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinks with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDisplayVideo360AdvertiserLinks = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listDisplayVideo360AdvertiserLinks(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinksStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+      ];
+      client.descriptors.page.listDisplayVideo360AdvertiserLinks.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDisplayVideo360AdvertiserLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listDisplayVideo360AdvertiserLinks,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinksStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDisplayVideo360AdvertiserLinks.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDisplayVideo360AdvertiserLinksStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listDisplayVideo360AdvertiserLinks,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listDisplayVideo360AdvertiserLinks without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
+        ),
+      ];
+      client.descriptors.page.listDisplayVideo360AdvertiserLinks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[] =
+        [];
+      const iterable = client.listDisplayVideo360AdvertiserLinksAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listDisplayVideo360AdvertiserLinks with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDisplayVideo360AdvertiserLinks.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDisplayVideo360AdvertiserLinksAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLink[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listDisplayVideo360AdvertiserLinkProposals', () => {
+    it('invokes listDisplayVideo360AdvertiserLinkProposals without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+      ];
+      client.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listDisplayVideo360AdvertiserLinkProposals(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinkProposals without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+      ];
+      client.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDisplayVideo360AdvertiserLinkProposals(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinkProposals with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listDisplayVideo360AdvertiserLinkProposals(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinkProposalsStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+      ];
+      client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.listDisplayVideo360AdvertiserLinkProposalsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listDisplayVideo360AdvertiserLinkProposalsStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.listDisplayVideo360AdvertiserLinkProposalsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listDisplayVideo360AdvertiserLinkProposals without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
+        ),
+      ];
+      client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[] =
+        [];
+      const iterable =
+        client.listDisplayVideo360AdvertiserLinkProposalsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listDisplayVideo360AdvertiserLinkProposals with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listDisplayVideo360AdvertiserLinkProposalsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.IDisplayVideo360AdvertiserLinkProposal[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('listCustomDimensions', () => {
     it('invokes listCustomDimensions without error', async () => {
       const client =
@@ -11345,6 +13283,52 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
     });
 
+    describe('dataRetentionSettings', () => {
+      const fakePath = '/rendered/path/dataRetentionSettings';
+      const expectedParameters = {
+        property: 'propertyValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.dataRetentionSettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataRetentionSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataRetentionSettingsPath', () => {
+        const result = client.dataRetentionSettingsPath('propertyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dataRetentionSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromDataRetentionSettingsName', () => {
+        const result =
+          client.matchPropertyFromDataRetentionSettingsName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates.dataRetentionSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('dataSharingSettings', () => {
       const fakePath = '/rendered/path/dataSharingSettings';
       const expectedParameters = {
@@ -11382,6 +13366,100 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert(
           (
             client.pathTemplates.dataSharingSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('displayVideo360AdvertiserLink', () => {
+      const fakePath = '/rendered/path/displayVideo360AdvertiserLink';
+      const expectedParameters = {
+        property: 'propertyValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.displayVideo360AdvertiserLinkPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.displayVideo360AdvertiserLinkPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('displayVideo360AdvertiserLinkPath', () => {
+        const result =
+          client.displayVideo360AdvertiserLinkPath('propertyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.displayVideo360AdvertiserLinkPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromDisplayVideo360AdvertiserLinkName', () => {
+        const result =
+          client.matchPropertyFromDisplayVideo360AdvertiserLinkName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates.displayVideo360AdvertiserLinkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('displayVideo360AdvertiserLinkProposal', () => {
+      const fakePath = '/rendered/path/displayVideo360AdvertiserLinkProposal';
+      const expectedParameters = {
+        property: 'propertyValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.displayVideo360AdvertiserLinkProposalPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.displayVideo360AdvertiserLinkProposalPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('displayVideo360AdvertiserLinkProposalPath', () => {
+        const result =
+          client.displayVideo360AdvertiserLinkProposalPath('propertyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .displayVideo360AdvertiserLinkProposalPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromDisplayVideo360AdvertiserLinkProposalName', () => {
+        const result =
+          client.matchPropertyFromDisplayVideo360AdvertiserLinkProposalName(
+            fakePath
+          );
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates
+              .displayVideo360AdvertiserLinkProposalPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
