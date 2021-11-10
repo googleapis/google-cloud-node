@@ -376,6 +376,24 @@ export class WorkflowsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single Workflow.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the workflow which information should be retrieved.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Workflow]{@link google.cloud.workflows.v1.Workflow}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workflows.get_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_GetWorkflow_async
+   */
   getWorkflow(
     request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
     options?: CallOptions
@@ -403,24 +421,6 @@ export class WorkflowsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single Workflow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the workflow which information should be retrieved.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Workflow]{@link google.cloud.workflows.v1.Workflow}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getWorkflow(request);
-   */
   getWorkflow(
     request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
     optionsOrCallback?:
@@ -463,6 +463,39 @@ export class WorkflowsClient {
     return this.innerApiCalls.getWorkflow(request, options, callback);
   }
 
+  /**
+   * Creates a new workflow. If a workflow with the specified name already
+   * exists in the specified project and location, the long running operation
+   * will return {@link google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Project and location in which the workflow should be created.
+   *   Format:  projects/{project}/locations/{location}
+   * @param {google.cloud.workflows.v1.Workflow} request.workflow
+   *   Required. Workflow to be created.
+   * @param {string} request.workflowId
+   *   Required. The ID of the workflow to be created. It has to fulfill the
+   *   following requirements:
+   *
+   *   * Must contain only letters, numbers, underscores and hyphens.
+   *   * Must start with a letter.
+   *   * Must be between 1-64 characters.
+   *   * Must end with a number or a letter.
+   *   * Must be unique within the customer project and location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
+   */
   createWorkflow(
     request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
     options?: CallOptions
@@ -499,40 +532,6 @@ export class WorkflowsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new workflow. If a workflow with the specified name already
-   * exists in the specified project and location, the long running operation
-   * will return {@link google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Project and location in which the workflow should be created.
-   *   Format:  projects/{project}/locations/{location}
-   * @param {google.cloud.workflows.v1.Workflow} request.workflow
-   *   Required. Workflow to be created.
-   * @param {string} request.workflowId
-   *   Required. The ID of the workflow to be created. It has to fulfill the
-   *   following requirements:
-   *
-   *   * Must contain only letters, numbers, underscores and hyphens.
-   *   * Must start with a letter.
-   *   * Must be between 1-64 characters.
-   *   * Must end with a number or a letter.
-   *   * Must be unique within the customer project and location.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createWorkflow(request);
-   * const [response] = await operation.promise();
-   */
   createWorkflow(
     request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
     optionsOrCallback?:
@@ -590,11 +589,8 @@ export class WorkflowsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateWorkflowProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
    */
   async checkCreateWorkflowProgress(
     name: string
@@ -618,6 +614,28 @@ export class WorkflowsClient {
       protos.google.cloud.workflows.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a workflow with the specified name.
+   * This method also cancels and deletes all running executions of the
+   * workflow.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the workflow to be deleted.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
+   */
   deleteWorkflow(
     request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
     options?: CallOptions
@@ -654,29 +672,6 @@ export class WorkflowsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a workflow with the specified name.
-   * This method also cancels and deletes all running executions of the
-   * workflow.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the workflow to be deleted.
-   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteWorkflow(request);
-   * const [response] = await operation.promise();
-   */
   deleteWorkflow(
     request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
     optionsOrCallback?:
@@ -734,11 +729,8 @@ export class WorkflowsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteWorkflowProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
    */
   async checkDeleteWorkflowProgress(
     name: string
@@ -762,6 +754,32 @@ export class WorkflowsClient {
       protos.google.cloud.workflows.v1.OperationMetadata
     >;
   }
+  /**
+   * Updates an existing workflow.
+   * Running this method has no impact on already running executions of the
+   * workflow. A new revision of the workflow may be created as a result of a
+   * successful update operation. In that case, such revision will be used
+   * in new workflow executions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.workflows.v1.Workflow} request.workflow
+   *   Required. Workflow to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   List of fields to be updated. If not present, the entire workflow
+   *   will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
+   */
   updateWorkflow(
     request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
     options?: CallOptions
@@ -798,33 +816,6 @@ export class WorkflowsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates an existing workflow.
-   * Running this method has no impact on already running executions of the
-   * workflow. A new revision of the workflow may be created as a result of a
-   * successful update operation. In that case, such revision will be used
-   * in new workflow executions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.workflows.v1.Workflow} request.workflow
-   *   Required. Workflow to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   List of fields to be updated. If not present, the entire workflow
-   *   will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateWorkflow(request);
-   * const [response] = await operation.promise();
-   */
   updateWorkflow(
     request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
     optionsOrCallback?:
@@ -882,11 +873,8 @@ export class WorkflowsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateWorkflowProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
    */
   async checkUpdateWorkflowProgress(
     name: string
@@ -910,37 +898,6 @@ export class WorkflowsClient {
       protos.google.cloud.workflows.v1.OperationMetadata
     >;
   }
-  listWorkflows(
-    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.workflows.v1.IWorkflow[],
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
-      protos.google.cloud.workflows.v1.IListWorkflowsResponse
-    ]
-  >;
-  listWorkflows(
-    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): void;
-  listWorkflows(
-    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
-      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
-      | null
-      | undefined,
-      protos.google.cloud.workflows.v1.IWorkflow
-    >
-  ): void;
   /**
    * Lists Workflows in a given project and location.
    * The default order is not specified.
@@ -981,6 +938,37 @@ export class WorkflowsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listWorkflows(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowsResponse
+    ]
+  >;
+  listWorkflows(
+    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >
+  ): void;
+  listWorkflows(
+    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >
+  ): void;
   listWorkflows(
     request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     optionsOrCallback?:
@@ -1121,11 +1109,8 @@ export class WorkflowsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listWorkflowsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/workflows.list_workflows.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_ListWorkflows_async
    */
   listWorkflowsAsync(
     request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
@@ -1139,7 +1124,6 @@ export class WorkflowsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
