@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function deleteKey() {
+  async function callDeleteKey() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteKey();
+  callDeleteKey();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteKey_async]
 }
 

@@ -22,12 +22,12 @@ function main(key) {
   /**
    *  Required. The key to update.
    */
-  // const key = ''
+  // const key = {}
   /**
    *  Optional. The mask to control which fields of the key get updated. If the mask is not
    *  present, all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} =
@@ -36,7 +36,7 @@ function main(key) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function updateKey() {
+  async function callUpdateKey() {
     // Construct request
     const request = {
       key,
@@ -47,7 +47,7 @@ function main(key) {
     console.log(response);
   }
 
-  updateKey();
+  callUpdateKey();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateKey_async]
 }
 

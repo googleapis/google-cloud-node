@@ -29,7 +29,7 @@ function main(name) {
    *  empty to provide reasons that apply to an event without concluding whether
    *  the event is legitimate or fraudulent.
    */
-  // const annotation = ''
+  // const annotation = {}
   /**
    *  Optional. Optional reasons for the annotation that will be assigned to the Event.
    */
@@ -50,7 +50,7 @@ function main(name) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function annotateAssessment() {
+  async function callAnnotateAssessment() {
     // Construct request
     const request = {
       name,
@@ -63,7 +63,7 @@ function main(name) {
     console.log(response);
   }
 
-  annotateAssessment();
+  callAnnotateAssessment();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async]
 }
 

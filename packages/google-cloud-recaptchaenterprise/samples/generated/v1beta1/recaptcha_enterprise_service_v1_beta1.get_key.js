@@ -33,7 +33,7 @@ function main(name) {
   const recaptchaenterpriseClient =
     new RecaptchaEnterpriseServiceV1Beta1Client();
 
-  async function getKey() {
+  async function callGetKey() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getKey();
+  callGetKey();
   // [END recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_GetKey_async]
 }
 

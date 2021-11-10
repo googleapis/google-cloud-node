@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function getMetrics() {
+  async function callGetMetrics() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getMetrics();
+  callGetMetrics();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetMetrics_async]
 }
 

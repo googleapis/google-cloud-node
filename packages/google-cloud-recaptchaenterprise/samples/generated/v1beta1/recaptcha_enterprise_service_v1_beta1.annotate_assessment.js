@@ -27,7 +27,7 @@ function main(name, annotation) {
   /**
    *  Required. The annotation that will be assigned to the Event.
    */
-  // const annotation = ''
+  // const annotation = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceV1Beta1Client} =
@@ -37,7 +37,7 @@ function main(name, annotation) {
   const recaptchaenterpriseClient =
     new RecaptchaEnterpriseServiceV1Beta1Client();
 
-  async function annotateAssessment() {
+  async function callAnnotateAssessment() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name, annotation) {
     console.log(response);
   }
 
-  annotateAssessment();
+  callAnnotateAssessment();
   // [END recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_AnnotateAssessment_async]
 }
 

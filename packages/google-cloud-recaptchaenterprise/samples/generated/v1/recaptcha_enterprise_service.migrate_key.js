@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function migrateKey() {
+  async function callMigrateKey() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  migrateKey();
+  callMigrateKey();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async]
 }
 

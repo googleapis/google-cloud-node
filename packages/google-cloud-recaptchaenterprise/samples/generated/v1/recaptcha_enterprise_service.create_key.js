@@ -27,7 +27,7 @@ function main(parent, key) {
   /**
    *  Required. Information to create a reCAPTCHA Enterprise key.
    */
-  // const key = ''
+  // const key = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, key) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function createKey() {
+  async function callCreateKey() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, key) {
     console.log(response);
   }
 
-  createKey();
+  callCreateKey();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateKey_async]
 }
 

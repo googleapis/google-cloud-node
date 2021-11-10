@@ -27,7 +27,7 @@ function main(parent, assessment) {
   /**
    *  Required. The assessment details.
    */
-  // const assessment = ''
+  // const assessment = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, assessment) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function createAssessment() {
+  async function callCreateAssessment() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, assessment) {
     console.log(response);
   }
 
-  createAssessment();
+  callCreateAssessment();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateAssessment_async]
 }
 

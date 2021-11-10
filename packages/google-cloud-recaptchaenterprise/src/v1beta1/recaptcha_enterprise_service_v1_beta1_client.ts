@@ -327,6 +327,26 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates an Assessment of the likelihood an event is legitimate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project in which the assessment will be created,
+   *   in the format "projects/{project_number}".
+   * @param {google.cloud.recaptchaenterprise.v1beta1.Assessment} request.assessment
+   *   Required. The assessment details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Assessment]{@link google.cloud.recaptchaenterprise.v1beta1.Assessment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_CreateAssessment_async
+   */
   createAssessment(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest,
     options?: CallOptions
@@ -361,26 +381,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates an Assessment of the likelihood an event is legitimate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project in which the assessment will be created,
-   *   in the format "projects/{project_number}".
-   * @param {google.cloud.recaptchaenterprise.v1beta1.Assessment} request.assessment
-   *   Required. The assessment details.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Assessment]{@link google.cloud.recaptchaenterprise.v1beta1.Assessment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createAssessment(request);
-   */
   createAssessment(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest,
     optionsOrCallback?:
@@ -427,6 +427,27 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize();
     return this.innerApiCalls.createAssessment(request, options, callback);
   }
+  /**
+   * Annotates a previously created Assessment to provide additional information
+   * on whether the event turned out to be authentic or fradulent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Assessment, in the format
+   *   "projects/{project_number}/assessments/{assessment_id}".
+   * @param {google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation} request.annotation
+   *   Required. The annotation that will be assigned to the Event.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnnotateAssessmentResponse]{@link google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_AnnotateAssessment_async
+   */
   annotateAssessment(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest,
     options?: CallOptions
@@ -461,27 +482,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Annotates a previously created Assessment to provide additional information
-   * on whether the event turned out to be authentic or fradulent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Assessment, in the format
-   *   "projects/{project_number}/assessments/{assessment_id}".
-   * @param {google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation} request.annotation
-   *   Required. The annotation that will be assigned to the Event.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotateAssessmentResponse]{@link google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.annotateAssessment(request);
-   */
   annotateAssessment(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest,
     optionsOrCallback?:
@@ -528,6 +528,26 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize();
     return this.innerApiCalls.annotateAssessment(request, options, callback);
   }
+  /**
+   * Creates a new reCAPTCHA Enterprise key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project in which the key will be created, in the
+   *   format "projects/{project_number}".
+   * @param {google.cloud.recaptchaenterprise.v1beta1.Key} request.key
+   *   Required. Information to create a reCAPTCHA Enterprise key.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_key.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_CreateKey_async
+   */
   createKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest,
     options?: CallOptions
@@ -562,26 +582,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new reCAPTCHA Enterprise key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project in which the key will be created, in the
-   *   format "projects/{project_number}".
-   * @param {google.cloud.recaptchaenterprise.v1beta1.Key} request.key
-   *   Required. Information to create a reCAPTCHA Enterprise key.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createKey(request);
-   */
   createKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest,
     optionsOrCallback?:
@@ -628,6 +628,24 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize();
     return this.innerApiCalls.createKey(request, options, callback);
   }
+  /**
+   * Returns the specified key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the requested key, in the format
+   *   "projects/{project_number}/keys/{key_id}".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.get_key.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_GetKey_async
+   */
   getKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest,
     options?: CallOptions
@@ -662,24 +680,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the specified key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the requested key, in the format
-   *   "projects/{project_number}/keys/{key_id}".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getKey(request);
-   */
   getKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest,
     optionsOrCallback?:
@@ -726,6 +726,26 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize();
     return this.innerApiCalls.getKey(request, options, callback);
   }
+  /**
+   * Updates the specified key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.recaptchaenterprise.v1beta1.Key} request.key
+   *   Required. The key to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which field of the key get updated. If the mask is not
+   *   present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.update_key.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_UpdateKey_async
+   */
   updateKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest,
     options?: CallOptions
@@ -760,26 +780,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.recaptchaenterprise.v1beta1.Key} request.key
-   *   Required. The key to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which field of the key get updated. If the mask is not
-   *   present, all fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateKey(request);
-   */
   updateKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest,
     optionsOrCallback?:
@@ -826,6 +826,24 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     this.initialize();
     return this.innerApiCalls.updateKey(request, options, callback);
   }
+  /**
+   * Deletes the specified key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the key to be deleted, in the format
+   *   "projects/{project_number}/keys/{key_id}".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.delete_key.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_DeleteKey_async
+   */
   deleteKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest,
     options?: CallOptions
@@ -860,24 +878,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the key to be deleted, in the format
-   *   "projects/{project_number}/keys/{key_id}".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteKey(request);
-   */
   deleteKey(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest,
     optionsOrCallback?:
@@ -925,6 +925,33 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     return this.innerApiCalls.deleteKey(request, options, callback);
   }
 
+  /**
+   * Returns the list of all keys that belong to a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project that contains the keys that will be
+   *   listed, in the format "projects/{project_number}".
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of keys to return. Default is 10. Max limit is
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous.
+   *   ListKeysRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listKeysAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listKeys(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
     options?: CallOptions
@@ -956,33 +983,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       protos.google.cloud.recaptchaenterprise.v1beta1.IKey
     >
   ): void;
-  /**
-   * Returns the list of all keys that belong to a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that will be
-   *   listed, in the format "projects/{project_number}".
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of keys to return. Default is 10. Max limit is
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous.
-   *   ListKeysRequest, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Key]{@link google.cloud.recaptchaenterprise.v1beta1.Key}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listKeysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listKeys(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
     optionsOrCallback?:
@@ -1099,11 +1099,8 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listKeysAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.list_keys.js</caption>
+   * region_tag:recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_ListKeys_async
    */
   listKeysAsync(
     request?: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
@@ -1117,7 +1114,6 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

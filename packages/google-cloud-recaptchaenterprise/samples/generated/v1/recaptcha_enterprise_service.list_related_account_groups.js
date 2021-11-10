@@ -47,7 +47,7 @@ function main(parent) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function listRelatedAccountGroups() {
+  async function callListRelatedAccountGroups() {
     // Construct request
     const request = {
       parent,
@@ -61,7 +61,7 @@ function main(parent) {
     }
   }
 
-  listRelatedAccountGroups();
+  callListRelatedAccountGroups();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_async]
 }
 

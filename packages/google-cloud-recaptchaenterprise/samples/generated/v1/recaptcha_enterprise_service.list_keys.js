@@ -42,7 +42,7 @@ function main(parent) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function listKeys() {
+  async function callListKeys() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent) {
     }
   }
 
-  listKeys();
+  callListKeys();
   // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async]
 }
 
