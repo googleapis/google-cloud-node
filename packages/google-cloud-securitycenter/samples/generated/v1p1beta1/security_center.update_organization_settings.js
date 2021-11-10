@@ -25,7 +25,7 @@ function main(organizationSettings) {
   // const organizationSettings = {}
   /**
    *  The FieldMask to use when updating the settings resource.
-   *   If empty all mutable fields will be updated.
+   *  If empty all mutable fields will be updated.
    */
   // const updateMask = {}
 

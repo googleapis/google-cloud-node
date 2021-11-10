@@ -1758,7 +1758,7 @@ export class SecurityCenterClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The FieldMask to use when updating the settings resource.
    *
-   *    If empty all mutable fields will be updated.
+   *   If empty all mutable fields will be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
