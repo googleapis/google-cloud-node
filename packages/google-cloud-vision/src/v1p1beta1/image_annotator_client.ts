@@ -286,6 +286,23 @@ export class ImageAnnotatorClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Run image detection and annotation for a batch of images.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number[]} request.requests
+   *   Required. Individual image annotation requests for this batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchAnnotateImagesResponse]{@link google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js</caption>
+   * region_tag:vision_v1p1beta1_generated_ImageAnnotator_BatchAnnotateImages_async
+   */
   batchAnnotateImages(
     request?: protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest,
     options?: CallOptions
@@ -320,23 +337,6 @@ export class ImageAnnotatorClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Run image detection and annotation for a batch of images.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.requests
-   *   Required. Individual image annotation requests for this batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchAnnotateImagesResponse]{@link google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchAnnotateImages(request);
-   */
   batchAnnotateImages(
     request?: protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesRequest,
     optionsOrCallback?:
@@ -374,6 +374,8 @@ export class ImageAnnotatorClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.batchAnnotateImages(request, options, callback);
   }

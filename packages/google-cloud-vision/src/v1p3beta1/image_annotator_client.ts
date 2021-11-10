@@ -343,6 +343,23 @@ export class ImageAnnotatorClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Run image detection and annotation for a batch of images.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number[]} request.requests
+   *   Individual image annotation requests for this batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchAnnotateImagesResponse]{@link google.cloud.vision.v1p3beta1.BatchAnnotateImagesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js</caption>
+   * region_tag:vision_v1p3beta1_generated_ImageAnnotator_BatchAnnotateImages_async
+   */
   batchAnnotateImages(
     request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
     options?: CallOptions
@@ -377,23 +394,6 @@ export class ImageAnnotatorClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Run image detection and annotation for a batch of images.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.requests
-   *   Individual image annotation requests for this batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchAnnotateImagesResponse]{@link google.cloud.vision.v1p3beta1.BatchAnnotateImagesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchAnnotateImages(request);
-   */
   batchAnnotateImages(
     request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
     optionsOrCallback?:
@@ -431,10 +431,36 @@ export class ImageAnnotatorClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.batchAnnotateImages(request, options, callback);
   }
 
+  /**
+   * Run asynchronous image detection and annotation for a list of generic
+   * files, such as PDF files, which may contain multiple pages and multiple
+   * images per page. Progress and results can be retrieved through the
+   * `google.longrunning.Operations` interface.
+   * `Operation.metadata` contains `OperationMetadata` (metadata).
+   * `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number[]} request.requests
+   *   Required. Individual async file annotation requests for this batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js</caption>
+   * region_tag:vision_v1p3beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async
+   */
   asyncBatchAnnotateFiles(
     request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
     options?: CallOptions
@@ -471,31 +497,6 @@ export class ImageAnnotatorClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Run asynchronous image detection and annotation for a list of generic
-   * files, such as PDF files, which may contain multiple pages and multiple
-   * images per page. Progress and results can be retrieved through the
-   * `google.longrunning.Operations` interface.
-   * `Operation.metadata` contains `OperationMetadata` (metadata).
-   * `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number[]} request.requests
-   *   Required. Individual async file annotation requests for this batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.asyncBatchAnnotateFiles(request);
-   * const [response] = await operation.promise();
-   */
   asyncBatchAnnotateFiles(
     request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
     optionsOrCallback?:
@@ -535,6 +536,8 @@ export class ImageAnnotatorClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.asyncBatchAnnotateFiles(
       request,
@@ -551,11 +554,8 @@ export class ImageAnnotatorClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkAsyncBatchAnnotateFilesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js</caption>
+   * region_tag:vision_v1p3beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async
    */
   async checkAsyncBatchAnnotateFilesProgress(
     name: string

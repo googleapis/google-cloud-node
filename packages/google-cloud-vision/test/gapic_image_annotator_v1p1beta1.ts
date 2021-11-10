@@ -142,7 +142,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse()
       );
@@ -166,7 +166,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse()
       );
@@ -205,7 +205,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.batchAnnotateImages = stubSimpleCall(
         undefined,
