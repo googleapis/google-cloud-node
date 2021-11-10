@@ -6,5 +6,5 @@
     "img.shields.io"
   ],
   "silent": true,
-  "concurrency": 10
+  "concurrency": 5
 }
