@@ -59,7 +59,7 @@
     "date-and-time": "^2.0.0",
     "duplexify": "^4.0.0",
     "extend": "^3.0.2",
-    "gcs-resumable-upload": "^3.5.1",
+    "gcs-resumable-upload": "^3.6.0",
     "get-stream": "^6.0.0",
     "hash-stream-validation": "^0.2.2",
     "mime": "^3.0.0",
