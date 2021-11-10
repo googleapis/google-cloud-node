@@ -20,7 +20,7 @@ function main(resource, query) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the resource context. See [SearchCatalogsRequest.resource][google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource]
+   *  Required. The name of the resource context. See SearchCatalogsRequest.resource google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest.resource
    *  for details.
    */
   // const resource = 'abc123'
@@ -50,7 +50,7 @@ function main(resource, query) {
   // Instantiates a client
   const privatecatalogClient = new PrivateCatalogClient();
 
-  async function searchVersions() {
+  async function callSearchVersions() {
     // Construct request
     const request = {
       resource,
@@ -64,7 +64,7 @@ function main(resource, query) {
     }
   }
 
-  searchVersions();
+  callSearchVersions();
   // [END cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchVersions_async]
 }
 

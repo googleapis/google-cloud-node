@@ -48,7 +48,7 @@ function main(resource) {
   // Instantiates a client
   const privatecatalogClient = new PrivateCatalogClient();
 
-  async function searchCatalogs() {
+  async function callSearchCatalogs() {
     // Construct request
     const request = {
       resource,
@@ -61,7 +61,7 @@ function main(resource) {
     }
   }
 
-  searchCatalogs();
+  callSearchCatalogs();
   // [END cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchCatalogs_async]
 }
 
