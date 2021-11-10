@@ -293,6 +293,32 @@ export class PhishingProtectionServiceV1Beta1Client {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Reports a URI suspected of containing phishing content to be reviewed. Once
+   * the report review is complete, its result can be found in the Cloud
+   * Security Command Center findings dashboard for Phishing Protection. If the
+   * result verifies the existence of malicious phishing content, the site will
+   * be added the to [Google's Social Engineering
+   * lists](https://support.google.com/webmasters/answer/6350487/) in order to
+   * protect users that could get exposed to this threat in the future.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project for which the report will be created,
+   *   in the format "projects/{project_number}".
+   * @param {string} request.uri
+   *   Required. The URI that is being reported for phishing content to be analyzed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ReportPhishingResponse]{@link google.cloud.phishingprotection.v1beta1.ReportPhishingResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/phishing_protection_service_v1_beta1.report_phishing.js</caption>
+   * region_tag:phishingprotection_v1beta1_generated_PhishingProtectionServiceV1Beta1_ReportPhishing_async
+   */
   reportPhishing(
     request?: protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
     options?: CallOptions
@@ -327,32 +353,6 @@ export class PhishingProtectionServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Reports a URI suspected of containing phishing content to be reviewed. Once
-   * the report review is complete, its result can be found in the Cloud
-   * Security Command Center findings dashboard for Phishing Protection. If the
-   * result verifies the existence of malicious phishing content, the site will
-   * be added the to [Google's Social Engineering
-   * lists](https://support.google.com/webmasters/answer/6350487/) in order to
-   * protect users that could get exposed to this threat in the future.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the project for which the report will be created,
-   *   in the format "projects/{project_number}".
-   * @param {string} request.uri
-   *   Required. The URI that is being reported for phishing content to be analyzed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReportPhishingResponse]{@link google.cloud.phishingprotection.v1beta1.ReportPhishingResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.reportPhishing(request);
-   */
   reportPhishing(
     request?: protos.google.cloud.phishingprotection.v1beta1.IReportPhishingRequest,
     optionsOrCallback?:
