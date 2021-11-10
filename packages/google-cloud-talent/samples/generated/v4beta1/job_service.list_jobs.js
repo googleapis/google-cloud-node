@@ -48,17 +48,17 @@ function main(parent, filter) {
   // const pageToken = 'abc123'
   /**
    *  The maximum number of jobs to be returned per page of results.
-   *  If [job_view][google.cloud.talent.v4beta1.ListJobsRequest.job_view] is set to [JobView.JOB_VIEW_ID_ONLY][google.cloud.talent.v4beta1.JobView.JOB_VIEW_ID_ONLY], the maximum allowed
+   *  If job_view google.cloud.talent.v4beta1.ListJobsRequest.job_view is set to JobView.JOB_VIEW_ID_ONLY google.cloud.talent.v4beta1.JobView.JOB_VIEW_ID_ONLY, the maximum allowed
    *  page size is 1000. Otherwise, the maximum allowed page size is 100.
    *  Default is 100 if empty or a number < 1 is specified.
    */
   // const pageSize = 1234
   /**
    *  The desired job attributes returned for jobs in the
-   *  search response. Defaults to [JobView.JOB_VIEW_FULL][google.cloud.talent.v4beta1.JobView.JOB_VIEW_FULL] if no value is
+   *  search response. Defaults to JobView.JOB_VIEW_FULL google.cloud.talent.v4beta1.JobView.JOB_VIEW_FULL  if no value is
    *  specified.
    */
-  // const jobView = ''
+  // const jobView = {}
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -66,7 +66,7 @@ function main(parent, filter) {
   // Instantiates a client
   const talentClient = new JobServiceClient();
 
-  async function listJobs() {
+  async function callListJobs() {
     // Construct request
     const request = {
       parent,
@@ -80,7 +80,7 @@ function main(parent, filter) {
     }
   }
 
-  listJobs();
+  callListJobs();
   // [END jobs_v4beta1_generated_JobService_ListJobs_async]
 }
 

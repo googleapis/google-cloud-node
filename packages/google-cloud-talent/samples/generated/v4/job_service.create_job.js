@@ -28,7 +28,7 @@ function main(parent, job) {
   /**
    *  Required. The Job to be created.
    */
-  // const job = ''
+  // const job = {}
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4;
@@ -36,7 +36,7 @@ function main(parent, job) {
   // Instantiates a client
   const talentClient = new JobServiceClient();
 
-  async function createJob() {
+  async function callCreateJob() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, job) {
     console.log(response);
   }
 
-  createJob();
+  callCreateJob();
   // [END jobs_v4_generated_JobService_CreateJob_async]
 }
 

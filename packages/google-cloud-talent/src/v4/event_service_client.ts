@@ -300,6 +300,35 @@ export class EventServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Report events issued when end user interacts with customer's application
+   * that uses Cloud Talent Solution. You may inspect the created events in
+   * [self service
+   * tools](https://console.cloud.google.com/talent-solution/overview).
+   * [Learn
+   * more](https://cloud.google.com/talent-solution/docs/management-tools)
+   * about self service tools.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the tenant under which the event is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/foo/tenants/bar".
+   * @param {google.cloud.talent.v4.ClientEvent} request.clientEvent
+   *   Required. Events issued when end user interacts with customer's application that
+   *   uses Cloud Talent Solution.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ClientEvent]{@link google.cloud.talent.v4.ClientEvent}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/event_service.create_client_event.js</caption>
+   * region_tag:jobs_v4_generated_EventService_CreateClientEvent_async
+   */
   createClientEvent(
     request?: protos.google.cloud.talent.v4.ICreateClientEventRequest,
     options?: CallOptions
@@ -331,35 +360,6 @@ export class EventServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Report events issued when end user interacts with customer's application
-   * that uses Cloud Talent Solution. You may inspect the created events in
-   * [self service
-   * tools](https://console.cloud.google.com/talent-solution/overview).
-   * [Learn
-   * more](https://cloud.google.com/talent-solution/docs/management-tools)
-   * about self service tools.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the tenant under which the event is created.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/foo/tenants/bar".
-   * @param {google.cloud.talent.v4.ClientEvent} request.clientEvent
-   *   Required. Events issued when end user interacts with customer's application that
-   *   uses Cloud Talent Solution.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ClientEvent]{@link google.cloud.talent.v4.ClientEvent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createClientEvent(request);
-   */
   createClientEvent(
     request?: protos.google.cloud.talent.v4.ICreateClientEventRequest,
     optionsOrCallback?:

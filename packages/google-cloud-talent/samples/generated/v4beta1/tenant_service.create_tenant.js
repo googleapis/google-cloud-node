@@ -28,7 +28,7 @@ function main(parent, tenant) {
   /**
    *  Required. The tenant to be created.
    */
-  // const tenant = ''
+  // const tenant = {}
 
   // Imports the Talent library
   const {TenantServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -36,7 +36,7 @@ function main(parent, tenant) {
   // Instantiates a client
   const talentClient = new TenantServiceClient();
 
-  async function createTenant() {
+  async function callCreateTenant() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, tenant) {
     console.log(response);
   }
 
-  createTenant();
+  callCreateTenant();
   // [END jobs_v4beta1_generated_TenantService_CreateTenant_async]
 }
 

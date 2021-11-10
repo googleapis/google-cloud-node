@@ -22,15 +22,15 @@ function main(tenant) {
   /**
    *  Required. The tenant resource to replace the current resource in the system.
    */
-  // const tenant = ''
+  // const tenant = {}
   /**
    *  Strongly recommended for the best service experience.
-   *  If [update_mask][google.cloud.talent.v4.UpdateTenantRequest.update_mask] is provided, only the specified fields in
-   *  [tenant][google.cloud.talent.v4.UpdateTenantRequest.tenant] are updated. Otherwise all the fields are updated.
+   *  If update_mask google.cloud.talent.v4.UpdateTenantRequest.update_mask  is provided, only the specified fields in
+   *  tenant google.cloud.talent.v4.UpdateTenantRequest.tenant  are updated. Otherwise all the fields are updated.
    *  A field mask to specify the tenant fields to be updated. Only
-   *  top level fields of [Tenant][google.cloud.talent.v4.Tenant] are supported.
+   *  top level fields of Tenant google.cloud.talent.v4.Tenant  are supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Talent library
   const {TenantServiceClient} = require('@google-cloud/talent').v4;
@@ -38,7 +38,7 @@ function main(tenant) {
   // Instantiates a client
   const talentClient = new TenantServiceClient();
 
-  async function updateTenant() {
+  async function callUpdateTenant() {
     // Construct request
     const request = {
       tenant,
@@ -49,7 +49,7 @@ function main(tenant) {
     console.log(response);
   }
 
-  updateTenant();
+  callUpdateTenant();
   // [END jobs_v4_generated_TenantService_UpdateTenant_async]
 }
 

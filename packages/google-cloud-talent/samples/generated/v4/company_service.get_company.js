@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const talentClient = new CompanyServiceClient();
 
-  async function getCompany() {
+  async function callGetCompany() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getCompany();
+  callGetCompany();
   // [END jobs_v4_generated_CompanyService_GetCompany_async]
 }
 

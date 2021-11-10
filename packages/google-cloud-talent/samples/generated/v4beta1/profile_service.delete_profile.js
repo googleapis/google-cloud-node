@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const talentClient = new ProfileServiceClient();
 
-  async function deleteProfile() {
+  async function callDeleteProfile() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteProfile();
+  callDeleteProfile();
   // [END jobs_v4beta1_generated_ProfileService_DeleteProfile_async]
 }
 

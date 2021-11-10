@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const talentClient = new TenantServiceClient();
 
-  async function getTenant() {
+  async function callGetTenant() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTenant();
+  callGetTenant();
   // [END jobs_v4beta1_generated_TenantService_GetTenant_async]
 }
 

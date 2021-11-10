@@ -37,7 +37,7 @@ function main(parent) {
   /**
    *  Set to true if the companies requested must have open jobs.
    *  Defaults to false.
-   *  If true, at most [page_size][google.cloud.talent.v4.ListCompaniesRequest.page_size] of companies are fetched, among which
+   *  If true, at most page_size google.cloud.talent.v4.ListCompaniesRequest.page_size  of companies are fetched, among which
    *  only those with open jobs are returned.
    */
   // const requireOpenJobs = true
@@ -48,7 +48,7 @@ function main(parent) {
   // Instantiates a client
   const talentClient = new CompanyServiceClient();
 
-  async function listCompanies() {
+  async function callListCompanies() {
     // Construct request
     const request = {
       parent,
@@ -61,7 +61,7 @@ function main(parent) {
     }
   }
 
-  listCompanies();
+  callListCompanies();
   // [END jobs_v4_generated_CompanyService_ListCompanies_async]
 }
 

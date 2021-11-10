@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const talentClient = new ApplicationServiceClient();
 
-  async function getApplication() {
+  async function callGetApplication() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getApplication();
+  callGetApplication();
   // [END jobs_v4beta1_generated_ApplicationService_GetApplication_async]
 }
 

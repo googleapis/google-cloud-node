@@ -343,6 +343,28 @@ export class ProfileServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates and returns a new profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the tenant this profile belongs to.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
+   * @param {google.cloud.talent.v4beta1.Profile} request.profile
+   *   Required. The profile to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4beta1/profile_service.create_profile.js</caption>
+   * region_tag:jobs_v4beta1_generated_ProfileService_CreateProfile_async
+   */
   createProfile(
     request?: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     options?: CallOptions
@@ -374,28 +396,6 @@ export class ProfileServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates and returns a new profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the tenant this profile belongs to.
-   *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-   *   "projects/foo/tenants/bar".
-   * @param {google.cloud.talent.v4beta1.Profile} request.profile
-   *   Required. The profile to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createProfile(request);
-   */
   createProfile(
     request?: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     optionsOrCallback?:
@@ -439,6 +439,27 @@ export class ProfileServiceClient {
     this.initialize();
     return this.innerApiCalls.createProfile(request, options, callback);
   }
+  /**
+   * Gets the specified profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the profile to get.
+   *
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+   *   example, "projects/foo/tenants/bar/profiles/baz".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4beta1/profile_service.get_profile.js</caption>
+   * region_tag:jobs_v4beta1_generated_ProfileService_GetProfile_async
+   */
   getProfile(
     request?: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     options?: CallOptions
@@ -466,27 +487,6 @@ export class ProfileServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the specified profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the profile to get.
-   *
-   *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
-   *   example, "projects/foo/tenants/bar/profiles/baz".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getProfile(request);
-   */
   getProfile(
     request?: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     optionsOrCallback?:
@@ -528,6 +528,27 @@ export class ProfileServiceClient {
     this.initialize();
     return this.innerApiCalls.getProfile(request, options, callback);
   }
+  /**
+   * Updates the specified profile and returns the updated result.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.talent.v4beta1.Profile} request.profile
+   *   Required. Profile to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A field mask to specify the profile fields to update.
+   *
+   *   A full update is performed if it is unset.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4beta1/profile_service.update_profile.js</caption>
+   * region_tag:jobs_v4beta1_generated_ProfileService_UpdateProfile_async
+   */
   updateProfile(
     request?: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     options?: CallOptions
@@ -559,27 +580,6 @@ export class ProfileServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified profile and returns the updated result.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.talent.v4beta1.Profile} request.profile
-   *   Required. Profile to be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   A field mask to specify the profile fields to update.
-   *
-   *   A full update is performed if it is unset.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Profile]{@link google.cloud.talent.v4beta1.Profile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateProfile(request);
-   */
   updateProfile(
     request?: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     optionsOrCallback?:
@@ -623,6 +623,29 @@ export class ProfileServiceClient {
     this.initialize();
     return this.innerApiCalls.updateProfile(request, options, callback);
   }
+  /**
+   * Deletes the specified profile.
+   * Prerequisite: The profile has no associated applications or assignments
+   * associated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the profile to be deleted.
+   *
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+   *   example, "projects/foo/tenants/bar/profiles/baz".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4beta1/profile_service.delete_profile.js</caption>
+   * region_tag:jobs_v4beta1_generated_ProfileService_DeleteProfile_async
+   */
   deleteProfile(
     request?: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     options?: CallOptions
@@ -654,29 +677,6 @@ export class ProfileServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified profile.
-   * Prerequisite: The profile has no associated applications or assignments
-   * associated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the profile to be deleted.
-   *
-   *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
-   *   example, "projects/foo/tenants/bar/profiles/baz".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteProfile(request);
-   */
   deleteProfile(
     request?: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     optionsOrCallback?:
@@ -720,37 +720,6 @@ export class ProfileServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteProfile(request, options, callback);
   }
-  searchProfiles(
-    request?: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      protos.google.cloud.talent.v4beta1.ISearchProfilesRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  searchProfiles(
-    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  searchProfiles(
-    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
-      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Searches for profiles within a tenant.
    *
@@ -940,9 +909,40 @@ export class ProfileServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.searchProfiles(request);
+   * @example <caption>include:samples/generated/v4beta1/profile_service.search_profiles.js</caption>
+   * region_tag:jobs_v4beta1_generated_ProfileService_SearchProfiles_async
    */
+  searchProfiles(
+    request?: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      protos.google.cloud.talent.v4beta1.ISearchProfilesRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  searchProfiles(
+    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchProfiles(
+    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4beta1.ISearchProfilesResponse,
+      | protos.google.cloud.talent.v4beta1.ISearchProfilesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   searchProfiles(
     request?: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
     optionsOrCallback?:
@@ -987,37 +987,6 @@ export class ProfileServiceClient {
     return this.innerApiCalls.searchProfiles(request, options, callback);
   }
 
-  listProfiles(
-    request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4beta1.IProfile[],
-      protos.google.cloud.talent.v4beta1.IListProfilesRequest | null,
-      protos.google.cloud.talent.v4beta1.IListProfilesResponse
-    ]
-  >;
-  listProfiles(
-    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
-      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.talent.v4beta1.IProfile
-    >
-  ): void;
-  listProfiles(
-    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
-      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.talent.v4beta1.IProfile
-    >
-  ): void;
   /**
    * Lists profiles by filter. The order is unspecified.
    *
@@ -1075,6 +1044,37 @@ export class ProfileServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listProfiles(
+    request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.talent.v4beta1.IProfile[],
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest | null,
+      protos.google.cloud.talent.v4beta1.IListProfilesResponse
+    ]
+  >;
+  listProfiles(
+    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile
+    >
+  ): void;
+  listProfiles(
+    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+      | protos.google.cloud.talent.v4beta1.IListProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.talent.v4beta1.IProfile
+    >
+  ): void;
   listProfiles(
     request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     optionsOrCallback?:
@@ -1251,11 +1251,8 @@ export class ProfileServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listProfilesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v4beta1/profile_service.list_profiles.js</caption>
+   * region_tag:jobs_v4beta1_generated_ProfileService_ListProfiles_async
    */
   listProfilesAsync(
     request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
@@ -1269,7 +1266,6 @@ export class ProfileServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

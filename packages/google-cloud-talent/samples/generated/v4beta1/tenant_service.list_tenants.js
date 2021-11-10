@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const talentClient = new TenantServiceClient();
 
-  async function listTenants() {
+  async function callListTenants() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  listTenants();
+  callListTenants();
   // [END jobs_v4beta1_generated_TenantService_ListTenants_async]
 }
 

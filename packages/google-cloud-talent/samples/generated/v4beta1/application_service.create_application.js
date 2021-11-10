@@ -29,7 +29,7 @@ function main(parent, application) {
   /**
    *  Required. The application to be created.
    */
-  // const application = ''
+  // const application = {}
 
   // Imports the Talent library
   const {ApplicationServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -37,7 +37,7 @@ function main(parent, application) {
   // Instantiates a client
   const talentClient = new ApplicationServiceClient();
 
-  async function createApplication() {
+  async function callCreateApplication() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, application) {
     console.log(response);
   }
 
-  createApplication();
+  callCreateApplication();
   // [END jobs_v4beta1_generated_ApplicationService_CreateApplication_async]
 }
 

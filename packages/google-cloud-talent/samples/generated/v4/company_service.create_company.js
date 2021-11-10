@@ -28,7 +28,7 @@ function main(parent, company) {
   /**
    *  Required. The company to be created.
    */
-  // const company = ''
+  // const company = {}
 
   // Imports the Talent library
   const {CompanyServiceClient} = require('@google-cloud/talent').v4;
@@ -36,7 +36,7 @@ function main(parent, company) {
   // Instantiates a client
   const talentClient = new CompanyServiceClient();
 
-  async function createCompany() {
+  async function callCreateCompany() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, company) {
     console.log(response);
   }
 
-  createCompany();
+  callCreateCompany();
   // [END jobs_v4_generated_CompanyService_CreateCompany_async]
 }
 

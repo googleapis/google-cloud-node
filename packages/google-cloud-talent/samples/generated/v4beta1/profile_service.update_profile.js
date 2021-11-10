@@ -22,12 +22,12 @@ function main(profile) {
   /**
    *  Required. Profile to be updated.
    */
-  // const profile = ''
+  // const profile = {}
   /**
    *  A field mask to specify the profile fields to update.
    *  A full update is performed if it is unset.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Talent library
   const {ProfileServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -35,7 +35,7 @@ function main(profile) {
   // Instantiates a client
   const talentClient = new ProfileServiceClient();
 
-  async function updateProfile() {
+  async function callUpdateProfile() {
     // Construct request
     const request = {
       profile,
@@ -46,7 +46,7 @@ function main(profile) {
     console.log(response);
   }
 
-  updateProfile();
+  callUpdateProfile();
   // [END jobs_v4beta1_generated_ProfileService_UpdateProfile_async]
 }
 

@@ -42,7 +42,7 @@ function main(parent) {
   // Instantiates a client
   const talentClient = new ApplicationServiceClient();
 
-  async function listApplications() {
+  async function callListApplications() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent) {
     }
   }
 
-  listApplications();
+  callListApplications();
   // [END jobs_v4beta1_generated_ApplicationService_ListApplications_async]
 }
 

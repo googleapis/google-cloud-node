@@ -28,7 +28,7 @@ function main(parent, profile) {
   /**
    *  Required. The profile to be created.
    */
-  // const profile = ''
+  // const profile = {}
 
   // Imports the Talent library
   const {ProfileServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -36,7 +36,7 @@ function main(parent, profile) {
   // Instantiates a client
   const talentClient = new ProfileServiceClient();
 
-  async function createProfile() {
+  async function callCreateProfile() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, profile) {
     console.log(response);
   }
 
-  createProfile();
+  callCreateProfile();
   // [END jobs_v4beta1_generated_ProfileService_CreateProfile_async]
 }
 

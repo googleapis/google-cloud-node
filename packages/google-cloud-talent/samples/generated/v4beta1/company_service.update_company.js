@@ -22,15 +22,15 @@ function main(company) {
   /**
    *  Required. The company resource to replace the current resource in the system.
    */
-  // const company = ''
+  // const company = {}
   /**
    *  Strongly recommended for the best service experience.
-   *  If [update_mask][google.cloud.talent.v4beta1.UpdateCompanyRequest.update_mask] is provided, only the specified fields in
-   *  [company][google.cloud.talent.v4beta1.UpdateCompanyRequest.company] are updated. Otherwise all the fields are updated.
+   *  If update_mask google.cloud.talent.v4beta1.UpdateCompanyRequest.update_mask  is provided, only the specified fields in
+   *  company google.cloud.talent.v4beta1.UpdateCompanyRequest.company  are updated. Otherwise all the fields are updated.
    *  A field mask to specify the company fields to be updated. Only
-   *  top level fields of [Company][google.cloud.talent.v4beta1.Company] are supported.
+   *  top level fields of Company google.cloud.talent.v4beta1.Company  are supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Talent library
   const {CompanyServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -38,7 +38,7 @@ function main(company) {
   // Instantiates a client
   const talentClient = new CompanyServiceClient();
 
-  async function updateCompany() {
+  async function callUpdateCompany() {
     // Construct request
     const request = {
       company,
@@ -49,7 +49,7 @@ function main(company) {
     console.log(response);
   }
 
-  updateCompany();
+  callUpdateCompany();
   // [END jobs_v4beta1_generated_CompanyService_UpdateCompany_async]
 }
 

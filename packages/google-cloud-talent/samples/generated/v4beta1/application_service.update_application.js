@@ -22,15 +22,15 @@ function main(application) {
   /**
    *  Required. The application resource to replace the current resource in the system.
    */
-  // const application = ''
+  // const application = {}
   /**
    *  Strongly recommended for the best service experience.
-   *  If [update_mask][google.cloud.talent.v4beta1.UpdateApplicationRequest.update_mask] is provided, only the specified fields in
-   *  [application][google.cloud.talent.v4beta1.UpdateApplicationRequest.application] are updated. Otherwise all the fields are updated.
+   *  If update_mask google.cloud.talent.v4beta1.UpdateApplicationRequest.update_mask  is provided, only the specified fields in
+   *  application google.cloud.talent.v4beta1.UpdateApplicationRequest.application  are updated. Otherwise all the fields are updated.
    *  A field mask to specify the application fields to be updated. Only
-   *  top level fields of [Application][google.cloud.talent.v4beta1.Application] are supported.
+   *  top level fields of Application google.cloud.talent.v4beta1.Application  are supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Talent library
   const {ApplicationServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -38,7 +38,7 @@ function main(application) {
   // Instantiates a client
   const talentClient = new ApplicationServiceClient();
 
-  async function updateApplication() {
+  async function callUpdateApplication() {
     // Construct request
     const request = {
       application,
@@ -49,7 +49,7 @@ function main(application) {
     console.log(response);
   }
 
-  updateApplication();
+  callUpdateApplication();
   // [END jobs_v4beta1_generated_ApplicationService_UpdateApplication_async]
 }
 

@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const talentClient = new TenantServiceClient();
 
-  async function deleteTenant() {
+  async function callDeleteTenant() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteTenant();
+  callDeleteTenant();
   // [END jobs_v4_generated_TenantService_DeleteTenant_async]
 }
 

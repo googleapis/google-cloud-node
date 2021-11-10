@@ -300,33 +300,6 @@ export class CompletionClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  completeQuery(
-    request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.talent.v4.ICompleteQueryResponse,
-      protos.google.cloud.talent.v4.ICompleteQueryRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  completeQuery(
-    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.talent.v4.ICompleteQueryResponse,
-      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeQuery(
-    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-    callback: Callback<
-      protos.google.cloud.talent.v4.ICompleteQueryResponse,
-      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Completes the specified prefix with keyword suggestions.
    * Intended for use by a job search auto-complete search box.
@@ -370,9 +343,36 @@ export class CompletionClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.completeQuery(request);
+   * @example <caption>include:samples/generated/v4/completion.complete_query.js</caption>
+   * region_tag:jobs_v4_generated_Completion_CompleteQuery_async
    */
+  completeQuery(
+    request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  completeQuery(
+    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  completeQuery(
+    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   completeQuery(
     request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
     optionsOrCallback?:

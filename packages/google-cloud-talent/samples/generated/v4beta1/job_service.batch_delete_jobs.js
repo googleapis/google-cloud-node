@@ -43,7 +43,7 @@ function main(parent, filter) {
   // Instantiates a client
   const talentClient = new JobServiceClient();
 
-  async function batchDeleteJobs() {
+  async function callBatchDeleteJobs() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent, filter) {
     console.log(response);
   }
 
-  batchDeleteJobs();
+  callBatchDeleteJobs();
   // [END jobs_v4beta1_generated_JobService_BatchDeleteJobs_async]
 }
 

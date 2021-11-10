@@ -41,7 +41,7 @@ function main(parent) {
   // const filter = 'abc123'
   /**
    *  The token that specifies the current offset (that is, starting result).
-   *  Please set the value to [ListProfilesResponse.next_page_token][google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token] to
+   *  Please set the value to ListProfilesResponse.next_page_token google.cloud.talent.v4beta1.ListProfilesResponse.next_page_token  to
    *  continue the list.
    */
   // const pageToken = 'abc123'
@@ -56,7 +56,7 @@ function main(parent) {
    *  Valid values are:
    *  * name
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Talent library
   const {ProfileServiceClient} = require('@google-cloud/talent').v4beta1;
@@ -64,7 +64,7 @@ function main(parent) {
   // Instantiates a client
   const talentClient = new ProfileServiceClient();
 
-  async function listProfiles() {
+  async function callListProfiles() {
     // Construct request
     const request = {
       parent,
@@ -77,7 +77,7 @@ function main(parent) {
     }
   }
 
-  listProfiles();
+  callListProfiles();
   // [END jobs_v4beta1_generated_ProfileService_ListProfiles_async]
 }
 

@@ -22,15 +22,15 @@ function main(job) {
   /**
    *  Required. The Job to be updated.
    */
-  // const job = ''
+  // const job = {}
   /**
    *  Strongly recommended for the best service experience.
-   *  If [update_mask][google.cloud.talent.v4.UpdateJobRequest.update_mask] is provided, only the specified fields in
-   *  [job][google.cloud.talent.v4.UpdateJobRequest.job] are updated. Otherwise all the fields are updated.
+   *  If update_mask google.cloud.talent.v4.UpdateJobRequest.update_mask  is provided, only the specified fields in
+   *  job google.cloud.talent.v4.UpdateJobRequest.job  are updated. Otherwise all the fields are updated.
    *  A field mask to restrict the fields that are updated. Only
-   *  top level fields of [Job][google.cloud.talent.v4.Job] are supported.
+   *  top level fields of Job google.cloud.talent.v4.Job  are supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4;
@@ -38,7 +38,7 @@ function main(job) {
   // Instantiates a client
   const talentClient = new JobServiceClient();
 
-  async function updateJob() {
+  async function callUpdateJob() {
     // Construct request
     const request = {
       job,
@@ -49,7 +49,7 @@ function main(job) {
     console.log(response);
   }
 
-  updateJob();
+  callUpdateJob();
   // [END jobs_v4_generated_JobService_UpdateJob_async]
 }
 
