@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const resourcemanagerClient = new TagBindingsClient();
 
-  async function deleteTagBinding() {
+  async function callDeleteTagBinding() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteTagBinding();
+  callDeleteTagBinding();
   // [END cloudresourcemanager_v3_generated_TagBindings_DeleteTagBinding_async]
 }
 

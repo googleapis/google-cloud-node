@@ -680,7 +680,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -705,7 +705,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -751,7 +751,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createProject = stubLongRunningCall(
         undefined,
@@ -774,7 +774,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateProjectRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createProject = stubLongRunningCall(
         undefined,
@@ -1618,7 +1618,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Project()
@@ -1649,7 +1649,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Project()
@@ -1696,7 +1696,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListProjectsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listProjects = stubSimpleCall(
         undefined,
@@ -1869,7 +1869,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Project()
@@ -1900,7 +1900,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Project()
@@ -1947,7 +1947,7 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchProjectsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchProjects = stubSimpleCall(
         undefined,

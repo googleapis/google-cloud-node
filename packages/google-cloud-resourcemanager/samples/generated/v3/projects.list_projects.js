@@ -26,8 +26,8 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. A pagination token returned from a previous call to [ListProjects]
-   *  [google.cloud.resourcemanager.v3.Projects.ListProjects]
+   *  Optional. A pagination token returned from a previous call to ListProjects
+   *  google.cloud.resourcemanager.v3.Projects.ListProjects
    *  that indicates from where listing should continue.
    */
   // const pageToken = 'abc123'
@@ -49,7 +49,7 @@ function main(parent) {
   // Instantiates a client
   const resourcemanagerClient = new ProjectsClient();
 
-  async function listProjects() {
+  async function callListProjects() {
     // Construct request
     const request = {
       parent,
@@ -62,7 +62,7 @@ function main(parent) {
     }
   }
 
-  listProjects();
+  callListProjects();
   // [END cloudresourcemanager_v3_generated_Projects_ListProjects_async]
 }
 

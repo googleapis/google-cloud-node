@@ -680,7 +680,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -705,7 +705,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -751,7 +751,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagValue = stubLongRunningCall(
         undefined,
@@ -774,7 +774,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagValue = stubLongRunningCall(
         undefined,
@@ -1234,7 +1234,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.TagValue()
@@ -1265,7 +1265,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.TagValue()
@@ -1312,7 +1312,7 @@ describe('v3.TagValuesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listTagValues = stubSimpleCall(
         undefined,

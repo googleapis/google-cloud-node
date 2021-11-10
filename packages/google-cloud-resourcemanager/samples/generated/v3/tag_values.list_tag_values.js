@@ -42,7 +42,7 @@ function main(parent) {
   // Instantiates a client
   const resourcemanagerClient = new TagValuesClient();
 
-  async function listTagValues() {
+  async function callListTagValues() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent) {
     }
   }
 
-  listTagValues();
+  callListTagValues();
   // [END cloudresourcemanager_v3_generated_TagValues_ListTagValues_async]
 }
 

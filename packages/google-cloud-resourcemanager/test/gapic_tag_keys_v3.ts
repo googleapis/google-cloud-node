@@ -677,7 +677,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -701,7 +701,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -747,7 +747,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagKey = stubLongRunningCall(
         undefined,
@@ -770,7 +770,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagKeyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagKey = stubLongRunningCall(
         undefined,
@@ -1219,7 +1219,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.TagKey()
@@ -1250,7 +1250,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.TagKey()
@@ -1297,7 +1297,7 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagKeysRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listTagKeys = stubSimpleCall(
         undefined,

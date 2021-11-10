@@ -388,6 +388,25 @@ export class TagValuesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves TagValue. If the TagValue or namespaced name does not exist, or
+   * if the user does not have permission to view it, this method will return
+   * `PERMISSION_DENIED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name for TagValue to be fetched in the format `tagValues/456`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TagValue]{@link google.cloud.resourcemanager.v3.TagValue}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.get_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_GetTagValue_async
+   */
   getTagValue(
     request?: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
     options?: CallOptions
@@ -419,25 +438,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves TagValue. If the TagValue or namespaced name does not exist, or
-   * if the user does not have permission to view it, this method will return
-   * `PERMISSION_DENIED`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for TagValue to be fetched in the format `tagValues/456`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TagValue]{@link google.cloud.resourcemanager.v3.TagValue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTagValue(request);
-   */
   getTagValue(
     request?: protos.google.cloud.resourcemanager.v3.IGetTagValueRequest,
     optionsOrCallback?:
@@ -481,6 +481,32 @@ export class TagValuesClient {
     this.initialize();
     return this.innerApiCalls.getTagValue(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a TagValue. The returned policy may be
+   * empty if no such policy or resource exists. The `resource` field should
+   * be the TagValue's resource name. For example: `tagValues/1234`.
+   * The caller must have the
+   * `cloudresourcemanager.googleapis.com/tagValues.getIamPolicy` permission on
+   * the identified TagValue to get the access control policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.get_iam_policy.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -508,32 +534,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a TagValue. The returned policy may be
-   * empty if no such policy or resource exists. The `resource` field should
-   * be the TagValue's resource name. For example: `tagValues/1234`.
-   * The caller must have the
-   * `cloudresourcemanager.googleapis.com/tagValues.getIamPolicy` permission on
-   * the identified TagValue to get the access control policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -573,6 +573,33 @@ export class TagValuesClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Sets the access control policy on a TagValue, replacing any existing
+   * policy. The `resource` field should be the TagValue's resource name.
+   * For example: `tagValues/1234`.
+   * The caller must have `resourcemanager.tagValues.setIamPolicy` permission
+   * on the identified tagValue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.set_iam_policy.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -600,33 +627,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy on a TagValue, replacing any existing
-   * policy. The `resource` field should be the TagValue's resource name.
-   * For example: `tagValues/1234`.
-   * The caller must have `resourcemanager.tagValues.setIamPolicy` permission
-   * on the identified tagValue.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -666,6 +666,33 @@ export class TagValuesClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on the specified TagValue.
+   * The `resource` field should be the TagValue's resource name. For example:
+   * `tagValues/1234`.
+   *
+   * There are no permissions required for making this API call.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.test_iam_permissions.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -693,33 +720,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on the specified TagValue.
-   * The `resource` field should be the TagValue's resource name. For example:
-   * `tagValues/1234`.
-   *
-   * There are no permissions required for making this API call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -760,6 +760,32 @@ export class TagValuesClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
+  /**
+   * Creates a TagValue as a child of the specified TagKey. If a another
+   * request with the same parameters is sent while the original request is in
+   * process the second request will receive an error. A maximum of 300
+   * TagValues can exist under a TagKey at any given time.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
+   *   Required. The TagValue to be created. Only fields `short_name`, `description`,
+   *   and `parent` are considered during the creation request.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Set as true to perform the validations necessary for creating the resource,
+   *   but not actually perform the action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.create_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async
+   */
   createTagValue(
     request?: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
     options?: CallOptions
@@ -796,33 +822,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a TagValue as a child of the specified TagKey. If a another
-   * request with the same parameters is sent while the original request is in
-   * process the second request will receive an error. A maximum of 300
-   * TagValues can exist under a TagKey at any given time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
-   *   Required. The TagValue to be created. Only fields `short_name`, `description`,
-   *   and `parent` are considered during the creation request.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Set as true to perform the validations necessary for creating the resource,
-   *   but not actually perform the action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createTagValue(request);
-   * const [response] = await operation.promise();
-   */
   createTagValue(
     request?: protos.google.cloud.resourcemanager.v3.ICreateTagValueRequest,
     optionsOrCallback?:
@@ -862,6 +861,8 @@ export class TagValuesClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.createTagValue(request, options, callback);
   }
@@ -874,11 +875,8 @@ export class TagValuesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateTagValueProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/tag_values.create_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async
    */
   async checkCreateTagValueProgress(
     name: string
@@ -902,6 +900,33 @@ export class TagValuesClient {
       protos.google.cloud.resourcemanager.v3.CreateTagValueMetadata
     >;
   }
+  /**
+   * Updates the attributes of the TagValue resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
+   *   Required. The new definition of the TagValue. Only fields `description` and `etag`
+   *   fields can be updated by this request. If the `etag` field is nonempty, it
+   *   must match the `etag` field of the existing ControlGroup. Otherwise,
+   *   `FAILED_PRECONDITION` will be returned.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Fields to be updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. True to perform validations necessary for updating the resource, but not
+   *   actually perform the action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.update_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_async
+   */
   updateTagValue(
     request?: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
     options?: CallOptions
@@ -938,34 +963,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the attributes of the TagValue resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.TagValue} request.tagValue
-   *   Required. The new definition of the TagValue. Only fields `description` and `etag`
-   *   fields can be updated by this request. If the `etag` field is nonempty, it
-   *   must match the `etag` field of the existing ControlGroup. Otherwise,
-   *   `FAILED_PRECONDITION` will be returned.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Fields to be updated.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. True to perform validations necessary for updating the resource, but not
-   *   actually perform the action.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateTagValue(request);
-   * const [response] = await operation.promise();
-   */
   updateTagValue(
     request?: protos.google.cloud.resourcemanager.v3.IUpdateTagValueRequest,
     optionsOrCallback?:
@@ -1023,11 +1020,8 @@ export class TagValuesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateTagValueProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/tag_values.update_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_UpdateTagValue_async
    */
   async checkUpdateTagValueProgress(
     name: string
@@ -1051,6 +1045,32 @@ export class TagValuesClient {
       protos.google.cloud.resourcemanager.v3.UpdateTagValueMetadata
     >;
   }
+  /**
+   * Deletes a TagValue. The TagValue cannot have any bindings when it is
+   * deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name for TagValue to be deleted in the format tagValues/456.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Set as true to perform the validations necessary for deletion, but not
+   *   actually perform the action.
+   * @param {string} [request.etag]
+   *   Optional. The etag known to the client for the expected state of the TagValue. This
+   *   is to be used for optimistic concurrency.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/tag_values.delete_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async
+   */
   deleteTagValue(
     request?: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
     options?: CallOptions
@@ -1087,33 +1107,6 @@ export class TagValuesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a TagValue. The TagValue cannot have any bindings when it is
-   * deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for TagValue to be deleted in the format tagValues/456.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Set as true to perform the validations necessary for deletion, but not
-   *   actually perform the action.
-   * @param {string} [request.etag]
-   *   Optional. The etag known to the client for the expected state of the TagValue. This
-   *   is to be used for optimistic concurrency.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteTagValue(request);
-   * const [response] = await operation.promise();
-   */
   deleteTagValue(
     request?: protos.google.cloud.resourcemanager.v3.IDeleteTagValueRequest,
     optionsOrCallback?:
@@ -1171,11 +1164,8 @@ export class TagValuesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteTagValueProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/tag_values.delete_tag_value.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_DeleteTagValue_async
    */
   async checkDeleteTagValueProgress(
     name: string
@@ -1199,6 +1189,34 @@ export class TagValuesClient {
       protos.google.cloud.resourcemanager.v3.DeleteTagValueMetadata
     >;
   }
+  /**
+   * Lists all TagValues for a specific TagKey.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name for TagKey, parent of the TagValues to be listed,
+   *   in the format `tagKeys/123`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of TagValues to return in the response. The server
+   *   allows a maximum of 300 TagValues to return. If unspecified, the server
+   *   will use 100 as the default.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous call to `ListTagValues`
+   *   that indicates where this listing should continue from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [TagValue]{@link google.cloud.resourcemanager.v3.TagValue}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTagValuesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listTagValues(
     request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
     options?: CallOptions
@@ -1230,34 +1248,6 @@ export class TagValuesClient {
       protos.google.cloud.resourcemanager.v3.ITagValue
     >
   ): void;
-  /**
-   * Lists all TagValues for a specific TagKey.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name for TagKey, parent of the TagValues to be listed,
-   *   in the format `tagKeys/123`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of TagValues to return in the response. The server
-   *   allows a maximum of 300 TagValues to return. If unspecified, the server
-   *   will use 100 as the default.
-   * @param {string} [request.pageToken]
-   *   Optional. A pagination token returned from a previous call to `ListTagValues`
-   *   that indicates where this listing should continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TagValue]{@link google.cloud.resourcemanager.v3.TagValue}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTagValuesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listTagValues(
     request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
     optionsOrCallback?:
@@ -1292,6 +1282,8 @@ export class TagValuesClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listTagValues(request, options, callback);
   }
@@ -1328,6 +1320,8 @@ export class TagValuesClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagValues'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1364,11 +1358,8 @@ export class TagValuesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTagValuesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/tag_values.list_tag_values.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_TagValues_ListTagValues_async
    */
   listTagValuesAsync(
     request?: protos.google.cloud.resourcemanager.v3.IListTagValuesRequest,
@@ -1376,7 +1367,8 @@ export class TagValuesClient {
   ): AsyncIterable<protos.google.cloud.resourcemanager.v3.ITagValue> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagValues'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

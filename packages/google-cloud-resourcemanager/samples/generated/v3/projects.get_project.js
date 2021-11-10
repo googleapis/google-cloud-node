@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const resourcemanagerClient = new ProjectsClient();
 
-  async function getProject() {
+  async function callGetProject() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getProject();
+  callGetProject();
   // [END cloudresourcemanager_v3_generated_Projects_GetProject_async]
 }
 

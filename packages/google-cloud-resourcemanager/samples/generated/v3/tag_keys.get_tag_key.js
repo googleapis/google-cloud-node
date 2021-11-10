@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const resourcemanagerClient = new TagKeysClient();
 
-  async function getTagKey() {
+  async function callGetTagKey() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTagKey();
+  callGetTagKey();
   // [END cloudresourcemanager_v3_generated_TagKeys_GetTagKey_async]
 }
 

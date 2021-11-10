@@ -420,6 +420,28 @@ export class FoldersClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves a folder identified by the supplied resource name.
+   * Valid folder resource names have the format `folders/{folder_id}`
+   * (for example, `folders/1234`).
+   * The caller must have `resourcemanager.folders.get` permission on the
+   * identified folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the folder to retrieve.
+   *   Must be of the form `folders/{folder_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Folder]{@link google.cloud.resourcemanager.v3.Folder}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.get_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_GetFolder_async
+   */
   getFolder(
     request?: protos.google.cloud.resourcemanager.v3.IGetFolderRequest,
     options?: CallOptions
@@ -451,28 +473,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves a folder identified by the supplied resource name.
-   * Valid folder resource names have the format `folders/{folder_id}`
-   * (for example, `folders/1234`).
-   * The caller must have `resourcemanager.folders.get` permission on the
-   * identified folder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the folder to retrieve.
-   *   Must be of the form `folders/{folder_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Folder]{@link google.cloud.resourcemanager.v3.Folder}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getFolder(request);
-   */
   getFolder(
     request?: protos.google.cloud.resourcemanager.v3.IGetFolderRequest,
     optionsOrCallback?:
@@ -516,6 +516,31 @@ export class FoldersClient {
     this.initialize();
     return this.innerApiCalls.getFolder(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a folder. The returned policy may be
+   * empty if no such policy or resource exists. The `resource` field should
+   * be the folder's resource name, for example: "folders/1234".
+   * The caller must have `resourcemanager.folders.getIamPolicy` permission
+   * on the identified folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.get_iam_policy.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -543,31 +568,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a folder. The returned policy may be
-   * empty if no such policy or resource exists. The `resource` field should
-   * be the folder's resource name, for example: "folders/1234".
-   * The caller must have `resourcemanager.folders.getIamPolicy` permission
-   * on the identified folder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -607,6 +607,33 @@ export class FoldersClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Sets the access control policy on a folder, replacing any existing policy.
+   * The `resource` field should be the folder's resource name, for example:
+   * "folders/1234".
+   * The caller must have `resourcemanager.folders.setIamPolicy` permission
+   * on the identified folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.set_iam_policy.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -634,33 +661,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy on a folder, replacing any existing policy.
-   * The `resource` field should be the folder's resource name, for example:
-   * "folders/1234".
-   * The caller must have `resourcemanager.folders.setIamPolicy` permission
-   * on the identified folder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -700,6 +700,33 @@ export class FoldersClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on the specified folder.
+   * The `resource` field should be the folder's resource name,
+   * for example: "folders/1234".
+   *
+   * There are no permissions required for making this API call.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.test_iam_permissions.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -727,33 +754,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on the specified folder.
-   * The `resource` field should be the folder's resource name,
-   * for example: "folders/1234".
-   *
-   * There are no permissions required for making this API call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -794,42 +794,6 @@ export class FoldersClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
-  createFolder(
-    request?: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.IFolder,
-        protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createFolder(
-    request: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.IFolder,
-        protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createFolder(
-    request: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.IFolder,
-        protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a folder in the resource hierarchy.
    * Returns an `Operation` which can be used to track the progress of the
@@ -873,10 +837,45 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createFolder(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v3/folders.create_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_CreateFolder_async
    */
+  createFolder(
+    request?: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.IFolder,
+        protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createFolder(
+    request: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.IFolder,
+        protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFolder(
+    request: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.IFolder,
+        protos.google.cloud.resourcemanager.v3.ICreateFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createFolder(
     request?: protos.google.cloud.resourcemanager.v3.ICreateFolderRequest,
     optionsOrCallback?:
@@ -916,6 +915,8 @@ export class FoldersClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.createFolder(request, options, callback);
   }
@@ -928,11 +929,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateFolderProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/folders.create_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_CreateFolder_async
    */
   async checkCreateFolderProgress(
     name: string
@@ -956,6 +954,43 @@ export class FoldersClient {
       protos.google.cloud.resourcemanager.v3.CreateFolderMetadata
     >;
   }
+  /**
+   * Updates a folder, changing its `display_name`.
+   * Changes to the folder `display_name` will be rejected if they violate
+   * either the `display_name` formatting rules or the naming constraints
+   * described in the {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
+   *
+   * The folder's `display_name` must start and end with a letter or digit,
+   * may contain letters, digits, spaces, hyphens and underscores and can be
+   * between 3 and 30 characters. This is captured by the regular expression:
+   * `{@link \p{L}\p{N}_- |\p{L}\p{N}}{1,28}[\p{L}\p{N}]`.
+   * The caller must have `resourcemanager.folders.update` permission on the
+   * identified folder.
+   *
+   * If the update fails due to the unique name constraint then a
+   * `PreconditionFailure` explaining this violation will be returned
+   * in the Status.details field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.resourcemanager.v3.Folder} request.folder
+   *   Required. The new definition of the Folder. It must include the `name` field, which
+   *   cannot be changed.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Fields to be updated.
+   *   Only the `display_name` can be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.update_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_UpdateFolder_async
+   */
   updateFolder(
     request?: protos.google.cloud.resourcemanager.v3.IUpdateFolderRequest,
     options?: CallOptions
@@ -992,44 +1027,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a folder, changing its `display_name`.
-   * Changes to the folder `display_name` will be rejected if they violate
-   * either the `display_name` formatting rules or the naming constraints
-   * described in the {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
-   *
-   * The folder's `display_name` must start and end with a letter or digit,
-   * may contain letters, digits, spaces, hyphens and underscores and can be
-   * between 3 and 30 characters. This is captured by the regular expression:
-   * `{@link \p{L}\p{N}_- |\p{L}\p{N}}{1,28}[\p{L}\p{N}]`.
-   * The caller must have `resourcemanager.folders.update` permission on the
-   * identified folder.
-   *
-   * If the update fails due to the unique name constraint then a
-   * `PreconditionFailure` explaining this violation will be returned
-   * in the Status.details field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcemanager.v3.Folder} request.folder
-   *   Required. The new definition of the Folder. It must include the `name` field, which
-   *   cannot be changed.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Fields to be updated.
-   *   Only the `display_name` can be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateFolder(request);
-   * const [response] = await operation.promise();
-   */
   updateFolder(
     request?: protos.google.cloud.resourcemanager.v3.IUpdateFolderRequest,
     optionsOrCallback?:
@@ -1087,11 +1084,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateFolderProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/folders.update_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_UpdateFolder_async
    */
   async checkUpdateFolderProgress(
     name: string
@@ -1115,42 +1109,6 @@ export class FoldersClient {
       protos.google.cloud.resourcemanager.v3.UpdateFolderMetadata
     >;
   }
-  moveFolder(
-    request?: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.IFolder,
-        protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  moveFolder(
-    request: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.IFolder,
-        protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  moveFolder(
-    request: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.resourcemanager.v3.IFolder,
-        protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Moves a folder under a new resource parent.
    * Returns an `Operation` which can be used to track the progress of the
@@ -1188,10 +1146,45 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.moveFolder(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v3/folders.move_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_MoveFolder_async
    */
+  moveFolder(
+    request?: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.IFolder,
+        protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  moveFolder(
+    request: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.IFolder,
+        protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  moveFolder(
+    request: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.resourcemanager.v3.IFolder,
+        protos.google.cloud.resourcemanager.v3.IMoveFolderMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   moveFolder(
     request?: protos.google.cloud.resourcemanager.v3.IMoveFolderRequest,
     optionsOrCallback?:
@@ -1249,11 +1242,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkMoveFolderProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/folders.move_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_MoveFolder_async
    */
   async checkMoveFolderProgress(
     name: string
@@ -1277,6 +1267,34 @@ export class FoldersClient {
       protos.google.cloud.resourcemanager.v3.MoveFolderMetadata
     >;
   }
+  /**
+   * Requests deletion of a folder. The folder is moved into the
+   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED} state
+   * immediately, and is deleted approximately 30 days later. This method may
+   * only be called on an empty folder, where a folder is empty if it doesn't
+   * contain any folders or projects in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state.
+   * If called on a folder in {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
+   * state the operation will result in a no-op success.
+   * The caller must have `resourcemanager.folders.delete` permission on the
+   * identified folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the folder to be deleted.
+   *   Must be of the form `folders/{folder_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.delete_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_DeleteFolder_async
+   */
   deleteFolder(
     request?: protos.google.cloud.resourcemanager.v3.IDeleteFolderRequest,
     options?: CallOptions
@@ -1313,35 +1331,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Requests deletion of a folder. The folder is moved into the
-   * {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED} state
-   * immediately, and is deleted approximately 30 days later. This method may
-   * only be called on an empty folder, where a folder is empty if it doesn't
-   * contain any folders or projects in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state.
-   * If called on a folder in {@link google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED|DELETE_REQUESTED}
-   * state the operation will result in a no-op success.
-   * The caller must have `resourcemanager.folders.delete` permission on the
-   * identified folder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the folder to be deleted.
-   *   Must be of the form `folders/{folder_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteFolder(request);
-   * const [response] = await operation.promise();
-   */
   deleteFolder(
     request?: protos.google.cloud.resourcemanager.v3.IDeleteFolderRequest,
     optionsOrCallback?:
@@ -1399,11 +1388,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteFolderProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/folders.delete_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_DeleteFolder_async
    */
   async checkDeleteFolderProgress(
     name: string
@@ -1427,6 +1413,34 @@ export class FoldersClient {
       protos.google.cloud.resourcemanager.v3.DeleteFolderMetadata
     >;
   }
+  /**
+   * Cancels the deletion request for a folder. This method may be called on a
+   * folder in any state. If the folder is in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE}
+   * state the result will be a no-op success. In order to succeed, the folder's
+   * parent must be in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. In addition,
+   * reintroducing the folder into the tree must not violate folder naming,
+   * height, and fanout constraints described in the
+   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
+   * The caller must have `resourcemanager.folders.undelete` permission on the
+   * identified folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the folder to undelete.
+   *   Must be of the form `folders/{folder_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/folders.undelete_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_UndeleteFolder_async
+   */
   undeleteFolder(
     request?: protos.google.cloud.resourcemanager.v3.IUndeleteFolderRequest,
     options?: CallOptions
@@ -1463,35 +1477,6 @@ export class FoldersClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Cancels the deletion request for a folder. This method may be called on a
-   * folder in any state. If the folder is in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE}
-   * state the result will be a no-op success. In order to succeed, the folder's
-   * parent must be in the {@link google.cloud.resourcemanager.v3.Folder.State.ACTIVE|ACTIVE} state. In addition,
-   * reintroducing the folder into the tree must not violate folder naming,
-   * height, and fanout constraints described in the
-   * {@link google.cloud.resourcemanager.v3.Folders.CreateFolder|CreateFolder} documentation.
-   * The caller must have `resourcemanager.folders.undelete` permission on the
-   * identified folder.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the folder to undelete.
-   *   Must be of the form `folders/{folder_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.undeleteFolder(request);
-   * const [response] = await operation.promise();
-   */
   undeleteFolder(
     request?: protos.google.cloud.resourcemanager.v3.IUndeleteFolderRequest,
     optionsOrCallback?:
@@ -1549,11 +1534,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUndeleteFolderProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v3/folders.undelete_folder.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_UndeleteFolder_async
    */
   async checkUndeleteFolderProgress(
     name: string
@@ -1577,37 +1559,6 @@ export class FoldersClient {
       protos.google.cloud.resourcemanager.v3.UndeleteFolderMetadata
     >;
   }
-  listFolders(
-    request?: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.IFolder[],
-      protos.google.cloud.resourcemanager.v3.IListFoldersRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListFoldersResponse
-    ]
-  >;
-  listFolders(
-    request: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
-      | protos.google.cloud.resourcemanager.v3.IListFoldersResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.IFolder
-    >
-  ): void;
-  listFolders(
-    request: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
-      | protos.google.cloud.resourcemanager.v3.IListFoldersResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.IFolder
-    >
-  ): void;
   /**
    * Lists the folders that are direct descendants of supplied parent resource.
    * `list()` provides a strongly consistent view of the folders underneath
@@ -1650,6 +1601,37 @@ export class FoldersClient {
    */
   listFolders(
     request?: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.IFolder[],
+      protos.google.cloud.resourcemanager.v3.IListFoldersRequest | null,
+      protos.google.cloud.resourcemanager.v3.IListFoldersResponse
+    ]
+  >;
+  listFolders(
+    request: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
+      | protos.google.cloud.resourcemanager.v3.IListFoldersResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IFolder
+    >
+  ): void;
+  listFolders(
+    request: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
+      | protos.google.cloud.resourcemanager.v3.IListFoldersResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IFolder
+    >
+  ): void;
+  listFolders(
+    request?: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1682,6 +1664,8 @@ export class FoldersClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listFolders(request, options, callback);
   }
@@ -1724,6 +1708,8 @@ export class FoldersClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1766,11 +1752,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listFoldersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/folders.list_folders.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_ListFolders_async
    */
   listFoldersAsync(
     request?: protos.google.cloud.resourcemanager.v3.IListFoldersRequest,
@@ -1778,7 +1761,8 @@ export class FoldersClient {
   ): AsyncIterable<protos.google.cloud.resourcemanager.v3.IFolder> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1788,37 +1772,6 @@ export class FoldersClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.resourcemanager.v3.IFolder>;
   }
-  searchFolders(
-    request?: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.IFolder[],
-      protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
-    ]
-  >;
-  searchFolders(
-    request: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
-      | protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.IFolder
-    >
-  ): void;
-  searchFolders(
-    request: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
-      | protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.IFolder
-    >
-  ): void;
   /**
    * Search for folders that match specific filter criteria.
    * `search()` provides an eventually consistent view of the folders a user has
@@ -1882,6 +1835,37 @@ export class FoldersClient {
    */
   searchFolders(
     request?: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.IFolder[],
+      protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest | null,
+      protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
+    ]
+  >;
+  searchFolders(
+    request: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
+      | protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IFolder
+    >
+  ): void;
+  searchFolders(
+    request: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
+      | protos.google.cloud.resourcemanager.v3.ISearchFoldersResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IFolder
+    >
+  ): void;
+  searchFolders(
+    request?: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1914,6 +1898,8 @@ export class FoldersClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.searchFolders(request, options, callback);
   }
@@ -1978,6 +1964,8 @@ export class FoldersClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchFolders'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2042,11 +2030,8 @@ export class FoldersClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.searchFoldersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/folders.search_folders.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Folders_SearchFolders_async
    */
   searchFoldersAsync(
     request?: protos.google.cloud.resourcemanager.v3.ISearchFoldersRequest,
@@ -2054,7 +2039,8 @@ export class FoldersClient {
   ): AsyncIterable<protos.google.cloud.resourcemanager.v3.IFolder> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchFolders'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -28,7 +28,7 @@ function main(resource) {
    *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
    *  `GetIamPolicy`. This field is only used by Cloud IAM.
    */
-  // const options = ''
+  // const options = {}
 
   // Imports the Resourcemanager library
   const {FoldersClient} = require('@google-cloud/resource-manager').v3;
@@ -36,7 +36,7 @@ function main(resource) {
   // Instantiates a client
   const resourcemanagerClient = new FoldersClient();
 
-  async function getIamPolicy() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -47,7 +47,7 @@ function main(resource) {
     console.log(response);
   }
 
-  getIamPolicy();
+  callGetIamPolicy();
   // [END cloudresourcemanager_v3_generated_Folders_GetIamPolicy_async]
 }
 

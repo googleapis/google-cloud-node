@@ -23,12 +23,12 @@ function main(folder, updateMask) {
    *  Required. The new definition of the Folder. It must include the `name` field, which
    *  cannot be changed.
    */
-  // const folder = ''
+  // const folder = {}
   /**
    *  Required. Fields to be updated.
    *  Only the `display_name` can be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Resourcemanager library
   const {FoldersClient} = require('@google-cloud/resource-manager').v3;
@@ -36,7 +36,7 @@ function main(folder, updateMask) {
   // Instantiates a client
   const resourcemanagerClient = new FoldersClient();
 
-  async function updateFolder() {
+  async function callUpdateFolder() {
     // Construct request
     const request = {
       folder,
@@ -49,7 +49,7 @@ function main(folder, updateMask) {
     console.log(response);
   }
 
-  updateFolder();
+  callUpdateFolder();
   // [END cloudresourcemanager_v3_generated_Folders_UpdateFolder_async]
 }
 

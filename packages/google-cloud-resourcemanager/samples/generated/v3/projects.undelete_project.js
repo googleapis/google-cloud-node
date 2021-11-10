@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const resourcemanagerClient = new ProjectsClient();
 
-  async function undeleteProject() {
+  async function callUndeleteProject() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  undeleteProject();
+  callUndeleteProject();
   // [END cloudresourcemanager_v3_generated_Projects_UndeleteProject_async]
 }
 

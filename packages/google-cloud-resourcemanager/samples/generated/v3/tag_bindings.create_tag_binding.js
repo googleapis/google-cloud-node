@@ -22,7 +22,7 @@ function main(tagBinding) {
   /**
    *  Required. The TagBinding to be created.
    */
-  // const tagBinding = ''
+  // const tagBinding = {}
   /**
    *  Optional. Set to true to perform the validations necessary for creating the resource,
    *  but not actually perform the action.
@@ -35,7 +35,7 @@ function main(tagBinding) {
   // Instantiates a client
   const resourcemanagerClient = new TagBindingsClient();
 
-  async function createTagBinding() {
+  async function callCreateTagBinding() {
     // Construct request
     const request = {
       tagBinding,
@@ -47,7 +47,7 @@ function main(tagBinding) {
     console.log(response);
   }
 
-  createTagBinding();
+  callCreateTagBinding();
   // [END cloudresourcemanager_v3_generated_TagBindings_CreateTagBinding_async]
 }
 

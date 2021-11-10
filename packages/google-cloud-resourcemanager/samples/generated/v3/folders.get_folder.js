@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const resourcemanagerClient = new FoldersClient();
 
-  async function getFolder() {
+  async function callGetFolder() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getFolder();
+  callGetFolder();
   // [END cloudresourcemanager_v3_generated_Folders_GetFolder_async]
 }
 

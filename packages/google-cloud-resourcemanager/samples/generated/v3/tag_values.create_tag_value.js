@@ -23,7 +23,7 @@ function main(tagValue) {
    *  Required. The TagValue to be created. Only fields `short_name`, `description`,
    *  and `parent` are considered during the creation request.
    */
-  // const tagValue = ''
+  // const tagValue = {}
   /**
    *  Optional. Set as true to perform the validations necessary for creating the resource,
    *  but not actually perform the action.
@@ -36,7 +36,7 @@ function main(tagValue) {
   // Instantiates a client
   const resourcemanagerClient = new TagValuesClient();
 
-  async function createTagValue() {
+  async function callCreateTagValue() {
     // Construct request
     const request = {
       tagValue,
@@ -48,7 +48,7 @@ function main(tagValue) {
     console.log(response);
   }
 
-  createTagValue();
+  callCreateTagValue();
   // [END cloudresourcemanager_v3_generated_TagValues_CreateTagValue_async]
 }
 

@@ -39,7 +39,7 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  Optional. Controls whether folders in the
-   *  [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED]
+   *  DELETE_REQUESTED google.cloud.resourcemanager.v3.Folder.State.DELETE_REQUESTED
    *  state should be returned. Defaults to false.
    */
   // const showDeleted = true
@@ -50,7 +50,7 @@ function main(parent) {
   // Instantiates a client
   const resourcemanagerClient = new FoldersClient();
 
-  async function listFolders() {
+  async function callListFolders() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent) {
     }
   }
 
-  listFolders();
+  callListFolders();
   // [END cloudresourcemanager_v3_generated_Folders_ListFolders_async]
 }
 

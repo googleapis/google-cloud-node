@@ -331,6 +331,25 @@ export class OrganizationsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Fetches an organization resource identified by the specified resource name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Organization to fetch. This is the organization's
+   *   relative path in the API, formatted as "organizations/[organizationId]".
+   *   For example, "organizations/1234".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Organization]{@link google.cloud.resourcemanager.v3.Organization}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/organizations.get_organization.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Organizations_GetOrganization_async
+   */
   getOrganization(
     request?: protos.google.cloud.resourcemanager.v3.IGetOrganizationRequest,
     options?: CallOptions
@@ -365,25 +384,6 @@ export class OrganizationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Fetches an organization resource identified by the specified resource name.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Organization to fetch. This is the organization's
-   *   relative path in the API, formatted as "organizations/[organizationId]".
-   *   For example, "organizations/1234".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Organization]{@link google.cloud.resourcemanager.v3.Organization}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getOrganization(request);
-   */
   getOrganization(
     request?: protos.google.cloud.resourcemanager.v3.IGetOrganizationRequest,
     optionsOrCallback?:
@@ -430,6 +430,32 @@ export class OrganizationsClient {
     this.initialize();
     return this.innerApiCalls.getOrganization(request, options, callback);
   }
+  /**
+   * Gets the access control policy for an organization resource. The policy may
+   * be empty if no such policy or resource exists. The `resource` field should
+   * be the organization's resource name, for example: "organizations/123".
+   *
+   * Authorization requires the IAM permission
+   * `resourcemanager.organizations.getIamPolicy` on the specified organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/organizations.get_iam_policy.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Organizations_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -457,32 +483,6 @@ export class OrganizationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for an organization resource. The policy may
-   * be empty if no such policy or resource exists. The `resource` field should
-   * be the organization's resource name, for example: "organizations/123".
-   *
-   * Authorization requires the IAM permission
-   * `resourcemanager.organizations.getIamPolicy` on the specified organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -522,6 +522,34 @@ export class OrganizationsClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Sets the access control policy on an organization resource. Replaces any
+   * existing policy. The `resource` field should be the organization's resource
+   * name, for example: "organizations/123".
+   *
+   * Authorization requires the IAM permission
+   * `resourcemanager.organizations.setIamPolicy` on the specified organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/organizations.set_iam_policy.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Organizations_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -549,34 +577,6 @@ export class OrganizationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy on an organization resource. Replaces any
-   * existing policy. The `resource` field should be the organization's resource
-   * name, for example: "organizations/123".
-   *
-   * Authorization requires the IAM permission
-   * `resourcemanager.organizations.setIamPolicy` on the specified organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -616,6 +616,33 @@ export class OrganizationsClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Returns the permissions that a caller has on the specified organization.
+   * The `resource` field should be the organization's resource name,
+   * for example: "organizations/123".
+   *
+   * There are no permissions required for making this API call.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/organizations.test_iam_permissions.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Organizations_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -643,33 +670,6 @@ export class OrganizationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the permissions that a caller has on the specified organization.
-   * The `resource` field should be the organization's resource name,
-   * for example: "organizations/123".
-   *
-   * There are no permissions required for making this API call.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -710,37 +710,6 @@ export class OrganizationsClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
-  searchOrganizations(
-    request?: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcemanager.v3.IOrganization[],
-      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
-    ]
-  >;
-  searchOrganizations(
-    request: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
-      | protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.IOrganization
-    >
-  ): void;
-  searchOrganizations(
-    request: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
-      | protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcemanager.v3.IOrganization
-    >
-  ): void;
   /**
    * Searches organization resources that are visible to the user and satisfy
    * the specified filter. This method returns organizations in an unspecified
@@ -792,6 +761,37 @@ export class OrganizationsClient {
    */
   searchOrganizations(
     request?: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.resourcemanager.v3.IOrganization[],
+      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest | null,
+      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
+    ]
+  >;
+  searchOrganizations(
+    request: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
+      | protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IOrganization
+    >
+  ): void;
+  searchOrganizations(
+    request: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
+      | protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcemanager.v3.IOrganization
+    >
+  ): void;
+  searchOrganizations(
+    request?: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -824,6 +824,8 @@ export class OrganizationsClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.searchOrganizations(request, options, callback);
   }
@@ -875,6 +877,8 @@ export class OrganizationsClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchOrganizations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -926,11 +930,8 @@ export class OrganizationsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.searchOrganizationsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/organizations.search_organizations.js</caption>
+   * region_tag:cloudresourcemanager_v3_generated_Organizations_SearchOrganizations_async
    */
   searchOrganizationsAsync(
     request?: protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
@@ -938,7 +939,8 @@ export class OrganizationsClient {
   ): AsyncIterable<protos.google.cloud.resourcemanager.v3.IOrganization> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchOrganizations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

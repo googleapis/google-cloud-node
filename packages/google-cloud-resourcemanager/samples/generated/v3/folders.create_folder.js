@@ -23,7 +23,7 @@ function main(folder) {
    *  Required. The folder being created, only the display name and parent will be
    *  consulted. All other fields will be ignored.
    */
-  // const folder = ''
+  // const folder = {}
 
   // Imports the Resourcemanager library
   const {FoldersClient} = require('@google-cloud/resource-manager').v3;
@@ -31,7 +31,7 @@ function main(folder) {
   // Instantiates a client
   const resourcemanagerClient = new FoldersClient();
 
-  async function createFolder() {
+  async function callCreateFolder() {
     // Construct request
     const request = {
       folder,
@@ -43,7 +43,7 @@ function main(folder) {
     console.log(response);
   }
 
-  createFolder();
+  callCreateFolder();
   // [END cloudresourcemanager_v3_generated_Folders_CreateFolder_async]
 }
 

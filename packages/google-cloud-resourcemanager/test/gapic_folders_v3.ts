@@ -677,7 +677,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateFolderRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -701,7 +701,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateFolderRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -747,7 +747,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateFolderRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createFolder = stubLongRunningCall(
         undefined,
@@ -770,7 +770,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateFolderRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createFolder = stubLongRunningCall(
         undefined,
@@ -1603,7 +1603,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListFoldersRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Folder()
@@ -1634,7 +1634,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListFoldersRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Folder()
@@ -1681,7 +1681,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListFoldersRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listFolders = stubSimpleCall(
         undefined,
@@ -1856,7 +1856,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchFoldersRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Folder()
@@ -1887,7 +1887,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchFoldersRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Folder()
@@ -1934,7 +1934,7 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchFoldersRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchFolders = stubSimpleCall(
         undefined,

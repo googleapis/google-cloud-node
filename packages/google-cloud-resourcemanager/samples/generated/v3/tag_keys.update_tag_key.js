@@ -25,13 +25,13 @@ function main(tagKey) {
    *  must match the `etag` field of the existing tag key. Otherwise,
    *  `FAILED_PRECONDITION` will be returned.
    */
-  // const tagKey = ''
+  // const tagKey = {}
   /**
    *  Fields to be updated. The mask may only contain `description` or
    *  `etag`. If omitted entirely, both `description` and `etag` are assumed to
    *  be significant.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Set as true to perform validations necessary for updating the resource, but
    *  not actually perform the action.
@@ -44,7 +44,7 @@ function main(tagKey) {
   // Instantiates a client
   const resourcemanagerClient = new TagKeysClient();
 
-  async function updateTagKey() {
+  async function callUpdateTagKey() {
     // Construct request
     const request = {
       tagKey,
@@ -56,7 +56,7 @@ function main(tagKey) {
     console.log(response);
   }
 
-  updateTagKey();
+  callUpdateTagKey();
   // [END cloudresourcemanager_v3_generated_TagKeys_UpdateTagKey_async]
 }
 

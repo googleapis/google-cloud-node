@@ -648,7 +648,7 @@ describe('v3.OrganizationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Organization()
@@ -680,7 +680,7 @@ describe('v3.OrganizationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcemanager.v3.Organization()
@@ -729,7 +729,7 @@ describe('v3.OrganizationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchOrganizations = stubSimpleCall(
         undefined,

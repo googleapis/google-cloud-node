@@ -23,7 +23,7 @@ function main(tagKey) {
    *  Required. The TagKey to be created. Only fields `short_name`, `description`,
    *  and `parent` are considered during the creation request.
    */
-  // const tagKey = ''
+  // const tagKey = {}
   /**
    *  Optional. Set to true to perform validations necessary for creating the resource, but
    *  not actually perform the action.
@@ -36,7 +36,7 @@ function main(tagKey) {
   // Instantiates a client
   const resourcemanagerClient = new TagKeysClient();
 
-  async function createTagKey() {
+  async function callCreateTagKey() {
     // Construct request
     const request = {
       tagKey,
@@ -48,7 +48,7 @@ function main(tagKey) {
     console.log(response);
   }
 
-  createTagKey();
+  callCreateTagKey();
   // [END cloudresourcemanager_v3_generated_TagKeys_CreateTagKey_async]
 }
 

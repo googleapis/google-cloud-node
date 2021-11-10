@@ -54,7 +54,7 @@ function main() {
   // Instantiates a client
   const resourcemanagerClient = new OrganizationsClient();
 
-  async function searchOrganizations() {
+  async function callSearchOrganizations() {
     // Construct request
     const request = {};
 
@@ -67,7 +67,7 @@ function main() {
     }
   }
 
-  searchOrganizations();
+  callSearchOrganizations();
   // [END cloudresourcemanager_v3_generated_Organizations_SearchOrganizations_async]
 }
 
