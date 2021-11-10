@@ -343,33 +343,6 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  predict(
-    request?: protos.google.cloud.automl.v1beta1.IPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1beta1.IPredictResponse,
-      protos.google.cloud.automl.v1beta1.IPredictRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  predict(
-    request: protos.google.cloud.automl.v1beta1.IPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.automl.v1beta1.IPredictResponse,
-      protos.google.cloud.automl.v1beta1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request: protos.google.cloud.automl.v1beta1.IPredictRequest,
-    callback: Callback<
-      protos.google.cloud.automl.v1beta1.IPredictResponse,
-      protos.google.cloud.automl.v1beta1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Perform an online prediction. The prediction result will be directly
    * returned in the response.
@@ -426,9 +399,36 @@ export class PredictionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.predict(request);
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.predict.js</caption>
+   * region_tag:automl_v1beta1_generated_PredictionService_Predict_async
    */
+  predict(
+    request?: protos.google.cloud.automl.v1beta1.IPredictRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.automl.v1beta1.IPredictResponse,
+      protos.google.cloud.automl.v1beta1.IPredictRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  predict(
+    request: protos.google.cloud.automl.v1beta1.IPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.automl.v1beta1.IPredictResponse,
+      protos.google.cloud.automl.v1beta1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  predict(
+    request: protos.google.cloud.automl.v1beta1.IPredictRequest,
+    callback: Callback<
+      protos.google.cloud.automl.v1beta1.IPredictResponse,
+      protos.google.cloud.automl.v1beta1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   predict(
     request?: protos.google.cloud.automl.v1beta1.IPredictRequest,
     optionsOrCallback?:
@@ -469,42 +469,6 @@ export class PredictionServiceClient {
     return this.innerApiCalls.predict(request, options, callback);
   }
 
-  batchPredict(
-    request?: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.automl.v1beta1.IBatchPredictResult,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  batchPredict(
-    request: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.automl.v1beta1.IBatchPredictResult,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchPredict(
-    request: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.automl.v1beta1.IBatchPredictResult,
-        protos.google.cloud.automl.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Perform a batch prediction. Unlike the online {@link google.cloud.automl.v1beta1.PredictionService.Predict|Predict}, batch
    * prediction result won't be immediately available in the response. Instead,
@@ -608,10 +572,45 @@ export class PredictionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchPredict(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.batch_predict.js</caption>
+   * region_tag:automl_v1beta1_generated_PredictionService_BatchPredict_async
    */
+  batchPredict(
+    request?: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.automl.v1beta1.IBatchPredictResult,
+        protos.google.cloud.automl.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  batchPredict(
+    request: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.automl.v1beta1.IBatchPredictResult,
+        protos.google.cloud.automl.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchPredict(
+    request: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.automl.v1beta1.IBatchPredictResult,
+        protos.google.cloud.automl.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchPredict(
     request?: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
     optionsOrCallback?:
@@ -669,11 +668,8 @@ export class PredictionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchPredictProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.batch_predict.js</caption>
+   * region_tag:automl_v1beta1_generated_PredictionService_BatchPredict_async
    */
   async checkBatchPredictProgress(
     name: string

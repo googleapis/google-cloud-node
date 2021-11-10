@@ -511,6 +511,25 @@ export class AutoMlClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the project to create the dataset for.
+   * @param {google.cloud.automl.v1beta1.Dataset} request.dataset
+   *   Required. The dataset to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.create_dataset.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_CreateDataset_async
+   */
   createDataset(
     request?: protos.google.cloud.automl.v1beta1.ICreateDatasetRequest,
     options?: CallOptions
@@ -542,25 +561,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the project to create the dataset for.
-   * @param {google.cloud.automl.v1beta1.Dataset} request.dataset
-   *   Required. The dataset to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createDataset(request);
-   */
   createDataset(
     request?: protos.google.cloud.automl.v1beta1.ICreateDatasetRequest,
     optionsOrCallback?:
@@ -604,6 +604,23 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.createDataset(request, options, callback);
   }
+  /**
+   * Gets a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the dataset to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.get_dataset.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_GetDataset_async
+   */
   getDataset(
     request?: protos.google.cloud.automl.v1beta1.IGetDatasetRequest,
     options?: CallOptions
@@ -631,23 +648,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the dataset to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDataset(request);
-   */
   getDataset(
     request?: protos.google.cloud.automl.v1beta1.IGetDatasetRequest,
     optionsOrCallback?:
@@ -689,6 +689,25 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.getDataset(request, options, callback);
   }
+  /**
+   * Updates a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.automl.v1beta1.Dataset} request.dataset
+   *   Required. The dataset which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.update_dataset.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_UpdateDataset_async
+   */
   updateDataset(
     request?: protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest,
     options?: CallOptions
@@ -720,25 +739,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a dataset.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.automl.v1beta1.Dataset} request.dataset
-   *   Required. The dataset which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateDataset(request);
-   */
   updateDataset(
     request?: protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest,
     optionsOrCallback?:
@@ -782,6 +782,23 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.updateDataset(request, options, callback);
   }
+  /**
+   * Gets an annotation spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the annotation spec to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnnotationSpec]{@link google.cloud.automl.v1beta1.AnnotationSpec}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.get_annotation_spec.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_GetAnnotationSpec_async
+   */
   getAnnotationSpec(
     request?: protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest,
     options?: CallOptions
@@ -813,23 +830,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets an annotation spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the annotation spec to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnnotationSpec]{@link google.cloud.automl.v1beta1.AnnotationSpec}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getAnnotationSpec(request);
-   */
   getAnnotationSpec(
     request?: protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest,
     optionsOrCallback?:
@@ -873,6 +873,25 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.getAnnotationSpec(request, options, callback);
   }
+  /**
+   * Gets a table spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the table spec to retrieve.
+   * @param {google.protobuf.FieldMask} request.fieldMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.get_table_spec.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_GetTableSpec_async
+   */
   getTableSpec(
     request?: protos.google.cloud.automl.v1beta1.IGetTableSpecRequest,
     options?: CallOptions
@@ -904,25 +923,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a table spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the table spec to retrieve.
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTableSpec(request);
-   */
   getTableSpec(
     request?: protos.google.cloud.automl.v1beta1.IGetTableSpecRequest,
     optionsOrCallback?:
@@ -966,6 +966,25 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.getTableSpec(request, options, callback);
   }
+  /**
+   * Updates a table spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.automl.v1beta1.TableSpec} request.tableSpec
+   *   Required. The table spec which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.update_table_spec.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_UpdateTableSpec_async
+   */
   updateTableSpec(
     request?: protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest,
     options?: CallOptions
@@ -997,25 +1016,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a table spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.automl.v1beta1.TableSpec} request.tableSpec
-   *   Required. The table spec which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTableSpec(request);
-   */
   updateTableSpec(
     request?: protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest,
     optionsOrCallback?:
@@ -1059,6 +1059,25 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.updateTableSpec(request, options, callback);
   }
+  /**
+   * Gets a column spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the column spec to retrieve.
+   * @param {google.protobuf.FieldMask} request.fieldMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.get_column_spec.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_GetColumnSpec_async
+   */
   getColumnSpec(
     request?: protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest,
     options?: CallOptions
@@ -1090,25 +1109,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a column spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the column spec to retrieve.
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getColumnSpec(request);
-   */
   getColumnSpec(
     request?: protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest,
     optionsOrCallback?:
@@ -1152,6 +1152,25 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.getColumnSpec(request, options, callback);
   }
+  /**
+   * Updates a column spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.automl.v1beta1.ColumnSpec} request.columnSpec
+   *   Required. The column spec which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.update_column_spec.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_UpdateColumnSpec_async
+   */
   updateColumnSpec(
     request?: protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest,
     options?: CallOptions
@@ -1183,25 +1202,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a column spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.automl.v1beta1.ColumnSpec} request.columnSpec
-   *   Required. The column spec which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateColumnSpec(request);
-   */
   updateColumnSpec(
     request?: protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest,
     optionsOrCallback?:
@@ -1245,6 +1245,23 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.updateColumnSpec(request, options, callback);
   }
+  /**
+   * Gets a model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the model.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Model]{@link google.cloud.automl.v1beta1.Model}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.get_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_GetModel_async
+   */
   getModel(
     request?: protos.google.cloud.automl.v1beta1.IGetModelRequest,
     options?: CallOptions
@@ -1272,23 +1289,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the model.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Model]{@link google.cloud.automl.v1beta1.Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getModel(request);
-   */
   getModel(
     request?: protos.google.cloud.automl.v1beta1.IGetModelRequest,
     optionsOrCallback?:
@@ -1330,6 +1330,23 @@ export class AutoMlClient {
     this.initialize();
     return this.innerApiCalls.getModel(request, options, callback);
   }
+  /**
+   * Gets a model evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name for the model evaluation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.get_model_evaluation.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_GetModelEvaluation_async
+   */
   getModelEvaluation(
     request?: protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest,
     options?: CallOptions
@@ -1361,23 +1378,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a model evaluation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name for the model evaluation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ModelEvaluation]{@link google.cloud.automl.v1beta1.ModelEvaluation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getModelEvaluation(request);
-   */
   getModelEvaluation(
     request?: protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest,
     optionsOrCallback?:
@@ -1422,6 +1422,29 @@ export class AutoMlClient {
     return this.innerApiCalls.getModelEvaluation(request, options, callback);
   }
 
+  /**
+   * Deletes a dataset and all of its contents.
+   * Returns empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes,
+   * and `delete_details` in the
+   * {@link google.longrunning.Operation.metadata|metadata} field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the dataset to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.delete_dataset.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_DeleteDataset_async
+   */
   deleteDataset(
     request?: protos.google.cloud.automl.v1beta1.IDeleteDatasetRequest,
     options?: CallOptions
@@ -1458,30 +1481,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a dataset and all of its contents.
-   * Returns empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes,
-   * and `delete_details` in the
-   * {@link google.longrunning.Operation.metadata|metadata} field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the dataset to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteDataset(request);
-   * const [response] = await operation.promise();
-   */
   deleteDataset(
     request?: protos.google.cloud.automl.v1beta1.IDeleteDatasetRequest,
     optionsOrCallback?:
@@ -1539,11 +1538,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteDatasetProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.delete_dataset.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_DeleteDataset_async
    */
   async checkDeleteDatasetProgress(
     name: string
@@ -1567,6 +1563,37 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Imports data into a dataset.
+   * For Tables this method can only be called on an empty Dataset.
+   *
+   * For Tables:
+   * *   A
+   * {@link google.cloud.automl.v1beta1.InputConfig.params|schema_inference_version}
+   *     parameter must be explicitly set.
+   * Returns an empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Dataset name. Dataset must already exist. All imported
+   *   annotations and examples will be added.
+   * @param {google.cloud.automl.v1beta1.InputConfig} request.inputConfig
+   *   Required. The desired input location and its domain specific semantics,
+   *   if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.import_data.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ImportData_async
+   */
   importData(
     request?: protos.google.cloud.automl.v1beta1.IImportDataRequest,
     options?: CallOptions
@@ -1603,38 +1630,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Imports data into a dataset.
-   * For Tables this method can only be called on an empty Dataset.
-   *
-   * For Tables:
-   * *   A
-   * {@link google.cloud.automl.v1beta1.InputConfig.params|schema_inference_version}
-   *     parameter must be explicitly set.
-   * Returns an empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Dataset name. Dataset must already exist. All imported
-   *   annotations and examples will be added.
-   * @param {google.cloud.automl.v1beta1.InputConfig} request.inputConfig
-   *   Required. The desired input location and its domain specific semantics,
-   *   if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.importData(request);
-   * const [response] = await operation.promise();
-   */
   importData(
     request?: protos.google.cloud.automl.v1beta1.IImportDataRequest,
     optionsOrCallback?:
@@ -1692,11 +1687,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkImportDataProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.import_data.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ImportData_async
    */
   async checkImportDataProgress(
     name: string
@@ -1720,6 +1712,29 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Exports dataset's data to the provided output location.
+   * Returns an empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the dataset.
+   * @param {google.cloud.automl.v1beta1.OutputConfig} request.outputConfig
+   *   Required. The desired output location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.export_data.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ExportData_async
+   */
   exportData(
     request?: protos.google.cloud.automl.v1beta1.IExportDataRequest,
     options?: CallOptions
@@ -1756,30 +1771,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Exports dataset's data to the provided output location.
-   * Returns an empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the dataset.
-   * @param {google.cloud.automl.v1beta1.OutputConfig} request.outputConfig
-   *   Required. The desired output location.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportData(request);
-   * const [response] = await operation.promise();
-   */
   exportData(
     request?: protos.google.cloud.automl.v1beta1.IExportDataRequest,
     optionsOrCallback?:
@@ -1837,11 +1828,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportDataProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.export_data.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ExportData_async
    */
   async checkExportDataProgress(
     name: string
@@ -1865,6 +1853,31 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Creates a model.
+   * Returns a Model in the {@link google.longrunning.Operation.response|response}
+   * field when it completes.
+   * When you create a model, several model evaluations are created for it:
+   * a global evaluation, and one evaluation for each annotation spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent project where the model is being created.
+   * @param {google.cloud.automl.v1beta1.Model} request.model
+   *   Required. The model to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.create_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_CreateModel_async
+   */
   createModel(
     request?: protos.google.cloud.automl.v1beta1.ICreateModelRequest,
     options?: CallOptions
@@ -1901,32 +1914,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a model.
-   * Returns a Model in the {@link google.longrunning.Operation.response|response}
-   * field when it completes.
-   * When you create a model, several model evaluations are created for it:
-   * a global evaluation, and one evaluation for each annotation spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the parent project where the model is being created.
-   * @param {google.cloud.automl.v1beta1.Model} request.model
-   *   Required. The model to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createModel(request);
-   * const [response] = await operation.promise();
-   */
   createModel(
     request?: protos.google.cloud.automl.v1beta1.ICreateModelRequest,
     optionsOrCallback?:
@@ -1984,11 +1971,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.create_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_CreateModel_async
    */
   async checkCreateModelProgress(
     name: string
@@ -2012,6 +1996,29 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a model.
+   * Returns `google.protobuf.Empty` in the
+   * {@link google.longrunning.Operation.response|response} field when it completes,
+   * and `delete_details` in the
+   * {@link google.longrunning.Operation.metadata|metadata} field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the model being deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.delete_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_DeleteModel_async
+   */
   deleteModel(
     request?: protos.google.cloud.automl.v1beta1.IDeleteModelRequest,
     options?: CallOptions
@@ -2048,30 +2055,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a model.
-   * Returns `google.protobuf.Empty` in the
-   * {@link google.longrunning.Operation.response|response} field when it completes,
-   * and `delete_details` in the
-   * {@link google.longrunning.Operation.metadata|metadata} field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the model being deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteModel(request);
-   * const [response] = await operation.promise();
-   */
   deleteModel(
     request?: protos.google.cloud.automl.v1beta1.IDeleteModelRequest,
     optionsOrCallback?:
@@ -2129,11 +2112,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.delete_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_DeleteModel_async
    */
   async checkDeleteModelProgress(
     name: string
@@ -2157,6 +2137,40 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Deploys a model. If a model is already deployed, deploying it with the
+   * same parameters has no effect. Deploying with different parametrs
+   * (as e.g. changing
+   *
+   * {@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata.node_number|node_number})
+   *  will reset the deployment state without pausing the model's availability.
+   *
+   * Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
+   * deployment automatically.
+   *
+   * Returns an empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata} request.imageObjectDetectionModelDeploymentMetadata
+   *   Model deployment metadata specific to Image Object Detection.
+   * @param {google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata} request.imageClassificationModelDeploymentMetadata
+   *   Model deployment metadata specific to Image Classification.
+   * @param {string} request.name
+   *   Required. Resource name of the model to deploy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.deploy_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_DeployModel_async
+   */
   deployModel(
     request?: protos.google.cloud.automl.v1beta1.IDeployModelRequest,
     options?: CallOptions
@@ -2193,41 +2207,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deploys a model. If a model is already deployed, deploying it with the
-   * same parameters has no effect. Deploying with different parametrs
-   * (as e.g. changing
-   *
-   * {@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata.node_number|node_number})
-   *  will reset the deployment state without pausing the model's availability.
-   *
-   * Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
-   * deployment automatically.
-   *
-   * Returns an empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata} request.imageObjectDetectionModelDeploymentMetadata
-   *   Model deployment metadata specific to Image Object Detection.
-   * @param {google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata} request.imageClassificationModelDeploymentMetadata
-   *   Model deployment metadata specific to Image Classification.
-   * @param {string} request.name
-   *   Required. Resource name of the model to deploy.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deployModel(request);
-   * const [response] = await operation.promise();
-   */
   deployModel(
     request?: protos.google.cloud.automl.v1beta1.IDeployModelRequest,
     optionsOrCallback?:
@@ -2285,11 +2264,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeployModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.deploy_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_DeployModel_async
    */
   async checkDeployModelProgress(
     name: string
@@ -2313,6 +2289,31 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Undeploys a model. If the model is not deployed this method has no effect.
+   *
+   * Only applicable for Text Classification, Image Object Detection and Tables;
+   * all other domains manage deployment automatically.
+   *
+   * Returns an empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the model to undeploy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.undeploy_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_UndeployModel_async
+   */
   undeployModel(
     request?: protos.google.cloud.automl.v1beta1.IUndeployModelRequest,
     options?: CallOptions
@@ -2349,32 +2350,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Undeploys a model. If the model is not deployed this method has no effect.
-   *
-   * Only applicable for Text Classification, Image Object Detection and Tables;
-   * all other domains manage deployment automatically.
-   *
-   * Returns an empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the model to undeploy.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.undeployModel(request);
-   * const [response] = await operation.promise();
-   */
   undeployModel(
     request?: protos.google.cloud.automl.v1beta1.IUndeployModelRequest,
     optionsOrCallback?:
@@ -2432,11 +2407,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUndeployModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.undeploy_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_UndeployModel_async
    */
   async checkUndeployModelProgress(
     name: string
@@ -2460,6 +2432,34 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Exports a trained, "export-able", model to a user specified Google Cloud
+   * Storage location. A model is considered export-able if and only if it has
+   * an export format defined for it in
+   *
+   * {@link google.cloud.automl.v1beta1.ModelExportOutputConfig|ModelExportOutputConfig}.
+   *
+   * Returns an empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model to export.
+   * @param {google.cloud.automl.v1beta1.ModelExportOutputConfig} request.outputConfig
+   *   Required. The desired output location and configuration.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.export_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ExportModel_async
+   */
   exportModel(
     request?: protos.google.cloud.automl.v1beta1.IExportModelRequest,
     options?: CallOptions
@@ -2496,35 +2496,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Exports a trained, "export-able", model to a user specified Google Cloud
-   * Storage location. A model is considered export-able if and only if it has
-   * an export format defined for it in
-   *
-   * {@link google.cloud.automl.v1beta1.ModelExportOutputConfig|ModelExportOutputConfig}.
-   *
-   * Returns an empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the model to export.
-   * @param {google.cloud.automl.v1beta1.ModelExportOutputConfig} request.outputConfig
-   *   Required. The desired output location and configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportModel(request);
-   * const [response] = await operation.promise();
-   */
   exportModel(
     request?: protos.google.cloud.automl.v1beta1.IExportModelRequest,
     optionsOrCallback?:
@@ -2582,11 +2553,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.export_model.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ExportModel_async
    */
   async checkExportModelProgress(
     name: string
@@ -2610,6 +2578,41 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
+  /**
+   * Exports examples on which the model was evaluated (i.e. which were in the
+   * TEST set of the dataset the model was created from), together with their
+   * ground truth annotations and the annotations created (predicted) by the
+   * model.
+   * The examples, ground truth and predictions are exported in the state
+   * they were at the moment the model was evaluated.
+   *
+   * This export is available only for 30 days since the model evaluation is
+   * created.
+   *
+   * Currently only available for Tables.
+   *
+   * Returns an empty response in the
+   * {@link google.longrunning.Operation.response|response} field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model whose evaluated examples are to
+   *   be exported.
+   * @param {google.cloud.automl.v1beta1.ExportEvaluatedExamplesOutputConfig} request.outputConfig
+   *   Required. The desired output location and configuration.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.export_evaluated_examples.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ExportEvaluatedExamples_async
+   */
   exportEvaluatedExamples(
     request?: protos.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest,
     options?: CallOptions
@@ -2646,42 +2649,6 @@ export class AutoMlClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Exports examples on which the model was evaluated (i.e. which were in the
-   * TEST set of the dataset the model was created from), together with their
-   * ground truth annotations and the annotations created (predicted) by the
-   * model.
-   * The examples, ground truth and predictions are exported in the state
-   * they were at the moment the model was evaluated.
-   *
-   * This export is available only for 30 days since the model evaluation is
-   * created.
-   *
-   * Currently only available for Tables.
-   *
-   * Returns an empty response in the
-   * {@link google.longrunning.Operation.response|response} field when it completes.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the model whose evaluated examples are to
-   *   be exported.
-   * @param {google.cloud.automl.v1beta1.ExportEvaluatedExamplesOutputConfig} request.outputConfig
-   *   Required. The desired output location and configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportEvaluatedExamples(request);
-   * const [response] = await operation.promise();
-   */
   exportEvaluatedExamples(
     request?: protos.google.cloud.automl.v1beta1.IExportEvaluatedExamplesRequest,
     optionsOrCallback?:
@@ -2743,11 +2710,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportEvaluatedExamplesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.export_evaluated_examples.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ExportEvaluatedExamples_async
    */
   async checkExportEvaluatedExamplesProgress(
     name: string
@@ -2771,37 +2735,6 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >;
   }
-  listDatasets(
-    request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1beta1.IDataset[],
-      protos.google.cloud.automl.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.automl.v1beta1.IListDatasetsResponse
-    ]
-  >;
-  listDatasets(
-    request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-      | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.IDataset
-    >
-  ): void;
-  listDatasets(
-    request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
-      | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.IDataset
-    >
-  ): void;
   /**
    * Lists datasets in a project.
    *
@@ -2838,6 +2771,37 @@ export class AutoMlClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listDatasets(
+    request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.automl.v1beta1.IDataset[],
+      protos.google.cloud.automl.v1beta1.IListDatasetsRequest | null,
+      protos.google.cloud.automl.v1beta1.IListDatasetsResponse
+    ]
+  >;
+  listDatasets(
+    request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
+      | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.IDataset
+    >
+  ): void;
+  listDatasets(
+    request: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
+      | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.IDataset
+    >
+  ): void;
   listDatasets(
     request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
     optionsOrCallback?:
@@ -2928,7 +2892,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDatasets'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as gax.GaxCall,
@@ -2971,11 +2936,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listDatasetsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.list_datasets.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ListDatasets_async
    */
   listDatasetsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
@@ -2989,8 +2951,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listDatasets'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
@@ -2998,37 +2960,6 @@ export class AutoMlClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1beta1.IDataset>;
   }
-  listTableSpecs(
-    request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1beta1.ITableSpec[],
-      protos.google.cloud.automl.v1beta1.IListTableSpecsRequest | null,
-      protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
-    ]
-  >;
-  listTableSpecs(
-    request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-      | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.ITableSpec
-    >
-  ): void;
-  listTableSpecs(
-    request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
-      | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.ITableSpec
-    >
-  ): void;
   /**
    * Lists table specs in a dataset.
    *
@@ -3061,6 +2992,37 @@ export class AutoMlClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTableSpecs(
+    request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.automl.v1beta1.ITableSpec[],
+      protos.google.cloud.automl.v1beta1.IListTableSpecsRequest | null,
+      protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
+    ]
+  >;
+  listTableSpecs(
+    request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
+      | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.ITableSpec
+    >
+  ): void;
+  listTableSpecs(
+    request: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
+      | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.ITableSpec
+    >
+  ): void;
   listTableSpecs(
     request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
     optionsOrCallback?:
@@ -3147,7 +3109,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTableSpecs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTableSpecs.createStream(
       this.innerApiCalls.listTableSpecs as gax.GaxCall,
@@ -3186,11 +3149,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTableSpecsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.list_table_specs.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ListTableSpecs_async
    */
   listTableSpecsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
@@ -3204,8 +3164,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listTableSpecs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTableSpecs.asyncIterate(
       this.innerApiCalls['listTableSpecs'] as GaxCall,
@@ -3213,37 +3173,6 @@ export class AutoMlClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1beta1.ITableSpec>;
   }
-  listColumnSpecs(
-    request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1beta1.IColumnSpec[],
-      protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest | null,
-      protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
-    ]
-  >;
-  listColumnSpecs(
-    request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-      | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.IColumnSpec
-    >
-  ): void;
-  listColumnSpecs(
-    request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
-      | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.IColumnSpec
-    >
-  ): void;
   /**
    * Lists column specs in a table spec.
    *
@@ -3276,6 +3205,37 @@ export class AutoMlClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listColumnSpecs(
+    request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.automl.v1beta1.IColumnSpec[],
+      protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest | null,
+      protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
+    ]
+  >;
+  listColumnSpecs(
+    request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
+      | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.IColumnSpec
+    >
+  ): void;
+  listColumnSpecs(
+    request: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
+      | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.IColumnSpec
+    >
+  ): void;
   listColumnSpecs(
     request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
     optionsOrCallback?:
@@ -3362,7 +3322,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listColumnSpecs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listColumnSpecs.createStream(
       this.innerApiCalls.listColumnSpecs as gax.GaxCall,
@@ -3401,11 +3362,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listColumnSpecsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.list_column_specs.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ListColumnSpecs_async
    */
   listColumnSpecsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
@@ -3419,8 +3377,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listColumnSpecs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listColumnSpecs.asyncIterate(
       this.innerApiCalls['listColumnSpecs'] as GaxCall,
@@ -3428,33 +3386,6 @@ export class AutoMlClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1beta1.IColumnSpec>;
   }
-  listModels(
-    request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1beta1.IModel[],
-      protos.google.cloud.automl.v1beta1.IListModelsRequest | null,
-      protos.google.cloud.automl.v1beta1.IListModelsResponse
-    ]
-  >;
-  listModels(
-    request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListModelsRequest,
-      protos.google.cloud.automl.v1beta1.IListModelsResponse | null | undefined,
-      protos.google.cloud.automl.v1beta1.IModel
-    >
-  ): void;
-  listModels(
-    request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListModelsRequest,
-      protos.google.cloud.automl.v1beta1.IListModelsResponse | null | undefined,
-      protos.google.cloud.automl.v1beta1.IModel
-    >
-  ): void;
   /**
    * Lists models.
    *
@@ -3492,6 +3423,33 @@ export class AutoMlClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listModels(
+    request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.automl.v1beta1.IModel[],
+      protos.google.cloud.automl.v1beta1.IListModelsRequest | null,
+      protos.google.cloud.automl.v1beta1.IListModelsResponse
+    ]
+  >;
+  listModels(
+    request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListModelsRequest,
+      protos.google.cloud.automl.v1beta1.IListModelsResponse | null | undefined,
+      protos.google.cloud.automl.v1beta1.IModel
+    >
+  ): void;
+  listModels(
+    request: protos.google.cloud.automl.v1beta1.IListModelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListModelsRequest,
+      protos.google.cloud.automl.v1beta1.IListModelsResponse | null | undefined,
+      protos.google.cloud.automl.v1beta1.IModel
+    >
+  ): void;
   listModels(
     request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
     optionsOrCallback?:
@@ -3581,7 +3539,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listModels'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as gax.GaxCall,
@@ -3625,11 +3584,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listModelsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.list_models.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ListModels_async
    */
   listModelsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListModelsRequest,
@@ -3643,8 +3599,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listModels'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
@@ -3652,37 +3608,6 @@ export class AutoMlClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.automl.v1beta1.IModel>;
   }
-  listModelEvaluations(
-    request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.automl.v1beta1.IModelEvaluation[],
-      protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest | null,
-      protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
-    ]
-  >;
-  listModelEvaluations(
-    request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-      | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.IModelEvaluation
-    >
-  ): void;
-  listModelEvaluations(
-    request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
-      | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.automl.v1beta1.IModelEvaluation
-    >
-  ): void;
   /**
    * Lists model evaluations.
    *
@@ -3724,6 +3649,37 @@ export class AutoMlClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listModelEvaluations(
+    request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.automl.v1beta1.IModelEvaluation[],
+      protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest | null,
+      protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
+    ]
+  >;
+  listModelEvaluations(
+    request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
+      | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.IModelEvaluation
+    >
+  ): void;
+  listModelEvaluations(
+    request: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
+      | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.automl.v1beta1.IModelEvaluation
+    >
+  ): void;
   listModelEvaluations(
     request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
     optionsOrCallback?:
@@ -3819,7 +3775,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listModelEvaluations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluations.createStream(
       this.innerApiCalls.listModelEvaluations as gax.GaxCall,
@@ -3867,11 +3824,8 @@ export class AutoMlClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listModelEvaluationsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/auto_ml.list_model_evaluations.js</caption>
+   * region_tag:automl_v1beta1_generated_AutoMl_ListModelEvaluations_async
    */
   listModelEvaluationsAsync(
     request?: protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
@@ -3885,8 +3839,8 @@ export class AutoMlClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listModelEvaluations'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,
