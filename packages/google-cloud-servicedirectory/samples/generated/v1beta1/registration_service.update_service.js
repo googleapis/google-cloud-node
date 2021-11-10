@@ -22,11 +22,11 @@ function main(service, updateMask) {
   /**
    *  Required. The updated service.
    */
-  // const service = ''
+  // const service = {}
   /**
    *  Required. List of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -35,7 +35,7 @@ function main(service, updateMask) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function updateService() {
+  async function callUpdateService() {
     // Construct request
     const request = {
       service,
@@ -47,7 +47,7 @@ function main(service, updateMask) {
     console.log(response);
   }
 
-  updateService();
+  callUpdateService();
   // [END servicedirectory_v1beta1_generated_RegistrationService_UpdateService_async]
 }
 

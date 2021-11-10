@@ -58,7 +58,7 @@ function main(parent) {
    *      doesn't have a field called "doesnotexist". Since the filter does not
    *      match any services, it returns no results
    *  For more information about filtering, see
-   *  [API Filtering](https://aip.dev/160).
+   *  API Filtering (https://aip.dev/160).
    */
   // const filter = 'abc123'
   /**
@@ -79,7 +79,7 @@ function main(parent) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function listServices() {
+  async function callListServices() {
     // Construct request
     const request = {
       parent,
@@ -92,7 +92,7 @@ function main(parent) {
     }
   }
 
-  listServices();
+  callListServices();
   // [END servicedirectory_v1beta1_generated_RegistrationService_ListServices_async]
 }
 

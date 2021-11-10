@@ -55,7 +55,7 @@ function main(name) {
   // Instantiates a client
   const servicedirectoryClient = new LookupServiceClient();
 
-  async function resolveService() {
+  async function callResolveService() {
     // Construct request
     const request = {
       name,
@@ -66,7 +66,7 @@ function main(name) {
     console.log(response);
   }
 
-  resolveService();
+  callResolveService();
   // [END servicedirectory_v1_generated_LookupService_ResolveService_async]
 }
 

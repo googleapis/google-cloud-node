@@ -76,7 +76,7 @@ function main(parent) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function listNamespaces() {
+  async function callListNamespaces() {
     // Construct request
     const request = {
       parent,
@@ -89,7 +89,7 @@ function main(parent) {
     }
   }
 
-  listNamespaces();
+  callListNamespaces();
   // [END servicedirectory_v1_generated_RegistrationService_ListNamespaces_async]
 }
 

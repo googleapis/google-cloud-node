@@ -22,11 +22,11 @@ function main(endpoint, updateMask) {
   /**
    *  Required. The updated endpoint.
    */
-  // const endpoint = ''
+  // const endpoint = {}
   /**
    *  Required. List of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -35,7 +35,7 @@ function main(endpoint, updateMask) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function updateEndpoint() {
+  async function callUpdateEndpoint() {
     // Construct request
     const request = {
       endpoint,
@@ -47,7 +47,7 @@ function main(endpoint, updateMask) {
     console.log(response);
   }
 
-  updateEndpoint();
+  callUpdateEndpoint();
   // [END servicedirectory_v1beta1_generated_RegistrationService_UpdateEndpoint_async]
 }
 

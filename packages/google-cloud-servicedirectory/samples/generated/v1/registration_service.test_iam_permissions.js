@@ -28,7 +28,7 @@ function main(resource, permissions) {
    *  The set of permissions to check for the `resource`. Permissions with
    *  wildcards (such as '*' or 'storage.*') are not allowed. For more
    *  information see
-   *  [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *  IAM Overview (https://cloud.google.com/iam/docs/overview#permissions).
    */
   // const permissions = 'abc123'
 
@@ -39,7 +39,7 @@ function main(resource, permissions) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function testIamPermissions() {
+  async function callTestIamPermissions() {
     // Construct request
     const request = {
       resource,
@@ -51,7 +51,7 @@ function main(resource, permissions) {
     console.log(response);
   }
 
-  testIamPermissions();
+  callTestIamPermissions();
   // [END servicedirectory_v1_generated_RegistrationService_TestIamPermissions_async]
 }
 

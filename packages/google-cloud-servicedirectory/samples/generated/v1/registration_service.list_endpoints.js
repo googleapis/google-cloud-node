@@ -71,7 +71,7 @@ function main(parent) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function listEndpoints() {
+  async function callListEndpoints() {
     // Construct request
     const request = {
       parent,
@@ -84,7 +84,7 @@ function main(parent) {
     }
   }
 
-  listEndpoints();
+  callListEndpoints();
   // [END servicedirectory_v1_generated_RegistrationService_ListEndpoints_async]
 }
 

@@ -298,40 +298,6 @@ export class LookupServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  resolveService(
-    request?: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
-      (
-        | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  resolveService(
-    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
-      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resolveService(
-    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
-    callback: Callback<
-      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
-      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Returns a {@link google.cloud.servicedirectory.v1beta1.Service|service} and its
    * associated endpoints.
@@ -386,9 +352,43 @@ export class LookupServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.resolveService(request);
+   * @example <caption>include:samples/generated/v1beta1/lookup_service.resolve_service.js</caption>
+   * region_tag:servicedirectory_v1beta1_generated_LookupService_ResolveService_async
    */
+  resolveService(
+    request?: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      (
+        | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  resolveService(
+    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resolveService(
+    request: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
+    callback: Callback<
+      protos.google.cloud.servicedirectory.v1beta1.IResolveServiceResponse,
+      | protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   resolveService(
     request?: protos.google.cloud.servicedirectory.v1beta1.IResolveServiceRequest,
     optionsOrCallback?:

@@ -22,11 +22,11 @@ function main(namespace, updateMask) {
   /**
    *  Required. The updated namespace.
    */
-  // const namespace = ''
+  // const namespace = {}
   /**
    *  Required. List of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -35,7 +35,7 @@ function main(namespace, updateMask) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function updateNamespace() {
+  async function callUpdateNamespace() {
     // Construct request
     const request = {
       namespace,
@@ -47,7 +47,7 @@ function main(namespace, updateMask) {
     console.log(response);
   }
 
-  updateNamespace();
+  callUpdateNamespace();
   // [END servicedirectory_v1beta1_generated_RegistrationService_UpdateNamespace_async]
 }
 

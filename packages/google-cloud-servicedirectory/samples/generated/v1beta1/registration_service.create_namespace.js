@@ -37,7 +37,7 @@ function main(parent, namespaceId, namespace) {
   /**
    *  Required. A namespace with initial fields set.
    */
-  // const namespace = ''
+  // const namespace = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -46,7 +46,7 @@ function main(parent, namespaceId, namespace) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function createNamespace() {
+  async function callCreateNamespace() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent, namespaceId, namespace) {
     console.log(response);
   }
 
-  createNamespace();
+  callCreateNamespace();
   // [END servicedirectory_v1beta1_generated_RegistrationService_CreateNamespace_async]
 }
 

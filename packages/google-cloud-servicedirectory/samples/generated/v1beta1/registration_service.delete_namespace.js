@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function deleteNamespace() {
+  async function callDeleteNamespace() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteNamespace();
+  callDeleteNamespace();
   // [END servicedirectory_v1beta1_generated_RegistrationService_DeleteNamespace_async]
 }
 

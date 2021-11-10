@@ -30,7 +30,7 @@ function main(resource, policy) {
    *  valid policy but certain Cloud Platform services (such as Projects)
    *  might reject them.
    */
-  // const policy = ''
+  // const policy = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -39,7 +39,7 @@ function main(resource, policy) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function setIamPolicy() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -51,7 +51,7 @@ function main(resource, policy) {
     console.log(response);
   }
 
-  setIamPolicy();
+  callSetIamPolicy();
   // [END servicedirectory_v1beta1_generated_RegistrationService_SetIamPolicy_async]
 }
 

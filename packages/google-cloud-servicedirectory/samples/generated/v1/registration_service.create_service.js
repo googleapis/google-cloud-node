@@ -36,7 +36,7 @@ function main(parent, serviceId, service) {
   /**
    *  Required. A service  with initial fields set.
    */
-  // const service = ''
+  // const service = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -45,7 +45,7 @@ function main(parent, serviceId, service) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function createService() {
+  async function callCreateService() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, serviceId, service) {
     console.log(response);
   }
 
-  createService();
+  callCreateService();
   // [END servicedirectory_v1_generated_RegistrationService_CreateService_async]
 }
 

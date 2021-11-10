@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function deleteEndpoint() {
+  async function callDeleteEndpoint() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteEndpoint();
+  callDeleteEndpoint();
   // [END servicedirectory_v1beta1_generated_RegistrationService_DeleteEndpoint_async]
 }
 

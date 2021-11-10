@@ -57,7 +57,7 @@ function main(name) {
    *      doesn't have a field called "doesnotexist". Since the filter does not
    *      match any endpoint, it returns no results
    *  For more information about filtering, see
-   *  [API Filtering](https://aip.dev/160).
+   *  API Filtering (https://aip.dev/160).
    */
   // const endpointFilter = 'abc123'
 
@@ -68,7 +68,7 @@ function main(name) {
   // Instantiates a client
   const servicedirectoryClient = new LookupServiceClient();
 
-  async function resolveService() {
+  async function callResolveService() {
     // Construct request
     const request = {
       name,
@@ -79,7 +79,7 @@ function main(name) {
     console.log(response);
   }
 
-  resolveService();
+  callResolveService();
   // [END servicedirectory_v1beta1_generated_LookupService_ResolveService_async]
 }
 

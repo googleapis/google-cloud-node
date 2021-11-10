@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function getEndpoint() {
+  async function callGetEndpoint() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getEndpoint();
+  callGetEndpoint();
   // [END servicedirectory_v1_generated_RegistrationService_GetEndpoint_async]
 }
 

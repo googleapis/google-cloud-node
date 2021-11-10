@@ -36,7 +36,7 @@ function main(parent, endpointId, endpoint) {
   /**
    *  Required. A endpoint with initial fields set.
    */
-  // const endpoint = ''
+  // const endpoint = {}
 
   // Imports the Servicedirectory library
   const {RegistrationServiceClient} =
@@ -45,7 +45,7 @@ function main(parent, endpointId, endpoint) {
   // Instantiates a client
   const servicedirectoryClient = new RegistrationServiceClient();
 
-  async function createEndpoint() {
+  async function callCreateEndpoint() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, endpointId, endpoint) {
     console.log(response);
   }
 
-  createEndpoint();
+  callCreateEndpoint();
   // [END servicedirectory_v1beta1_generated_RegistrationService_CreateEndpoint_async]
 }
 
