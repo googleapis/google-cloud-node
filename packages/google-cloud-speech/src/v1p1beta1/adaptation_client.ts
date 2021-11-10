@@ -336,6 +336,35 @@ export class AdaptationClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Create a set of phrase hints. Each item in the set can be a single word or
+   * a multi-word phrase. The items in the PhraseSet are favored by the
+   * recognition model when you send a call that includes the PhraseSet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this phrase set will be created.
+   *   Format:
+   *   {api_version}/projects/{project}/locations/{location}/phraseSets
+   * @param {string} request.phraseSetId
+   *   Required. The ID to use for the phrase set, which will become the final
+   *   component of the phrase set's resource name.
+   *
+   *   This value should be 4-63 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
+   *   Required. The phrase set to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PhraseSet]{@link google.cloud.speech.v1p1beta1.PhraseSet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.create_phrase_set.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_CreatePhraseSet_async
+   */
   createPhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
     options?: CallOptions
@@ -367,35 +396,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Create a set of phrase hints. Each item in the set can be a single word or
-   * a multi-word phrase. The items in the PhraseSet are favored by the
-   * recognition model when you send a call that includes the PhraseSet.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this phrase set will be created.
-   *   Format:
-   *   {api_version}/projects/{project}/locations/{location}/phraseSets
-   * @param {string} request.phraseSetId
-   *   Required. The ID to use for the phrase set, which will become the final
-   *   component of the phrase set's resource name.
-   *
-   *   This value should be 4-63 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
-   * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
-   *   Required. The phrase set to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PhraseSet]{@link google.cloud.speech.v1p1beta1.PhraseSet}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createPhraseSet(request);
-   */
   createPhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest,
     optionsOrCallback?:
@@ -439,6 +439,25 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.createPhraseSet(request, options, callback);
   }
+  /**
+   * Get a phrase set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the phrase set to retrieve.
+   *   Format:
+   *   {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PhraseSet]{@link google.cloud.speech.v1p1beta1.PhraseSet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.get_phrase_set.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_GetPhraseSet_async
+   */
   getPhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
     options?: CallOptions
@@ -470,25 +489,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get a phrase set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the phrase set to retrieve.
-   *   Format:
-   *   {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PhraseSet]{@link google.cloud.speech.v1p1beta1.PhraseSet}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getPhraseSet(request);
-   */
   getPhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest,
     optionsOrCallback?:
@@ -532,6 +532,29 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.getPhraseSet(request, options, callback);
   }
+  /**
+   * Update a phrase set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
+   *   Required. The phrase set to update.
+   *
+   *   The phrase set's `name` field is used to identify the set to be
+   *   updated. Format:
+   *   {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PhraseSet]{@link google.cloud.speech.v1p1beta1.PhraseSet}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.update_phrase_set.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_UpdatePhraseSet_async
+   */
   updatePhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
     options?: CallOptions
@@ -563,29 +586,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Update a phrase set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.PhraseSet} request.phraseSet
-   *   Required. The phrase set to update.
-   *
-   *   The phrase set's `name` field is used to identify the set to be
-   *   updated. Format:
-   *   {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PhraseSet]{@link google.cloud.speech.v1p1beta1.PhraseSet}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updatePhraseSet(request);
-   */
   updatePhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest,
     optionsOrCallback?:
@@ -629,6 +629,25 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.updatePhraseSet(request, options, callback);
   }
+  /**
+   * Delete a phrase set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the phrase set to delete.
+   *   Format:
+   *   {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.delete_phrase_set.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_DeletePhraseSet_async
+   */
   deletePhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
     options?: CallOptions
@@ -660,25 +679,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Delete a phrase set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the phrase set to delete.
-   *   Format:
-   *   {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deletePhraseSet(request);
-   */
   deletePhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest,
     optionsOrCallback?:
@@ -722,6 +722,33 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.deletePhraseSet(request, options, callback);
   }
+  /**
+   * Create a custom class.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this custom class will be created.
+   *   Format:
+   *   {api_version}/projects/{project}/locations/{location}/customClasses
+   * @param {string} request.customClassId
+   *   Required. The ID to use for the custom class, which will become the final
+   *   component of the custom class' resource name.
+   *
+   *   This value should be 4-63 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
+   *   Required. The custom class to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomClass]{@link google.cloud.speech.v1p1beta1.CustomClass}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.create_custom_class.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_CreateCustomClass_async
+   */
   createCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
     options?: CallOptions
@@ -756,33 +783,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Create a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this custom class will be created.
-   *   Format:
-   *   {api_version}/projects/{project}/locations/{location}/customClasses
-   * @param {string} request.customClassId
-   *   Required. The ID to use for the custom class, which will become the final
-   *   component of the custom class' resource name.
-   *
-   *   This value should be 4-63 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
-   * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
-   *   Required. The custom class to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CustomClass]{@link google.cloud.speech.v1p1beta1.CustomClass}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createCustomClass(request);
-   */
   createCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest,
     optionsOrCallback?:
@@ -829,6 +829,25 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.createCustomClass(request, options, callback);
   }
+  /**
+   * Get a custom class.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the custom class to retrieve.
+   *   Format:
+   *   {api_version}/projects/{project}/locations/{location}/customClasses/{custom_class}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomClass]{@link google.cloud.speech.v1p1beta1.CustomClass}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.get_custom_class.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_GetCustomClass_async
+   */
   getCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
     options?: CallOptions
@@ -860,25 +879,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the custom class to retrieve.
-   *   Format:
-   *   {api_version}/projects/{project}/locations/{location}/customClasses/{custom_class}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CustomClass]{@link google.cloud.speech.v1p1beta1.CustomClass}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getCustomClass(request);
-   */
   getCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest,
     optionsOrCallback?:
@@ -922,6 +922,29 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.getCustomClass(request, options, callback);
   }
+  /**
+   * Update a custom class.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
+   *   Required. The custom class to update.
+   *
+   *   The custom class's `name` field is used to identify the custom class to be
+   *   updated. Format:
+   *   {api_version}/projects/{project}/locations/{location}/customClasses/{custom_class}
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomClass]{@link google.cloud.speech.v1p1beta1.CustomClass}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.update_custom_class.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_UpdateCustomClass_async
+   */
   updateCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
     options?: CallOptions
@@ -956,29 +979,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Update a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.CustomClass} request.customClass
-   *   Required. The custom class to update.
-   *
-   *   The custom class's `name` field is used to identify the custom class to be
-   *   updated. Format:
-   *   {api_version}/projects/{project}/locations/{location}/customClasses/{custom_class}
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CustomClass]{@link google.cloud.speech.v1p1beta1.CustomClass}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateCustomClass(request);
-   */
   updateCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest,
     optionsOrCallback?:
@@ -1025,6 +1025,25 @@ export class AdaptationClient {
     this.initialize();
     return this.innerApiCalls.updateCustomClass(request, options, callback);
   }
+  /**
+   * Delete a custom class.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the custom class to delete.
+   *   Format:
+   *   {api_version}/projects/{project}/locations/{location}/customClasses/{custom_class}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.delete_custom_class.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_DeleteCustomClass_async
+   */
   deleteCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
     options?: CallOptions
@@ -1059,25 +1078,6 @@ export class AdaptationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Delete a custom class.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the custom class to delete.
-   *   Format:
-   *   {api_version}/projects/{project}/locations/{location}/customClasses/{custom_class}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteCustomClass(request);
-   */
   deleteCustomClass(
     request?: protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest,
     optionsOrCallback?:
@@ -1125,37 +1125,6 @@ export class AdaptationClient {
     return this.innerApiCalls.deleteCustomClass(request, options, callback);
   }
 
-  listPhraseSet(
-    request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest | null,
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-    ]
-  >;
-  listPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet
-    >
-  ): void;
-  listPhraseSet(
-    request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.IPhraseSet
-    >
-  ): void;
   /**
    * List phrase sets.
    *
@@ -1189,6 +1158,37 @@ export class AdaptationClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listPhraseSet(
+    request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
+      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest | null,
+      protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+    ]
+  >;
+  listPhraseSet(
+    request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+      | null
+      | undefined,
+      protos.google.cloud.speech.v1p1beta1.IPhraseSet
+    >
+  ): void;
+  listPhraseSet(
+    request: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+      | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+      | null
+      | undefined,
+      protos.google.cloud.speech.v1p1beta1.IPhraseSet
+    >
+  ): void;
   listPhraseSet(
     request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
     optionsOrCallback?:
@@ -1276,7 +1276,8 @@ export class AdaptationClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPhraseSet'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPhraseSet.createStream(
       this.innerApiCalls.listPhraseSet as gax.GaxCall,
@@ -1316,11 +1317,8 @@ export class AdaptationClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listPhraseSetAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.list_phrase_set.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_ListPhraseSet_async
    */
   listPhraseSetAsync(
     request?: protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
@@ -1334,8 +1332,8 @@ export class AdaptationClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listPhraseSet'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPhraseSet.asyncIterate(
       this.innerApiCalls['listPhraseSet'] as GaxCall,
@@ -1343,37 +1341,6 @@ export class AdaptationClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.speech.v1p1beta1.IPhraseSet>;
   }
-  listCustomClasses(
-    request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.speech.v1p1beta1.ICustomClass[],
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-    ]
-  >;
-  listCustomClasses(
-    request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.ICustomClass
-    >
-  ): void;
-  listCustomClasses(
-    request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
-      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
-      | null
-      | undefined,
-      protos.google.cloud.speech.v1p1beta1.ICustomClass
-    >
-  ): void;
   /**
    * List custom classes.
    *
@@ -1407,6 +1374,37 @@ export class AdaptationClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listCustomClasses(
+    request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.speech.v1p1beta1.ICustomClass[],
+      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest | null,
+      protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+    ]
+  >;
+  listCustomClasses(
+    request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+      | null
+      | undefined,
+      protos.google.cloud.speech.v1p1beta1.ICustomClass
+    >
+  ): void;
+  listCustomClasses(
+    request: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+      | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+      | null
+      | undefined,
+      protos.google.cloud.speech.v1p1beta1.ICustomClass
+    >
+  ): void;
   listCustomClasses(
     request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
     optionsOrCallback?:
@@ -1494,7 +1492,8 @@ export class AdaptationClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCustomClasses'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomClasses.createStream(
       this.innerApiCalls.listCustomClasses as gax.GaxCall,
@@ -1534,11 +1533,8 @@ export class AdaptationClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listCustomClassesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1p1beta1/adaptation.list_custom_classes.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Adaptation_ListCustomClasses_async
    */
   listCustomClassesAsync(
     request?: protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
@@ -1552,8 +1548,8 @@ export class AdaptationClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCustomClasses'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,

@@ -343,6 +343,27 @@ export class SpeechClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Performs synchronous speech recognition: receive results after all audio
+   * has been sent and processed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
+   *   Required. Provides information to the recognizer that specifies how to
+   *   process the request.
+   * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
+   *   Required. The audio data to be recognized.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RecognizeResponse]{@link google.cloud.speech.v1p1beta1.RecognizeResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/speech.recognize.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Speech_Recognize_async
+   */
   recognize(
     request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
     options?: CallOptions
@@ -370,27 +391,6 @@ export class SpeechClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Performs synchronous speech recognition: receive results after all audio
-   * has been sent and processed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
-   *   Required. Provides information to the recognizer that specifies how to
-   *   process the request.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
-   *   Required. The audio data to be recognized.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RecognizeResponse]{@link google.cloud.speech.v1p1beta1.RecognizeResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.recognize(request);
-   */
   recognize(
     request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
     optionsOrCallback?:
@@ -423,6 +423,8 @@ export class SpeechClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.recognize(request, options, callback);
   }
@@ -440,18 +442,43 @@ export class SpeechClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.streamingRecognize();
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
-   * stream.write(request);
-   * stream.end();
+   * @example <caption>include:samples/generated/v1p1beta1/speech.streaming_recognize.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Speech_StreamingRecognize_async
    */
   _streamingRecognize(options?: CallOptions): gax.CancellableStream {
     this.initialize();
     return this.innerApiCalls.streamingRecognize(options);
   }
 
+  /**
+   * Performs asynchronous speech recognition: receive results via the
+   * google.longrunning.Operations interface. Returns either an
+   * `Operation.error` or an `Operation.response` which contains
+   * a `LongRunningRecognizeResponse` message.
+   * For more information on asynchronous speech recognition, see the
+   * [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
+   *   Required. Provides information to the recognizer that specifies how to
+   *   process the request.
+   * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
+   *   Required. The audio data to be recognized.
+   * @param {google.cloud.speech.v1p1beta1.TranscriptOutputConfig} [request.outputConfig]
+   *   Optional. Specifies an optional destination for the recognition results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
+   */
   longRunningRecognize(
     request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
     options?: CallOptions
@@ -488,36 +515,6 @@ export class SpeechClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Performs asynchronous speech recognition: receive results via the
-   * google.longrunning.Operations interface. Returns either an
-   * `Operation.error` or an `Operation.response` which contains
-   * a `LongRunningRecognizeResponse` message.
-   * For more information on asynchronous speech recognition, see the
-   * [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionConfig} request.config
-   *   Required. Provides information to the recognizer that specifies how to
-   *   process the request.
-   * @param {google.cloud.speech.v1p1beta1.RecognitionAudio} request.audio
-   *   Required. The audio data to be recognized.
-   * @param {google.cloud.speech.v1p1beta1.TranscriptOutputConfig} [request.outputConfig]
-   *   Optional. Specifies an optional destination for the recognition results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.longRunningRecognize(request);
-   * const [response] = await operation.promise();
-   */
   longRunningRecognize(
     request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
     optionsOrCallback?:
@@ -557,6 +554,8 @@ export class SpeechClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.longRunningRecognize(request, options, callback);
   }
@@ -569,11 +568,8 @@ export class SpeechClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkLongRunningRecognizeProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
+   * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
    */
   async checkLongRunningRecognizeProgress(
     name: string
