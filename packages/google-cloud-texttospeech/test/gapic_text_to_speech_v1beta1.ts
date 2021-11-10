@@ -142,7 +142,7 @@ describe('v1beta1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.ListVoicesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.ListVoicesResponse()
       );
@@ -165,7 +165,7 @@ describe('v1beta1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.ListVoicesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.ListVoicesResponse()
       );
@@ -204,7 +204,7 @@ describe('v1beta1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.ListVoicesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listVoices = stubSimpleCall(
         undefined,
@@ -229,7 +229,7 @@ describe('v1beta1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse()
       );
@@ -252,7 +252,7 @@ describe('v1beta1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse()
       );
@@ -291,7 +291,7 @@ describe('v1beta1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.synthesizeSpeech = stubSimpleCall(
         undefined,
