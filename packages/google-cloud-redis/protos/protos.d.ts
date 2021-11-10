@@ -239,6 +239,102 @@ export namespace google {
                     type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
+                /** Properties of a NodeInfo. */
+                interface INodeInfo {
+
+                    /** NodeInfo id */
+                    id?: (string|null);
+
+                    /** NodeInfo zone */
+                    zone?: (string|null);
+                }
+
+                /** Represents a NodeInfo. */
+                class NodeInfo implements INodeInfo {
+
+                    /**
+                     * Constructs a new NodeInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.redis.v1.INodeInfo);
+
+                    /** NodeInfo id. */
+                    public id: string;
+
+                    /** NodeInfo zone. */
+                    public zone: string;
+
+                    /**
+                     * Creates a new NodeInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeInfo instance
+                     */
+                    public static create(properties?: google.cloud.redis.v1.INodeInfo): google.cloud.redis.v1.NodeInfo;
+
+                    /**
+                     * Encodes the specified NodeInfo message. Does not implicitly {@link google.cloud.redis.v1.NodeInfo.verify|verify} messages.
+                     * @param message NodeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.redis.v1.INodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeInfo message, length delimited. Does not implicitly {@link google.cloud.redis.v1.NodeInfo.verify|verify} messages.
+                     * @param message NodeInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.redis.v1.INodeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.v1.NodeInfo;
+
+                    /**
+                     * Decodes a NodeInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.v1.NodeInfo;
+
+                    /**
+                     * Verifies a NodeInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.redis.v1.NodeInfo;
+
+                    /**
+                     * Creates a plain object from a NodeInfo message. Also converts values to other types if specified.
+                     * @param message NodeInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.redis.v1.NodeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -298,6 +394,21 @@ export namespace google {
 
                     /** Instance connectMode */
                     connectMode?: (google.cloud.redis.v1.Instance.ConnectMode|keyof typeof google.cloud.redis.v1.Instance.ConnectMode|null);
+
+                    /** Instance replicaCount */
+                    replicaCount?: (number|null);
+
+                    /** Instance nodes */
+                    nodes?: (google.cloud.redis.v1.INodeInfo[]|null);
+
+                    /** Instance readEndpoint */
+                    readEndpoint?: (string|null);
+
+                    /** Instance readEndpointPort */
+                    readEndpointPort?: (number|null);
+
+                    /** Instance readReplicasMode */
+                    readReplicasMode?: (google.cloud.redis.v1.Instance.ReadReplicasMode|keyof typeof google.cloud.redis.v1.Instance.ReadReplicasMode|null);
                 }
 
                 /** Represents an Instance. */
@@ -365,6 +476,21 @@ export namespace google {
 
                     /** Instance connectMode. */
                     public connectMode: (google.cloud.redis.v1.Instance.ConnectMode|keyof typeof google.cloud.redis.v1.Instance.ConnectMode);
+
+                    /** Instance replicaCount. */
+                    public replicaCount: number;
+
+                    /** Instance nodes. */
+                    public nodes: google.cloud.redis.v1.INodeInfo[];
+
+                    /** Instance readEndpoint. */
+                    public readEndpoint: string;
+
+                    /** Instance readEndpointPort. */
+                    public readEndpointPort: number;
+
+                    /** Instance readReplicasMode. */
+                    public readReplicasMode: (google.cloud.redis.v1.Instance.ReadReplicasMode|keyof typeof google.cloud.redis.v1.Instance.ReadReplicasMode);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -464,6 +590,13 @@ export namespace google {
                         CONNECT_MODE_UNSPECIFIED = 0,
                         DIRECT_PEERING = 1,
                         PRIVATE_SERVICE_ACCESS = 2
+                    }
+
+                    /** ReadReplicasMode enum. */
+                    enum ReadReplicasMode {
+                        READ_REPLICAS_MODE_UNSPECIFIED = 0,
+                        READ_REPLICAS_DISABLED = 1,
+                        READ_REPLICAS_ENABLED = 2
                     }
                 }
 

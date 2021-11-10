@@ -252,6 +252,24 @@
                         }
                       }
                     },
+                    "NodeInfo": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Instance": {
                       "options": {
                         "(google.api.resource).type": "redis.googleapis.com/Instance",
@@ -386,6 +404,42 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "replicaCount": {
+                          "type": "int32",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "NodeInfo",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "readEndpoint": {
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "readEndpointPort": {
+                          "type": "int32",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "readReplicasMode": {
+                          "type": "ReadReplicasMode",
+                          "id": 35,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -414,6 +468,13 @@
                             "CONNECT_MODE_UNSPECIFIED": 0,
                             "DIRECT_PEERING": 1,
                             "PRIVATE_SERVICE_ACCESS": 2
+                          }
+                        },
+                        "ReadReplicasMode": {
+                          "values": {
+                            "READ_REPLICAS_MODE_UNSPECIFIED": 0,
+                            "READ_REPLICAS_DISABLED": 1,
+                            "READ_REPLICAS_ENABLED": 2
                           }
                         }
                       }

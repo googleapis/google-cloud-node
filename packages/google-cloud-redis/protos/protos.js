@@ -398,6 +398,216 @@
                         return CloudRedis;
                     })();
     
+                    v1.NodeInfo = (function() {
+    
+                        /**
+                         * Properties of a NodeInfo.
+                         * @memberof google.cloud.redis.v1
+                         * @interface INodeInfo
+                         * @property {string|null} [id] NodeInfo id
+                         * @property {string|null} [zone] NodeInfo zone
+                         */
+    
+                        /**
+                         * Constructs a new NodeInfo.
+                         * @memberof google.cloud.redis.v1
+                         * @classdesc Represents a NodeInfo.
+                         * @implements INodeInfo
+                         * @constructor
+                         * @param {google.cloud.redis.v1.INodeInfo=} [properties] Properties to set
+                         */
+                        function NodeInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NodeInfo id.
+                         * @member {string} id
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @instance
+                         */
+                        NodeInfo.prototype.id = "";
+    
+                        /**
+                         * NodeInfo zone.
+                         * @member {string} zone
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @instance
+                         */
+                        NodeInfo.prototype.zone = "";
+    
+                        /**
+                         * Creates a new NodeInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {google.cloud.redis.v1.INodeInfo=} [properties] Properties to set
+                         * @returns {google.cloud.redis.v1.NodeInfo} NodeInfo instance
+                         */
+                        NodeInfo.create = function create(properties) {
+                            return new NodeInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NodeInfo message. Does not implicitly {@link google.cloud.redis.v1.NodeInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {google.cloud.redis.v1.INodeInfo} message NodeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.zone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NodeInfo message, length delimited. Does not implicitly {@link google.cloud.redis.v1.NodeInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {google.cloud.redis.v1.INodeInfo} message NodeInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NodeInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.redis.v1.NodeInfo} NodeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.v1.NodeInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 2:
+                                    message.zone = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NodeInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.redis.v1.NodeInfo} NodeInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NodeInfo message.
+                         * @function verify
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NodeInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NodeInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.redis.v1.NodeInfo} NodeInfo
+                         */
+                        NodeInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.redis.v1.NodeInfo)
+                                return object;
+                            var message = new $root.google.cloud.redis.v1.NodeInfo();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NodeInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @static
+                         * @param {google.cloud.redis.v1.NodeInfo} message NodeInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NodeInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.zone = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                object.zone = message.zone;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NodeInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.redis.v1.NodeInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NodeInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return NodeInfo;
+                    })();
+    
                     v1.Instance = (function() {
     
                         /**
@@ -423,6 +633,11 @@
                          * @property {string|null} [authorizedNetwork] Instance authorizedNetwork
                          * @property {string|null} [persistenceIamIdentity] Instance persistenceIamIdentity
                          * @property {google.cloud.redis.v1.Instance.ConnectMode|null} [connectMode] Instance connectMode
+                         * @property {number|null} [replicaCount] Instance replicaCount
+                         * @property {Array.<google.cloud.redis.v1.INodeInfo>|null} [nodes] Instance nodes
+                         * @property {string|null} [readEndpoint] Instance readEndpoint
+                         * @property {number|null} [readEndpointPort] Instance readEndpointPort
+                         * @property {google.cloud.redis.v1.Instance.ReadReplicasMode|null} [readReplicasMode] Instance readReplicasMode
                          */
     
                         /**
@@ -436,6 +651,7 @@
                         function Instance(properties) {
                             this.labels = {};
                             this.redisConfigs = {};
+                            this.nodes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -595,6 +811,46 @@
                         Instance.prototype.connectMode = 0;
     
                         /**
+                         * Instance replicaCount.
+                         * @member {number} replicaCount
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.replicaCount = 0;
+    
+                        /**
+                         * Instance nodes.
+                         * @member {Array.<google.cloud.redis.v1.INodeInfo>} nodes
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.nodes = $util.emptyArray;
+    
+                        /**
+                         * Instance readEndpoint.
+                         * @member {string} readEndpoint
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.readEndpoint = "";
+    
+                        /**
+                         * Instance readEndpointPort.
+                         * @member {number} readEndpointPort
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.readEndpointPort = 0;
+    
+                        /**
+                         * Instance readReplicasMode.
+                         * @member {google.cloud.redis.v1.Instance.ReadReplicasMode} readReplicasMode
+                         * @memberof google.cloud.redis.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.readReplicasMode = 0;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.redis.v1.Instance
@@ -658,6 +914,17 @@
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.persistenceIamIdentity);
                             if (message.connectMode != null && Object.hasOwnProperty.call(message, "connectMode"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.connectMode);
+                            if (message.replicaCount != null && Object.hasOwnProperty.call(message, "replicaCount"))
+                                writer.uint32(/* id 31, wireType 0 =*/248).int32(message.replicaCount);
+                            if (message.nodes != null && message.nodes.length)
+                                for (var i = 0; i < message.nodes.length; ++i)
+                                    $root.google.cloud.redis.v1.NodeInfo.encode(message.nodes[i], writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                            if (message.readEndpoint != null && Object.hasOwnProperty.call(message, "readEndpoint"))
+                                writer.uint32(/* id 33, wireType 2 =*/266).string(message.readEndpoint);
+                            if (message.readEndpointPort != null && Object.hasOwnProperty.call(message, "readEndpointPort"))
+                                writer.uint32(/* id 34, wireType 0 =*/272).int32(message.readEndpointPort);
+                            if (message.readReplicasMode != null && Object.hasOwnProperty.call(message, "readReplicasMode"))
+                                writer.uint32(/* id 35, wireType 0 =*/280).int32(message.readReplicasMode);
                             return writer;
                         };
     
@@ -787,6 +1054,23 @@
                                 case 22:
                                     message.connectMode = reader.int32();
                                     break;
+                                case 31:
+                                    message.replicaCount = reader.int32();
+                                    break;
+                                case 32:
+                                    if (!(message.nodes && message.nodes.length))
+                                        message.nodes = [];
+                                    message.nodes.push($root.google.cloud.redis.v1.NodeInfo.decode(reader, reader.uint32()));
+                                    break;
+                                case 33:
+                                    message.readEndpoint = reader.string();
+                                    break;
+                                case 34:
+                                    message.readEndpointPort = reader.int32();
+                                    break;
+                                case 35:
+                                    message.readReplicasMode = reader.int32();
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -910,6 +1194,33 @@
                                 switch (message.connectMode) {
                                 default:
                                     return "connectMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
+                                if (!$util.isInteger(message.replicaCount))
+                                    return "replicaCount: integer expected";
+                            if (message.nodes != null && message.hasOwnProperty("nodes")) {
+                                if (!Array.isArray(message.nodes))
+                                    return "nodes: array expected";
+                                for (var i = 0; i < message.nodes.length; ++i) {
+                                    var error = $root.google.cloud.redis.v1.NodeInfo.verify(message.nodes[i]);
+                                    if (error)
+                                        return "nodes." + error;
+                                }
+                            }
+                            if (message.readEndpoint != null && message.hasOwnProperty("readEndpoint"))
+                                if (!$util.isString(message.readEndpoint))
+                                    return "readEndpoint: string expected";
+                            if (message.readEndpointPort != null && message.hasOwnProperty("readEndpointPort"))
+                                if (!$util.isInteger(message.readEndpointPort))
+                                    return "readEndpointPort: integer expected";
+                            if (message.readReplicasMode != null && message.hasOwnProperty("readReplicasMode"))
+                                switch (message.readReplicasMode) {
+                                default:
+                                    return "readReplicasMode: enum value expected";
                                 case 0:
                                 case 1:
                                 case 2:
@@ -1041,6 +1352,36 @@
                                 message.connectMode = 2;
                                 break;
                             }
+                            if (object.replicaCount != null)
+                                message.replicaCount = object.replicaCount | 0;
+                            if (object.nodes) {
+                                if (!Array.isArray(object.nodes))
+                                    throw TypeError(".google.cloud.redis.v1.Instance.nodes: array expected");
+                                message.nodes = [];
+                                for (var i = 0; i < object.nodes.length; ++i) {
+                                    if (typeof object.nodes[i] !== "object")
+                                        throw TypeError(".google.cloud.redis.v1.Instance.nodes: object expected");
+                                    message.nodes[i] = $root.google.cloud.redis.v1.NodeInfo.fromObject(object.nodes[i]);
+                                }
+                            }
+                            if (object.readEndpoint != null)
+                                message.readEndpoint = String(object.readEndpoint);
+                            if (object.readEndpointPort != null)
+                                message.readEndpointPort = object.readEndpointPort | 0;
+                            switch (object.readReplicasMode) {
+                            case "READ_REPLICAS_MODE_UNSPECIFIED":
+                            case 0:
+                                message.readReplicasMode = 0;
+                                break;
+                            case "READ_REPLICAS_DISABLED":
+                            case 1:
+                                message.readReplicasMode = 1;
+                                break;
+                            case "READ_REPLICAS_ENABLED":
+                            case 2:
+                                message.readReplicasMode = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1057,6 +1398,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.nodes = [];
                             if (options.objects || options.defaults) {
                                 object.labels = {};
                                 object.redisConfigs = {};
@@ -1079,6 +1422,10 @@
                                 object.authorizedNetwork = "";
                                 object.persistenceIamIdentity = "";
                                 object.connectMode = options.enums === String ? "CONNECT_MODE_UNSPECIFIED" : 0;
+                                object.replicaCount = 0;
+                                object.readEndpoint = "";
+                                object.readEndpointPort = 0;
+                                object.readReplicasMode = options.enums === String ? "READ_REPLICAS_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1125,6 +1472,19 @@
                                 object.persistenceIamIdentity = message.persistenceIamIdentity;
                             if (message.connectMode != null && message.hasOwnProperty("connectMode"))
                                 object.connectMode = options.enums === String ? $root.google.cloud.redis.v1.Instance.ConnectMode[message.connectMode] : message.connectMode;
+                            if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
+                                object.replicaCount = message.replicaCount;
+                            if (message.nodes && message.nodes.length) {
+                                object.nodes = [];
+                                for (var j = 0; j < message.nodes.length; ++j)
+                                    object.nodes[j] = $root.google.cloud.redis.v1.NodeInfo.toObject(message.nodes[j], options);
+                            }
+                            if (message.readEndpoint != null && message.hasOwnProperty("readEndpoint"))
+                                object.readEndpoint = message.readEndpoint;
+                            if (message.readEndpointPort != null && message.hasOwnProperty("readEndpointPort"))
+                                object.readEndpointPort = message.readEndpointPort;
+                            if (message.readReplicasMode != null && message.hasOwnProperty("readReplicasMode"))
+                                object.readReplicasMode = options.enums === String ? $root.google.cloud.redis.v1.Instance.ReadReplicasMode[message.readReplicasMode] : message.readReplicasMode;
                             return object;
                         };
     
@@ -1196,6 +1556,22 @@
                             values[valuesById[0] = "CONNECT_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DIRECT_PEERING"] = 1;
                             values[valuesById[2] = "PRIVATE_SERVICE_ACCESS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ReadReplicasMode enum.
+                         * @name google.cloud.redis.v1.Instance.ReadReplicasMode
+                         * @enum {number}
+                         * @property {number} READ_REPLICAS_MODE_UNSPECIFIED=0 READ_REPLICAS_MODE_UNSPECIFIED value
+                         * @property {number} READ_REPLICAS_DISABLED=1 READ_REPLICAS_DISABLED value
+                         * @property {number} READ_REPLICAS_ENABLED=2 READ_REPLICAS_ENABLED value
+                         */
+                        Instance.ReadReplicasMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "READ_REPLICAS_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "READ_REPLICAS_DISABLED"] = 1;
+                            values[valuesById[2] = "READ_REPLICAS_ENABLED"] = 2;
                             return values;
                         })();
     
