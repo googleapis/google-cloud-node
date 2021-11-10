@@ -29,7 +29,7 @@ function main() {
    *  The new override.
    *  Only the override_value is updated; all other fields are ignored.
    */
-  // const override = ''
+  // const override = {}
   /**
    *  Whether to force the update of the quota override.
    *  Setting the force parameter to 'true' ignores all quota safety checks that
@@ -40,7 +40,7 @@ function main() {
    *  Update only the specified fields of the override.
    *  If unset, all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  The list of quota safety checks to ignore before the override mutation.
    *  Unlike 'force' field that ignores all the quota safety checks, the
@@ -55,7 +55,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function updateAdminOverride() {
+  async function callUpdateAdminOverride() {
     // Construct request
     const request = {};
 
@@ -65,7 +65,7 @@ function main() {
     console.log(response);
   }
 
-  updateAdminOverride();
+  callUpdateAdminOverride();
   // [END serviceusage_v1beta1_generated_ServiceUsage_UpdateAdminOverride_async]
 }
 

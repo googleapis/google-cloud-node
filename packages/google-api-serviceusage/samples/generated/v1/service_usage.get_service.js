@@ -33,7 +33,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function getService() {
+  async function callGetService() {
     // Construct request
     const request = {};
 
@@ -42,7 +42,7 @@ function main() {
     console.log(response);
   }
 
-  getService();
+  callGetService();
   // [END serviceusage_v1_generated_ServiceUsage_GetService_async]
 }
 

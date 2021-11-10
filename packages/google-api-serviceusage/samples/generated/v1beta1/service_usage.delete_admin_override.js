@@ -45,7 +45,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function deleteAdminOverride() {
+  async function callDeleteAdminOverride() {
     // Construct request
     const request = {};
 
@@ -55,7 +55,7 @@ function main() {
     console.log(response);
   }
 
-  deleteAdminOverride();
+  callDeleteAdminOverride();
   // [END serviceusage_v1beta1_generated_ServiceUsage_DeleteAdminOverride_async]
 }
 

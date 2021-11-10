@@ -28,7 +28,7 @@ function main() {
   /**
    *  Specifies the level of detail for quota information in the response.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Serviceusage library
   const {ServiceUsageClient} = require('@google-cloud/service-usage').v1beta1;
@@ -36,7 +36,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function getConsumerQuotaLimit() {
+  async function callGetConsumerQuotaLimit() {
     // Construct request
     const request = {};
 
@@ -45,7 +45,7 @@ function main() {
     console.log(response);
   }
 
-  getConsumerQuotaLimit();
+  callGetConsumerQuotaLimit();
   // [END serviceusage_v1beta1_generated_ServiceUsage_GetConsumerQuotaLimit_async]
 }
 

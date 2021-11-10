@@ -28,7 +28,7 @@ function main() {
   /**
    *  The import data is specified in the request message itself
    */
-  // const inlineSource = ''
+  // const inlineSource = {}
   /**
    *  Whether to force the creation of the quota overrides.
    *  Setting the force parameter to 'true' ignores all quota safety checks that
@@ -49,7 +49,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function importConsumerOverrides() {
+  async function callImportConsumerOverrides() {
     // Construct request
     const request = {};
 
@@ -61,7 +61,7 @@ function main() {
     console.log(response);
   }
 
-  importConsumerOverrides();
+  callImportConsumerOverrides();
   // [END serviceusage_v1beta1_generated_ServiceUsage_ImportConsumerOverrides_async]
 }
 

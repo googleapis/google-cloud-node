@@ -34,7 +34,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function generateServiceIdentity() {
+  async function callGenerateServiceIdentity() {
     // Construct request
     const request = {};
 
@@ -46,7 +46,7 @@ function main() {
     console.log(response);
   }
 
-  generateServiceIdentity();
+  callGenerateServiceIdentity();
   // [END serviceusage_v1beta1_generated_ServiceUsage_GenerateServiceIdentity_async]
 }
 

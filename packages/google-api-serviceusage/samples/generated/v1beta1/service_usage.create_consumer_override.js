@@ -29,7 +29,7 @@ function main() {
   /**
    *  The override to create.
    */
-  // const override = ''
+  // const override = {}
   /**
    *  Whether to force the creation of the quota override.
    *  Setting the force parameter to 'true' ignores all quota safety checks that
@@ -50,7 +50,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function createConsumerOverride() {
+  async function callCreateConsumerOverride() {
     // Construct request
     const request = {};
 
@@ -62,7 +62,7 @@ function main() {
     console.log(response);
   }
 
-  createConsumerOverride();
+  callCreateConsumerOverride();
   // [END serviceusage_v1beta1_generated_ServiceUsage_CreateConsumerOverride_async]
 }
 

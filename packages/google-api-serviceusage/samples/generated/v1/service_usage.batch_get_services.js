@@ -42,7 +42,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function batchGetServices() {
+  async function callBatchGetServices() {
     // Construct request
     const request = {};
 
@@ -51,7 +51,7 @@ function main() {
     console.log(response);
   }
 
-  batchGetServices();
+  callBatchGetServices();
   // [END serviceusage_v1_generated_ServiceUsage_BatchGetServices_async]
 }
 

@@ -42,7 +42,7 @@ function main() {
   // Instantiates a client
   const serviceusageClient = new ServiceUsageClient();
 
-  async function listConsumerOverrides() {
+  async function callListConsumerOverrides() {
     // Construct request
     const request = {};
 
@@ -55,7 +55,7 @@ function main() {
     }
   }
 
-  listConsumerOverrides();
+  callListConsumerOverrides();
   // [END serviceusage_v1beta1_generated_ServiceUsage_ListConsumerOverrides_async]
 }
 
