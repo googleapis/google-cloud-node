@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function getQueue() {
+  async function callGetQueue() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getQueue();
+  callGetQueue();
   // [END cloudtasks_v2_generated_CloudTasks_GetQueue_async]
 }
 

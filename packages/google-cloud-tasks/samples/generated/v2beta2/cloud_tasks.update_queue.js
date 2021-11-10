@@ -21,17 +21,17 @@ function main(queue) {
    */
   /**
    *  Required. The queue to create or update.
-   *  The queue's [name][google.cloud.tasks.v2beta2.Queue.name] must be specified.
+   *  The queue's name google.cloud.tasks.v2beta2.Queue.name  must be specified.
    *  Output only fields cannot be modified using UpdateQueue.
    *  Any value specified for an output only field will be ignored.
-   *  The queue's [name][google.cloud.tasks.v2beta2.Queue.name] cannot be changed.
+   *  The queue's name google.cloud.tasks.v2beta2.Queue.name  cannot be changed.
    */
-  // const queue = ''
+  // const queue = {}
   /**
    *  A mask used to specify which fields of the queue are being updated.
    *  If empty, then all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Tasks library
   const {CloudTasksClient} = require('@google-cloud/tasks').v2beta2;
@@ -39,7 +39,7 @@ function main(queue) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function updateQueue() {
+  async function callUpdateQueue() {
     // Construct request
     const request = {
       queue,
@@ -50,7 +50,7 @@ function main(queue) {
     console.log(response);
   }
 
-  updateQueue();
+  callUpdateQueue();
   // [END cloudtasks_v2beta2_generated_CloudTasks_UpdateQueue_async]
 }
 

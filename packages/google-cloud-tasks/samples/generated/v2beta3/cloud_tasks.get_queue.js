@@ -27,10 +27,10 @@ function main(name) {
   /**
    *  Optional. Read mask is used for a more granular control over what the API returns.
    *  If the mask is not present all fields will be returned except
-   *  [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+   *  Queue.stats. Queue.stats will be returned only if it was  explicitly
    *  specified in the mask.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Tasks library
   const {CloudTasksClient} = require('@google-cloud/tasks').v2beta3;
@@ -38,7 +38,7 @@ function main(name) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function getQueue() {
+  async function callGetQueue() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name) {
     console.log(response);
   }
 
-  getQueue();
+  callGetQueue();
   // [END cloudtasks_v2beta3_generated_CloudTasks_GetQueue_async]
 }
 

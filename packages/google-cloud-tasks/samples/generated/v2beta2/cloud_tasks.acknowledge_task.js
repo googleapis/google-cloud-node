@@ -26,12 +26,12 @@ function main(name, scheduleTime) {
   // const name = 'abc123'
   /**
    *  Required. The task's current schedule time, available in the
-   *  [schedule_time][google.cloud.tasks.v2beta2.Task.schedule_time] returned by
-   *  [LeaseTasks][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks] response or
-   *  [RenewLease][google.cloud.tasks.v2beta2.CloudTasks.RenewLease] response. This restriction is
+   *  schedule_time google.cloud.tasks.v2beta2.Task.schedule_time  returned by
+   *  LeaseTasks google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks  response or
+   *  RenewLease google.cloud.tasks.v2beta2.CloudTasks.RenewLease  response. This restriction is
    *  to ensure that your worker currently holds the lease.
    */
-  // const scheduleTime = ''
+  // const scheduleTime = {}
 
   // Imports the Tasks library
   const {CloudTasksClient} = require('@google-cloud/tasks').v2beta2;
@@ -39,7 +39,7 @@ function main(name, scheduleTime) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function acknowledgeTask() {
+  async function callAcknowledgeTask() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name, scheduleTime) {
     console.log(response);
   }
 
-  acknowledgeTask();
+  callAcknowledgeTask();
   // [END cloudtasks_v2beta2_generated_CloudTasks_AcknowledgeTask_async]
 }
 

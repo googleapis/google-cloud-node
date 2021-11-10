@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function pauseQueue() {
+  async function callPauseQueue() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  pauseQueue();
+  callPauseQueue();
   // [END cloudtasks_v2beta3_generated_CloudTasks_PauseQueue_async]
 }
 

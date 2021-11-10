@@ -28,7 +28,7 @@ function main(resource) {
    *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
    *  `GetIamPolicy`. This field is only used by Cloud IAM.
    */
-  // const options = ''
+  // const options = {}
 
   // Imports the Tasks library
   const {CloudTasksClient} = require('@google-cloud/tasks').v2;
@@ -36,7 +36,7 @@ function main(resource) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function getIamPolicy() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -47,7 +47,7 @@ function main(resource) {
     console.log(response);
   }
 
-  getIamPolicy();
+  callGetIamPolicy();
   // [END cloudtasks_v2_generated_CloudTasks_GetIamPolicy_async]
 }
 

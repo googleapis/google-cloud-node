@@ -343,6 +343,29 @@ export class CloudTasksClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a queue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the queue. For example:
+   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Read mask is used for a more granular control over what the API returns.
+   *   If the mask is not present all fields will be returned except
+   *   [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+   *   specified in the mask.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Queue]{@link google.cloud.tasks.v2beta3.Queue}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.get_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_GetQueue_async
+   */
   getQueue(
     request?: protos.google.cloud.tasks.v2beta3.IGetQueueRequest,
     options?: CallOptions
@@ -370,29 +393,6 @@ export class CloudTasksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a queue.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the queue. For example:
-   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Read mask is used for a more granular control over what the API returns.
-   *   If the mask is not present all fields will be returned except
-   *   [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
-   *   specified in the mask.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Queue]{@link google.cloud.tasks.v2beta3.Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getQueue(request);
-   */
   getQueue(
     request?: protos.google.cloud.tasks.v2beta3.IGetQueueRequest,
     optionsOrCallback?:
@@ -432,33 +432,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.getQueue(request, options, callback);
   }
-  createQueue(
-    request?: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createQueue(
-    request: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createQueue(
-    request: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a queue.
    *
@@ -493,9 +466,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createQueue(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.create_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_CreateQueue_async
    */
+  createQueue(
+    request?: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createQueue(
+    request: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQueue(
+    request: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.ICreateQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createQueue(
     request?: protos.google.cloud.tasks.v2beta3.ICreateQueueRequest,
     optionsOrCallback?:
@@ -537,33 +537,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.createQueue(request, options, callback);
   }
-  updateQueue(
-    request?: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateQueue(
-    request: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateQueue(
-    request: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates a queue.
    *
@@ -602,9 +575,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateQueue(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.update_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_UpdateQueue_async
    */
+  updateQueue(
+    request?: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateQueue(
+    request: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQueue(
+    request: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateQueue(
     request?: protos.google.cloud.tasks.v2beta3.IUpdateQueueRequest,
     optionsOrCallback?:
@@ -646,33 +646,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.updateQueue(request, options, callback);
   }
-  deleteQueue(
-    request?: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteQueue(
-    request: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteQueue(
-    request: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Deletes a queue.
    *
@@ -700,9 +673,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteQueue(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.delete_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_DeleteQueue_async
    */
+  deleteQueue(
+    request?: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteQueue(
+    request: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQueue(
+    request: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteQueue(
     request?: protos.google.cloud.tasks.v2beta3.IDeleteQueueRequest,
     optionsOrCallback?:
@@ -744,6 +744,29 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.deleteQueue(request, options, callback);
   }
+  /**
+   * Purges a queue by deleting all of its tasks.
+   *
+   * All tasks created before this method is called are permanently deleted.
+   *
+   * Purge operations can take up to one minute to take effect. Tasks
+   * might be dispatched before the purge takes effect. A purge is irreversible.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The queue name. For example:
+   *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Queue]{@link google.cloud.tasks.v2beta3.Queue}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.purge_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_PurgeQueue_async
+   */
   purgeQueue(
     request?: protos.google.cloud.tasks.v2beta3.IPurgeQueueRequest,
     options?: CallOptions
@@ -771,29 +794,6 @@ export class CloudTasksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Purges a queue by deleting all of its tasks.
-   *
-   * All tasks created before this method is called are permanently deleted.
-   *
-   * Purge operations can take up to one minute to take effect. Tasks
-   * might be dispatched before the purge takes effect. A purge is irreversible.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The queue name. For example:
-   *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Queue]{@link google.cloud.tasks.v2beta3.Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.purgeQueue(request);
-   */
   purgeQueue(
     request?: protos.google.cloud.tasks.v2beta3.IPurgeQueueRequest,
     optionsOrCallback?:
@@ -835,6 +835,30 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.purgeQueue(request, options, callback);
   }
+  /**
+   * Pauses the queue.
+   *
+   * If a queue is paused then the system will stop dispatching tasks
+   * until the queue is resumed via
+   * {@link google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue|ResumeQueue}. Tasks can still be added
+   * when the queue is paused. A queue is paused if its
+   * {@link google.cloud.tasks.v2beta3.Queue.state|state} is {@link google.cloud.tasks.v2beta3.Queue.State.PAUSED|PAUSED}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The queue name. For example:
+   *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Queue]{@link google.cloud.tasks.v2beta3.Queue}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.pause_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_PauseQueue_async
+   */
   pauseQueue(
     request?: protos.google.cloud.tasks.v2beta3.IPauseQueueRequest,
     options?: CallOptions
@@ -862,30 +886,6 @@ export class CloudTasksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Pauses the queue.
-   *
-   * If a queue is paused then the system will stop dispatching tasks
-   * until the queue is resumed via
-   * {@link google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue|ResumeQueue}. Tasks can still be added
-   * when the queue is paused. A queue is paused if its
-   * {@link google.cloud.tasks.v2beta3.Queue.state|state} is {@link google.cloud.tasks.v2beta3.Queue.State.PAUSED|PAUSED}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The queue name. For example:
-   *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Queue]{@link google.cloud.tasks.v2beta3.Queue}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.pauseQueue(request);
-   */
   pauseQueue(
     request?: protos.google.cloud.tasks.v2beta3.IPauseQueueRequest,
     optionsOrCallback?:
@@ -927,33 +927,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.pauseQueue(request, options, callback);
   }
-  resumeQueue(
-    request?: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  resumeQueue(
-    request: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resumeQueue(
-    request: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.IQueue,
-      protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Resume a queue.
    *
@@ -981,9 +954,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.resumeQueue(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.resume_queue.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_ResumeQueue_async
    */
+  resumeQueue(
+    request?: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  resumeQueue(
+    request: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeQueue(
+    request: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IQueue,
+      protos.google.cloud.tasks.v2beta3.IResumeQueueRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   resumeQueue(
     request?: protos.google.cloud.tasks.v2beta3.IResumeQueueRequest,
     optionsOrCallback?:
@@ -1025,6 +1025,35 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.resumeQueue(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a {@link google.cloud.tasks.v2beta3.Queue|Queue}.
+   * Returns an empty policy if the resource exists and does not have a policy
+   * set.
+   *
+   * Authorization requires the following
+   * [Google IAM](https://cloud.google.com/iam) permission on the specified
+   * resource parent:
+   *
+   * * `cloudtasks.queues.getIamPolicy`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.get_iam_policy.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -1052,35 +1081,6 @@ export class CloudTasksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a {@link google.cloud.tasks.v2beta3.Queue|Queue}.
-   * Returns an empty policy if the resource exists and does not have a policy
-   * set.
-   *
-   * Authorization requires the following
-   * [Google IAM](https://cloud.google.com/iam) permission on the specified
-   * resource parent:
-   *
-   * * `cloudtasks.queues.getIamPolicy`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -1120,33 +1120,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the access control policy for a {@link google.cloud.tasks.v2beta3.Queue|Queue}. Replaces any existing
    * policy.
@@ -1177,9 +1150,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.set_iam_policy.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_SetIamPolicy_async
    */
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -1219,6 +1219,35 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on a {@link google.cloud.tasks.v2beta3.Queue|Queue}.
+   * If the resource does not exist, this will return an empty set of
+   * permissions, not a {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} error.
+   *
+   * Note: This operation is designed to be used for building permission-aware
+   * UIs and command-line tools, not for authorization checking. This operation
+   * may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.test_iam_permissions.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -1246,35 +1275,6 @@ export class CloudTasksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on a {@link google.cloud.tasks.v2beta3.Queue|Queue}.
-   * If the resource does not exist, this will return an empty set of
-   * permissions, not a {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} error.
-   *
-   * Note: This operation is designed to be used for building permission-aware
-   * UIs and command-line tools, not for authorization checking. This operation
-   * may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -1314,33 +1314,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
-  getTask(
-    request?: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.IGetTaskRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getTask(
-    request: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.IGetTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getTask(
-    request: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.IGetTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Gets a task.
    *
@@ -1369,9 +1342,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.getTask(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.get_task.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_GetTask_async
    */
+  getTask(
+    request?: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.IGetTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getTask(
+    request: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTask(
+    request: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getTask(
     request?: protos.google.cloud.tasks.v2beta3.IGetTaskRequest,
     optionsOrCallback?:
@@ -1411,33 +1411,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.getTask(request, options, callback);
   }
-  createTask(
-    request?: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createTask(
-    request: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTask(
-    request: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a task and adds it to a queue.
    *
@@ -1506,9 +1479,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createTask(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.create_task.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_CreateTask_async
    */
+  createTask(
+    request?: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createTask(
+    request: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createTask(
+    request: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.ICreateTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createTask(
     request?: protos.google.cloud.tasks.v2beta3.ICreateTaskRequest,
     optionsOrCallback?:
@@ -1550,6 +1550,28 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.createTask(request, options, callback);
   }
+  /**
+   * Deletes a task.
+   *
+   * A task can be deleted if it is scheduled or dispatched. A task
+   * cannot be deleted if it has executed successfully or permanently
+   * failed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The task name. For example:
+   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.delete_task.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_DeleteTask_async
+   */
   deleteTask(
     request?: protos.google.cloud.tasks.v2beta3.IDeleteTaskRequest,
     options?: CallOptions
@@ -1577,28 +1599,6 @@ export class CloudTasksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a task.
-   *
-   * A task can be deleted if it is scheduled or dispatched. A task
-   * cannot be deleted if it has executed successfully or permanently
-   * failed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The task name. For example:
-   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteTask(request);
-   */
   deleteTask(
     request?: protos.google.cloud.tasks.v2beta3.IDeleteTaskRequest,
     optionsOrCallback?:
@@ -1640,33 +1640,6 @@ export class CloudTasksClient {
     this.initialize();
     return this.innerApiCalls.deleteTask(request, options, callback);
   }
-  runTask(
-    request?: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.IRunTaskRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  runTask(
-    request: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.IRunTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  runTask(
-    request: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
-    callback: Callback<
-      protos.google.cloud.tasks.v2beta3.ITask,
-      protos.google.cloud.tasks.v2beta3.IRunTaskRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Forces a task to run now.
    *
@@ -1718,9 +1691,36 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.runTask(request);
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.run_task.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_RunTask_async
    */
+  runTask(
+    request?: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.IRunTaskRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  runTask(
+    request: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runTask(
+    request: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ITask,
+      protos.google.cloud.tasks.v2beta3.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runTask(
     request?: protos.google.cloud.tasks.v2beta3.IRunTaskRequest,
     optionsOrCallback?:
@@ -1761,33 +1761,6 @@ export class CloudTasksClient {
     return this.innerApiCalls.runTask(request, options, callback);
   }
 
-  listQueues(
-    request?: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.IQueue[],
-      protos.google.cloud.tasks.v2beta3.IListQueuesRequest | null,
-      protos.google.cloud.tasks.v2beta3.IListQueuesResponse
-    ]
-  >;
-  listQueues(
-    request: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
-      protos.google.cloud.tasks.v2beta3.IListQueuesResponse | null | undefined,
-      protos.google.cloud.tasks.v2beta3.IQueue
-    >
-  ): void;
-  listQueues(
-    request: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
-      protos.google.cloud.tasks.v2beta3.IListQueuesResponse | null | undefined,
-      protos.google.cloud.tasks.v2beta3.IQueue
-    >
-  ): void;
   /**
    * Lists queues.
    *
@@ -1845,6 +1818,33 @@ export class CloudTasksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listQueues(
+    request?: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.IQueue[],
+      protos.google.cloud.tasks.v2beta3.IListQueuesRequest | null,
+      protos.google.cloud.tasks.v2beta3.IListQueuesResponse
+    ]
+  >;
+  listQueues(
+    request: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
+      protos.google.cloud.tasks.v2beta3.IListQueuesResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta3.IQueue
+    >
+  ): void;
+  listQueues(
+    request: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
+      protos.google.cloud.tasks.v2beta3.IListQueuesResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta3.IQueue
+    >
+  ): void;
   listQueues(
     request?: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
     optionsOrCallback?:
@@ -2015,11 +2015,8 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listQueuesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.list_queues.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_ListQueues_async
    */
   listQueuesAsync(
     request?: protos.google.cloud.tasks.v2beta3.IListQueuesRequest,
@@ -2033,7 +2030,6 @@ export class CloudTasksClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listQueues'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2043,33 +2039,6 @@ export class CloudTasksClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.tasks.v2beta3.IQueue>;
   }
-  listTasks(
-    request?: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.tasks.v2beta3.ITask[],
-      protos.google.cloud.tasks.v2beta3.IListTasksRequest | null,
-      protos.google.cloud.tasks.v2beta3.IListTasksResponse
-    ]
-  >;
-  listTasks(
-    request: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.tasks.v2beta3.IListTasksRequest,
-      protos.google.cloud.tasks.v2beta3.IListTasksResponse | null | undefined,
-      protos.google.cloud.tasks.v2beta3.ITask
-    >
-  ): void;
-  listTasks(
-    request: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.tasks.v2beta3.IListTasksRequest,
-      protos.google.cloud.tasks.v2beta3.IListTasksResponse | null | undefined,
-      protos.google.cloud.tasks.v2beta3.ITask
-    >
-  ): void;
   /**
    * Lists the tasks in a queue.
    *
@@ -2131,6 +2100,33 @@ export class CloudTasksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTasks(
+    request?: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ITask[],
+      protos.google.cloud.tasks.v2beta3.IListTasksRequest | null,
+      protos.google.cloud.tasks.v2beta3.IListTasksResponse
+    ]
+  >;
+  listTasks(
+    request: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta3.IListTasksRequest,
+      protos.google.cloud.tasks.v2beta3.IListTasksResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta3.ITask
+    >
+  ): void;
+  listTasks(
+    request: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.tasks.v2beta3.IListTasksRequest,
+      protos.google.cloud.tasks.v2beta3.IListTasksResponse | null | undefined,
+      protos.google.cloud.tasks.v2beta3.ITask
+    >
+  ): void;
   listTasks(
     request?: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
     optionsOrCallback?:
@@ -2297,11 +2293,8 @@ export class CloudTasksClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTasksAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.list_tasks.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_ListTasks_async
    */
   listTasksAsync(
     request?: protos.google.cloud.tasks.v2beta3.IListTasksRequest,
@@ -2315,7 +2308,6 @@ export class CloudTasksClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

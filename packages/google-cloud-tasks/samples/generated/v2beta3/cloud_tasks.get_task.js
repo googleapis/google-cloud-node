@@ -25,18 +25,18 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+   *  The response_view specifies which subset of the Task google.cloud.tasks.v2beta3.Task  will be
    *  returned.
-   *  By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+   *  By default response_view is BASIC google.cloud.tasks.v2beta3.Task.View.BASIC; not all
    *  information is retrieved by default because some data, such as
    *  payloads, might be desirable to return only when needed because
    *  of its large size or because of the sensitivity of data that it
    *  contains.
-   *  Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
-   *  `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-   *  permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.
+   *  Authorization for FULL google.cloud.tasks.v2beta3.Task.View.FULL  requires
+   *  `cloudtasks.tasks.fullView` Google IAM (https://cloud.google.com/iam/)
+   *  permission on the Task google.cloud.tasks.v2beta3.Task  resource.
    */
-  // const responseView = ''
+  // const responseView = {}
 
   // Imports the Tasks library
   const {CloudTasksClient} = require('@google-cloud/tasks').v2beta3;
@@ -44,7 +44,7 @@ function main(name) {
   // Instantiates a client
   const tasksClient = new CloudTasksClient();
 
-  async function getTask() {
+  async function callGetTask() {
     // Construct request
     const request = {
       name,
@@ -55,7 +55,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTask();
+  callGetTask();
   // [END cloudtasks_v2beta3_generated_CloudTasks_GetTask_async]
 }
 
