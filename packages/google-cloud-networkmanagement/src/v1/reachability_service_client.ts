@@ -405,6 +405,24 @@ export class ReachabilityServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the details of a specific Connectivity Test.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. `ConnectivityTest` resource name using the form:
+   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConnectivityTest]{@link google.cloud.networkmanagement.v1.ConnectivityTest}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reachability_service.get_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_GetConnectivityTest_async
+   */
   getConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IGetConnectivityTestRequest,
     options?: CallOptions
@@ -439,24 +457,6 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the details of a specific Connectivity Test.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. `ConnectivityTest` resource name using the form:
-   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ConnectivityTest]{@link google.cloud.networkmanagement.v1.ConnectivityTest}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getConnectivityTest(request);
-   */
   getConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IGetConnectivityTestRequest,
     optionsOrCallback?:
@@ -504,42 +504,6 @@ export class ReachabilityServiceClient {
     return this.innerApiCalls.getConnectivityTest(request, options, callback);
   }
 
-  createConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a new Connectivity Test.
    * After you create a test, the reachability analysis is performed as part
@@ -580,10 +544,45 @@ export class ReachabilityServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createConnectivityTest(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/reachability_service.create_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_CreateConnectivityTest_async
    */
+  createConnectivityTest(
+    request?: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createConnectivityTest(
+    request: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConnectivityTest(
+    request: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkmanagement.v1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.ICreateConnectivityTestRequest,
     optionsOrCallback?:
@@ -645,11 +644,8 @@ export class ReachabilityServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateConnectivityTestProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/reachability_service.create_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_CreateConnectivityTest_async
    */
   async checkCreateConnectivityTestProgress(
     name: string
@@ -673,6 +669,41 @@ export class ReachabilityServiceClient {
       protos.google.cloud.networkmanagement.v1.OperationMetadata
     >;
   }
+  /**
+   * Updates the configuration of an existing `ConnectivityTest`.
+   * After you update a test, the reachability analysis is performed as part
+   * of the long running operation, which completes when the analysis completes.
+   * The Reachability state in the test resource is updated with the new result.
+   *
+   * If the endpoint specifications in `ConnectivityTest` are invalid
+   * (for example, they contain non-existent resources in the network, or the
+   * user does not have read permissions to the network configurations of
+   * listed projects), then the reachability result returns a value of
+   * <code>UNKNOWN</code>.
+   *
+   * If the endpoint specifications in `ConnectivityTest` are incomplete, the
+   * reachability result returns a value of `AMBIGUOUS`. See the documentation
+   * in `ConnectivityTest` for for more details.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field.
+   * @param {google.cloud.networkmanagement.v1.ConnectivityTest} request.resource
+   *   Required. Only fields specified in update_mask are updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reachability_service.update_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_UpdateConnectivityTest_async
+   */
   updateConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IUpdateConnectivityTestRequest,
     options?: CallOptions
@@ -709,42 +740,6 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the configuration of an existing `ConnectivityTest`.
-   * After you update a test, the reachability analysis is performed as part
-   * of the long running operation, which completes when the analysis completes.
-   * The Reachability state in the test resource is updated with the new result.
-   *
-   * If the endpoint specifications in `ConnectivityTest` are invalid
-   * (for example, they contain non-existent resources in the network, or the
-   * user does not have read permissions to the network configurations of
-   * listed projects), then the reachability result returns a value of
-   * <code>UNKNOWN</code>.
-   *
-   * If the endpoint specifications in `ConnectivityTest` are incomplete, the
-   * reachability result returns a value of `AMBIGUOUS`. See the documentation
-   * in `ConnectivityTest` for for more details.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in
-   *   this field.
-   * @param {google.cloud.networkmanagement.v1.ConnectivityTest} request.resource
-   *   Required. Only fields specified in update_mask are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateConnectivityTest(request);
-   * const [response] = await operation.promise();
-   */
   updateConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IUpdateConnectivityTestRequest,
     optionsOrCallback?:
@@ -806,11 +801,8 @@ export class ReachabilityServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateConnectivityTestProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/reachability_service.update_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_UpdateConnectivityTest_async
    */
   async checkUpdateConnectivityTestProgress(
     name: string
@@ -834,6 +826,37 @@ export class ReachabilityServiceClient {
       protos.google.cloud.networkmanagement.v1.OperationMetadata
     >;
   }
+  /**
+   * Rerun an existing `ConnectivityTest`.
+   * After the user triggers the rerun, the reachability analysis is performed
+   * as part of the long running operation, which completes when the analysis
+   * completes.
+   *
+   * Even though the test configuration remains the same, the reachability
+   * result may change due to underlying network configuration changes.
+   *
+   * If the endpoint specifications in `ConnectivityTest` become invalid (for
+   * example, specified resources are deleted in the network, or you lost
+   * read permissions to the network configurations of listed projects), then
+   * the reachability result returns a value of `UNKNOWN`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Connectivity Test resource name using the form:
+   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reachability_service.rerun_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_RerunConnectivityTest_async
+   */
   rerunConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IRerunConnectivityTestRequest,
     options?: CallOptions
@@ -870,38 +893,6 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Rerun an existing `ConnectivityTest`.
-   * After the user triggers the rerun, the reachability analysis is performed
-   * as part of the long running operation, which completes when the analysis
-   * completes.
-   *
-   * Even though the test configuration remains the same, the reachability
-   * result may change due to underlying network configuration changes.
-   *
-   * If the endpoint specifications in `ConnectivityTest` become invalid (for
-   * example, specified resources are deleted in the network, or you lost
-   * read permissions to the network configurations of listed projects), then
-   * the reachability result returns a value of `UNKNOWN`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Connectivity Test resource name using the form:
-   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.rerunConnectivityTest(request);
-   * const [response] = await operation.promise();
-   */
   rerunConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IRerunConnectivityTestRequest,
     optionsOrCallback?:
@@ -959,11 +950,8 @@ export class ReachabilityServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRerunConnectivityTestProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/reachability_service.rerun_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_RerunConnectivityTest_async
    */
   async checkRerunConnectivityTestProgress(
     name: string
@@ -987,6 +975,26 @@ export class ReachabilityServiceClient {
       protos.google.cloud.networkmanagement.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a specific `ConnectivityTest`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Connectivity Test resource name using the form:
+   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reachability_service.delete_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_DeleteConnectivityTest_async
+   */
   deleteConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IDeleteConnectivityTestRequest,
     options?: CallOptions
@@ -1023,27 +1031,6 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a specific `ConnectivityTest`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Connectivity Test resource name using the form:
-   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteConnectivityTest(request);
-   * const [response] = await operation.promise();
-   */
   deleteConnectivityTest(
     request?: protos.google.cloud.networkmanagement.v1.IDeleteConnectivityTestRequest,
     optionsOrCallback?:
@@ -1105,11 +1092,8 @@ export class ReachabilityServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteConnectivityTestProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/reachability_service.delete_connectivity_test.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_DeleteConnectivityTest_async
    */
   async checkDeleteConnectivityTestProgress(
     name: string
@@ -1133,37 +1117,6 @@ export class ReachabilityServiceClient {
       protos.google.cloud.networkmanagement.v1.OperationMetadata
     >;
   }
-  listConnectivityTests(
-    request?: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.networkmanagement.v1.IConnectivityTest[],
-      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest | null,
-      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
-    ]
-  >;
-  listConnectivityTests(
-    request: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
-      | protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkmanagement.v1.IConnectivityTest
-    >
-  ): void;
-  listConnectivityTests(
-    request: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
-      | protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
-      | null
-      | undefined,
-      protos.google.cloud.networkmanagement.v1.IConnectivityTest
-    >
-  ): void;
   /**
    * Lists all Connectivity Tests owned by a project.
    *
@@ -1210,6 +1163,37 @@ export class ReachabilityServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listConnectivityTests(
+    request?: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.networkmanagement.v1.IConnectivityTest[],
+      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest | null,
+      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
+    ]
+  >;
+  listConnectivityTests(
+    request: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
+      | protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IConnectivityTest
+    >
+  ): void;
+  listConnectivityTests(
+    request: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
+      | protos.google.cloud.networkmanagement.v1.IListConnectivityTestsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkmanagement.v1.IConnectivityTest
+    >
+  ): void;
   listConnectivityTests(
     request?: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
     optionsOrCallback?:
@@ -1310,7 +1294,8 @@ export class ReachabilityServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConnectivityTests'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectivityTests.createStream(
       this.innerApiCalls.listConnectivityTests as gax.GaxCall,
@@ -1363,11 +1348,8 @@ export class ReachabilityServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listConnectivityTestsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/reachability_service.list_connectivity_tests.js</caption>
+   * region_tag:networkmanagement_v1_generated_ReachabilityService_ListConnectivityTests_async
    */
   listConnectivityTestsAsync(
     request?: protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
@@ -1381,8 +1363,8 @@ export class ReachabilityServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listConnectivityTests'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listConnectivityTests.asyncIterate(
       this.innerApiCalls['listConnectivityTests'] as GaxCall,
