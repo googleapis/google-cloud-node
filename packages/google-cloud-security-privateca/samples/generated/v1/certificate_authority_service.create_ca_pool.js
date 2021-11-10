@@ -21,7 +21,7 @@ function main(parent, caPoolId, caPool) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  [CaPool][google.cloud.security.privateca.v1.CaPool], in the format `projects/* /locations/*`.
+   *  CaPool google.cloud.security.privateca.v1.CaPool, in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -30,9 +30,9 @@ function main(parent, caPoolId, caPool) {
    */
   // const caPoolId = 'abc123'
   /**
-   *  Required. A [CaPool][google.cloud.security.privateca.v1.CaPool] with initial field values.
+   *  Required. A CaPool google.cloud.security.privateca.v1.CaPool  with initial field values.
    */
-  // const caPool = ''
+  // const caPool = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -55,7 +55,7 @@ function main(parent, caPoolId, caPool) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function createCaPool() {
+  async function callCreateCaPool() {
     // Construct request
     const request = {
       parent,
@@ -69,7 +69,7 @@ function main(parent, caPoolId, caPool) {
     console.log(response);
   }
 
-  createCaPool();
+  callCreateCaPool();
   // [END privateca_v1_generated_CertificateAuthorityService_CreateCaPool_async]
 }
 

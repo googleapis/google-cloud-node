@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for this [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] in the
+   *  Required. The resource name for this CertificateAuthority google.cloud.security.privateca.v1beta1.CertificateAuthority  in the
    *  format `projects/* /locations/* /certificateAuthorities/*`.
    */
   // const name = 'abc123'
@@ -46,7 +46,7 @@ function main(name) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function disableCertificateAuthority() {
+  async function callDisableCertificateAuthority() {
     // Construct request
     const request = {
       name,
@@ -60,7 +60,7 @@ function main(name) {
     console.log(response);
   }
 
-  disableCertificateAuthority();
+  callDisableCertificateAuthority();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_DisableCertificateAuthority_async]
 }
 

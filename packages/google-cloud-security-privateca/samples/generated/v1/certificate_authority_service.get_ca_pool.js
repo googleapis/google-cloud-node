@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][google.cloud.security.privateca.v1.CaPool.name] of the [CaPool][google.cloud.security.privateca.v1.CaPool] to get.
+   *  Required. The name google.cloud.security.privateca.v1.CaPool.name  of the CaPool google.cloud.security.privateca.v1.CaPool  to get.
    */
   // const name = 'abc123'
 
@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function getCaPool() {
+  async function callGetCaPool() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getCaPool();
+  callGetCaPool();
   // [END privateca_v1_generated_CertificateAuthorityService_GetCaPool_async]
 }
 

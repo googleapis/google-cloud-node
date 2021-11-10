@@ -20,8 +20,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][google.cloud.security.privateca.v1beta1.CertificateRevocationList.name] of the
-   *  [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList] to get.
+   *  Required. The name google.cloud.security.privateca.v1beta1.CertificateRevocationList.name  of the
+   *  CertificateRevocationList google.cloud.security.privateca.v1beta1.CertificateRevocationList  to get.
    */
   // const name = 'abc123'
 
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function getCertificateRevocationList() {
+  async function callGetCertificateRevocationList() {
     // Construct request
     const request = {
       name,
@@ -45,7 +45,7 @@ function main(name) {
     console.log(response);
   }
 
-  getCertificateRevocationList();
+  callGetCertificateRevocationList();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_GetCertificateRevocationList_async]
 }
 

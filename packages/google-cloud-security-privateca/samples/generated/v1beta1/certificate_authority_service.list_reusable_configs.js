@@ -21,22 +21,22 @@ function main(parent) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig], in the format
+   *  ReusableConfigs google.cloud.security.privateca.v1beta1.ReusableConfig, in the format
    *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
    *  Optional. Limit on the number of
-   *  [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig] to include in the response.
-   *  Further [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig] can subsequently be
+   *  ReusableConfigs google.cloud.security.privateca.v1beta1.ReusableConfig  to include in the response.
+   *  Further ReusableConfigs google.cloud.security.privateca.v1beta1.ReusableConfig  can subsequently be
    *  obtained by including the
-   *  [ListReusableConfigsResponse.next_page_token][google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse.next_page_token] in a subsequent request. If
+   *  ListReusableConfigsResponse.next_page_token google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse.next_page_token  in a subsequent request. If
    *  unspecified, the server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
    *  Optional. Pagination token, returned earlier via
-   *  [ListReusableConfigsResponse.next_page_token][google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse.next_page_token].
+   *  ListReusableConfigsResponse.next_page_token google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse.next_page_token.
    */
   // const pageToken = 'abc123'
   /**
@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function listReusableConfigs() {
+  async function callListReusableConfigs() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent) {
     }
   }
 
-  listReusableConfigs();
+  callListReusableConfigs();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_ListReusableConfigs_async]
 }
 

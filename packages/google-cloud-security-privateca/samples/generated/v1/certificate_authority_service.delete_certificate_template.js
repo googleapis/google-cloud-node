@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for this [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate] in the format
+   *  Required. The resource name for this CertificateTemplate google.cloud.security.privateca.v1.CertificateTemplate  in the format
    *  `projects/* /locations/* /certificateTemplates/*`.
    */
   // const name = 'abc123'
@@ -46,7 +46,7 @@ function main(name) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function deleteCertificateTemplate() {
+  async function callDeleteCertificateTemplate() {
     // Construct request
     const request = {
       name,
@@ -60,7 +60,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteCertificateTemplate();
+  callDeleteCertificateTemplate();
   // [END privateca_v1_generated_CertificateAuthorityService_DeleteCertificateTemplate_async]
 }
 

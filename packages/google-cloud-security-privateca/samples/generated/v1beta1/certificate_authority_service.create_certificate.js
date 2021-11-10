@@ -20,22 +20,22 @@ function main(parent, certificate) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the location and [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-   *  associated with the [Certificate][google.cloud.security.privateca.v1beta1.Certificate], in the format
+   *  Required. The resource name of the location and CertificateAuthority google.cloud.security.privateca.v1beta1.CertificateAuthority
+   *  associated with the Certificate google.cloud.security.privateca.v1beta1.Certificate, in the format
    *  `projects/* /locations/* /certificateAuthorities/*`.
    */
   // const parent = 'abc123'
   /**
    *  Optional. It must be unique within a location and match the regular
    *  expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
-   *  [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] in the Enterprise [CertificateAuthority.Tier][google.cloud.security.privateca.v1beta1.CertificateAuthority.Tier],
+   *  CertificateAuthority google.cloud.security.privateca.v1beta1.CertificateAuthority in the Enterprise CertificateAuthority.Tier google.cloud.security.privateca.v1beta1.CertificateAuthority.Tier,
    *  but is optional and its value is ignored otherwise.
    */
   // const certificateId = 'abc123'
   /**
-   *  Required. A [Certificate][google.cloud.security.privateca.v1beta1.Certificate] with initial field values.
+   *  Required. A Certificate google.cloud.security.privateca.v1beta1.Certificate  with initial field values.
    */
-  // const certificate = ''
+  // const certificate = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -58,7 +58,7 @@ function main(parent, certificate) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function createCertificate() {
+  async function callCreateCertificate() {
     // Construct request
     const request = {
       parent,
@@ -70,7 +70,7 @@ function main(parent, certificate) {
     console.log(response);
   }
 
-  createCertificate();
+  callCreateCertificate();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_CreateCertificate_async]
 }
 

@@ -20,13 +20,13 @@ function main(certificateTemplate, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate] with updated values.
+   *  Required. CertificateTemplate google.cloud.security.privateca.v1.CertificateTemplate  with updated values.
    */
-  // const certificateTemplate = ''
+  // const certificateTemplate = {}
   /**
    *  Required. A list of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -49,7 +49,7 @@ function main(certificateTemplate, updateMask) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function updateCertificateTemplate() {
+  async function callUpdateCertificateTemplate() {
     // Construct request
     const request = {
       certificateTemplate,
@@ -64,7 +64,7 @@ function main(certificateTemplate, updateMask) {
     console.log(response);
   }
 
-  updateCertificateTemplate();
+  callUpdateCertificateTemplate();
   // [END privateca_v1_generated_CertificateAuthorityService_UpdateCertificateTemplate_async]
 }
 

@@ -21,7 +21,7 @@ function main(parent, certificateTemplateId, certificateTemplate) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate], in the format
+   *  CertificateTemplate google.cloud.security.privateca.v1.CertificateTemplate, in the format
    *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
@@ -31,9 +31,9 @@ function main(parent, certificateTemplateId, certificateTemplate) {
    */
   // const certificateTemplateId = 'abc123'
   /**
-   *  Required. A [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate] with initial field values.
+   *  Required. A CertificateTemplate google.cloud.security.privateca.v1.CertificateTemplate  with initial field values.
    */
-  // const certificateTemplate = ''
+  // const certificateTemplate = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -56,7 +56,7 @@ function main(parent, certificateTemplateId, certificateTemplate) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function createCertificateTemplate() {
+  async function callCreateCertificateTemplate() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +72,7 @@ function main(parent, certificateTemplateId, certificateTemplate) {
     console.log(response);
   }
 
-  createCertificateTemplate();
+  callCreateCertificateTemplate();
   // [END privateca_v1_generated_CertificateAuthorityService_CreateCertificateTemplate_async]
 }
 

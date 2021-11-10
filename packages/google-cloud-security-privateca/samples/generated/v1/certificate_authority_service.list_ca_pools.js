@@ -21,22 +21,22 @@ function main(parent) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  [CaPools][google.cloud.security.privateca.v1.CaPool], in the format
+   *  CaPools google.cloud.security.privateca.v1.CaPool, in the format
    *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Limit on the number of [CaPools][google.cloud.security.privateca.v1.CaPool] to
+   *  Optional. Limit on the number of CaPools google.cloud.security.privateca.v1.CaPool  to
    *  include in the response.
-   *  Further [CaPools][google.cloud.security.privateca.v1.CaPool] can subsequently be
+   *  Further CaPools google.cloud.security.privateca.v1.CaPool  can subsequently be
    *  obtained by including the
-   *  [ListCaPoolsResponse.next_page_token][google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token] in a subsequent
+   *  ListCaPoolsResponse.next_page_token google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token  in a subsequent
    *  request. If unspecified, the server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
    *  Optional. Pagination token, returned earlier via
-   *  [ListCaPoolsResponse.next_page_token][google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token].
+   *  ListCaPoolsResponse.next_page_token google.cloud.security.privateca.v1.ListCaPoolsResponse.next_page_token.
    */
   // const pageToken = 'abc123'
   /**
@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function listCaPools() {
+  async function callListCaPools() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent) {
     }
   }
 
-  listCaPools();
+  callListCaPools();
   // [END privateca_v1_generated_CertificateAuthorityService_ListCaPools_async]
 }
 

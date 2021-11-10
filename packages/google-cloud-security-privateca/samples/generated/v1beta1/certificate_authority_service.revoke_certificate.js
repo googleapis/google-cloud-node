@@ -20,14 +20,14 @@ function main(name, reason) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for this [Certificate][google.cloud.security.privateca.v1beta1.Certificate] in the
+   *  Required. The resource name for this Certificate google.cloud.security.privateca.v1beta1.Certificate  in the
    *  format `projects/* /locations/* /certificateAuthorities/* /certificates/*`.
    */
   // const name = 'abc123'
   /**
-   *  Required. The [RevocationReason][google.cloud.security.privateca.v1beta1.RevocationReason] for revoking this certificate.
+   *  Required. The RevocationReason google.cloud.security.privateca.v1beta1.RevocationReason  for revoking this certificate.
    */
-  // const reason = ''
+  // const reason = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -50,7 +50,7 @@ function main(name, reason) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function revokeCertificate() {
+  async function callRevokeCertificate() {
     // Construct request
     const request = {
       name,
@@ -62,7 +62,7 @@ function main(name, reason) {
     console.log(response);
   }
 
-  revokeCertificate();
+  callRevokeCertificate();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_RevokeCertificate_async]
 }
 

@@ -20,20 +20,20 @@ function main(name, pemCaCertificate, subordinateConfig) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name for this [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] in the
+   *  Required. The resource name for this CertificateAuthority google.cloud.security.privateca.v1beta1.CertificateAuthority  in the
    *  format `projects/* /locations/* /certificateAuthorities/*`.
    */
   // const name = 'abc123'
   /**
    *  Required. The signed CA certificate issued from
-   *  [FetchCertificateAuthorityCsrResponse.pem_csr][google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrResponse.pem_csr].
+   *  FetchCertificateAuthorityCsrResponse.pem_csr google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrResponse.pem_csr.
    */
   // const pemCaCertificate = 'abc123'
   /**
    *  Required. Must include information about the issuer of 'pem_ca_certificate', and any
    *  further issuers until the self-signed CA.
    */
-  // const subordinateConfig = ''
+  // const subordinateConfig = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -56,7 +56,7 @@ function main(name, pemCaCertificate, subordinateConfig) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function activateCertificateAuthority() {
+  async function callActivateCertificateAuthority() {
     // Construct request
     const request = {
       name,
@@ -72,7 +72,7 @@ function main(name, pemCaCertificate, subordinateConfig) {
     console.log(response);
   }
 
-  activateCertificateAuthority();
+  callActivateCertificateAuthority();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_ActivateCertificateAuthority_async]
 }
 

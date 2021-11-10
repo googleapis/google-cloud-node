@@ -20,13 +20,13 @@ function main(certificateRevocationList, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList] with updated values.
+   *  Required. CertificateRevocationList google.cloud.security.privateca.v1.CertificateRevocationList  with updated values.
    */
-  // const certificateRevocationList = ''
+  // const certificateRevocationList = {}
   /**
    *  Required. A list of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -49,7 +49,7 @@ function main(certificateRevocationList, updateMask) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function updateCertificateRevocationList() {
+  async function callUpdateCertificateRevocationList() {
     // Construct request
     const request = {
       certificateRevocationList,
@@ -64,7 +64,7 @@ function main(certificateRevocationList, updateMask) {
     console.log(response);
   }
 
-  updateCertificateRevocationList();
+  callUpdateCertificateRevocationList();
   // [END privateca_v1_generated_CertificateAuthorityService_UpdateCertificateRevocationList_async]
 }
 

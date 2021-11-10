@@ -20,8 +20,8 @@ function main(parent, certificateAuthorityId, certificateAuthority) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the [CaPool][google.cloud.security.privateca.v1.CaPool] associated with the
-   *  [CertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthority], in the format
+   *  Required. The resource name of the CaPool google.cloud.security.privateca.v1.CaPool  associated with the
+   *  CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority, in the format
    *  `projects/* /locations/* /caPools/*`.
    */
   // const parent = 'abc123'
@@ -31,9 +31,9 @@ function main(parent, certificateAuthorityId, certificateAuthority) {
    */
   // const certificateAuthorityId = 'abc123'
   /**
-   *  Required. A [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority] with initial field values.
+   *  Required. A CertificateAuthority google.cloud.security.privateca.v1.CertificateAuthority  with initial field values.
    */
-  // const certificateAuthority = ''
+  // const certificateAuthority = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -56,7 +56,7 @@ function main(parent, certificateAuthorityId, certificateAuthority) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function createCertificateAuthority() {
+  async function callCreateCertificateAuthority() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +72,7 @@ function main(parent, certificateAuthorityId, certificateAuthority) {
     console.log(response);
   }
 
-  createCertificateAuthority();
+  callCreateCertificateAuthority();
   // [END privateca_v1_generated_CertificateAuthorityService_CreateCertificateAuthority_async]
 }
 

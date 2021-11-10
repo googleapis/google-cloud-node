@@ -20,13 +20,13 @@ function main(caPool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. [CaPool][google.cloud.security.privateca.v1.CaPool] with updated values.
+   *  Required. CaPool google.cloud.security.privateca.v1.CaPool  with updated values.
    */
-  // const caPool = ''
+  // const caPool = {}
   /**
    *  Required. A list of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. An ID to identify requests. Specify a unique request ID so that if you must
    *  retry your request, the server will know to ignore the request if it has
@@ -49,7 +49,7 @@ function main(caPool, updateMask) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function updateCaPool() {
+  async function callUpdateCaPool() {
     // Construct request
     const request = {
       caPool,
@@ -62,7 +62,7 @@ function main(caPool, updateMask) {
     console.log(response);
   }
 
-  updateCaPool();
+  callUpdateCaPool();
   // [END privateca_v1_generated_CertificateAuthorityService_UpdateCaPool_async]
 }
 

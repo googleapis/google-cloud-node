@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][ReusableConfigs.name] of the [ReusableConfigs][] to get.
+   *  Required. The name ReusableConfigs.name  of the ReusableConfigs   to get.
    */
   // const name = 'abc123'
 
@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function getReusableConfig() {
+  async function callGetReusableConfig() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getReusableConfig();
+  callGetReusableConfig();
   // [END privateca_v1beta1_generated_CertificateAuthorityService_GetReusableConfig_async]
 }
 

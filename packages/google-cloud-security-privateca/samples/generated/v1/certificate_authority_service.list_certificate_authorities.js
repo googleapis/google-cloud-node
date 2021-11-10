@@ -20,23 +20,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the [CaPool][google.cloud.security.privateca.v1.CaPool] associated with the
-   *  [CertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthority], in the format
+   *  Required. The resource name of the CaPool google.cloud.security.privateca.v1.CaPool  associated with the
+   *  CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority, in the format
    *  `projects/* /locations/* /caPools/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Limit on the number of [CertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthority] to
+   *  Optional. Limit on the number of CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority  to
    *  include in the response.
-   *  Further [CertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthority] can subsequently be
+   *  Further CertificateAuthorities google.cloud.security.privateca.v1.CertificateAuthority  can subsequently be
    *  obtained by including the
-   *  [ListCertificateAuthoritiesResponse.next_page_token][google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token] in a subsequent
+   *  ListCertificateAuthoritiesResponse.next_page_token google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token  in a subsequent
    *  request. If unspecified, the server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
    *  Optional. Pagination token, returned earlier via
-   *  [ListCertificateAuthoritiesResponse.next_page_token][google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token].
+   *  ListCertificateAuthoritiesResponse.next_page_token google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse.next_page_token.
    */
   // const pageToken = 'abc123'
   /**
@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const privatecaClient = new CertificateAuthorityServiceClient();
 
-  async function listCertificateAuthorities() {
+  async function callListCertificateAuthorities() {
     // Construct request
     const request = {
       parent,
@@ -70,7 +70,7 @@ function main(parent) {
     }
   }
 
-  listCertificateAuthorities();
+  callListCertificateAuthorities();
   // [END privateca_v1_generated_CertificateAuthorityService_ListCertificateAuthorities_async]
 }
 
