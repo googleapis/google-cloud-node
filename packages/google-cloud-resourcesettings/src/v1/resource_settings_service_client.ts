@@ -334,6 +334,29 @@ export class ResourceSettingsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a setting.
+   *
+   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+   * setting does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the setting to get. See {@link google.cloud.resourcesettings.v1.Setting|Setting} for naming
+   *   requirements.
+   * @param {google.cloud.resourcesettings.v1.SettingView} request.view
+   *   The SettingView for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Setting]{@link google.cloud.resourcesettings.v1.Setting}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/resource_settings_service.get_setting.js</caption>
+   * region_tag:resourcesettings_v1_generated_ResourceSettingsService_GetSetting_async
+   */
   getSetting(
     request?: protos.google.cloud.resourcesettings.v1.IGetSettingRequest,
     options?: CallOptions
@@ -365,29 +388,6 @@ export class ResourceSettingsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a setting.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * setting does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the setting to get. See {@link google.cloud.resourcesettings.v1.Setting|Setting} for naming
-   *   requirements.
-   * @param {google.cloud.resourcesettings.v1.SettingView} request.view
-   *   The SettingView for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Setting]{@link google.cloud.resourcesettings.v1.Setting}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSetting(request);
-   */
   getSetting(
     request?: protos.google.cloud.resourcesettings.v1.IGetSettingRequest,
     optionsOrCallback?:
@@ -431,6 +431,38 @@ export class ResourceSettingsServiceClient {
     this.initialize();
     return this.innerApiCalls.getSetting(request, options, callback);
   }
+  /**
+   * Updates a setting.
+   *
+   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
+   * setting does not exist.
+   * Returns a `google.rpc.Status` with `google.rpc.Code.FAILED_PRECONDITION` if
+   * the setting is flagged as read only.
+   * Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag
+   * supplied in the request does not match the persisted etag of the setting
+   * value.
+   *
+   * On success, the response will contain only `name`, `local_value` and
+   * `etag`.  The `metadata` and `effective_value` cannot be updated through
+   * this API.
+   *
+   * Note: the supplied setting will perform a full overwrite of the
+   * `local_value` field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.resourcesettings.v1.Setting} request.setting
+   *   Required. The setting to update. See {@link google.cloud.resourcesettings.v1.Setting|Setting} for field requirements.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Setting]{@link google.cloud.resourcesettings.v1.Setting}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/resource_settings_service.update_setting.js</caption>
+   * region_tag:resourcesettings_v1_generated_ResourceSettingsService_UpdateSetting_async
+   */
   updateSetting(
     request?: protos.google.cloud.resourcesettings.v1.IUpdateSettingRequest,
     options?: CallOptions
@@ -462,38 +494,6 @@ export class ResourceSettingsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a setting.
-   *
-   * Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-   * setting does not exist.
-   * Returns a `google.rpc.Status` with `google.rpc.Code.FAILED_PRECONDITION` if
-   * the setting is flagged as read only.
-   * Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag
-   * supplied in the request does not match the persisted etag of the setting
-   * value.
-   *
-   * On success, the response will contain only `name`, `local_value` and
-   * `etag`.  The `metadata` and `effective_value` cannot be updated through
-   * this API.
-   *
-   * Note: the supplied setting will perform a full overwrite of the
-   * `local_value` field.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.resourcesettings.v1.Setting} request.setting
-   *   Required. The setting to update. See {@link google.cloud.resourcesettings.v1.Setting|Setting} for field requirements.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Setting]{@link google.cloud.resourcesettings.v1.Setting}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateSetting(request);
-   */
   updateSetting(
     request?: protos.google.cloud.resourcesettings.v1.IUpdateSettingRequest,
     optionsOrCallback?:
@@ -538,37 +538,6 @@ export class ResourceSettingsServiceClient {
     return this.innerApiCalls.updateSetting(request, options, callback);
   }
 
-  listSettings(
-    request?: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.resourcesettings.v1.ISetting[],
-      protos.google.cloud.resourcesettings.v1.IListSettingsRequest | null,
-      protos.google.cloud.resourcesettings.v1.IListSettingsResponse
-    ]
-  >;
-  listSettings(
-    request: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
-      | protos.google.cloud.resourcesettings.v1.IListSettingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcesettings.v1.ISetting
-    >
-  ): void;
-  listSettings(
-    request: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
-      | protos.google.cloud.resourcesettings.v1.IListSettingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.resourcesettings.v1.ISetting
-    >
-  ): void;
   /**
    * Lists all the settings that are available on the Cloud resource `parent`.
    *
@@ -601,6 +570,37 @@ export class ResourceSettingsServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listSettings(
+    request?: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.resourcesettings.v1.ISetting[],
+      protos.google.cloud.resourcesettings.v1.IListSettingsRequest | null,
+      protos.google.cloud.resourcesettings.v1.IListSettingsResponse
+    ]
+  >;
+  listSettings(
+    request: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
+      | protos.google.cloud.resourcesettings.v1.IListSettingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcesettings.v1.ISetting
+    >
+  ): void;
+  listSettings(
+    request: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
+      | protos.google.cloud.resourcesettings.v1.IListSettingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.resourcesettings.v1.ISetting
+    >
+  ): void;
   listSettings(
     request?: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
     optionsOrCallback?:
@@ -687,7 +687,8 @@ export class ResourceSettingsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSettings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSettings.createStream(
       this.innerApiCalls.listSettings as gax.GaxCall,
@@ -726,11 +727,8 @@ export class ResourceSettingsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSettingsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/resource_settings_service.list_settings.js</caption>
+   * region_tag:resourcesettings_v1_generated_ResourceSettingsService_ListSettings_async
    */
   listSettingsAsync(
     request?: protos.google.cloud.resourcesettings.v1.IListSettingsRequest,
@@ -744,8 +742,8 @@ export class ResourceSettingsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listSettings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSettings.asyncIterate(
       this.innerApiCalls['listSettings'] as GaxCall,
