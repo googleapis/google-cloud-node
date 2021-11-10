@@ -142,7 +142,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentResponse()
       );
@@ -165,7 +165,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentResponse()
       );
@@ -204,7 +204,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeSentiment = stubSimpleCall(
         undefined,
@@ -229,7 +229,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesResponse()
       );
@@ -252,7 +252,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesResponse()
       );
@@ -291,7 +291,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeEntities = stubSimpleCall(
         undefined,
@@ -316,7 +316,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse()
       );
@@ -340,7 +340,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse()
       );
@@ -379,7 +379,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeEntitySentiment = stubSimpleCall(
         undefined,
@@ -407,7 +407,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxResponse()
       );
@@ -430,7 +430,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxResponse()
       );
@@ -469,7 +469,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeSyntax = stubSimpleCall(
         undefined,
@@ -494,7 +494,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextResponse()
       );
@@ -517,7 +517,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextResponse()
       );
@@ -556,7 +556,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.classifyText = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextResponse()
       );
@@ -604,7 +604,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextResponse()
       );
@@ -643,7 +643,7 @@ describe('v1beta2.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateText = stubSimpleCall(
         undefined,
