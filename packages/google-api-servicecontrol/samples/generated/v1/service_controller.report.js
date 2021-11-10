@@ -23,7 +23,7 @@ function main() {
    *  The service name as specified in its service configuration. For example,
    *  `"pubsub.googleapis.com"`.
    *  See
-   *  [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   *  google.api.Service (https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    *  for the definition of a service name.
    */
   // const serviceName = 'abc123'
@@ -35,7 +35,7 @@ function main() {
    *  of the report.
    *  There is no limit on the number of operations in the same ReportRequest,
    *  however the ReportRequest size should be no larger than 1MB. See
-   *  [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
+   *  ReportResponse.report_errors google.api.servicecontrol.v1.ReportResponse.report_errors
    *  for partial failure behavior.
    */
   // const operations = 1234
@@ -53,7 +53,7 @@ function main() {
   // Instantiates a client
   const servicecontrolClient = new ServiceControllerClient();
 
-  async function report() {
+  async function callReport() {
     // Construct request
     const request = {};
 
@@ -62,7 +62,7 @@ function main() {
     console.log(response);
   }
 
-  report();
+  callReport();
   // [END servicecontrol_v1_generated_ServiceController_Report_async]
 }
 

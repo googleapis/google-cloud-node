@@ -22,13 +22,13 @@ function main() {
   /**
    *  Name of the service as specified in the service configuration. For example,
    *  `"pubsub.googleapis.com"`.
-   *  See [google.api.Service][google.api.Service] for the definition of a service name.
+   *  See google.api.Service google.api.Service  for the definition of a service name.
    */
   // const serviceName = 'abc123'
   /**
    *  Operation that describes the quota allocation.
    */
-  // const allocateOperation = ''
+  // const allocateOperation = {}
   /**
    *  Specifies which version of service configuration should be used to process
    *  the request. If unspecified or no matching version can be found, the latest
@@ -42,7 +42,7 @@ function main() {
   // Instantiates a client
   const servicecontrolClient = new QuotaControllerClient();
 
-  async function allocateQuota() {
+  async function callAllocateQuota() {
     // Construct request
     const request = {};
 
@@ -51,7 +51,7 @@ function main() {
     console.log(response);
   }
 
-  allocateQuota();
+  callAllocateQuota();
   // [END servicecontrol_v1_generated_QuotaController_AllocateQuota_async]
 }
 

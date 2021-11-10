@@ -287,33 +287,6 @@ export class ServiceControllerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  check(
-    request?: protos.google.api.servicecontrol.v1.ICheckRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicecontrol.v1.ICheckResponse,
-      protos.google.api.servicecontrol.v1.ICheckRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  check(
-    request: protos.google.api.servicecontrol.v1.ICheckRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicecontrol.v1.ICheckResponse,
-      protos.google.api.servicecontrol.v1.ICheckRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  check(
-    request: protos.google.api.servicecontrol.v1.ICheckRequest,
-    callback: Callback<
-      protos.google.api.servicecontrol.v1.ICheckResponse,
-      protos.google.api.servicecontrol.v1.ICheckRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Checks whether an operation on a service should be allowed to proceed
    * based on the configuration of the service and related policies. It must be
@@ -357,9 +330,36 @@ export class ServiceControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.check(request);
+   * @example <caption>include:samples/generated/v1/service_controller.check.js</caption>
+   * region_tag:servicecontrol_v1_generated_ServiceController_Check_async
    */
+  check(
+    request?: protos.google.api.servicecontrol.v1.ICheckRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.servicecontrol.v1.ICheckResponse,
+      protos.google.api.servicecontrol.v1.ICheckRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  check(
+    request: protos.google.api.servicecontrol.v1.ICheckRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.servicecontrol.v1.ICheckResponse,
+      protos.google.api.servicecontrol.v1.ICheckRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  check(
+    request: protos.google.api.servicecontrol.v1.ICheckRequest,
+    callback: Callback<
+      protos.google.api.servicecontrol.v1.ICheckResponse,
+      protos.google.api.servicecontrol.v1.ICheckRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   check(
     request?: protos.google.api.servicecontrol.v1.ICheckRequest,
     optionsOrCallback?:
@@ -399,33 +399,6 @@ export class ServiceControllerClient {
     this.initialize();
     return this.innerApiCalls.check(request, options, callback);
   }
-  report(
-    request?: protos.google.api.servicecontrol.v1.IReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.servicecontrol.v1.IReportResponse,
-      protos.google.api.servicecontrol.v1.IReportRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  report(
-    request: protos.google.api.servicecontrol.v1.IReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.servicecontrol.v1.IReportResponse,
-      protos.google.api.servicecontrol.v1.IReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  report(
-    request: protos.google.api.servicecontrol.v1.IReportRequest,
-    callback: Callback<
-      protos.google.api.servicecontrol.v1.IReportResponse,
-      protos.google.api.servicecontrol.v1.IReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Reports operation results to Google Service Control, such as logs and
    * metrics. It should be called after an operation is completed.
@@ -477,9 +450,36 @@ export class ServiceControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.report(request);
+   * @example <caption>include:samples/generated/v1/service_controller.report.js</caption>
+   * region_tag:servicecontrol_v1_generated_ServiceController_Report_async
    */
+  report(
+    request?: protos.google.api.servicecontrol.v1.IReportRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.servicecontrol.v1.IReportResponse,
+      protos.google.api.servicecontrol.v1.IReportRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  report(
+    request: protos.google.api.servicecontrol.v1.IReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.servicecontrol.v1.IReportResponse,
+      protos.google.api.servicecontrol.v1.IReportRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  report(
+    request: protos.google.api.servicecontrol.v1.IReportRequest,
+    callback: Callback<
+      protos.google.api.servicecontrol.v1.IReportResponse,
+      protos.google.api.servicecontrol.v1.IReportRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   report(
     request?: protos.google.api.servicecontrol.v1.IReportRequest,
     optionsOrCallback?:
