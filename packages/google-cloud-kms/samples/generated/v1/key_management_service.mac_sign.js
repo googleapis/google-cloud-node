@@ -20,7 +20,7 @@ function main(name, data) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to use for signing.
+   *  Required. The resource name of the CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to use for signing.
    */
   // const name = 'abc123'
   /**
@@ -29,13 +29,13 @@ function main(name, data) {
    */
   // const data = 'Buffer.from('string')'
   /**
-   *  Optional. An optional CRC32C checksum of the [MacSignRequest.data][google.cloud.kms.v1.MacSignRequest.data]. If
-   *  specified, [KeyManagementService][google.cloud.kms.v1.KeyManagementService] will verify the integrity of the
-   *  received [MacSignRequest.data][google.cloud.kms.v1.MacSignRequest.data] using this checksum.
-   *  [KeyManagementService][google.cloud.kms.v1.KeyManagementService] will report an error if the checksum verification
+   *  Optional. An optional CRC32C checksum of the MacSignRequest.data google.cloud.kms.v1.MacSignRequest.data. If
+   *  specified, KeyManagementService google.cloud.kms.v1.KeyManagementService  will verify the integrity of the
+   *  received MacSignRequest.data google.cloud.kms.v1.MacSignRequest.data  using this checksum.
+   *  KeyManagementService google.cloud.kms.v1.KeyManagementService  will report an error if the checksum verification
    *  fails. If you receive a checksum error, your client should verify that
-   *  CRC32C([MacSignRequest.data][google.cloud.kms.v1.MacSignRequest.data]) is equal to
-   *  [MacSignRequest.data_crc32c][google.cloud.kms.v1.MacSignRequest.data_crc32c], and if so, perform a limited
+   *  CRC32C(MacSignRequest.data google.cloud.kms.v1.MacSignRequest.data) is equal to
+   *  MacSignRequest.data_crc32c google.cloud.kms.v1.MacSignRequest.data_crc32c, and if so, perform a limited
    *  number of retries. A persistent mismatch may indicate an issue in your
    *  computation of the CRC32C checksum.
    *  Note: This field is defined as int64 for reasons of compatibility across
@@ -43,7 +43,7 @@ function main(name, data) {
    *  never exceed 2^32-1, and can be safely downconverted to uint32 in languages
    *  that support this type.
    */
-  // const dataCrc32c = ''
+  // const dataCrc32c = {}
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
@@ -51,7 +51,7 @@ function main(name, data) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function macSign() {
+  async function callMacSign() {
     // Construct request
     const request = {
       name,
@@ -63,7 +63,7 @@ function main(name, data) {
     console.log(response);
   }
 
-  macSign();
+  callMacSign();
   // [END cloudkms_v1_generated_KeyManagementService_MacSign_async]
 }
 

@@ -20,8 +20,8 @@ function main(parent, cryptoKeyId, cryptoKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][google.cloud.kms.v1.KeyRing.name] of the KeyRing associated with the
-   *  [CryptoKeys][google.cloud.kms.v1.CryptoKey].
+   *  Required. The name google.cloud.kms.v1.KeyRing.name  of the KeyRing associated with the
+   *  CryptoKeys google.cloud.kms.v1.CryptoKey.
    */
   // const parent = 'abc123'
   /**
@@ -30,15 +30,15 @@ function main(parent, cryptoKeyId, cryptoKey) {
    */
   // const cryptoKeyId = 'abc123'
   /**
-   *  Required. A [CryptoKey][google.cloud.kms.v1.CryptoKey] with initial field values.
+   *  Required. A CryptoKey google.cloud.kms.v1.CryptoKey  with initial field values.
    */
-  // const cryptoKey = ''
+  // const cryptoKey = {}
   /**
-   *  If set to true, the request will create a [CryptoKey][google.cloud.kms.v1.CryptoKey] without any
-   *  [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion]. You must manually call
-   *  [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion] or
-   *  [ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion]
-   *  before you can use this [CryptoKey][google.cloud.kms.v1.CryptoKey].
+   *  If set to true, the request will create a CryptoKey google.cloud.kms.v1.CryptoKey  without any
+   *  CryptoKeyVersions google.cloud.kms.v1.CryptoKeyVersion. You must manually call
+   *  CreateCryptoKeyVersion google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion  or
+   *  ImportCryptoKeyVersion google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion
+   *  before you can use this CryptoKey google.cloud.kms.v1.CryptoKey.
    */
   // const skipInitialVersionCreation = true
 
@@ -48,7 +48,7 @@ function main(parent, cryptoKeyId, cryptoKey) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function createCryptoKey() {
+  async function callCreateCryptoKey() {
     // Construct request
     const request = {
       parent,
@@ -61,7 +61,7 @@ function main(parent, cryptoKeyId, cryptoKey) {
     console.log(response);
   }
 
-  createCryptoKey();
+  callCreateCryptoKey();
   // [END cloudkms_v1_generated_KeyManagementService_CreateCryptoKey_async]
 }
 

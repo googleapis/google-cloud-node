@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+   *  Required. The name google.cloud.kms.v1.CryptoKeyVersion.name  of the CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  public key to
    *  get.
    */
   // const name = 'abc123'
@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function getPublicKey() {
+  async function callGetPublicKey() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getPublicKey();
+  callGetPublicKey();
   // [END cloudkms_v1_generated_KeyManagementService_GetPublicKey_async]
 }
 

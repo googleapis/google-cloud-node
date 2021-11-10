@@ -20,13 +20,13 @@ function main(cryptoKeyVersion, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with updated values.
+   *  Required. CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  with updated values.
    */
-  // const cryptoKeyVersion = ''
+  // const cryptoKeyVersion = {}
   /**
    *  Required. List of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
@@ -34,7 +34,7 @@ function main(cryptoKeyVersion, updateMask) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function updateCryptoKeyVersion() {
+  async function callUpdateCryptoKeyVersion() {
     // Construct request
     const request = {
       cryptoKeyVersion,
@@ -46,7 +46,7 @@ function main(cryptoKeyVersion, updateMask) {
     console.log(response);
   }
 
-  updateCryptoKeyVersion();
+  callUpdateCryptoKeyVersion();
   // [END cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyVersion_async]
 }
 

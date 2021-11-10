@@ -20,8 +20,8 @@ function main(parent, importJobId, importJob) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][google.cloud.kms.v1.KeyRing.name] of the [KeyRing][google.cloud.kms.v1.KeyRing] associated with the
-   *  [ImportJobs][google.cloud.kms.v1.ImportJob].
+   *  Required. The name google.cloud.kms.v1.KeyRing.name  of the KeyRing google.cloud.kms.v1.KeyRing  associated with the
+   *  ImportJobs google.cloud.kms.v1.ImportJob.
    */
   // const parent = 'abc123'
   /**
@@ -30,9 +30,9 @@ function main(parent, importJobId, importJob) {
    */
   // const importJobId = 'abc123'
   /**
-   *  Required. An [ImportJob][google.cloud.kms.v1.ImportJob] with initial field values.
+   *  Required. An ImportJob google.cloud.kms.v1.ImportJob  with initial field values.
    */
-  // const importJob = ''
+  // const importJob = {}
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
@@ -40,7 +40,7 @@ function main(parent, importJobId, importJob) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function createImportJob() {
+  async function callCreateImportJob() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent, importJobId, importJob) {
     console.log(response);
   }
 
-  createImportJob();
+  callCreateImportJob();
   // [END cloudkms_v1_generated_KeyManagementService_CreateImportJob_async]
 }
 

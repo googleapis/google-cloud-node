@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.
+   *  Required. The name google.cloud.kms.v1.CryptoKeyVersion.name  of the CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  to get.
    */
   // const name = 'abc123'
 
@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function getCryptoKeyVersion() {
+  async function callGetCryptoKeyVersion() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getCryptoKeyVersion();
+  callGetCryptoKeyVersion();
   // [END cloudkms_v1_generated_KeyManagementService_GetCryptoKeyVersion_async]
 }
 

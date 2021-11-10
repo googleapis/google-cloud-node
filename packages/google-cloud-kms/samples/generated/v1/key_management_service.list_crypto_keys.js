@@ -20,38 +20,38 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the [KeyRing][google.cloud.kms.v1.KeyRing] to list, in the format
+   *  Required. The resource name of the KeyRing google.cloud.kms.v1.KeyRing  to list, in the format
    *  `projects/* /locations/* /keyRings/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Optional limit on the number of [CryptoKeys][google.cloud.kms.v1.CryptoKey] to include in the
-   *  response.  Further [CryptoKeys][google.cloud.kms.v1.CryptoKey] can subsequently be obtained by
-   *  including the [ListCryptoKeysResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token] in a subsequent
+   *  Optional. Optional limit on the number of CryptoKeys google.cloud.kms.v1.CryptoKey  to include in the
+   *  response.  Further CryptoKeys google.cloud.kms.v1.CryptoKey  can subsequently be obtained by
+   *  including the ListCryptoKeysResponse.next_page_token google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token  in a subsequent
    *  request.  If unspecified, the server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
    *  Optional. Optional pagination token, returned earlier via
-   *  [ListCryptoKeysResponse.next_page_token][google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token].
+   *  ListCryptoKeysResponse.next_page_token google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token.
    */
   // const pageToken = 'abc123'
   /**
    *  The fields of the primary version to include in the response.
    */
-  // const versionView = ''
+  // const versionView = {}
   /**
    *  Optional. Only include resources that match the filter in the response. For
    *  more information, see
-   *  [Sorting and filtering list
-   *  results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   *  Sorting and filtering list
+   *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
    */
   // const filter = 'abc123'
   /**
    *  Optional. Specify how the results should be sorted. If not specified, the
    *  results will be sorted in the default order. For more information, see
-   *  [Sorting and filtering list
-   *  results](https://cloud.google.com/kms/docs/sorting-and-filtering).
+   *  Sorting and filtering list
+   *  results (https://cloud.google.com/kms/docs/sorting-and-filtering).
    */
   // const orderBy = 'abc123'
 
@@ -61,7 +61,7 @@ function main(parent) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function listCryptoKeys() {
+  async function callListCryptoKeys() {
     // Construct request
     const request = {
       parent,
@@ -74,7 +74,7 @@ function main(parent) {
     }
   }
 
-  listCryptoKeys();
+  callListCryptoKeys();
   // [END cloudkms_v1_generated_KeyManagementService_ListCryptoKeys_async]
 }
 

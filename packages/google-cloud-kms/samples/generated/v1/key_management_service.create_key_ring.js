@@ -21,7 +21,7 @@ function main(parent, keyRingId, keyRing) {
    */
   /**
    *  Required. The resource name of the location associated with the
-   *  [KeyRings][google.cloud.kms.v1.KeyRing], in the format `projects/* /locations/*`.
+   *  KeyRings google.cloud.kms.v1.KeyRing, in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -30,9 +30,9 @@ function main(parent, keyRingId, keyRing) {
    */
   // const keyRingId = 'abc123'
   /**
-   *  Required. A [KeyRing][google.cloud.kms.v1.KeyRing] with initial field values.
+   *  Required. A KeyRing google.cloud.kms.v1.KeyRing  with initial field values.
    */
-  // const keyRing = ''
+  // const keyRing = {}
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
@@ -40,7 +40,7 @@ function main(parent, keyRingId, keyRing) {
   // Instantiates a client
   const kmsClient = new KeyManagementServiceClient();
 
-  async function createKeyRing() {
+  async function callCreateKeyRing() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent, keyRingId, keyRing) {
     console.log(response);
   }
 
-  createKeyRing();
+  callCreateKeyRing();
   // [END cloudkms_v1_generated_KeyManagementService_CreateKeyRing_async]
 }
 
