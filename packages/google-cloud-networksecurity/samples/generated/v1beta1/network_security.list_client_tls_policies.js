@@ -43,7 +43,7 @@ function main(parent) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function listClientTlsPolicies() {
+  async function callListClientTlsPolicies() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent) {
     }
   }
 
-  listClientTlsPolicies();
+  callListClientTlsPolicies();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_async]
 }
 

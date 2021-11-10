@@ -26,11 +26,11 @@ function main(authorizationPolicy) {
    *  the full request. A field will be overwritten if it is in the mask. If the
    *  user does not provide a mask then all fields will be overwritten.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. Updated AuthorizationPolicy resource.
    */
-  // const authorizationPolicy = ''
+  // const authorizationPolicy = {}
 
   // Imports the Networksecurity library
   const {NetworkSecurityClient} =
@@ -39,7 +39,7 @@ function main(authorizationPolicy) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function updateAuthorizationPolicy() {
+  async function callUpdateAuthorizationPolicy() {
     // Construct request
     const request = {
       authorizationPolicy,
@@ -53,7 +53,7 @@ function main(authorizationPolicy) {
     console.log(response);
   }
 
-  updateAuthorizationPolicy();
+  callUpdateAuthorizationPolicy();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_UpdateAuthorizationPolicy_async]
 }
 

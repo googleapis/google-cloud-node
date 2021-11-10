@@ -27,11 +27,11 @@ function main(serverTlsPolicy) {
    *  mask. If the user does not provide a mask then all fields will be
    *  overwritten.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. Updated ServerTlsPolicy resource.
    */
-  // const serverTlsPolicy = ''
+  // const serverTlsPolicy = {}
 
   // Imports the Networksecurity library
   const {NetworkSecurityClient} =
@@ -40,7 +40,7 @@ function main(serverTlsPolicy) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function updateServerTlsPolicy() {
+  async function callUpdateServerTlsPolicy() {
     // Construct request
     const request = {
       serverTlsPolicy,
@@ -54,7 +54,7 @@ function main(serverTlsPolicy) {
     console.log(response);
   }
 
-  updateServerTlsPolicy();
+  callUpdateServerTlsPolicy();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_UpdateServerTlsPolicy_async]
 }
 

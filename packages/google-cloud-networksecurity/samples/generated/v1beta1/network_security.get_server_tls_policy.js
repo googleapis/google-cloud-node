@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function getServerTlsPolicy() {
+  async function callGetServerTlsPolicy() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getServerTlsPolicy();
+  callGetServerTlsPolicy();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_async]
 }
 

@@ -33,7 +33,7 @@ function main(parent, clientTlsPolicyId, clientTlsPolicy) {
   /**
    *  Required. ClientTlsPolicy resource to be created.
    */
-  // const clientTlsPolicy = ''
+  // const clientTlsPolicy = {}
 
   // Imports the Networksecurity library
   const {NetworkSecurityClient} =
@@ -42,7 +42,7 @@ function main(parent, clientTlsPolicyId, clientTlsPolicy) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function createClientTlsPolicy() {
+  async function callCreateClientTlsPolicy() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, clientTlsPolicyId, clientTlsPolicy) {
     console.log(response);
   }
 
-  createClientTlsPolicy();
+  callCreateClientTlsPolicy();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_async]
 }
 

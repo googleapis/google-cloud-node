@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function deleteServerTlsPolicy() {
+  async function callDeleteServerTlsPolicy() {
     // Construct request
     const request = {
       name,
@@ -46,7 +46,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteServerTlsPolicy();
+  callDeleteServerTlsPolicy();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_async]
 }
 

@@ -44,7 +44,7 @@ function main(parent) {
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();
 
-  async function listAuthorizationPolicies() {
+  async function callListAuthorizationPolicies() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     }
   }
 
-  listAuthorizationPolicies();
+  callListAuthorizationPolicies();
   // [END networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_async]
 }
 
