@@ -346,6 +346,31 @@ export class StorageTransferServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Returns the Google service account that is used by Storage Transfer
+   * Service to access buckets in the project where transfers
+   * run or in other projects. Each Google service account is associated
+   * with one Google Cloud Platform Console project. Users
+   * should add this service account to the Google Cloud Storage bucket
+   * ACLs to grant access to Storage Transfer Service. This service
+   * account is created and owned by Storage Transfer Service and can
+   * only be used by Storage Transfer Service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform Console project that the
+   *   Google service account is associated with.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GoogleServiceAccount]{@link google.storagetransfer.v1.GoogleServiceAccount}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.get_google_service_account.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_GetGoogleServiceAccount_async
+   */
   getGoogleServiceAccount(
     request?: protos.google.storagetransfer.v1.IGetGoogleServiceAccountRequest,
     options?: CallOptions
@@ -380,31 +405,6 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the Google service account that is used by Storage Transfer
-   * Service to access buckets in the project where transfers
-   * run or in other projects. Each Google service account is associated
-   * with one Google Cloud Platform Console project. Users
-   * should add this service account to the Google Cloud Storage bucket
-   * ACLs to grant access to Storage Transfer Service. This service
-   * account is created and owned by Storage Transfer Service and can
-   * only be used by Storage Transfer Service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that the
-   *   Google service account is associated with.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GoogleServiceAccount]{@link google.storagetransfer.v1.GoogleServiceAccount}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getGoogleServiceAccount(request);
-   */
   getGoogleServiceAccount(
     request?: protos.google.storagetransfer.v1.IGetGoogleServiceAccountRequest,
     optionsOrCallback?:
@@ -455,6 +455,23 @@ export class StorageTransferServiceClient {
       callback
     );
   }
+  /**
+   * Creates a transfer job that runs periodically.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.storagetransfer.v1.TransferJob} request.transferJob
+   *   Required. The job to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TransferJob]{@link google.storagetransfer.v1.TransferJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.create_transfer_job.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_CreateTransferJob_async
+   */
   createTransferJob(
     request?: protos.google.storagetransfer.v1.ICreateTransferJobRequest,
     options?: CallOptions
@@ -486,23 +503,6 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a transfer job that runs periodically.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.storagetransfer.v1.TransferJob} request.transferJob
-   *   Required. The job to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TransferJob]{@link google.storagetransfer.v1.TransferJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createTransferJob(request);
-   */
   createTransferJob(
     request?: protos.google.storagetransfer.v1.ICreateTransferJobRequest,
     optionsOrCallback?:
@@ -537,40 +537,11 @@ export class StorageTransferServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.createTransferJob(request, options, callback);
   }
-  updateTransferJob(
-    request?: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.storagetransfer.v1.ITransferJob,
-      protos.google.storagetransfer.v1.IUpdateTransferJobRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateTransferJob(
-    request: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.storagetransfer.v1.ITransferJob,
-      | protos.google.storagetransfer.v1.IUpdateTransferJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTransferJob(
-    request: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
-    callback: Callback<
-      protos.google.storagetransfer.v1.ITransferJob,
-      | protos.google.storagetransfer.v1.IUpdateTransferJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates a transfer job. Updating a job's transfer spec does not affect
    * transfer operations that are running already.
@@ -618,9 +589,40 @@ export class StorageTransferServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTransferJob(request);
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.update_transfer_job.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_UpdateTransferJob_async
    */
+  updateTransferJob(
+    request?: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.ITransferJob,
+      protos.google.storagetransfer.v1.IUpdateTransferJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateTransferJob(
+    request: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.storagetransfer.v1.ITransferJob,
+      | protos.google.storagetransfer.v1.IUpdateTransferJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateTransferJob(
+    request: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
+    callback: Callback<
+      protos.google.storagetransfer.v1.ITransferJob,
+      | protos.google.storagetransfer.v1.IUpdateTransferJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateTransferJob(
     request?: protos.google.storagetransfer.v1.IUpdateTransferJobRequest,
     optionsOrCallback?:
@@ -664,6 +666,27 @@ export class StorageTransferServiceClient {
     this.initialize();
     return this.innerApiCalls.updateTransferJob(request, options, callback);
   }
+  /**
+   * Gets a transfer job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.jobName
+   *   Required.
+   *   The job to get.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform Console project that owns the
+   *   job.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TransferJob]{@link google.storagetransfer.v1.TransferJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.get_transfer_job.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_GetTransferJob_async
+   */
   getTransferJob(
     request?: protos.google.storagetransfer.v1.IGetTransferJobRequest,
     options?: CallOptions
@@ -695,27 +718,6 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a transfer job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.jobName
-   *   Required.
-   *   The job to get.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that owns the
-   *   job.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TransferJob]{@link google.storagetransfer.v1.TransferJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTransferJob(request);
-   */
   getTransferJob(
     request?: protos.google.storagetransfer.v1.IGetTransferJobRequest,
     optionsOrCallback?:
@@ -759,6 +761,23 @@ export class StorageTransferServiceClient {
     this.initialize();
     return this.innerApiCalls.getTransferJob(request, options, callback);
   }
+  /**
+   * Pauses a transfer operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the transfer operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.pause_transfer_operation.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_PauseTransferOperation_async
+   */
   pauseTransferOperation(
     request?: protos.google.storagetransfer.v1.IPauseTransferOperationRequest,
     options?: CallOptions
@@ -793,23 +812,6 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Pauses a transfer operation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the transfer operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.pauseTransferOperation(request);
-   */
   pauseTransferOperation(
     request?: protos.google.storagetransfer.v1.IPauseTransferOperationRequest,
     optionsOrCallback?:
@@ -860,6 +862,23 @@ export class StorageTransferServiceClient {
       callback
     );
   }
+  /**
+   * Resumes a transfer operation that is paused.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the transfer operation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.resume_transfer_operation.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_ResumeTransferOperation_async
+   */
   resumeTransferOperation(
     request?: protos.google.storagetransfer.v1.IResumeTransferOperationRequest,
     options?: CallOptions
@@ -894,23 +913,6 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Resumes a transfer operation that is paused.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the transfer operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.resumeTransferOperation(request);
-   */
   resumeTransferOperation(
     request?: protos.google.storagetransfer.v1.IResumeTransferOperationRequest,
     optionsOrCallback?:
@@ -962,6 +964,30 @@ export class StorageTransferServiceClient {
     );
   }
 
+  /**
+   * Attempts to start a new TransferOperation for the current TransferJob. A
+   * TransferJob has a maximum of one active TransferOperation. If this method
+   * is called while a TransferOperation is active, an error wil be returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.jobName
+   *   Required. The name of the transfer job.
+   * @param {string} request.projectId
+   *   Required. The ID of the Google Cloud Platform Console project that owns the
+   *   transfer job.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.run_transfer_job.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_RunTransferJob_async
+   */
   runTransferJob(
     request?: protos.google.storagetransfer.v1.IRunTransferJobRequest,
     options?: CallOptions
@@ -998,31 +1024,6 @@ export class StorageTransferServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Attempts to start a new TransferOperation for the current TransferJob. A
-   * TransferJob has a maximum of one active TransferOperation. If this method
-   * is called while a TransferOperation is active, an error wil be returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.jobName
-   *   Required. The name of the transfer job.
-   * @param {string} request.projectId
-   *   Required. The ID of the Google Cloud Platform Console project that owns the
-   *   transfer job.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.runTransferJob(request);
-   * const [response] = await operation.promise();
-   */
   runTransferJob(
     request?: protos.google.storagetransfer.v1.IRunTransferJobRequest,
     optionsOrCallback?:
@@ -1080,11 +1081,8 @@ export class StorageTransferServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRunTransferJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.run_transfer_job.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_RunTransferJob_async
    */
   async checkRunTransferJobProgress(
     name: string
@@ -1108,37 +1106,6 @@ export class StorageTransferServiceClient {
       protos.google.storagetransfer.v1.TransferOperation
     >;
   }
-  listTransferJobs(
-    request?: protos.google.storagetransfer.v1.IListTransferJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.storagetransfer.v1.ITransferJob[],
-      protos.google.storagetransfer.v1.IListTransferJobsRequest | null,
-      protos.google.storagetransfer.v1.IListTransferJobsResponse
-    ]
-  >;
-  listTransferJobs(
-    request: protos.google.storagetransfer.v1.IListTransferJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.storagetransfer.v1.IListTransferJobsRequest,
-      | protos.google.storagetransfer.v1.IListTransferJobsResponse
-      | null
-      | undefined,
-      protos.google.storagetransfer.v1.ITransferJob
-    >
-  ): void;
-  listTransferJobs(
-    request: protos.google.storagetransfer.v1.IListTransferJobsRequest,
-    callback: PaginationCallback<
-      protos.google.storagetransfer.v1.IListTransferJobsRequest,
-      | protos.google.storagetransfer.v1.IListTransferJobsResponse
-      | null
-      | undefined,
-      protos.google.storagetransfer.v1.ITransferJob
-    >
-  ): void;
   /**
    * Lists transfer jobs.
    *
@@ -1176,6 +1143,37 @@ export class StorageTransferServiceClient {
    */
   listTransferJobs(
     request?: protos.google.storagetransfer.v1.IListTransferJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.storagetransfer.v1.ITransferJob[],
+      protos.google.storagetransfer.v1.IListTransferJobsRequest | null,
+      protos.google.storagetransfer.v1.IListTransferJobsResponse
+    ]
+  >;
+  listTransferJobs(
+    request: protos.google.storagetransfer.v1.IListTransferJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.storagetransfer.v1.IListTransferJobsRequest,
+      | protos.google.storagetransfer.v1.IListTransferJobsResponse
+      | null
+      | undefined,
+      protos.google.storagetransfer.v1.ITransferJob
+    >
+  ): void;
+  listTransferJobs(
+    request: protos.google.storagetransfer.v1.IListTransferJobsRequest,
+    callback: PaginationCallback<
+      protos.google.storagetransfer.v1.IListTransferJobsRequest,
+      | protos.google.storagetransfer.v1.IListTransferJobsResponse
+      | null
+      | undefined,
+      protos.google.storagetransfer.v1.ITransferJob
+    >
+  ): void;
+  listTransferJobs(
+    request?: protos.google.storagetransfer.v1.IListTransferJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1208,6 +1206,8 @@ export class StorageTransferServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listTransferJobs(request, options, callback);
   }
@@ -1251,7 +1251,10 @@ export class StorageTransferServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listTransferJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferJobs.createStream(
       this.innerApiCalls.listTransferJobs as gax.GaxCall,
@@ -1293,11 +1296,8 @@ export class StorageTransferServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTransferJobsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/storage_transfer_service.list_transfer_jobs.js</caption>
+   * region_tag:storagetransfer_v1_generated_StorageTransferService_ListTransferJobs_async
    */
   listTransferJobsAsync(
     request?: protos.google.storagetransfer.v1.IListTransferJobsRequest,
@@ -1305,8 +1305,10 @@ export class StorageTransferServiceClient {
   ): AsyncIterable<protos.google.storagetransfer.v1.ITransferJob> {
     request = request || {};
     options = options || {};
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listTransferJobs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTransferJobs.asyncIterate(
       this.innerApiCalls['listTransferJobs'] as GaxCall,
