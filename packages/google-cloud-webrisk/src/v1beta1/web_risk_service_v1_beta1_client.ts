@@ -288,6 +288,28 @@ export class WebRiskServiceV1Beta1Client {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the most recent threat list diffs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.webrisk.v1beta1.ThreatType} request.threatType
+   *   The ThreatList to update.
+   * @param {Buffer} request.versionToken
+   *   The current version token of the client for the requested list (the
+   *   client version that was received from the last successful diff).
+   * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} request.constraints
+   *   Required. The constraints associated with this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ComputeThreatListDiffResponse]{@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/web_risk_service_v1_beta1.compute_threat_list_diff.js</caption>
+   * region_tag:webrisk_v1beta1_generated_WebRiskServiceV1Beta1_ComputeThreatListDiff_async
+   */
   computeThreatListDiff(
     request?: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest,
     options?: CallOptions
@@ -322,28 +344,6 @@ export class WebRiskServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the most recent threat list diffs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.webrisk.v1beta1.ThreatType} request.threatType
-   *   The ThreatList to update.
-   * @param {Buffer} request.versionToken
-   *   The current version token of the client for the requested list (the
-   *   client version that was received from the last successful diff).
-   * @param {google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints} request.constraints
-   *   Required. The constraints associated with this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ComputeThreatListDiffResponse]{@link google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.computeThreatListDiff(request);
-   */
   computeThreatListDiff(
     request?: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest,
     optionsOrCallback?:
@@ -381,9 +381,30 @@ export class WebRiskServiceV1Beta1Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.computeThreatListDiff(request, options, callback);
   }
+  /**
+   * This method is used to check whether a URI is on a given threatList.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.uri
+   *   Required. The URI to be checked for matches.
+   * @param {number[]} request.threatTypes
+   *   Required. The ThreatLists to search in.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SearchUrisResponse]{@link google.cloud.webrisk.v1beta1.SearchUrisResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/web_risk_service_v1_beta1.search_uris.js</caption>
+   * region_tag:webrisk_v1beta1_generated_WebRiskServiceV1Beta1_SearchUris_async
+   */
   searchUris(
     request?: protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest,
     options?: CallOptions
@@ -411,25 +432,6 @@ export class WebRiskServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * This method is used to check whether a URI is on a given threatList.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.uri
-   *   Required. The URI to be checked for matches.
-   * @param {number[]} request.threatTypes
-   *   Required. The ThreatLists to search in.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SearchUrisResponse]{@link google.cloud.webrisk.v1beta1.SearchUrisResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.searchUris(request);
-   */
   searchUris(
     request?: protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest,
     optionsOrCallback?:
@@ -462,9 +464,35 @@ export class WebRiskServiceV1Beta1Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.searchUris(request, options, callback);
   }
+  /**
+   * Gets the full hashes that match the requested hash prefix.
+   * This is used after a hash prefix is looked up in a threatList
+   * and there is a match. The client side threatList only holds partial hashes
+   * so the client must query this method to determine if there is a full
+   * hash match of a threat.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Buffer} request.hashPrefix
+   *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
+   *   hash. For JSON requests, this field is base64-encoded.
+   * @param {number[]} request.threatTypes
+   *   Required. The ThreatLists to search in.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SearchHashesResponse]{@link google.cloud.webrisk.v1beta1.SearchHashesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/web_risk_service_v1_beta1.search_hashes.js</caption>
+   * region_tag:webrisk_v1beta1_generated_WebRiskServiceV1Beta1_SearchHashes_async
+   */
   searchHashes(
     request?: protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest,
     options?: CallOptions
@@ -496,30 +524,6 @@ export class WebRiskServiceV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the full hashes that match the requested hash prefix.
-   * This is used after a hash prefix is looked up in a threatList
-   * and there is a match. The client side threatList only holds partial hashes
-   * so the client must query this method to determine if there is a full
-   * hash match of a threat.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {Buffer} request.hashPrefix
-   *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
-   *   hash. For JSON requests, this field is base64-encoded.
-   * @param {number[]} request.threatTypes
-   *   Required. The ThreatLists to search in.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SearchHashesResponse]{@link google.cloud.webrisk.v1beta1.SearchHashesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.searchHashes(request);
-   */
   searchHashes(
     request?: protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest,
     optionsOrCallback?:
@@ -554,6 +558,8 @@ export class WebRiskServiceV1Beta1Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.searchHashes(request, options, callback);
   }

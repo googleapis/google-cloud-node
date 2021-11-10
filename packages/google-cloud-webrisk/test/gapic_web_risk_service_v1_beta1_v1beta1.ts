@@ -152,7 +152,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
       );
@@ -177,7 +177,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
       );
@@ -217,7 +217,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.computeThreatListDiff = stubSimpleCall(
         undefined,
@@ -246,7 +246,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
       );
@@ -270,7 +270,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
       );
@@ -310,7 +310,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchUris = stubSimpleCall(
         undefined,
@@ -336,7 +336,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
       );
@@ -360,7 +360,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
       );
@@ -400,7 +400,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchHashes = stubSimpleCall(
         undefined,
