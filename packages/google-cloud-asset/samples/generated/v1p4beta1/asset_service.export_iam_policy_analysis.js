@@ -22,15 +22,15 @@ function main(analysisQuery, outputConfig) {
   /**
    *  Required. The request query.
    */
-  // const analysisQuery = ''
+  // const analysisQuery = {}
   /**
    *  Optional. The request options.
    */
-  // const options = ''
+  // const options = {}
   /**
    *  Required. Output configuration indicating where the results will be output to.
    */
-  // const outputConfig = ''
+  // const outputConfig = {}
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1p4beta1;
@@ -38,7 +38,7 @@ function main(analysisQuery, outputConfig) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function exportIamPolicyAnalysis() {
+  async function callExportIamPolicyAnalysis() {
     // Construct request
     const request = {
       analysisQuery,
@@ -51,7 +51,7 @@ function main(analysisQuery, outputConfig) {
     console.log(response);
   }
 
-  exportIamPolicyAnalysis();
+  callExportIamPolicyAnalysis();
   // [END cloudasset_v1p4beta1_generated_AssetService_ExportIamPolicyAnalysis_async]
 }
 

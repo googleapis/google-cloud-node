@@ -322,6 +322,26 @@ export class AssetServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Analyzes IAM policies based on the specified request. Returns
+   * a list of {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult|IamPolicyAnalysisResult} matching the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} request.analysisQuery
+   *   Required. The request query.
+   * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} [request.options]
+   *   Optional. The request options.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeIamPolicyResponse]{@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p4beta1/asset_service.analyze_iam_policy.js</caption>
+   * region_tag:cloudasset_v1p4beta1_generated_AssetService_AnalyzeIamPolicy_async
+   */
   analyzeIamPolicy(
     request?: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     options?: CallOptions
@@ -353,26 +373,6 @@ export class AssetServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Analyzes IAM policies based on the specified request. Returns
-   * a list of {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult|IamPolicyAnalysisResult} matching the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} request.analysisQuery
-   *   Required. The request query.
-   * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} [request.options]
-   *   Optional. The request options.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AnalyzeIamPolicyResponse]{@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.analyzeIamPolicy(request);
-   */
   analyzeIamPolicy(
     request?: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     optionsOrCallback?:
@@ -417,6 +417,32 @@ export class AssetServiceClient {
     return this.innerApiCalls.analyzeIamPolicy(request, options, callback);
   }
 
+  /**
+   * Exports IAM policy analysis based on the specified request. This API
+   * implements the {@link google.longrunning.Operation|google.longrunning.Operation} API allowing you to keep
+   * track of the export. The metadata contains the request to help callers to
+   * map responses to requests.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} request.analysisQuery
+   *   Required. The request query.
+   * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} [request.options]
+   *   Optional. The request options.
+   * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} request.outputConfig
+   *   Required. Output configuration indicating where the results will be output to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1p4beta1/asset_service.export_iam_policy_analysis.js</caption>
+   * region_tag:cloudasset_v1p4beta1_generated_AssetService_ExportIamPolicyAnalysis_async
+   */
   exportIamPolicyAnalysis(
     request?: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     options?: CallOptions
@@ -453,33 +479,6 @@ export class AssetServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Exports IAM policy analysis based on the specified request. This API
-   * implements the {@link google.longrunning.Operation|google.longrunning.Operation} API allowing you to keep
-   * track of the export. The metadata contains the request to help callers to
-   * map responses to requests.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} request.analysisQuery
-   *   Required. The request query.
-   * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} [request.options]
-   *   Optional. The request options.
-   * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} request.outputConfig
-   *   Required. Output configuration indicating where the results will be output to.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportIamPolicyAnalysis(request);
-   * const [response] = await operation.promise();
-   */
   exportIamPolicyAnalysis(
     request?: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     optionsOrCallback?:
@@ -541,11 +540,8 @@ export class AssetServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportIamPolicyAnalysisProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1p4beta1/asset_service.export_iam_policy_analysis.js</caption>
+   * region_tag:cloudasset_v1p4beta1_generated_AssetService_ExportIamPolicyAnalysis_async
    */
   async checkExportIamPolicyAnalysisProgress(
     name: string

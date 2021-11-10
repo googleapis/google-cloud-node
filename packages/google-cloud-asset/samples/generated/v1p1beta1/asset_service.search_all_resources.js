@@ -65,7 +65,7 @@ function main(scope) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function searchAllResources() {
+  async function callSearchAllResources() {
     // Construct request
     const request = {
       scope,
@@ -78,7 +78,7 @@ function main(scope) {
     }
   }
 
-  searchAllResources();
+  callSearchAllResources();
   // [END cloudasset_v1p1beta1_generated_AssetService_SearchAllResources_async]
 }
 

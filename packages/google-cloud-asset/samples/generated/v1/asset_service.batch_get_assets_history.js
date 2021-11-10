@@ -37,7 +37,7 @@ function main(parent) {
   /**
    *  Optional. The content type.
    */
-  // const contentType = ''
+  // const contentType = {}
   /**
    *  Optional. The time window for the asset history. Both start_time and
    *  end_time are optional and if set, it must be after the current time minus
@@ -46,23 +46,23 @@ function main(parent) {
    *  returned. The returned results contain all temporal assets whose time
    *  window overlap with read_time_window.
    */
-  // const readTimeWindow = ''
+  // const readTimeWindow = {}
   /**
    *  Optional. A list of relationship types to output, for example:
    *  `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
    *  content_type=RELATIONSHIP.
    *  * If specified:
-   *  it outputs specified relationships' history on the [asset_names]. It
-   *  returns an error if any of the [relationship_types] doesn't belong to the
-   *  supported relationship types of the [asset_names] or if any of the
-   *  [asset_names]'s types doesn't belong to the source types of the
-   *  [relationship_types].
+   *  it outputs specified relationships' history on the asset_names. It
+   *  returns an error if any of the relationship_types  doesn't belong to the
+   *  supported relationship types of the asset_names  or if any of the
+   *  asset_names's types doesn't belong to the source types of the
+   *  relationship_types.
    *  * Otherwise:
-   *  it outputs the supported relationships' history on the [asset_names] or
-   *  returns an error if any of the [asset_names]'s types has no relationship
+   *  it outputs the supported relationships' history on the asset_names  or
+   *  returns an error if any of the asset_names's types has no relationship
    *  support.
-   *  See [Introduction to Cloud Asset
-   *  Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+   *  See Introduction to Cloud Asset
+   *  Inventory (https://cloud.google.com/asset-inventory/docs/overview) for all
    *  supported asset types and relationship types.
    */
   // const relationshipTypes = 'abc123'
@@ -73,7 +73,7 @@ function main(parent) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function batchGetAssetsHistory() {
+  async function callBatchGetAssetsHistory() {
     // Construct request
     const request = {
       parent,
@@ -84,7 +84,7 @@ function main(parent) {
     console.log(response);
   }
 
-  batchGetAssetsHistory();
+  callBatchGetAssetsHistory();
   // [END cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_async]
 }
 

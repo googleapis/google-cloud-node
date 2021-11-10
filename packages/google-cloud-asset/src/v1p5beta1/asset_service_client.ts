@@ -318,37 +318,6 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
 
-  listAssets(
-    request?: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1p5beta1.IAsset[],
-      protos.google.cloud.asset.v1p5beta1.IListAssetsRequest | null,
-      protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
-    ]
-  >;
-  listAssets(
-    request: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
-      | protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1p5beta1.IAsset
-    >
-  ): void;
-  listAssets(
-    request: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
-      | protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1p5beta1.IAsset
-    >
-  ): void;
   /**
    * Lists assets with time and resource types and returns paged results in
    * response.
@@ -395,6 +364,37 @@ export class AssetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listAssets(
+    request?: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1p5beta1.IAsset[],
+      protos.google.cloud.asset.v1p5beta1.IListAssetsRequest | null,
+      protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
+    ]
+  >;
+  listAssets(
+    request: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+      | protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p5beta1.IAsset
+    >
+  ): void;
+  listAssets(
+    request: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+      | protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p5beta1.IAsset
+    >
+  ): void;
   listAssets(
     request?: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
     optionsOrCallback?:
@@ -547,11 +547,8 @@ export class AssetServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listAssetsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1p5beta1/asset_service.list_assets.js</caption>
+   * region_tag:cloudasset_v1p5beta1_generated_AssetService_ListAssets_async
    */
   listAssetsAsync(
     request?: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
@@ -565,7 +562,6 @@ export class AssetServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

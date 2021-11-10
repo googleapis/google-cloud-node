@@ -23,7 +23,7 @@ function main(scope) {
    *  Required. A scope can be a project, a folder, or an organization. The search is
    *  limited to the IAM policies within the `scope`. The caller must be granted
    *  the
-   *  [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *  `cloudasset.assets.searchAllIamPolicies` (https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *  permission on the desired scope.
    *  The allowed values are:
    *  * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
@@ -33,15 +33,15 @@ function main(scope) {
    */
   // const scope = 'abc123'
   /**
-   *  Optional. The query statement. See [how to construct a
-   *  query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
+   *  Optional. The query statement. See how to construct a
+   *  query (https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
    *  for more information. If not specified or empty, it will search all the
    *  IAM policies within the specified `scope`. Note that the query string is
    *  compared against each Cloud IAM policy binding, including its members,
    *  roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
    *  contain the bindings that match your query. To learn more about the IAM
-   *  policy structure, see [IAM policy
-   *  doc](https://cloud.google.com/iam/docs/policies#structure).
+   *  policy structure, see IAM policy
+   *  doc (https://cloud.google.com/iam/docs/policies#structure).
    *  Examples:
    *  * `policy:amy@gmail.com` to find IAM policy bindings that specify user
    *    "amy@gmail.com".
@@ -91,8 +91,8 @@ function main(scope) {
   // const pageToken = 'abc123'
   /**
    *  Optional. A list of asset types that the IAM policies are attached to. If empty, it
-   *  will search the IAM policies that are attached to all the [searchable asset
-   *  types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *  will search the IAM policies that are attached to all the searchable asset
+   *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
    *  Regular expressions are also supported. For example:
    *  * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
    *  starts with "compute.googleapis.com".
@@ -100,7 +100,7 @@ function main(scope) {
    *  "Instance".
    *  * ".*Instance.*" snapshots IAM policies attached to asset type contains
    *  "Instance".
-   *  See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *  See RE2 (https://github.com/google/re2/wiki/Syntax) for all supported
    *  regular expression syntax. If the regular expression does not match any
    *  supported asset type, an INVALID_ARGUMENT error will be returned.
    */
@@ -125,7 +125,7 @@ function main(scope) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function searchAllIamPolicies() {
+  async function callSearchAllIamPolicies() {
     // Construct request
     const request = {
       scope,
@@ -138,7 +138,7 @@ function main(scope) {
     }
   }
 
-  searchAllIamPolicies();
+  callSearchAllIamPolicies();
   // [END cloudasset_v1_generated_AssetService_SearchAllIamPolicies_async]
 }
 
