@@ -352,6 +352,26 @@ export class WebSecurityScannerClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a new ScanConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name where the scan is created, which should be a
+   *   project resource name in the format 'projects/{projectId}'.
+   * @param {google.cloud.websecurityscanner.v1beta.ScanConfig} request.scanConfig
+   *   Required. The ScanConfig to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.create_scan_config.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_CreateScanConfig_async
+   */
   createScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.ICreateScanConfigRequest,
     options?: CallOptions
@@ -386,26 +406,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new ScanConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name where the scan is created, which should be a
-   *   project resource name in the format 'projects/{projectId}'.
-   * @param {google.cloud.websecurityscanner.v1beta.ScanConfig} request.scanConfig
-   *   Required. The ScanConfig to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createScanConfig(request);
-   */
   createScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.ICreateScanConfigRequest,
     optionsOrCallback?:
@@ -452,6 +452,24 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.createScanConfig(request, options, callback);
   }
+  /**
+   * Deletes an existing ScanConfig and its child resources.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ScanConfig to be deleted. The name follows the
+   *   format of 'projects/{projectId}/scanConfigs/{scanConfigId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.delete_scan_config.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_DeleteScanConfig_async
+   */
   deleteScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.IDeleteScanConfigRequest,
     options?: CallOptions
@@ -486,24 +504,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes an existing ScanConfig and its child resources.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ScanConfig to be deleted. The name follows the
-   *   format of 'projects/{projectId}/scanConfigs/{scanConfigId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteScanConfig(request);
-   */
   deleteScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.IDeleteScanConfigRequest,
     optionsOrCallback?:
@@ -550,6 +550,24 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.deleteScanConfig(request, options, callback);
   }
+  /**
+   * Gets a ScanConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ScanConfig to be returned. The name follows the
+   *   format of 'projects/{projectId}/scanConfigs/{scanConfigId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.get_scan_config.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_GetScanConfig_async
+   */
   getScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.IGetScanConfigRequest,
     options?: CallOptions
@@ -584,24 +602,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a ScanConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ScanConfig to be returned. The name follows the
-   *   format of 'projects/{projectId}/scanConfigs/{scanConfigId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getScanConfig(request);
-   */
   getScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.IGetScanConfigRequest,
     optionsOrCallback?:
@@ -648,6 +648,29 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.getScanConfig(request, options, callback);
   }
+  /**
+   * Updates a ScanConfig. This method support partial update of a ScanConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.websecurityscanner.v1beta.ScanConfig} request.scanConfig
+   *   Required. The ScanConfig to be updated. The name field must be set to identify the
+   *   resource to be updated. The values of fields not covered by the mask
+   *   will be ignored.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.update_scan_config.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_UpdateScanConfig_async
+   */
   updateScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.IUpdateScanConfigRequest,
     options?: CallOptions
@@ -682,29 +705,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a ScanConfig. This method support partial update of a ScanConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.websecurityscanner.v1beta.ScanConfig} request.scanConfig
-   *   Required. The ScanConfig to be updated. The name field must be set to identify the
-   *   resource to be updated. The values of fields not covered by the mask
-   *   will be ignored.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateScanConfig(request);
-   */
   updateScanConfig(
     request?: protos.google.cloud.websecurityscanner.v1beta.IUpdateScanConfigRequest,
     optionsOrCallback?:
@@ -751,6 +751,24 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.updateScanConfig(request, options, callback);
   }
+  /**
+   * Start a ScanRun according to the given ScanConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ScanConfig to be used. The name follows the
+   *   format of 'projects/{projectId}/scanConfigs/{scanConfigId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.start_scan_run.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_StartScanRun_async
+   */
   startScanRun(
     request?: protos.google.cloud.websecurityscanner.v1beta.IStartScanRunRequest,
     options?: CallOptions
@@ -785,24 +803,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Start a ScanRun according to the given ScanConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ScanConfig to be used. The name follows the
-   *   format of 'projects/{projectId}/scanConfigs/{scanConfigId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.startScanRun(request);
-   */
   startScanRun(
     request?: protos.google.cloud.websecurityscanner.v1beta.IStartScanRunRequest,
     optionsOrCallback?:
@@ -849,6 +849,25 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.startScanRun(request, options, callback);
   }
+  /**
+   * Gets a ScanRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ScanRun to be returned. The name follows the
+   *   format of
+   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.get_scan_run.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_GetScanRun_async
+   */
   getScanRun(
     request?: protos.google.cloud.websecurityscanner.v1beta.IGetScanRunRequest,
     options?: CallOptions
@@ -883,25 +902,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a ScanRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ScanRun to be returned. The name follows the
-   *   format of
-   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getScanRun(request);
-   */
   getScanRun(
     request?: protos.google.cloud.websecurityscanner.v1beta.IGetScanRunRequest,
     optionsOrCallback?:
@@ -948,6 +948,25 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.getScanRun(request, options, callback);
   }
+  /**
+   * Stops a ScanRun. The stopped ScanRun is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ScanRun to be stopped. The name follows the
+   *   format of
+   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.stop_scan_run.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_StopScanRun_async
+   */
   stopScanRun(
     request?: protos.google.cloud.websecurityscanner.v1beta.IStopScanRunRequest,
     options?: CallOptions
@@ -982,25 +1001,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Stops a ScanRun. The stopped ScanRun is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ScanRun to be stopped. The name follows the
-   *   format of
-   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.stopScanRun(request);
-   */
   stopScanRun(
     request?: protos.google.cloud.websecurityscanner.v1beta.IStopScanRunRequest,
     optionsOrCallback?:
@@ -1047,6 +1047,25 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.stopScanRun(request, options, callback);
   }
+  /**
+   * Gets a Finding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Finding to be returned. The name follows the
+   *   format of
+   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}/findings/{findingId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Finding]{@link google.cloud.websecurityscanner.v1beta.Finding}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.get_finding.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_GetFinding_async
+   */
   getFinding(
     request?: protos.google.cloud.websecurityscanner.v1beta.IGetFindingRequest,
     options?: CallOptions
@@ -1081,25 +1100,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a Finding.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Finding to be returned. The name follows the
-   *   format of
-   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}/findings/{findingId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Finding]{@link google.cloud.websecurityscanner.v1beta.Finding}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getFinding(request);
-   */
   getFinding(
     request?: protos.google.cloud.websecurityscanner.v1beta.IGetFindingRequest,
     optionsOrCallback?:
@@ -1146,6 +1146,25 @@ export class WebSecurityScannerClient {
     this.initialize();
     return this.innerApiCalls.getFinding(request, options, callback);
   }
+  /**
+   * List all FindingTypeStats under a given ScanRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, which should be a scan run resource name in the
+   *   format
+   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListFindingTypeStatsResponse]{@link google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.list_finding_type_stats.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_ListFindingTypeStats_async
+   */
   listFindingTypeStats(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListFindingTypeStatsRequest,
     options?: CallOptions
@@ -1180,25 +1199,6 @@ export class WebSecurityScannerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * List all FindingTypeStats under a given ScanRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, which should be a scan run resource name in the
-   *   format
-   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListFindingTypeStatsResponse]{@link google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listFindingTypeStats(request);
-   */
   listFindingTypeStats(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListFindingTypeStatsRequest,
     optionsOrCallback?:
@@ -1246,6 +1246,35 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.listFindingTypeStats(request, options, callback);
   }
 
+  /**
+   * Lists ScanConfigs under a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, which should be a project resource name in the
+   *   format 'projects/{projectId}'.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to be returned. This should be a
+   *   `next_page_token` value returned from a previous List request.
+   *   If unspecified, the first page of results is returned.
+   * @param {number} request.pageSize
+   *   The maximum number of ScanConfigs to return, can be limited by server.
+   *   If not specified or not positive, the implementation will select a
+   *   reasonable value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScanConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listScanConfigs(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListScanConfigsRequest,
     options?: CallOptions
@@ -1277,35 +1306,6 @@ export class WebSecurityScannerClient {
       protos.google.cloud.websecurityscanner.v1beta.IScanConfig
     >
   ): void;
-  /**
-   * Lists ScanConfigs under a given project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, which should be a project resource name in the
-   *   format 'projects/{projectId}'.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results to be returned. This should be a
-   *   `next_page_token` value returned from a previous List request.
-   *   If unspecified, the first page of results is returned.
-   * @param {number} request.pageSize
-   *   The maximum number of ScanConfigs to return, can be limited by server.
-   *   If not specified or not positive, the implementation will select a
-   *   reasonable value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ScanConfig]{@link google.cloud.websecurityscanner.v1beta.ScanConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listScanConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listScanConfigs(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListScanConfigsRequest,
     optionsOrCallback?:
@@ -1389,7 +1389,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listScanConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanConfigs.createStream(
       this.innerApiCalls.listScanConfigs as gax.GaxCall,
@@ -1425,11 +1426,8 @@ export class WebSecurityScannerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listScanConfigsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.list_scan_configs.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_ListScanConfigs_async
    */
   listScanConfigsAsync(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListScanConfigsRequest,
@@ -1443,8 +1441,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listScanConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanConfigs.asyncIterate(
       this.innerApiCalls['listScanConfigs'] as GaxCall,
@@ -1452,6 +1450,36 @@ export class WebSecurityScannerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1beta.IScanConfig>;
   }
+  /**
+   * Lists ScanRuns under a given ScanConfig, in descending order of ScanRun
+   * stop time.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, which should be a scan resource name in the
+   *   format 'projects/{projectId}/scanConfigs/{scanConfigId}'.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to be returned. This should be a
+   *   `next_page_token` value returned from a previous List request.
+   *   If unspecified, the first page of results is returned.
+   * @param {number} request.pageSize
+   *   The maximum number of ScanRuns to return, can be limited by server.
+   *   If not specified or not positive, the implementation will select a
+   *   reasonable value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScanRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listScanRuns(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListScanRunsRequest,
     options?: CallOptions
@@ -1483,36 +1511,6 @@ export class WebSecurityScannerClient {
       protos.google.cloud.websecurityscanner.v1beta.IScanRun
     >
   ): void;
-  /**
-   * Lists ScanRuns under a given ScanConfig, in descending order of ScanRun
-   * stop time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, which should be a scan resource name in the
-   *   format 'projects/{projectId}/scanConfigs/{scanConfigId}'.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results to be returned. This should be a
-   *   `next_page_token` value returned from a previous List request.
-   *   If unspecified, the first page of results is returned.
-   * @param {number} request.pageSize
-   *   The maximum number of ScanRuns to return, can be limited by server.
-   *   If not specified or not positive, the implementation will select a
-   *   reasonable value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ScanRun]{@link google.cloud.websecurityscanner.v1beta.ScanRun}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listScanRunsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listScanRuns(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListScanRunsRequest,
     optionsOrCallback?:
@@ -1596,7 +1594,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listScanRuns'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanRuns.createStream(
       this.innerApiCalls.listScanRuns as gax.GaxCall,
@@ -1632,11 +1631,8 @@ export class WebSecurityScannerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listScanRunsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.list_scan_runs.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_ListScanRuns_async
    */
   listScanRunsAsync(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListScanRunsRequest,
@@ -1650,8 +1646,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listScanRuns'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listScanRuns.asyncIterate(
       this.innerApiCalls['listScanRuns'] as GaxCall,
@@ -1659,6 +1655,36 @@ export class WebSecurityScannerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1beta.IScanRun>;
   }
+  /**
+   * List CrawledUrls under a given ScanRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, which should be a scan run resource name in the
+   *   format
+   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to be returned. This should be a
+   *   `next_page_token` value returned from a previous List request.
+   *   If unspecified, the first page of results is returned.
+   * @param {number} request.pageSize
+   *   The maximum number of CrawledUrls to return, can be limited by server.
+   *   If not specified or not positive, the implementation will select a
+   *   reasonable value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [CrawledUrl]{@link google.cloud.websecurityscanner.v1beta.CrawledUrl}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCrawledUrlsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listCrawledUrls(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListCrawledUrlsRequest,
     options?: CallOptions
@@ -1690,36 +1716,6 @@ export class WebSecurityScannerClient {
       protos.google.cloud.websecurityscanner.v1beta.ICrawledUrl
     >
   ): void;
-  /**
-   * List CrawledUrls under a given ScanRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, which should be a scan run resource name in the
-   *   format
-   *   'projects/{projectId}/scanConfigs/{scanConfigId}/scanRuns/{scanRunId}'.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results to be returned. This should be a
-   *   `next_page_token` value returned from a previous List request.
-   *   If unspecified, the first page of results is returned.
-   * @param {number} request.pageSize
-   *   The maximum number of CrawledUrls to return, can be limited by server.
-   *   If not specified or not positive, the implementation will select a
-   *   reasonable value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [CrawledUrl]{@link google.cloud.websecurityscanner.v1beta.CrawledUrl}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listCrawledUrlsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listCrawledUrls(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListCrawledUrlsRequest,
     optionsOrCallback?:
@@ -1804,7 +1800,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCrawledUrls'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCrawledUrls.createStream(
       this.innerApiCalls.listCrawledUrls as gax.GaxCall,
@@ -1841,11 +1838,8 @@ export class WebSecurityScannerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listCrawledUrlsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.list_crawled_urls.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_ListCrawledUrls_async
    */
   listCrawledUrlsAsync(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListCrawledUrlsRequest,
@@ -1859,8 +1853,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listCrawledUrls'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCrawledUrls.asyncIterate(
       this.innerApiCalls['listCrawledUrls'] as GaxCall,
@@ -1868,37 +1862,6 @@ export class WebSecurityScannerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1beta.ICrawledUrl>;
   }
-  listFindings(
-    request?: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.websecurityscanner.v1beta.IFinding[],
-      protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest | null,
-      protos.google.cloud.websecurityscanner.v1beta.IListFindingsResponse
-    ]
-  >;
-  listFindings(
-    request: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
-      | protos.google.cloud.websecurityscanner.v1beta.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.websecurityscanner.v1beta.IFinding
-    >
-  ): void;
-  listFindings(
-    request: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
-      | protos.google.cloud.websecurityscanner.v1beta.IListFindingsResponse
-      | null
-      | undefined,
-      protos.google.cloud.websecurityscanner.v1beta.IFinding
-    >
-  ): void;
   /**
    * List Findings under a given ScanRun.
    *
@@ -1934,6 +1897,37 @@ export class WebSecurityScannerClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listFindings(
+    request?: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.websecurityscanner.v1beta.IFinding[],
+      protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest | null,
+      protos.google.cloud.websecurityscanner.v1beta.IListFindingsResponse
+    ]
+  >;
+  listFindings(
+    request: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
+      | protos.google.cloud.websecurityscanner.v1beta.IListFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.websecurityscanner.v1beta.IFinding
+    >
+  ): void;
+  listFindings(
+    request: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
+      | protos.google.cloud.websecurityscanner.v1beta.IListFindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.websecurityscanner.v1beta.IFinding
+    >
+  ): void;
   listFindings(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
     optionsOrCallback?:
@@ -2023,7 +2017,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFindings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as gax.GaxCall,
@@ -2065,11 +2060,8 @@ export class WebSecurityScannerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listFindingsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/web_security_scanner.list_findings.js</caption>
+   * region_tag:websecurityscanner_v1beta_generated_WebSecurityScanner_ListFindings_async
    */
   listFindingsAsync(
     request?: protos.google.cloud.websecurityscanner.v1beta.IListFindingsRequest,
@@ -2083,8 +2075,8 @@ export class WebSecurityScannerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFindings'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
