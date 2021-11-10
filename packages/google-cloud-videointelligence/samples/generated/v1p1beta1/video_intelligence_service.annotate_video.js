@@ -21,12 +21,12 @@ function main(features) {
    */
   /**
    *  Input video location. Currently, only
-   *  [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
+   *  Google Cloud Storage (https://cloud.google.com/storage/) URIs are
    *  supported, which must be specified in the following format:
    *  `gs://bucket-id/object-id` (other URI formats return
-   *  [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For
-   *  more information, see [Request
-   *  URIs](https://cloud.google.com/storage/docs/request-endpoints). A video URI
+   *  google.rpc.Code.INVALID_ARGUMENT google.rpc.Code.INVALID_ARGUMENT). For
+   *  more information, see Request
+   *  URIs (https://cloud.google.com/storage/docs/request-endpoints). A video URI
    *  may include wildcards in `object-id`, and thus identify multiple videos.
    *  Supported wildcards: '*' to match 0 or more characters;
    *  '?' to match 1 character. If unset, the input video should be embedded
@@ -46,15 +46,15 @@ function main(features) {
   /**
    *  Additional video context and/or feature-specific parameters.
    */
-  // const videoContext = ''
+  // const videoContext = {}
   /**
    *  Optional. Location where the output (in JSON format) should be stored.
-   *  Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
+   *  Currently, only Google Cloud Storage (https://cloud.google.com/storage/)
    *  URIs are supported, which must be specified in the following format:
    *  `gs://bucket-id/object-id` (other URI formats return
-   *  [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For
-   *  more information, see [Request
-   *  URIs](https://cloud.google.com/storage/docs/request-endpoints).
+   *  google.rpc.Code.INVALID_ARGUMENT google.rpc.Code.INVALID_ARGUMENT). For
+   *  more information, see Request
+   *  URIs (https://cloud.google.com/storage/docs/request-endpoints).
    */
   // const outputUri = 'abc123'
   /**
@@ -71,7 +71,7 @@ function main(features) {
   // Instantiates a client
   const videointelligenceClient = new VideoIntelligenceServiceClient();
 
-  async function annotateVideo() {
+  async function callAnnotateVideo() {
     // Construct request
     const request = {
       features,
@@ -83,7 +83,7 @@ function main(features) {
     console.log(response);
   }
 
-  annotateVideo();
+  callAnnotateVideo();
   // [END videointelligence_v1p1beta1_generated_VideoIntelligenceService_AnnotateVideo_async]
 }
 
