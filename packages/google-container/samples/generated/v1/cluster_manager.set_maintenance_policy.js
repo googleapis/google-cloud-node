@@ -20,13 +20,13 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Google Developers Console [project ID or project
-   *  number](https://support.google.com/cloud/answer/6158840).
+   *  Required. The Google Developers Console project ID or project
+   *  number (https://support.google.com/cloud/answer/6158840).
    */
   // const projectId = 'abc123'
   /**
    *  Required. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+   *  zone (https://cloud.google.com/compute/docs/zones#available) in which the
    *  cluster resides.
    */
   // const zone = 'abc123'
@@ -38,7 +38,7 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
    *  Required. The maintenance policy to be set for the cluster. An empty field
    *  clears the existing maintenance policy.
    */
-  // const maintenancePolicy = ''
+  // const maintenancePolicy = {}
   /**
    *  The name (project, location, cluster id) of the cluster to set maintenance
    *  policy.
@@ -52,7 +52,7 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function setMaintenancePolicy() {
+  async function callSetMaintenancePolicy() {
     // Construct request
     const request = {
       projectId,
@@ -66,7 +66,7 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
     console.log(response);
   }
 
-  setMaintenancePolicy();
+  callSetMaintenancePolicy();
   // [END container_v1_generated_ClusterManager_SetMaintenancePolicy_async]
 }
 

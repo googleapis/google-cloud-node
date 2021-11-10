@@ -31,7 +31,7 @@ function main() {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function getJSONWebKeys() {
+  async function callGetJSONWebKeys() {
     // Construct request
     const request = {};
 
@@ -40,7 +40,7 @@ function main() {
     console.log(response);
   }
 
-  getJSONWebKeys();
+  callGetJSONWebKeys();
   // [END container_v1_generated_ClusterManager_GetJSONWebKeys_async]
 }
 

@@ -20,27 +20,9 @@ function main(update) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://support.google.com/cloud/answer/6158840).
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides. This field has been deprecated and replaced by the name
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The name of the cluster to upgrade.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const clusterId = 'abc123'
-  /**
    *  Required. A description of the update.
    */
-  // const update = ''
+  // const update = {}
   /**
    *  The name (project, location, cluster) of the cluster to update.
    *  Specified in the format `projects/* /locations/* /clusters/*`.
@@ -53,7 +35,7 @@ function main(update) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function updateCluster() {
+  async function callUpdateCluster() {
     // Construct request
     const request = {
       update,
@@ -64,7 +46,7 @@ function main(update) {
     console.log(response);
   }
 
-  updateCluster();
+  callUpdateCluster();
   // [END container_v1_generated_ClusterManager_UpdateCluster_async]
 }
 

@@ -20,26 +20,8 @@ function main(locations) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://support.google.com/cloud/answer/6158840).
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides. This field has been deprecated and replaced by the name
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The name of the cluster to upgrade.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const clusterId = 'abc123'
-  /**
    *  Required. The desired list of Google Compute Engine
-   *  [zones](https://cloud.google.com/compute/docs/zones#available) in which the
+   *  zones (https://cloud.google.com/compute/docs/zones#available) in which the
    *  cluster's nodes should be located. Changing the locations a cluster is in
    *  will result in nodes being either created or removed from the cluster,
    *  depending on whether locations are being added or removed.
@@ -58,7 +40,7 @@ function main(locations) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function setLocations() {
+  async function callSetLocations() {
     // Construct request
     const request = {
       locations,
@@ -69,7 +51,7 @@ function main(locations) {
     console.log(response);
   }
 
-  setLocations();
+  callSetLocations();
   // [END container_v1_generated_ClusterManager_SetLocations_async]
 }
 

@@ -20,27 +20,9 @@ function main(networkPolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://developers.google.com/console/help/new/#projectnumber).
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides. This field has been deprecated and replaced by the name
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The name of the cluster.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const clusterId = 'abc123'
-  /**
    *  Required. Configuration options for the NetworkPolicy feature.
    */
-  // const networkPolicy = ''
+  // const networkPolicy = {}
   /**
    *  The name (project, location, cluster id) of the cluster to set networking
    *  policy. Specified in the format `projects/* /locations/* /clusters/*`.
@@ -53,7 +35,7 @@ function main(networkPolicy) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function setNetworkPolicy() {
+  async function callSetNetworkPolicy() {
     // Construct request
     const request = {
       networkPolicy,
@@ -64,7 +46,7 @@ function main(networkPolicy) {
     console.log(response);
   }
 
-  setNetworkPolicy();
+  callSetNetworkPolicy();
   // [END container_v1_generated_ClusterManager_SetNetworkPolicy_async]
 }
 

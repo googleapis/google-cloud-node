@@ -334,6 +334,35 @@ export class ClusterManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Lists all clusters owned by a project in either the specified zone or all
+   * zones.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Deprecated. The Google Developers Console [project ID or project
+   *   number](https://support.google.com/cloud/answer/6158840).
+   *   This field has been deprecated and replaced by the parent field.
+   * @param {string} request.zone
+   *   Deprecated. The name of the Google Compute Engine
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+   *   cluster resides, or "-" for all zones. This field has been deprecated and
+   *   replaced by the parent field.
+   * @param {string} request.parent
+   *   The parent (project and location) where the clusters will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   *   Location "-" matches all zones and all regions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListClustersResponse]{@link google.container.v1.ListClustersResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.list_clusters.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_ListClusters_async
+   */
   listClusters(
     request?: protos.google.container.v1.IListClustersRequest,
     options?: CallOptions
@@ -361,35 +390,6 @@ export class ClusterManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Lists all clusters owned by a project in either the specified zone or all
-   * zones.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://support.google.com/cloud/answer/6158840).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides, or "-" for all zones. This field has been deprecated and
-   *   replaced by the parent field.
-   * @param {string} request.parent
-   *   The parent (project and location) where the clusters will be listed.
-   *   Specified in the format `projects/* /locations/*`.
-   *   Location "-" matches all zones and all regions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListClustersResponse]{@link google.container.v1.ListClustersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listClusters(request);
-   */
   listClusters(
     request?: protos.google.container.v1.IListClustersRequest,
     optionsOrCallback?:
@@ -430,33 +430,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.listClusters(request, options, callback);
   }
-  getCluster(
-    request?: protos.google.container.v1.IGetClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getCluster(
-    request: protos.google.container.v1.IGetClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getCluster(
-    request: protos.google.container.v1.IGetClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.ICluster,
-      protos.google.container.v1.IGetClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Gets the details of a specific cluster.
    *
@@ -484,9 +457,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.getCluster(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.get_cluster.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_GetCluster_async
    */
+  getCluster(
+    request?: protos.google.container.v1.IGetClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getCluster(
+    request: protos.google.container.v1.IGetClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCluster(
+    request: protos.google.container.v1.IGetClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.ICluster,
+      protos.google.container.v1.IGetClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getCluster(
     request?: protos.google.container.v1.IGetClusterRequest,
     optionsOrCallback?:
@@ -527,33 +527,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
   }
-  createCluster(
-    request?: protos.google.container.v1.ICreateClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createCluster(
-    request: protos.google.container.v1.ICreateClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCluster(
-    request: protos.google.container.v1.ICreateClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a cluster, consisting of the specified number and type of Google
    * Compute Engine instances.
@@ -594,9 +567,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createCluster(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.create_cluster.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_CreateCluster_async
    */
+  createCluster(
+    request?: protos.google.container.v1.ICreateClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createCluster(
+    request: protos.google.container.v1.ICreateClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCluster(
+    request: protos.google.container.v1.ICreateClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createCluster(
     request?: protos.google.container.v1.ICreateClusterRequest,
     optionsOrCallback?:
@@ -637,33 +637,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.createCluster(request, options, callback);
   }
-  updateCluster(
-    request?: protos.google.container.v1.IUpdateClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateCluster(
-    request: protos.google.container.v1.IUpdateClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCluster(
-    request: protos.google.container.v1.IUpdateClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the settings of a specific cluster.
    *
@@ -693,9 +666,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateCluster(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.update_cluster.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_UpdateCluster_async
    */
+  updateCluster(
+    request?: protos.google.container.v1.IUpdateClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateCluster(
+    request: protos.google.container.v1.IUpdateClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCluster(
+    request: protos.google.container.v1.IUpdateClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateCluster(
     request?: protos.google.container.v1.IUpdateClusterRequest,
     optionsOrCallback?:
@@ -736,33 +736,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.updateCluster(request, options, callback);
   }
-  updateNodePool(
-    request?: protos.google.container.v1.IUpdateNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateNodePool(
-    request: protos.google.container.v1.IUpdateNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNodePool(
-    request: protos.google.container.v1.IUpdateNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the version and/or image type for the specified node pool.
    *
@@ -818,9 +791,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateNodePool(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.update_node_pool.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_UpdateNodePool_async
    */
+  updateNodePool(
+    request?: protos.google.container.v1.IUpdateNodePoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateNodePool(
+    request: protos.google.container.v1.IUpdateNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateNodePool(
+    request: protos.google.container.v1.IUpdateNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateNodePool(
     request?: protos.google.container.v1.IUpdateNodePoolRequest,
     optionsOrCallback?:
@@ -861,37 +861,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.updateNodePool(request, options, callback);
   }
-  setNodePoolAutoscaling(
-    request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setNodePoolAutoscaling(
-    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolAutoscaling(
-    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the autoscaling settings for the specified node pool.
    *
@@ -925,9 +894,40 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setNodePoolAutoscaling(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_autoscaling.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetNodePoolAutoscaling_async
    */
+  setNodePoolAutoscaling(
+    request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolAutoscalingRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setNodePoolAutoscaling(
+    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNodePoolAutoscaling(
+    request: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolAutoscalingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setNodePoolAutoscaling(
     request?: protos.google.container.v1.ISetNodePoolAutoscalingRequest,
     optionsOrCallback?:
@@ -976,33 +976,6 @@ export class ClusterManagerClient {
       callback
     );
   }
-  setLoggingService(
-    request?: protos.google.container.v1.ISetLoggingServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setLoggingService(
-    request: protos.google.container.v1.ISetLoggingServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLoggingService(
-    request: protos.google.container.v1.ISetLoggingServiceRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the logging service for a specific cluster.
    *
@@ -1042,9 +1015,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setLoggingService(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_logging_service.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetLoggingService_async
    */
+  setLoggingService(
+    request?: protos.google.container.v1.ISetLoggingServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setLoggingService(
+    request: protos.google.container.v1.ISetLoggingServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLoggingService(
+    request: protos.google.container.v1.ISetLoggingServiceRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLoggingServiceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setLoggingService(
     request?: protos.google.container.v1.ISetLoggingServiceRequest,
     optionsOrCallback?:
@@ -1087,37 +1087,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setLoggingService(request, options, callback);
   }
-  setMonitoringService(
-    request?: protos.google.container.v1.ISetMonitoringServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setMonitoringService(
-    request: protos.google.container.v1.ISetMonitoringServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMonitoringServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMonitoringService(
-    request: protos.google.container.v1.ISetMonitoringServiceRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetMonitoringServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the monitoring service for a specific cluster.
    *
@@ -1157,9 +1126,40 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setMonitoringService(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_monitoring_service.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetMonitoringService_async
    */
+  setMonitoringService(
+    request?: protos.google.container.v1.ISetMonitoringServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMonitoringServiceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setMonitoringService(
+    request: protos.google.container.v1.ISetMonitoringServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMonitoringServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMonitoringService(
+    request: protos.google.container.v1.ISetMonitoringServiceRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetMonitoringServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setMonitoringService(
     request?: protos.google.container.v1.ISetMonitoringServiceRequest,
     optionsOrCallback?:
@@ -1204,33 +1204,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setMonitoringService(request, options, callback);
   }
-  setAddonsConfig(
-    request?: protos.google.container.v1.ISetAddonsConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setAddonsConfig(
-    request: protos.google.container.v1.ISetAddonsConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setAddonsConfig(
-    request: protos.google.container.v1.ISetAddonsConfigRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the addons for a specific cluster.
    *
@@ -1261,9 +1234,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setAddonsConfig(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_addons_config.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetAddonsConfig_async
    */
+  setAddonsConfig(
+    request?: protos.google.container.v1.ISetAddonsConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setAddonsConfig(
+    request: protos.google.container.v1.ISetAddonsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setAddonsConfig(
+    request: protos.google.container.v1.ISetAddonsConfigRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetAddonsConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setAddonsConfig(
     request?: protos.google.container.v1.ISetAddonsConfigRequest,
     optionsOrCallback?:
@@ -1304,33 +1304,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setAddonsConfig(request, options, callback);
   }
-  setLocations(
-    request?: protos.google.container.v1.ISetLocationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setLocations(
-    request: protos.google.container.v1.ISetLocationsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLocations(
-    request: protos.google.container.v1.ISetLocationsRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLocationsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the locations for a specific cluster.
    * Deprecated. Use
@@ -1369,10 +1342,37 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setLocations(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_locations.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetLocations_async
    * @deprecated SetLocations is deprecated and may be removed in a future version.
    */
+  setLocations(
+    request?: protos.google.container.v1.ISetLocationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setLocations(
+    request: protos.google.container.v1.ISetLocationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLocations(
+    request: protos.google.container.v1.ISetLocationsRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLocationsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setLocations(
     request?: protos.google.container.v1.ISetLocationsRequest,
     optionsOrCallback?:
@@ -1418,33 +1418,6 @@ export class ClusterManagerClient {
     );
     return this.innerApiCalls.setLocations(request, options, callback);
   }
-  updateMaster(
-    request?: protos.google.container.v1.IUpdateMasterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateMaster(
-    request: protos.google.container.v1.IUpdateMasterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateMaster(
-    request: protos.google.container.v1.IUpdateMasterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the master for a specific cluster.
    *
@@ -1483,9 +1456,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateMaster(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.update_master.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_UpdateMaster_async
    */
+  updateMaster(
+    request?: protos.google.container.v1.IUpdateMasterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateMaster(
+    request: protos.google.container.v1.IUpdateMasterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMaster(
+    request: protos.google.container.v1.IUpdateMasterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IUpdateMasterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateMaster(
     request?: protos.google.container.v1.IUpdateMasterRequest,
     optionsOrCallback?:
@@ -1526,33 +1526,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.updateMaster(request, options, callback);
   }
-  setMasterAuth(
-    request?: protos.google.container.v1.ISetMasterAuthRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setMasterAuth(
-    request: protos.google.container.v1.ISetMasterAuthRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setMasterAuth(
-    request: protos.google.container.v1.ISetMasterAuthRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets master auth materials. Currently supports changing the admin password
    * or a specific cluster, either via password generation or explicitly setting
@@ -1586,9 +1559,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setMasterAuth(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_master_auth.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetMasterAuth_async
    */
+  setMasterAuth(
+    request?: protos.google.container.v1.ISetMasterAuthRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setMasterAuth(
+    request: protos.google.container.v1.ISetMasterAuthRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setMasterAuth(
+    request: protos.google.container.v1.ISetMasterAuthRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetMasterAuthRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setMasterAuth(
     request?: protos.google.container.v1.ISetMasterAuthRequest,
     optionsOrCallback?:
@@ -1629,33 +1629,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setMasterAuth(request, options, callback);
   }
-  deleteCluster(
-    request?: protos.google.container.v1.IDeleteClusterRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteCluster(
-    request: protos.google.container.v1.IDeleteClusterRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteCluster(
-    request: protos.google.container.v1.IDeleteClusterRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Deletes the cluster, including the Kubernetes endpoint and all worker
    * nodes.
@@ -1691,9 +1664,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteCluster(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.delete_cluster.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_DeleteCluster_async
    */
+  deleteCluster(
+    request?: protos.google.container.v1.IDeleteClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteCluster(
+    request: protos.google.container.v1.IDeleteClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCluster(
+    request: protos.google.container.v1.IDeleteClusterRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteClusterRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteCluster(
     request?: protos.google.container.v1.IDeleteClusterRequest,
     optionsOrCallback?:
@@ -1734,6 +1734,34 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.deleteCluster(request, options, callback);
   }
+  /**
+   * Lists all operations in a project in a specific zone or all zones.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Deprecated. The Google Developers Console [project ID or project
+   *   number](https://support.google.com/cloud/answer/6158840).
+   *   This field has been deprecated and replaced by the parent field.
+   * @param {string} request.zone
+   *   Deprecated. The name of the Google Compute Engine
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
+   *   operations for, or `-` for all zones. This field has been deprecated and
+   *   replaced by the parent field.
+   * @param {string} request.parent
+   *   The parent (project and location) where the operations will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   *   Location "-" matches all zones and all regions.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListOperationsResponse]{@link google.container.v1.ListOperationsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.list_operations.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_ListOperations_async
+   */
   listOperations(
     request?: protos.google.container.v1.IListOperationsRequest,
     options?: CallOptions
@@ -1761,34 +1789,6 @@ export class ClusterManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Lists all operations in a project in a specific zone or all zones.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://support.google.com/cloud/answer/6158840).
-   *   This field has been deprecated and replaced by the parent field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
-   *   operations for, or `-` for all zones. This field has been deprecated and
-   *   replaced by the parent field.
-   * @param {string} request.parent
-   *   The parent (project and location) where the operations will be listed.
-   *   Specified in the format `projects/* /locations/*`.
-   *   Location "-" matches all zones and all regions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListOperationsResponse]{@link google.container.v1.ListOperationsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listOperations(request);
-   */
   listOperations(
     request?: protos.google.container.v1.IListOperationsRequest,
     optionsOrCallback?:
@@ -1829,33 +1829,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.listOperations(request, options, callback);
   }
-  getOperation(
-    request?: protos.google.container.v1.IGetOperationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getOperation(
-    request: protos.google.container.v1.IGetOperationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getOperation(
-    request: protos.google.container.v1.IGetOperationRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IGetOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Gets the specified operation.
    *
@@ -1883,9 +1856,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.getOperation(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.get_operation.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_GetOperation_async
    */
+  getOperation(
+    request?: protos.google.container.v1.IGetOperationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getOperation(
+    request: protos.google.container.v1.IGetOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getOperation(
+    request: protos.google.container.v1.IGetOperationRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IGetOperationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getOperation(
     request?: protos.google.container.v1.IGetOperationRequest,
     optionsOrCallback?:
@@ -1926,33 +1926,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.getOperation(request, options, callback);
   }
-  cancelOperation(
-    request?: protos.google.container.v1.ICancelOperationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  cancelOperation(
-    request: protos.google.container.v1.ICancelOperationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelOperation(
-    request: protos.google.container.v1.ICancelOperationRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.container.v1.ICancelOperationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Cancels the specified operation.
    *
@@ -1980,9 +1953,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.cancelOperation(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.cancel_operation.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_CancelOperation_async
    */
+  cancelOperation(
+    request?: protos.google.container.v1.ICancelOperationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  cancelOperation(
+    request: protos.google.container.v1.ICancelOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelOperation(
+    request: protos.google.container.v1.ICancelOperationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.container.v1.ICancelOperationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelOperation(
     request?: protos.google.container.v1.ICancelOperationRequest,
     optionsOrCallback?:
@@ -2023,6 +2023,33 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.cancelOperation(request, options, callback);
   }
+  /**
+   * Returns configuration info about the Google Kubernetes Engine service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Deprecated. The Google Developers Console [project ID or project
+   *   number](https://support.google.com/cloud/answer/6158840).
+   *   This field has been deprecated and replaced by the name field.
+   * @param {string} request.zone
+   *   Deprecated. The name of the Google Compute Engine
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
+   *   operations for. This field has been deprecated and replaced by the name
+   *   field.
+   * @param {string} request.name
+   *   The name (project and location) of the server config to get,
+   *   specified in the format `projects/* /locations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ServerConfig]{@link google.container.v1.ServerConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.get_server_config.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_GetServerConfig_async
+   */
   getServerConfig(
     request?: protos.google.container.v1.IGetServerConfigRequest,
     options?: CallOptions
@@ -2050,33 +2077,6 @@ export class ClusterManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns configuration info about the Google Kubernetes Engine service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Deprecated. The Google Developers Console [project ID or project
-   *   number](https://support.google.com/cloud/answer/6158840).
-   *   This field has been deprecated and replaced by the name field.
-   * @param {string} request.zone
-   *   Deprecated. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) to return
-   *   operations for. This field has been deprecated and replaced by the name
-   *   field.
-   * @param {string} request.name
-   *   The name (project and location) of the server config to get,
-   *   specified in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ServerConfig]{@link google.container.v1.ServerConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getServerConfig(request);
-   */
   getServerConfig(
     request?: protos.google.container.v1.IGetServerConfigRequest,
     optionsOrCallback?:
@@ -2117,6 +2117,27 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.getServerConfig(request, options, callback);
   }
+  /**
+   * Gets the public component of the cluster signing keys in
+   * JSON Web Key format.
+   * This API is not yet intended for general use, and is not available for all
+   * clusters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The cluster (project, location, cluster id) to get keys for. Specified in
+   *   the format `projects/* /locations/* /clusters/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GetJSONWebKeysResponse]{@link google.container.v1.GetJSONWebKeysResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.get_j_s_o_n_web_keys.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_GetJSONWebKeys_async
+   */
   getJSONWebKeys(
     request?: protos.google.container.v1.IGetJSONWebKeysRequest,
     options?: CallOptions
@@ -2144,27 +2165,6 @@ export class ClusterManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the public component of the cluster signing keys in
-   * JSON Web Key format.
-   * This API is not yet intended for general use, and is not available for all
-   * clusters.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The cluster (project, location, cluster id) to get keys for. Specified in
-   *   the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GetJSONWebKeysResponse]{@link google.container.v1.GetJSONWebKeysResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getJSONWebKeys(request);
-   */
   getJSONWebKeys(
     request?: protos.google.container.v1.IGetJSONWebKeysRequest,
     optionsOrCallback?:
@@ -2204,33 +2204,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.getJSONWebKeys(request, options, callback);
   }
-  listNodePools(
-    request?: protos.google.container.v1.IListNodePoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  listNodePools(
-    request: protos.google.container.v1.IListNodePoolsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listNodePools(
-    request: protos.google.container.v1.IListNodePoolsRequest,
-    callback: Callback<
-      protos.google.container.v1.IListNodePoolsResponse,
-      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Lists the node pools for a cluster.
    *
@@ -2258,9 +2231,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.listNodePools(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.list_node_pools.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_ListNodePools_async
    */
+  listNodePools(
+    request?: protos.google.container.v1.IListNodePoolsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  listNodePools(
+    request: protos.google.container.v1.IListNodePoolsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listNodePools(
+    request: protos.google.container.v1.IListNodePoolsRequest,
+    callback: Callback<
+      protos.google.container.v1.IListNodePoolsResponse,
+      protos.google.container.v1.IListNodePoolsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   listNodePools(
     request?: protos.google.container.v1.IListNodePoolsRequest,
     optionsOrCallback?:
@@ -2301,33 +2301,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.listNodePools(request, options, callback);
   }
-  getNodePool(
-    request?: protos.google.container.v1.IGetNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getNodePool(
-    request: protos.google.container.v1.IGetNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNodePool(
-    request: protos.google.container.v1.IGetNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.INodePool,
-      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Retrieves the requested node pool.
    *
@@ -2359,9 +2332,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.getNodePool(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.get_node_pool.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_GetNodePool_async
    */
+  getNodePool(
+    request?: protos.google.container.v1.IGetNodePoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getNodePool(
+    request: protos.google.container.v1.IGetNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNodePool(
+    request: protos.google.container.v1.IGetNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.INodePool,
+      protos.google.container.v1.IGetNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getNodePool(
     request?: protos.google.container.v1.IGetNodePoolRequest,
     optionsOrCallback?:
@@ -2402,33 +2402,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.getNodePool(request, options, callback);
   }
-  createNodePool(
-    request?: protos.google.container.v1.ICreateNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createNodePool(
-    request: protos.google.container.v1.ICreateNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNodePool(
-    request: protos.google.container.v1.ICreateNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a node pool for a cluster.
    *
@@ -2459,9 +2432,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createNodePool(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.create_node_pool.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_CreateNodePool_async
    */
+  createNodePool(
+    request?: protos.google.container.v1.ICreateNodePoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createNodePool(
+    request: protos.google.container.v1.ICreateNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNodePool(
+    request: protos.google.container.v1.ICreateNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICreateNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createNodePool(
     request?: protos.google.container.v1.ICreateNodePoolRequest,
     optionsOrCallback?:
@@ -2502,33 +2502,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.createNodePool(request, options, callback);
   }
-  deleteNodePool(
-    request?: protos.google.container.v1.IDeleteNodePoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteNodePool(
-    request: protos.google.container.v1.IDeleteNodePoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNodePool(
-    request: protos.google.container.v1.IDeleteNodePoolRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Deletes a node pool from a cluster.
    *
@@ -2560,9 +2533,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteNodePool(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.delete_node_pool.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_DeleteNodePool_async
    */
+  deleteNodePool(
+    request?: protos.google.container.v1.IDeleteNodePoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteNodePool(
+    request: protos.google.container.v1.IDeleteNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNodePool(
+    request: protos.google.container.v1.IDeleteNodePoolRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IDeleteNodePoolRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteNodePool(
     request?: protos.google.container.v1.IDeleteNodePoolRequest,
     optionsOrCallback?:
@@ -2603,37 +2603,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.deleteNodePool(request, options, callback);
   }
-  rollbackNodePoolUpgrade(
-    request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IRollbackNodePoolUpgradeRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  rollbackNodePoolUpgrade(
-    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rollbackNodePoolUpgrade(
-    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Rolls back a previously Aborted or Failed NodePool upgrade.
    * This makes no changes if the last upgrade successfully completed.
@@ -2666,9 +2635,40 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.rollbackNodePoolUpgrade(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.rollback_node_pool_upgrade.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_RollbackNodePoolUpgrade_async
    */
+  rollbackNodePoolUpgrade(
+    request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IRollbackNodePoolUpgradeRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  rollbackNodePoolUpgrade(
+    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rollbackNodePoolUpgrade(
+    request: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.IRollbackNodePoolUpgradeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   rollbackNodePoolUpgrade(
     request?: protos.google.container.v1.IRollbackNodePoolUpgradeRequest,
     optionsOrCallback?:
@@ -2717,37 +2717,6 @@ export class ClusterManagerClient {
       callback
     );
   }
-  setNodePoolManagement(
-    request?: protos.google.container.v1.ISetNodePoolManagementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setNodePoolManagement(
-    request: protos.google.container.v1.ISetNodePoolManagementRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolManagementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolManagement(
-    request: protos.google.container.v1.ISetNodePoolManagementRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      | protos.google.container.v1.ISetNodePoolManagementRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the NodeManagement options for a node pool.
    *
@@ -2781,9 +2750,40 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setNodePoolManagement(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_management.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetNodePoolManagement_async
    */
+  setNodePoolManagement(
+    request?: protos.google.container.v1.ISetNodePoolManagementRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolManagementRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setNodePoolManagement(
+    request: protos.google.container.v1.ISetNodePoolManagementRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolManagementRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNodePoolManagement(
+    request: protos.google.container.v1.ISetNodePoolManagementRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      | protos.google.container.v1.ISetNodePoolManagementRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setNodePoolManagement(
     request?: protos.google.container.v1.ISetNodePoolManagementRequest,
     optionsOrCallback?:
@@ -2828,33 +2828,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setNodePoolManagement(request, options, callback);
   }
-  setLabels(
-    request?: protos.google.container.v1.ISetLabelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setLabels(
-    request: protos.google.container.v1.ISetLabelsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request: protos.google.container.v1.ISetLabelsRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLabelsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets labels on a cluster.
    *
@@ -2891,9 +2864,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setLabels(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_labels.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetLabels_async
    */
+  setLabels(
+    request?: protos.google.container.v1.ISetLabelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setLabels(
+    request: protos.google.container.v1.ISetLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLabels(
+    request: protos.google.container.v1.ISetLabelsRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLabelsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setLabels(
     request?: protos.google.container.v1.ISetLabelsRequest,
     optionsOrCallback?:
@@ -2934,33 +2934,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setLabels(request, options, callback);
   }
-  setLegacyAbac(
-    request?: protos.google.container.v1.ISetLegacyAbacRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setLegacyAbac(
-    request: protos.google.container.v1.ISetLegacyAbacRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLegacyAbac(
-    request: protos.google.container.v1.ISetLegacyAbacRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Enables or disables the ABAC authorization mechanism on a cluster.
    *
@@ -2990,9 +2963,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setLegacyAbac(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_legacy_abac.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetLegacyAbac_async
    */
+  setLegacyAbac(
+    request?: protos.google.container.v1.ISetLegacyAbacRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setLegacyAbac(
+    request: protos.google.container.v1.ISetLegacyAbacRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setLegacyAbac(
+    request: protos.google.container.v1.ISetLegacyAbacRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetLegacyAbacRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setLegacyAbac(
     request?: protos.google.container.v1.ISetLegacyAbacRequest,
     optionsOrCallback?:
@@ -3033,33 +3033,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setLegacyAbac(request, options, callback);
   }
-  startIPRotation(
-    request?: protos.google.container.v1.IStartIPRotationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  startIPRotation(
-    request: protos.google.container.v1.IStartIPRotationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startIPRotation(
-    request: protos.google.container.v1.IStartIPRotationRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Starts master IP rotation.
    *
@@ -3089,9 +3062,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.startIPRotation(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.start_i_p_rotation.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_StartIPRotation_async
    */
+  startIPRotation(
+    request?: protos.google.container.v1.IStartIPRotationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  startIPRotation(
+    request: protos.google.container.v1.IStartIPRotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startIPRotation(
+    request: protos.google.container.v1.IStartIPRotationRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.IStartIPRotationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   startIPRotation(
     request?: protos.google.container.v1.IStartIPRotationRequest,
     optionsOrCallback?:
@@ -3132,33 +3132,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.startIPRotation(request, options, callback);
   }
-  completeIPRotation(
-    request?: protos.google.container.v1.ICompleteIPRotationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  completeIPRotation(
-    request: protos.google.container.v1.ICompleteIPRotationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  completeIPRotation(
-    request: protos.google.container.v1.ICompleteIPRotationRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Completes master IP rotation.
    *
@@ -3186,9 +3159,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.completeIPRotation(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.complete_i_p_rotation.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_CompleteIPRotation_async
    */
+  completeIPRotation(
+    request?: protos.google.container.v1.ICompleteIPRotationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  completeIPRotation(
+    request: protos.google.container.v1.ICompleteIPRotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  completeIPRotation(
+    request: protos.google.container.v1.ICompleteIPRotationRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ICompleteIPRotationRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   completeIPRotation(
     request?: protos.google.container.v1.ICompleteIPRotationRequest,
     optionsOrCallback?:
@@ -3231,33 +3231,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.completeIPRotation(request, options, callback);
   }
-  setNodePoolSize(
-    request?: protos.google.container.v1.ISetNodePoolSizeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setNodePoolSize(
-    request: protos.google.container.v1.ISetNodePoolSizeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNodePoolSize(
-    request: protos.google.container.v1.ISetNodePoolSizeRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the size for a specific node pool.
    *
@@ -3291,9 +3264,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setNodePoolSize(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_node_pool_size.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetNodePoolSize_async
    */
+  setNodePoolSize(
+    request?: protos.google.container.v1.ISetNodePoolSizeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setNodePoolSize(
+    request: protos.google.container.v1.ISetNodePoolSizeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNodePoolSize(
+    request: protos.google.container.v1.ISetNodePoolSizeRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNodePoolSizeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setNodePoolSize(
     request?: protos.google.container.v1.ISetNodePoolSizeRequest,
     optionsOrCallback?:
@@ -3334,33 +3334,6 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setNodePoolSize(request, options, callback);
   }
-  setNetworkPolicy(
-    request?: protos.google.container.v1.ISetNetworkPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setNetworkPolicy(
-    request: protos.google.container.v1.ISetNetworkPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setNetworkPolicy(
-    request: protos.google.container.v1.ISetNetworkPolicyRequest,
-    callback: Callback<
-      protos.google.container.v1.IOperation,
-      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Enables or disables Network Policy for a cluster.
    *
@@ -3390,9 +3363,36 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setNetworkPolicy(request);
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_network_policy.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetNetworkPolicy_async
    */
+  setNetworkPolicy(
+    request?: protos.google.container.v1.ISetNetworkPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setNetworkPolicy(
+    request: protos.google.container.v1.ISetNetworkPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setNetworkPolicy(
+    request: protos.google.container.v1.ISetNetworkPolicyRequest,
+    callback: Callback<
+      protos.google.container.v1.IOperation,
+      protos.google.container.v1.ISetNetworkPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setNetworkPolicy(
     request?: protos.google.container.v1.ISetNetworkPolicyRequest,
     optionsOrCallback?:
@@ -3435,6 +3435,37 @@ export class ClusterManagerClient {
     this.initialize();
     return this.innerApiCalls.setNetworkPolicy(request, options, callback);
   }
+  /**
+   * Sets the maintenance policy for a cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The Google Developers Console [project ID or project
+   *   number](https://support.google.com/cloud/answer/6158840).
+   * @param {string} request.zone
+   *   Required. The name of the Google Compute Engine
+   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
+   *   cluster resides.
+   * @param {string} request.clusterId
+   *   Required. The name of the cluster to update.
+   * @param {google.container.v1.MaintenancePolicy} request.maintenancePolicy
+   *   Required. The maintenance policy to be set for the cluster. An empty field
+   *   clears the existing maintenance policy.
+   * @param {string} request.name
+   *   The name (project, location, cluster id) of the cluster to set maintenance
+   *   policy.
+   *   Specified in the format `projects/* /locations/* /clusters/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.container.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cluster_manager.set_maintenance_policy.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_SetMaintenancePolicy_async
+   */
   setMaintenancePolicy(
     request?: protos.google.container.v1.ISetMaintenancePolicyRequest,
     options?: CallOptions
@@ -3466,37 +3497,6 @@ export class ClusterManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the maintenance policy for a cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The Google Developers Console [project ID or project
-   *   number](https://support.google.com/cloud/answer/6158840).
-   * @param {string} request.zone
-   *   Required. The name of the Google Compute Engine
-   *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *   cluster resides.
-   * @param {string} request.clusterId
-   *   Required. The name of the cluster to update.
-   * @param {google.container.v1.MaintenancePolicy} request.maintenancePolicy
-   *   Required. The maintenance policy to be set for the cluster. An empty field
-   *   clears the existing maintenance policy.
-   * @param {string} request.name
-   *   The name (project, location, cluster id) of the cluster to set maintenance
-   *   policy.
-   *   Specified in the format `projects/* /locations/* /clusters/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.container.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setMaintenancePolicy(request);
-   */
   setMaintenancePolicy(
     request?: protos.google.container.v1.ISetMaintenancePolicyRequest,
     optionsOrCallback?:
@@ -3542,37 +3542,6 @@ export class ClusterManagerClient {
     return this.innerApiCalls.setMaintenancePolicy(request, options, callback);
   }
 
-  listUsableSubnetworks(
-    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.container.v1.IUsableSubnetwork[],
-      protos.google.container.v1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1.IListUsableSubnetworksResponse
-    ]
-  >;
-  listUsableSubnetworks(
-    request: protos.google.container.v1.IListUsableSubnetworksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.container.v1.IListUsableSubnetworksRequest,
-      | protos.google.container.v1.IListUsableSubnetworksResponse
-      | null
-      | undefined,
-      protos.google.container.v1.IUsableSubnetwork
-    >
-  ): void;
-  listUsableSubnetworks(
-    request: protos.google.container.v1.IListUsableSubnetworksRequest,
-    callback: PaginationCallback<
-      protos.google.container.v1.IListUsableSubnetworksRequest,
-      | protos.google.container.v1.IListUsableSubnetworksResponse
-      | null
-      | undefined,
-      protos.google.container.v1.IUsableSubnetwork
-    >
-  ): void;
   /**
    * Lists subnetworks that are usable for creating clusters in a project.
    *
@@ -3607,6 +3576,37 @@ export class ClusterManagerClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listUsableSubnetworks(
+    request?: protos.google.container.v1.IListUsableSubnetworksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.container.v1.IUsableSubnetwork[],
+      protos.google.container.v1.IListUsableSubnetworksRequest | null,
+      protos.google.container.v1.IListUsableSubnetworksResponse
+    ]
+  >;
+  listUsableSubnetworks(
+    request: protos.google.container.v1.IListUsableSubnetworksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.container.v1.IListUsableSubnetworksRequest,
+      | protos.google.container.v1.IListUsableSubnetworksResponse
+      | null
+      | undefined,
+      protos.google.container.v1.IUsableSubnetwork
+    >
+  ): void;
+  listUsableSubnetworks(
+    request: protos.google.container.v1.IListUsableSubnetworksRequest,
+    callback: PaginationCallback<
+      protos.google.container.v1.IListUsableSubnetworksRequest,
+      | protos.google.container.v1.IListUsableSubnetworksResponse
+      | null
+      | undefined,
+      protos.google.container.v1.IUsableSubnetwork
+    >
+  ): void;
   listUsableSubnetworks(
     request?: protos.google.container.v1.IListUsableSubnetworksRequest,
     optionsOrCallback?:
@@ -3737,11 +3737,8 @@ export class ClusterManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listUsableSubnetworksAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cluster_manager.list_usable_subnetworks.js</caption>
+   * region_tag:container_v1_generated_ClusterManager_ListUsableSubnetworks_async
    */
   listUsableSubnetworksAsync(
     request?: protos.google.container.v1.IListUsableSubnetworksRequest,
@@ -3755,7 +3752,6 @@ export class ClusterManagerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

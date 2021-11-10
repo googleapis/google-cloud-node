@@ -20,29 +20,6 @@ function main(nodeVersion, imageType) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://support.google.com/cloud/answer/6158840).
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides. This field has been deprecated and replaced by the name
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The name of the cluster to upgrade.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const clusterId = 'abc123'
-  /**
-   *  Deprecated. The name of the node pool to upgrade.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const nodePoolId = 'abc123'
-  /**
    *  Required. The Kubernetes version to change the nodes to (typically an
    *  upgrade).
    *  Users may specify either explicit versions offered by Kubernetes Engine or
@@ -66,7 +43,7 @@ function main(nodeVersion, imageType) {
   // const name = 'abc123'
   /**
    *  The desired list of Google Compute Engine
-   *  [zones](https://cloud.google.com/compute/docs/zones#available) in which the
+   *  zones (https://cloud.google.com/compute/docs/zones#available) in which the
    *  node pool's nodes should be located. Changing the locations for a node pool
    *  will result in nodes being either created or removed from the node pool,
    *  depending on whether locations are being added or removed.
@@ -75,11 +52,11 @@ function main(nodeVersion, imageType) {
   /**
    *  The desired workload metadata config for the node pool.
    */
-  // const workloadMetadataConfig = ''
+  // const workloadMetadataConfig = {}
   /**
    *  Upgrade settings control disruption and speed of the upgrade.
    */
-  // const upgradeSettings = ''
+  // const upgradeSettings = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;
@@ -87,7 +64,7 @@ function main(nodeVersion, imageType) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function updateNodePool() {
+  async function callUpdateNodePool() {
     // Construct request
     const request = {
       nodeVersion,
@@ -99,7 +76,7 @@ function main(nodeVersion, imageType) {
     console.log(response);
   }
 
-  updateNodePool();
+  callUpdateNodePool();
   // [END container_v1_generated_ClusterManager_UpdateNodePool_async]
 }
 

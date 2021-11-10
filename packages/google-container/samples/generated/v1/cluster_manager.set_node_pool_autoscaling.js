@@ -20,32 +20,9 @@ function main(autoscaling) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://support.google.com/cloud/answer/6158840).
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides. This field has been deprecated and replaced by the name
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The name of the cluster to upgrade.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const clusterId = 'abc123'
-  /**
-   *  Deprecated. The name of the node pool to upgrade.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const nodePoolId = 'abc123'
-  /**
    *  Required. Autoscaling configuration for the node pool.
    */
-  // const autoscaling = ''
+  // const autoscaling = {}
   /**
    *  The name (project, location, cluster, node pool) of the node pool to set
    *  autoscaler settings. Specified in the format
@@ -59,7 +36,7 @@ function main(autoscaling) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function setNodePoolAutoscaling() {
+  async function callSetNodePoolAutoscaling() {
     // Construct request
     const request = {
       autoscaling,
@@ -70,7 +47,7 @@ function main(autoscaling) {
     console.log(response);
   }
 
-  setNodePoolAutoscaling();
+  callSetNodePoolAutoscaling();
   // [END container_v1_generated_ClusterManager_SetNodePoolAutoscaling_async]
 }
 

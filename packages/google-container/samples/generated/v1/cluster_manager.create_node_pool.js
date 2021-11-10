@@ -20,27 +20,9 @@ function main(nodePool) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://developers.google.com/console/help/new/#projectnumber).
-   *  This field has been deprecated and replaced by the parent field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides. This field has been deprecated and replaced by the parent
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The name of the cluster.
-   *  This field has been deprecated and replaced by the parent field.
-   */
-  // const clusterId = 'abc123'
-  /**
    *  Required. The node pool to create.
    */
-  // const nodePool = ''
+  // const nodePool = {}
   /**
    *  The parent (project, location, cluster id) where the node pool will be
    *  created. Specified in the format
@@ -54,7 +36,7 @@ function main(nodePool) {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function createNodePool() {
+  async function callCreateNodePool() {
     // Construct request
     const request = {
       nodePool,
@@ -65,7 +47,7 @@ function main(nodePool) {
     console.log(response);
   }
 
-  createNodePool();
+  callCreateNodePool();
   // [END container_v1_generated_ClusterManager_CreateNodePool_async]
 }
 

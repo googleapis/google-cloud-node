@@ -20,24 +20,6 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Deprecated. The Google Developers Console [project ID or project
-   *  number](https://support.google.com/cloud/answer/6158840).
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const projectId = 'abc123'
-  /**
-   *  Deprecated. The name of the Google Compute Engine
-   *  [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-   *  operation resides. This field has been deprecated and replaced by the name
-   *  field.
-   */
-  // const zone = 'abc123'
-  /**
-   *  Deprecated. The server-assigned `name` of the operation.
-   *  This field has been deprecated and replaced by the name field.
-   */
-  // const operationId = 'abc123'
-  /**
    *  The name (project, location, operation id) of the operation to cancel.
    *  Specified in the format `projects/* /locations/* /operations/*`.
    */
@@ -49,7 +31,7 @@ function main() {
   // Instantiates a client
   const containerClient = new ClusterManagerClient();
 
-  async function cancelOperation() {
+  async function callCancelOperation() {
     // Construct request
     const request = {};
 
@@ -58,7 +40,7 @@ function main() {
     console.log(response);
   }
 
-  cancelOperation();
+  callCancelOperation();
   // [END container_v1_generated_ClusterManager_CancelOperation_async]
 }
 
