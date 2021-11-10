@@ -305,12 +305,8 @@ export class SpeechTranslationServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.streamingTranslateSpeech();
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
-   * stream.write(request);
-   * stream.end();
+   * @example <caption>include:samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js</caption>
+   * region_tag:mediatranslation_v1beta1_generated_SpeechTranslationService_StreamingTranslateSpeech_async
    */
   streamingTranslateSpeech(options?: CallOptions): gax.CancellableStream {
     this.initialize();
