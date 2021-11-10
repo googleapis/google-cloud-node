@@ -30,17 +30,17 @@ function main(session, queryInput) {
    *  `User Id`. They can be a random number or some type of user and session
    *  identifiers (preferably hashed). The length of the `Session ID` and
    *  `User ID` must not exceed 36 characters.
-   *  For more information, see the [API interactions
-   *  guide](https://cloud.google.com/dialogflow/docs/api-overview).
+   *  For more information, see the API interactions
+   *  guide (https://cloud.google.com/dialogflow/docs/api-overview).
    *  Note: Always use agent versions for production traffic.
-   *  See [Versions and
-   *  environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+   *  See Versions and
+   *  environments (https://cloud.google.com/dialogflow/es/docs/agents-versions).
    */
   // const session = 'abc123'
   /**
    *  The parameters of this query.
    */
-  // const queryParams = ''
+  // const queryParams = {}
   /**
    *  Required. The input specification. It can be set to:
    *  1.  an audio config which instructs the speech recognizer how to process
@@ -48,9 +48,9 @@ function main(session, queryInput) {
    *  2.  a conversational query in the form of text, or
    *  3.  an event that specifies which intent to trigger.
    */
-  // const queryInput = ''
+  // const queryInput = {}
   /**
-   *  Please use [InputAudioConfig.single_utterance][google.cloud.dialogflow.v2.InputAudioConfig.single_utterance] instead.
+   *  Please use InputAudioConfig.single_utterance google.cloud.dialogflow.v2.InputAudioConfig.single_utterance  instead.
    *  If `false` (default), recognition does not cease until
    *  the client closes the stream. If `true`, the recognizer will detect a
    *  single spoken utterance in input audio. Recognition ceases when it detects
@@ -65,15 +65,15 @@ function main(session, queryInput) {
    *  audio. If this field is not set and agent-level speech synthesizer is not
    *  configured, no output audio is generated.
    */
-  // const outputAudioConfig = ''
+  // const outputAudioConfig = {}
   /**
-   *  Mask for [output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config] indicating which settings in this
+   *  Mask for output_audio_config google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config  indicating which settings in this
    *  request-level config should override speech synthesizer settings defined at
    *  agent-level.
-   *  If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config] replaces the agent-level
+   *  If unspecified or empty, output_audio_config google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config  replaces the agent-level
    *  config in its entirety.
    */
-  // const outputAudioConfigMask = ''
+  // const outputAudioConfigMask = {}
   /**
    *  The input audio content to be recognized. Must be sent if
    *  `query_input` was set to a streaming input audio config. The complete audio
@@ -87,7 +87,7 @@ function main(session, queryInput) {
   // Instantiates a client
   const dialogflowClient = new SessionsClient();
 
-  async function streamingDetectIntent() {
+  async function callStreamingDetectIntent() {
     // Construct request
     const request = {
       session,
@@ -109,7 +109,7 @@ function main(session, queryInput) {
     stream.end();
   }
 
-  streamingDetectIntent();
+  callStreamingDetectIntent();
   // [END dialogflow_v2_generated_Sessions_StreamingDetectIntent_async]
 }
 

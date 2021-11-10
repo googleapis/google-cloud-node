@@ -33,7 +33,7 @@ function main() {
   // const pageSize = 1234
   /**
    *  Optional. The
-   *  [ListAnswerRecordsResponse.next_page_token][google.cloud.dialogflow.v2beta1.ListAnswerRecordsResponse.next_page_token]
+   *  ListAnswerRecordsResponse.next_page_token google.cloud.dialogflow.v2beta1.ListAnswerRecordsResponse.next_page_token
    *  value returned from a previous list request used to continue listing on
    *  the next page.
    */
@@ -45,7 +45,7 @@ function main() {
   // Instantiates a client
   const dialogflowClient = new AnswerRecordsClient();
 
-  async function listAnswerRecords() {
+  async function callListAnswerRecords() {
     // Construct request
     const request = {};
 
@@ -56,7 +56,7 @@ function main() {
     }
   }
 
-  listAnswerRecords();
+  callListAnswerRecords();
   // [END dialogflow_v2beta1_generated_AnswerRecords_ListAnswerRecords_async]
 }
 

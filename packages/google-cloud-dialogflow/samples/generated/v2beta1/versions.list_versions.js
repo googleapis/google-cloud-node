@@ -42,7 +42,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new VersionsClient();
 
-  async function listVersions() {
+  async function callListVersions() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent) {
     }
   }
 
-  listVersions();
+  callListVersions();
   // [END dialogflow_v2beta1_generated_Versions_ListVersions_async]
 }
 

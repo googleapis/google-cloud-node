@@ -50,7 +50,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ContextsClient();
 
-  async function listContexts() {
+  async function callListContexts() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent) {
     }
   }
 
-  listContexts();
+  callListContexts();
   // [END dialogflow_v2beta1_generated_Contexts_ListContexts_async]
 }
 

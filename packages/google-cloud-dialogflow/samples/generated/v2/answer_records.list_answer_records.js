@@ -30,7 +30,7 @@ function main(parent, filter) {
    *  Filter on answer record type. Currently predicates on `type` is supported,
    *  valid values are `ARTICLE_ANSWER`, `FAQ_ANSWER`.
    *  For more information about filtering, see
-   *  [API Filtering](https://aip.dev/160).
+   *  API Filtering (https://aip.dev/160).
    */
   // const filter = 'abc123'
   /**
@@ -41,7 +41,7 @@ function main(parent, filter) {
   // const pageSize = 1234
   /**
    *  Optional. The
-   *  [ListAnswerRecordsResponse.next_page_token][google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token]
+   *  ListAnswerRecordsResponse.next_page_token google.cloud.dialogflow.v2.ListAnswerRecordsResponse.next_page_token
    *  value returned from a previous list request used to continue listing on
    *  the next page.
    */
@@ -53,7 +53,7 @@ function main(parent, filter) {
   // Instantiates a client
   const dialogflowClient = new AnswerRecordsClient();
 
-  async function listAnswerRecords() {
+  async function callListAnswerRecords() {
     // Construct request
     const request = {
       parent,
@@ -67,7 +67,7 @@ function main(parent, filter) {
     }
   }
 
-  listAnswerRecords();
+  callListAnswerRecords();
   // [END dialogflow_v2_generated_AnswerRecords_ListAnswerRecords_async]
 }
 

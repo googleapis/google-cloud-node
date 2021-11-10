@@ -26,8 +26,8 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Optional. The language for which you want a validation result. If not
-   *  specified, the agent's default language is used. [Many
-   *  languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *  specified, the agent's default language is used. Many
+   *  languages (https://cloud.google.com/dialogflow/docs/reference/language)
    *  are supported. Note: languages must be enabled in the agent before they can
    *  be used.
    */
@@ -39,7 +39,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new AgentsClient();
 
-  async function getValidationResult() {
+  async function callGetValidationResult() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent) {
     console.log(response);
   }
 
-  getValidationResult();
+  callGetValidationResult();
   // [END dialogflow_v2_generated_Agents_GetValidationResult_async]
 }
 

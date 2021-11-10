@@ -30,17 +30,17 @@ function main(session, queryInput) {
    *  and `User Id`. They can be a random number or some type of user and session
    *  identifiers (preferably hashed). The length of the `Session ID` and
    *  `User ID` must not exceed 36 characters.
-   *  For more information, see the [API interactions
-   *  guide](https://cloud.google.com/dialogflow/docs/api-overview).
+   *  For more information, see the API interactions
+   *  guide (https://cloud.google.com/dialogflow/docs/api-overview).
    *  Note: Always use agent versions for production traffic.
-   *  See [Versions and
-   *  environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
+   *  See Versions and
+   *  environments (https://cloud.google.com/dialogflow/es/docs/agents-versions).
    */
   // const session = 'abc123'
   /**
    *  The parameters of this query.
    */
-  // const queryParams = ''
+  // const queryParams = {}
   /**
    *  Required. The input specification. It can be set to:
    *  1.  an audio config
@@ -48,21 +48,21 @@ function main(session, queryInput) {
    *  2.  a conversational query in the form of text, or
    *  3.  an event that specifies which intent to trigger.
    */
-  // const queryInput = ''
+  // const queryInput = {}
   /**
    *  Instructs the speech synthesizer how to generate the output
    *  audio. If this field is not set and agent-level speech synthesizer is not
    *  configured, no output audio is generated.
    */
-  // const outputAudioConfig = ''
+  // const outputAudioConfig = {}
   /**
-   *  Mask for [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] indicating which settings in this
+   *  Mask for output_audio_config google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config  indicating which settings in this
    *  request-level config should override speech synthesizer settings defined at
    *  agent-level.
-   *  If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] replaces the agent-level
+   *  If unspecified or empty, output_audio_config google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config  replaces the agent-level
    *  config in its entirety.
    */
-  // const outputAudioConfigMask = ''
+  // const outputAudioConfigMask = {}
   /**
    *  The natural language speech audio to be processed. This field
    *  should be populated iff `query_input` is set to an input audio config.
@@ -76,7 +76,7 @@ function main(session, queryInput) {
   // Instantiates a client
   const dialogflowClient = new SessionsClient();
 
-  async function detectIntent() {
+  async function callDetectIntent() {
     // Construct request
     const request = {
       session,
@@ -88,7 +88,7 @@ function main(session, queryInput) {
     console.log(response);
   }
 
-  detectIntent();
+  callDetectIntent();
   // [END dialogflow_v2_generated_Sessions_DetectIntent_async]
 }
 

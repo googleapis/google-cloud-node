@@ -443,6 +443,28 @@ export class ContextsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified context.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the context. Format:
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>/contexts/<Context ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/contexts.get_context.js</caption>
+   * region_tag:dialogflow_v2_generated_Contexts_GetContext_async
+   */
   getContext(
     request?: protos.google.cloud.dialogflow.v2.IGetContextRequest,
     options?: CallOptions
@@ -470,28 +492,6 @@ export class ContextsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the context. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
-   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>/contexts/<Context ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getContext(request);
-   */
   getContext(
     request?: protos.google.cloud.dialogflow.v2.IGetContextRequest,
     optionsOrCallback?:
@@ -533,6 +533,32 @@ export class ContextsClient {
     this.initialize();
     return this.innerApiCalls.getContext(request, options, callback);
   }
+  /**
+   * Creates a context.
+   *
+   * If the specified context already exists, overrides the context.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The session to create a context for.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {google.cloud.dialogflow.v2.Context} request.context
+   *   Required. The context to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/contexts.create_context.js</caption>
+   * region_tag:dialogflow_v2_generated_Contexts_CreateContext_async
+   */
   createContext(
     request?: protos.google.cloud.dialogflow.v2.ICreateContextRequest,
     options?: CallOptions
@@ -564,32 +590,6 @@ export class ContextsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a context.
-   *
-   * If the specified context already exists, overrides the context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The session to create a context for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {google.cloud.dialogflow.v2.Context} request.context
-   *   Required. The context to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createContext(request);
-   */
   createContext(
     request?: protos.google.cloud.dialogflow.v2.ICreateContextRequest,
     optionsOrCallback?:
@@ -633,6 +633,25 @@ export class ContextsClient {
     this.initialize();
     return this.innerApiCalls.createContext(request, options, callback);
   }
+  /**
+   * Updates the specified context.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Context} request.context
+   *   Required. The context to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/contexts.update_context.js</caption>
+   * region_tag:dialogflow_v2_generated_Contexts_UpdateContext_async
+   */
   updateContext(
     request?: protos.google.cloud.dialogflow.v2.IUpdateContextRequest,
     options?: CallOptions
@@ -664,25 +683,6 @@ export class ContextsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.Context} request.context
-   *   Required. The context to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Context]{@link google.cloud.dialogflow.v2.Context}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateContext(request);
-   */
   updateContext(
     request?: protos.google.cloud.dialogflow.v2.IUpdateContextRequest,
     optionsOrCallback?:
@@ -726,6 +726,28 @@ export class ContextsClient {
     this.initialize();
     return this.innerApiCalls.updateContext(request, options, callback);
   }
+  /**
+   * Deletes the specified context.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the context to delete. Format:
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>/contexts/<Context ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/contexts.delete_context.js</caption>
+   * region_tag:dialogflow_v2_generated_Contexts_DeleteContext_async
+   */
   deleteContext(
     request?: protos.google.cloud.dialogflow.v2.IDeleteContextRequest,
     options?: CallOptions
@@ -757,28 +779,6 @@ export class ContextsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified context.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the context to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
-   *   or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>/contexts/<Context ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteContext(request);
-   */
   deleteContext(
     request?: protos.google.cloud.dialogflow.v2.IDeleteContextRequest,
     optionsOrCallback?:
@@ -822,6 +822,28 @@ export class ContextsClient {
     this.initialize();
     return this.innerApiCalls.deleteContext(request, options, callback);
   }
+  /**
+   * Deletes all active contexts in the specified session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the session to delete all contexts from. Format:
+   *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
+   *   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+   *   ID>`.
+   *   If `Environment ID` is not specified we assume default 'draft' environment.
+   *   If `User ID` is not specified, we assume default '-' user.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/contexts.delete_all_contexts.js</caption>
+   * region_tag:dialogflow_v2_generated_Contexts_DeleteAllContexts_async
+   */
   deleteAllContexts(
     request?: protos.google.cloud.dialogflow.v2.IDeleteAllContextsRequest,
     options?: CallOptions
@@ -853,28 +875,6 @@ export class ContextsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes all active contexts in the specified session.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the session to delete all contexts from. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
-   *   ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
-   *   ID>`.
-   *   If `Environment ID` is not specified we assume default 'draft' environment.
-   *   If `User ID` is not specified, we assume default '-' user.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteAllContexts(request);
-   */
   deleteAllContexts(
     request?: protos.google.cloud.dialogflow.v2.IDeleteAllContextsRequest,
     optionsOrCallback?:
@@ -919,6 +919,36 @@ export class ContextsClient {
     return this.innerApiCalls.deleteAllContexts(request, options, callback);
   }
 
+  /**
+   * Returns the list of all contexts in the specified session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The session to list all contexts from.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+   *   ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Context]{@link google.cloud.dialogflow.v2.Context}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listContextsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listContexts(
     request?: protos.google.cloud.dialogflow.v2.IListContextsRequest,
     options?: CallOptions
@@ -950,36 +980,6 @@ export class ContextsClient {
       protos.google.cloud.dialogflow.v2.IContext
     >
   ): void;
-  /**
-   * Returns the list of all contexts in the specified session.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The session to list all contexts from.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
-   *   ID>/sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
-   *   default 100 and at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Context]{@link google.cloud.dialogflow.v2.Context}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listContextsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listContexts(
     request?: protos.google.cloud.dialogflow.v2.IListContextsRequest,
     optionsOrCallback?:
@@ -1102,11 +1102,8 @@ export class ContextsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listContextsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/contexts.list_contexts.js</caption>
+   * region_tag:dialogflow_v2_generated_Contexts_ListContexts_async
    */
   listContextsAsync(
     request?: protos.google.cloud.dialogflow.v2.IListContextsRequest,
@@ -1120,7 +1117,6 @@ export class ContextsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

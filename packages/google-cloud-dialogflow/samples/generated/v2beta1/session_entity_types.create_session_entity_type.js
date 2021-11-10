@@ -38,7 +38,7 @@ function main(parent, sessionEntityType) {
   /**
    *  Required. The session entity type to create.
    */
-  // const sessionEntityType = ''
+  // const sessionEntityType = {}
 
   // Imports the Dialogflow library
   const {SessionEntityTypesClient} =
@@ -47,7 +47,7 @@ function main(parent, sessionEntityType) {
   // Instantiates a client
   const dialogflowClient = new SessionEntityTypesClient();
 
-  async function createSessionEntityType() {
+  async function callCreateSessionEntityType() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent, sessionEntityType) {
     console.log(response);
   }
 
-  createSessionEntityType();
+  callCreateSessionEntityType();
   // [END dialogflow_v2beta1_generated_SessionEntityTypes_CreateSessionEntityType_async]
 }
 

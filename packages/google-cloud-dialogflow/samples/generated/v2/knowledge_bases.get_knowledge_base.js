@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new KnowledgeBasesClient();
 
-  async function getKnowledgeBase() {
+  async function callGetKnowledgeBase() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getKnowledgeBase();
+  callGetKnowledgeBase();
   // [END dialogflow_v2_generated_KnowledgeBases_GetKnowledgeBase_async]
 }
 

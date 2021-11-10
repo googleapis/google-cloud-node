@@ -35,7 +35,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ContextsClient();
 
-  async function deleteAllContexts() {
+  async function callDeleteAllContexts() {
     // Construct request
     const request = {
       parent,
@@ -46,7 +46,7 @@ function main(parent) {
     console.log(response);
   }
 
-  deleteAllContexts();
+  callDeleteAllContexts();
   // [END dialogflow_v2_generated_Contexts_DeleteAllContexts_async]
 }
 

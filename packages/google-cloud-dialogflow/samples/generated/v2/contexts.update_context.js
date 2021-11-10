@@ -22,11 +22,11 @@ function main(context) {
   /**
    *  Required. The context to update.
    */
-  // const context = ''
+  // const context = {}
   /**
    *  Optional. The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {ContextsClient} = require('@google-cloud/dialogflow').v2;
@@ -34,7 +34,7 @@ function main(context) {
   // Instantiates a client
   const dialogflowClient = new ContextsClient();
 
-  async function updateContext() {
+  async function callUpdateContext() {
     // Construct request
     const request = {
       context,
@@ -45,7 +45,7 @@ function main(context) {
     console.log(response);
   }
 
-  updateContext();
+  callUpdateContext();
   // [END dialogflow_v2_generated_Contexts_UpdateContext_async]
 }
 

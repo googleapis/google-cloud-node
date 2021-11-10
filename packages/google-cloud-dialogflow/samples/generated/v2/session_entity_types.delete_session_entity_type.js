@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new SessionEntityTypesClient();
 
-  async function deleteSessionEntityType() {
+  async function callDeleteSessionEntityType() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteSessionEntityType();
+  callDeleteSessionEntityType();
   // [END dialogflow_v2_generated_SessionEntityTypes_DeleteSessionEntityType_async]
 }
 

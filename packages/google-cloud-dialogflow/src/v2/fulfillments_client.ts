@@ -410,6 +410,24 @@ export class FulfillmentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the fulfillment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the fulfillment.
+   *   Format: `projects/<Project ID>/agent/fulfillment`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Fulfillment]{@link google.cloud.dialogflow.v2.Fulfillment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/fulfillments.get_fulfillment.js</caption>
+   * region_tag:dialogflow_v2_generated_Fulfillments_GetFulfillment_async
+   */
   getFulfillment(
     request?: protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest,
     options?: CallOptions
@@ -441,24 +459,6 @@ export class FulfillmentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the fulfillment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the fulfillment.
-   *   Format: `projects/<Project ID>/agent/fulfillment`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Fulfillment]{@link google.cloud.dialogflow.v2.Fulfillment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getFulfillment(request);
-   */
   getFulfillment(
     request?: protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest,
     optionsOrCallback?:
@@ -502,6 +502,26 @@ export class FulfillmentsClient {
     this.initialize();
     return this.innerApiCalls.getFulfillment(request, options, callback);
   }
+  /**
+   * Updates the fulfillment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Fulfillment} request.fulfillment
+   *   Required. The fulfillment to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The mask to control which fields get updated. If the mask is not
+   *   present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Fulfillment]{@link google.cloud.dialogflow.v2.Fulfillment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/fulfillments.update_fulfillment.js</caption>
+   * region_tag:dialogflow_v2_generated_Fulfillments_UpdateFulfillment_async
+   */
   updateFulfillment(
     request?: protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest,
     options?: CallOptions
@@ -533,26 +553,6 @@ export class FulfillmentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the fulfillment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.Fulfillment} request.fulfillment
-   *   Required. The fulfillment to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to control which fields get updated. If the mask is not
-   *   present, all fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Fulfillment]{@link google.cloud.dialogflow.v2.Fulfillment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateFulfillment(request);
-   */
   updateFulfillment(
     request?: protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest,
     optionsOrCallback?:

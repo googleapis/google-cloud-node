@@ -30,7 +30,7 @@ function main(parent) {
    *  for. This provides a way for user to get follow up smart reply suggestion
    *  after a smart reply selection, without sending a text message.
    */
-  // const currentTextInput = ''
+  // const currentTextInput = {}
   /**
    *  The name of the latest conversation message to compile suggestion
    *  for. If empty, it will be the latest message of the conversation.
@@ -40,7 +40,7 @@ function main(parent) {
   // const latestMessage = 'abc123'
   /**
    *  Optional. Max number of messages prior to and including
-   *  [latest_message] to use as context when compiling the
+   *  latest_message  to use as context when compiling the
    *  suggestion. By default 20 and at most 50.
    */
   // const contextSize = 1234
@@ -51,7 +51,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function suggestSmartReplies() {
+  async function callSuggestSmartReplies() {
     // Construct request
     const request = {
       parent,
@@ -62,7 +62,7 @@ function main(parent) {
     console.log(response);
   }
 
-  suggestSmartReplies();
+  callSuggestSmartReplies();
   // [END dialogflow_v2beta1_generated_Participants_SuggestSmartReplies_async]
 }
 

@@ -44,7 +44,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new EnvironmentsClient();
 
-  async function getEnvironmentHistory() {
+  async function callGetEnvironmentHistory() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent) {
     }
   }
 
-  getEnvironmentHistory();
+  callGetEnvironmentHistory();
   // [END dialogflow_v2_generated_Environments_GetEnvironmentHistory_async]
 }
 

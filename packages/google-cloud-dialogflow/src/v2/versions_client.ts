@@ -439,6 +439,28 @@ export class VersionsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified agent version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the version.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent/versions/<Version ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
+   *     ID>`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Version]{@link google.cloud.dialogflow.v2.Version}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/versions.get_version.js</caption>
+   * region_tag:dialogflow_v2_generated_Versions_GetVersion_async
+   */
   getVersion(
     request?: protos.google.cloud.dialogflow.v2.IGetVersionRequest,
     options?: CallOptions
@@ -466,28 +488,6 @@ export class VersionsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified agent version.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the version.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent/versions/<Version ID>`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-   *     ID>`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Version]{@link google.cloud.dialogflow.v2.Version}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getVersion(request);
-   */
   getVersion(
     request?: protos.google.cloud.dialogflow.v2.IGetVersionRequest,
     optionsOrCallback?:
@@ -529,6 +529,31 @@ export class VersionsClient {
     this.initialize();
     return this.innerApiCalls.getVersion(request, options, callback);
   }
+  /**
+   * Creates an agent version.
+   *
+   * The new version points to the agent instance in the "default" environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to create a version for.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
+   * @param {google.cloud.dialogflow.v2.Version} request.version
+   *   Required. The version to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Version]{@link google.cloud.dialogflow.v2.Version}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/versions.create_version.js</caption>
+   * region_tag:dialogflow_v2_generated_Versions_CreateVersion_async
+   */
   createVersion(
     request?: protos.google.cloud.dialogflow.v2.ICreateVersionRequest,
     options?: CallOptions
@@ -560,31 +585,6 @@ export class VersionsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates an agent version.
-   *
-   * The new version points to the agent instance in the "default" environment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to create a version for.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent`
-   * @param {google.cloud.dialogflow.v2.Version} request.version
-   *   Required. The version to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Version]{@link google.cloud.dialogflow.v2.Version}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createVersion(request);
-   */
   createVersion(
     request?: protos.google.cloud.dialogflow.v2.ICreateVersionRequest,
     optionsOrCallback?:
@@ -628,6 +628,34 @@ export class VersionsClient {
     this.initialize();
     return this.innerApiCalls.createVersion(request, options, callback);
   }
+  /**
+   * Updates the specified agent version.
+   *
+   * Note that this method does not allow you to update the state of the agent
+   * the given version points to. It allows you to update only mutable
+   * properties of the version resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Version} request.version
+   *   Required. The version to update.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent/versions/<Version ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
+   *     ID>`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Version]{@link google.cloud.dialogflow.v2.Version}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/versions.update_version.js</caption>
+   * region_tag:dialogflow_v2_generated_Versions_UpdateVersion_async
+   */
   updateVersion(
     request?: protos.google.cloud.dialogflow.v2.IUpdateVersionRequest,
     options?: CallOptions
@@ -659,34 +687,6 @@ export class VersionsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified agent version.
-   *
-   * Note that this method does not allow you to update the state of the agent
-   * the given version points to. It allows you to update only mutable
-   * properties of the version resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.Version} request.version
-   *   Required. The version to update.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent/versions/<Version ID>`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-   *     ID>`
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Version]{@link google.cloud.dialogflow.v2.Version}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateVersion(request);
-   */
   updateVersion(
     request?: protos.google.cloud.dialogflow.v2.IUpdateVersionRequest,
     optionsOrCallback?:
@@ -730,6 +730,28 @@ export class VersionsClient {
     this.initialize();
     return this.innerApiCalls.updateVersion(request, options, callback);
   }
+  /**
+   * Delete the specified agent version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the version to delete.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent/versions/<Version ID>`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
+   *     ID>`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/versions.delete_version.js</caption>
+   * region_tag:dialogflow_v2_generated_Versions_DeleteVersion_async
+   */
   deleteVersion(
     request?: protos.google.cloud.dialogflow.v2.IDeleteVersionRequest,
     options?: CallOptions
@@ -761,28 +783,6 @@ export class VersionsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Delete the specified agent version.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the version to delete.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent/versions/<Version ID>`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
-   *     ID>`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteVersion(request);
-   */
   deleteVersion(
     request?: protos.google.cloud.dialogflow.v2.IDeleteVersionRequest,
     optionsOrCallback?:
@@ -827,6 +827,35 @@ export class VersionsClient {
     return this.innerApiCalls.deleteVersion(request, options, callback);
   }
 
+  /**
+   * Returns the list of all versions of the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all versions from.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Version]{@link google.cloud.dialogflow.v2.Version}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listVersions(
     request?: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
     options?: CallOptions
@@ -858,35 +887,6 @@ export class VersionsClient {
       protos.google.cloud.dialogflow.v2.IVersion
     >
   ): void;
-  /**
-   * Returns the list of all versions of the specified agent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all versions from.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Version]{@link google.cloud.dialogflow.v2.Version}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listVersions(
     request?: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
     optionsOrCallback?:
@@ -1007,11 +1007,8 @@ export class VersionsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listVersionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/versions.list_versions.js</caption>
+   * region_tag:dialogflow_v2_generated_Versions_ListVersions_async
    */
   listVersionsAsync(
     request?: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
@@ -1025,7 +1022,6 @@ export class VersionsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

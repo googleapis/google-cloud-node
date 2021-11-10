@@ -22,11 +22,11 @@ function main(environment, updateMask) {
   /**
    *  Required. The environment to update.
    */
-  // const environment = ''
+  // const environment = {}
   /**
    *  Required. The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. This field is used to prevent accidental overwrite of the default
    *  environment, which is an operation that cannot be undone. To confirm that
@@ -41,7 +41,7 @@ function main(environment, updateMask) {
   // Instantiates a client
   const dialogflowClient = new EnvironmentsClient();
 
-  async function updateEnvironment() {
+  async function callUpdateEnvironment() {
     // Construct request
     const request = {
       environment,
@@ -53,7 +53,7 @@ function main(environment, updateMask) {
     console.log(response);
   }
 
-  updateEnvironment();
+  callUpdateEnvironment();
   // [END dialogflow_v2_generated_Environments_UpdateEnvironment_async]
 }
 

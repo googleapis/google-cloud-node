@@ -35,14 +35,14 @@ function main(parent) {
    *  Optional. The language used to access language-specific data.
    *  If not specified, the agent's default language is used.
    *  For more information, see
-   *  [Multilingual intent and entity
-   *  data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   *  Multilingual intent and entity
+   *  data (https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    */
   // const languageCode = 'abc123'
   /**
    *  Optional. The resource view to apply to the returned intent.
    */
-  // const intentView = ''
+  // const intentView = {}
   /**
    *  Optional. The maximum number of items to return in a single page. By
    *  default 100 and at most 1000.
@@ -59,7 +59,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new IntentsClient();
 
-  async function listIntents() {
+  async function callListIntents() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +72,7 @@ function main(parent) {
     }
   }
 
-  listIntents();
+  callListIntents();
   // [END dialogflow_v2beta1_generated_Intents_ListIntents_async]
 }
 

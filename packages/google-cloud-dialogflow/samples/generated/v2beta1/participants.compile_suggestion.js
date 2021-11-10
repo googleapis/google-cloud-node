@@ -34,7 +34,7 @@ function main() {
   // const latestMessage = 'abc123'
   /**
    *  Optional. Max number of messages prior to and including
-   *  [latest_message] to use as context when compiling the
+   *  latest_message  to use as context when compiling the
    *  suggestion. If zero or less than zero, 20 is used.
    */
   // const contextSize = 1234
@@ -45,7 +45,7 @@ function main() {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function compileSuggestion() {
+  async function callCompileSuggestion() {
     // Construct request
     const request = {};
 
@@ -54,7 +54,7 @@ function main() {
     console.log(response);
   }
 
-  compileSuggestion();
+  callCompileSuggestion();
   // [END dialogflow_v2beta1_generated_Participants_CompileSuggestion_async]
 }
 

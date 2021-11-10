@@ -29,7 +29,7 @@ function main(name) {
    *  The path for a Cloud Storage source file for reloading document content.
    *  If not provided, the Document's existing source will be reloaded.
    */
-  // const gcsSource = ''
+  // const gcsSource = {}
   /**
    *  Whether to import custom metadata from Google Cloud Storage.
    *  Only valid when the document source is Google Cloud Storage URI.
@@ -42,7 +42,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new DocumentsClient();
 
-  async function reloadDocument() {
+  async function callReloadDocument() {
     // Construct request
     const request = {
       name,
@@ -54,7 +54,7 @@ function main(name) {
     console.log(response);
   }
 
-  reloadDocument();
+  callReloadDocument();
   // [END dialogflow_v2beta1_generated_Documents_ReloadDocument_async]
 }
 

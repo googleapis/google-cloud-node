@@ -528,6 +528,30 @@ export class EntityTypesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified entity type.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entity type.
+   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2.EntityType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/entity_types.get_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_GetEntityType_async
+   */
   getEntityType(
     request?: protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest,
     options?: CallOptions
@@ -559,30 +583,6 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified entity type.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the entity type.
-   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
-   * @param {string} [request.languageCode]
-   *   Optional. The language used to access language-specific data.
-   *   If not specified, the agent's default language is used.
-   *   For more information, see
-   *   [Multilingual intent and entity
-   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2.EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getEntityType(request);
-   */
   getEntityType(
     request?: protos.google.cloud.dialogflow.v2.IGetEntityTypeRequest,
     optionsOrCallback?:
@@ -626,6 +626,36 @@ export class EntityTypesClient {
     this.initialize();
     return this.innerApiCalls.getEntityType(request, options, callback);
   }
+  /**
+   * Creates an entity type in the specified agent.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to create a entity type for.
+   *   Format: `projects/<Project ID>/agent`.
+   * @param {google.cloud.dialogflow.v2.EntityType} request.entityType
+   *   Required. The entity type to create.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2.EntityType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/entity_types.create_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_CreateEntityType_async
+   */
   createEntityType(
     request?: protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest,
     options?: CallOptions
@@ -657,36 +687,6 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates an entity type in the specified agent.
-   *
-   * Note: You should always train an agent prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to create a entity type for.
-   *   Format: `projects/<Project ID>/agent`.
-   * @param {google.cloud.dialogflow.v2.EntityType} request.entityType
-   *   Required. The entity type to create.
-   * @param {string} [request.languageCode]
-   *   Optional. The language used to access language-specific data.
-   *   If not specified, the agent's default language is used.
-   *   For more information, see
-   *   [Multilingual intent and entity
-   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2.EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createEntityType(request);
-   */
   createEntityType(
     request?: protos.google.cloud.dialogflow.v2.ICreateEntityTypeRequest,
     optionsOrCallback?:
@@ -730,6 +730,35 @@ export class EntityTypesClient {
     this.initialize();
     return this.innerApiCalls.createEntityType(request, options, callback);
   }
+  /**
+   * Updates the specified entity type.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.EntityType} request.entityType
+   *   Required. The entity type to update.
+   * @param {string} [request.languageCode]
+   *   Optional. The language used to access language-specific data.
+   *   If not specified, the agent's default language is used.
+   *   For more information, see
+   *   [Multilingual intent and entity
+   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2.EntityType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/entity_types.update_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_UpdateEntityType_async
+   */
   updateEntityType(
     request?: protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest,
     options?: CallOptions
@@ -761,35 +790,6 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified entity type.
-   *
-   * Note: You should always train an agent prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.EntityType} request.entityType
-   *   Required. The entity type to update.
-   * @param {string} [request.languageCode]
-   *   Optional. The language used to access language-specific data.
-   *   If not specified, the agent's default language is used.
-   *   For more information, see
-   *   [Multilingual intent and entity
-   *   data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [EntityType]{@link google.cloud.dialogflow.v2.EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateEntityType(request);
-   */
   updateEntityType(
     request?: protos.google.cloud.dialogflow.v2.IUpdateEntityTypeRequest,
     optionsOrCallback?:
@@ -833,6 +833,28 @@ export class EntityTypesClient {
     this.initialize();
     return this.innerApiCalls.updateEntityType(request, options, callback);
   }
+  /**
+   * Deletes the specified entity type.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entity type to delete.
+   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/entity_types.delete_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_DeleteEntityType_async
+   */
   deleteEntityType(
     request?: protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest,
     options?: CallOptions
@@ -864,28 +886,6 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified entity type.
-   *
-   * Note: You should always train an agent prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the entity type to delete.
-   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteEntityType(request);
-   */
   deleteEntityType(
     request?: protos.google.cloud.dialogflow.v2.IDeleteEntityTypeRequest,
     optionsOrCallback?:
@@ -930,42 +930,6 @@ export class EntityTypesClient {
     return this.innerApiCalls.deleteEntityType(request, options, callback);
   }
 
-  batchUpdateEntityTypes(
-    request?: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  batchUpdateEntityTypes(
-    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateEntityTypes(
-    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates/Creates multiple entity types in the specified agent.
    *
@@ -1010,10 +974,45 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchUpdateEntityTypes(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2/entity_types.batch_update_entity_types.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchUpdateEntityTypes_async
    */
+  batchUpdateEntityTypes(
+    request?: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  batchUpdateEntityTypes(
+    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateEntityTypes(
+    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchUpdateEntityTypes(
     request?: protos.google.cloud.dialogflow.v2.IBatchUpdateEntityTypesRequest,
     optionsOrCallback?:
@@ -1075,11 +1074,8 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchUpdateEntityTypesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/entity_types.batch_update_entity_types.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchUpdateEntityTypes_async
    */
   async checkBatchUpdateEntityTypesProgress(
     name: string
@@ -1103,6 +1099,42 @@ export class EntityTypesClient {
       protos.google.protobuf.Struct
     >;
   }
+  /**
+   * Deletes entity types in the specified agent.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the agent to delete all entities types for. Format:
+   *   `projects/<Project ID>/agent`.
+   * @param {string[]} request.entityTypeNames
+   *   Required. The names entity types to delete. All names must point to the
+   *   same agent as `parent`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/entity_types.batch_delete_entity_types.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchDeleteEntityTypes_async
+   */
   batchDeleteEntityTypes(
     request?: protos.google.cloud.dialogflow.v2.IBatchDeleteEntityTypesRequest,
     options?: CallOptions
@@ -1139,43 +1171,6 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes entity types in the specified agent.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: An empty [Struct
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
-   * - `response`: An [Empty
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
-   *
-   * Note: You should always train an agent prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the agent to delete all entities types for. Format:
-   *   `projects/<Project ID>/agent`.
-   * @param {string[]} request.entityTypeNames
-   *   Required. The names entity types to delete. All names must point to the
-   *   same agent as `parent`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchDeleteEntityTypes(request);
-   * const [response] = await operation.promise();
-   */
   batchDeleteEntityTypes(
     request?: protos.google.cloud.dialogflow.v2.IBatchDeleteEntityTypesRequest,
     optionsOrCallback?:
@@ -1237,11 +1232,8 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchDeleteEntityTypesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/entity_types.batch_delete_entity_types.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchDeleteEntityTypes_async
    */
   async checkBatchDeleteEntityTypesProgress(
     name: string
@@ -1262,42 +1254,6 @@ export class EntityTypesClient {
       protos.google.protobuf.Struct
     >;
   }
-  batchCreateEntities(
-    request?: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  batchCreateEntities(
-    request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchCreateEntities(
-    request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates multiple new entities in the specified entity type.
    *
@@ -1336,10 +1292,45 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchCreateEntities(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2/entity_types.batch_create_entities.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchCreateEntities_async
    */
+  batchCreateEntities(
+    request?: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  batchCreateEntities(
+    request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateEntities(
+    request: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchCreateEntities(
     request?: protos.google.cloud.dialogflow.v2.IBatchCreateEntitiesRequest,
     optionsOrCallback?:
@@ -1397,11 +1388,8 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchCreateEntitiesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/entity_types.batch_create_entities.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchCreateEntities_async
    */
   async checkBatchCreateEntitiesProgress(
     name: string
@@ -1422,42 +1410,6 @@ export class EntityTypesClient {
       protos.google.protobuf.Struct
     >;
   }
-  batchUpdateEntities(
-    request?: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  batchUpdateEntities(
-    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchUpdateEntities(
-    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates or creates multiple entities in the specified entity type. This
    * method does not affect entities in the entity type that aren't explicitly
@@ -1501,10 +1453,45 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchUpdateEntities(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2/entity_types.batch_update_entities.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchUpdateEntities_async
    */
+  batchUpdateEntities(
+    request?: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  batchUpdateEntities(
+    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchUpdateEntities(
+    request: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchUpdateEntities(
     request?: protos.google.cloud.dialogflow.v2.IBatchUpdateEntitiesRequest,
     optionsOrCallback?:
@@ -1562,11 +1549,8 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchUpdateEntitiesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/entity_types.batch_update_entities.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchUpdateEntities_async
    */
   async checkBatchUpdateEntitiesProgress(
     name: string
@@ -1587,42 +1571,6 @@ export class EntityTypesClient {
       protos.google.protobuf.Struct
     >;
   }
-  batchDeleteEntities(
-    request?: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  batchDeleteEntities(
-    request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  batchDeleteEntities(
-    request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.protobuf.IStruct
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Deletes entities in the specified entity type.
    *
@@ -1663,10 +1611,45 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.batchDeleteEntities(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2/entity_types.batch_delete_entities.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchDeleteEntities_async
    */
+  batchDeleteEntities(
+    request?: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  batchDeleteEntities(
+    request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteEntities(
+    request: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   batchDeleteEntities(
     request?: protos.google.cloud.dialogflow.v2.IBatchDeleteEntitiesRequest,
     optionsOrCallback?:
@@ -1724,11 +1707,8 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkBatchDeleteEntitiesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/entity_types.batch_delete_entities.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_BatchDeleteEntities_async
    */
   async checkBatchDeleteEntitiesProgress(
     name: string
@@ -1749,37 +1729,6 @@ export class EntityTypesClient {
       protos.google.protobuf.Struct
     >;
   }
-  listEntityTypes(
-    request?: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IEntityType[],
-      protos.google.cloud.dialogflow.v2.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
-    ]
-  >;
-  listEntityTypes(
-    request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-      | protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.IEntityType
-    >
-  ): void;
-  listEntityTypes(
-    request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
-      | protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.IEntityType
-    >
-  ): void;
   /**
    * Returns the list of all entity types in the specified agent.
    *
@@ -1812,6 +1761,37 @@ export class EntityTypesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listEntityTypes(
+    request?: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEntityType[],
+      protos.google.cloud.dialogflow.v2.IListEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
+    ]
+  >;
+  listEntityTypes(
+    request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.IEntityType
+    >
+  ): void;
+  listEntityTypes(
+    request: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2.IListEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.IEntityType
+    >
+  ): void;
   listEntityTypes(
     request?: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
     optionsOrCallback?:
@@ -1938,11 +1918,8 @@ export class EntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listEntityTypesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/entity_types.list_entity_types.js</caption>
+   * region_tag:dialogflow_v2_generated_EntityTypes_ListEntityTypes_async
    */
   listEntityTypesAsync(
     request?: protos.google.cloud.dialogflow.v2.IListEntityTypesRequest,
@@ -1956,7 +1933,6 @@ export class EntityTypesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

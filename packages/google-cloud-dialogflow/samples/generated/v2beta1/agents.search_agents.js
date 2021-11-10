@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new AgentsClient();
 
-  async function searchAgents() {
+  async function callSearchAgents() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  searchAgents();
+  callSearchAgents();
   // [END dialogflow_v2beta1_generated_Agents_SearchAgents_async]
 }
 

@@ -22,13 +22,13 @@ function main(knowledgeBase) {
   /**
    *  Required. The knowledge base to update.
    */
-  // const knowledgeBase = ''
+  // const knowledgeBase = {}
   /**
    *  Optional. Not specified means `update all`.
    *  Currently, only `display_name` can be updated, an InvalidArgument will be
    *  returned for attempting to update other fields.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {KnowledgeBasesClient} = require('@google-cloud/dialogflow').v2;
@@ -36,7 +36,7 @@ function main(knowledgeBase) {
   // Instantiates a client
   const dialogflowClient = new KnowledgeBasesClient();
 
-  async function updateKnowledgeBase() {
+  async function callUpdateKnowledgeBase() {
     // Construct request
     const request = {
       knowledgeBase,
@@ -47,7 +47,7 @@ function main(knowledgeBase) {
     console.log(response);
   }
 
-  updateKnowledgeBase();
+  callUpdateKnowledgeBase();
   // [END dialogflow_v2_generated_KnowledgeBases_UpdateKnowledgeBase_async]
 }
 

@@ -22,11 +22,11 @@ function main(conversationProfile, updateMask) {
   /**
    *  Required. The conversation profile to update.
    */
-  // const conversationProfile = ''
+  // const conversationProfile = {}
   /**
    *  Required. The mask to control which fields to update.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {ConversationProfilesClient} =
@@ -35,7 +35,7 @@ function main(conversationProfile, updateMask) {
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();
 
-  async function updateConversationProfile() {
+  async function callUpdateConversationProfile() {
     // Construct request
     const request = {
       conversationProfile,
@@ -47,7 +47,7 @@ function main(conversationProfile, updateMask) {
     console.log(response);
   }
 
-  updateConversationProfile();
+  callUpdateConversationProfile();
   // [END dialogflow_v2beta1_generated_ConversationProfiles_UpdateConversationProfile_async]
 }
 

@@ -29,7 +29,7 @@ function main(parent, environment, environmentId) {
   /**
    *  Required. The environment to create.
    */
-  // const environment = ''
+  // const environment = {}
   /**
    *  Required. The unique id of the new environment.
    */
@@ -41,7 +41,7 @@ function main(parent, environment, environmentId) {
   // Instantiates a client
   const dialogflowClient = new EnvironmentsClient();
 
-  async function createEnvironment() {
+  async function callCreateEnvironment() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent, environment, environmentId) {
     console.log(response);
   }
 
-  createEnvironment();
+  callCreateEnvironment();
   // [END dialogflow_v2beta1_generated_Environments_CreateEnvironment_async]
 }
 

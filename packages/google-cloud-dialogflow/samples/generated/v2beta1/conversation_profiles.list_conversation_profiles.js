@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();
 
-  async function listConversationProfiles() {
+  async function callListConversationProfiles() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent) {
     }
   }
 
-  listConversationProfiles();
+  callListConversationProfiles();
   // [END dialogflow_v2beta1_generated_ConversationProfiles_ListConversationProfiles_async]
 }
 

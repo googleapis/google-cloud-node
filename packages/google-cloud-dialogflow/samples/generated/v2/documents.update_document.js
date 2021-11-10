@@ -22,13 +22,13 @@ function main(document) {
   /**
    *  Required. The document to update.
    */
-  // const document = ''
+  // const document = {}
   /**
    *  Optional. Not specified means `update all`.
    *  Currently, only `display_name` can be updated, an InvalidArgument will be
    *  returned for attempting to update other fields.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {DocumentsClient} = require('@google-cloud/dialogflow').v2;
@@ -36,7 +36,7 @@ function main(document) {
   // Instantiates a client
   const dialogflowClient = new DocumentsClient();
 
-  async function updateDocument() {
+  async function callUpdateDocument() {
     // Construct request
     const request = {
       document,
@@ -48,7 +48,7 @@ function main(document) {
     console.log(response);
   }
 
-  updateDocument();
+  callUpdateDocument();
   // [END dialogflow_v2_generated_Documents_UpdateDocument_async]
 }
 

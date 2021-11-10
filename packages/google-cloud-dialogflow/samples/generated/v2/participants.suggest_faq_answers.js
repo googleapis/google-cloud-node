@@ -34,7 +34,7 @@ function main(parent) {
   // const latestMessage = 'abc123'
   /**
    *  Max number of messages prior to and including
-   *  [latest_message] to use as context when compiling the
+   *  latest_message  to use as context when compiling the
    *  suggestion. By default 20 and at most 50.
    */
   // const contextSize = 1234
@@ -45,7 +45,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function suggestFaqAnswers() {
+  async function callSuggestFaqAnswers() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent) {
     console.log(response);
   }
 
-  suggestFaqAnswers();
+  callSuggestFaqAnswers();
   // [END dialogflow_v2_generated_Participants_SuggestFaqAnswers_async]
 }
 

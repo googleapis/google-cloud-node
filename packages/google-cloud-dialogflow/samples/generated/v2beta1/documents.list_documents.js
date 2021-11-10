@@ -37,7 +37,7 @@ function main(parent) {
   /**
    *  The filter expression used to filter documents returned by the list method.
    *  The expression has the following syntax:
-   *    <field> <operator> <value> [AND <field> <operator> <value>] ...
+   *    <field> <operator> <value> AND <field> <operator> <value>  ...
    *  The following fields and operators are supported:
    *  * knowledge_types with has(:) operator
    *  * display_name with has(:) operator
@@ -49,7 +49,7 @@ function main(parent) {
    *  * "state=ACTIVE" matches documents with ACTIVE state.
    *  * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
    *  For more information about filtering, see
-   *  [API Filtering](https://aip.dev/160).
+   *  API Filtering (https://aip.dev/160).
    */
   // const filter = 'abc123'
 
@@ -59,7 +59,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new DocumentsClient();
 
-  async function listDocuments() {
+  async function callListDocuments() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +72,7 @@ function main(parent) {
     }
   }
 
-  listDocuments();
+  callListDocuments();
   // [END dialogflow_v2beta1_generated_Documents_ListDocuments_async]
 }
 

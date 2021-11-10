@@ -41,7 +41,7 @@ function main() {
    *  `create_time_epoch_microseconds > 1551790877964485` or
    *  `create_time > "2017-01-15T01:30:15.01Z"`
    *  For more information about filtering, see
-   *  [API Filtering](https://aip.dev/160).
+   *  API Filtering (https://aip.dev/160).
    */
   // const filter = 'abc123'
 
@@ -51,7 +51,7 @@ function main() {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function listSuggestions() {
+  async function callListSuggestions() {
     // Construct request
     const request = {};
 
@@ -62,7 +62,7 @@ function main() {
     }
   }
 
-  listSuggestions();
+  callListSuggestions();
   // [END dialogflow_v2beta1_generated_Participants_ListSuggestions_async]
 }
 

@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();
 
-  async function getConversationProfile() {
+  async function callGetConversationProfile() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getConversationProfile();
+  callGetConversationProfile();
   // [END dialogflow_v2_generated_ConversationProfiles_GetConversationProfile_async]
 }
 

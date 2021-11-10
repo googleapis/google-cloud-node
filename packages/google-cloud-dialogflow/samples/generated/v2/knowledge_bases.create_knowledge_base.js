@@ -27,7 +27,7 @@ function main(parent, knowledgeBase) {
   /**
    *  Required. The knowledge base to create.
    */
-  // const knowledgeBase = ''
+  // const knowledgeBase = {}
 
   // Imports the Dialogflow library
   const {KnowledgeBasesClient} = require('@google-cloud/dialogflow').v2;
@@ -35,7 +35,7 @@ function main(parent, knowledgeBase) {
   // Instantiates a client
   const dialogflowClient = new KnowledgeBasesClient();
 
-  async function createKnowledgeBase() {
+  async function callCreateKnowledgeBase() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, knowledgeBase) {
     console.log(response);
   }
 
-  createKnowledgeBase();
+  callCreateKnowledgeBase();
   // [END dialogflow_v2_generated_KnowledgeBases_CreateKnowledgeBase_async]
 }
 

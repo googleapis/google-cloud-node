@@ -445,6 +445,30 @@ export class EnvironmentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified agent environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the environment.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>`
+   *
+   *   The environment ID for the default environment is `-`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/environments.get_environment.js</caption>
+   * region_tag:dialogflow_v2_generated_Environments_GetEnvironment_async
+   */
   getEnvironment(
     request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
     options?: CallOptions
@@ -476,30 +500,6 @@ export class EnvironmentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified agent environment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the environment.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
-   *   - `projects/<Project ID>/locations/<Location
-   *     ID>/agent/environments/<Environment ID>`
-   *
-   *   The environment ID for the default environment is `-`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getEnvironment(request);
-   */
   getEnvironment(
     request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
     optionsOrCallback?:
@@ -543,6 +543,31 @@ export class EnvironmentsClient {
     this.initialize();
     return this.innerApiCalls.getEnvironment(request, options, callback);
   }
+  /**
+   * Creates an agent environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to create an environment for.
+   *   Supported formats:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
+   * @param {google.cloud.dialogflow.v2.Environment} request.environment
+   *   Required. The environment to create.
+   * @param {string} request.environmentId
+   *   Required. The unique id of the new environment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/environments.create_environment.js</caption>
+   * region_tag:dialogflow_v2_generated_Environments_CreateEnvironment_async
+   */
   createEnvironment(
     request?: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
     options?: CallOptions
@@ -574,31 +599,6 @@ export class EnvironmentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates an agent environment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to create an environment for.
-   *   Supported formats:
-   *
-   *   - `projects/<Project ID>/agent`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent`
-   * @param {google.cloud.dialogflow.v2.Environment} request.environment
-   *   Required. The environment to create.
-   * @param {string} request.environmentId
-   *   Required. The unique id of the new environment.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createEnvironment(request);
-   */
   createEnvironment(
     request?: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
     optionsOrCallback?:
@@ -642,37 +642,6 @@ export class EnvironmentsClient {
     this.initialize();
     return this.innerApiCalls.createEnvironment(request, options, callback);
   }
-  updateEnvironment(
-    request?: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IEnvironment,
-      protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.v2.IEnvironment,
-      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.v2.IEnvironment,
-      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the specified agent environment.
    *
@@ -705,9 +674,40 @@ export class EnvironmentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateEnvironment(request);
+   * @example <caption>include:samples/generated/v2/environments.update_environment.js</caption>
+   * region_tag:dialogflow_v2_generated_Environments_UpdateEnvironment_async
    */
+  updateEnvironment(
+    request?: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateEnvironment(
     request?: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
     optionsOrCallback?:
@@ -751,6 +751,30 @@ export class EnvironmentsClient {
     this.initialize();
     return this.innerApiCalls.updateEnvironment(request, options, callback);
   }
+  /**
+   * Deletes the specified agent environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the environment to delete.
+   *   / Format:
+   *
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>`
+   *
+   *   The environment ID for the default environment is `-`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/environments.delete_environment.js</caption>
+   * region_tag:dialogflow_v2_generated_Environments_DeleteEnvironment_async
+   */
   deleteEnvironment(
     request?: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
     options?: CallOptions
@@ -782,30 +806,6 @@ export class EnvironmentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified agent environment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the environment to delete.
-   *   / Format:
-   *
-   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
-   *   - `projects/<Project ID>/locations/<Location
-   *     ID>/agent/environments/<Environment ID>`
-   *
-   *   The environment ID for the default environment is `-`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteEnvironment(request);
-   */
   deleteEnvironment(
     request?: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
     optionsOrCallback?:
@@ -850,6 +850,35 @@ export class EnvironmentsClient {
     return this.innerApiCalls.deleteEnvironment(request, options, callback);
   }
 
+  /**
+   * Returns the list of all non-default environments of the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all environments from.
+   *   Format:
+   *
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Environment]{@link google.cloud.dialogflow.v2.Environment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listEnvironments(
     request?: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
     options?: CallOptions
@@ -881,35 +910,6 @@ export class EnvironmentsClient {
       protos.google.cloud.dialogflow.v2.IEnvironment
     >
   ): void;
-  /**
-   * Returns the list of all non-default environments of the specified agent.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The agent to list all environments from.
-   *   Format:
-   *
-   *   - `projects/<Project ID>/agent`
-   *   - `projects/<Project ID>/locations/<Location ID>/agent`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By default 100 and
-   *   at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Environment]{@link google.cloud.dialogflow.v2.Environment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEnvironmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listEnvironments(
     request?: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
     optionsOrCallback?:
@@ -1030,11 +1030,8 @@ export class EnvironmentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listEnvironmentsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/environments.list_environments.js</caption>
+   * region_tag:dialogflow_v2_generated_Environments_ListEnvironments_async
    */
   listEnvironmentsAsync(
     request?: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
@@ -1048,7 +1045,6 @@ export class EnvironmentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1058,33 +1054,6 @@ export class EnvironmentsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IEnvironment>;
   }
-  getEnvironmentHistory(
-    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry[],
-      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest | null,
-      protos.google.cloud.dialogflow.v2.IEnvironmentHistory
-    ]
-  >;
-  getEnvironmentHistory(
-    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
-      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
-      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
-    >
-  ): void;
-  getEnvironmentHistory(
-    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
-      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
-      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
-    >
-  ): void;
   /**
    * Gets the history of the specified environment.
    *
@@ -1117,6 +1086,33 @@ export class EnvironmentsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  getEnvironmentHistory(
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry[],
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest | null,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory
+    ]
+  >;
+  getEnvironmentHistory(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+    >
+  ): void;
+  getEnvironmentHistory(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+    >
+  ): void;
   getEnvironmentHistory(
     request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
     optionsOrCallback?:
@@ -1241,11 +1237,8 @@ export class EnvironmentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.getEnvironmentHistoryAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/environments.get_environment_history.js</caption>
+   * region_tag:dialogflow_v2_generated_Environments_GetEnvironmentHistory_async
    */
   getEnvironmentHistoryAsync(
     request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
@@ -1259,7 +1252,6 @@ export class EnvironmentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['getEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

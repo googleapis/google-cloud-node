@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();
 
-  async function deleteConversationProfile() {
+  async function callDeleteConversationProfile() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteConversationProfile();
+  callDeleteConversationProfile();
   // [END dialogflow_v2beta1_generated_ConversationProfiles_DeleteConversationProfile_async]
 }
 

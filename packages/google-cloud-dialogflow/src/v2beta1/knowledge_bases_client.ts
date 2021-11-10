@@ -439,6 +439,28 @@ export class KnowledgeBasesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified knowledge base.
+   *
+   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
+   * only use `projects.knowledgeBases`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the knowledge base to retrieve.
+   *   Format `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/knowledge_bases.get_knowledge_base.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_KnowledgeBases_GetKnowledgeBase_async
+   */
   getKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
     options?: CallOptions
@@ -473,28 +495,6 @@ export class KnowledgeBasesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified knowledge base.
-   *
-   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
-   * only use `projects.knowledgeBases`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the knowledge base to retrieve.
-   *   Format `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getKnowledgeBase(request);
-   */
   getKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.IGetKnowledgeBaseRequest,
     optionsOrCallback?:
@@ -541,6 +541,29 @@ export class KnowledgeBasesClient {
     this.initialize();
     return this.innerApiCalls.getKnowledgeBase(request, options, callback);
   }
+  /**
+   * Creates a knowledge base.
+   *
+   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
+   * only use `projects.knowledgeBases`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to create a knowledge base for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   * @param {google.cloud.dialogflow.v2beta1.KnowledgeBase} request.knowledgeBase
+   *   Required. The knowledge base to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/knowledge_bases.create_knowledge_base.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_KnowledgeBases_CreateKnowledgeBase_async
+   */
   createKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
     options?: CallOptions
@@ -575,29 +598,6 @@ export class KnowledgeBasesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a knowledge base.
-   *
-   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
-   * only use `projects.knowledgeBases`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project to create a knowledge base for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
-   * @param {google.cloud.dialogflow.v2beta1.KnowledgeBase} request.knowledgeBase
-   *   Required. The knowledge base to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createKnowledgeBase(request);
-   */
   createKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.ICreateKnowledgeBaseRequest,
     optionsOrCallback?:
@@ -644,6 +644,31 @@ export class KnowledgeBasesClient {
     this.initialize();
     return this.innerApiCalls.createKnowledgeBase(request, options, callback);
   }
+  /**
+   * Deletes the specified knowledge base.
+   *
+   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
+   * only use `projects.knowledgeBases`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the knowledge base to delete.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {boolean} [request.force]
+   *   Optional. Force deletes the knowledge base. When set to true, any documents
+   *   in the knowledge base are also deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/knowledge_bases.delete_knowledge_base.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_KnowledgeBases_DeleteKnowledgeBase_async
+   */
   deleteKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
     options?: CallOptions
@@ -678,31 +703,6 @@ export class KnowledgeBasesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified knowledge base.
-   *
-   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
-   * only use `projects.knowledgeBases`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the knowledge base to delete.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {boolean} [request.force]
-   *   Optional. Force deletes the knowledge base. When set to true, any documents
-   *   in the knowledge base are also deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteKnowledgeBase(request);
-   */
   deleteKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.IDeleteKnowledgeBaseRequest,
     optionsOrCallback?:
@@ -749,6 +749,30 @@ export class KnowledgeBasesClient {
     this.initialize();
     return this.innerApiCalls.deleteKnowledgeBase(request, options, callback);
   }
+  /**
+   * Updates the specified knowledge base.
+   *
+   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
+   * only use `projects.knowledgeBases`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2beta1.KnowledgeBase} request.knowledgeBase
+   *   Required. The knowledge base to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Not specified means `update all`.
+   *   Currently, only `display_name` can be updated, an InvalidArgument will be
+   *   returned for attempting to update other fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/knowledge_bases.update_knowledge_base.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_KnowledgeBases_UpdateKnowledgeBase_async
+   */
   updateKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
     options?: CallOptions
@@ -783,30 +807,6 @@ export class KnowledgeBasesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified knowledge base.
-   *
-   * Note: The `projects.agent.knowledgeBases` resource is deprecated;
-   * only use `projects.knowledgeBases`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2beta1.KnowledgeBase} request.knowledgeBase
-   *   Required. The knowledge base to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Not specified means `update all`.
-   *   Currently, only `display_name` can be updated, an InvalidArgument will be
-   *   returned for attempting to update other fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateKnowledgeBase(request);
-   */
   updateKnowledgeBase(
     request?: protos.google.cloud.dialogflow.v2beta1.IUpdateKnowledgeBaseRequest,
     optionsOrCallback?:
@@ -854,37 +854,6 @@ export class KnowledgeBasesClient {
     return this.innerApiCalls.updateKnowledgeBase(request, options, callback);
   }
 
-  listKnowledgeBases(
-    request?: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
-      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
-    ]
-  >;
-  listKnowledgeBases(
-    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
-      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
-    >
-  ): void;
-  listKnowledgeBases(
-    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
-      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
-    >
-  ): void;
   /**
    * Returns the list of all knowledge bases of the specified agent.
    *
@@ -941,6 +910,37 @@ export class KnowledgeBasesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listKnowledgeBases(
+    request?: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase[],
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest | null,
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+    ]
+  >;
+  listKnowledgeBases(
+    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
+    >
+  ): void;
+  listKnowledgeBases(
+    request: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
+      | protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2beta1.IKnowledgeBase
+    >
+  ): void;
   listKnowledgeBases(
     request?: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
     optionsOrCallback?:
@@ -1109,11 +1109,8 @@ export class KnowledgeBasesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listKnowledgeBasesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2beta1/knowledge_bases.list_knowledge_bases.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_KnowledgeBases_ListKnowledgeBases_async
    */
   listKnowledgeBasesAsync(
     request?: protos.google.cloud.dialogflow.v2beta1.IListKnowledgeBasesRequest,
@@ -1127,7 +1124,6 @@ export class KnowledgeBasesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

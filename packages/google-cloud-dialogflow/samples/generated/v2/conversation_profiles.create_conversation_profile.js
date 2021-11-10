@@ -27,7 +27,7 @@ function main(parent, conversationProfile) {
   /**
    *  Required. The conversation profile to create.
    */
-  // const conversationProfile = ''
+  // const conversationProfile = {}
 
   // Imports the Dialogflow library
   const {ConversationProfilesClient} = require('@google-cloud/dialogflow').v2;
@@ -35,7 +35,7 @@ function main(parent, conversationProfile) {
   // Instantiates a client
   const dialogflowClient = new ConversationProfilesClient();
 
-  async function createConversationProfile() {
+  async function callCreateConversationProfile() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, conversationProfile) {
     console.log(response);
   }
 
-  createConversationProfile();
+  callCreateConversationProfile();
   // [END dialogflow_v2_generated_ConversationProfiles_CreateConversationProfile_async]
 }
 

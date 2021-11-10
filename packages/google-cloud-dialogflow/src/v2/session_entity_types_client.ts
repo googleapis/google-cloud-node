@@ -442,6 +442,33 @@ export class SessionEntityTypesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified session entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the session entity type. Format:
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+   *   Name>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/session_entity_types.get_session_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_SessionEntityTypes_GetSessionEntityType_async
+   */
   getSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.IGetSessionEntityTypeRequest,
     options?: CallOptions
@@ -476,33 +503,6 @@ export class SessionEntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified session entity type.
-   *
-   * This method doesn't work with Google Assistant integration.
-   * Contact Dialogflow support if you need to use session entities
-   * with Google Assistant integration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the session entity type. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
-   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
-   *   Name>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSessionEntityType(request);
-   */
   getSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.IGetSessionEntityTypeRequest,
     optionsOrCallback?:
@@ -549,6 +549,37 @@ export class SessionEntityTypesClient {
     this.initialize();
     return this.innerApiCalls.getSessionEntityType(request, options, callback);
   }
+  /**
+   * Creates a session entity type.
+   *
+   * If the specified session entity type already exists, overrides the session
+   * entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The session to create a session entity type for.
+   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+   *   sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {google.cloud.dialogflow.v2.SessionEntityType} request.sessionEntityType
+   *   Required. The session entity type to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/session_entity_types.create_session_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_SessionEntityTypes_CreateSessionEntityType_async
+   */
   createSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.ICreateSessionEntityTypeRequest,
     options?: CallOptions
@@ -583,37 +614,6 @@ export class SessionEntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a session entity type.
-   *
-   * If the specified session entity type already exists, overrides the session
-   * entity type.
-   *
-   * This method doesn't work with Google Assistant integration.
-   * Contact Dialogflow support if you need to use session entities
-   * with Google Assistant integration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The session to create a session entity type for.
-   *   Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-   *   `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-   *   sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {google.cloud.dialogflow.v2.SessionEntityType} request.sessionEntityType
-   *   Required. The session entity type to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createSessionEntityType(request);
-   */
   createSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.ICreateSessionEntityTypeRequest,
     optionsOrCallback?:
@@ -664,6 +664,29 @@ export class SessionEntityTypesClient {
       callback
     );
   }
+  /**
+   * Updates the specified session entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.SessionEntityType} request.sessionEntityType
+   *   Required. The session entity type to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/session_entity_types.update_session_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_SessionEntityTypes_UpdateSessionEntityType_async
+   */
   updateSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.IUpdateSessionEntityTypeRequest,
     options?: CallOptions
@@ -698,29 +721,6 @@ export class SessionEntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified session entity type.
-   *
-   * This method doesn't work with Google Assistant integration.
-   * Contact Dialogflow support if you need to use session entities
-   * with Google Assistant integration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.SessionEntityType} request.sessionEntityType
-   *   Required. The session entity type to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The mask to control which fields get updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateSessionEntityType(request);
-   */
   updateSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.IUpdateSessionEntityTypeRequest,
     optionsOrCallback?:
@@ -771,6 +771,33 @@ export class SessionEntityTypesClient {
       callback
     );
   }
+  /**
+   * Deletes the specified session entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entity type to delete. Format:
+   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+   *   Name>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment. If `User ID` is not specified, we assume default '-' user.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/session_entity_types.delete_session_entity_type.js</caption>
+   * region_tag:dialogflow_v2_generated_SessionEntityTypes_DeleteSessionEntityType_async
+   */
   deleteSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.IDeleteSessionEntityTypeRequest,
     options?: CallOptions
@@ -805,33 +832,6 @@ export class SessionEntityTypesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified session entity type.
-   *
-   * This method doesn't work with Google Assistant integration.
-   * Contact Dialogflow support if you need to use session entities
-   * with Google Assistant integration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the entity type to delete. Format:
-   *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-   *   Display Name>` or `projects/<Project ID>/agent/environments/<Environment
-   *   ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
-   *   Name>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment. If `User ID` is not specified, we assume default '-' user.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteSessionEntityType(request);
-   */
   deleteSessionEntityType(
     request?: protos.google.cloud.dialogflow.v2.IDeleteSessionEntityTypeRequest,
     optionsOrCallback?:
@@ -883,37 +883,6 @@ export class SessionEntityTypesClient {
     );
   }
 
-  listSessionEntityTypes(
-    request?: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.ISessionEntityType[],
-      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesResponse
-    ]
-  >;
-  listSessionEntityTypes(
-    request: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
-      | protos.google.cloud.dialogflow.v2.IListSessionEntityTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.ISessionEntityType
-    >
-  ): void;
-  listSessionEntityTypes(
-    request: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
-      | protos.google.cloud.dialogflow.v2.IListSessionEntityTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.v2.ISessionEntityType
-    >
-  ): void;
   /**
    * Returns the list of all session entity types in the specified session.
    *
@@ -948,6 +917,37 @@ export class SessionEntityTypesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listSessionEntityTypes(
+    request?: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISessionEntityType[],
+      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest | null,
+      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesResponse
+    ]
+  >;
+  listSessionEntityTypes(
+    request: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2.IListSessionEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.ISessionEntityType
+    >
+  ): void;
+  listSessionEntityTypes(
+    request: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
+      | protos.google.cloud.dialogflow.v2.IListSessionEntityTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.ISessionEntityType
+    >
+  ): void;
   listSessionEntityTypes(
     request?: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
     optionsOrCallback?:
@@ -1074,11 +1074,8 @@ export class SessionEntityTypesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSessionEntityTypesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/session_entity_types.list_session_entity_types.js</caption>
+   * region_tag:dialogflow_v2_generated_SessionEntityTypes_ListSessionEntityTypes_async
    */
   listSessionEntityTypesAsync(
     request?: protos.google.cloud.dialogflow.v2.IListSessionEntityTypesRequest,
@@ -1092,7 +1089,6 @@ export class SessionEntityTypesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listSessionEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

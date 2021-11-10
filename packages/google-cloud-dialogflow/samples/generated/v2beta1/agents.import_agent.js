@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new AgentsClient();
 
-  async function importAgent() {
+  async function callImportAgent() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent) {
     console.log(response);
   }
 
-  importAgent();
+  callImportAgent();
   // [END dialogflow_v2beta1_generated_Agents_ImportAgent_async]
 }
 

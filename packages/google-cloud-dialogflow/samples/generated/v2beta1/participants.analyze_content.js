@@ -28,11 +28,11 @@ function main(participant) {
   /**
    *  The natural language text to be processed.
    */
-  // const textInput = ''
+  // const textInput = {}
   /**
    *  An input event to send to Dialogflow.
    */
-  // const eventInput = ''
+  // const eventInput = {}
   /**
    *  Speech synthesis configuration.
    *  The speech synthesis settings for a virtual agent that may be configured
@@ -40,11 +40,11 @@ function main(participant) {
    *  AnalyzeContent. If this configuration is not supplied, speech synthesis
    *  is disabled.
    */
-  // const replyAudioConfig = ''
+  // const replyAudioConfig = {}
   /**
    *  Parameters for a Dialogflow virtual-agent query.
    */
-  // const queryParams = ''
+  // const queryParams = {}
   /**
    *  Optional. The send time of the message from end user or human agent's
    *  perspective. It is used for identifying the same message under one
@@ -59,7 +59,7 @@ function main(participant) {
    *  If the value is not provided, a new request will always be regarded as a
    *  new message without any de-duplication.
    */
-  // const messageSendTime = ''
+  // const messageSendTime = {}
   /**
    *  A unique identifier for this request. Restricted to 36 ASCII characters.
    *  A random UUID is recommended.
@@ -73,7 +73,7 @@ function main(participant) {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function analyzeContent() {
+  async function callAnalyzeContent() {
     // Construct request
     const request = {
       participant,
@@ -84,7 +84,7 @@ function main(participant) {
     console.log(response);
   }
 
-  analyzeContent();
+  callAnalyzeContent();
   // [END dialogflow_v2beta1_generated_Participants_AnalyzeContent_async]
 }
 

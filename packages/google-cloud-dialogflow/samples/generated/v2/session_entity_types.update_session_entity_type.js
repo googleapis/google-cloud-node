@@ -22,11 +22,11 @@ function main(sessionEntityType) {
   /**
    *  Required. The session entity type to update.
    */
-  // const sessionEntityType = ''
+  // const sessionEntityType = {}
   /**
    *  Optional. The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {SessionEntityTypesClient} = require('@google-cloud/dialogflow').v2;
@@ -34,7 +34,7 @@ function main(sessionEntityType) {
   // Instantiates a client
   const dialogflowClient = new SessionEntityTypesClient();
 
-  async function updateSessionEntityType() {
+  async function callUpdateSessionEntityType() {
     // Construct request
     const request = {
       sessionEntityType,
@@ -45,7 +45,7 @@ function main(sessionEntityType) {
     console.log(response);
   }
 
-  updateSessionEntityType();
+  callUpdateSessionEntityType();
   // [END dialogflow_v2_generated_SessionEntityTypes_UpdateSessionEntityType_async]
 }
 

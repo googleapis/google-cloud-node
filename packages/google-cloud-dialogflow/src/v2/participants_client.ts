@@ -441,6 +441,27 @@ export class ParticipantsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a new participant in a conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource identifier of the conversation adding the participant.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>`.
+   * @param {google.cloud.dialogflow.v2.Participant} request.participant
+   *   Required. The participant to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2.Participant}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.create_participant.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_CreateParticipant_async
+   */
   createParticipant(
     request?: protos.google.cloud.dialogflow.v2.ICreateParticipantRequest,
     options?: CallOptions
@@ -472,27 +493,6 @@ export class ParticipantsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new participant in a conversation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource identifier of the conversation adding the participant.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>`.
-   * @param {google.cloud.dialogflow.v2.Participant} request.participant
-   *   Required. The participant to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2.Participant}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createParticipant(request);
-   */
   createParticipant(
     request?: protos.google.cloud.dialogflow.v2.ICreateParticipantRequest,
     optionsOrCallback?:
@@ -536,6 +536,25 @@ export class ParticipantsClient {
     this.initialize();
     return this.innerApiCalls.createParticipant(request, options, callback);
   }
+  /**
+   * Retrieves a conversation participant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the participant. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/conversations/<Conversation
+   *   ID>/participants/<Participant ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2.Participant}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.get_participant.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_GetParticipant_async
+   */
   getParticipant(
     request?: protos.google.cloud.dialogflow.v2.IGetParticipantRequest,
     options?: CallOptions
@@ -567,25 +586,6 @@ export class ParticipantsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves a conversation participant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the participant. Format:
-   *   `projects/<Project ID>/locations/<Location ID>/conversations/<Conversation
-   *   ID>/participants/<Participant ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2.Participant}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getParticipant(request);
-   */
   getParticipant(
     request?: protos.google.cloud.dialogflow.v2.IGetParticipantRequest,
     optionsOrCallback?:
@@ -629,6 +629,25 @@ export class ParticipantsClient {
     this.initialize();
     return this.innerApiCalls.getParticipant(request, options, callback);
   }
+  /**
+   * Updates the specified participant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Participant} request.participant
+   *   Required. The participant to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The mask to specify which fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2.Participant}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.update_participant.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_UpdateParticipant_async
+   */
   updateParticipant(
     request?: protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest,
     options?: CallOptions
@@ -660,25 +679,6 @@ export class ParticipantsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified participant.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.Participant} request.participant
-   *   Required. The participant to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to specify which fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Participant]{@link google.cloud.dialogflow.v2.Participant}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateParticipant(request);
-   */
   updateParticipant(
     request?: protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest,
     optionsOrCallback?:
@@ -722,37 +722,6 @@ export class ParticipantsClient {
     this.initialize();
     return this.innerApiCalls.updateParticipant(request, options, callback);
   }
-  analyzeContent(
-    request?: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
-      protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  analyzeContent(
-    request: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
-      | protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  analyzeContent(
-    request: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
-      | protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Adds a text (chat, for example), or audio (phone recording, for example)
    * message from a participant into the conversation.
@@ -790,9 +759,40 @@ export class ParticipantsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.analyzeContent(request);
+   * @example <caption>include:samples/generated/v2/participants.analyze_content.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_AnalyzeContent_async
    */
+  analyzeContent(
+    request?: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
+      protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  analyzeContent(
+    request: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
+      | protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  analyzeContent(
+    request: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IAnalyzeContentResponse,
+      | protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   analyzeContent(
     request?: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
     optionsOrCallback?:
@@ -836,6 +836,36 @@ export class ParticipantsClient {
     this.initialize();
     return this.innerApiCalls.analyzeContent(request, options, callback);
   }
+  /**
+   * Gets suggested articles for a participant based on specific historical
+   * messages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the participant to fetch suggestion for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+   * @param {string} request.latestMessage
+   *   The name of the latest conversation message to compile suggestion
+   *   for. If empty, it will be the latest message of the conversation.
+   *
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {number} request.contextSize
+   *   Max number of messages prior to and including
+   *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message} to use as context
+   *   when compiling the suggestion. By default 20 and at most 50.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SuggestArticlesResponse]{@link google.cloud.dialogflow.v2.SuggestArticlesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.suggest_articles.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_SuggestArticles_async
+   */
   suggestArticles(
     request?: protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest,
     options?: CallOptions
@@ -867,36 +897,6 @@ export class ParticipantsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets suggested articles for a participant based on specific historical
-   * messages.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the participant to fetch suggestion for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message to compile suggestion
-   *   for. If empty, it will be the latest message of the conversation.
-   *
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
-   * @param {number} request.contextSize
-   *   Max number of messages prior to and including
-   *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message} to use as context
-   *   when compiling the suggestion. By default 20 and at most 50.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SuggestArticlesResponse]{@link google.cloud.dialogflow.v2.SuggestArticlesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.suggestArticles(request);
-   */
   suggestArticles(
     request?: protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest,
     optionsOrCallback?:
@@ -940,6 +940,36 @@ export class ParticipantsClient {
     this.initialize();
     return this.innerApiCalls.suggestArticles(request, options, callback);
   }
+  /**
+   * Gets suggested faq answers for a participant based on specific historical
+   * messages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the participant to fetch suggestion for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+   * @param {string} request.latestMessage
+   *   The name of the latest conversation message to compile suggestion
+   *   for. If empty, it will be the latest message of the conversation.
+   *
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {number} request.contextSize
+   *   Max number of messages prior to and including
+   *   [latest_message] to use as context when compiling the
+   *   suggestion. By default 20 and at most 50.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SuggestFaqAnswersResponse]{@link google.cloud.dialogflow.v2.SuggestFaqAnswersResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.suggest_faq_answers.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_SuggestFaqAnswers_async
+   */
   suggestFaqAnswers(
     request?: protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest,
     options?: CallOptions
@@ -971,36 +1001,6 @@ export class ParticipantsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets suggested faq answers for a participant based on specific historical
-   * messages.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the participant to fetch suggestion for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message to compile suggestion
-   *   for. If empty, it will be the latest message of the conversation.
-   *
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
-   * @param {number} request.contextSize
-   *   Max number of messages prior to and including
-   *   [latest_message] to use as context when compiling the
-   *   suggestion. By default 20 and at most 50.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SuggestFaqAnswersResponse]{@link google.cloud.dialogflow.v2.SuggestFaqAnswersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.suggestFaqAnswers(request);
-   */
   suggestFaqAnswers(
     request?: protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest,
     optionsOrCallback?:
@@ -1045,6 +1045,33 @@ export class ParticipantsClient {
     return this.innerApiCalls.suggestFaqAnswers(request, options, callback);
   }
 
+  /**
+   * Returns the list of all participants in the specified conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The conversation to list all participants from.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Participant]{@link google.cloud.dialogflow.v2.Participant}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listParticipantsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listParticipants(
     request?: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
     options?: CallOptions
@@ -1076,33 +1103,6 @@ export class ParticipantsClient {
       protos.google.cloud.dialogflow.v2.IParticipant
     >
   ): void;
-  /**
-   * Returns the list of all participants in the specified conversation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The conversation to list all participants from.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return in a single page. By
-   *   default 100 and at most 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Participant]{@link google.cloud.dialogflow.v2.Participant}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listParticipantsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listParticipants(
     request?: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
     optionsOrCallback?:
@@ -1219,11 +1219,8 @@ export class ParticipantsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listParticipantsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/participants.list_participants.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_ListParticipants_async
    */
   listParticipantsAsync(
     request?: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
@@ -1237,7 +1234,6 @@ export class ParticipantsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

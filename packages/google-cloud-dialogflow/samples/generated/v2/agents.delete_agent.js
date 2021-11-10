@@ -31,7 +31,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new AgentsClient();
 
-  async function deleteAgent() {
+  async function callDeleteAgent() {
     // Construct request
     const request = {
       parent,
@@ -42,7 +42,7 @@ function main(parent) {
     console.log(response);
   }
 
-  deleteAgent();
+  callDeleteAgent();
   // [END dialogflow_v2_generated_Agents_DeleteAgent_async]
 }
 

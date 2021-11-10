@@ -22,11 +22,11 @@ function main(agent) {
   /**
    *  Required. The agent to update.
    */
-  // const agent = ''
+  // const agent = {}
   /**
    *  Optional. The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {AgentsClient} = require('@google-cloud/dialogflow').v2beta1;
@@ -34,7 +34,7 @@ function main(agent) {
   // Instantiates a client
   const dialogflowClient = new AgentsClient();
 
-  async function setAgent() {
+  async function callSetAgent() {
     // Construct request
     const request = {
       agent,
@@ -45,7 +45,7 @@ function main(agent) {
     console.log(response);
   }
 
-  setAgent();
+  callSetAgent();
   // [END dialogflow_v2beta1_generated_Agents_SetAgent_async]
 }
 

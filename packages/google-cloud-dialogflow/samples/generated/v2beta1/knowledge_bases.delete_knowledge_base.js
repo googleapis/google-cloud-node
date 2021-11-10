@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new KnowledgeBasesClient();
 
-  async function deleteKnowledgeBase() {
+  async function callDeleteKnowledgeBase() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteKnowledgeBase();
+  callDeleteKnowledgeBase();
   // [END dialogflow_v2beta1_generated_KnowledgeBases_DeleteKnowledgeBase_async]
 }
 

@@ -36,7 +36,7 @@ function main(parent, entityTypeNames) {
   // Instantiates a client
   const dialogflowClient = new EntityTypesClient();
 
-  async function batchDeleteEntityTypes() {
+  async function callBatchDeleteEntityTypes() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, entityTypeNames) {
     console.log(response);
   }
 
-  batchDeleteEntityTypes();
+  callBatchDeleteEntityTypes();
   // [END dialogflow_v2_generated_EntityTypes_BatchDeleteEntityTypes_async]
 }
 

@@ -34,7 +34,7 @@ function main(parent) {
   // const latestMessage = 'abc123'
   /**
    *  Max number of messages prior to and including
-   *  [latest_message][google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message] to use as context
+   *  latest_message google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message  to use as context
    *  when compiling the suggestion. By default 20 and at most 50.
    */
   // const contextSize = 1234
@@ -45,7 +45,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function suggestArticles() {
+  async function callSuggestArticles() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent) {
     console.log(response);
   }
 
-  suggestArticles();
+  callSuggestArticles();
   // [END dialogflow_v2_generated_Participants_SuggestArticles_async]
 }
 

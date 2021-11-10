@@ -22,12 +22,12 @@ function main(fulfillment, updateMask) {
   /**
    *  Required. The fulfillment to update.
    */
-  // const fulfillment = ''
+  // const fulfillment = {}
   /**
    *  Required. The mask to control which fields get updated. If the mask is not
    *  present, all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dialogflow library
   const {FulfillmentsClient} = require('@google-cloud/dialogflow').v2;
@@ -35,7 +35,7 @@ function main(fulfillment, updateMask) {
   // Instantiates a client
   const dialogflowClient = new FulfillmentsClient();
 
-  async function updateFulfillment() {
+  async function callUpdateFulfillment() {
     // Construct request
     const request = {
       fulfillment,
@@ -47,7 +47,7 @@ function main(fulfillment, updateMask) {
     console.log(response);
   }
 
-  updateFulfillment();
+  callUpdateFulfillment();
   // [END dialogflow_v2_generated_Fulfillments_UpdateFulfillment_async]
 }
 

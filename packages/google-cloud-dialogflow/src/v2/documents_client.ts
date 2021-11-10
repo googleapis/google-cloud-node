@@ -505,6 +505,25 @@ export class DocumentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified document.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the document to retrieve.
+   *   Format `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Document]{@link google.cloud.dialogflow.v2.Document}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.get_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_GetDocument_async
+   */
   getDocument(
     request?: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
     options?: CallOptions
@@ -532,25 +551,6 @@ export class DocumentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified document.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document to retrieve.
-   *   Format `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Document]{@link google.cloud.dialogflow.v2.Document}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDocument(request);
-   */
   getDocument(
     request?: protos.google.cloud.dialogflow.v2.IGetDocumentRequest,
     optionsOrCallback?:
@@ -593,6 +593,36 @@ export class DocumentsClient {
     return this.innerApiCalls.getDocument(request, options, callback);
   }
 
+  /**
+   * Creates a new document.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2.Document|Document}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knowledge base to create a document for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {google.cloud.dialogflow.v2.Document} request.document
+   *   Required. The document to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.create_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_CreateDocument_async
+   */
   createDocument(
     request?: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
     options?: CallOptions
@@ -629,37 +659,6 @@ export class DocumentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new document.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.Document|Document}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to create a document for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {google.cloud.dialogflow.v2.Document} request.document
-   *   Required. The document to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createDocument(request);
-   * const [response] = await operation.promise();
-   */
   createDocument(
     request?: protos.google.cloud.dialogflow.v2.ICreateDocumentRequest,
     optionsOrCallback?:
@@ -717,11 +716,8 @@ export class DocumentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateDocumentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/documents.create_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_CreateDocument_async
    */
   async checkCreateDocumentProgress(
     name: string
@@ -745,6 +741,35 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
     >;
   }
+  /**
+   * Deletes the specified document.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the document to delete.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.delete_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_DeleteDocument_async
+   */
   deleteDocument(
     request?: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
     options?: CallOptions
@@ -781,36 +806,6 @@ export class DocumentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified document.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: An [Empty
-   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the document to delete.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteDocument(request);
-   * const [response] = await operation.promise();
-   */
   deleteDocument(
     request?: protos.google.cloud.dialogflow.v2.IDeleteDocumentRequest,
     optionsOrCallback?:
@@ -868,11 +863,8 @@ export class DocumentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteDocumentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/documents.delete_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_DeleteDocument_async
    */
   async checkDeleteDocumentProgress(
     name: string
@@ -896,6 +888,36 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
     >;
   }
+  /**
+   * Updates the specified document.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
+   * - `response`: {@link google.cloud.dialogflow.v2.Document|Document}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Document} request.document
+   *   Required. The document to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Not specified means `update all`.
+   *   Currently, only `display_name` can be updated, an InvalidArgument will be
+   *   returned for attempting to update other fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/documents.update_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_UpdateDocument_async
+   */
   updateDocument(
     request?: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
     options?: CallOptions
@@ -932,37 +954,6 @@ export class DocumentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified document.
-   *
-   * This method is a [long-running
-   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
-   * The returned `Operation` type has the following method-specific fields:
-   *
-   * - `metadata`: {@link google.cloud.dialogflow.v2.KnowledgeOperationMetadata|KnowledgeOperationMetadata}
-   * - `response`: {@link google.cloud.dialogflow.v2.Document|Document}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.Document} request.document
-   *   Required. The document to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Not specified means `update all`.
-   *   Currently, only `display_name` can be updated, an InvalidArgument will be
-   *   returned for attempting to update other fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateDocument(request);
-   * const [response] = await operation.promise();
-   */
   updateDocument(
     request?: protos.google.cloud.dialogflow.v2.IUpdateDocumentRequest,
     optionsOrCallback?:
@@ -1020,11 +1011,8 @@ export class DocumentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateDocumentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/documents.update_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_UpdateDocument_async
    */
   async checkUpdateDocumentProgress(
     name: string
@@ -1048,42 +1036,6 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
     >;
   }
-  reloadDocument(
-    request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  reloadDocument(
-    request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  reloadDocument(
-    request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dialogflow.v2.IDocument,
-        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Reloads the specified document from its specified source, content_uri or
    * content. The previously loaded content of the document will be deleted.
@@ -1121,10 +1073,45 @@ export class DocumentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.reloadDocument(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2/documents.reload_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ReloadDocument_async
    */
+  reloadDocument(
+    request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  reloadDocument(
+    request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reloadDocument(
+    request: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IDocument,
+        protos.google.cloud.dialogflow.v2.IKnowledgeOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   reloadDocument(
     request?: protos.google.cloud.dialogflow.v2.IReloadDocumentRequest,
     optionsOrCallback?:
@@ -1182,11 +1169,8 @@ export class DocumentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkReloadDocumentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2/documents.reload_document.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ReloadDocument_async
    */
   async checkReloadDocumentProgress(
     name: string
@@ -1210,6 +1194,33 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2.KnowledgeOperationMetadata
     >;
   }
+  /**
+   * Returns the list of all documents of the knowledge base.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The knowledge base to list all documents for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/knowledgeBases/<Knowledge Base ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
+   *   default 10 and at most 100.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Document]{@link google.cloud.dialogflow.v2.Document}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDocumentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listDocuments(
     request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
     options?: CallOptions
@@ -1241,33 +1252,6 @@ export class DocumentsClient {
       protos.google.cloud.dialogflow.v2.IDocument
     >
   ): void;
-  /**
-   * Returns the list of all documents of the knowledge base.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The knowledge base to list all documents for.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/knowledgeBases/<Knowledge Base ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By
-   *   default 10 and at most 100.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Document]{@link google.cloud.dialogflow.v2.Document}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDocumentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listDocuments(
     request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
     optionsOrCallback?:
@@ -1384,11 +1368,8 @@ export class DocumentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listDocumentsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/documents.list_documents.js</caption>
+   * region_tag:dialogflow_v2_generated_Documents_ListDocuments_async
    */
   listDocumentsAsync(
     request?: protos.google.cloud.dialogflow.v2.IListDocumentsRequest,
@@ -1402,7 +1383,6 @@ export class DocumentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new ParticipantsClient();
 
-  async function listParticipants() {
+  async function callListParticipants() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  listParticipants();
+  callListParticipants();
   // [END dialogflow_v2_generated_Participants_ListParticipants_async]
 }
 

@@ -33,23 +33,23 @@ function main(parent) {
   /**
    *  The collection of intents to update or create.
    */
-  // const intentBatchInline = ''
+  // const intentBatchInline = {}
   /**
    *  Optional. The language used to access language-specific data.
    *  If not specified, the agent's default language is used.
    *  For more information, see
-   *  [Multilingual intent and entity
-   *  data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   *  Multilingual intent and entity
+   *  data (https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    */
   // const languageCode = 'abc123'
   /**
    *  Optional. The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. The resource view to apply to the returned intent.
    */
-  // const intentView = ''
+  // const intentView = {}
 
   // Imports the Dialogflow library
   const {IntentsClient} = require('@google-cloud/dialogflow').v2;
@@ -57,7 +57,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new IntentsClient();
 
-  async function batchUpdateIntents() {
+  async function callBatchUpdateIntents() {
     // Construct request
     const request = {
       parent,
@@ -69,7 +69,7 @@ function main(parent) {
     console.log(response);
   }
 
-  batchUpdateIntents();
+  callBatchUpdateIntents();
   // [END dialogflow_v2_generated_Intents_BatchUpdateIntents_async]
 }
 

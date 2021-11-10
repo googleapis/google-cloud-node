@@ -39,7 +39,7 @@ function main(name) {
   // Instantiates a client
   const dialogflowClient = new DocumentsClient();
 
-  async function reloadDocument() {
+  async function callReloadDocument() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name) {
     console.log(response);
   }
 
-  reloadDocument();
+  callReloadDocument();
   // [END dialogflow_v2_generated_Documents_ReloadDocument_async]
 }
 

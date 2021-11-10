@@ -27,8 +27,8 @@ function main(parent, requests) {
   // const parent = 'abc123'
   /**
    *  Required. A maximum of 1000 Messages can be created in a batch.
-   *  [CreateMessageRequest.message.send_time][] is required. All created
-   *  messages will have identical [Message.create_time][google.cloud.dialogflow.v2beta1.Message.create_time].
+   *  CreateMessageRequest.message.send_time   is required. All created
+   *  messages will have identical Message.create_time google.cloud.dialogflow.v2beta1.Message.create_time.
    */
   // const requests = 1234
 
@@ -38,7 +38,7 @@ function main(parent, requests) {
   // Instantiates a client
   const dialogflowClient = new ConversationsClient();
 
-  async function batchCreateMessages() {
+  async function callBatchCreateMessages() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent, requests) {
     console.log(response);
   }
 
-  batchCreateMessages();
+  callBatchCreateMessages();
   // [END dialogflow_v2beta1_generated_Conversations_BatchCreateMessages_async]
 }
 

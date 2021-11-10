@@ -32,7 +32,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new AgentsClient();
 
-  async function trainAgent() {
+  async function callTrainAgent() {
     // Construct request
     const request = {
       parent,
@@ -44,7 +44,7 @@ function main(parent) {
     console.log(response);
   }
 
-  trainAgent();
+  callTrainAgent();
   // [END dialogflow_v2beta1_generated_Agents_TrainAgent_async]
 }
 

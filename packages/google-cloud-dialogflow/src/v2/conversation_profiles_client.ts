@@ -442,6 +442,25 @@ export class ConversationProfilesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified conversation profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the conversation profile.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.get_conversation_profile.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_GetConversationProfile_async
+   */
   getConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest,
     options?: CallOptions
@@ -476,25 +495,6 @@ export class ConversationProfilesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified conversation profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the conversation profile.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversationProfiles/<Conversation Profile ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getConversationProfile(request);
-   */
   getConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest,
     optionsOrCallback?:
@@ -545,6 +545,30 @@ export class ConversationProfilesClient {
       callback
     );
   }
+  /**
+   * Creates a conversation profile in the specified project.
+   *
+   * {@link |ConversationProfile.CreateTime} and {@link |ConversationProfile.UpdateTime}
+   * aren't populated in the response. You can retrieve them via
+   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile} API.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to create a conversation profile for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   * @param {google.cloud.dialogflow.v2.ConversationProfile} request.conversationProfile
+   *   Required. The conversation profile to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.create_conversation_profile.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_CreateConversationProfile_async
+   */
   createConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest,
     options?: CallOptions
@@ -579,30 +603,6 @@ export class ConversationProfilesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a conversation profile in the specified project.
-   *
-   * {@link |ConversationProfile.CreateTime} and {@link |ConversationProfile.UpdateTime}
-   * aren't populated in the response. You can retrieve them via
-   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile} API.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project to create a conversation profile for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
-   * @param {google.cloud.dialogflow.v2.ConversationProfile} request.conversationProfile
-   *   Required. The conversation profile to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createConversationProfile(request);
-   */
   createConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest,
     optionsOrCallback?:
@@ -653,6 +653,29 @@ export class ConversationProfilesClient {
       callback
     );
   }
+  /**
+   * Updates the specified conversation profile.
+   *
+   * {@link |ConversationProfile.CreateTime} and {@link |ConversationProfile.UpdateTime}
+   * aren't populated in the response. You can retrieve them via
+   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile} API.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.ConversationProfile} request.conversationProfile
+   *   Required. The conversation profile to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The mask to control which fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.update_conversation_profile.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_UpdateConversationProfile_async
+   */
   updateConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest,
     options?: CallOptions
@@ -687,29 +710,6 @@ export class ConversationProfilesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified conversation profile.
-   *
-   * {@link |ConversationProfile.CreateTime} and {@link |ConversationProfile.UpdateTime}
-   * aren't populated in the response. You can retrieve them via
-   * {@link google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile|GetConversationProfile} API.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.v2.ConversationProfile} request.conversationProfile
-   *   Required. The conversation profile to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to control which fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateConversationProfile(request);
-   */
   updateConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest,
     optionsOrCallback?:
@@ -760,6 +760,25 @@ export class ConversationProfilesClient {
       callback
     );
   }
+  /**
+   * Deletes the specified conversation profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the conversation profile to delete.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversation_profiles.delete_conversation_profile.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_DeleteConversationProfile_async
+   */
   deleteConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest,
     options?: CallOptions
@@ -794,25 +813,6 @@ export class ConversationProfilesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified conversation profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the conversation profile to delete.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversationProfiles/<Conversation Profile ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteConversationProfile(request);
-   */
   deleteConversationProfile(
     request?: protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest,
     optionsOrCallback?:
@@ -864,6 +864,32 @@ export class ConversationProfilesClient {
     );
   }
 
+  /**
+   * Returns the list of all conversation profiles in the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to list all conversation profiles from.
+   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConversationProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listConversationProfiles(
     request?: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
     options?: CallOptions
@@ -895,32 +921,6 @@ export class ConversationProfilesClient {
       protos.google.cloud.dialogflow.v2.IConversationProfile
     >
   ): void;
-  /**
-   * Returns the list of all conversation profiles in the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project to list all conversation profiles from.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By
-   *   default 100 and at most 1000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ConversationProfile]{@link google.cloud.dialogflow.v2.ConversationProfile}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConversationProfilesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listConversationProfiles(
     request?: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
     optionsOrCallback?:
@@ -1039,11 +1039,8 @@ export class ConversationProfilesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listConversationProfilesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v2/conversation_profiles.list_conversation_profiles.js</caption>
+   * region_tag:dialogflow_v2_generated_ConversationProfiles_ListConversationProfiles_async
    */
   listConversationProfilesAsync(
     request?: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
@@ -1057,7 +1054,6 @@ export class ConversationProfilesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

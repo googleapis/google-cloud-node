@@ -42,7 +42,7 @@ function main(parent) {
   // Instantiates a client
   const dialogflowClient = new EnvironmentsClient();
 
-  async function listEnvironments() {
+  async function callListEnvironments() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent) {
     }
   }
 
-  listEnvironments();
+  callListEnvironments();
   // [END dialogflow_v2beta1_generated_Environments_ListEnvironments_async]
 }
 

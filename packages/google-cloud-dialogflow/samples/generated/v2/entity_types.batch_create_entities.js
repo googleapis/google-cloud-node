@@ -32,8 +32,8 @@ function main(parent, entities) {
    *  Optional. The language used to access language-specific data.
    *  If not specified, the agent's default language is used.
    *  For more information, see
-   *  [Multilingual intent and entity
-   *  data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
+   *  Multilingual intent and entity
+   *  data (https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
    */
   // const languageCode = 'abc123'
 
@@ -43,7 +43,7 @@ function main(parent, entities) {
   // Instantiates a client
   const dialogflowClient = new EntityTypesClient();
 
-  async function batchCreateEntities() {
+  async function callBatchCreateEntities() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, entities) {
     console.log(response);
   }
 
-  batchCreateEntities();
+  callBatchCreateEntities();
   // [END dialogflow_v2_generated_EntityTypes_BatchCreateEntities_async]
 }
 

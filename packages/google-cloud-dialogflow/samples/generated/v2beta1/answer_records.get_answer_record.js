@@ -32,7 +32,7 @@ function main() {
   // Instantiates a client
   const dialogflowClient = new AnswerRecordsClient();
 
-  async function getAnswerRecord() {
+  async function callGetAnswerRecord() {
     // Construct request
     const request = {};
 
@@ -41,7 +41,7 @@ function main() {
     console.log(response);
   }
 
-  getAnswerRecord();
+  callGetAnswerRecord();
   // [END dialogflow_v2beta1_generated_AnswerRecords_GetAnswerRecord_async]
 }
 
