@@ -15,7 +15,7 @@
 'use strict';
 
 function main(name) {
-  // [START osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  // [START osconfig_v1_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -35,8 +35,7 @@ function main(name) {
   // const pageToken = 'abc123'
 
   // Imports the Osconfig library
-  const {OsConfigZonalServiceClient} =
-    require('@google-cloud/os-config').v1alpha;
+  const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1;
 
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
@@ -57,7 +56,7 @@ function main(name) {
   }
 
   callListOSPolicyAssignmentRevisions();
-  // [END osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  // [END osconfig_v1_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
 }
 
 process.on('unhandledRejection', err => {

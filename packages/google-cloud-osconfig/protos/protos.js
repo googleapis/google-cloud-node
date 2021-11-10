@@ -4055,6 +4055,11851 @@
                         return values;
                     })();
     
+                    v1.OSPolicy = (function() {
+    
+                        /**
+                         * Properties of a OSPolicy.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IOSPolicy
+                         * @property {string|null} [id] OSPolicy id
+                         * @property {string|null} [description] OSPolicy description
+                         * @property {google.cloud.osconfig.v1.OSPolicy.Mode|null} [mode] OSPolicy mode
+                         * @property {Array.<google.cloud.osconfig.v1.OSPolicy.IResourceGroup>|null} [resourceGroups] OSPolicy resourceGroups
+                         * @property {boolean|null} [allowNoResourceGroupMatch] OSPolicy allowNoResourceGroupMatch
+                         */
+    
+                        /**
+                         * Constructs a new OSPolicy.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a OSPolicy.
+                         * @implements IOSPolicy
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IOSPolicy=} [properties] Properties to set
+                         */
+                        function OSPolicy(properties) {
+                            this.resourceGroups = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OSPolicy id.
+                         * @member {string} id
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @instance
+                         */
+                        OSPolicy.prototype.id = "";
+    
+                        /**
+                         * OSPolicy description.
+                         * @member {string} description
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @instance
+                         */
+                        OSPolicy.prototype.description = "";
+    
+                        /**
+                         * OSPolicy mode.
+                         * @member {google.cloud.osconfig.v1.OSPolicy.Mode} mode
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @instance
+                         */
+                        OSPolicy.prototype.mode = 0;
+    
+                        /**
+                         * OSPolicy resourceGroups.
+                         * @member {Array.<google.cloud.osconfig.v1.OSPolicy.IResourceGroup>} resourceGroups
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @instance
+                         */
+                        OSPolicy.prototype.resourceGroups = $util.emptyArray;
+    
+                        /**
+                         * OSPolicy allowNoResourceGroupMatch.
+                         * @member {boolean} allowNoResourceGroupMatch
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @instance
+                         */
+                        OSPolicy.prototype.allowNoResourceGroupMatch = false;
+    
+                        /**
+                         * Creates a new OSPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.OSPolicy} OSPolicy instance
+                         */
+                        OSPolicy.create = function create(properties) {
+                            return new OSPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicy message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicy} message OSPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.mode);
+                            if (message.resourceGroups != null && message.resourceGroups.length)
+                                for (var i = 0; i < message.resourceGroups.length; ++i)
+                                    $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup.encode(message.resourceGroups[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.allowNoResourceGroupMatch != null && Object.hasOwnProperty.call(message, "allowNoResourceGroupMatch"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.allowNoResourceGroupMatch);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicy message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicy} message OSPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OSPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.OSPolicy} OSPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.id = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    message.mode = reader.int32();
+                                    break;
+                                case 4:
+                                    if (!(message.resourceGroups && message.resourceGroups.length))
+                                        message.resourceGroups = [];
+                                    message.resourceGroups.push($root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.allowNoResourceGroupMatch = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OSPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.OSPolicy} OSPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OSPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OSPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                switch (message.mode) {
+                                default:
+                                    return "mode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.resourceGroups != null && message.hasOwnProperty("resourceGroups")) {
+                                if (!Array.isArray(message.resourceGroups))
+                                    return "resourceGroups: array expected";
+                                for (var i = 0; i < message.resourceGroups.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup.verify(message.resourceGroups[i]);
+                                    if (error)
+                                        return "resourceGroups." + error;
+                                }
+                            }
+                            if (message.allowNoResourceGroupMatch != null && message.hasOwnProperty("allowNoResourceGroupMatch"))
+                                if (typeof message.allowNoResourceGroupMatch !== "boolean")
+                                    return "allowNoResourceGroupMatch: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OSPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.OSPolicy} OSPolicy
+                         */
+                        OSPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.OSPolicy();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.mode) {
+                            case "MODE_UNSPECIFIED":
+                            case 0:
+                                message.mode = 0;
+                                break;
+                            case "VALIDATION":
+                            case 1:
+                                message.mode = 1;
+                                break;
+                            case "ENFORCEMENT":
+                            case 2:
+                                message.mode = 2;
+                                break;
+                            }
+                            if (object.resourceGroups) {
+                                if (!Array.isArray(object.resourceGroups))
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicy.resourceGroups: array expected");
+                                message.resourceGroups = [];
+                                for (var i = 0; i < object.resourceGroups.length; ++i) {
+                                    if (typeof object.resourceGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.resourceGroups: object expected");
+                                    message.resourceGroups[i] = $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup.fromObject(object.resourceGroups[i]);
+                                }
+                            }
+                            if (object.allowNoResourceGroupMatch != null)
+                                message.allowNoResourceGroupMatch = Boolean(object.allowNoResourceGroupMatch);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OSPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @static
+                         * @param {google.cloud.osconfig.v1.OSPolicy} message OSPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OSPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceGroups = [];
+                            if (options.defaults) {
+                                object.id = "";
+                                object.description = "";
+                                object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
+                                object.allowNoResourceGroupMatch = false;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.mode != null && message.hasOwnProperty("mode"))
+                                object.mode = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicy.Mode[message.mode] : message.mode;
+                            if (message.resourceGroups && message.resourceGroups.length) {
+                                object.resourceGroups = [];
+                                for (var j = 0; j < message.resourceGroups.length; ++j)
+                                    object.resourceGroups[j] = $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup.toObject(message.resourceGroups[j], options);
+                            }
+                            if (message.allowNoResourceGroupMatch != null && message.hasOwnProperty("allowNoResourceGroupMatch"))
+                                object.allowNoResourceGroupMatch = message.allowNoResourceGroupMatch;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OSPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.OSPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OSPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        OSPolicy.InventoryFilter = (function() {
+    
+                            /**
+                             * Properties of an InventoryFilter.
+                             * @memberof google.cloud.osconfig.v1.OSPolicy
+                             * @interface IInventoryFilter
+                             * @property {string|null} [osShortName] InventoryFilter osShortName
+                             * @property {string|null} [osVersion] InventoryFilter osVersion
+                             */
+    
+                            /**
+                             * Constructs a new InventoryFilter.
+                             * @memberof google.cloud.osconfig.v1.OSPolicy
+                             * @classdesc Represents an InventoryFilter.
+                             * @implements IInventoryFilter
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IInventoryFilter=} [properties] Properties to set
+                             */
+                            function InventoryFilter(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InventoryFilter osShortName.
+                             * @member {string} osShortName
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @instance
+                             */
+                            InventoryFilter.prototype.osShortName = "";
+    
+                            /**
+                             * InventoryFilter osVersion.
+                             * @member {string} osVersion
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @instance
+                             */
+                            InventoryFilter.prototype.osVersion = "";
+    
+                            /**
+                             * Creates a new InventoryFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IInventoryFilter=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.InventoryFilter} InventoryFilter instance
+                             */
+                            InventoryFilter.create = function create(properties) {
+                                return new InventoryFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InventoryFilter message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.InventoryFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IInventoryFilter} message InventoryFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InventoryFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.osShortName != null && Object.hasOwnProperty.call(message, "osShortName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.osShortName);
+                                if (message.osVersion != null && Object.hasOwnProperty.call(message, "osVersion"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.osVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InventoryFilter message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.InventoryFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IInventoryFilter} message InventoryFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InventoryFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InventoryFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.InventoryFilter} InventoryFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InventoryFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.osShortName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.osVersion = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InventoryFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.InventoryFilter} InventoryFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InventoryFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InventoryFilter message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InventoryFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.osShortName != null && message.hasOwnProperty("osShortName"))
+                                    if (!$util.isString(message.osShortName))
+                                        return "osShortName: string expected";
+                                if (message.osVersion != null && message.hasOwnProperty("osVersion"))
+                                    if (!$util.isString(message.osVersion))
+                                        return "osVersion: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InventoryFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.InventoryFilter} InventoryFilter
+                             */
+                            InventoryFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter();
+                                if (object.osShortName != null)
+                                    message.osShortName = String(object.osShortName);
+                                if (object.osVersion != null)
+                                    message.osVersion = String(object.osVersion);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InventoryFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.InventoryFilter} message InventoryFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InventoryFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.osShortName = "";
+                                    object.osVersion = "";
+                                }
+                                if (message.osShortName != null && message.hasOwnProperty("osShortName"))
+                                    object.osShortName = message.osShortName;
+                                if (message.osVersion != null && message.hasOwnProperty("osVersion"))
+                                    object.osVersion = message.osVersion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InventoryFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.InventoryFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InventoryFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return InventoryFilter;
+                        })();
+    
+                        OSPolicy.Resource = (function() {
+    
+                            /**
+                             * Properties of a Resource.
+                             * @memberof google.cloud.osconfig.v1.OSPolicy
+                             * @interface IResource
+                             * @property {string|null} [id] Resource id
+                             * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource|null} [pkg] Resource pkg
+                             * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource|null} [repository] Resource repository
+                             * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource|null} [exec] Resource exec
+                             * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource|null} [file] Resource file
+                             */
+    
+                            /**
+                             * Constructs a new Resource.
+                             * @memberof google.cloud.osconfig.v1.OSPolicy
+                             * @classdesc Represents a Resource.
+                             * @implements IResource
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResource=} [properties] Properties to set
+                             */
+                            function Resource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Resource id.
+                             * @member {string} id
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             */
+                            Resource.prototype.id = "";
+    
+                            /**
+                             * Resource pkg.
+                             * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource|null|undefined} pkg
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             */
+                            Resource.prototype.pkg = null;
+    
+                            /**
+                             * Resource repository.
+                             * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource|null|undefined} repository
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             */
+                            Resource.prototype.repository = null;
+    
+                            /**
+                             * Resource exec.
+                             * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource|null|undefined} exec
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             */
+                            Resource.prototype.exec = null;
+    
+                            /**
+                             * Resource file.
+                             * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource|null|undefined} file
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             */
+                            Resource.prototype.file = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Resource resourceType.
+                             * @member {"pkg"|"repository"|"exec"|"file"|undefined} resourceType
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             */
+                            Object.defineProperty(Resource.prototype, "resourceType", {
+                                get: $util.oneOfGetter($oneOfFields = ["pkg", "repository", "exec", "file"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Resource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResource=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.Resource} Resource instance
+                             */
+                            Resource.create = function create(properties) {
+                                return new Resource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Resource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResource} message Resource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Resource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.pkg != null && Object.hasOwnProperty.call(message, "pkg"))
+                                    $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.encode(message.pkg, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                    $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.encode(message.repository, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.exec != null && Object.hasOwnProperty.call(message, "exec"))
+                                    $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.encode(message.exec, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.file != null && Object.hasOwnProperty.call(message, "file"))
+                                    $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.encode(message.file, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResource} message Resource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Resource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Resource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.Resource} Resource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Resource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.id = reader.string();
+                                        break;
+                                    case 2:
+                                        message.pkg = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        message.repository = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        message.exec = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Resource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.Resource} Resource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Resource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Resource message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Resource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.pkg != null && message.hasOwnProperty("pkg")) {
+                                    properties.resourceType = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.verify(message.pkg);
+                                        if (error)
+                                            return "pkg." + error;
+                                    }
+                                }
+                                if (message.repository != null && message.hasOwnProperty("repository")) {
+                                    if (properties.resourceType === 1)
+                                        return "resourceType: multiple values";
+                                    properties.resourceType = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.verify(message.repository);
+                                        if (error)
+                                            return "repository." + error;
+                                    }
+                                }
+                                if (message.exec != null && message.hasOwnProperty("exec")) {
+                                    if (properties.resourceType === 1)
+                                        return "resourceType: multiple values";
+                                    properties.resourceType = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.verify(message.exec);
+                                        if (error)
+                                            return "exec." + error;
+                                    }
+                                }
+                                if (message.file != null && message.hasOwnProperty("file")) {
+                                    if (properties.resourceType === 1)
+                                        return "resourceType: multiple values";
+                                    properties.resourceType = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.verify(message.file);
+                                        if (error)
+                                            return "file." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.Resource} Resource
+                             */
+                            Resource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.pkg != null) {
+                                    if (typeof object.pkg !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.pkg: object expected");
+                                    message.pkg = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.fromObject(object.pkg);
+                                }
+                                if (object.repository != null) {
+                                    if (typeof object.repository !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.repository: object expected");
+                                    message.repository = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.fromObject(object.repository);
+                                }
+                                if (object.exec != null) {
+                                    if (typeof object.exec !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.exec: object expected");
+                                    message.exec = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.fromObject(object.exec);
+                                }
+                                if (object.file != null) {
+                                    if (typeof object.file !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.file: object expected");
+                                    message.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.fromObject(object.file);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.Resource} message Resource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Resource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.id = "";
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.pkg != null && message.hasOwnProperty("pkg")) {
+                                    object.pkg = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.toObject(message.pkg, options);
+                                    if (options.oneofs)
+                                        object.resourceType = "pkg";
+                                }
+                                if (message.repository != null && message.hasOwnProperty("repository")) {
+                                    object.repository = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.toObject(message.repository, options);
+                                    if (options.oneofs)
+                                        object.resourceType = "repository";
+                                }
+                                if (message.exec != null && message.hasOwnProperty("exec")) {
+                                    object.exec = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.toObject(message.exec, options);
+                                    if (options.oneofs)
+                                        object.resourceType = "exec";
+                                }
+                                if (message.file != null && message.hasOwnProperty("file")) {
+                                    object.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.toObject(message.file, options);
+                                    if (options.oneofs)
+                                        object.resourceType = "file";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Resource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Resource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            Resource.File = (function() {
+    
+                                /**
+                                 * Properties of a File.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @interface IFile
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote|null} [remote] File remote
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs|null} [gcs] File gcs
+                                 * @property {string|null} [localPath] File localPath
+                                 * @property {boolean|null} [allowInsecure] File allowInsecure
+                                 */
+    
+                                /**
+                                 * Constructs a new File.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @classdesc Represents a File.
+                                 * @implements IFile
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFile=} [properties] Properties to set
+                                 */
+                                function File(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * File remote.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote|null|undefined} remote
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @instance
+                                 */
+                                File.prototype.remote = null;
+    
+                                /**
+                                 * File gcs.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs|null|undefined} gcs
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @instance
+                                 */
+                                File.prototype.gcs = null;
+    
+                                /**
+                                 * File localPath.
+                                 * @member {string|null|undefined} localPath
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @instance
+                                 */
+                                File.prototype.localPath = null;
+    
+                                /**
+                                 * File allowInsecure.
+                                 * @member {boolean} allowInsecure
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @instance
+                                 */
+                                File.prototype.allowInsecure = false;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * File type.
+                                 * @member {"remote"|"gcs"|"localPath"|undefined} type
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @instance
+                                 */
+                                Object.defineProperty(File.prototype, "type", {
+                                    get: $util.oneOfGetter($oneOfFields = ["remote", "gcs", "localPath"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new File instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFile=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File} File instance
+                                 */
+                                File.create = function create(properties) {
+                                    return new File(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified File message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFile} message File message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                File.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.remote != null && Object.hasOwnProperty.call(message, "remote"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.encode(message.remote, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.gcs != null && Object.hasOwnProperty.call(message, "gcs"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.encode(message.gcs, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.localPath != null && Object.hasOwnProperty.call(message, "localPath"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.localPath);
+                                    if (message.allowInsecure != null && Object.hasOwnProperty.call(message, "allowInsecure"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowInsecure);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified File message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFile} message File message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                File.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a File message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File} File
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                File.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.File();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.remote = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.decode(reader, reader.uint32());
+                                            break;
+                                        case 2:
+                                            message.gcs = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.decode(reader, reader.uint32());
+                                            break;
+                                        case 3:
+                                            message.localPath = reader.string();
+                                            break;
+                                        case 4:
+                                            message.allowInsecure = reader.bool();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a File message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File} File
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                File.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a File message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                File.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.remote != null && message.hasOwnProperty("remote")) {
+                                        properties.type = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.verify(message.remote);
+                                            if (error)
+                                                return "remote." + error;
+                                        }
+                                    }
+                                    if (message.gcs != null && message.hasOwnProperty("gcs")) {
+                                        if (properties.type === 1)
+                                            return "type: multiple values";
+                                        properties.type = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.verify(message.gcs);
+                                            if (error)
+                                                return "gcs." + error;
+                                        }
+                                    }
+                                    if (message.localPath != null && message.hasOwnProperty("localPath")) {
+                                        if (properties.type === 1)
+                                            return "type: multiple values";
+                                        properties.type = 1;
+                                        if (!$util.isString(message.localPath))
+                                            return "localPath: string expected";
+                                    }
+                                    if (message.allowInsecure != null && message.hasOwnProperty("allowInsecure"))
+                                        if (typeof message.allowInsecure !== "boolean")
+                                            return "allowInsecure: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a File message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File} File
+                                 */
+                                File.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.File)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.File();
+                                    if (object.remote != null) {
+                                        if (typeof object.remote !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.File.remote: object expected");
+                                        message.remote = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.fromObject(object.remote);
+                                    }
+                                    if (object.gcs != null) {
+                                        if (typeof object.gcs !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.File.gcs: object expected");
+                                        message.gcs = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.fromObject(object.gcs);
+                                    }
+                                    if (object.localPath != null)
+                                        message.localPath = String(object.localPath);
+                                    if (object.allowInsecure != null)
+                                        message.allowInsecure = Boolean(object.allowInsecure);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a File message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File} message File
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                File.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.allowInsecure = false;
+                                    if (message.remote != null && message.hasOwnProperty("remote")) {
+                                        object.remote = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.toObject(message.remote, options);
+                                        if (options.oneofs)
+                                            object.type = "remote";
+                                    }
+                                    if (message.gcs != null && message.hasOwnProperty("gcs")) {
+                                        object.gcs = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.toObject(message.gcs, options);
+                                        if (options.oneofs)
+                                            object.type = "gcs";
+                                    }
+                                    if (message.localPath != null && message.hasOwnProperty("localPath")) {
+                                        object.localPath = message.localPath;
+                                        if (options.oneofs)
+                                            object.type = "localPath";
+                                    }
+                                    if (message.allowInsecure != null && message.hasOwnProperty("allowInsecure"))
+                                        object.allowInsecure = message.allowInsecure;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this File to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                File.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                File.Remote = (function() {
+    
+                                    /**
+                                     * Properties of a Remote.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                     * @interface IRemote
+                                     * @property {string|null} [uri] Remote uri
+                                     * @property {string|null} [sha256Checksum] Remote sha256Checksum
+                                     */
+    
+                                    /**
+                                     * Constructs a new Remote.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                     * @classdesc Represents a Remote.
+                                     * @implements IRemote
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote=} [properties] Properties to set
+                                     */
+                                    function Remote(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Remote uri.
+                                     * @member {string} uri
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @instance
+                                     */
+                                    Remote.prototype.uri = "";
+    
+                                    /**
+                                     * Remote sha256Checksum.
+                                     * @member {string} sha256Checksum
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @instance
+                                     */
+                                    Remote.prototype.sha256Checksum = "";
+    
+                                    /**
+                                     * Creates a new Remote instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote} Remote instance
+                                     */
+                                    Remote.create = function create(properties) {
+                                        return new Remote(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Remote message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote} message Remote message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Remote.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                        if (message.sha256Checksum != null && Object.hasOwnProperty.call(message, "sha256Checksum"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.sha256Checksum);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Remote message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote} message Remote message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Remote.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Remote message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote} Remote
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Remote.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.uri = reader.string();
+                                                break;
+                                            case 2:
+                                                message.sha256Checksum = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Remote message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote} Remote
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Remote.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Remote message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Remote.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.uri != null && message.hasOwnProperty("uri"))
+                                            if (!$util.isString(message.uri))
+                                                return "uri: string expected";
+                                        if (message.sha256Checksum != null && message.hasOwnProperty("sha256Checksum"))
+                                            if (!$util.isString(message.sha256Checksum))
+                                                return "sha256Checksum: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Remote message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote} Remote
+                                     */
+                                    Remote.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote();
+                                        if (object.uri != null)
+                                            message.uri = String(object.uri);
+                                        if (object.sha256Checksum != null)
+                                            message.sha256Checksum = String(object.sha256Checksum);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Remote message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote} message Remote
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Remote.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.uri = "";
+                                            object.sha256Checksum = "";
+                                        }
+                                        if (message.uri != null && message.hasOwnProperty("uri"))
+                                            object.uri = message.uri;
+                                        if (message.sha256Checksum != null && message.hasOwnProperty("sha256Checksum"))
+                                            object.sha256Checksum = message.sha256Checksum;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Remote to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Remote.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return Remote;
+                                })();
+    
+                                File.Gcs = (function() {
+    
+                                    /**
+                                     * Properties of a Gcs.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                     * @interface IGcs
+                                     * @property {string|null} [bucket] Gcs bucket
+                                     * @property {string|null} [object] Gcs object
+                                     * @property {number|Long|null} [generation] Gcs generation
+                                     */
+    
+                                    /**
+                                     * Constructs a new Gcs.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File
+                                     * @classdesc Represents a Gcs.
+                                     * @implements IGcs
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs=} [properties] Properties to set
+                                     */
+                                    function Gcs(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Gcs bucket.
+                                     * @member {string} bucket
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @instance
+                                     */
+                                    Gcs.prototype.bucket = "";
+    
+                                    /**
+                                     * Gcs object.
+                                     * @member {string} object
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @instance
+                                     */
+                                    Gcs.prototype.object = "";
+    
+                                    /**
+                                     * Gcs generation.
+                                     * @member {number|Long} generation
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @instance
+                                     */
+                                    Gcs.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                    /**
+                                     * Creates a new Gcs instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs} Gcs instance
+                                     */
+                                    Gcs.create = function create(properties) {
+                                        return new Gcs(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Gcs message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs} message Gcs message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Gcs.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
+                                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Gcs message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs} message Gcs message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Gcs.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Gcs message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs} Gcs
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Gcs.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.bucket = reader.string();
+                                                break;
+                                            case 2:
+                                                message.object = reader.string();
+                                                break;
+                                            case 3:
+                                                message.generation = reader.int64();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Gcs message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs} Gcs
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Gcs.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Gcs message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Gcs.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                            if (!$util.isString(message.bucket))
+                                                return "bucket: string expected";
+                                        if (message.object != null && message.hasOwnProperty("object"))
+                                            if (!$util.isString(message.object))
+                                                return "object: string expected";
+                                        if (message.generation != null && message.hasOwnProperty("generation"))
+                                            if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
+                                                return "generation: integer|Long expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Gcs message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs} Gcs
+                                     */
+                                    Gcs.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs();
+                                        if (object.bucket != null)
+                                            message.bucket = String(object.bucket);
+                                        if (object.object != null)
+                                            message.object = String(object.object);
+                                        if (object.generation != null)
+                                            if ($util.Long)
+                                                (message.generation = $util.Long.fromValue(object.generation)).unsigned = false;
+                                            else if (typeof object.generation === "string")
+                                                message.generation = parseInt(object.generation, 10);
+                                            else if (typeof object.generation === "number")
+                                                message.generation = object.generation;
+                                            else if (typeof object.generation === "object")
+                                                message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Gcs message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs} message Gcs
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Gcs.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.bucket = "";
+                                            object.object = "";
+                                            if ($util.Long) {
+                                                var long = new $util.Long(0, 0, false);
+                                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                            } else
+                                                object.generation = options.longs === String ? "0" : 0;
+                                        }
+                                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                            object.bucket = message.bucket;
+                                        if (message.object != null && message.hasOwnProperty("object"))
+                                            object.object = message.object;
+                                        if (message.generation != null && message.hasOwnProperty("generation"))
+                                            if (typeof message.generation === "number")
+                                                object.generation = options.longs === String ? String(message.generation) : message.generation;
+                                            else
+                                                object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Gcs to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Gcs.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return Gcs;
+                                })();
+    
+                                return File;
+                            })();
+    
+                            Resource.PackageResource = (function() {
+    
+                                /**
+                                 * Properties of a PackageResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @interface IPackageResource
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState|null} [desiredState] PackageResource desiredState
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT|null} [apt] PackageResource apt
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb|null} [deb] PackageResource deb
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM|null} [yum] PackageResource yum
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper|null} [zypper] PackageResource zypper
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM|null} [rpm] PackageResource rpm
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet|null} [googet] PackageResource googet
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI|null} [msi] PackageResource msi
+                                 */
+    
+                                /**
+                                 * Constructs a new PackageResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @classdesc Represents a PackageResource.
+                                 * @implements IPackageResource
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource=} [properties] Properties to set
+                                 */
+                                function PackageResource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PackageResource desiredState.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState} desiredState
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.desiredState = 0;
+    
+                                /**
+                                 * PackageResource apt.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT|null|undefined} apt
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.apt = null;
+    
+                                /**
+                                 * PackageResource deb.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb|null|undefined} deb
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.deb = null;
+    
+                                /**
+                                 * PackageResource yum.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM|null|undefined} yum
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.yum = null;
+    
+                                /**
+                                 * PackageResource zypper.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper|null|undefined} zypper
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.zypper = null;
+    
+                                /**
+                                 * PackageResource rpm.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM|null|undefined} rpm
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.rpm = null;
+    
+                                /**
+                                 * PackageResource googet.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet|null|undefined} googet
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.googet = null;
+    
+                                /**
+                                 * PackageResource msi.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI|null|undefined} msi
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                PackageResource.prototype.msi = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * PackageResource systemPackage.
+                                 * @member {"apt"|"deb"|"yum"|"zypper"|"rpm"|"googet"|"msi"|undefined} systemPackage
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 */
+                                Object.defineProperty(PackageResource.prototype, "systemPackage", {
+                                    get: $util.oneOfGetter($oneOfFields = ["apt", "deb", "yum", "zypper", "rpm", "googet", "msi"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new PackageResource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource} PackageResource instance
+                                 */
+                                PackageResource.create = function create(properties) {
+                                    return new PackageResource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PackageResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource} message PackageResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PackageResource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.desiredState != null && Object.hasOwnProperty.call(message, "desiredState"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.desiredState);
+                                    if (message.apt != null && Object.hasOwnProperty.call(message, "apt"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.encode(message.apt, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.deb != null && Object.hasOwnProperty.call(message, "deb"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.encode(message.deb, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.yum != null && Object.hasOwnProperty.call(message, "yum"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.encode(message.yum, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.zypper != null && Object.hasOwnProperty.call(message, "zypper"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.encode(message.zypper, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    if (message.rpm != null && Object.hasOwnProperty.call(message, "rpm"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.encode(message.rpm, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    if (message.googet != null && Object.hasOwnProperty.call(message, "googet"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.encode(message.googet, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    if (message.msi != null && Object.hasOwnProperty.call(message, "msi"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.encode(message.msi, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PackageResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource} message PackageResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PackageResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PackageResource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource} PackageResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PackageResource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.desiredState = reader.int32();
+                                            break;
+                                        case 2:
+                                            message.apt = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.decode(reader, reader.uint32());
+                                            break;
+                                        case 3:
+                                            message.deb = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.decode(reader, reader.uint32());
+                                            break;
+                                        case 4:
+                                            message.yum = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.decode(reader, reader.uint32());
+                                            break;
+                                        case 5:
+                                            message.zypper = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.decode(reader, reader.uint32());
+                                            break;
+                                        case 6:
+                                            message.rpm = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.decode(reader, reader.uint32());
+                                            break;
+                                        case 7:
+                                            message.googet = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.decode(reader, reader.uint32());
+                                            break;
+                                        case 8:
+                                            message.msi = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PackageResource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource} PackageResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PackageResource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PackageResource message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PackageResource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.desiredState != null && message.hasOwnProperty("desiredState"))
+                                        switch (message.desiredState) {
+                                        default:
+                                            return "desiredState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.apt != null && message.hasOwnProperty("apt")) {
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.verify(message.apt);
+                                            if (error)
+                                                return "apt." + error;
+                                        }
+                                    }
+                                    if (message.deb != null && message.hasOwnProperty("deb")) {
+                                        if (properties.systemPackage === 1)
+                                            return "systemPackage: multiple values";
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.verify(message.deb);
+                                            if (error)
+                                                return "deb." + error;
+                                        }
+                                    }
+                                    if (message.yum != null && message.hasOwnProperty("yum")) {
+                                        if (properties.systemPackage === 1)
+                                            return "systemPackage: multiple values";
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.verify(message.yum);
+                                            if (error)
+                                                return "yum." + error;
+                                        }
+                                    }
+                                    if (message.zypper != null && message.hasOwnProperty("zypper")) {
+                                        if (properties.systemPackage === 1)
+                                            return "systemPackage: multiple values";
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.verify(message.zypper);
+                                            if (error)
+                                                return "zypper." + error;
+                                        }
+                                    }
+                                    if (message.rpm != null && message.hasOwnProperty("rpm")) {
+                                        if (properties.systemPackage === 1)
+                                            return "systemPackage: multiple values";
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.verify(message.rpm);
+                                            if (error)
+                                                return "rpm." + error;
+                                        }
+                                    }
+                                    if (message.googet != null && message.hasOwnProperty("googet")) {
+                                        if (properties.systemPackage === 1)
+                                            return "systemPackage: multiple values";
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.verify(message.googet);
+                                            if (error)
+                                                return "googet." + error;
+                                        }
+                                    }
+                                    if (message.msi != null && message.hasOwnProperty("msi")) {
+                                        if (properties.systemPackage === 1)
+                                            return "systemPackage: multiple values";
+                                        properties.systemPackage = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.verify(message.msi);
+                                            if (error)
+                                                return "msi." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PackageResource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource} PackageResource
+                                 */
+                                PackageResource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource();
+                                    switch (object.desiredState) {
+                                    case "DESIRED_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.desiredState = 0;
+                                        break;
+                                    case "INSTALLED":
+                                    case 1:
+                                        message.desiredState = 1;
+                                        break;
+                                    case "REMOVED":
+                                    case 2:
+                                        message.desiredState = 2;
+                                        break;
+                                    }
+                                    if (object.apt != null) {
+                                        if (typeof object.apt !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.apt: object expected");
+                                        message.apt = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.fromObject(object.apt);
+                                    }
+                                    if (object.deb != null) {
+                                        if (typeof object.deb !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.deb: object expected");
+                                        message.deb = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.fromObject(object.deb);
+                                    }
+                                    if (object.yum != null) {
+                                        if (typeof object.yum !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.yum: object expected");
+                                        message.yum = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.fromObject(object.yum);
+                                    }
+                                    if (object.zypper != null) {
+                                        if (typeof object.zypper !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.zypper: object expected");
+                                        message.zypper = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.fromObject(object.zypper);
+                                    }
+                                    if (object.rpm != null) {
+                                        if (typeof object.rpm !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.rpm: object expected");
+                                        message.rpm = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.fromObject(object.rpm);
+                                    }
+                                    if (object.googet != null) {
+                                        if (typeof object.googet !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.googet: object expected");
+                                        message.googet = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.fromObject(object.googet);
+                                    }
+                                    if (object.msi != null) {
+                                        if (typeof object.msi !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.msi: object expected");
+                                        message.msi = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.fromObject(object.msi);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PackageResource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource} message PackageResource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PackageResource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.desiredState = options.enums === String ? "DESIRED_STATE_UNSPECIFIED" : 0;
+                                    if (message.desiredState != null && message.hasOwnProperty("desiredState"))
+                                        object.desiredState = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState[message.desiredState] : message.desiredState;
+                                    if (message.apt != null && message.hasOwnProperty("apt")) {
+                                        object.apt = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.toObject(message.apt, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "apt";
+                                    }
+                                    if (message.deb != null && message.hasOwnProperty("deb")) {
+                                        object.deb = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.toObject(message.deb, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "deb";
+                                    }
+                                    if (message.yum != null && message.hasOwnProperty("yum")) {
+                                        object.yum = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.toObject(message.yum, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "yum";
+                                    }
+                                    if (message.zypper != null && message.hasOwnProperty("zypper")) {
+                                        object.zypper = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.toObject(message.zypper, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "zypper";
+                                    }
+                                    if (message.rpm != null && message.hasOwnProperty("rpm")) {
+                                        object.rpm = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.toObject(message.rpm, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "rpm";
+                                    }
+                                    if (message.googet != null && message.hasOwnProperty("googet")) {
+                                        object.googet = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.toObject(message.googet, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "googet";
+                                    }
+                                    if (message.msi != null && message.hasOwnProperty("msi")) {
+                                        object.msi = $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.toObject(message.msi, options);
+                                        if (options.oneofs)
+                                            object.systemPackage = "msi";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PackageResource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PackageResource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                PackageResource.Deb = (function() {
+    
+                                    /**
+                                     * Properties of a Deb.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IDeb
+                                     * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null} [source] Deb source
+                                     * @property {boolean|null} [pullDeps] Deb pullDeps
+                                     */
+    
+                                    /**
+                                     * Constructs a new Deb.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a Deb.
+                                     * @implements IDeb
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb=} [properties] Properties to set
+                                     */
+                                    function Deb(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Deb source.
+                                     * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null|undefined} source
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @instance
+                                     */
+                                    Deb.prototype.source = null;
+    
+                                    /**
+                                     * Deb pullDeps.
+                                     * @member {boolean} pullDeps
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @instance
+                                     */
+                                    Deb.prototype.pullDeps = false;
+    
+                                    /**
+                                     * Creates a new Deb instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb} Deb instance
+                                     */
+                                    Deb.create = function create(properties) {
+                                        return new Deb(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Deb message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb} message Deb message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Deb.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                            $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.encode(message.source, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.pullDeps != null && Object.hasOwnProperty.call(message, "pullDeps"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.pullDeps);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Deb message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb} message Deb message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Deb.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Deb message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb} Deb
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Deb.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.decode(reader, reader.uint32());
+                                                break;
+                                            case 2:
+                                                message.pullDeps = reader.bool();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Deb message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb} Deb
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Deb.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Deb message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Deb.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.source != null && message.hasOwnProperty("source")) {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.verify(message.source);
+                                            if (error)
+                                                return "source." + error;
+                                        }
+                                        if (message.pullDeps != null && message.hasOwnProperty("pullDeps"))
+                                            if (typeof message.pullDeps !== "boolean")
+                                                return "pullDeps: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Deb message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb} Deb
+                                     */
+                                    Deb.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb();
+                                        if (object.source != null) {
+                                            if (typeof object.source !== "object")
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.source: object expected");
+                                            message.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.fromObject(object.source);
+                                        }
+                                        if (object.pullDeps != null)
+                                            message.pullDeps = Boolean(object.pullDeps);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Deb message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb} message Deb
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Deb.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.source = null;
+                                            object.pullDeps = false;
+                                        }
+                                        if (message.source != null && message.hasOwnProperty("source"))
+                                            object.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.toObject(message.source, options);
+                                        if (message.pullDeps != null && message.hasOwnProperty("pullDeps"))
+                                            object.pullDeps = message.pullDeps;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Deb to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Deb.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return Deb;
+                                })();
+    
+                                PackageResource.APT = (function() {
+    
+                                    /**
+                                     * Properties of a APT.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IAPT
+                                     * @property {string|null} [name] APT name
+                                     */
+    
+                                    /**
+                                     * Constructs a new APT.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a APT.
+                                     * @implements IAPT
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT=} [properties] Properties to set
+                                     */
+                                    function APT(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * APT name.
+                                     * @member {string} name
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @instance
+                                     */
+                                    APT.prototype.name = "";
+    
+                                    /**
+                                     * Creates a new APT instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT} APT instance
+                                     */
+                                    APT.create = function create(properties) {
+                                        return new APT(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified APT message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT} message APT message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    APT.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified APT message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT} message APT message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    APT.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a APT message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT} APT
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    APT.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.name = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a APT message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT} APT
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    APT.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a APT message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    APT.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            if (!$util.isString(message.name))
+                                                return "name: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a APT message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT} APT
+                                     */
+                                    APT.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT();
+                                        if (object.name != null)
+                                            message.name = String(object.name);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a APT message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT} message APT
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    APT.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.name = "";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            object.name = message.name;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this APT to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    APT.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return APT;
+                                })();
+    
+                                PackageResource.RPM = (function() {
+    
+                                    /**
+                                     * Properties of a RPM.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IRPM
+                                     * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null} [source] RPM source
+                                     * @property {boolean|null} [pullDeps] RPM pullDeps
+                                     */
+    
+                                    /**
+                                     * Constructs a new RPM.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a RPM.
+                                     * @implements IRPM
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM=} [properties] Properties to set
+                                     */
+                                    function RPM(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * RPM source.
+                                     * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null|undefined} source
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @instance
+                                     */
+                                    RPM.prototype.source = null;
+    
+                                    /**
+                                     * RPM pullDeps.
+                                     * @member {boolean} pullDeps
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @instance
+                                     */
+                                    RPM.prototype.pullDeps = false;
+    
+                                    /**
+                                     * Creates a new RPM instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM} RPM instance
+                                     */
+                                    RPM.create = function create(properties) {
+                                        return new RPM(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RPM message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM} message RPM message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RPM.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                            $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.encode(message.source, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.pullDeps != null && Object.hasOwnProperty.call(message, "pullDeps"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.pullDeps);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RPM message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM} message RPM message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RPM.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a RPM message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM} RPM
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RPM.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.decode(reader, reader.uint32());
+                                                break;
+                                            case 2:
+                                                message.pullDeps = reader.bool();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a RPM message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM} RPM
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RPM.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a RPM message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    RPM.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.source != null && message.hasOwnProperty("source")) {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.verify(message.source);
+                                            if (error)
+                                                return "source." + error;
+                                        }
+                                        if (message.pullDeps != null && message.hasOwnProperty("pullDeps"))
+                                            if (typeof message.pullDeps !== "boolean")
+                                                return "pullDeps: boolean expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a RPM message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM} RPM
+                                     */
+                                    RPM.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM();
+                                        if (object.source != null) {
+                                            if (typeof object.source !== "object")
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.source: object expected");
+                                            message.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.fromObject(object.source);
+                                        }
+                                        if (object.pullDeps != null)
+                                            message.pullDeps = Boolean(object.pullDeps);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a RPM message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM} message RPM
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    RPM.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.source = null;
+                                            object.pullDeps = false;
+                                        }
+                                        if (message.source != null && message.hasOwnProperty("source"))
+                                            object.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.toObject(message.source, options);
+                                        if (message.pullDeps != null && message.hasOwnProperty("pullDeps"))
+                                            object.pullDeps = message.pullDeps;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this RPM to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    RPM.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return RPM;
+                                })();
+    
+                                PackageResource.YUM = (function() {
+    
+                                    /**
+                                     * Properties of a YUM.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IYUM
+                                     * @property {string|null} [name] YUM name
+                                     */
+    
+                                    /**
+                                     * Constructs a new YUM.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a YUM.
+                                     * @implements IYUM
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM=} [properties] Properties to set
+                                     */
+                                    function YUM(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * YUM name.
+                                     * @member {string} name
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @instance
+                                     */
+                                    YUM.prototype.name = "";
+    
+                                    /**
+                                     * Creates a new YUM instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM} YUM instance
+                                     */
+                                    YUM.create = function create(properties) {
+                                        return new YUM(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified YUM message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM} message YUM message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    YUM.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified YUM message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM} message YUM message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    YUM.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a YUM message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM} YUM
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    YUM.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.name = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a YUM message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM} YUM
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    YUM.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a YUM message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    YUM.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            if (!$util.isString(message.name))
+                                                return "name: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a YUM message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM} YUM
+                                     */
+                                    YUM.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM();
+                                        if (object.name != null)
+                                            message.name = String(object.name);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a YUM message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM} message YUM
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    YUM.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.name = "";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            object.name = message.name;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this YUM to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    YUM.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return YUM;
+                                })();
+    
+                                PackageResource.Zypper = (function() {
+    
+                                    /**
+                                     * Properties of a Zypper.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IZypper
+                                     * @property {string|null} [name] Zypper name
+                                     */
+    
+                                    /**
+                                     * Constructs a new Zypper.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a Zypper.
+                                     * @implements IZypper
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper=} [properties] Properties to set
+                                     */
+                                    function Zypper(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Zypper name.
+                                     * @member {string} name
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @instance
+                                     */
+                                    Zypper.prototype.name = "";
+    
+                                    /**
+                                     * Creates a new Zypper instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper} Zypper instance
+                                     */
+                                    Zypper.create = function create(properties) {
+                                        return new Zypper(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Zypper message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper} message Zypper message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Zypper.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Zypper message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper} message Zypper message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Zypper.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Zypper message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper} Zypper
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Zypper.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.name = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Zypper message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper} Zypper
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Zypper.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Zypper message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Zypper.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            if (!$util.isString(message.name))
+                                                return "name: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Zypper message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper} Zypper
+                                     */
+                                    Zypper.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper();
+                                        if (object.name != null)
+                                            message.name = String(object.name);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Zypper message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper} message Zypper
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Zypper.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.name = "";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            object.name = message.name;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Zypper to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Zypper.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return Zypper;
+                                })();
+    
+                                PackageResource.GooGet = (function() {
+    
+                                    /**
+                                     * Properties of a GooGet.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IGooGet
+                                     * @property {string|null} [name] GooGet name
+                                     */
+    
+                                    /**
+                                     * Constructs a new GooGet.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a GooGet.
+                                     * @implements IGooGet
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet=} [properties] Properties to set
+                                     */
+                                    function GooGet(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * GooGet name.
+                                     * @member {string} name
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @instance
+                                     */
+                                    GooGet.prototype.name = "";
+    
+                                    /**
+                                     * Creates a new GooGet instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet} GooGet instance
+                                     */
+                                    GooGet.create = function create(properties) {
+                                        return new GooGet(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GooGet message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet} message GooGet message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GooGet.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GooGet message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet} message GooGet message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GooGet.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a GooGet message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet} GooGet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GooGet.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.name = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a GooGet message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet} GooGet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GooGet.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a GooGet message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    GooGet.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            if (!$util.isString(message.name))
+                                                return "name: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a GooGet message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet} GooGet
+                                     */
+                                    GooGet.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet();
+                                        if (object.name != null)
+                                            message.name = String(object.name);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a GooGet message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet} message GooGet
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    GooGet.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            object.name = "";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            object.name = message.name;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this GooGet to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    GooGet.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return GooGet;
+                                })();
+    
+                                PackageResource.MSI = (function() {
+    
+                                    /**
+                                     * Properties of a MSI.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @interface IMSI
+                                     * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null} [source] MSI source
+                                     * @property {Array.<string>|null} [properties] MSI properties
+                                     */
+    
+                                    /**
+                                     * Constructs a new MSI.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource
+                                     * @classdesc Represents a MSI.
+                                     * @implements IMSI
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI=} [properties] Properties to set
+                                     */
+                                    function MSI(properties) {
+                                        this.properties = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * MSI source.
+                                     * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null|undefined} source
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @instance
+                                     */
+                                    MSI.prototype.source = null;
+    
+                                    /**
+                                     * MSI properties.
+                                     * @member {Array.<string>} properties
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @instance
+                                     */
+                                    MSI.prototype.properties = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new MSI instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI} MSI instance
+                                     */
+                                    MSI.create = function create(properties) {
+                                        return new MSI(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified MSI message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI} message MSI message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    MSI.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                            $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.encode(message.source, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.properties != null && message.properties.length)
+                                            for (var i = 0; i < message.properties.length; ++i)
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.properties[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified MSI message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI} message MSI message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    MSI.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a MSI message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI} MSI
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    MSI.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.decode(reader, reader.uint32());
+                                                break;
+                                            case 2:
+                                                if (!(message.properties && message.properties.length))
+                                                    message.properties = [];
+                                                message.properties.push(reader.string());
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a MSI message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI} MSI
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    MSI.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a MSI message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    MSI.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.source != null && message.hasOwnProperty("source")) {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.verify(message.source);
+                                            if (error)
+                                                return "source." + error;
+                                        }
+                                        if (message.properties != null && message.hasOwnProperty("properties")) {
+                                            if (!Array.isArray(message.properties))
+                                                return "properties: array expected";
+                                            for (var i = 0; i < message.properties.length; ++i)
+                                                if (!$util.isString(message.properties[i]))
+                                                    return "properties: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a MSI message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI} MSI
+                                     */
+                                    MSI.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI();
+                                        if (object.source != null) {
+                                            if (typeof object.source !== "object")
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.source: object expected");
+                                            message.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.fromObject(object.source);
+                                        }
+                                        if (object.properties) {
+                                            if (!Array.isArray(object.properties))
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.properties: array expected");
+                                            message.properties = [];
+                                            for (var i = 0; i < object.properties.length; ++i)
+                                                message.properties[i] = String(object.properties[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a MSI message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI} message MSI
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    MSI.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.properties = [];
+                                        if (options.defaults)
+                                            object.source = null;
+                                        if (message.source != null && message.hasOwnProperty("source"))
+                                            object.source = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.toObject(message.source, options);
+                                        if (message.properties && message.properties.length) {
+                                            object.properties = [];
+                                            for (var j = 0; j < message.properties.length; ++j)
+                                                object.properties[j] = message.properties[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this MSI to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    MSI.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return MSI;
+                                })();
+    
+                                /**
+                                 * DesiredState enum.
+                                 * @name google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState
+                                 * @enum {number}
+                                 * @property {number} DESIRED_STATE_UNSPECIFIED=0 DESIRED_STATE_UNSPECIFIED value
+                                 * @property {number} INSTALLED=1 INSTALLED value
+                                 * @property {number} REMOVED=2 REMOVED value
+                                 */
+                                PackageResource.DesiredState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "DESIRED_STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "INSTALLED"] = 1;
+                                    values[valuesById[2] = "REMOVED"] = 2;
+                                    return values;
+                                })();
+    
+                                return PackageResource;
+                            })();
+    
+                            Resource.RepositoryResource = (function() {
+    
+                                /**
+                                 * Properties of a RepositoryResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @interface IRepositoryResource
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository|null} [apt] RepositoryResource apt
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository|null} [yum] RepositoryResource yum
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository|null} [zypper] RepositoryResource zypper
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository|null} [goo] RepositoryResource goo
+                                 */
+    
+                                /**
+                                 * Constructs a new RepositoryResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @classdesc Represents a RepositoryResource.
+                                 * @implements IRepositoryResource
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource=} [properties] Properties to set
+                                 */
+                                function RepositoryResource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RepositoryResource apt.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository|null|undefined} apt
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @instance
+                                 */
+                                RepositoryResource.prototype.apt = null;
+    
+                                /**
+                                 * RepositoryResource yum.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository|null|undefined} yum
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @instance
+                                 */
+                                RepositoryResource.prototype.yum = null;
+    
+                                /**
+                                 * RepositoryResource zypper.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository|null|undefined} zypper
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @instance
+                                 */
+                                RepositoryResource.prototype.zypper = null;
+    
+                                /**
+                                 * RepositoryResource goo.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository|null|undefined} goo
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @instance
+                                 */
+                                RepositoryResource.prototype.goo = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * RepositoryResource repository.
+                                 * @member {"apt"|"yum"|"zypper"|"goo"|undefined} repository
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @instance
+                                 */
+                                Object.defineProperty(RepositoryResource.prototype, "repository", {
+                                    get: $util.oneOfGetter($oneOfFields = ["apt", "yum", "zypper", "goo"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new RepositoryResource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource} RepositoryResource instance
+                                 */
+                                RepositoryResource.create = function create(properties) {
+                                    return new RepositoryResource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RepositoryResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource} message RepositoryResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RepositoryResource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.apt != null && Object.hasOwnProperty.call(message, "apt"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.encode(message.apt, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.yum != null && Object.hasOwnProperty.call(message, "yum"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.encode(message.yum, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.zypper != null && Object.hasOwnProperty.call(message, "zypper"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.encode(message.zypper, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.goo != null && Object.hasOwnProperty.call(message, "goo"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.encode(message.goo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RepositoryResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource} message RepositoryResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RepositoryResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RepositoryResource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource} RepositoryResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RepositoryResource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.apt = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.decode(reader, reader.uint32());
+                                            break;
+                                        case 2:
+                                            message.yum = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.decode(reader, reader.uint32());
+                                            break;
+                                        case 3:
+                                            message.zypper = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.decode(reader, reader.uint32());
+                                            break;
+                                        case 4:
+                                            message.goo = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RepositoryResource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource} RepositoryResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RepositoryResource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RepositoryResource message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RepositoryResource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.apt != null && message.hasOwnProperty("apt")) {
+                                        properties.repository = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.verify(message.apt);
+                                            if (error)
+                                                return "apt." + error;
+                                        }
+                                    }
+                                    if (message.yum != null && message.hasOwnProperty("yum")) {
+                                        if (properties.repository === 1)
+                                            return "repository: multiple values";
+                                        properties.repository = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.verify(message.yum);
+                                            if (error)
+                                                return "yum." + error;
+                                        }
+                                    }
+                                    if (message.zypper != null && message.hasOwnProperty("zypper")) {
+                                        if (properties.repository === 1)
+                                            return "repository: multiple values";
+                                        properties.repository = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.verify(message.zypper);
+                                            if (error)
+                                                return "zypper." + error;
+                                        }
+                                    }
+                                    if (message.goo != null && message.hasOwnProperty("goo")) {
+                                        if (properties.repository === 1)
+                                            return "repository: multiple values";
+                                        properties.repository = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.verify(message.goo);
+                                            if (error)
+                                                return "goo." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RepositoryResource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource} RepositoryResource
+                                 */
+                                RepositoryResource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource();
+                                    if (object.apt != null) {
+                                        if (typeof object.apt !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.apt: object expected");
+                                        message.apt = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.fromObject(object.apt);
+                                    }
+                                    if (object.yum != null) {
+                                        if (typeof object.yum !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.yum: object expected");
+                                        message.yum = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.fromObject(object.yum);
+                                    }
+                                    if (object.zypper != null) {
+                                        if (typeof object.zypper !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.zypper: object expected");
+                                        message.zypper = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.fromObject(object.zypper);
+                                    }
+                                    if (object.goo != null) {
+                                        if (typeof object.goo !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.goo: object expected");
+                                        message.goo = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.fromObject(object.goo);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RepositoryResource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource} message RepositoryResource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RepositoryResource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.apt != null && message.hasOwnProperty("apt")) {
+                                        object.apt = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.toObject(message.apt, options);
+                                        if (options.oneofs)
+                                            object.repository = "apt";
+                                    }
+                                    if (message.yum != null && message.hasOwnProperty("yum")) {
+                                        object.yum = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.toObject(message.yum, options);
+                                        if (options.oneofs)
+                                            object.repository = "yum";
+                                    }
+                                    if (message.zypper != null && message.hasOwnProperty("zypper")) {
+                                        object.zypper = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.toObject(message.zypper, options);
+                                        if (options.oneofs)
+                                            object.repository = "zypper";
+                                    }
+                                    if (message.goo != null && message.hasOwnProperty("goo")) {
+                                        object.goo = $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.toObject(message.goo, options);
+                                        if (options.oneofs)
+                                            object.repository = "goo";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RepositoryResource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RepositoryResource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                RepositoryResource.AptRepository = (function() {
+    
+                                    /**
+                                     * Properties of an AptRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @interface IAptRepository
+                                     * @property {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType|null} [archiveType] AptRepository archiveType
+                                     * @property {string|null} [uri] AptRepository uri
+                                     * @property {string|null} [distribution] AptRepository distribution
+                                     * @property {Array.<string>|null} [components] AptRepository components
+                                     * @property {string|null} [gpgKey] AptRepository gpgKey
+                                     */
+    
+                                    /**
+                                     * Constructs a new AptRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @classdesc Represents an AptRepository.
+                                     * @implements IAptRepository
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository=} [properties] Properties to set
+                                     */
+                                    function AptRepository(properties) {
+                                        this.components = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * AptRepository archiveType.
+                                     * @member {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType} archiveType
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @instance
+                                     */
+                                    AptRepository.prototype.archiveType = 0;
+    
+                                    /**
+                                     * AptRepository uri.
+                                     * @member {string} uri
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @instance
+                                     */
+                                    AptRepository.prototype.uri = "";
+    
+                                    /**
+                                     * AptRepository distribution.
+                                     * @member {string} distribution
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @instance
+                                     */
+                                    AptRepository.prototype.distribution = "";
+    
+                                    /**
+                                     * AptRepository components.
+                                     * @member {Array.<string>} components
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @instance
+                                     */
+                                    AptRepository.prototype.components = $util.emptyArray;
+    
+                                    /**
+                                     * AptRepository gpgKey.
+                                     * @member {string} gpgKey
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @instance
+                                     */
+                                    AptRepository.prototype.gpgKey = "";
+    
+                                    /**
+                                     * Creates a new AptRepository instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository} AptRepository instance
+                                     */
+                                    AptRepository.create = function create(properties) {
+                                        return new AptRepository(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified AptRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository} message AptRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    AptRepository.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.archiveType != null && Object.hasOwnProperty.call(message, "archiveType"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.archiveType);
+                                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                                        if (message.distribution != null && Object.hasOwnProperty.call(message, "distribution"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.distribution);
+                                        if (message.components != null && message.components.length)
+                                            for (var i = 0; i < message.components.length; ++i)
+                                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.components[i]);
+                                        if (message.gpgKey != null && Object.hasOwnProperty.call(message, "gpgKey"))
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.gpgKey);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified AptRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository} message AptRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    AptRepository.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an AptRepository message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository} AptRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    AptRepository.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.archiveType = reader.int32();
+                                                break;
+                                            case 2:
+                                                message.uri = reader.string();
+                                                break;
+                                            case 3:
+                                                message.distribution = reader.string();
+                                                break;
+                                            case 4:
+                                                if (!(message.components && message.components.length))
+                                                    message.components = [];
+                                                message.components.push(reader.string());
+                                                break;
+                                            case 5:
+                                                message.gpgKey = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an AptRepository message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository} AptRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    AptRepository.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an AptRepository message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    AptRepository.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.archiveType != null && message.hasOwnProperty("archiveType"))
+                                            switch (message.archiveType) {
+                                            default:
+                                                return "archiveType: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                                break;
+                                            }
+                                        if (message.uri != null && message.hasOwnProperty("uri"))
+                                            if (!$util.isString(message.uri))
+                                                return "uri: string expected";
+                                        if (message.distribution != null && message.hasOwnProperty("distribution"))
+                                            if (!$util.isString(message.distribution))
+                                                return "distribution: string expected";
+                                        if (message.components != null && message.hasOwnProperty("components")) {
+                                            if (!Array.isArray(message.components))
+                                                return "components: array expected";
+                                            for (var i = 0; i < message.components.length; ++i)
+                                                if (!$util.isString(message.components[i]))
+                                                    return "components: string[] expected";
+                                        }
+                                        if (message.gpgKey != null && message.hasOwnProperty("gpgKey"))
+                                            if (!$util.isString(message.gpgKey))
+                                                return "gpgKey: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an AptRepository message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository} AptRepository
+                                     */
+                                    AptRepository.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository();
+                                        switch (object.archiveType) {
+                                        case "ARCHIVE_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.archiveType = 0;
+                                            break;
+                                        case "DEB":
+                                        case 1:
+                                            message.archiveType = 1;
+                                            break;
+                                        case "DEB_SRC":
+                                        case 2:
+                                            message.archiveType = 2;
+                                            break;
+                                        }
+                                        if (object.uri != null)
+                                            message.uri = String(object.uri);
+                                        if (object.distribution != null)
+                                            message.distribution = String(object.distribution);
+                                        if (object.components) {
+                                            if (!Array.isArray(object.components))
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.components: array expected");
+                                            message.components = [];
+                                            for (var i = 0; i < object.components.length; ++i)
+                                                message.components[i] = String(object.components[i]);
+                                        }
+                                        if (object.gpgKey != null)
+                                            message.gpgKey = String(object.gpgKey);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an AptRepository message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository} message AptRepository
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    AptRepository.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.components = [];
+                                        if (options.defaults) {
+                                            object.archiveType = options.enums === String ? "ARCHIVE_TYPE_UNSPECIFIED" : 0;
+                                            object.uri = "";
+                                            object.distribution = "";
+                                            object.gpgKey = "";
+                                        }
+                                        if (message.archiveType != null && message.hasOwnProperty("archiveType"))
+                                            object.archiveType = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType[message.archiveType] : message.archiveType;
+                                        if (message.uri != null && message.hasOwnProperty("uri"))
+                                            object.uri = message.uri;
+                                        if (message.distribution != null && message.hasOwnProperty("distribution"))
+                                            object.distribution = message.distribution;
+                                        if (message.components && message.components.length) {
+                                            object.components = [];
+                                            for (var j = 0; j < message.components.length; ++j)
+                                                object.components[j] = message.components[j];
+                                        }
+                                        if (message.gpgKey != null && message.hasOwnProperty("gpgKey"))
+                                            object.gpgKey = message.gpgKey;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this AptRepository to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    AptRepository.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * ArchiveType enum.
+                                     * @name google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType
+                                     * @enum {number}
+                                     * @property {number} ARCHIVE_TYPE_UNSPECIFIED=0 ARCHIVE_TYPE_UNSPECIFIED value
+                                     * @property {number} DEB=1 DEB value
+                                     * @property {number} DEB_SRC=2 DEB_SRC value
+                                     */
+                                    AptRepository.ArchiveType = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "ARCHIVE_TYPE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "DEB"] = 1;
+                                        values[valuesById[2] = "DEB_SRC"] = 2;
+                                        return values;
+                                    })();
+    
+                                    return AptRepository;
+                                })();
+    
+                                RepositoryResource.YumRepository = (function() {
+    
+                                    /**
+                                     * Properties of a YumRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @interface IYumRepository
+                                     * @property {string|null} [id] YumRepository id
+                                     * @property {string|null} [displayName] YumRepository displayName
+                                     * @property {string|null} [baseUrl] YumRepository baseUrl
+                                     * @property {Array.<string>|null} [gpgKeys] YumRepository gpgKeys
+                                     */
+    
+                                    /**
+                                     * Constructs a new YumRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @classdesc Represents a YumRepository.
+                                     * @implements IYumRepository
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository=} [properties] Properties to set
+                                     */
+                                    function YumRepository(properties) {
+                                        this.gpgKeys = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * YumRepository id.
+                                     * @member {string} id
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @instance
+                                     */
+                                    YumRepository.prototype.id = "";
+    
+                                    /**
+                                     * YumRepository displayName.
+                                     * @member {string} displayName
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @instance
+                                     */
+                                    YumRepository.prototype.displayName = "";
+    
+                                    /**
+                                     * YumRepository baseUrl.
+                                     * @member {string} baseUrl
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @instance
+                                     */
+                                    YumRepository.prototype.baseUrl = "";
+    
+                                    /**
+                                     * YumRepository gpgKeys.
+                                     * @member {Array.<string>} gpgKeys
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @instance
+                                     */
+                                    YumRepository.prototype.gpgKeys = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new YumRepository instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository} YumRepository instance
+                                     */
+                                    YumRepository.create = function create(properties) {
+                                        return new YumRepository(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified YumRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository} message YumRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    YumRepository.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                        if (message.baseUrl != null && Object.hasOwnProperty.call(message, "baseUrl"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.baseUrl);
+                                        if (message.gpgKeys != null && message.gpgKeys.length)
+                                            for (var i = 0; i < message.gpgKeys.length; ++i)
+                                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gpgKeys[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified YumRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository} message YumRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    YumRepository.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a YumRepository message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository} YumRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    YumRepository.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.id = reader.string();
+                                                break;
+                                            case 2:
+                                                message.displayName = reader.string();
+                                                break;
+                                            case 3:
+                                                message.baseUrl = reader.string();
+                                                break;
+                                            case 4:
+                                                if (!(message.gpgKeys && message.gpgKeys.length))
+                                                    message.gpgKeys = [];
+                                                message.gpgKeys.push(reader.string());
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a YumRepository message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository} YumRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    YumRepository.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a YumRepository message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    YumRepository.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.id != null && message.hasOwnProperty("id"))
+                                            if (!$util.isString(message.id))
+                                                return "id: string expected";
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            if (!$util.isString(message.displayName))
+                                                return "displayName: string expected";
+                                        if (message.baseUrl != null && message.hasOwnProperty("baseUrl"))
+                                            if (!$util.isString(message.baseUrl))
+                                                return "baseUrl: string expected";
+                                        if (message.gpgKeys != null && message.hasOwnProperty("gpgKeys")) {
+                                            if (!Array.isArray(message.gpgKeys))
+                                                return "gpgKeys: array expected";
+                                            for (var i = 0; i < message.gpgKeys.length; ++i)
+                                                if (!$util.isString(message.gpgKeys[i]))
+                                                    return "gpgKeys: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a YumRepository message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository} YumRepository
+                                     */
+                                    YumRepository.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository();
+                                        if (object.id != null)
+                                            message.id = String(object.id);
+                                        if (object.displayName != null)
+                                            message.displayName = String(object.displayName);
+                                        if (object.baseUrl != null)
+                                            message.baseUrl = String(object.baseUrl);
+                                        if (object.gpgKeys) {
+                                            if (!Array.isArray(object.gpgKeys))
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.gpgKeys: array expected");
+                                            message.gpgKeys = [];
+                                            for (var i = 0; i < object.gpgKeys.length; ++i)
+                                                message.gpgKeys[i] = String(object.gpgKeys[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a YumRepository message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository} message YumRepository
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    YumRepository.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.gpgKeys = [];
+                                        if (options.defaults) {
+                                            object.id = "";
+                                            object.displayName = "";
+                                            object.baseUrl = "";
+                                        }
+                                        if (message.id != null && message.hasOwnProperty("id"))
+                                            object.id = message.id;
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            object.displayName = message.displayName;
+                                        if (message.baseUrl != null && message.hasOwnProperty("baseUrl"))
+                                            object.baseUrl = message.baseUrl;
+                                        if (message.gpgKeys && message.gpgKeys.length) {
+                                            object.gpgKeys = [];
+                                            for (var j = 0; j < message.gpgKeys.length; ++j)
+                                                object.gpgKeys[j] = message.gpgKeys[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this YumRepository to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    YumRepository.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return YumRepository;
+                                })();
+    
+                                RepositoryResource.ZypperRepository = (function() {
+    
+                                    /**
+                                     * Properties of a ZypperRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @interface IZypperRepository
+                                     * @property {string|null} [id] ZypperRepository id
+                                     * @property {string|null} [displayName] ZypperRepository displayName
+                                     * @property {string|null} [baseUrl] ZypperRepository baseUrl
+                                     * @property {Array.<string>|null} [gpgKeys] ZypperRepository gpgKeys
+                                     */
+    
+                                    /**
+                                     * Constructs a new ZypperRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @classdesc Represents a ZypperRepository.
+                                     * @implements IZypperRepository
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository=} [properties] Properties to set
+                                     */
+                                    function ZypperRepository(properties) {
+                                        this.gpgKeys = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ZypperRepository id.
+                                     * @member {string} id
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @instance
+                                     */
+                                    ZypperRepository.prototype.id = "";
+    
+                                    /**
+                                     * ZypperRepository displayName.
+                                     * @member {string} displayName
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @instance
+                                     */
+                                    ZypperRepository.prototype.displayName = "";
+    
+                                    /**
+                                     * ZypperRepository baseUrl.
+                                     * @member {string} baseUrl
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @instance
+                                     */
+                                    ZypperRepository.prototype.baseUrl = "";
+    
+                                    /**
+                                     * ZypperRepository gpgKeys.
+                                     * @member {Array.<string>} gpgKeys
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @instance
+                                     */
+                                    ZypperRepository.prototype.gpgKeys = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new ZypperRepository instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository} ZypperRepository instance
+                                     */
+                                    ZypperRepository.create = function create(properties) {
+                                        return new ZypperRepository(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ZypperRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository} message ZypperRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ZypperRepository.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                        if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                        if (message.baseUrl != null && Object.hasOwnProperty.call(message, "baseUrl"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.baseUrl);
+                                        if (message.gpgKeys != null && message.gpgKeys.length)
+                                            for (var i = 0; i < message.gpgKeys.length; ++i)
+                                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.gpgKeys[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ZypperRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository} message ZypperRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ZypperRepository.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ZypperRepository message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository} ZypperRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ZypperRepository.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.id = reader.string();
+                                                break;
+                                            case 2:
+                                                message.displayName = reader.string();
+                                                break;
+                                            case 3:
+                                                message.baseUrl = reader.string();
+                                                break;
+                                            case 4:
+                                                if (!(message.gpgKeys && message.gpgKeys.length))
+                                                    message.gpgKeys = [];
+                                                message.gpgKeys.push(reader.string());
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ZypperRepository message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository} ZypperRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ZypperRepository.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ZypperRepository message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ZypperRepository.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.id != null && message.hasOwnProperty("id"))
+                                            if (!$util.isString(message.id))
+                                                return "id: string expected";
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            if (!$util.isString(message.displayName))
+                                                return "displayName: string expected";
+                                        if (message.baseUrl != null && message.hasOwnProperty("baseUrl"))
+                                            if (!$util.isString(message.baseUrl))
+                                                return "baseUrl: string expected";
+                                        if (message.gpgKeys != null && message.hasOwnProperty("gpgKeys")) {
+                                            if (!Array.isArray(message.gpgKeys))
+                                                return "gpgKeys: array expected";
+                                            for (var i = 0; i < message.gpgKeys.length; ++i)
+                                                if (!$util.isString(message.gpgKeys[i]))
+                                                    return "gpgKeys: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ZypperRepository message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository} ZypperRepository
+                                     */
+                                    ZypperRepository.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository();
+                                        if (object.id != null)
+                                            message.id = String(object.id);
+                                        if (object.displayName != null)
+                                            message.displayName = String(object.displayName);
+                                        if (object.baseUrl != null)
+                                            message.baseUrl = String(object.baseUrl);
+                                        if (object.gpgKeys) {
+                                            if (!Array.isArray(object.gpgKeys))
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.gpgKeys: array expected");
+                                            message.gpgKeys = [];
+                                            for (var i = 0; i < object.gpgKeys.length; ++i)
+                                                message.gpgKeys[i] = String(object.gpgKeys[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ZypperRepository message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository} message ZypperRepository
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ZypperRepository.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.gpgKeys = [];
+                                        if (options.defaults) {
+                                            object.id = "";
+                                            object.displayName = "";
+                                            object.baseUrl = "";
+                                        }
+                                        if (message.id != null && message.hasOwnProperty("id"))
+                                            object.id = message.id;
+                                        if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                            object.displayName = message.displayName;
+                                        if (message.baseUrl != null && message.hasOwnProperty("baseUrl"))
+                                            object.baseUrl = message.baseUrl;
+                                        if (message.gpgKeys && message.gpgKeys.length) {
+                                            object.gpgKeys = [];
+                                            for (var j = 0; j < message.gpgKeys.length; ++j)
+                                                object.gpgKeys[j] = message.gpgKeys[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ZypperRepository to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ZypperRepository.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return ZypperRepository;
+                                })();
+    
+                                RepositoryResource.GooRepository = (function() {
+    
+                                    /**
+                                     * Properties of a GooRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @interface IGooRepository
+                                     * @property {string|null} [name] GooRepository name
+                                     * @property {string|null} [url] GooRepository url
+                                     */
+    
+                                    /**
+                                     * Constructs a new GooRepository.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource
+                                     * @classdesc Represents a GooRepository.
+                                     * @implements IGooRepository
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository=} [properties] Properties to set
+                                     */
+                                    function GooRepository(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * GooRepository name.
+                                     * @member {string} name
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @instance
+                                     */
+                                    GooRepository.prototype.name = "";
+    
+                                    /**
+                                     * GooRepository url.
+                                     * @member {string} url
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @instance
+                                     */
+                                    GooRepository.prototype.url = "";
+    
+                                    /**
+                                     * Creates a new GooRepository instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository} GooRepository instance
+                                     */
+                                    GooRepository.create = function create(properties) {
+                                        return new GooRepository(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GooRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository} message GooRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GooRepository.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.url);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified GooRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository} message GooRepository message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    GooRepository.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a GooRepository message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository} GooRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GooRepository.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.name = reader.string();
+                                                break;
+                                            case 2:
+                                                message.url = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a GooRepository message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository} GooRepository
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    GooRepository.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a GooRepository message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    GooRepository.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            if (!$util.isString(message.name))
+                                                return "name: string expected";
+                                        if (message.url != null && message.hasOwnProperty("url"))
+                                            if (!$util.isString(message.url))
+                                                return "url: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a GooRepository message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository} GooRepository
+                                     */
+                                    GooRepository.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository();
+                                        if (object.name != null)
+                                            message.name = String(object.name);
+                                        if (object.url != null)
+                                            message.url = String(object.url);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a GooRepository message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository} message GooRepository
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    GooRepository.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.name = "";
+                                            object.url = "";
+                                        }
+                                        if (message.name != null && message.hasOwnProperty("name"))
+                                            object.name = message.name;
+                                        if (message.url != null && message.hasOwnProperty("url"))
+                                            object.url = message.url;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this GooRepository to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    GooRepository.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return GooRepository;
+                                })();
+    
+                                return RepositoryResource;
+                            })();
+    
+                            Resource.ExecResource = (function() {
+    
+                                /**
+                                 * Properties of an ExecResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @interface IExecResource
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null} [validate] ExecResource validate
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null} [enforce] ExecResource enforce
+                                 */
+    
+                                /**
+                                 * Constructs a new ExecResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @classdesc Represents an ExecResource.
+                                 * @implements IExecResource
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource=} [properties] Properties to set
+                                 */
+                                function ExecResource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ExecResource validate.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null|undefined} validate
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @instance
+                                 */
+                                ExecResource.prototype.validate = null;
+    
+                                /**
+                                 * ExecResource enforce.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null|undefined} enforce
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @instance
+                                 */
+                                ExecResource.prototype.enforce = null;
+    
+                                /**
+                                 * Creates a new ExecResource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource} ExecResource instance
+                                 */
+                                ExecResource.create = function create(properties) {
+                                    return new ExecResource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ExecResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource} message ExecResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ExecResource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.validate != null && Object.hasOwnProperty.call(message, "validate"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.encode(message.validate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.enforce != null && Object.hasOwnProperty.call(message, "enforce"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.encode(message.enforce, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ExecResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource} message ExecResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ExecResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ExecResource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource} ExecResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ExecResource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.validate = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.decode(reader, reader.uint32());
+                                            break;
+                                        case 2:
+                                            message.enforce = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ExecResource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource} ExecResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ExecResource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ExecResource message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ExecResource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.validate != null && message.hasOwnProperty("validate")) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.verify(message.validate);
+                                        if (error)
+                                            return "validate." + error;
+                                    }
+                                    if (message.enforce != null && message.hasOwnProperty("enforce")) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.verify(message.enforce);
+                                        if (error)
+                                            return "enforce." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ExecResource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource} ExecResource
+                                 */
+                                ExecResource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource();
+                                    if (object.validate != null) {
+                                        if (typeof object.validate !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.validate: object expected");
+                                        message.validate = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.fromObject(object.validate);
+                                    }
+                                    if (object.enforce != null) {
+                                        if (typeof object.enforce !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.enforce: object expected");
+                                        message.enforce = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.fromObject(object.enforce);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ExecResource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource} message ExecResource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ExecResource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.validate = null;
+                                        object.enforce = null;
+                                    }
+                                    if (message.validate != null && message.hasOwnProperty("validate"))
+                                        object.validate = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.toObject(message.validate, options);
+                                    if (message.enforce != null && message.hasOwnProperty("enforce"))
+                                        object.enforce = $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.toObject(message.enforce, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ExecResource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ExecResource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                ExecResource.Exec = (function() {
+    
+                                    /**
+                                     * Properties of an Exec.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                     * @interface IExec
+                                     * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null} [file] Exec file
+                                     * @property {string|null} [script] Exec script
+                                     * @property {Array.<string>|null} [args] Exec args
+                                     * @property {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter|null} [interpreter] Exec interpreter
+                                     * @property {string|null} [outputFilePath] Exec outputFilePath
+                                     */
+    
+                                    /**
+                                     * Constructs a new Exec.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource
+                                     * @classdesc Represents an Exec.
+                                     * @implements IExec
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec=} [properties] Properties to set
+                                     */
+                                    function Exec(properties) {
+                                        this.args = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Exec file.
+                                     * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null|undefined} file
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Exec.prototype.file = null;
+    
+                                    /**
+                                     * Exec script.
+                                     * @member {string|null|undefined} script
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Exec.prototype.script = null;
+    
+                                    /**
+                                     * Exec args.
+                                     * @member {Array.<string>} args
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Exec.prototype.args = $util.emptyArray;
+    
+                                    /**
+                                     * Exec interpreter.
+                                     * @member {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter} interpreter
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Exec.prototype.interpreter = 0;
+    
+                                    /**
+                                     * Exec outputFilePath.
+                                     * @member {string} outputFilePath
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Exec.prototype.outputFilePath = "";
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    /**
+                                     * Exec source.
+                                     * @member {"file"|"script"|undefined} source
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Object.defineProperty(Exec.prototype, "source", {
+                                        get: $util.oneOfGetter($oneOfFields = ["file", "script"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new Exec instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec} Exec instance
+                                     */
+                                    Exec.create = function create(properties) {
+                                        return new Exec(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Exec message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec} message Exec message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Exec.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.file != null && Object.hasOwnProperty.call(message, "file"))
+                                            $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.encode(message.file, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.script != null && Object.hasOwnProperty.call(message, "script"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.script);
+                                        if (message.args != null && message.args.length)
+                                            for (var i = 0; i < message.args.length; ++i)
+                                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.args[i]);
+                                        if (message.interpreter != null && Object.hasOwnProperty.call(message, "interpreter"))
+                                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.interpreter);
+                                        if (message.outputFilePath != null && Object.hasOwnProperty.call(message, "outputFilePath"))
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.outputFilePath);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Exec message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec} message Exec message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Exec.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an Exec message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec} Exec
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Exec.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.decode(reader, reader.uint32());
+                                                break;
+                                            case 2:
+                                                message.script = reader.string();
+                                                break;
+                                            case 3:
+                                                if (!(message.args && message.args.length))
+                                                    message.args = [];
+                                                message.args.push(reader.string());
+                                                break;
+                                            case 4:
+                                                message.interpreter = reader.int32();
+                                                break;
+                                            case 5:
+                                                message.outputFilePath = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an Exec message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec} Exec
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Exec.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an Exec message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Exec.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.file != null && message.hasOwnProperty("file")) {
+                                            properties.source = 1;
+                                            {
+                                                var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.verify(message.file);
+                                                if (error)
+                                                    return "file." + error;
+                                            }
+                                        }
+                                        if (message.script != null && message.hasOwnProperty("script")) {
+                                            if (properties.source === 1)
+                                                return "source: multiple values";
+                                            properties.source = 1;
+                                            if (!$util.isString(message.script))
+                                                return "script: string expected";
+                                        }
+                                        if (message.args != null && message.hasOwnProperty("args")) {
+                                            if (!Array.isArray(message.args))
+                                                return "args: array expected";
+                                            for (var i = 0; i < message.args.length; ++i)
+                                                if (!$util.isString(message.args[i]))
+                                                    return "args: string[] expected";
+                                        }
+                                        if (message.interpreter != null && message.hasOwnProperty("interpreter"))
+                                            switch (message.interpreter) {
+                                            default:
+                                                return "interpreter: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                            case 3:
+                                                break;
+                                            }
+                                        if (message.outputFilePath != null && message.hasOwnProperty("outputFilePath"))
+                                            if (!$util.isString(message.outputFilePath))
+                                                return "outputFilePath: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an Exec message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec} Exec
+                                     */
+                                    Exec.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec();
+                                        if (object.file != null) {
+                                            if (typeof object.file !== "object")
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.file: object expected");
+                                            message.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.fromObject(object.file);
+                                        }
+                                        if (object.script != null)
+                                            message.script = String(object.script);
+                                        if (object.args) {
+                                            if (!Array.isArray(object.args))
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.args: array expected");
+                                            message.args = [];
+                                            for (var i = 0; i < object.args.length; ++i)
+                                                message.args[i] = String(object.args[i]);
+                                        }
+                                        switch (object.interpreter) {
+                                        case "INTERPRETER_UNSPECIFIED":
+                                        case 0:
+                                            message.interpreter = 0;
+                                            break;
+                                        case "NONE":
+                                        case 1:
+                                            message.interpreter = 1;
+                                            break;
+                                        case "SHELL":
+                                        case 2:
+                                            message.interpreter = 2;
+                                            break;
+                                        case "POWERSHELL":
+                                        case 3:
+                                            message.interpreter = 3;
+                                            break;
+                                        }
+                                        if (object.outputFilePath != null)
+                                            message.outputFilePath = String(object.outputFilePath);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an Exec message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec} message Exec
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Exec.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.args = [];
+                                        if (options.defaults) {
+                                            object.interpreter = options.enums === String ? "INTERPRETER_UNSPECIFIED" : 0;
+                                            object.outputFilePath = "";
+                                        }
+                                        if (message.file != null && message.hasOwnProperty("file")) {
+                                            object.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.toObject(message.file, options);
+                                            if (options.oneofs)
+                                                object.source = "file";
+                                        }
+                                        if (message.script != null && message.hasOwnProperty("script")) {
+                                            object.script = message.script;
+                                            if (options.oneofs)
+                                                object.source = "script";
+                                        }
+                                        if (message.args && message.args.length) {
+                                            object.args = [];
+                                            for (var j = 0; j < message.args.length; ++j)
+                                                object.args[j] = message.args[j];
+                                        }
+                                        if (message.interpreter != null && message.hasOwnProperty("interpreter"))
+                                            object.interpreter = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter[message.interpreter] : message.interpreter;
+                                        if (message.outputFilePath != null && message.hasOwnProperty("outputFilePath"))
+                                            object.outputFilePath = message.outputFilePath;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Exec to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Exec.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Interpreter enum.
+                                     * @name google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter
+                                     * @enum {number}
+                                     * @property {number} INTERPRETER_UNSPECIFIED=0 INTERPRETER_UNSPECIFIED value
+                                     * @property {number} NONE=1 NONE value
+                                     * @property {number} SHELL=2 SHELL value
+                                     * @property {number} POWERSHELL=3 POWERSHELL value
+                                     */
+                                    Exec.Interpreter = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "INTERPRETER_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "NONE"] = 1;
+                                        values[valuesById[2] = "SHELL"] = 2;
+                                        values[valuesById[3] = "POWERSHELL"] = 3;
+                                        return values;
+                                    })();
+    
+                                    return Exec;
+                                })();
+    
+                                return ExecResource;
+                            })();
+    
+                            Resource.FileResource = (function() {
+    
+                                /**
+                                 * Properties of a FileResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @interface IFileResource
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null} [file] FileResource file
+                                 * @property {string|null} [content] FileResource content
+                                 * @property {string|null} [path] FileResource path
+                                 * @property {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState|null} [state] FileResource state
+                                 * @property {string|null} [permissions] FileResource permissions
+                                 */
+    
+                                /**
+                                 * Constructs a new FileResource.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource
+                                 * @classdesc Represents a FileResource.
+                                 * @implements IFileResource
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource=} [properties] Properties to set
+                                 */
+                                function FileResource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FileResource file.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null|undefined} file
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 */
+                                FileResource.prototype.file = null;
+    
+                                /**
+                                 * FileResource content.
+                                 * @member {string|null|undefined} content
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 */
+                                FileResource.prototype.content = null;
+    
+                                /**
+                                 * FileResource path.
+                                 * @member {string} path
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 */
+                                FileResource.prototype.path = "";
+    
+                                /**
+                                 * FileResource state.
+                                 * @member {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState} state
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 */
+                                FileResource.prototype.state = 0;
+    
+                                /**
+                                 * FileResource permissions.
+                                 * @member {string} permissions
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 */
+                                FileResource.prototype.permissions = "";
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * FileResource source.
+                                 * @member {"file"|"content"|undefined} source
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 */
+                                Object.defineProperty(FileResource.prototype, "source", {
+                                    get: $util.oneOfGetter($oneOfFields = ["file", "content"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new FileResource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource} FileResource instance
+                                 */
+                                FileResource.create = function create(properties) {
+                                    return new FileResource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FileResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource} message FileResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FileResource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.file != null && Object.hasOwnProperty.call(message, "file"))
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.encode(message.file, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.content);
+                                    if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                                    if (message.permissions != null && Object.hasOwnProperty.call(message, "permissions"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.permissions);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FileResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource} message FileResource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FileResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FileResource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource} FileResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FileResource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.decode(reader, reader.uint32());
+                                            break;
+                                        case 2:
+                                            message.content = reader.string();
+                                            break;
+                                        case 3:
+                                            message.path = reader.string();
+                                            break;
+                                        case 4:
+                                            message.state = reader.int32();
+                                            break;
+                                        case 5:
+                                            message.permissions = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FileResource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource} FileResource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FileResource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FileResource message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FileResource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.file != null && message.hasOwnProperty("file")) {
+                                        properties.source = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.verify(message.file);
+                                            if (error)
+                                                return "file." + error;
+                                        }
+                                    }
+                                    if (message.content != null && message.hasOwnProperty("content")) {
+                                        if (properties.source === 1)
+                                            return "source: multiple values";
+                                        properties.source = 1;
+                                        if (!$util.isString(message.content))
+                                            return "content: string expected";
+                                    }
+                                    if (message.path != null && message.hasOwnProperty("path"))
+                                        if (!$util.isString(message.path))
+                                            return "path: string expected";
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        switch (message.state) {
+                                        default:
+                                            return "state: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.permissions != null && message.hasOwnProperty("permissions"))
+                                        if (!$util.isString(message.permissions))
+                                            return "permissions: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FileResource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource} FileResource
+                                 */
+                                FileResource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource();
+                                    if (object.file != null) {
+                                        if (typeof object.file !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.file: object expected");
+                                        message.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.fromObject(object.file);
+                                    }
+                                    if (object.content != null)
+                                        message.content = String(object.content);
+                                    if (object.path != null)
+                                        message.path = String(object.path);
+                                    switch (object.state) {
+                                    case "DESIRED_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.state = 0;
+                                        break;
+                                    case "PRESENT":
+                                    case 1:
+                                        message.state = 1;
+                                        break;
+                                    case "ABSENT":
+                                    case 2:
+                                        message.state = 2;
+                                        break;
+                                    case "CONTENTS_MATCH":
+                                    case 3:
+                                        message.state = 3;
+                                        break;
+                                    }
+                                    if (object.permissions != null)
+                                        message.permissions = String(object.permissions);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FileResource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicy.Resource.FileResource} message FileResource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FileResource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.path = "";
+                                        object.state = options.enums === String ? "DESIRED_STATE_UNSPECIFIED" : 0;
+                                        object.permissions = "";
+                                    }
+                                    if (message.file != null && message.hasOwnProperty("file")) {
+                                        object.file = $root.google.cloud.osconfig.v1.OSPolicy.Resource.File.toObject(message.file, options);
+                                        if (options.oneofs)
+                                            object.source = "file";
+                                    }
+                                    if (message.content != null && message.hasOwnProperty("content")) {
+                                        object.content = message.content;
+                                        if (options.oneofs)
+                                            object.source = "content";
+                                    }
+                                    if (message.path != null && message.hasOwnProperty("path"))
+                                        object.path = message.path;
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        object.state = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState[message.state] : message.state;
+                                    if (message.permissions != null && message.hasOwnProperty("permissions"))
+                                        object.permissions = message.permissions;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FileResource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FileResource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * DesiredState enum.
+                                 * @name google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState
+                                 * @enum {number}
+                                 * @property {number} DESIRED_STATE_UNSPECIFIED=0 DESIRED_STATE_UNSPECIFIED value
+                                 * @property {number} PRESENT=1 PRESENT value
+                                 * @property {number} ABSENT=2 ABSENT value
+                                 * @property {number} CONTENTS_MATCH=3 CONTENTS_MATCH value
+                                 */
+                                FileResource.DesiredState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "DESIRED_STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "PRESENT"] = 1;
+                                    values[valuesById[2] = "ABSENT"] = 2;
+                                    values[valuesById[3] = "CONTENTS_MATCH"] = 3;
+                                    return values;
+                                })();
+    
+                                return FileResource;
+                            })();
+    
+                            return Resource;
+                        })();
+    
+                        OSPolicy.ResourceGroup = (function() {
+    
+                            /**
+                             * Properties of a ResourceGroup.
+                             * @memberof google.cloud.osconfig.v1.OSPolicy
+                             * @interface IResourceGroup
+                             * @property {Array.<google.cloud.osconfig.v1.OSPolicy.IInventoryFilter>|null} [inventoryFilters] ResourceGroup inventoryFilters
+                             * @property {Array.<google.cloud.osconfig.v1.OSPolicy.IResource>|null} [resources] ResourceGroup resources
+                             */
+    
+                            /**
+                             * Constructs a new ResourceGroup.
+                             * @memberof google.cloud.osconfig.v1.OSPolicy
+                             * @classdesc Represents a ResourceGroup.
+                             * @implements IResourceGroup
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResourceGroup=} [properties] Properties to set
+                             */
+                            function ResourceGroup(properties) {
+                                this.inventoryFilters = [];
+                                this.resources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ResourceGroup inventoryFilters.
+                             * @member {Array.<google.cloud.osconfig.v1.OSPolicy.IInventoryFilter>} inventoryFilters
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @instance
+                             */
+                            ResourceGroup.prototype.inventoryFilters = $util.emptyArray;
+    
+                            /**
+                             * ResourceGroup resources.
+                             * @member {Array.<google.cloud.osconfig.v1.OSPolicy.IResource>} resources
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @instance
+                             */
+                            ResourceGroup.prototype.resources = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ResourceGroup instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResourceGroup=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.ResourceGroup} ResourceGroup instance
+                             */
+                            ResourceGroup.create = function create(properties) {
+                                return new ResourceGroup(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceGroup message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.ResourceGroup.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResourceGroup} message ResourceGroup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceGroup.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.inventoryFilters != null && message.inventoryFilters.length)
+                                    for (var i = 0; i < message.inventoryFilters.length; ++i)
+                                        $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter.encode(message.inventoryFilters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.resources != null && message.resources.length)
+                                    for (var i = 0; i < message.resources.length; ++i)
+                                        $root.google.cloud.osconfig.v1.OSPolicy.Resource.encode(message.resources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ResourceGroup message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.ResourceGroup.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.IResourceGroup} message ResourceGroup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ResourceGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ResourceGroup message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.ResourceGroup} ResourceGroup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceGroup.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.inventoryFilters && message.inventoryFilters.length))
+                                            message.inventoryFilters = [];
+                                        message.inventoryFilters.push($root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter.decode(reader, reader.uint32()));
+                                        break;
+                                    case 2:
+                                        if (!(message.resources && message.resources.length))
+                                            message.resources = [];
+                                        message.resources.push($root.google.cloud.osconfig.v1.OSPolicy.Resource.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ResourceGroup message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.ResourceGroup} ResourceGroup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ResourceGroup.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ResourceGroup message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ResourceGroup.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.inventoryFilters != null && message.hasOwnProperty("inventoryFilters")) {
+                                    if (!Array.isArray(message.inventoryFilters))
+                                        return "inventoryFilters: array expected";
+                                    for (var i = 0; i < message.inventoryFilters.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter.verify(message.inventoryFilters[i]);
+                                        if (error)
+                                            return "inventoryFilters." + error;
+                                    }
+                                }
+                                if (message.resources != null && message.hasOwnProperty("resources")) {
+                                    if (!Array.isArray(message.resources))
+                                        return "resources: array expected";
+                                    for (var i = 0; i < message.resources.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicy.Resource.verify(message.resources[i]);
+                                        if (error)
+                                            return "resources." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ResourceGroup message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicy.ResourceGroup} ResourceGroup
+                             */
+                            ResourceGroup.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicy.ResourceGroup();
+                                if (object.inventoryFilters) {
+                                    if (!Array.isArray(object.inventoryFilters))
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.ResourceGroup.inventoryFilters: array expected");
+                                    message.inventoryFilters = [];
+                                    for (var i = 0; i < object.inventoryFilters.length; ++i) {
+                                        if (typeof object.inventoryFilters[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.ResourceGroup.inventoryFilters: object expected");
+                                        message.inventoryFilters[i] = $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter.fromObject(object.inventoryFilters[i]);
+                                    }
+                                }
+                                if (object.resources) {
+                                    if (!Array.isArray(object.resources))
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicy.ResourceGroup.resources: array expected");
+                                    message.resources = [];
+                                    for (var i = 0; i < object.resources.length; ++i) {
+                                        if (typeof object.resources[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicy.ResourceGroup.resources: object expected");
+                                        message.resources[i] = $root.google.cloud.osconfig.v1.OSPolicy.Resource.fromObject(object.resources[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ResourceGroup message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicy.ResourceGroup} message ResourceGroup
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ResourceGroup.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.inventoryFilters = [];
+                                    object.resources = [];
+                                }
+                                if (message.inventoryFilters && message.inventoryFilters.length) {
+                                    object.inventoryFilters = [];
+                                    for (var j = 0; j < message.inventoryFilters.length; ++j)
+                                        object.inventoryFilters[j] = $root.google.cloud.osconfig.v1.OSPolicy.InventoryFilter.toObject(message.inventoryFilters[j], options);
+                                }
+                                if (message.resources && message.resources.length) {
+                                    object.resources = [];
+                                    for (var j = 0; j < message.resources.length; ++j)
+                                        object.resources[j] = $root.google.cloud.osconfig.v1.OSPolicy.Resource.toObject(message.resources[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ResourceGroup to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicy.ResourceGroup
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ResourceGroup.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ResourceGroup;
+                        })();
+    
+                        /**
+                         * Mode enum.
+                         * @name google.cloud.osconfig.v1.OSPolicy.Mode
+                         * @enum {number}
+                         * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                         * @property {number} VALIDATION=1 VALIDATION value
+                         * @property {number} ENFORCEMENT=2 ENFORCEMENT value
+                         */
+                        OSPolicy.Mode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "VALIDATION"] = 1;
+                            values[valuesById[2] = "ENFORCEMENT"] = 2;
+                            return values;
+                        })();
+    
+                        return OSPolicy;
+                    })();
+    
+                    v1.GetOSPolicyAssignmentReportRequest = (function() {
+    
+                        /**
+                         * Properties of a GetOSPolicyAssignmentReportRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IGetOSPolicyAssignmentReportRequest
+                         * @property {string|null} [name] GetOSPolicyAssignmentReportRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetOSPolicyAssignmentReportRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a GetOSPolicyAssignmentReportRequest.
+                         * @implements IGetOSPolicyAssignmentReportRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest=} [properties] Properties to set
+                         */
+                        function GetOSPolicyAssignmentReportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetOSPolicyAssignmentReportRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @instance
+                         */
+                        GetOSPolicyAssignmentReportRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetOSPolicyAssignmentReportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest} GetOSPolicyAssignmentReportRequest instance
+                         */
+                        GetOSPolicyAssignmentReportRequest.create = function create(properties) {
+                            return new GetOSPolicyAssignmentReportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetOSPolicyAssignmentReportRequest message. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest} message GetOSPolicyAssignmentReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetOSPolicyAssignmentReportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetOSPolicyAssignmentReportRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest} message GetOSPolicyAssignmentReportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetOSPolicyAssignmentReportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetOSPolicyAssignmentReportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest} GetOSPolicyAssignmentReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetOSPolicyAssignmentReportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetOSPolicyAssignmentReportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest} GetOSPolicyAssignmentReportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetOSPolicyAssignmentReportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetOSPolicyAssignmentReportRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetOSPolicyAssignmentReportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetOSPolicyAssignmentReportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest} GetOSPolicyAssignmentReportRequest
+                         */
+                        GetOSPolicyAssignmentReportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetOSPolicyAssignmentReportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest} message GetOSPolicyAssignmentReportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetOSPolicyAssignmentReportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetOSPolicyAssignmentReportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetOSPolicyAssignmentReportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetOSPolicyAssignmentReportRequest;
+                    })();
+    
+                    v1.ListOSPolicyAssignmentReportsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListOSPolicyAssignmentReportsRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IListOSPolicyAssignmentReportsRequest
+                         * @property {string|null} [parent] ListOSPolicyAssignmentReportsRequest parent
+                         * @property {number|null} [pageSize] ListOSPolicyAssignmentReportsRequest pageSize
+                         * @property {string|null} [filter] ListOSPolicyAssignmentReportsRequest filter
+                         * @property {string|null} [pageToken] ListOSPolicyAssignmentReportsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOSPolicyAssignmentReportsRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ListOSPolicyAssignmentReportsRequest.
+                         * @implements IListOSPolicyAssignmentReportsRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest=} [properties] Properties to set
+                         */
+                        function ListOSPolicyAssignmentReportsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOSPolicyAssignmentReportsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentReportsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListOSPolicyAssignmentReportsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentReportsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListOSPolicyAssignmentReportsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentReportsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListOSPolicyAssignmentReportsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentReportsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListOSPolicyAssignmentReportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest} ListOSPolicyAssignmentReportsRequest instance
+                         */
+                        ListOSPolicyAssignmentReportsRequest.create = function create(properties) {
+                            return new ListOSPolicyAssignmentReportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentReportsRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest} message ListOSPolicyAssignmentReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentReportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentReportsRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest} message ListOSPolicyAssignmentReportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentReportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentReportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest} ListOSPolicyAssignmentReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentReportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.filter = reader.string();
+                                    break;
+                                case 4:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentReportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest} ListOSPolicyAssignmentReportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentReportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOSPolicyAssignmentReportsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOSPolicyAssignmentReportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOSPolicyAssignmentReportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest} ListOSPolicyAssignmentReportsRequest
+                         */
+                        ListOSPolicyAssignmentReportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOSPolicyAssignmentReportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest} message ListOSPolicyAssignmentReportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOSPolicyAssignmentReportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.filter = "";
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOSPolicyAssignmentReportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOSPolicyAssignmentReportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListOSPolicyAssignmentReportsRequest;
+                    })();
+    
+                    v1.ListOSPolicyAssignmentReportsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListOSPolicyAssignmentReportsResponse.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IListOSPolicyAssignmentReportsResponse
+                         * @property {Array.<google.cloud.osconfig.v1.IOSPolicyAssignmentReport>|null} [osPolicyAssignmentReports] ListOSPolicyAssignmentReportsResponse osPolicyAssignmentReports
+                         * @property {string|null} [nextPageToken] ListOSPolicyAssignmentReportsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOSPolicyAssignmentReportsResponse.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ListOSPolicyAssignmentReportsResponse.
+                         * @implements IListOSPolicyAssignmentReportsResponse
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse=} [properties] Properties to set
+                         */
+                        function ListOSPolicyAssignmentReportsResponse(properties) {
+                            this.osPolicyAssignmentReports = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOSPolicyAssignmentReportsResponse osPolicyAssignmentReports.
+                         * @member {Array.<google.cloud.osconfig.v1.IOSPolicyAssignmentReport>} osPolicyAssignmentReports
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentReportsResponse.prototype.osPolicyAssignmentReports = $util.emptyArray;
+    
+                        /**
+                         * ListOSPolicyAssignmentReportsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentReportsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListOSPolicyAssignmentReportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse} ListOSPolicyAssignmentReportsResponse instance
+                         */
+                        ListOSPolicyAssignmentReportsResponse.create = function create(properties) {
+                            return new ListOSPolicyAssignmentReportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentReportsResponse message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse} message ListOSPolicyAssignmentReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentReportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osPolicyAssignmentReports != null && message.osPolicyAssignmentReports.length)
+                                for (var i = 0; i < message.osPolicyAssignmentReports.length; ++i)
+                                    $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.encode(message.osPolicyAssignmentReports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentReportsResponse message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse} message ListOSPolicyAssignmentReportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentReportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentReportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse} ListOSPolicyAssignmentReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentReportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.osPolicyAssignmentReports && message.osPolicyAssignmentReports.length))
+                                        message.osPolicyAssignmentReports = [];
+                                    message.osPolicyAssignmentReports.push($root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentReportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse} ListOSPolicyAssignmentReportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentReportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOSPolicyAssignmentReportsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOSPolicyAssignmentReportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osPolicyAssignmentReports != null && message.hasOwnProperty("osPolicyAssignmentReports")) {
+                                if (!Array.isArray(message.osPolicyAssignmentReports))
+                                    return "osPolicyAssignmentReports: array expected";
+                                for (var i = 0; i < message.osPolicyAssignmentReports.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.verify(message.osPolicyAssignmentReports[i]);
+                                    if (error)
+                                        return "osPolicyAssignmentReports." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOSPolicyAssignmentReportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse} ListOSPolicyAssignmentReportsResponse
+                         */
+                        ListOSPolicyAssignmentReportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse();
+                            if (object.osPolicyAssignmentReports) {
+                                if (!Array.isArray(object.osPolicyAssignmentReports))
+                                    throw TypeError(".google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse.osPolicyAssignmentReports: array expected");
+                                message.osPolicyAssignmentReports = [];
+                                for (var i = 0; i < object.osPolicyAssignmentReports.length; ++i) {
+                                    if (typeof object.osPolicyAssignmentReports[i] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse.osPolicyAssignmentReports: object expected");
+                                    message.osPolicyAssignmentReports[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.fromObject(object.osPolicyAssignmentReports[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOSPolicyAssignmentReportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse} message ListOSPolicyAssignmentReportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOSPolicyAssignmentReportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.osPolicyAssignmentReports = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.osPolicyAssignmentReports && message.osPolicyAssignmentReports.length) {
+                                object.osPolicyAssignmentReports = [];
+                                for (var j = 0; j < message.osPolicyAssignmentReports.length; ++j)
+                                    object.osPolicyAssignmentReports[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.toObject(message.osPolicyAssignmentReports[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOSPolicyAssignmentReportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOSPolicyAssignmentReportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListOSPolicyAssignmentReportsResponse;
+                    })();
+    
+                    v1.OSPolicyAssignmentReport = (function() {
+    
+                        /**
+                         * Properties of a OSPolicyAssignmentReport.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IOSPolicyAssignmentReport
+                         * @property {string|null} [name] OSPolicyAssignmentReport name
+                         * @property {string|null} [instance] OSPolicyAssignmentReport instance
+                         * @property {string|null} [osPolicyAssignment] OSPolicyAssignmentReport osPolicyAssignment
+                         * @property {Array.<google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance>|null} [osPolicyCompliances] OSPolicyAssignmentReport osPolicyCompliances
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] OSPolicyAssignmentReport updateTime
+                         * @property {string|null} [lastRunId] OSPolicyAssignmentReport lastRunId
+                         */
+    
+                        /**
+                         * Constructs a new OSPolicyAssignmentReport.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a OSPolicyAssignmentReport.
+                         * @implements IOSPolicyAssignmentReport
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentReport=} [properties] Properties to set
+                         */
+                        function OSPolicyAssignmentReport(properties) {
+                            this.osPolicyCompliances = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OSPolicyAssignmentReport name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         */
+                        OSPolicyAssignmentReport.prototype.name = "";
+    
+                        /**
+                         * OSPolicyAssignmentReport instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         */
+                        OSPolicyAssignmentReport.prototype.instance = "";
+    
+                        /**
+                         * OSPolicyAssignmentReport osPolicyAssignment.
+                         * @member {string} osPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         */
+                        OSPolicyAssignmentReport.prototype.osPolicyAssignment = "";
+    
+                        /**
+                         * OSPolicyAssignmentReport osPolicyCompliances.
+                         * @member {Array.<google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance>} osPolicyCompliances
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         */
+                        OSPolicyAssignmentReport.prototype.osPolicyCompliances = $util.emptyArray;
+    
+                        /**
+                         * OSPolicyAssignmentReport updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         */
+                        OSPolicyAssignmentReport.prototype.updateTime = null;
+    
+                        /**
+                         * OSPolicyAssignmentReport lastRunId.
+                         * @member {string} lastRunId
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         */
+                        OSPolicyAssignmentReport.prototype.lastRunId = "";
+    
+                        /**
+                         * Creates a new OSPolicyAssignmentReport instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentReport=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport} OSPolicyAssignmentReport instance
+                         */
+                        OSPolicyAssignmentReport.create = function create(properties) {
+                            return new OSPolicyAssignmentReport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicyAssignmentReport message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentReport} message OSPolicyAssignmentReport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicyAssignmentReport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.instance);
+                            if (message.osPolicyAssignment != null && Object.hasOwnProperty.call(message, "osPolicyAssignment"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.osPolicyAssignment);
+                            if (message.osPolicyCompliances != null && message.osPolicyCompliances.length)
+                                for (var i = 0; i < message.osPolicyCompliances.length; ++i)
+                                    $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.encode(message.osPolicyCompliances[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.lastRunId != null && Object.hasOwnProperty.call(message, "lastRunId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.lastRunId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicyAssignmentReport message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentReport} message OSPolicyAssignmentReport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicyAssignmentReport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OSPolicyAssignmentReport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport} OSPolicyAssignmentReport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicyAssignmentReport.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.instance = reader.string();
+                                    break;
+                                case 3:
+                                    message.osPolicyAssignment = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.osPolicyCompliances && message.osPolicyCompliances.length))
+                                        message.osPolicyCompliances = [];
+                                    message.osPolicyCompliances.push($root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.lastRunId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OSPolicyAssignmentReport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport} OSPolicyAssignmentReport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicyAssignmentReport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OSPolicyAssignmentReport message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OSPolicyAssignmentReport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment"))
+                                if (!$util.isString(message.osPolicyAssignment))
+                                    return "osPolicyAssignment: string expected";
+                            if (message.osPolicyCompliances != null && message.hasOwnProperty("osPolicyCompliances")) {
+                                if (!Array.isArray(message.osPolicyCompliances))
+                                    return "osPolicyCompliances: array expected";
+                                for (var i = 0; i < message.osPolicyCompliances.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.verify(message.osPolicyCompliances[i]);
+                                    if (error)
+                                        return "osPolicyCompliances." + error;
+                                }
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.lastRunId != null && message.hasOwnProperty("lastRunId"))
+                                if (!$util.isString(message.lastRunId))
+                                    return "lastRunId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OSPolicyAssignmentReport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport} OSPolicyAssignmentReport
+                         */
+                        OSPolicyAssignmentReport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.osPolicyAssignment != null)
+                                message.osPolicyAssignment = String(object.osPolicyAssignment);
+                            if (object.osPolicyCompliances) {
+                                if (!Array.isArray(object.osPolicyCompliances))
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.osPolicyCompliances: array expected");
+                                message.osPolicyCompliances = [];
+                                for (var i = 0; i < object.osPolicyCompliances.length; ++i) {
+                                    if (typeof object.osPolicyCompliances[i] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.osPolicyCompliances: object expected");
+                                    message.osPolicyCompliances[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.fromObject(object.osPolicyCompliances[i]);
+                                }
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.lastRunId != null)
+                                message.lastRunId = String(object.lastRunId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OSPolicyAssignmentReport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @static
+                         * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport} message OSPolicyAssignmentReport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OSPolicyAssignmentReport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.osPolicyCompliances = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.instance = "";
+                                object.osPolicyAssignment = "";
+                                object.updateTime = null;
+                                object.lastRunId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment"))
+                                object.osPolicyAssignment = message.osPolicyAssignment;
+                            if (message.osPolicyCompliances && message.osPolicyCompliances.length) {
+                                object.osPolicyCompliances = [];
+                                for (var j = 0; j < message.osPolicyCompliances.length; ++j)
+                                    object.osPolicyCompliances[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.toObject(message.osPolicyCompliances[j], options);
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.lastRunId != null && message.hasOwnProperty("lastRunId"))
+                                object.lastRunId = message.lastRunId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OSPolicyAssignmentReport to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OSPolicyAssignmentReport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        OSPolicyAssignmentReport.OSPolicyCompliance = (function() {
+    
+                            /**
+                             * Properties of a OSPolicyCompliance.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                             * @interface IOSPolicyCompliance
+                             * @property {string|null} [osPolicyId] OSPolicyCompliance osPolicyId
+                             * @property {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState|null} [complianceState] OSPolicyCompliance complianceState
+                             * @property {string|null} [complianceStateReason] OSPolicyCompliance complianceStateReason
+                             * @property {Array.<google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance>|null} [osPolicyResourceCompliances] OSPolicyCompliance osPolicyResourceCompliances
+                             */
+    
+                            /**
+                             * Constructs a new OSPolicyCompliance.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport
+                             * @classdesc Represents a OSPolicyCompliance.
+                             * @implements IOSPolicyCompliance
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance=} [properties] Properties to set
+                             */
+                            function OSPolicyCompliance(properties) {
+                                this.osPolicyResourceCompliances = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OSPolicyCompliance osPolicyId.
+                             * @member {string} osPolicyId
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @instance
+                             */
+                            OSPolicyCompliance.prototype.osPolicyId = "";
+    
+                            /**
+                             * OSPolicyCompliance complianceState.
+                             * @member {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState} complianceState
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @instance
+                             */
+                            OSPolicyCompliance.prototype.complianceState = 0;
+    
+                            /**
+                             * OSPolicyCompliance complianceStateReason.
+                             * @member {string} complianceStateReason
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @instance
+                             */
+                            OSPolicyCompliance.prototype.complianceStateReason = "";
+    
+                            /**
+                             * OSPolicyCompliance osPolicyResourceCompliances.
+                             * @member {Array.<google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance>} osPolicyResourceCompliances
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @instance
+                             */
+                            OSPolicyCompliance.prototype.osPolicyResourceCompliances = $util.emptyArray;
+    
+                            /**
+                             * Creates a new OSPolicyCompliance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance} OSPolicyCompliance instance
+                             */
+                            OSPolicyCompliance.create = function create(properties) {
+                                return new OSPolicyCompliance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OSPolicyCompliance message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance} message OSPolicyCompliance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OSPolicyCompliance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.osPolicyId != null && Object.hasOwnProperty.call(message, "osPolicyId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.osPolicyId);
+                                if (message.complianceState != null && Object.hasOwnProperty.call(message, "complianceState"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.complianceState);
+                                if (message.complianceStateReason != null && Object.hasOwnProperty.call(message, "complianceStateReason"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.complianceStateReason);
+                                if (message.osPolicyResourceCompliances != null && message.osPolicyResourceCompliances.length)
+                                    for (var i = 0; i < message.osPolicyResourceCompliances.length; ++i)
+                                        $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.encode(message.osPolicyResourceCompliances[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OSPolicyCompliance message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance} message OSPolicyCompliance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OSPolicyCompliance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a OSPolicyCompliance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance} OSPolicyCompliance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OSPolicyCompliance.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.osPolicyId = reader.string();
+                                        break;
+                                    case 2:
+                                        message.complianceState = reader.int32();
+                                        break;
+                                    case 3:
+                                        message.complianceStateReason = reader.string();
+                                        break;
+                                    case 4:
+                                        if (!(message.osPolicyResourceCompliances && message.osPolicyResourceCompliances.length))
+                                            message.osPolicyResourceCompliances = [];
+                                        message.osPolicyResourceCompliances.push($root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a OSPolicyCompliance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance} OSPolicyCompliance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OSPolicyCompliance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a OSPolicyCompliance message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OSPolicyCompliance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.osPolicyId != null && message.hasOwnProperty("osPolicyId"))
+                                    if (!$util.isString(message.osPolicyId))
+                                        return "osPolicyId: string expected";
+                                if (message.complianceState != null && message.hasOwnProperty("complianceState"))
+                                    switch (message.complianceState) {
+                                    default:
+                                        return "complianceState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.complianceStateReason != null && message.hasOwnProperty("complianceStateReason"))
+                                    if (!$util.isString(message.complianceStateReason))
+                                        return "complianceStateReason: string expected";
+                                if (message.osPolicyResourceCompliances != null && message.hasOwnProperty("osPolicyResourceCompliances")) {
+                                    if (!Array.isArray(message.osPolicyResourceCompliances))
+                                        return "osPolicyResourceCompliances: array expected";
+                                    for (var i = 0; i < message.osPolicyResourceCompliances.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.verify(message.osPolicyResourceCompliances[i]);
+                                        if (error)
+                                            return "osPolicyResourceCompliances." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a OSPolicyCompliance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance} OSPolicyCompliance
+                             */
+                            OSPolicyCompliance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance();
+                                if (object.osPolicyId != null)
+                                    message.osPolicyId = String(object.osPolicyId);
+                                switch (object.complianceState) {
+                                case "UNKNOWN":
+                                case 0:
+                                    message.complianceState = 0;
+                                    break;
+                                case "COMPLIANT":
+                                case 1:
+                                    message.complianceState = 1;
+                                    break;
+                                case "NON_COMPLIANT":
+                                case 2:
+                                    message.complianceState = 2;
+                                    break;
+                                }
+                                if (object.complianceStateReason != null)
+                                    message.complianceStateReason = String(object.complianceStateReason);
+                                if (object.osPolicyResourceCompliances) {
+                                    if (!Array.isArray(object.osPolicyResourceCompliances))
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.osPolicyResourceCompliances: array expected");
+                                    message.osPolicyResourceCompliances = [];
+                                    for (var i = 0; i < object.osPolicyResourceCompliances.length; ++i) {
+                                        if (typeof object.osPolicyResourceCompliances[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.osPolicyResourceCompliances: object expected");
+                                        message.osPolicyResourceCompliances[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.fromObject(object.osPolicyResourceCompliances[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a OSPolicyCompliance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance} message OSPolicyCompliance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OSPolicyCompliance.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.osPolicyResourceCompliances = [];
+                                if (options.defaults) {
+                                    object.osPolicyId = "";
+                                    object.complianceState = options.enums === String ? "UNKNOWN" : 0;
+                                    object.complianceStateReason = "";
+                                }
+                                if (message.osPolicyId != null && message.hasOwnProperty("osPolicyId"))
+                                    object.osPolicyId = message.osPolicyId;
+                                if (message.complianceState != null && message.hasOwnProperty("complianceState"))
+                                    object.complianceState = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState[message.complianceState] : message.complianceState;
+                                if (message.complianceStateReason != null && message.hasOwnProperty("complianceStateReason"))
+                                    object.complianceStateReason = message.complianceStateReason;
+                                if (message.osPolicyResourceCompliances && message.osPolicyResourceCompliances.length) {
+                                    object.osPolicyResourceCompliances = [];
+                                    for (var j = 0; j < message.osPolicyResourceCompliances.length; ++j)
+                                        object.osPolicyResourceCompliances[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.toObject(message.osPolicyResourceCompliances[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OSPolicyCompliance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OSPolicyCompliance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            OSPolicyCompliance.OSPolicyResourceCompliance = (function() {
+    
+                                /**
+                                 * Properties of a OSPolicyResourceCompliance.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                                 * @interface IOSPolicyResourceCompliance
+                                 * @property {string|null} [osPolicyResourceId] OSPolicyResourceCompliance osPolicyResourceId
+                                 * @property {Array.<google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep>|null} [configSteps] OSPolicyResourceCompliance configSteps
+                                 * @property {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState|null} [complianceState] OSPolicyResourceCompliance complianceState
+                                 * @property {string|null} [complianceStateReason] OSPolicyResourceCompliance complianceStateReason
+                                 * @property {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput|null} [execResourceOutput] OSPolicyResourceCompliance execResourceOutput
+                                 */
+    
+                                /**
+                                 * Constructs a new OSPolicyResourceCompliance.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance
+                                 * @classdesc Represents a OSPolicyResourceCompliance.
+                                 * @implements IOSPolicyResourceCompliance
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance=} [properties] Properties to set
+                                 */
+                                function OSPolicyResourceCompliance(properties) {
+                                    this.configSteps = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * OSPolicyResourceCompliance osPolicyResourceId.
+                                 * @member {string} osPolicyResourceId
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 */
+                                OSPolicyResourceCompliance.prototype.osPolicyResourceId = "";
+    
+                                /**
+                                 * OSPolicyResourceCompliance configSteps.
+                                 * @member {Array.<google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep>} configSteps
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 */
+                                OSPolicyResourceCompliance.prototype.configSteps = $util.emptyArray;
+    
+                                /**
+                                 * OSPolicyResourceCompliance complianceState.
+                                 * @member {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState} complianceState
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 */
+                                OSPolicyResourceCompliance.prototype.complianceState = 0;
+    
+                                /**
+                                 * OSPolicyResourceCompliance complianceStateReason.
+                                 * @member {string} complianceStateReason
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 */
+                                OSPolicyResourceCompliance.prototype.complianceStateReason = "";
+    
+                                /**
+                                 * OSPolicyResourceCompliance execResourceOutput.
+                                 * @member {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput|null|undefined} execResourceOutput
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 */
+                                OSPolicyResourceCompliance.prototype.execResourceOutput = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * OSPolicyResourceCompliance output.
+                                 * @member {"execResourceOutput"|undefined} output
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 */
+                                Object.defineProperty(OSPolicyResourceCompliance.prototype, "output", {
+                                    get: $util.oneOfGetter($oneOfFields = ["execResourceOutput"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new OSPolicyResourceCompliance instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance} OSPolicyResourceCompliance instance
+                                 */
+                                OSPolicyResourceCompliance.create = function create(properties) {
+                                    return new OSPolicyResourceCompliance(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified OSPolicyResourceCompliance message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance} message OSPolicyResourceCompliance message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                OSPolicyResourceCompliance.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.osPolicyResourceId != null && Object.hasOwnProperty.call(message, "osPolicyResourceId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.osPolicyResourceId);
+                                    if (message.configSteps != null && message.configSteps.length)
+                                        for (var i = 0; i < message.configSteps.length; ++i)
+                                            $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.encode(message.configSteps[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.complianceState != null && Object.hasOwnProperty.call(message, "complianceState"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.complianceState);
+                                    if (message.complianceStateReason != null && Object.hasOwnProperty.call(message, "complianceStateReason"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.complianceStateReason);
+                                    if (message.execResourceOutput != null && Object.hasOwnProperty.call(message, "execResourceOutput"))
+                                        $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.encode(message.execResourceOutput, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified OSPolicyResourceCompliance message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance} message OSPolicyResourceCompliance message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                OSPolicyResourceCompliance.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a OSPolicyResourceCompliance message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance} OSPolicyResourceCompliance
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                OSPolicyResourceCompliance.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.osPolicyResourceId = reader.string();
+                                            break;
+                                        case 2:
+                                            if (!(message.configSteps && message.configSteps.length))
+                                                message.configSteps = [];
+                                            message.configSteps.push($root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.decode(reader, reader.uint32()));
+                                            break;
+                                        case 3:
+                                            message.complianceState = reader.int32();
+                                            break;
+                                        case 4:
+                                            message.complianceStateReason = reader.string();
+                                            break;
+                                        case 5:
+                                            message.execResourceOutput = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a OSPolicyResourceCompliance message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance} OSPolicyResourceCompliance
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                OSPolicyResourceCompliance.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a OSPolicyResourceCompliance message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                OSPolicyResourceCompliance.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.osPolicyResourceId != null && message.hasOwnProperty("osPolicyResourceId"))
+                                        if (!$util.isString(message.osPolicyResourceId))
+                                            return "osPolicyResourceId: string expected";
+                                    if (message.configSteps != null && message.hasOwnProperty("configSteps")) {
+                                        if (!Array.isArray(message.configSteps))
+                                            return "configSteps: array expected";
+                                        for (var i = 0; i < message.configSteps.length; ++i) {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.verify(message.configSteps[i]);
+                                            if (error)
+                                                return "configSteps." + error;
+                                        }
+                                    }
+                                    if (message.complianceState != null && message.hasOwnProperty("complianceState"))
+                                        switch (message.complianceState) {
+                                        default:
+                                            return "complianceState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.complianceStateReason != null && message.hasOwnProperty("complianceStateReason"))
+                                        if (!$util.isString(message.complianceStateReason))
+                                            return "complianceStateReason: string expected";
+                                    if (message.execResourceOutput != null && message.hasOwnProperty("execResourceOutput")) {
+                                        properties.output = 1;
+                                        {
+                                            var error = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.verify(message.execResourceOutput);
+                                            if (error)
+                                                return "execResourceOutput." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a OSPolicyResourceCompliance message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance} OSPolicyResourceCompliance
+                                 */
+                                OSPolicyResourceCompliance.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance();
+                                    if (object.osPolicyResourceId != null)
+                                        message.osPolicyResourceId = String(object.osPolicyResourceId);
+                                    if (object.configSteps) {
+                                        if (!Array.isArray(object.configSteps))
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.configSteps: array expected");
+                                        message.configSteps = [];
+                                        for (var i = 0; i < object.configSteps.length; ++i) {
+                                            if (typeof object.configSteps[i] !== "object")
+                                                throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.configSteps: object expected");
+                                            message.configSteps[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.fromObject(object.configSteps[i]);
+                                        }
+                                    }
+                                    switch (object.complianceState) {
+                                    case "UNKNOWN":
+                                    case 0:
+                                        message.complianceState = 0;
+                                        break;
+                                    case "COMPLIANT":
+                                    case 1:
+                                        message.complianceState = 1;
+                                        break;
+                                    case "NON_COMPLIANT":
+                                    case 2:
+                                        message.complianceState = 2;
+                                        break;
+                                    }
+                                    if (object.complianceStateReason != null)
+                                        message.complianceStateReason = String(object.complianceStateReason);
+                                    if (object.execResourceOutput != null) {
+                                        if (typeof object.execResourceOutput !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.execResourceOutput: object expected");
+                                        message.execResourceOutput = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.fromObject(object.execResourceOutput);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a OSPolicyResourceCompliance message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance} message OSPolicyResourceCompliance
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                OSPolicyResourceCompliance.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.configSteps = [];
+                                    if (options.defaults) {
+                                        object.osPolicyResourceId = "";
+                                        object.complianceState = options.enums === String ? "UNKNOWN" : 0;
+                                        object.complianceStateReason = "";
+                                    }
+                                    if (message.osPolicyResourceId != null && message.hasOwnProperty("osPolicyResourceId"))
+                                        object.osPolicyResourceId = message.osPolicyResourceId;
+                                    if (message.configSteps && message.configSteps.length) {
+                                        object.configSteps = [];
+                                        for (var j = 0; j < message.configSteps.length; ++j)
+                                            object.configSteps[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.toObject(message.configSteps[j], options);
+                                    }
+                                    if (message.complianceState != null && message.hasOwnProperty("complianceState"))
+                                        object.complianceState = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState[message.complianceState] : message.complianceState;
+                                    if (message.complianceStateReason != null && message.hasOwnProperty("complianceStateReason"))
+                                        object.complianceStateReason = message.complianceStateReason;
+                                    if (message.execResourceOutput != null && message.hasOwnProperty("execResourceOutput")) {
+                                        object.execResourceOutput = $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.toObject(message.execResourceOutput, options);
+                                        if (options.oneofs)
+                                            object.output = "execResourceOutput";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this OSPolicyResourceCompliance to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                OSPolicyResourceCompliance.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                OSPolicyResourceCompliance.OSPolicyResourceConfigStep = (function() {
+    
+                                    /**
+                                     * Properties of a OSPolicyResourceConfigStep.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                     * @interface IOSPolicyResourceConfigStep
+                                     * @property {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type|null} [type] OSPolicyResourceConfigStep type
+                                     * @property {string|null} [errorMessage] OSPolicyResourceConfigStep errorMessage
+                                     */
+    
+                                    /**
+                                     * Constructs a new OSPolicyResourceConfigStep.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                     * @classdesc Represents a OSPolicyResourceConfigStep.
+                                     * @implements IOSPolicyResourceConfigStep
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep=} [properties] Properties to set
+                                     */
+                                    function OSPolicyResourceConfigStep(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * OSPolicyResourceConfigStep type.
+                                     * @member {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type} type
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @instance
+                                     */
+                                    OSPolicyResourceConfigStep.prototype.type = 0;
+    
+                                    /**
+                                     * OSPolicyResourceConfigStep errorMessage.
+                                     * @member {string} errorMessage
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @instance
+                                     */
+                                    OSPolicyResourceConfigStep.prototype.errorMessage = "";
+    
+                                    /**
+                                     * Creates a new OSPolicyResourceConfigStep instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep} OSPolicyResourceConfigStep instance
+                                     */
+                                    OSPolicyResourceConfigStep.create = function create(properties) {
+                                        return new OSPolicyResourceConfigStep(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified OSPolicyResourceConfigStep message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep} message OSPolicyResourceConfigStep message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    OSPolicyResourceConfigStep.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                        if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified OSPolicyResourceConfigStep message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep} message OSPolicyResourceConfigStep message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    OSPolicyResourceConfigStep.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a OSPolicyResourceConfigStep message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep} OSPolicyResourceConfigStep
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    OSPolicyResourceConfigStep.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1:
+                                                message.type = reader.int32();
+                                                break;
+                                            case 2:
+                                                message.errorMessage = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a OSPolicyResourceConfigStep message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep} OSPolicyResourceConfigStep
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    OSPolicyResourceConfigStep.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a OSPolicyResourceConfigStep message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    OSPolicyResourceConfigStep.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            switch (message.type) {
+                                            default:
+                                                return "type: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                            case 3:
+                                            case 4:
+                                                break;
+                                            }
+                                        if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                            if (!$util.isString(message.errorMessage))
+                                                return "errorMessage: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a OSPolicyResourceConfigStep message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep} OSPolicyResourceConfigStep
+                                     */
+                                    OSPolicyResourceConfigStep.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep();
+                                        switch (object.type) {
+                                        case "TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.type = 0;
+                                            break;
+                                        case "VALIDATION":
+                                        case 1:
+                                            message.type = 1;
+                                            break;
+                                        case "DESIRED_STATE_CHECK":
+                                        case 2:
+                                            message.type = 2;
+                                            break;
+                                        case "DESIRED_STATE_ENFORCEMENT":
+                                        case 3:
+                                            message.type = 3;
+                                            break;
+                                        case "DESIRED_STATE_CHECK_POST_ENFORCEMENT":
+                                        case 4:
+                                            message.type = 4;
+                                            break;
+                                        }
+                                        if (object.errorMessage != null)
+                                            message.errorMessage = String(object.errorMessage);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a OSPolicyResourceConfigStep message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep} message OSPolicyResourceConfigStep
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    OSPolicyResourceConfigStep.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                            object.errorMessage = "";
+                                        }
+                                        if (message.type != null && message.hasOwnProperty("type"))
+                                            object.type = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type[message.type] : message.type;
+                                        if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                            object.errorMessage = message.errorMessage;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this OSPolicyResourceConfigStep to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    OSPolicyResourceConfigStep.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Type enum.
+                                     * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type
+                                     * @enum {number}
+                                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                                     * @property {number} VALIDATION=1 VALIDATION value
+                                     * @property {number} DESIRED_STATE_CHECK=2 DESIRED_STATE_CHECK value
+                                     * @property {number} DESIRED_STATE_ENFORCEMENT=3 DESIRED_STATE_ENFORCEMENT value
+                                     * @property {number} DESIRED_STATE_CHECK_POST_ENFORCEMENT=4 DESIRED_STATE_CHECK_POST_ENFORCEMENT value
+                                     */
+                                    OSPolicyResourceConfigStep.Type = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "VALIDATION"] = 1;
+                                        values[valuesById[2] = "DESIRED_STATE_CHECK"] = 2;
+                                        values[valuesById[3] = "DESIRED_STATE_ENFORCEMENT"] = 3;
+                                        values[valuesById[4] = "DESIRED_STATE_CHECK_POST_ENFORCEMENT"] = 4;
+                                        return values;
+                                    })();
+    
+                                    return OSPolicyResourceConfigStep;
+                                })();
+    
+                                OSPolicyResourceCompliance.ExecResourceOutput = (function() {
+    
+                                    /**
+                                     * Properties of an ExecResourceOutput.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                     * @interface IExecResourceOutput
+                                     * @property {Uint8Array|null} [enforcementOutput] ExecResourceOutput enforcementOutput
+                                     */
+    
+                                    /**
+                                     * Constructs a new ExecResourceOutput.
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance
+                                     * @classdesc Represents an ExecResourceOutput.
+                                     * @implements IExecResourceOutput
+                                     * @constructor
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput=} [properties] Properties to set
+                                     */
+                                    function ExecResourceOutput(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ExecResourceOutput enforcementOutput.
+                                     * @member {Uint8Array} enforcementOutput
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @instance
+                                     */
+                                    ExecResourceOutput.prototype.enforcementOutput = $util.newBuffer([]);
+    
+                                    /**
+                                     * Creates a new ExecResourceOutput instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput=} [properties] Properties to set
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput instance
+                                     */
+                                    ExecResourceOutput.create = function create(properties) {
+                                        return new ExecResourceOutput(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ExecResourceOutput message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput} message ExecResourceOutput message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ExecResourceOutput.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.enforcementOutput != null && Object.hasOwnProperty.call(message, "enforcementOutput"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.enforcementOutput);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ExecResourceOutput message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput} message ExecResourceOutput message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ExecResourceOutput.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an ExecResourceOutput message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ExecResourceOutput.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 2:
+                                                message.enforcementOutput = reader.bytes();
+                                                break;
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an ExecResourceOutput message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ExecResourceOutput.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an ExecResourceOutput message.
+                                     * @function verify
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ExecResourceOutput.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.enforcementOutput != null && message.hasOwnProperty("enforcementOutput"))
+                                            if (!(message.enforcementOutput && typeof message.enforcementOutput.length === "number" || $util.isString(message.enforcementOutput)))
+                                                return "enforcementOutput: buffer expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an ExecResourceOutput message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput
+                                     */
+                                    ExecResourceOutput.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput)
+                                            return object;
+                                        var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput();
+                                        if (object.enforcementOutput != null)
+                                            if (typeof object.enforcementOutput === "string")
+                                                $util.base64.decode(object.enforcementOutput, message.enforcementOutput = $util.newBuffer($util.base64.length(object.enforcementOutput)), 0);
+                                            else if (object.enforcementOutput.length)
+                                                message.enforcementOutput = object.enforcementOutput;
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an ExecResourceOutput message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @static
+                                     * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput} message ExecResourceOutput
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ExecResourceOutput.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults)
+                                            if (options.bytes === String)
+                                                object.enforcementOutput = "";
+                                            else {
+                                                object.enforcementOutput = [];
+                                                if (options.bytes !== Array)
+                                                    object.enforcementOutput = $util.newBuffer(object.enforcementOutput);
+                                            }
+                                        if (message.enforcementOutput != null && message.hasOwnProperty("enforcementOutput"))
+                                            object.enforcementOutput = options.bytes === String ? $util.base64.encode(message.enforcementOutput, 0, message.enforcementOutput.length) : options.bytes === Array ? Array.prototype.slice.call(message.enforcementOutput) : message.enforcementOutput;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ExecResourceOutput to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ExecResourceOutput.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    return ExecResourceOutput;
+                                })();
+    
+                                /**
+                                 * ComplianceState enum.
+                                 * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState
+                                 * @enum {number}
+                                 * @property {number} UNKNOWN=0 UNKNOWN value
+                                 * @property {number} COMPLIANT=1 COMPLIANT value
+                                 * @property {number} NON_COMPLIANT=2 NON_COMPLIANT value
+                                 */
+                                OSPolicyResourceCompliance.ComplianceState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "UNKNOWN"] = 0;
+                                    values[valuesById[1] = "COMPLIANT"] = 1;
+                                    values[valuesById[2] = "NON_COMPLIANT"] = 2;
+                                    return values;
+                                })();
+    
+                                return OSPolicyResourceCompliance;
+                            })();
+    
+                            /**
+                             * ComplianceState enum.
+                             * @name google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState
+                             * @enum {number}
+                             * @property {number} UNKNOWN=0 UNKNOWN value
+                             * @property {number} COMPLIANT=1 COMPLIANT value
+                             * @property {number} NON_COMPLIANT=2 NON_COMPLIANT value
+                             */
+                            OSPolicyCompliance.ComplianceState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "UNKNOWN"] = 0;
+                                values[valuesById[1] = "COMPLIANT"] = 1;
+                                values[valuesById[2] = "NON_COMPLIANT"] = 2;
+                                return values;
+                            })();
+    
+                            return OSPolicyCompliance;
+                        })();
+    
+                        return OSPolicyAssignmentReport;
+                    })();
+    
+                    v1.OSPolicyAssignment = (function() {
+    
+                        /**
+                         * Properties of a OSPolicyAssignment.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IOSPolicyAssignment
+                         * @property {string|null} [name] OSPolicyAssignment name
+                         * @property {string|null} [description] OSPolicyAssignment description
+                         * @property {Array.<google.cloud.osconfig.v1.IOSPolicy>|null} [osPolicies] OSPolicyAssignment osPolicies
+                         * @property {google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter|null} [instanceFilter] OSPolicyAssignment instanceFilter
+                         * @property {google.cloud.osconfig.v1.OSPolicyAssignment.IRollout|null} [rollout] OSPolicyAssignment rollout
+                         * @property {string|null} [revisionId] OSPolicyAssignment revisionId
+                         * @property {google.protobuf.ITimestamp|null} [revisionCreateTime] OSPolicyAssignment revisionCreateTime
+                         * @property {string|null} [etag] OSPolicyAssignment etag
+                         * @property {google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState|null} [rolloutState] OSPolicyAssignment rolloutState
+                         * @property {boolean|null} [baseline] OSPolicyAssignment baseline
+                         * @property {boolean|null} [deleted] OSPolicyAssignment deleted
+                         * @property {boolean|null} [reconciling] OSPolicyAssignment reconciling
+                         * @property {string|null} [uid] OSPolicyAssignment uid
+                         */
+    
+                        /**
+                         * Constructs a new OSPolicyAssignment.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a OSPolicyAssignment.
+                         * @implements IOSPolicyAssignment
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignment=} [properties] Properties to set
+                         */
+                        function OSPolicyAssignment(properties) {
+                            this.osPolicies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OSPolicyAssignment name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.name = "";
+    
+                        /**
+                         * OSPolicyAssignment description.
+                         * @member {string} description
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.description = "";
+    
+                        /**
+                         * OSPolicyAssignment osPolicies.
+                         * @member {Array.<google.cloud.osconfig.v1.IOSPolicy>} osPolicies
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.osPolicies = $util.emptyArray;
+    
+                        /**
+                         * OSPolicyAssignment instanceFilter.
+                         * @member {google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter|null|undefined} instanceFilter
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.instanceFilter = null;
+    
+                        /**
+                         * OSPolicyAssignment rollout.
+                         * @member {google.cloud.osconfig.v1.OSPolicyAssignment.IRollout|null|undefined} rollout
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.rollout = null;
+    
+                        /**
+                         * OSPolicyAssignment revisionId.
+                         * @member {string} revisionId
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.revisionId = "";
+    
+                        /**
+                         * OSPolicyAssignment revisionCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} revisionCreateTime
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.revisionCreateTime = null;
+    
+                        /**
+                         * OSPolicyAssignment etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.etag = "";
+    
+                        /**
+                         * OSPolicyAssignment rolloutState.
+                         * @member {google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState} rolloutState
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.rolloutState = 0;
+    
+                        /**
+                         * OSPolicyAssignment baseline.
+                         * @member {boolean} baseline
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.baseline = false;
+    
+                        /**
+                         * OSPolicyAssignment deleted.
+                         * @member {boolean} deleted
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.deleted = false;
+    
+                        /**
+                         * OSPolicyAssignment reconciling.
+                         * @member {boolean} reconciling
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.reconciling = false;
+    
+                        /**
+                         * OSPolicyAssignment uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         */
+                        OSPolicyAssignment.prototype.uid = "";
+    
+                        /**
+                         * Creates a new OSPolicyAssignment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignment=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignment} OSPolicyAssignment instance
+                         */
+                        OSPolicyAssignment.create = function create(properties) {
+                            return new OSPolicyAssignment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicyAssignment message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignment} message OSPolicyAssignment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicyAssignment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.osPolicies != null && message.osPolicies.length)
+                                for (var i = 0; i < message.osPolicies.length; ++i)
+                                    $root.google.cloud.osconfig.v1.OSPolicy.encode(message.osPolicies[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.instanceFilter != null && Object.hasOwnProperty.call(message, "instanceFilter"))
+                                $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.encode(message.instanceFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.rollout != null && Object.hasOwnProperty.call(message, "rollout"))
+                                $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.encode(message.rollout, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.revisionId);
+                            if (message.revisionCreateTime != null && Object.hasOwnProperty.call(message, "revisionCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.revisionCreateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
+                            if (message.rolloutState != null && Object.hasOwnProperty.call(message, "rolloutState"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.rolloutState);
+                            if (message.baseline != null && Object.hasOwnProperty.call(message, "baseline"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.baseline);
+                            if (message.deleted != null && Object.hasOwnProperty.call(message, "deleted"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deleted);
+                            if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.reconciling);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.uid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicyAssignment message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignment} message OSPolicyAssignment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicyAssignment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OSPolicyAssignment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignment} OSPolicyAssignment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicyAssignment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.description = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.osPolicies && message.osPolicies.length))
+                                        message.osPolicies = [];
+                                    message.osPolicies.push($root.google.cloud.osconfig.v1.OSPolicy.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.instanceFilter = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.rollout = $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.revisionId = reader.string();
+                                    break;
+                                case 7:
+                                    message.revisionCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.etag = reader.string();
+                                    break;
+                                case 9:
+                                    message.rolloutState = reader.int32();
+                                    break;
+                                case 10:
+                                    message.baseline = reader.bool();
+                                    break;
+                                case 11:
+                                    message.deleted = reader.bool();
+                                    break;
+                                case 12:
+                                    message.reconciling = reader.bool();
+                                    break;
+                                case 13:
+                                    message.uid = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OSPolicyAssignment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignment} OSPolicyAssignment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicyAssignment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OSPolicyAssignment message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OSPolicyAssignment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.osPolicies != null && message.hasOwnProperty("osPolicies")) {
+                                if (!Array.isArray(message.osPolicies))
+                                    return "osPolicies: array expected";
+                                for (var i = 0; i < message.osPolicies.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.OSPolicy.verify(message.osPolicies[i]);
+                                    if (error)
+                                        return "osPolicies." + error;
+                                }
+                            }
+                            if (message.instanceFilter != null && message.hasOwnProperty("instanceFilter")) {
+                                var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.verify(message.instanceFilter);
+                                if (error)
+                                    return "instanceFilter." + error;
+                            }
+                            if (message.rollout != null && message.hasOwnProperty("rollout")) {
+                                var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.verify(message.rollout);
+                                if (error)
+                                    return "rollout." + error;
+                            }
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                if (!$util.isString(message.revisionId))
+                                    return "revisionId: string expected";
+                            if (message.revisionCreateTime != null && message.hasOwnProperty("revisionCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.revisionCreateTime);
+                                if (error)
+                                    return "revisionCreateTime." + error;
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.rolloutState != null && message.hasOwnProperty("rolloutState"))
+                                switch (message.rolloutState) {
+                                default:
+                                    return "rolloutState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.baseline != null && message.hasOwnProperty("baseline"))
+                                if (typeof message.baseline !== "boolean")
+                                    return "baseline: boolean expected";
+                            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                                if (typeof message.deleted !== "boolean")
+                                    return "deleted: boolean expected";
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                if (typeof message.reconciling !== "boolean")
+                                    return "reconciling: boolean expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OSPolicyAssignment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignment} OSPolicyAssignment
+                         */
+                        OSPolicyAssignment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignment)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.osPolicies) {
+                                if (!Array.isArray(object.osPolicies))
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.osPolicies: array expected");
+                                message.osPolicies = [];
+                                for (var i = 0; i < object.osPolicies.length; ++i) {
+                                    if (typeof object.osPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.osPolicies: object expected");
+                                    message.osPolicies[i] = $root.google.cloud.osconfig.v1.OSPolicy.fromObject(object.osPolicies[i]);
+                                }
+                            }
+                            if (object.instanceFilter != null) {
+                                if (typeof object.instanceFilter !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.instanceFilter: object expected");
+                                message.instanceFilter = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.fromObject(object.instanceFilter);
+                            }
+                            if (object.rollout != null) {
+                                if (typeof object.rollout !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.rollout: object expected");
+                                message.rollout = $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.fromObject(object.rollout);
+                            }
+                            if (object.revisionId != null)
+                                message.revisionId = String(object.revisionId);
+                            if (object.revisionCreateTime != null) {
+                                if (typeof object.revisionCreateTime !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.revisionCreateTime: object expected");
+                                message.revisionCreateTime = $root.google.protobuf.Timestamp.fromObject(object.revisionCreateTime);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            switch (object.rolloutState) {
+                            case "ROLLOUT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.rolloutState = 0;
+                                break;
+                            case "IN_PROGRESS":
+                            case 1:
+                                message.rolloutState = 1;
+                                break;
+                            case "CANCELLING":
+                            case 2:
+                                message.rolloutState = 2;
+                                break;
+                            case "CANCELLED":
+                            case 3:
+                                message.rolloutState = 3;
+                                break;
+                            case "SUCCEEDED":
+                            case 4:
+                                message.rolloutState = 4;
+                                break;
+                            }
+                            if (object.baseline != null)
+                                message.baseline = Boolean(object.baseline);
+                            if (object.deleted != null)
+                                message.deleted = Boolean(object.deleted);
+                            if (object.reconciling != null)
+                                message.reconciling = Boolean(object.reconciling);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OSPolicyAssignment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @static
+                         * @param {google.cloud.osconfig.v1.OSPolicyAssignment} message OSPolicyAssignment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OSPolicyAssignment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.osPolicies = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.instanceFilter = null;
+                                object.rollout = null;
+                                object.revisionId = "";
+                                object.revisionCreateTime = null;
+                                object.etag = "";
+                                object.rolloutState = options.enums === String ? "ROLLOUT_STATE_UNSPECIFIED" : 0;
+                                object.baseline = false;
+                                object.deleted = false;
+                                object.reconciling = false;
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.osPolicies && message.osPolicies.length) {
+                                object.osPolicies = [];
+                                for (var j = 0; j < message.osPolicies.length; ++j)
+                                    object.osPolicies[j] = $root.google.cloud.osconfig.v1.OSPolicy.toObject(message.osPolicies[j], options);
+                            }
+                            if (message.instanceFilter != null && message.hasOwnProperty("instanceFilter"))
+                                object.instanceFilter = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.toObject(message.instanceFilter, options);
+                            if (message.rollout != null && message.hasOwnProperty("rollout"))
+                                object.rollout = $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.toObject(message.rollout, options);
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                object.revisionId = message.revisionId;
+                            if (message.revisionCreateTime != null && message.hasOwnProperty("revisionCreateTime"))
+                                object.revisionCreateTime = $root.google.protobuf.Timestamp.toObject(message.revisionCreateTime, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.rolloutState != null && message.hasOwnProperty("rolloutState"))
+                                object.rolloutState = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState[message.rolloutState] : message.rolloutState;
+                            if (message.baseline != null && message.hasOwnProperty("baseline"))
+                                object.baseline = message.baseline;
+                            if (message.deleted != null && message.hasOwnProperty("deleted"))
+                                object.deleted = message.deleted;
+                            if (message.reconciling != null && message.hasOwnProperty("reconciling"))
+                                object.reconciling = message.reconciling;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OSPolicyAssignment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OSPolicyAssignment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        OSPolicyAssignment.LabelSet = (function() {
+    
+                            /**
+                             * Properties of a LabelSet.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                             * @interface ILabelSet
+                             * @property {Object.<string,string>|null} [labels] LabelSet labels
+                             */
+    
+                            /**
+                             * Constructs a new LabelSet.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                             * @classdesc Represents a LabelSet.
+                             * @implements ILabelSet
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet=} [properties] Properties to set
+                             */
+                            function LabelSet(properties) {
+                                this.labels = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LabelSet labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @instance
+                             */
+                            LabelSet.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * Creates a new LabelSet instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet} LabelSet instance
+                             */
+                            LabelSet.create = function create(properties) {
+                                return new LabelSet(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LabelSet message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet} message LabelSet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LabelSet.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LabelSet message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet} message LabelSet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LabelSet.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LabelSet message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet} LabelSet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LabelSet.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LabelSet message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet} LabelSet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LabelSet.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LabelSet message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LabelSet.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LabelSet message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet} LabelSet
+                             */
+                            LabelSet.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet();
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LabelSet message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet} message LabelSet
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LabelSet.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LabelSet to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LabelSet.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return LabelSet;
+                        })();
+    
+                        OSPolicyAssignment.InstanceFilter = (function() {
+    
+                            /**
+                             * Properties of an InstanceFilter.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                             * @interface IInstanceFilter
+                             * @property {boolean|null} [all] InstanceFilter all
+                             * @property {Array.<google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet>|null} [inclusionLabels] InstanceFilter inclusionLabels
+                             * @property {Array.<google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet>|null} [exclusionLabels] InstanceFilter exclusionLabels
+                             * @property {Array.<google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory>|null} [inventories] InstanceFilter inventories
+                             */
+    
+                            /**
+                             * Constructs a new InstanceFilter.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                             * @classdesc Represents an InstanceFilter.
+                             * @implements IInstanceFilter
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter=} [properties] Properties to set
+                             */
+                            function InstanceFilter(properties) {
+                                this.inclusionLabels = [];
+                                this.exclusionLabels = [];
+                                this.inventories = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InstanceFilter all.
+                             * @member {boolean} all
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @instance
+                             */
+                            InstanceFilter.prototype.all = false;
+    
+                            /**
+                             * InstanceFilter inclusionLabels.
+                             * @member {Array.<google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet>} inclusionLabels
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @instance
+                             */
+                            InstanceFilter.prototype.inclusionLabels = $util.emptyArray;
+    
+                            /**
+                             * InstanceFilter exclusionLabels.
+                             * @member {Array.<google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet>} exclusionLabels
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @instance
+                             */
+                            InstanceFilter.prototype.exclusionLabels = $util.emptyArray;
+    
+                            /**
+                             * InstanceFilter inventories.
+                             * @member {Array.<google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory>} inventories
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @instance
+                             */
+                            InstanceFilter.prototype.inventories = $util.emptyArray;
+    
+                            /**
+                             * Creates a new InstanceFilter instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter} InstanceFilter instance
+                             */
+                            InstanceFilter.create = function create(properties) {
+                                return new InstanceFilter(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceFilter message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter} message InstanceFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceFilter.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.all != null && Object.hasOwnProperty.call(message, "all"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.all);
+                                if (message.inclusionLabels != null && message.inclusionLabels.length)
+                                    for (var i = 0; i < message.inclusionLabels.length; ++i)
+                                        $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.encode(message.inclusionLabels[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.exclusionLabels != null && message.exclusionLabels.length)
+                                    for (var i = 0; i < message.exclusionLabels.length; ++i)
+                                        $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.encode(message.exclusionLabels[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.inventories != null && message.inventories.length)
+                                    for (var i = 0; i < message.inventories.length; ++i)
+                                        $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.encode(message.inventories[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceFilter message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter} message InstanceFilter message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InstanceFilter message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter} InstanceFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceFilter.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.all = reader.bool();
+                                        break;
+                                    case 2:
+                                        if (!(message.inclusionLabels && message.inclusionLabels.length))
+                                            message.inclusionLabels = [];
+                                        message.inclusionLabels.push($root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.decode(reader, reader.uint32()));
+                                        break;
+                                    case 3:
+                                        if (!(message.exclusionLabels && message.exclusionLabels.length))
+                                            message.exclusionLabels = [];
+                                        message.exclusionLabels.push($root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.decode(reader, reader.uint32()));
+                                        break;
+                                    case 4:
+                                        if (!(message.inventories && message.inventories.length))
+                                            message.inventories = [];
+                                        message.inventories.push($root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InstanceFilter message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter} InstanceFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceFilter.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InstanceFilter message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InstanceFilter.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.all != null && message.hasOwnProperty("all"))
+                                    if (typeof message.all !== "boolean")
+                                        return "all: boolean expected";
+                                if (message.inclusionLabels != null && message.hasOwnProperty("inclusionLabels")) {
+                                    if (!Array.isArray(message.inclusionLabels))
+                                        return "inclusionLabels: array expected";
+                                    for (var i = 0; i < message.inclusionLabels.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.verify(message.inclusionLabels[i]);
+                                        if (error)
+                                            return "inclusionLabels." + error;
+                                    }
+                                }
+                                if (message.exclusionLabels != null && message.hasOwnProperty("exclusionLabels")) {
+                                    if (!Array.isArray(message.exclusionLabels))
+                                        return "exclusionLabels: array expected";
+                                    for (var i = 0; i < message.exclusionLabels.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.verify(message.exclusionLabels[i]);
+                                        if (error)
+                                            return "exclusionLabels." + error;
+                                    }
+                                }
+                                if (message.inventories != null && message.hasOwnProperty("inventories")) {
+                                    if (!Array.isArray(message.inventories))
+                                        return "inventories: array expected";
+                                    for (var i = 0; i < message.inventories.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.verify(message.inventories[i]);
+                                        if (error)
+                                            return "inventories." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InstanceFilter message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter} InstanceFilter
+                             */
+                            InstanceFilter.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter();
+                                if (object.all != null)
+                                    message.all = Boolean(object.all);
+                                if (object.inclusionLabels) {
+                                    if (!Array.isArray(object.inclusionLabels))
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.inclusionLabels: array expected");
+                                    message.inclusionLabels = [];
+                                    for (var i = 0; i < object.inclusionLabels.length; ++i) {
+                                        if (typeof object.inclusionLabels[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.inclusionLabels: object expected");
+                                        message.inclusionLabels[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.fromObject(object.inclusionLabels[i]);
+                                    }
+                                }
+                                if (object.exclusionLabels) {
+                                    if (!Array.isArray(object.exclusionLabels))
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.exclusionLabels: array expected");
+                                    message.exclusionLabels = [];
+                                    for (var i = 0; i < object.exclusionLabels.length; ++i) {
+                                        if (typeof object.exclusionLabels[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.exclusionLabels: object expected");
+                                        message.exclusionLabels[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.fromObject(object.exclusionLabels[i]);
+                                    }
+                                }
+                                if (object.inventories) {
+                                    if (!Array.isArray(object.inventories))
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.inventories: array expected");
+                                    message.inventories = [];
+                                    for (var i = 0; i < object.inventories.length; ++i) {
+                                        if (typeof object.inventories[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.inventories: object expected");
+                                        message.inventories[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.fromObject(object.inventories[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InstanceFilter message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter} message InstanceFilter
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InstanceFilter.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.inclusionLabels = [];
+                                    object.exclusionLabels = [];
+                                    object.inventories = [];
+                                }
+                                if (options.defaults)
+                                    object.all = false;
+                                if (message.all != null && message.hasOwnProperty("all"))
+                                    object.all = message.all;
+                                if (message.inclusionLabels && message.inclusionLabels.length) {
+                                    object.inclusionLabels = [];
+                                    for (var j = 0; j < message.inclusionLabels.length; ++j)
+                                        object.inclusionLabels[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.toObject(message.inclusionLabels[j], options);
+                                }
+                                if (message.exclusionLabels && message.exclusionLabels.length) {
+                                    object.exclusionLabels = [];
+                                    for (var j = 0; j < message.exclusionLabels.length; ++j)
+                                        object.exclusionLabels[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.toObject(message.exclusionLabels[j], options);
+                                }
+                                if (message.inventories && message.inventories.length) {
+                                    object.inventories = [];
+                                    for (var j = 0; j < message.inventories.length; ++j)
+                                        object.inventories[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.toObject(message.inventories[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InstanceFilter to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InstanceFilter.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            InstanceFilter.Inventory = (function() {
+    
+                                /**
+                                 * Properties of an Inventory.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                                 * @interface IInventory
+                                 * @property {string|null} [osShortName] Inventory osShortName
+                                 * @property {string|null} [osVersion] Inventory osVersion
+                                 */
+    
+                                /**
+                                 * Constructs a new Inventory.
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter
+                                 * @classdesc Represents an Inventory.
+                                 * @implements IInventory
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory=} [properties] Properties to set
+                                 */
+                                function Inventory(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Inventory osShortName.
+                                 * @member {string} osShortName
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @instance
+                                 */
+                                Inventory.prototype.osShortName = "";
+    
+                                /**
+                                 * Inventory osVersion.
+                                 * @member {string} osVersion
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @instance
+                                 */
+                                Inventory.prototype.osVersion = "";
+    
+                                /**
+                                 * Creates a new Inventory instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory} Inventory instance
+                                 */
+                                Inventory.create = function create(properties) {
+                                    return new Inventory(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Inventory message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory} message Inventory message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Inventory.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.osShortName != null && Object.hasOwnProperty.call(message, "osShortName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.osShortName);
+                                    if (message.osVersion != null && Object.hasOwnProperty.call(message, "osVersion"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.osVersion);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Inventory message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory} message Inventory message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Inventory.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Inventory message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory} Inventory
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Inventory.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.osShortName = reader.string();
+                                            break;
+                                        case 2:
+                                            message.osVersion = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Inventory message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory} Inventory
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Inventory.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Inventory message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Inventory.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.osShortName != null && message.hasOwnProperty("osShortName"))
+                                        if (!$util.isString(message.osShortName))
+                                            return "osShortName: string expected";
+                                    if (message.osVersion != null && message.hasOwnProperty("osVersion"))
+                                        if (!$util.isString(message.osVersion))
+                                            return "osVersion: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Inventory message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory} Inventory
+                                 */
+                                Inventory.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory();
+                                    if (object.osShortName != null)
+                                        message.osShortName = String(object.osShortName);
+                                    if (object.osVersion != null)
+                                        message.osVersion = String(object.osVersion);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Inventory message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory} message Inventory
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Inventory.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.osShortName = "";
+                                        object.osVersion = "";
+                                    }
+                                    if (message.osShortName != null && message.hasOwnProperty("osShortName"))
+                                        object.osShortName = message.osShortName;
+                                    if (message.osVersion != null && message.hasOwnProperty("osVersion"))
+                                        object.osVersion = message.osVersion;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Inventory to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Inventory.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Inventory;
+                            })();
+    
+                            return InstanceFilter;
+                        })();
+    
+                        OSPolicyAssignment.Rollout = (function() {
+    
+                            /**
+                             * Properties of a Rollout.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                             * @interface IRollout
+                             * @property {google.cloud.osconfig.v1.IFixedOrPercent|null} [disruptionBudget] Rollout disruptionBudget
+                             * @property {google.protobuf.IDuration|null} [minWaitDuration] Rollout minWaitDuration
+                             */
+    
+                            /**
+                             * Constructs a new Rollout.
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment
+                             * @classdesc Represents a Rollout.
+                             * @implements IRollout
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IRollout=} [properties] Properties to set
+                             */
+                            function Rollout(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Rollout disruptionBudget.
+                             * @member {google.cloud.osconfig.v1.IFixedOrPercent|null|undefined} disruptionBudget
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @instance
+                             */
+                            Rollout.prototype.disruptionBudget = null;
+    
+                            /**
+                             * Rollout minWaitDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} minWaitDuration
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @instance
+                             */
+                            Rollout.prototype.minWaitDuration = null;
+    
+                            /**
+                             * Creates a new Rollout instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IRollout=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.Rollout} Rollout instance
+                             */
+                            Rollout.create = function create(properties) {
+                                return new Rollout(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Rollout message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IRollout} message Rollout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Rollout.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.disruptionBudget != null && Object.hasOwnProperty.call(message, "disruptionBudget"))
+                                    $root.google.cloud.osconfig.v1.FixedOrPercent.encode(message.disruptionBudget, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.minWaitDuration != null && Object.hasOwnProperty.call(message, "minWaitDuration"))
+                                    $root.google.protobuf.Duration.encode(message.minWaitDuration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Rollout message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.IRollout} message Rollout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Rollout.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Rollout message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.Rollout} Rollout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Rollout.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.disruptionBudget = $root.google.cloud.osconfig.v1.FixedOrPercent.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        message.minWaitDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Rollout message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.Rollout} Rollout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Rollout.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Rollout message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Rollout.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.disruptionBudget != null && message.hasOwnProperty("disruptionBudget")) {
+                                    var error = $root.google.cloud.osconfig.v1.FixedOrPercent.verify(message.disruptionBudget);
+                                    if (error)
+                                        return "disruptionBudget." + error;
+                                }
+                                if (message.minWaitDuration != null && message.hasOwnProperty("minWaitDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.minWaitDuration);
+                                    if (error)
+                                        return "minWaitDuration." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Rollout message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.OSPolicyAssignment.Rollout} Rollout
+                             */
+                            Rollout.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignment.Rollout();
+                                if (object.disruptionBudget != null) {
+                                    if (typeof object.disruptionBudget !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.disruptionBudget: object expected");
+                                    message.disruptionBudget = $root.google.cloud.osconfig.v1.FixedOrPercent.fromObject(object.disruptionBudget);
+                                }
+                                if (object.minWaitDuration != null) {
+                                    if (typeof object.minWaitDuration !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.minWaitDuration: object expected");
+                                    message.minWaitDuration = $root.google.protobuf.Duration.fromObject(object.minWaitDuration);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Rollout message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @static
+                             * @param {google.cloud.osconfig.v1.OSPolicyAssignment.Rollout} message Rollout
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Rollout.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.disruptionBudget = null;
+                                    object.minWaitDuration = null;
+                                }
+                                if (message.disruptionBudget != null && message.hasOwnProperty("disruptionBudget"))
+                                    object.disruptionBudget = $root.google.cloud.osconfig.v1.FixedOrPercent.toObject(message.disruptionBudget, options);
+                                if (message.minWaitDuration != null && message.hasOwnProperty("minWaitDuration"))
+                                    object.minWaitDuration = $root.google.protobuf.Duration.toObject(message.minWaitDuration, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Rollout to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.OSPolicyAssignment.Rollout
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Rollout.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Rollout;
+                        })();
+    
+                        /**
+                         * RolloutState enum.
+                         * @name google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState
+                         * @enum {number}
+                         * @property {number} ROLLOUT_STATE_UNSPECIFIED=0 ROLLOUT_STATE_UNSPECIFIED value
+                         * @property {number} IN_PROGRESS=1 IN_PROGRESS value
+                         * @property {number} CANCELLING=2 CANCELLING value
+                         * @property {number} CANCELLED=3 CANCELLED value
+                         * @property {number} SUCCEEDED=4 SUCCEEDED value
+                         */
+                        OSPolicyAssignment.RolloutState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROLLOUT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IN_PROGRESS"] = 1;
+                            values[valuesById[2] = "CANCELLING"] = 2;
+                            values[valuesById[3] = "CANCELLED"] = 3;
+                            values[valuesById[4] = "SUCCEEDED"] = 4;
+                            return values;
+                        })();
+    
+                        return OSPolicyAssignment;
+                    })();
+    
+                    v1.OSPolicyAssignmentOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a OSPolicyAssignmentOperationMetadata.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IOSPolicyAssignmentOperationMetadata
+                         * @property {string|null} [osPolicyAssignment] OSPolicyAssignmentOperationMetadata osPolicyAssignment
+                         * @property {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod|null} [apiMethod] OSPolicyAssignmentOperationMetadata apiMethod
+                         * @property {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState|null} [rolloutState] OSPolicyAssignmentOperationMetadata rolloutState
+                         * @property {google.protobuf.ITimestamp|null} [rolloutStartTime] OSPolicyAssignmentOperationMetadata rolloutStartTime
+                         * @property {google.protobuf.ITimestamp|null} [rolloutUpdateTime] OSPolicyAssignmentOperationMetadata rolloutUpdateTime
+                         */
+    
+                        /**
+                         * Constructs a new OSPolicyAssignmentOperationMetadata.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a OSPolicyAssignmentOperationMetadata.
+                         * @implements IOSPolicyAssignmentOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata=} [properties] Properties to set
+                         */
+                        function OSPolicyAssignmentOperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OSPolicyAssignmentOperationMetadata osPolicyAssignment.
+                         * @member {string} osPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @instance
+                         */
+                        OSPolicyAssignmentOperationMetadata.prototype.osPolicyAssignment = "";
+    
+                        /**
+                         * OSPolicyAssignmentOperationMetadata apiMethod.
+                         * @member {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod} apiMethod
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @instance
+                         */
+                        OSPolicyAssignmentOperationMetadata.prototype.apiMethod = 0;
+    
+                        /**
+                         * OSPolicyAssignmentOperationMetadata rolloutState.
+                         * @member {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState} rolloutState
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @instance
+                         */
+                        OSPolicyAssignmentOperationMetadata.prototype.rolloutState = 0;
+    
+                        /**
+                         * OSPolicyAssignmentOperationMetadata rolloutStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} rolloutStartTime
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @instance
+                         */
+                        OSPolicyAssignmentOperationMetadata.prototype.rolloutStartTime = null;
+    
+                        /**
+                         * OSPolicyAssignmentOperationMetadata rolloutUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} rolloutUpdateTime
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @instance
+                         */
+                        OSPolicyAssignmentOperationMetadata.prototype.rolloutUpdateTime = null;
+    
+                        /**
+                         * Creates a new OSPolicyAssignmentOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata} OSPolicyAssignmentOperationMetadata instance
+                         */
+                        OSPolicyAssignmentOperationMetadata.create = function create(properties) {
+                            return new OSPolicyAssignmentOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicyAssignmentOperationMetadata message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata} message OSPolicyAssignmentOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicyAssignmentOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osPolicyAssignment != null && Object.hasOwnProperty.call(message, "osPolicyAssignment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.osPolicyAssignment);
+                            if (message.apiMethod != null && Object.hasOwnProperty.call(message, "apiMethod"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.apiMethod);
+                            if (message.rolloutState != null && Object.hasOwnProperty.call(message, "rolloutState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.rolloutState);
+                            if (message.rolloutStartTime != null && Object.hasOwnProperty.call(message, "rolloutStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.rolloutStartTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.rolloutUpdateTime != null && Object.hasOwnProperty.call(message, "rolloutUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.rolloutUpdateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OSPolicyAssignmentOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata} message OSPolicyAssignmentOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OSPolicyAssignmentOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a OSPolicyAssignmentOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata} OSPolicyAssignmentOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicyAssignmentOperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.osPolicyAssignment = reader.string();
+                                    break;
+                                case 2:
+                                    message.apiMethod = reader.int32();
+                                    break;
+                                case 3:
+                                    message.rolloutState = reader.int32();
+                                    break;
+                                case 4:
+                                    message.rolloutStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.rolloutUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a OSPolicyAssignmentOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata} OSPolicyAssignmentOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OSPolicyAssignmentOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a OSPolicyAssignmentOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OSPolicyAssignmentOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment"))
+                                if (!$util.isString(message.osPolicyAssignment))
+                                    return "osPolicyAssignment: string expected";
+                            if (message.apiMethod != null && message.hasOwnProperty("apiMethod"))
+                                switch (message.apiMethod) {
+                                default:
+                                    return "apiMethod: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.rolloutState != null && message.hasOwnProperty("rolloutState"))
+                                switch (message.rolloutState) {
+                                default:
+                                    return "rolloutState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.rolloutStartTime != null && message.hasOwnProperty("rolloutStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.rolloutStartTime);
+                                if (error)
+                                    return "rolloutStartTime." + error;
+                            }
+                            if (message.rolloutUpdateTime != null && message.hasOwnProperty("rolloutUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.rolloutUpdateTime);
+                                if (error)
+                                    return "rolloutUpdateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a OSPolicyAssignmentOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata} OSPolicyAssignmentOperationMetadata
+                         */
+                        OSPolicyAssignmentOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata();
+                            if (object.osPolicyAssignment != null)
+                                message.osPolicyAssignment = String(object.osPolicyAssignment);
+                            switch (object.apiMethod) {
+                            case "API_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.apiMethod = 0;
+                                break;
+                            case "CREATE":
+                            case 1:
+                                message.apiMethod = 1;
+                                break;
+                            case "UPDATE":
+                            case 2:
+                                message.apiMethod = 2;
+                                break;
+                            case "DELETE":
+                            case 3:
+                                message.apiMethod = 3;
+                                break;
+                            }
+                            switch (object.rolloutState) {
+                            case "ROLLOUT_STATE_UNSPECIFIED":
+                            case 0:
+                                message.rolloutState = 0;
+                                break;
+                            case "IN_PROGRESS":
+                            case 1:
+                                message.rolloutState = 1;
+                                break;
+                            case "CANCELLING":
+                            case 2:
+                                message.rolloutState = 2;
+                                break;
+                            case "CANCELLED":
+                            case 3:
+                                message.rolloutState = 3;
+                                break;
+                            case "SUCCEEDED":
+                            case 4:
+                                message.rolloutState = 4;
+                                break;
+                            }
+                            if (object.rolloutStartTime != null) {
+                                if (typeof object.rolloutStartTime !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.rolloutStartTime: object expected");
+                                message.rolloutStartTime = $root.google.protobuf.Timestamp.fromObject(object.rolloutStartTime);
+                            }
+                            if (object.rolloutUpdateTime != null) {
+                                if (typeof object.rolloutUpdateTime !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.rolloutUpdateTime: object expected");
+                                message.rolloutUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.rolloutUpdateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a OSPolicyAssignmentOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @static
+                         * @param {google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata} message OSPolicyAssignmentOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OSPolicyAssignmentOperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.osPolicyAssignment = "";
+                                object.apiMethod = options.enums === String ? "API_METHOD_UNSPECIFIED" : 0;
+                                object.rolloutState = options.enums === String ? "ROLLOUT_STATE_UNSPECIFIED" : 0;
+                                object.rolloutStartTime = null;
+                                object.rolloutUpdateTime = null;
+                            }
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment"))
+                                object.osPolicyAssignment = message.osPolicyAssignment;
+                            if (message.apiMethod != null && message.hasOwnProperty("apiMethod"))
+                                object.apiMethod = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod[message.apiMethod] : message.apiMethod;
+                            if (message.rolloutState != null && message.hasOwnProperty("rolloutState"))
+                                object.rolloutState = options.enums === String ? $root.google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState[message.rolloutState] : message.rolloutState;
+                            if (message.rolloutStartTime != null && message.hasOwnProperty("rolloutStartTime"))
+                                object.rolloutStartTime = $root.google.protobuf.Timestamp.toObject(message.rolloutStartTime, options);
+                            if (message.rolloutUpdateTime != null && message.hasOwnProperty("rolloutUpdateTime"))
+                                object.rolloutUpdateTime = $root.google.protobuf.Timestamp.toObject(message.rolloutUpdateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OSPolicyAssignmentOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OSPolicyAssignmentOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * APIMethod enum.
+                         * @name google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod
+                         * @enum {number}
+                         * @property {number} API_METHOD_UNSPECIFIED=0 API_METHOD_UNSPECIFIED value
+                         * @property {number} CREATE=1 CREATE value
+                         * @property {number} UPDATE=2 UPDATE value
+                         * @property {number} DELETE=3 DELETE value
+                         */
+                        OSPolicyAssignmentOperationMetadata.APIMethod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "API_METHOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATE"] = 1;
+                            values[valuesById[2] = "UPDATE"] = 2;
+                            values[valuesById[3] = "DELETE"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * RolloutState enum.
+                         * @name google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState
+                         * @enum {number}
+                         * @property {number} ROLLOUT_STATE_UNSPECIFIED=0 ROLLOUT_STATE_UNSPECIFIED value
+                         * @property {number} IN_PROGRESS=1 IN_PROGRESS value
+                         * @property {number} CANCELLING=2 CANCELLING value
+                         * @property {number} CANCELLED=3 CANCELLED value
+                         * @property {number} SUCCEEDED=4 SUCCEEDED value
+                         */
+                        OSPolicyAssignmentOperationMetadata.RolloutState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROLLOUT_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IN_PROGRESS"] = 1;
+                            values[valuesById[2] = "CANCELLING"] = 2;
+                            values[valuesById[3] = "CANCELLED"] = 3;
+                            values[valuesById[4] = "SUCCEEDED"] = 4;
+                            return values;
+                        })();
+    
+                        return OSPolicyAssignmentOperationMetadata;
+                    })();
+    
+                    v1.CreateOSPolicyAssignmentRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface ICreateOSPolicyAssignmentRequest
+                         * @property {string|null} [parent] CreateOSPolicyAssignmentRequest parent
+                         * @property {google.cloud.osconfig.v1.IOSPolicyAssignment|null} [osPolicyAssignment] CreateOSPolicyAssignmentRequest osPolicyAssignment
+                         * @property {string|null} [osPolicyAssignmentId] CreateOSPolicyAssignmentRequest osPolicyAssignmentId
+                         */
+    
+                        /**
+                         * Constructs a new CreateOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a CreateOSPolicyAssignmentRequest.
+                         * @implements ICreateOSPolicyAssignmentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest=} [properties] Properties to set
+                         */
+                        function CreateOSPolicyAssignmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateOSPolicyAssignmentRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        CreateOSPolicyAssignmentRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateOSPolicyAssignmentRequest osPolicyAssignment.
+                         * @member {google.cloud.osconfig.v1.IOSPolicyAssignment|null|undefined} osPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        CreateOSPolicyAssignmentRequest.prototype.osPolicyAssignment = null;
+    
+                        /**
+                         * CreateOSPolicyAssignmentRequest osPolicyAssignmentId.
+                         * @member {string} osPolicyAssignmentId
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        CreateOSPolicyAssignmentRequest.prototype.osPolicyAssignmentId = "";
+    
+                        /**
+                         * Creates a new CreateOSPolicyAssignmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest} CreateOSPolicyAssignmentRequest instance
+                         */
+                        CreateOSPolicyAssignmentRequest.create = function create(properties) {
+                            return new CreateOSPolicyAssignmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest} message CreateOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateOSPolicyAssignmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.osPolicyAssignment != null && Object.hasOwnProperty.call(message, "osPolicyAssignment"))
+                                $root.google.cloud.osconfig.v1.OSPolicyAssignment.encode(message.osPolicyAssignment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.osPolicyAssignmentId != null && Object.hasOwnProperty.call(message, "osPolicyAssignmentId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.osPolicyAssignmentId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest} message CreateOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateOSPolicyAssignmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateOSPolicyAssignmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest} CreateOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateOSPolicyAssignmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.osPolicyAssignment = $root.google.cloud.osconfig.v1.OSPolicyAssignment.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.osPolicyAssignmentId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest} CreateOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateOSPolicyAssignmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateOSPolicyAssignmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateOSPolicyAssignmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment")) {
+                                var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.verify(message.osPolicyAssignment);
+                                if (error)
+                                    return "osPolicyAssignment." + error;
+                            }
+                            if (message.osPolicyAssignmentId != null && message.hasOwnProperty("osPolicyAssignmentId"))
+                                if (!$util.isString(message.osPolicyAssignmentId))
+                                    return "osPolicyAssignmentId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest} CreateOSPolicyAssignmentRequest
+                         */
+                        CreateOSPolicyAssignmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.osPolicyAssignment != null) {
+                                if (typeof object.osPolicyAssignment !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest.osPolicyAssignment: object expected");
+                                message.osPolicyAssignment = $root.google.cloud.osconfig.v1.OSPolicyAssignment.fromObject(object.osPolicyAssignment);
+                            }
+                            if (object.osPolicyAssignmentId != null)
+                                message.osPolicyAssignmentId = String(object.osPolicyAssignmentId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest} message CreateOSPolicyAssignmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateOSPolicyAssignmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.osPolicyAssignment = null;
+                                object.osPolicyAssignmentId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment"))
+                                object.osPolicyAssignment = $root.google.cloud.osconfig.v1.OSPolicyAssignment.toObject(message.osPolicyAssignment, options);
+                            if (message.osPolicyAssignmentId != null && message.hasOwnProperty("osPolicyAssignmentId"))
+                                object.osPolicyAssignmentId = message.osPolicyAssignmentId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateOSPolicyAssignmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateOSPolicyAssignmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateOSPolicyAssignmentRequest;
+                    })();
+    
+                    v1.UpdateOSPolicyAssignmentRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IUpdateOSPolicyAssignmentRequest
+                         * @property {google.cloud.osconfig.v1.IOSPolicyAssignment|null} [osPolicyAssignment] UpdateOSPolicyAssignmentRequest osPolicyAssignment
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateOSPolicyAssignmentRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents an UpdateOSPolicyAssignmentRequest.
+                         * @implements IUpdateOSPolicyAssignmentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest=} [properties] Properties to set
+                         */
+                        function UpdateOSPolicyAssignmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateOSPolicyAssignmentRequest osPolicyAssignment.
+                         * @member {google.cloud.osconfig.v1.IOSPolicyAssignment|null|undefined} osPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        UpdateOSPolicyAssignmentRequest.prototype.osPolicyAssignment = null;
+    
+                        /**
+                         * UpdateOSPolicyAssignmentRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        UpdateOSPolicyAssignmentRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateOSPolicyAssignmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest} UpdateOSPolicyAssignmentRequest instance
+                         */
+                        UpdateOSPolicyAssignmentRequest.create = function create(properties) {
+                            return new UpdateOSPolicyAssignmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest} message UpdateOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateOSPolicyAssignmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osPolicyAssignment != null && Object.hasOwnProperty.call(message, "osPolicyAssignment"))
+                                $root.google.cloud.osconfig.v1.OSPolicyAssignment.encode(message.osPolicyAssignment, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest} message UpdateOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateOSPolicyAssignmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateOSPolicyAssignmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest} UpdateOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateOSPolicyAssignmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.osPolicyAssignment = $root.google.cloud.osconfig.v1.OSPolicyAssignment.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest} UpdateOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateOSPolicyAssignmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateOSPolicyAssignmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateOSPolicyAssignmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment")) {
+                                var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.verify(message.osPolicyAssignment);
+                                if (error)
+                                    return "osPolicyAssignment." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest} UpdateOSPolicyAssignmentRequest
+                         */
+                        UpdateOSPolicyAssignmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest();
+                            if (object.osPolicyAssignment != null) {
+                                if (typeof object.osPolicyAssignment !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest.osPolicyAssignment: object expected");
+                                message.osPolicyAssignment = $root.google.cloud.osconfig.v1.OSPolicyAssignment.fromObject(object.osPolicyAssignment);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest} message UpdateOSPolicyAssignmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateOSPolicyAssignmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.osPolicyAssignment = null;
+                                object.updateMask = null;
+                            }
+                            if (message.osPolicyAssignment != null && message.hasOwnProperty("osPolicyAssignment"))
+                                object.osPolicyAssignment = $root.google.cloud.osconfig.v1.OSPolicyAssignment.toObject(message.osPolicyAssignment, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateOSPolicyAssignmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateOSPolicyAssignmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateOSPolicyAssignmentRequest;
+                    })();
+    
+                    v1.GetOSPolicyAssignmentRequest = (function() {
+    
+                        /**
+                         * Properties of a GetOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IGetOSPolicyAssignmentRequest
+                         * @property {string|null} [name] GetOSPolicyAssignmentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a GetOSPolicyAssignmentRequest.
+                         * @implements IGetOSPolicyAssignmentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest=} [properties] Properties to set
+                         */
+                        function GetOSPolicyAssignmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetOSPolicyAssignmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        GetOSPolicyAssignmentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetOSPolicyAssignmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest} GetOSPolicyAssignmentRequest instance
+                         */
+                        GetOSPolicyAssignmentRequest.create = function create(properties) {
+                            return new GetOSPolicyAssignmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest} message GetOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetOSPolicyAssignmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest} message GetOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetOSPolicyAssignmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetOSPolicyAssignmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest} GetOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetOSPolicyAssignmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest} GetOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetOSPolicyAssignmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetOSPolicyAssignmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetOSPolicyAssignmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest} GetOSPolicyAssignmentRequest
+                         */
+                        GetOSPolicyAssignmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest} message GetOSPolicyAssignmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetOSPolicyAssignmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetOSPolicyAssignmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetOSPolicyAssignmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetOSPolicyAssignmentRequest;
+                    })();
+    
+                    v1.ListOSPolicyAssignmentsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListOSPolicyAssignmentsRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IListOSPolicyAssignmentsRequest
+                         * @property {string|null} [parent] ListOSPolicyAssignmentsRequest parent
+                         * @property {number|null} [pageSize] ListOSPolicyAssignmentsRequest pageSize
+                         * @property {string|null} [pageToken] ListOSPolicyAssignmentsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOSPolicyAssignmentsRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ListOSPolicyAssignmentsRequest.
+                         * @implements IListOSPolicyAssignmentsRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest=} [properties] Properties to set
+                         */
+                        function ListOSPolicyAssignmentsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOSPolicyAssignmentsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListOSPolicyAssignmentsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListOSPolicyAssignmentsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListOSPolicyAssignmentsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest} ListOSPolicyAssignmentsRequest instance
+                         */
+                        ListOSPolicyAssignmentsRequest.create = function create(properties) {
+                            return new ListOSPolicyAssignmentsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentsRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest} message ListOSPolicyAssignmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentsRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest} message ListOSPolicyAssignmentsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest} ListOSPolicyAssignmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest} ListOSPolicyAssignmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOSPolicyAssignmentsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOSPolicyAssignmentsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOSPolicyAssignmentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest} ListOSPolicyAssignmentsRequest
+                         */
+                        ListOSPolicyAssignmentsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOSPolicyAssignmentsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest} message ListOSPolicyAssignmentsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOSPolicyAssignmentsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOSPolicyAssignmentsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOSPolicyAssignmentsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListOSPolicyAssignmentsRequest;
+                    })();
+    
+                    v1.ListOSPolicyAssignmentsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListOSPolicyAssignmentsResponse.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IListOSPolicyAssignmentsResponse
+                         * @property {Array.<google.cloud.osconfig.v1.IOSPolicyAssignment>|null} [osPolicyAssignments] ListOSPolicyAssignmentsResponse osPolicyAssignments
+                         * @property {string|null} [nextPageToken] ListOSPolicyAssignmentsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOSPolicyAssignmentsResponse.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ListOSPolicyAssignmentsResponse.
+                         * @implements IListOSPolicyAssignmentsResponse
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse=} [properties] Properties to set
+                         */
+                        function ListOSPolicyAssignmentsResponse(properties) {
+                            this.osPolicyAssignments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOSPolicyAssignmentsResponse osPolicyAssignments.
+                         * @member {Array.<google.cloud.osconfig.v1.IOSPolicyAssignment>} osPolicyAssignments
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentsResponse.prototype.osPolicyAssignments = $util.emptyArray;
+    
+                        /**
+                         * ListOSPolicyAssignmentsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListOSPolicyAssignmentsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse} ListOSPolicyAssignmentsResponse instance
+                         */
+                        ListOSPolicyAssignmentsResponse.create = function create(properties) {
+                            return new ListOSPolicyAssignmentsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentsResponse message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse} message ListOSPolicyAssignmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osPolicyAssignments != null && message.osPolicyAssignments.length)
+                                for (var i = 0; i < message.osPolicyAssignments.length; ++i)
+                                    $root.google.cloud.osconfig.v1.OSPolicyAssignment.encode(message.osPolicyAssignments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentsResponse message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse} message ListOSPolicyAssignmentsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse} ListOSPolicyAssignmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.osPolicyAssignments && message.osPolicyAssignments.length))
+                                        message.osPolicyAssignments = [];
+                                    message.osPolicyAssignments.push($root.google.cloud.osconfig.v1.OSPolicyAssignment.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse} ListOSPolicyAssignmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOSPolicyAssignmentsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOSPolicyAssignmentsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osPolicyAssignments != null && message.hasOwnProperty("osPolicyAssignments")) {
+                                if (!Array.isArray(message.osPolicyAssignments))
+                                    return "osPolicyAssignments: array expected";
+                                for (var i = 0; i < message.osPolicyAssignments.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.verify(message.osPolicyAssignments[i]);
+                                    if (error)
+                                        return "osPolicyAssignments." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOSPolicyAssignmentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse} ListOSPolicyAssignmentsResponse
+                         */
+                        ListOSPolicyAssignmentsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse();
+                            if (object.osPolicyAssignments) {
+                                if (!Array.isArray(object.osPolicyAssignments))
+                                    throw TypeError(".google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse.osPolicyAssignments: array expected");
+                                message.osPolicyAssignments = [];
+                                for (var i = 0; i < object.osPolicyAssignments.length; ++i) {
+                                    if (typeof object.osPolicyAssignments[i] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse.osPolicyAssignments: object expected");
+                                    message.osPolicyAssignments[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.fromObject(object.osPolicyAssignments[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOSPolicyAssignmentsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse} message ListOSPolicyAssignmentsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOSPolicyAssignmentsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.osPolicyAssignments = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.osPolicyAssignments && message.osPolicyAssignments.length) {
+                                object.osPolicyAssignments = [];
+                                for (var j = 0; j < message.osPolicyAssignments.length; ++j)
+                                    object.osPolicyAssignments[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.toObject(message.osPolicyAssignments[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOSPolicyAssignmentsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOSPolicyAssignmentsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListOSPolicyAssignmentsResponse;
+                    })();
+    
+                    v1.ListOSPolicyAssignmentRevisionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListOSPolicyAssignmentRevisionsRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IListOSPolicyAssignmentRevisionsRequest
+                         * @property {string|null} [name] ListOSPolicyAssignmentRevisionsRequest name
+                         * @property {number|null} [pageSize] ListOSPolicyAssignmentRevisionsRequest pageSize
+                         * @property {string|null} [pageToken] ListOSPolicyAssignmentRevisionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOSPolicyAssignmentRevisionsRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ListOSPolicyAssignmentRevisionsRequest.
+                         * @implements IListOSPolicyAssignmentRevisionsRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest=} [properties] Properties to set
+                         */
+                        function ListOSPolicyAssignmentRevisionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOSPolicyAssignmentRevisionsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.prototype.name = "";
+    
+                        /**
+                         * ListOSPolicyAssignmentRevisionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListOSPolicyAssignmentRevisionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListOSPolicyAssignmentRevisionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest} ListOSPolicyAssignmentRevisionsRequest instance
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.create = function create(properties) {
+                            return new ListOSPolicyAssignmentRevisionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentRevisionsRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest} message ListOSPolicyAssignmentRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest} message ListOSPolicyAssignmentRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentRevisionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest} ListOSPolicyAssignmentRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest} ListOSPolicyAssignmentRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOSPolicyAssignmentRevisionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOSPolicyAssignmentRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest} ListOSPolicyAssignmentRevisionsRequest
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOSPolicyAssignmentRevisionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest} message ListOSPolicyAssignmentRevisionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOSPolicyAssignmentRevisionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOSPolicyAssignmentRevisionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListOSPolicyAssignmentRevisionsRequest;
+                    })();
+    
+                    v1.ListOSPolicyAssignmentRevisionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListOSPolicyAssignmentRevisionsResponse.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IListOSPolicyAssignmentRevisionsResponse
+                         * @property {Array.<google.cloud.osconfig.v1.IOSPolicyAssignment>|null} [osPolicyAssignments] ListOSPolicyAssignmentRevisionsResponse osPolicyAssignments
+                         * @property {string|null} [nextPageToken] ListOSPolicyAssignmentRevisionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListOSPolicyAssignmentRevisionsResponse.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a ListOSPolicyAssignmentRevisionsResponse.
+                         * @implements IListOSPolicyAssignmentRevisionsResponse
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse=} [properties] Properties to set
+                         */
+                        function ListOSPolicyAssignmentRevisionsResponse(properties) {
+                            this.osPolicyAssignments = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListOSPolicyAssignmentRevisionsResponse osPolicyAssignments.
+                         * @member {Array.<google.cloud.osconfig.v1.IOSPolicyAssignment>} osPolicyAssignments
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.prototype.osPolicyAssignments = $util.emptyArray;
+    
+                        /**
+                         * ListOSPolicyAssignmentRevisionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @instance
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListOSPolicyAssignmentRevisionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse} ListOSPolicyAssignmentRevisionsResponse instance
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.create = function create(properties) {
+                            return new ListOSPolicyAssignmentRevisionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentRevisionsResponse message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse} message ListOSPolicyAssignmentRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.osPolicyAssignments != null && message.osPolicyAssignments.length)
+                                for (var i = 0; i < message.osPolicyAssignments.length; ++i)
+                                    $root.google.cloud.osconfig.v1.OSPolicyAssignment.encode(message.osPolicyAssignments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListOSPolicyAssignmentRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse} message ListOSPolicyAssignmentRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentRevisionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse} ListOSPolicyAssignmentRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.osPolicyAssignments && message.osPolicyAssignments.length))
+                                        message.osPolicyAssignments = [];
+                                    message.osPolicyAssignments.push($root.google.cloud.osconfig.v1.OSPolicyAssignment.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListOSPolicyAssignmentRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse} ListOSPolicyAssignmentRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListOSPolicyAssignmentRevisionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.osPolicyAssignments != null && message.hasOwnProperty("osPolicyAssignments")) {
+                                if (!Array.isArray(message.osPolicyAssignments))
+                                    return "osPolicyAssignments: array expected";
+                                for (var i = 0; i < message.osPolicyAssignments.length; ++i) {
+                                    var error = $root.google.cloud.osconfig.v1.OSPolicyAssignment.verify(message.osPolicyAssignments[i]);
+                                    if (error)
+                                        return "osPolicyAssignments." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListOSPolicyAssignmentRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse} ListOSPolicyAssignmentRevisionsResponse
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse();
+                            if (object.osPolicyAssignments) {
+                                if (!Array.isArray(object.osPolicyAssignments))
+                                    throw TypeError(".google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse.osPolicyAssignments: array expected");
+                                message.osPolicyAssignments = [];
+                                for (var i = 0; i < object.osPolicyAssignments.length; ++i) {
+                                    if (typeof object.osPolicyAssignments[i] !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse.osPolicyAssignments: object expected");
+                                    message.osPolicyAssignments[i] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.fromObject(object.osPolicyAssignments[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListOSPolicyAssignmentRevisionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @static
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse} message ListOSPolicyAssignmentRevisionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.osPolicyAssignments = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.osPolicyAssignments && message.osPolicyAssignments.length) {
+                                object.osPolicyAssignments = [];
+                                for (var j = 0; j < message.osPolicyAssignments.length; ++j)
+                                    object.osPolicyAssignments[j] = $root.google.cloud.osconfig.v1.OSPolicyAssignment.toObject(message.osPolicyAssignments[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListOSPolicyAssignmentRevisionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListOSPolicyAssignmentRevisionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListOSPolicyAssignmentRevisionsResponse;
+                    })();
+    
+                    v1.DeleteOSPolicyAssignmentRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @interface IDeleteOSPolicyAssignmentRequest
+                         * @property {string|null} [name] DeleteOSPolicyAssignmentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteOSPolicyAssignmentRequest.
+                         * @memberof google.cloud.osconfig.v1
+                         * @classdesc Represents a DeleteOSPolicyAssignmentRequest.
+                         * @implements IDeleteOSPolicyAssignmentRequest
+                         * @constructor
+                         * @param {google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest=} [properties] Properties to set
+                         */
+                        function DeleteOSPolicyAssignmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteOSPolicyAssignmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @instance
+                         */
+                        DeleteOSPolicyAssignmentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteOSPolicyAssignmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest} DeleteOSPolicyAssignmentRequest instance
+                         */
+                        DeleteOSPolicyAssignmentRequest.create = function create(properties) {
+                            return new DeleteOSPolicyAssignmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest} message DeleteOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteOSPolicyAssignmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest} message DeleteOSPolicyAssignmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteOSPolicyAssignmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteOSPolicyAssignmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest} DeleteOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteOSPolicyAssignmentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest} DeleteOSPolicyAssignmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteOSPolicyAssignmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteOSPolicyAssignmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteOSPolicyAssignmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest} DeleteOSPolicyAssignmentRequest
+                         */
+                        DeleteOSPolicyAssignmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @static
+                         * @param {google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest} message DeleteOSPolicyAssignmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteOSPolicyAssignmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteOSPolicyAssignmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteOSPolicyAssignmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteOSPolicyAssignmentRequest;
+                    })();
+    
                     v1.FixedOrPercent = (function() {
     
                         /**
@@ -14706,6 +26551,270 @@
                         OsConfigZonalService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
                             return new this(rpcImpl, requestDelimited, responseDelimited);
                         };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#createOSPolicyAssignment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef CreateOSPolicyAssignmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateOSPolicyAssignment.
+                         * @function createOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest} request CreateOSPolicyAssignmentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.CreateOSPolicyAssignmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.createOSPolicyAssignment = function createOSPolicyAssignment(request, callback) {
+                            return this.rpcCall(createOSPolicyAssignment, $root.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateOSPolicyAssignment" });
+    
+                        /**
+                         * Calls CreateOSPolicyAssignment.
+                         * @function createOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest} request CreateOSPolicyAssignmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#updateOSPolicyAssignment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef UpdateOSPolicyAssignmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateOSPolicyAssignment.
+                         * @function updateOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest} request UpdateOSPolicyAssignmentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.UpdateOSPolicyAssignmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.updateOSPolicyAssignment = function updateOSPolicyAssignment(request, callback) {
+                            return this.rpcCall(updateOSPolicyAssignment, $root.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateOSPolicyAssignment" });
+    
+                        /**
+                         * Calls UpdateOSPolicyAssignment.
+                         * @function updateOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest} request UpdateOSPolicyAssignmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#getOSPolicyAssignment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef GetOSPolicyAssignmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.OSPolicyAssignment} [response] OSPolicyAssignment
+                         */
+    
+                        /**
+                         * Calls GetOSPolicyAssignment.
+                         * @function getOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest} request GetOSPolicyAssignmentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.GetOSPolicyAssignmentCallback} callback Node-style callback called with the error, if any, and OSPolicyAssignment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.getOSPolicyAssignment = function getOSPolicyAssignment(request, callback) {
+                            return this.rpcCall(getOSPolicyAssignment, $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest, $root.google.cloud.osconfig.v1.OSPolicyAssignment, request, callback);
+                        }, "name", { value: "GetOSPolicyAssignment" });
+    
+                        /**
+                         * Calls GetOSPolicyAssignment.
+                         * @function getOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest} request GetOSPolicyAssignmentRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.OSPolicyAssignment>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#listOSPolicyAssignments}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef ListOSPolicyAssignmentsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse} [response] ListOSPolicyAssignmentsResponse
+                         */
+    
+                        /**
+                         * Calls ListOSPolicyAssignments.
+                         * @function listOSPolicyAssignments
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest} request ListOSPolicyAssignmentsRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.ListOSPolicyAssignmentsCallback} callback Node-style callback called with the error, if any, and ListOSPolicyAssignmentsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.listOSPolicyAssignments = function listOSPolicyAssignments(request, callback) {
+                            return this.rpcCall(listOSPolicyAssignments, $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest, $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse, request, callback);
+                        }, "name", { value: "ListOSPolicyAssignments" });
+    
+                        /**
+                         * Calls ListOSPolicyAssignments.
+                         * @function listOSPolicyAssignments
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest} request ListOSPolicyAssignmentsRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#listOSPolicyAssignmentRevisions}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef ListOSPolicyAssignmentRevisionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse} [response] ListOSPolicyAssignmentRevisionsResponse
+                         */
+    
+                        /**
+                         * Calls ListOSPolicyAssignmentRevisions.
+                         * @function listOSPolicyAssignmentRevisions
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest} request ListOSPolicyAssignmentRevisionsRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.ListOSPolicyAssignmentRevisionsCallback} callback Node-style callback called with the error, if any, and ListOSPolicyAssignmentRevisionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.listOSPolicyAssignmentRevisions = function listOSPolicyAssignmentRevisions(request, callback) {
+                            return this.rpcCall(listOSPolicyAssignmentRevisions, $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest, $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse, request, callback);
+                        }, "name", { value: "ListOSPolicyAssignmentRevisions" });
+    
+                        /**
+                         * Calls ListOSPolicyAssignmentRevisions.
+                         * @function listOSPolicyAssignmentRevisions
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest} request ListOSPolicyAssignmentRevisionsRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#deleteOSPolicyAssignment}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef DeleteOSPolicyAssignmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteOSPolicyAssignment.
+                         * @function deleteOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest} request DeleteOSPolicyAssignmentRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.DeleteOSPolicyAssignmentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.deleteOSPolicyAssignment = function deleteOSPolicyAssignment(request, callback) {
+                            return this.rpcCall(deleteOSPolicyAssignment, $root.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteOSPolicyAssignment" });
+    
+                        /**
+                         * Calls DeleteOSPolicyAssignment.
+                         * @function deleteOSPolicyAssignment
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest} request DeleteOSPolicyAssignmentRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#getOSPolicyAssignmentReport}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef GetOSPolicyAssignmentReportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.OSPolicyAssignmentReport} [response] OSPolicyAssignmentReport
+                         */
+    
+                        /**
+                         * Calls GetOSPolicyAssignmentReport.
+                         * @function getOSPolicyAssignmentReport
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest} request GetOSPolicyAssignmentReportRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.GetOSPolicyAssignmentReportCallback} callback Node-style callback called with the error, if any, and OSPolicyAssignmentReport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.getOSPolicyAssignmentReport = function getOSPolicyAssignmentReport(request, callback) {
+                            return this.rpcCall(getOSPolicyAssignmentReport, $root.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest, $root.google.cloud.osconfig.v1.OSPolicyAssignmentReport, request, callback);
+                        }, "name", { value: "GetOSPolicyAssignmentReport" });
+    
+                        /**
+                         * Calls GetOSPolicyAssignmentReport.
+                         * @function getOSPolicyAssignmentReport
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest} request GetOSPolicyAssignmentReportRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.OSPolicyAssignmentReport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#listOSPolicyAssignmentReports}.
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @typedef ListOSPolicyAssignmentReportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse} [response] ListOSPolicyAssignmentReportsResponse
+                         */
+    
+                        /**
+                         * Calls ListOSPolicyAssignmentReports.
+                         * @function listOSPolicyAssignmentReports
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest} request ListOSPolicyAssignmentReportsRequest message or plain object
+                         * @param {google.cloud.osconfig.v1.OsConfigZonalService.ListOSPolicyAssignmentReportsCallback} callback Node-style callback called with the error, if any, and ListOSPolicyAssignmentReportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsConfigZonalService.prototype.listOSPolicyAssignmentReports = function listOSPolicyAssignmentReports(request, callback) {
+                            return this.rpcCall(listOSPolicyAssignmentReports, $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest, $root.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse, request, callback);
+                        }, "name", { value: "ListOSPolicyAssignmentReports" });
+    
+                        /**
+                         * Calls ListOSPolicyAssignmentReports.
+                         * @function listOSPolicyAssignmentReports
+                         * @memberof google.cloud.osconfig.v1.OsConfigZonalService
+                         * @instance
+                         * @param {google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest} request ListOSPolicyAssignmentReportsRequest message or plain object
+                         * @returns {Promise<google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse>} Promise
+                         * @variation 2
+                         */
     
                         /**
                          * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#getInventory}.
@@ -46899,166 +59008,6 @@
                 return Duration;
             })();
     
-            protobuf.Empty = (function() {
-    
-                /**
-                 * Properties of an Empty.
-                 * @memberof google.protobuf
-                 * @interface IEmpty
-                 */
-    
-                /**
-                 * Constructs a new Empty.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Empty.
-                 * @implements IEmpty
-                 * @constructor
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 */
-                function Empty(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Creates a new Empty instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 * @returns {google.protobuf.Empty} Empty instance
-                 */
-                Empty.create = function create(properties) {
-                    return new Empty(properties);
-                };
-    
-                /**
-                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Empty message.
-                 * @function verify
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Empty.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Empty} Empty
-                 */
-                Empty.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Empty)
-                        return object;
-                    return new $root.google.protobuf.Empty();
-                };
-    
-                /**
-                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.Empty} message Empty
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Empty.toObject = function toObject() {
-                    return {};
-                };
-    
-                /**
-                 * Converts this Empty to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Empty
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Empty.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Empty;
-            })();
-    
             protobuf.FieldMask = (function() {
     
                 /**
@@ -47260,6 +59209,166 @@
                 };
     
                 return FieldMask;
+            })();
+    
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Empty;
             })();
     
             protobuf.Any = (function() {

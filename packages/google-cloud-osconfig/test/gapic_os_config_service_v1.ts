@@ -1854,6 +1854,178 @@ describe('v1.OsConfigServiceClient', () => {
       });
     });
 
+    describe('oSPolicyAssignment', () => {
+      const fakePath = '/rendered/path/oSPolicyAssignment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        os_policy_assignment: 'osPolicyAssignmentValue',
+      };
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.oSPolicyAssignmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.oSPolicyAssignmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('oSPolicyAssignmentPath', () => {
+        const result = client.oSPolicyAssignmentPath(
+          'projectValue',
+          'locationValue',
+          'osPolicyAssignmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromOSPolicyAssignmentName', () => {
+        const result = client.matchProjectFromOSPolicyAssignmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOSPolicyAssignmentName', () => {
+        const result = client.matchLocationFromOSPolicyAssignmentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchOsPolicyAssignmentFromOSPolicyAssignmentName', () => {
+        const result =
+          client.matchOsPolicyAssignmentFromOSPolicyAssignmentName(fakePath);
+        assert.strictEqual(result, 'osPolicyAssignmentValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('oSPolicyAssignmentReport', () => {
+      const fakePath = '/rendered/path/oSPolicyAssignmentReport';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        assignment: 'assignmentValue',
+      };
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('oSPolicyAssignmentReportPath', () => {
+        const result = client.oSPolicyAssignmentReportPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'assignmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchProjectFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchLocationFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInstanceFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchInstanceFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssignmentFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchAssignmentFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'assignmentValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('patchDeployment', () => {
       const fakePath = '/rendered/path/patchDeployment';
       const expectedParameters = {

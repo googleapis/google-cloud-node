@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function deleteOSPolicyAssignment() {
+  async function callDeleteOSPolicyAssignment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteOSPolicyAssignment();
+  callDeleteOSPolicyAssignment();
   // [END osconfig_v1alpha_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async]
 }
 

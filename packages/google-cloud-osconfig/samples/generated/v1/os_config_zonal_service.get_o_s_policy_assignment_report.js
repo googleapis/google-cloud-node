@@ -15,49 +15,40 @@
 'use strict';
 
 function main(name) {
-  // [START osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  // [START osconfig_v1_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the OS policy assignment to list revisions for.
+   *  Required. API resource name for OS policy assignment report.
+   *  Format:
+   *  `/projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report`
+   *  For `{project}`, either `project-number` or `project-id` can be provided.
+   *  For `{instance_id}`, either Compute Engine `instance-id` or `instance-name`
+   *  can be provided.
+   *  For `{assignment_id}`, the OSPolicyAssignment id must be provided.
    */
   // const name = 'abc123'
-  /**
-   *  The maximum number of revisions to return.
-   */
-  // const pageSize = 1234
-  /**
-   *  A pagination token returned from a previous call to
-   *  `ListOSPolicyAssignmentRevisions` that indicates where this listing should
-   *  continue from.
-   */
-  // const pageToken = 'abc123'
 
   // Imports the Osconfig library
-  const {OsConfigZonalServiceClient} =
-    require('@google-cloud/os-config').v1alpha;
+  const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1;
 
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function callListOSPolicyAssignmentRevisions() {
+  async function callGetOSPolicyAssignmentReport() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const iterable = await osconfigClient.listOSPolicyAssignmentRevisionsAsync(
-      request
-    );
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const response = await osconfigClient.getOSPolicyAssignmentReport(request);
+    console.log(response);
   }
 
-  callListOSPolicyAssignmentRevisions();
-  // [END osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  callGetOSPolicyAssignmentReport();
+  // [END osconfig_v1_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_async]
 }
 
 process.on('unhandledRejection', err => {

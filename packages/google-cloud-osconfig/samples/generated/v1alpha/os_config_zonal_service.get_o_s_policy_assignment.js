@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function getOSPolicyAssignment() {
+  async function callGetOSPolicyAssignment() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getOSPolicyAssignment();
+  callGetOSPolicyAssignment();
   // [END osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignment_async]
 }
 

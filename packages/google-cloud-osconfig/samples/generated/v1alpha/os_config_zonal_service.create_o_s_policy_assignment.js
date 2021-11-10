@@ -27,7 +27,7 @@ function main(parent, osPolicyAssignment, osPolicyAssignmentId) {
   /**
    *  Required. The OS policy assignment to be created.
    */
-  // const osPolicyAssignment = ''
+  // const osPolicyAssignment = {}
   /**
    *  Required. The logical name of the OS policy assignment in the project
    *  with the following restrictions:
@@ -46,7 +46,7 @@ function main(parent, osPolicyAssignment, osPolicyAssignmentId) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function createOSPolicyAssignment() {
+  async function callCreateOSPolicyAssignment() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent, osPolicyAssignment, osPolicyAssignmentId) {
     console.log(response);
   }
 
-  createOSPolicyAssignment();
+  callCreateOSPolicyAssignment();
   // [END osconfig_v1alpha_generated_OsConfigZonalService_CreateOSPolicyAssignment_async]
 }
 

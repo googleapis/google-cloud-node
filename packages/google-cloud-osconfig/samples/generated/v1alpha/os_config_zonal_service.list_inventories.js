@@ -31,7 +31,7 @@ function main(parent) {
    *  Inventory view indicating what information should be included in the
    *  inventory resource. If unspecified, the default view is BASIC.
    */
-  // const view = ''
+  // const view = {}
   /**
    *  The maximum number of results to return.
    */
@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function listInventories() {
+  async function callListInventories() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent) {
     }
   }
 
-  listInventories();
+  callListInventories();
   // [END osconfig_v1alpha_generated_OsConfigZonalService_ListInventories_async]
 }
 

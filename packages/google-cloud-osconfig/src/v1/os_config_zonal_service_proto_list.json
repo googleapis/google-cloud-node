@@ -1,5 +1,8 @@
 [
   "../../protos/google/cloud/osconfig/v1/inventory.proto",
+  "../../protos/google/cloud/osconfig/v1/os_policy.proto",
+  "../../protos/google/cloud/osconfig/v1/os_policy_assignment_reports.proto",
+  "../../protos/google/cloud/osconfig/v1/os_policy_assignments.proto",
   "../../protos/google/cloud/osconfig/v1/osconfig_common.proto",
   "../../protos/google/cloud/osconfig/v1/osconfig_service.proto",
   "../../protos/google/cloud/osconfig/v1/osconfig_zonal_service.proto",

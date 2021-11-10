@@ -37,7 +37,7 @@ function main(parent, patchDeploymentId, patchDeployment) {
   /**
    *  Required. The patch deployment to create.
    */
-  // const patchDeployment = ''
+  // const patchDeployment = {}
 
   // Imports the Osconfig library
   const {OsConfigServiceClient} = require('@google-cloud/os-config').v1;
@@ -45,7 +45,7 @@ function main(parent, patchDeploymentId, patchDeployment) {
   // Instantiates a client
   const osconfigClient = new OsConfigServiceClient();
 
-  async function createPatchDeployment() {
+  async function callCreatePatchDeployment() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, patchDeploymentId, patchDeployment) {
     console.log(response);
   }
 
-  createPatchDeployment();
+  callCreatePatchDeployment();
   // [END osconfig_v1_generated_OsConfigService_CreatePatchDeployment_async]
 }
 

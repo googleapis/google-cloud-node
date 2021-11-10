@@ -424,6 +424,30 @@ export class OsConfigZonalServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieve an existing OS policy assignment.
+   *
+   * This method always returns the latest revision. In order to retrieve a
+   * previous revision of the assignment, also provide the revision ID in the
+   * `name` parameter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of OS policy assignment.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/osPolicyAssignments/{os_policy_assignment}@{revisionId}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [OSPolicyAssignment]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.get_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_GetOSPolicyAssignment_async
+   */
   getOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentRequest,
     options?: CallOptions
@@ -458,30 +482,6 @@ export class OsConfigZonalServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieve an existing OS policy assignment.
-   *
-   * This method always returns the latest revision. In order to retrieve a
-   * previous revision of the assignment, also provide the revision ID in the
-   * `name` parameter.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of OS policy assignment.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/osPolicyAssignments/{os_policy_assignment}@{revisionId}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [OSPolicyAssignment]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getOSPolicyAssignment(request);
-   */
   getOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.IGetOSPolicyAssignmentRequest,
     optionsOrCallback?:
@@ -528,6 +528,32 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.innerApiCalls.getOSPolicyAssignment(request, options, callback);
   }
+  /**
+   * Get OS policies compliance data for the specified Compute Engine VM
+   * instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. API resource name for instance OS policies compliance resource.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/instanceOSPoliciesCompliances/{instance}`
+   *
+   *   For `{project}`, either Compute Engine project-number or project-id can be
+   *   provided.
+   *   For `{instance}`, either Compute Engine VM instance-id or instance-name can
+   *   be provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [InstanceOSPoliciesCompliance]{@link google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.get_instance_o_s_policies_compliance.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_GetInstanceOSPoliciesCompliance_async
+   */
   getInstanceOSPoliciesCompliance(
     request?: protos.google.cloud.osconfig.v1alpha.IGetInstanceOSPoliciesComplianceRequest,
     options?: CallOptions
@@ -562,32 +588,6 @@ export class OsConfigZonalServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get OS policies compliance data for the specified Compute Engine VM
-   * instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. API resource name for instance OS policies compliance resource.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/instanceOSPoliciesCompliances/{instance}`
-   *
-   *   For `{project}`, either Compute Engine project-number or project-id can be
-   *   provided.
-   *   For `{instance}`, either Compute Engine VM instance-id or instance-name can
-   *   be provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceOSPoliciesCompliance]{@link google.cloud.osconfig.v1alpha.InstanceOSPoliciesCompliance}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getInstanceOSPoliciesCompliance(request);
-   */
   getInstanceOSPoliciesCompliance(
     request?: protos.google.cloud.osconfig.v1alpha.IGetInstanceOSPoliciesComplianceRequest,
     optionsOrCallback?:
@@ -638,6 +638,34 @@ export class OsConfigZonalServiceClient {
       callback
     );
   }
+  /**
+   * Get inventory data for the specified VM instance. If the VM has no
+   * associated inventory, the message `NOT_FOUND` is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. API resource name for inventory resource.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/inventory`
+   *
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
+   *   For `{instance}`, either Compute Engine  `instance-id` or `instance-name`
+   *   can be provided.
+   * @param {google.cloud.osconfig.v1alpha.InventoryView} request.view
+   *   Inventory view indicating what information should be included in the
+   *   inventory resource. If unspecified, the default view is BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Inventory]{@link google.cloud.osconfig.v1alpha.Inventory}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.get_inventory.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_GetInventory_async
+   */
   getInventory(
     request?: protos.google.cloud.osconfig.v1alpha.IGetInventoryRequest,
     options?: CallOptions
@@ -669,34 +697,6 @@ export class OsConfigZonalServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get inventory data for the specified VM instance. If the VM has no
-   * associated inventory, the message `NOT_FOUND` is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. API resource name for inventory resource.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/inventory`
-   *
-   *   For `{project}`, either `project-number` or `project-id` can be provided.
-   *   For `{instance}`, either Compute Engine  `instance-id` or `instance-name`
-   *   can be provided.
-   * @param {google.cloud.osconfig.v1alpha.InventoryView} request.view
-   *   Inventory view indicating what information should be included in the
-   *   inventory resource. If unspecified, the default view is BASIC.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Inventory]{@link google.cloud.osconfig.v1alpha.Inventory}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getInventory(request);
-   */
   getInventory(
     request?: protos.google.cloud.osconfig.v1alpha.IGetInventoryRequest,
     optionsOrCallback?:
@@ -740,6 +740,31 @@ export class OsConfigZonalServiceClient {
     this.initialize();
     return this.innerApiCalls.getInventory(request, options, callback);
   }
+  /**
+   * Gets the vulnerability report for the specified VM instance. Only VMs with
+   * inventory data have vulnerability reports associated with them.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. API resource name for vulnerability resource.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/vulnerabilityReport`
+   *
+   *   For `{project}`, either `project-number` or `project-id` can be provided.
+   *   For `{instance}`, either Compute Engine `instance-id` or `instance-name`
+   *   can be provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [VulnerabilityReport]{@link google.cloud.osconfig.v1alpha.VulnerabilityReport}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.get_vulnerability_report.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_GetVulnerabilityReport_async
+   */
   getVulnerabilityReport(
     request?: protos.google.cloud.osconfig.v1alpha.IGetVulnerabilityReportRequest,
     options?: CallOptions
@@ -774,31 +799,6 @@ export class OsConfigZonalServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the vulnerability report for the specified VM instance. Only VMs with
-   * inventory data have vulnerability reports associated with them.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. API resource name for vulnerability resource.
-   *
-   *   Format:
-   *   `projects/{project}/locations/{location}/instances/{instance}/vulnerabilityReport`
-   *
-   *   For `{project}`, either `project-number` or `project-id` can be provided.
-   *   For `{instance}`, either Compute Engine `instance-id` or `instance-name`
-   *   can be provided.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [VulnerabilityReport]{@link google.cloud.osconfig.v1alpha.VulnerabilityReport}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getVulnerabilityReport(request);
-   */
   getVulnerabilityReport(
     request?: protos.google.cloud.osconfig.v1alpha.IGetVulnerabilityReportRequest,
     optionsOrCallback?:
@@ -850,42 +850,6 @@ export class OsConfigZonalServiceClient {
     );
   }
 
-  createOSPolicyAssignment(
-    request?: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
-        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createOSPolicyAssignment(
-    request: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
-        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createOSPolicyAssignment(
-    request: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
-        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Create an OS policy assignment.
    *
@@ -922,10 +886,45 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createOSPolicyAssignment(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.create_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_CreateOSPolicyAssignment_async
    */
+  createOSPolicyAssignment(
+    request?: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createOSPolicyAssignment(
+    request: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createOSPolicyAssignment(
+    request: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment,
+        protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignmentOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.ICreateOSPolicyAssignmentRequest,
     optionsOrCallback?:
@@ -987,11 +986,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateOSPolicyAssignmentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.create_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_CreateOSPolicyAssignment_async
    */
   async checkCreateOSPolicyAssignmentProgress(
     name: string
@@ -1015,6 +1011,35 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata
     >;
   }
+  /**
+   * Update an existing OS policy assignment.
+   *
+   * This method creates a new revision of the OS policy assignment.
+   *
+   * This method returns a long running operation (LRO) that contains the
+   * rollout details. The rollout can be cancelled by cancelling the LRO.
+   *
+   * For more information, see [Method:
+   * projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1alpha/projects.locations.osPolicyAssignments.operations/cancel).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.osconfig.v1alpha.OSPolicyAssignment} request.osPolicyAssignment
+   *   Required. The updated OS policy assignment.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask that controls which fields of the assignment should be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.update_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_UpdateOSPolicyAssignment_async
+   */
   updateOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.IUpdateOSPolicyAssignmentRequest,
     options?: CallOptions
@@ -1051,36 +1076,6 @@ export class OsConfigZonalServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Update an existing OS policy assignment.
-   *
-   * This method creates a new revision of the OS policy assignment.
-   *
-   * This method returns a long running operation (LRO) that contains the
-   * rollout details. The rollout can be cancelled by cancelling the LRO.
-   *
-   * For more information, see [Method:
-   * projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1alpha/projects.locations.osPolicyAssignments.operations/cancel).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.osconfig.v1alpha.OSPolicyAssignment} request.osPolicyAssignment
-   *   Required. The updated OS policy assignment.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask that controls which fields of the assignment should be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateOSPolicyAssignment(request);
-   * const [response] = await operation.promise();
-   */
   updateOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.IUpdateOSPolicyAssignmentRequest,
     optionsOrCallback?:
@@ -1142,11 +1137,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateOSPolicyAssignmentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.update_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_UpdateOSPolicyAssignment_async
    */
   async checkUpdateOSPolicyAssignmentProgress(
     name: string
@@ -1170,6 +1162,36 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata
     >;
   }
+  /**
+   * Delete the OS policy assignment.
+   *
+   * This method creates a new revision of the OS policy assignment.
+   *
+   * This method returns a long running operation (LRO) that contains the
+   * rollout details. The rollout can be cancelled by cancelling the LRO.
+   *
+   * If the LRO completes and is not cancelled, all revisions associated with
+   * the OS policy assignment are deleted.
+   *
+   * For more information, see [Method:
+   * projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1alpha/projects.locations.osPolicyAssignments.operations/cancel).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the OS policy assignment to be deleted
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.delete_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async
+   */
   deleteOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.IDeleteOSPolicyAssignmentRequest,
     options?: CallOptions
@@ -1206,37 +1228,6 @@ export class OsConfigZonalServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Delete the OS policy assignment.
-   *
-   * This method creates a new revision of the OS policy assignment.
-   *
-   * This method returns a long running operation (LRO) that contains the
-   * rollout details. The rollout can be cancelled by cancelling the LRO.
-   *
-   * If the LRO completes and is not cancelled, all revisions associated with
-   * the OS policy assignment are deleted.
-   *
-   * For more information, see [Method:
-   * projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1alpha/projects.locations.osPolicyAssignments.operations/cancel).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the OS policy assignment to be deleted
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteOSPolicyAssignment(request);
-   * const [response] = await operation.promise();
-   */
   deleteOSPolicyAssignment(
     request?: protos.google.cloud.osconfig.v1alpha.IDeleteOSPolicyAssignmentRequest,
     optionsOrCallback?:
@@ -1298,11 +1289,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteOSPolicyAssignmentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.delete_o_s_policy_assignment.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async
    */
   async checkDeleteOSPolicyAssignmentProgress(
     name: string
@@ -1326,6 +1314,34 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.OSPolicyAssignmentOperationMetadata
     >;
   }
+  /**
+   * List the OS policy assignments under the parent resource.
+   *
+   * For each OS policy assignment, the latest revision is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name.
+   * @param {number} request.pageSize
+   *   The maximum number of assignments to return.
+   * @param {string} request.pageToken
+   *   A pagination token returned from a previous call to
+   *   `ListOSPolicyAssignments` that indicates where this listing should continue
+   *   from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [OSPolicyAssignment]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOSPolicyAssignmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listOSPolicyAssignments(
     request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsRequest,
     options?: CallOptions
@@ -1357,34 +1373,6 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment
     >
   ): void;
-  /**
-   * List the OS policy assignments under the parent resource.
-   *
-   * For each OS policy assignment, the latest revision is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name.
-   * @param {number} request.pageSize
-   *   The maximum number of assignments to return.
-   * @param {string} request.pageToken
-   *   A pagination token returned from a previous call to
-   *   `ListOSPolicyAssignments` that indicates where this listing should continue
-   *   from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [OSPolicyAssignment]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOSPolicyAssignmentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listOSPolicyAssignments(
     request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsRequest,
     optionsOrCallback?:
@@ -1503,11 +1491,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listOSPolicyAssignmentsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignments.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignments_async
    */
   listOSPolicyAssignmentsAsync(
     request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsRequest,
@@ -1521,7 +1506,6 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listOSPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1531,6 +1515,32 @@ export class OsConfigZonalServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment>;
   }
+  /**
+   * List the OS policy assignment revisions for a given OS policy assignment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the OS policy assignment to list revisions for.
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return.
+   * @param {string} request.pageToken
+   *   A pagination token returned from a previous call to
+   *   `ListOSPolicyAssignmentRevisions` that indicates where this listing should
+   *   continue from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [OSPolicyAssignment]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOSPolicyAssignmentRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listOSPolicyAssignmentRevisions(
     request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsRequest,
     options?: CallOptions
@@ -1562,32 +1572,6 @@ export class OsConfigZonalServiceClient {
       protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment
     >
   ): void;
-  /**
-   * List the OS policy assignment revisions for a given OS policy assignment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the OS policy assignment to list revisions for.
-   * @param {number} request.pageSize
-   *   The maximum number of revisions to return.
-   * @param {string} request.pageToken
-   *   A pagination token returned from a previous call to
-   *   `ListOSPolicyAssignmentRevisions` that indicates where this listing should
-   *   continue from.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [OSPolicyAssignment]{@link google.cloud.osconfig.v1alpha.OSPolicyAssignment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listOSPolicyAssignmentRevisionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listOSPolicyAssignmentRevisions(
     request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsRequest,
     optionsOrCallback?:
@@ -1707,11 +1691,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listOSPolicyAssignmentRevisionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_o_s_policy_assignment_revisions.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async
    */
   listOSPolicyAssignmentRevisionsAsync(
     request?: protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsRequest,
@@ -1725,7 +1706,6 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         name: request.name || '',
       });
-    options = options || {};
     const defaultCallSettings =
       this._defaults['listOSPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1736,37 +1716,6 @@ export class OsConfigZonalServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1alpha.IOSPolicyAssignment>;
   }
-  listInstanceOSPoliciesCompliances(
-    request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance[],
-      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest | null,
-      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
-    ]
-  >;
-  listInstanceOSPoliciesCompliances(
-    request: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
-      | protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance
-    >
-  ): void;
-  listInstanceOSPoliciesCompliances(
-    request: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
-      | protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
-      | null
-      | undefined,
-      protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance
-    >
-  ): void;
   /**
    * List OS policies compliance data for all Compute Engine VM instances in the
    * specified zone.
@@ -1802,6 +1751,37 @@ export class OsConfigZonalServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listInstanceOSPoliciesCompliances(
+    request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance[],
+      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest | null,
+      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
+    ]
+  >;
+  listInstanceOSPoliciesCompliances(
+    request: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance
+    >
+  ): void;
+  listInstanceOSPoliciesCompliances(
+    request: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance
+    >
+  ): void;
   listInstanceOSPoliciesCompliances(
     request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
     optionsOrCallback?:
@@ -1937,11 +1917,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listInstanceOSPoliciesCompliancesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_instance_o_s_policies_compliances.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListInstanceOSPoliciesCompliances_async
    */
   listInstanceOSPoliciesCompliancesAsync(
     request?: protos.google.cloud.osconfig.v1alpha.IListInstanceOSPoliciesCompliancesRequest,
@@ -1955,7 +1932,6 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings =
       this._defaults['listInstanceOSPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1966,37 +1942,6 @@ export class OsConfigZonalServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1alpha.IInstanceOSPoliciesCompliance>;
   }
-  listInventories(
-    request?: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.osconfig.v1alpha.IInventory[],
-      protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest | null,
-      protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
-    ]
-  >;
-  listInventories(
-    request: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
-      | protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.osconfig.v1alpha.IInventory
-    >
-  ): void;
-  listInventories(
-    request: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
-      | protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.osconfig.v1alpha.IInventory
-    >
-  ): void;
   /**
    * List inventory data for all VM instances in the specified zone.
    *
@@ -2035,6 +1980,37 @@ export class OsConfigZonalServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listInventories(
+    request?: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IInventory[],
+      protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest | null,
+      protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
+    ]
+  >;
+  listInventories(
+    request: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IInventory
+    >
+  ): void;
+  listInventories(
+    request: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListInventoriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IInventory
+    >
+  ): void;
   listInventories(
     request?: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
     optionsOrCallback?:
@@ -2173,11 +2149,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listInventoriesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_inventories.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListInventories_async
    */
   listInventoriesAsync(
     request?: protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
@@ -2191,7 +2164,6 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2201,37 +2173,6 @@ export class OsConfigZonalServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.osconfig.v1alpha.IInventory>;
   }
-  listVulnerabilityReports(
-    request?: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport[],
-      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest | null,
-      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
-    ]
-  >;
-  listVulnerabilityReports(
-    request: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
-      | protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport
-    >
-  ): void;
-  listVulnerabilityReports(
-    request: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
-      | protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
-      | null
-      | undefined,
-      protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport
-    >
-  ): void;
   /**
    * List vulnerability reports for all VM instances in the specified zone.
    *
@@ -2267,6 +2208,37 @@ export class OsConfigZonalServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listVulnerabilityReports(
+    request?: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport[],
+      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest | null,
+      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
+    ]
+  >;
+  listVulnerabilityReports(
+    request: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport
+    >
+  ): void;
+  listVulnerabilityReports(
+    request: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
+      | protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.osconfig.v1alpha.IVulnerabilityReport
+    >
+  ): void;
   listVulnerabilityReports(
     request?: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
     optionsOrCallback?:
@@ -2403,11 +2375,8 @@ export class OsConfigZonalServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listVulnerabilityReportsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha/os_config_zonal_service.list_vulnerability_reports.js</caption>
+   * region_tag:osconfig_v1alpha_generated_OsConfigZonalService_ListVulnerabilityReports_async
    */
   listVulnerabilityReportsAsync(
     request?: protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
@@ -2421,7 +2390,6 @@ export class OsConfigZonalServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -15,49 +15,35 @@
 'use strict';
 
 function main(name) {
-  // [START osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  // [START osconfig_v1_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the OS policy assignment to list revisions for.
+   *  Required. The name of the OS policy assignment to be deleted
    */
   // const name = 'abc123'
-  /**
-   *  The maximum number of revisions to return.
-   */
-  // const pageSize = 1234
-  /**
-   *  A pagination token returned from a previous call to
-   *  `ListOSPolicyAssignmentRevisions` that indicates where this listing should
-   *  continue from.
-   */
-  // const pageToken = 'abc123'
 
   // Imports the Osconfig library
-  const {OsConfigZonalServiceClient} =
-    require('@google-cloud/os-config').v1alpha;
+  const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1;
 
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function callListOSPolicyAssignmentRevisions() {
+  async function callDeleteOSPolicyAssignment() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const iterable = await osconfigClient.listOSPolicyAssignmentRevisionsAsync(
-      request
-    );
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const [operation] = await osconfigClient.deleteOSPolicyAssignment(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListOSPolicyAssignmentRevisions();
-  // [END osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  callDeleteOSPolicyAssignment();
+  // [END osconfig_v1_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async]
 }
 
 process.on('unhandledRejection', err => {

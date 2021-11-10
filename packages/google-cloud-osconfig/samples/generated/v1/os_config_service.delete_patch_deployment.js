@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const osconfigClient = new OsConfigServiceClient();
 
-  async function deletePatchDeployment() {
+  async function callDeletePatchDeployment() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deletePatchDeployment();
+  callDeletePatchDeployment();
   // [END osconfig_v1_generated_OsConfigService_DeletePatchDeployment_async]
 }
 

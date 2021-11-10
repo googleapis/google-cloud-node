@@ -32,7 +32,7 @@ function main(name) {
    *  Inventory view indicating what information should be included in the
    *  inventory resource. If unspecified, the default view is BASIC.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Osconfig library
   const {OsConfigZonalServiceClient} =
@@ -41,7 +41,7 @@ function main(name) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function getInventory() {
+  async function callGetInventory() {
     // Construct request
     const request = {
       name,
@@ -52,7 +52,7 @@ function main(name) {
     console.log(response);
   }
 
-  getInventory();
+  callGetInventory();
   // [END osconfig_v1alpha_generated_OsConfigZonalService_GetInventory_async]
 }
 

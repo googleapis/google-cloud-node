@@ -14,50 +14,41 @@
 
 'use strict';
 
-function main(name) {
-  // [START osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+function main(osPolicyAssignment) {
+  // [START osconfig_v1_generated_OsConfigZonalService_UpdateOSPolicyAssignment_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the OS policy assignment to list revisions for.
+   *  Required. The updated OS policy assignment.
    */
-  // const name = 'abc123'
+  // const osPolicyAssignment = {}
   /**
-   *  The maximum number of revisions to return.
+   *  Optional. Field mask that controls which fields of the assignment should be
+   *  updated.
    */
-  // const pageSize = 1234
-  /**
-   *  A pagination token returned from a previous call to
-   *  `ListOSPolicyAssignmentRevisions` that indicates where this listing should
-   *  continue from.
-   */
-  // const pageToken = 'abc123'
+  // const updateMask = {}
 
   // Imports the Osconfig library
-  const {OsConfigZonalServiceClient} =
-    require('@google-cloud/os-config').v1alpha;
+  const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1;
 
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function callListOSPolicyAssignmentRevisions() {
+  async function callUpdateOSPolicyAssignment() {
     // Construct request
     const request = {
-      name,
+      osPolicyAssignment,
     };
 
     // Run request
-    const iterable = await osconfigClient.listOSPolicyAssignmentRevisionsAsync(
-      request
-    );
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const [operation] = await osconfigClient.updateOSPolicyAssignment(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListOSPolicyAssignmentRevisions();
-  // [END osconfig_v1alpha_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async]
+  callUpdateOSPolicyAssignment();
+  // [END osconfig_v1_generated_OsConfigZonalService_UpdateOSPolicyAssignment_async]
 }
 
 process.on('unhandledRejection', err => {

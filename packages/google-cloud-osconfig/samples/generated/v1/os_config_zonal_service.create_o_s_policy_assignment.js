@@ -14,25 +14,30 @@
 
 'use strict';
 
-function main(name) {
-  // [START osconfig_v1_generated_OsConfigZonalService_GetInventory_async]
+function main(parent, osPolicyAssignment, osPolicyAssignmentId) {
+  // [START osconfig_v1_generated_OsConfigZonalService_CreateOSPolicyAssignment_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. API resource name for inventory resource.
-   *  Format:
-   *  `projects/{project}/locations/{location}/instances/{instance}/inventory`
-   *  For `{project}`, either `project-number` or `project-id` can be provided.
-   *  For `{instance}`, either Compute Engine  `instance-id` or `instance-name`
-   *  can be provided.
+   *  Required. The parent resource name in the form:
+   *  projects/{project}/locations/{location}
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Inventory view indicating what information should be included in the
-   *  inventory resource. If unspecified, the default view is BASIC.
+   *  Required. The OS policy assignment to be created.
    */
-  // const view = {}
+  // const osPolicyAssignment = {}
+  /**
+   *  Required. The logical name of the OS policy assignment in the project
+   *  with the following restrictions:
+   *  * Must contain only lowercase letters, numbers, and hyphens.
+   *  * Must start with a letter.
+   *  * Must be between 1-63 characters.
+   *  * Must end with a number or a letter.
+   *  * Must be unique within the project.
+   */
+  // const osPolicyAssignmentId = 'abc123'
 
   // Imports the Osconfig library
   const {OsConfigZonalServiceClient} = require('@google-cloud/os-config').v1;
@@ -40,19 +45,22 @@ function main(name) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function callGetInventory() {
+  async function callCreateOSPolicyAssignment() {
     // Construct request
     const request = {
-      name,
+      parent,
+      osPolicyAssignment,
+      osPolicyAssignmentId,
     };
 
     // Run request
-    const response = await osconfigClient.getInventory(request);
+    const [operation] = await osconfigClient.createOSPolicyAssignment(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetInventory();
-  // [END osconfig_v1_generated_OsConfigZonalService_GetInventory_async]
+  callCreateOSPolicyAssignment();
+  // [END osconfig_v1_generated_OsConfigZonalService_CreateOSPolicyAssignment_async]
 }
 
 process.on('unhandledRejection', err => {

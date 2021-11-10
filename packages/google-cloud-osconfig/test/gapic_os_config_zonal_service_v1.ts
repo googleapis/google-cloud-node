@@ -25,7 +25,7 @@ import * as osconfigzonalserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -49,6 +49,38 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -204,6 +236,242 @@ describe('v1.OsConfigZonalServiceClient', () => {
     });
     const result = await promise;
     assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('getOSPolicyAssignment', () => {
+    it('invokes getOSPolicyAssignment without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+      );
+      client.innerApiCalls.getOSPolicyAssignment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getOSPolicyAssignment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getOSPolicyAssignment without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+      );
+      client.innerApiCalls.getOSPolicyAssignment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getOSPolicyAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.osconfig.v1.IOSPolicyAssignment | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getOSPolicyAssignment with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getOSPolicyAssignment = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getOSPolicyAssignment(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getOSPolicyAssignmentReport', () => {
+    it('invokes getOSPolicyAssignmentReport without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+      );
+      client.innerApiCalls.getOSPolicyAssignmentReport =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getOSPolicyAssignmentReport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getOSPolicyAssignmentReport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getOSPolicyAssignmentReport without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+      );
+      client.innerApiCalls.getOSPolicyAssignmentReport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getOSPolicyAssignmentReport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getOSPolicyAssignmentReport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getOSPolicyAssignmentReport with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getOSPolicyAssignmentReport = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getOSPolicyAssignmentReport(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getOSPolicyAssignmentReport as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
   });
 
   describe('getInventory', () => {
@@ -434,6 +702,1640 @@ describe('v1.OsConfigZonalServiceClient', () => {
         (client.innerApiCalls.getVulnerabilityReport as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('createOSPolicyAssignment', () => {
+    it('invokes createOSPolicyAssignment without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createOSPolicyAssignment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createOSPolicyAssignment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createOSPolicyAssignment without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createOSPolicyAssignment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createOSPolicyAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
+        protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createOSPolicyAssignment with call error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createOSPolicyAssignment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createOSPolicyAssignment(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createOSPolicyAssignment with LRO error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createOSPolicyAssignment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createOSPolicyAssignment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.createOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkCreateOSPolicyAssignmentProgress without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateOSPolicyAssignmentProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateOSPolicyAssignmentProgress with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateOSPolicyAssignmentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateOSPolicyAssignment', () => {
+    it('invokes updateOSPolicyAssignment without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
+      );
+      request.osPolicyAssignment = {};
+      request.osPolicyAssignment.name = '';
+      const expectedHeaderRequestParams = 'os_policy_assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateOSPolicyAssignment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateOSPolicyAssignment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateOSPolicyAssignment without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
+      );
+      request.osPolicyAssignment = {};
+      request.osPolicyAssignment.name = '';
+      const expectedHeaderRequestParams = 'os_policy_assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateOSPolicyAssignment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateOSPolicyAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
+        protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateOSPolicyAssignment with call error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
+      );
+      request.osPolicyAssignment = {};
+      request.osPolicyAssignment.name = '';
+      const expectedHeaderRequestParams = 'os_policy_assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateOSPolicyAssignment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateOSPolicyAssignment(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateOSPolicyAssignment with LRO error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
+      );
+      request.osPolicyAssignment = {};
+      request.osPolicyAssignment.name = '';
+      const expectedHeaderRequestParams = 'os_policy_assignment.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateOSPolicyAssignment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateOSPolicyAssignment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.updateOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkUpdateOSPolicyAssignmentProgress without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateOSPolicyAssignmentProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateOSPolicyAssignmentProgress with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateOSPolicyAssignmentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteOSPolicyAssignment', () => {
+    it('invokes deleteOSPolicyAssignment without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteOSPolicyAssignment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteOSPolicyAssignment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteOSPolicyAssignment without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteOSPolicyAssignment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteOSPolicyAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteOSPolicyAssignment with call error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteOSPolicyAssignment = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteOSPolicyAssignment(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteOSPolicyAssignment with LRO error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteOSPolicyAssignment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteOSPolicyAssignment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deleteOSPolicyAssignment as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeleteOSPolicyAssignmentProgress without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteOSPolicyAssignmentProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteOSPolicyAssignmentProgress with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteOSPolicyAssignmentProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listOSPolicyAssignments', () => {
+    it('invokes listOSPolicyAssignments without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.innerApiCalls.listOSPolicyAssignments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listOSPolicyAssignments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignments as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listOSPolicyAssignments without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.innerApiCalls.listOSPolicyAssignments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listOSPolicyAssignments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.osconfig.v1.IOSPolicyAssignment[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignments as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listOSPolicyAssignments with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listOSPolicyAssignments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listOSPolicyAssignments(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignments as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentsStream without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.descriptors.page.listOSPolicyAssignments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listOSPolicyAssignmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.osconfig.v1.OSPolicyAssignment[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.osconfig.v1.OSPolicyAssignment) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listOSPolicyAssignments, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentsStream with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOSPolicyAssignments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listOSPolicyAssignmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.osconfig.v1.OSPolicyAssignment[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.osconfig.v1.OSPolicyAssignment) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listOSPolicyAssignments, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listOSPolicyAssignments without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.descriptors.page.listOSPolicyAssignments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.osconfig.v1.IOSPolicyAssignment[] =
+        [];
+      const iterable = client.listOSPolicyAssignmentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listOSPolicyAssignments with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOSPolicyAssignments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listOSPolicyAssignmentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.osconfig.v1.IOSPolicyAssignment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listOSPolicyAssignmentRevisions', () => {
+    it('invokes listOSPolicyAssignmentRevisions without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.innerApiCalls.listOSPolicyAssignmentRevisions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listOSPolicyAssignmentRevisions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignmentRevisions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentRevisions without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.innerApiCalls.listOSPolicyAssignmentRevisions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listOSPolicyAssignmentRevisions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.osconfig.v1.IOSPolicyAssignment[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignmentRevisions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentRevisions with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listOSPolicyAssignmentRevisions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listOSPolicyAssignmentRevisions(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignmentRevisions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentRevisionsStream without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.descriptors.page.listOSPolicyAssignmentRevisions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listOSPolicyAssignmentRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.osconfig.v1.OSPolicyAssignment[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.osconfig.v1.OSPolicyAssignment) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listOSPolicyAssignmentRevisions,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentRevisionsStream with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOSPolicyAssignmentRevisions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listOSPolicyAssignmentRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.osconfig.v1.OSPolicyAssignment[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.osconfig.v1.OSPolicyAssignment) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listOSPolicyAssignmentRevisions,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listOSPolicyAssignmentRevisions without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignment()
+        ),
+      ];
+      client.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.osconfig.v1.IOSPolicyAssignment[] =
+        [];
+      const iterable = client.listOSPolicyAssignmentRevisionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listOSPolicyAssignmentRevisions with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listOSPolicyAssignmentRevisionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.osconfig.v1.IOSPolicyAssignment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listOSPolicyAssignmentReports', () => {
+    it('invokes listOSPolicyAssignmentReports without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+      ];
+      client.innerApiCalls.listOSPolicyAssignmentReports =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listOSPolicyAssignmentReports(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignmentReports as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentReports without error using callback', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+      ];
+      client.innerApiCalls.listOSPolicyAssignmentReports =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listOSPolicyAssignmentReports(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignmentReports as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentReports with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listOSPolicyAssignmentReports = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listOSPolicyAssignmentReports(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listOSPolicyAssignmentReports as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentReportsStream without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+      ];
+      client.descriptors.page.listOSPolicyAssignmentReports.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listOSPolicyAssignmentReportsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listOSPolicyAssignmentReports,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listOSPolicyAssignmentReportsStream with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOSPolicyAssignmentReports.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listOSPolicyAssignmentReportsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listOSPolicyAssignmentReports,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listOSPolicyAssignmentReports without error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport()
+        ),
+      ];
+      client.descriptors.page.listOSPolicyAssignmentReports.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[] =
+        [];
+      const iterable = client.listOSPolicyAssignmentReportsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listOSPolicyAssignmentReports with error', async () => {
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOSPolicyAssignmentReports.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listOSPolicyAssignmentReportsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listOSPolicyAssignmentReports
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
   });
@@ -1120,6 +3022,180 @@ describe('v1.OsConfigZonalServiceClient', () => {
         assert.strictEqual(result, 'instanceValue');
         assert(
           (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('oSPolicyAssignment', () => {
+      const fakePath = '/rendered/path/oSPolicyAssignment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        os_policy_assignment: 'osPolicyAssignmentValue',
+      };
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.oSPolicyAssignmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.oSPolicyAssignmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('oSPolicyAssignmentPath', () => {
+        const result = client.oSPolicyAssignmentPath(
+          'projectValue',
+          'locationValue',
+          'osPolicyAssignmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromOSPolicyAssignmentName', () => {
+        const result = client.matchProjectFromOSPolicyAssignmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOSPolicyAssignmentName', () => {
+        const result = client.matchLocationFromOSPolicyAssignmentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchOsPolicyAssignmentFromOSPolicyAssignmentName', () => {
+        const result =
+          client.matchOsPolicyAssignmentFromOSPolicyAssignmentName(fakePath);
+        assert.strictEqual(result, 'osPolicyAssignmentValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('oSPolicyAssignmentReport', () => {
+      const fakePath = '/rendered/path/oSPolicyAssignmentReport';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        assignment: 'assignmentValue',
+      };
+      const client =
+        new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.oSPolicyAssignmentReportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('oSPolicyAssignmentReportPath', () => {
+        const result = client.oSPolicyAssignmentReportPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'assignmentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchProjectFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchLocationFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInstanceFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchInstanceFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssignmentFromOSPolicyAssignmentReportName', () => {
+        const result =
+          client.matchAssignmentFromOSPolicyAssignmentReportName(fakePath);
+        assert.strictEqual(result, 'assignmentValue');
+        assert(
+          (
+            client.pathTemplates.oSPolicyAssignmentReportPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

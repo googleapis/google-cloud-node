@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const osconfigClient = new OsConfigServiceClient();
 
-  async function listPatchDeployments() {
+  async function callListPatchDeployments() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  listPatchDeployments();
+  callListPatchDeployments();
   // [END osconfig_v1_generated_OsConfigService_ListPatchDeployments_async]
 }
 

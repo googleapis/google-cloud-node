@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const osconfigClient = new OsConfigServiceClient();
 
-  async function getPatchJob() {
+  async function callGetPatchJob() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getPatchJob();
+  callGetPatchJob();
   // [END osconfig_v1_generated_OsConfigService_GetPatchJob_async]
 }
 

@@ -399,6 +399,1138 @@
                         "FULL": 2
                       }
                     },
+                    "OSPolicy": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "mode": {
+                          "type": "Mode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resourceGroups": {
+                          "rule": "repeated",
+                          "type": "ResourceGroup",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "allowNoResourceGroupMatch": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "InventoryFilter": {
+                          "fields": {
+                            "osShortName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "osVersion": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "Resource": {
+                          "oneofs": {
+                            "resourceType": {
+                              "oneof": [
+                                "pkg",
+                                "repository",
+                                "exec",
+                                "file"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "pkg": {
+                              "type": "PackageResource",
+                              "id": 2
+                            },
+                            "repository": {
+                              "type": "RepositoryResource",
+                              "id": 3
+                            },
+                            "exec": {
+                              "type": "ExecResource",
+                              "id": 4
+                            },
+                            "file": {
+                              "type": "FileResource",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "File": {
+                              "oneofs": {
+                                "type": {
+                                  "oneof": [
+                                    "remote",
+                                    "gcs",
+                                    "localPath"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "remote": {
+                                  "type": "Remote",
+                                  "id": 1
+                                },
+                                "gcs": {
+                                  "type": "Gcs",
+                                  "id": 2
+                                },
+                                "localPath": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "allowInsecure": {
+                                  "type": "bool",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "Remote": {
+                                  "fields": {
+                                    "uri": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "sha256Checksum": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "Gcs": {
+                                  "fields": {
+                                    "bucket": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "object": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "generation": {
+                                      "type": "int64",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "PackageResource": {
+                              "oneofs": {
+                                "systemPackage": {
+                                  "oneof": [
+                                    "apt",
+                                    "deb",
+                                    "yum",
+                                    "zypper",
+                                    "rpm",
+                                    "googet",
+                                    "msi"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "desiredState": {
+                                  "type": "DesiredState",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "apt": {
+                                  "type": "APT",
+                                  "id": 2
+                                },
+                                "deb": {
+                                  "type": "Deb",
+                                  "id": 3
+                                },
+                                "yum": {
+                                  "type": "YUM",
+                                  "id": 4
+                                },
+                                "zypper": {
+                                  "type": "Zypper",
+                                  "id": 5
+                                },
+                                "rpm": {
+                                  "type": "RPM",
+                                  "id": 6
+                                },
+                                "googet": {
+                                  "type": "GooGet",
+                                  "id": 7
+                                },
+                                "msi": {
+                                  "type": "MSI",
+                                  "id": 8
+                                }
+                              },
+                              "nested": {
+                                "Deb": {
+                                  "fields": {
+                                    "source": {
+                                      "type": "File",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "pullDeps": {
+                                      "type": "bool",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "APT": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                },
+                                "RPM": {
+                                  "fields": {
+                                    "source": {
+                                      "type": "File",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "pullDeps": {
+                                      "type": "bool",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "YUM": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                },
+                                "Zypper": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                },
+                                "GooGet": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                },
+                                "MSI": {
+                                  "fields": {
+                                    "source": {
+                                      "type": "File",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "properties": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "DesiredState": {
+                                  "values": {
+                                    "DESIRED_STATE_UNSPECIFIED": 0,
+                                    "INSTALLED": 1,
+                                    "REMOVED": 2
+                                  }
+                                }
+                              }
+                            },
+                            "RepositoryResource": {
+                              "oneofs": {
+                                "repository": {
+                                  "oneof": [
+                                    "apt",
+                                    "yum",
+                                    "zypper",
+                                    "goo"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "apt": {
+                                  "type": "AptRepository",
+                                  "id": 1
+                                },
+                                "yum": {
+                                  "type": "YumRepository",
+                                  "id": 2
+                                },
+                                "zypper": {
+                                  "type": "ZypperRepository",
+                                  "id": 3
+                                },
+                                "goo": {
+                                  "type": "GooRepository",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "AptRepository": {
+                                  "fields": {
+                                    "archiveType": {
+                                      "type": "ArchiveType",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "uri": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "distribution": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "components": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "gpgKey": {
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  },
+                                  "nested": {
+                                    "ArchiveType": {
+                                      "values": {
+                                        "ARCHIVE_TYPE_UNSPECIFIED": 0,
+                                        "DEB": 1,
+                                        "DEB_SRC": 2
+                                      }
+                                    }
+                                  }
+                                },
+                                "YumRepository": {
+                                  "fields": {
+                                    "id": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "baseUrl": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "gpgKeys": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "ZypperRepository": {
+                                  "fields": {
+                                    "id": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "baseUrl": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "gpgKeys": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "GooRepository": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "url": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "ExecResource": {
+                              "fields": {
+                                "validate": {
+                                  "type": "Exec",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "enforce": {
+                                  "type": "Exec",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Exec": {
+                                  "oneofs": {
+                                    "source": {
+                                      "oneof": [
+                                        "file",
+                                        "script"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "file": {
+                                      "type": "File",
+                                      "id": 1
+                                    },
+                                    "script": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "args": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "interpreter": {
+                                      "type": "Interpreter",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "outputFilePath": {
+                                      "type": "string",
+                                      "id": 5
+                                    }
+                                  },
+                                  "nested": {
+                                    "Interpreter": {
+                                      "values": {
+                                        "INTERPRETER_UNSPECIFIED": 0,
+                                        "NONE": 1,
+                                        "SHELL": 2,
+                                        "POWERSHELL": 3
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "FileResource": {
+                              "oneofs": {
+                                "source": {
+                                  "oneof": [
+                                    "file",
+                                    "content"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "file": {
+                                  "type": "File",
+                                  "id": 1
+                                },
+                                "content": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "path": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "state": {
+                                  "type": "DesiredState",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "permissions": {
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "DesiredState": {
+                                  "values": {
+                                    "DESIRED_STATE_UNSPECIFIED": 0,
+                                    "PRESENT": 1,
+                                    "ABSENT": 2,
+                                    "CONTENTS_MATCH": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ResourceGroup": {
+                          "fields": {
+                            "inventoryFilters": {
+                              "rule": "repeated",
+                              "type": "InventoryFilter",
+                              "id": 1
+                            },
+                            "resources": {
+                              "rule": "repeated",
+                              "type": "Resource",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "VALIDATION": 1,
+                            "ENFORCEMENT": 2
+                          }
+                        }
+                      }
+                    },
+                    "GetOSPolicyAssignmentReportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignmentReport"
+                          }
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentReportsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/InstanceOSPolicyAssignment"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentReportsResponse": {
+                      "fields": {
+                        "osPolicyAssignmentReports": {
+                          "rule": "repeated",
+                          "type": "OSPolicyAssignmentReport",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OSPolicyAssignmentReport": {
+                      "options": {
+                        "(google.api.resource).type": "osconfig.googleapis.com/OSPolicyAssignmentReport",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "osPolicyAssignment": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignment"
+                          }
+                        },
+                        "osPolicyCompliances": {
+                          "rule": "repeated",
+                          "type": "OSPolicyCompliance",
+                          "id": 4
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "lastRunId": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "OSPolicyCompliance": {
+                          "fields": {
+                            "osPolicyId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "complianceState": {
+                              "type": "ComplianceState",
+                              "id": 2
+                            },
+                            "complianceStateReason": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "osPolicyResourceCompliances": {
+                              "rule": "repeated",
+                              "type": "OSPolicyResourceCompliance",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "OSPolicyResourceCompliance": {
+                              "oneofs": {
+                                "output": {
+                                  "oneof": [
+                                    "execResourceOutput"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "osPolicyResourceId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "configSteps": {
+                                  "rule": "repeated",
+                                  "type": "OSPolicyResourceConfigStep",
+                                  "id": 2
+                                },
+                                "complianceState": {
+                                  "type": "ComplianceState",
+                                  "id": 3
+                                },
+                                "complianceStateReason": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "execResourceOutput": {
+                                  "type": "ExecResourceOutput",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "OSPolicyResourceConfigStep": {
+                                  "fields": {
+                                    "type": {
+                                      "type": "Type",
+                                      "id": 1
+                                    },
+                                    "errorMessage": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  },
+                                  "nested": {
+                                    "Type": {
+                                      "values": {
+                                        "TYPE_UNSPECIFIED": 0,
+                                        "VALIDATION": 1,
+                                        "DESIRED_STATE_CHECK": 2,
+                                        "DESIRED_STATE_ENFORCEMENT": 3,
+                                        "DESIRED_STATE_CHECK_POST_ENFORCEMENT": 4
+                                      }
+                                    }
+                                  }
+                                },
+                                "ExecResourceOutput": {
+                                  "fields": {
+                                    "enforcementOutput": {
+                                      "type": "bytes",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ComplianceState": {
+                                  "values": {
+                                    "UNKNOWN": 0,
+                                    "COMPLIANT": 1,
+                                    "NON_COMPLIANT": 2
+                                  }
+                                }
+                              }
+                            },
+                            "ComplianceState": {
+                              "values": {
+                                "UNKNOWN": 0,
+                                "COMPLIANT": 1,
+                                "NON_COMPLIANT": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OSPolicyAssignment": {
+                      "options": {
+                        "(google.api.resource).type": "osconfig.googleapis.com/OSPolicyAssignment",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/osPolicyAssignments/{os_policy_assignment}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "osPolicies": {
+                          "rule": "repeated",
+                          "type": "OSPolicy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceFilter": {
+                          "type": "InstanceFilter",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rollout": {
+                          "type": "Rollout",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "revisionCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "rolloutState": {
+                          "type": "RolloutState",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "baseline": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleted": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "LabelSet": {
+                          "fields": {
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "InstanceFilter": {
+                          "fields": {
+                            "all": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "inclusionLabels": {
+                              "rule": "repeated",
+                              "type": "LabelSet",
+                              "id": 2
+                            },
+                            "exclusionLabels": {
+                              "rule": "repeated",
+                              "type": "LabelSet",
+                              "id": 3
+                            },
+                            "inventories": {
+                              "rule": "repeated",
+                              "type": "Inventory",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Inventory": {
+                              "fields": {
+                                "osShortName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "osVersion": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Rollout": {
+                          "fields": {
+                            "disruptionBudget": {
+                              "type": "FixedOrPercent",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "minWaitDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RolloutState": {
+                          "values": {
+                            "ROLLOUT_STATE_UNSPECIFIED": 0,
+                            "IN_PROGRESS": 1,
+                            "CANCELLING": 2,
+                            "CANCELLED": 3,
+                            "SUCCEEDED": 4
+                          }
+                        }
+                      }
+                    },
+                    "OSPolicyAssignmentOperationMetadata": {
+                      "fields": {
+                        "osPolicyAssignment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignment"
+                          }
+                        },
+                        "apiMethod": {
+                          "type": "APIMethod",
+                          "id": 2
+                        },
+                        "rolloutState": {
+                          "type": "RolloutState",
+                          "id": 3
+                        },
+                        "rolloutStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "rolloutUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "APIMethod": {
+                          "values": {
+                            "API_METHOD_UNSPECIFIED": 0,
+                            "CREATE": 1,
+                            "UPDATE": 2,
+                            "DELETE": 3
+                          }
+                        },
+                        "RolloutState": {
+                          "values": {
+                            "ROLLOUT_STATE_UNSPECIFIED": 0,
+                            "IN_PROGRESS": 1,
+                            "CANCELLING": 2,
+                            "CANCELLED": 3,
+                            "SUCCEEDED": 4
+                          }
+                        }
+                      }
+                    },
+                    "CreateOSPolicyAssignmentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "osPolicyAssignment": {
+                          "type": "OSPolicyAssignment",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "osPolicyAssignmentId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateOSPolicyAssignmentRequest": {
+                      "fields": {
+                        "osPolicyAssignment": {
+                          "type": "OSPolicyAssignment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetOSPolicyAssignmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignment"
+                          }
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentsResponse": {
+                      "fields": {
+                        "osPolicyAssignments": {
+                          "rule": "repeated",
+                          "type": "OSPolicyAssignment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentRevisionsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignment"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListOSPolicyAssignmentRevisionsResponse": {
+                      "fields": {
+                        "osPolicyAssignments": {
+                          "rule": "repeated",
+                          "type": "OSPolicyAssignment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteOSPolicyAssignmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/OSPolicyAssignment"
+                          }
+                        }
+                      }
+                    },
                     "FixedOrPercent": {
                       "oneofs": {
                         "mode": {
@@ -1566,6 +2698,178 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "CreateOSPolicyAssignment": {
+                          "requestType": "CreateOSPolicyAssignmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/osPolicyAssignments",
+                            "(google.api.http).body": "os_policy_assignment",
+                            "(google.api.method_signature)": "parent,os_policy_assignment,os_policy_assignment_id",
+                            "(google.longrunning.operation_info).response_type": "OSPolicyAssignment",
+                            "(google.longrunning.operation_info).metadata_type": "OSPolicyAssignmentOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/osPolicyAssignments",
+                                "body": "os_policy_assignment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,os_policy_assignment,os_policy_assignment_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "OSPolicyAssignment",
+                                "metadata_type": "OSPolicyAssignmentOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateOSPolicyAssignment": {
+                          "requestType": "UpdateOSPolicyAssignmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{os_policy_assignment.name=projects/*/locations/*/osPolicyAssignments/*}",
+                            "(google.api.http).body": "os_policy_assignment",
+                            "(google.api.method_signature)": "os_policy_assignment,update_mask",
+                            "(google.longrunning.operation_info).response_type": "OSPolicyAssignment",
+                            "(google.longrunning.operation_info).metadata_type": "OSPolicyAssignmentOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{os_policy_assignment.name=projects/*/locations/*/osPolicyAssignments/*}",
+                                "body": "os_policy_assignment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "os_policy_assignment,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "OSPolicyAssignment",
+                                "metadata_type": "OSPolicyAssignmentOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetOSPolicyAssignment": {
+                          "requestType": "GetOSPolicyAssignmentRequest",
+                          "responseType": "OSPolicyAssignment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/osPolicyAssignments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/osPolicyAssignments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListOSPolicyAssignments": {
+                          "requestType": "ListOSPolicyAssignmentsRequest",
+                          "responseType": "ListOSPolicyAssignmentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/osPolicyAssignments",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/osPolicyAssignments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListOSPolicyAssignmentRevisions": {
+                          "requestType": "ListOSPolicyAssignmentRevisionsRequest",
+                          "responseType": "ListOSPolicyAssignmentRevisionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/osPolicyAssignments/*}:listRevisions",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/osPolicyAssignments/*}:listRevisions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteOSPolicyAssignment": {
+                          "requestType": "DeleteOSPolicyAssignmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/osPolicyAssignments/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OSPolicyAssignmentOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/osPolicyAssignments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OSPolicyAssignmentOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetOSPolicyAssignmentReport": {
+                          "requestType": "GetOSPolicyAssignmentReportRequest",
+                          "responseType": "OSPolicyAssignmentReport",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/osPolicyAssignments/*/report}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/osPolicyAssignments/*/report}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListOSPolicyAssignmentReports": {
+                          "requestType": "ListOSPolicyAssignmentReportsRequest",
+                          "responseType": "ListOSPolicyAssignmentReportsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*/osPolicyAssignments/*}/reports",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*/osPolicyAssignments/*}/reports"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "GetInventory": {
                           "requestType": "GetInventoryRequest",
                           "responseType": "Inventory",
@@ -5091,9 +6395,6 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
             "FieldMask": {
               "fields": {
                 "paths": {
@@ -5102,6 +6403,9 @@
                   "id": 1
                 }
               }
+            },
+            "Empty": {
+              "fields": {}
             },
             "Any": {
               "fields": {

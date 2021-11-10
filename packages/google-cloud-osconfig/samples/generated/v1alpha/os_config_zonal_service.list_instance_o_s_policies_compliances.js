@@ -49,7 +49,7 @@ function main(parent) {
   // Instantiates a client
   const osconfigClient = new OsConfigZonalServiceClient();
 
-  async function listInstanceOSPoliciesCompliances() {
+  async function callListInstanceOSPoliciesCompliances() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent) {
     }
   }
 
-  listInstanceOSPoliciesCompliances();
+  callListInstanceOSPoliciesCompliances();
   // [END osconfig_v1alpha_generated_OsConfigZonalService_ListInstanceOSPoliciesCompliances_async]
 }
 

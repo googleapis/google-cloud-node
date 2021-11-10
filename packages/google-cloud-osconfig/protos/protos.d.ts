@@ -1537,6 +1537,4787 @@ export namespace google {
                     FULL = 2
                 }
 
+                /** Properties of a OSPolicy. */
+                interface IOSPolicy {
+
+                    /** OSPolicy id */
+                    id?: (string|null);
+
+                    /** OSPolicy description */
+                    description?: (string|null);
+
+                    /** OSPolicy mode */
+                    mode?: (google.cloud.osconfig.v1.OSPolicy.Mode|keyof typeof google.cloud.osconfig.v1.OSPolicy.Mode|null);
+
+                    /** OSPolicy resourceGroups */
+                    resourceGroups?: (google.cloud.osconfig.v1.OSPolicy.IResourceGroup[]|null);
+
+                    /** OSPolicy allowNoResourceGroupMatch */
+                    allowNoResourceGroupMatch?: (boolean|null);
+                }
+
+                /** Represents a OSPolicy. */
+                class OSPolicy implements IOSPolicy {
+
+                    /**
+                     * Constructs a new OSPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IOSPolicy);
+
+                    /** OSPolicy id. */
+                    public id: string;
+
+                    /** OSPolicy description. */
+                    public description: string;
+
+                    /** OSPolicy mode. */
+                    public mode: (google.cloud.osconfig.v1.OSPolicy.Mode|keyof typeof google.cloud.osconfig.v1.OSPolicy.Mode);
+
+                    /** OSPolicy resourceGroups. */
+                    public resourceGroups: google.cloud.osconfig.v1.OSPolicy.IResourceGroup[];
+
+                    /** OSPolicy allowNoResourceGroupMatch. */
+                    public allowNoResourceGroupMatch: boolean;
+
+                    /**
+                     * Creates a new OSPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OSPolicy instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IOSPolicy): google.cloud.osconfig.v1.OSPolicy;
+
+                    /**
+                     * Encodes the specified OSPolicy message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.verify|verify} messages.
+                     * @param message OSPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IOSPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OSPolicy message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.verify|verify} messages.
+                     * @param message OSPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IOSPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OSPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OSPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy;
+
+                    /**
+                     * Decodes a OSPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OSPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy;
+
+                    /**
+                     * Verifies a OSPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OSPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OSPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy;
+
+                    /**
+                     * Creates a plain object from a OSPolicy message. Also converts values to other types if specified.
+                     * @param message OSPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.OSPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OSPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace OSPolicy {
+
+                    /** Properties of an InventoryFilter. */
+                    interface IInventoryFilter {
+
+                        /** InventoryFilter osShortName */
+                        osShortName?: (string|null);
+
+                        /** InventoryFilter osVersion */
+                        osVersion?: (string|null);
+                    }
+
+                    /** Represents an InventoryFilter. */
+                    class InventoryFilter implements IInventoryFilter {
+
+                        /**
+                         * Constructs a new InventoryFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicy.IInventoryFilter);
+
+                        /** InventoryFilter osShortName. */
+                        public osShortName: string;
+
+                        /** InventoryFilter osVersion. */
+                        public osVersion: string;
+
+                        /**
+                         * Creates a new InventoryFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InventoryFilter instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicy.IInventoryFilter): google.cloud.osconfig.v1.OSPolicy.InventoryFilter;
+
+                        /**
+                         * Encodes the specified InventoryFilter message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.InventoryFilter.verify|verify} messages.
+                         * @param message InventoryFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicy.IInventoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InventoryFilter message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.InventoryFilter.verify|verify} messages.
+                         * @param message InventoryFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.IInventoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InventoryFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InventoryFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.InventoryFilter;
+
+                        /**
+                         * Decodes an InventoryFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InventoryFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.InventoryFilter;
+
+                        /**
+                         * Verifies an InventoryFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InventoryFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InventoryFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.InventoryFilter;
+
+                        /**
+                         * Creates a plain object from an InventoryFilter message. Also converts values to other types if specified.
+                         * @param message InventoryFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicy.InventoryFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InventoryFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a Resource. */
+                    interface IResource {
+
+                        /** Resource id */
+                        id?: (string|null);
+
+                        /** Resource pkg */
+                        pkg?: (google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource|null);
+
+                        /** Resource repository */
+                        repository?: (google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource|null);
+
+                        /** Resource exec */
+                        exec?: (google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource|null);
+
+                        /** Resource file */
+                        file?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource|null);
+                    }
+
+                    /** Represents a Resource. */
+                    class Resource implements IResource {
+
+                        /**
+                         * Constructs a new Resource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicy.IResource);
+
+                        /** Resource id. */
+                        public id: string;
+
+                        /** Resource pkg. */
+                        public pkg?: (google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource|null);
+
+                        /** Resource repository. */
+                        public repository?: (google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource|null);
+
+                        /** Resource exec. */
+                        public exec?: (google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource|null);
+
+                        /** Resource file. */
+                        public file?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource|null);
+
+                        /** Resource resourceType. */
+                        public resourceType?: ("pkg"|"repository"|"exec"|"file");
+
+                        /**
+                         * Creates a new Resource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Resource instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicy.IResource): google.cloud.osconfig.v1.OSPolicy.Resource;
+
+                        /**
+                         * Encodes the specified Resource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.verify|verify} messages.
+                         * @param message Resource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicy.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.verify|verify} messages.
+                         * @param message Resource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Resource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Resource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource;
+
+                        /**
+                         * Decodes a Resource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Resource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource;
+
+                        /**
+                         * Verifies a Resource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Resource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource;
+
+                        /**
+                         * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                         * @param message Resource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Resource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Resource {
+
+                        /** Properties of a File. */
+                        interface IFile {
+
+                            /** File remote */
+                            remote?: (google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote|null);
+
+                            /** File gcs */
+                            gcs?: (google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs|null);
+
+                            /** File localPath */
+                            localPath?: (string|null);
+
+                            /** File allowInsecure */
+                            allowInsecure?: (boolean|null);
+                        }
+
+                        /** Represents a File. */
+                        class File implements IFile {
+
+                            /**
+                             * Constructs a new File.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IFile);
+
+                            /** File remote. */
+                            public remote?: (google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote|null);
+
+                            /** File gcs. */
+                            public gcs?: (google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs|null);
+
+                            /** File localPath. */
+                            public localPath?: (string|null);
+
+                            /** File allowInsecure. */
+                            public allowInsecure: boolean;
+
+                            /** File type. */
+                            public type?: ("remote"|"gcs"|"localPath");
+
+                            /**
+                             * Creates a new File instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns File instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IFile): google.cloud.osconfig.v1.OSPolicy.Resource.File;
+
+                            /**
+                             * Encodes the specified File message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.verify|verify} messages.
+                             * @param message File message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified File message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.verify|verify} messages.
+                             * @param message File message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a File message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns File
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.File;
+
+                            /**
+                             * Decodes a File message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns File
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.File;
+
+                            /**
+                             * Verifies a File message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a File message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns File
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.File;
+
+                            /**
+                             * Creates a plain object from a File message. Also converts values to other types if specified.
+                             * @param message File
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.File, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this File to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace File {
+
+                            /** Properties of a Remote. */
+                            interface IRemote {
+
+                                /** Remote uri */
+                                uri?: (string|null);
+
+                                /** Remote sha256Checksum */
+                                sha256Checksum?: (string|null);
+                            }
+
+                            /** Represents a Remote. */
+                            class Remote implements IRemote {
+
+                                /**
+                                 * Constructs a new Remote.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote);
+
+                                /** Remote uri. */
+                                public uri: string;
+
+                                /** Remote sha256Checksum. */
+                                public sha256Checksum: string;
+
+                                /**
+                                 * Creates a new Remote instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Remote instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote): google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote;
+
+                                /**
+                                 * Encodes the specified Remote message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.verify|verify} messages.
+                                 * @param message Remote message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Remote message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote.verify|verify} messages.
+                                 * @param message Remote message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.File.IRemote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Remote message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Remote
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote;
+
+                                /**
+                                 * Decodes a Remote message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Remote
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote;
+
+                                /**
+                                 * Verifies a Remote message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Remote message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Remote
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote;
+
+                                /**
+                                 * Creates a plain object from a Remote message. Also converts values to other types if specified.
+                                 * @param message Remote
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.File.Remote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Remote to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a Gcs. */
+                            interface IGcs {
+
+                                /** Gcs bucket */
+                                bucket?: (string|null);
+
+                                /** Gcs object */
+                                object?: (string|null);
+
+                                /** Gcs generation */
+                                generation?: (number|Long|string|null);
+                            }
+
+                            /** Represents a Gcs. */
+                            class Gcs implements IGcs {
+
+                                /**
+                                 * Constructs a new Gcs.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs);
+
+                                /** Gcs bucket. */
+                                public bucket: string;
+
+                                /** Gcs object. */
+                                public object: string;
+
+                                /** Gcs generation. */
+                                public generation: (number|Long|string);
+
+                                /**
+                                 * Creates a new Gcs instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Gcs instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs): google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs;
+
+                                /**
+                                 * Encodes the specified Gcs message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.verify|verify} messages.
+                                 * @param message Gcs message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Gcs message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs.verify|verify} messages.
+                                 * @param message Gcs message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.File.IGcs, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Gcs message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Gcs
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs;
+
+                                /**
+                                 * Decodes a Gcs message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Gcs
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs;
+
+                                /**
+                                 * Verifies a Gcs message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Gcs message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Gcs
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs;
+
+                                /**
+                                 * Creates a plain object from a Gcs message. Also converts values to other types if specified.
+                                 * @param message Gcs
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.File.Gcs, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Gcs to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+
+                        /** Properties of a PackageResource. */
+                        interface IPackageResource {
+
+                            /** PackageResource desiredState */
+                            desiredState?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState|null);
+
+                            /** PackageResource apt */
+                            apt?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT|null);
+
+                            /** PackageResource deb */
+                            deb?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb|null);
+
+                            /** PackageResource yum */
+                            yum?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM|null);
+
+                            /** PackageResource zypper */
+                            zypper?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper|null);
+
+                            /** PackageResource rpm */
+                            rpm?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM|null);
+
+                            /** PackageResource googet */
+                            googet?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet|null);
+
+                            /** PackageResource msi */
+                            msi?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI|null);
+                        }
+
+                        /** Represents a PackageResource. */
+                        class PackageResource implements IPackageResource {
+
+                            /**
+                             * Constructs a new PackageResource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource);
+
+                            /** PackageResource desiredState. */
+                            public desiredState: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState);
+
+                            /** PackageResource apt. */
+                            public apt?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT|null);
+
+                            /** PackageResource deb. */
+                            public deb?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb|null);
+
+                            /** PackageResource yum. */
+                            public yum?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM|null);
+
+                            /** PackageResource zypper. */
+                            public zypper?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper|null);
+
+                            /** PackageResource rpm. */
+                            public rpm?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM|null);
+
+                            /** PackageResource googet. */
+                            public googet?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet|null);
+
+                            /** PackageResource msi. */
+                            public msi?: (google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI|null);
+
+                            /** PackageResource systemPackage. */
+                            public systemPackage?: ("apt"|"deb"|"yum"|"zypper"|"rpm"|"googet"|"msi");
+
+                            /**
+                             * Creates a new PackageResource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PackageResource instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource;
+
+                            /**
+                             * Encodes the specified PackageResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.verify|verify} messages.
+                             * @param message PackageResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PackageResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.verify|verify} messages.
+                             * @param message PackageResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.IPackageResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PackageResource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PackageResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource;
+
+                            /**
+                             * Decodes a PackageResource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PackageResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource;
+
+                            /**
+                             * Verifies a PackageResource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PackageResource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PackageResource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource;
+
+                            /**
+                             * Creates a plain object from a PackageResource message. Also converts values to other types if specified.
+                             * @param message PackageResource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PackageResource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace PackageResource {
+
+                            /** Properties of a Deb. */
+                            interface IDeb {
+
+                                /** Deb source */
+                                source?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** Deb pullDeps */
+                                pullDeps?: (boolean|null);
+                            }
+
+                            /** Represents a Deb. */
+                            class Deb implements IDeb {
+
+                                /**
+                                 * Constructs a new Deb.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb);
+
+                                /** Deb source. */
+                                public source?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** Deb pullDeps. */
+                                public pullDeps: boolean;
+
+                                /**
+                                 * Creates a new Deb instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Deb instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb;
+
+                                /**
+                                 * Encodes the specified Deb message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.verify|verify} messages.
+                                 * @param message Deb message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Deb message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb.verify|verify} messages.
+                                 * @param message Deb message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IDeb, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Deb message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Deb
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb;
+
+                                /**
+                                 * Decodes a Deb message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Deb
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb;
+
+                                /**
+                                 * Verifies a Deb message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Deb message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Deb
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb;
+
+                                /**
+                                 * Creates a plain object from a Deb message. Also converts values to other types if specified.
+                                 * @param message Deb
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Deb, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Deb to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a APT. */
+                            interface IAPT {
+
+                                /** APT name */
+                                name?: (string|null);
+                            }
+
+                            /** Represents a APT. */
+                            class APT implements IAPT {
+
+                                /**
+                                 * Constructs a new APT.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT);
+
+                                /** APT name. */
+                                public name: string;
+
+                                /**
+                                 * Creates a new APT instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns APT instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT;
+
+                                /**
+                                 * Encodes the specified APT message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.verify|verify} messages.
+                                 * @param message APT message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified APT message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT.verify|verify} messages.
+                                 * @param message APT message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IAPT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a APT message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns APT
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT;
+
+                                /**
+                                 * Decodes a APT message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns APT
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT;
+
+                                /**
+                                 * Verifies a APT message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a APT message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns APT
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT;
+
+                                /**
+                                 * Creates a plain object from a APT message. Also converts values to other types if specified.
+                                 * @param message APT
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.APT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this APT to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a RPM. */
+                            interface IRPM {
+
+                                /** RPM source */
+                                source?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** RPM pullDeps */
+                                pullDeps?: (boolean|null);
+                            }
+
+                            /** Represents a RPM. */
+                            class RPM implements IRPM {
+
+                                /**
+                                 * Constructs a new RPM.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM);
+
+                                /** RPM source. */
+                                public source?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** RPM pullDeps. */
+                                public pullDeps: boolean;
+
+                                /**
+                                 * Creates a new RPM instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns RPM instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM;
+
+                                /**
+                                 * Encodes the specified RPM message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.verify|verify} messages.
+                                 * @param message RPM message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified RPM message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM.verify|verify} messages.
+                                 * @param message RPM message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IRPM, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a RPM message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns RPM
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM;
+
+                                /**
+                                 * Decodes a RPM message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns RPM
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM;
+
+                                /**
+                                 * Verifies a RPM message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a RPM message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns RPM
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM;
+
+                                /**
+                                 * Creates a plain object from a RPM message. Also converts values to other types if specified.
+                                 * @param message RPM
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.RPM, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this RPM to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a YUM. */
+                            interface IYUM {
+
+                                /** YUM name */
+                                name?: (string|null);
+                            }
+
+                            /** Represents a YUM. */
+                            class YUM implements IYUM {
+
+                                /**
+                                 * Constructs a new YUM.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM);
+
+                                /** YUM name. */
+                                public name: string;
+
+                                /**
+                                 * Creates a new YUM instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns YUM instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM;
+
+                                /**
+                                 * Encodes the specified YUM message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.verify|verify} messages.
+                                 * @param message YUM message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified YUM message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM.verify|verify} messages.
+                                 * @param message YUM message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IYUM, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a YUM message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns YUM
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM;
+
+                                /**
+                                 * Decodes a YUM message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns YUM
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM;
+
+                                /**
+                                 * Verifies a YUM message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a YUM message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns YUM
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM;
+
+                                /**
+                                 * Creates a plain object from a YUM message. Also converts values to other types if specified.
+                                 * @param message YUM
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.YUM, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this YUM to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a Zypper. */
+                            interface IZypper {
+
+                                /** Zypper name */
+                                name?: (string|null);
+                            }
+
+                            /** Represents a Zypper. */
+                            class Zypper implements IZypper {
+
+                                /**
+                                 * Constructs a new Zypper.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper);
+
+                                /** Zypper name. */
+                                public name: string;
+
+                                /**
+                                 * Creates a new Zypper instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Zypper instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper;
+
+                                /**
+                                 * Encodes the specified Zypper message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.verify|verify} messages.
+                                 * @param message Zypper message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Zypper message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper.verify|verify} messages.
+                                 * @param message Zypper message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IZypper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Zypper message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Zypper
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper;
+
+                                /**
+                                 * Decodes a Zypper message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Zypper
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper;
+
+                                /**
+                                 * Verifies a Zypper message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Zypper message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Zypper
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper;
+
+                                /**
+                                 * Creates a plain object from a Zypper message. Also converts values to other types if specified.
+                                 * @param message Zypper
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.Zypper, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Zypper to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a GooGet. */
+                            interface IGooGet {
+
+                                /** GooGet name */
+                                name?: (string|null);
+                            }
+
+                            /** Represents a GooGet. */
+                            class GooGet implements IGooGet {
+
+                                /**
+                                 * Constructs a new GooGet.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet);
+
+                                /** GooGet name. */
+                                public name: string;
+
+                                /**
+                                 * Creates a new GooGet instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GooGet instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet;
+
+                                /**
+                                 * Encodes the specified GooGet message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.verify|verify} messages.
+                                 * @param message GooGet message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GooGet message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet.verify|verify} messages.
+                                 * @param message GooGet message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IGooGet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GooGet message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GooGet
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet;
+
+                                /**
+                                 * Decodes a GooGet message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GooGet
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet;
+
+                                /**
+                                 * Verifies a GooGet message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GooGet message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GooGet
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet;
+
+                                /**
+                                 * Creates a plain object from a GooGet message. Also converts values to other types if specified.
+                                 * @param message GooGet
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.GooGet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GooGet to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a MSI. */
+                            interface IMSI {
+
+                                /** MSI source */
+                                source?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** MSI properties */
+                                properties?: (string[]|null);
+                            }
+
+                            /** Represents a MSI. */
+                            class MSI implements IMSI {
+
+                                /**
+                                 * Constructs a new MSI.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI);
+
+                                /** MSI source. */
+                                public source?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** MSI properties. */
+                                public properties: string[];
+
+                                /**
+                                 * Creates a new MSI instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns MSI instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI;
+
+                                /**
+                                 * Encodes the specified MSI message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.verify|verify} messages.
+                                 * @param message MSI message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified MSI message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI.verify|verify} messages.
+                                 * @param message MSI message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.IMSI, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a MSI message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns MSI
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI;
+
+                                /**
+                                 * Decodes a MSI message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns MSI
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI;
+
+                                /**
+                                 * Verifies a MSI message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a MSI message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns MSI
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI;
+
+                                /**
+                                 * Creates a plain object from a MSI message. Also converts values to other types if specified.
+                                 * @param message MSI
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.MSI, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this MSI to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** DesiredState enum. */
+                            enum DesiredState {
+                                DESIRED_STATE_UNSPECIFIED = 0,
+                                INSTALLED = 1,
+                                REMOVED = 2
+                            }
+                        }
+
+                        /** Properties of a RepositoryResource. */
+                        interface IRepositoryResource {
+
+                            /** RepositoryResource apt */
+                            apt?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository|null);
+
+                            /** RepositoryResource yum */
+                            yum?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository|null);
+
+                            /** RepositoryResource zypper */
+                            zypper?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository|null);
+
+                            /** RepositoryResource goo */
+                            goo?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository|null);
+                        }
+
+                        /** Represents a RepositoryResource. */
+                        class RepositoryResource implements IRepositoryResource {
+
+                            /**
+                             * Constructs a new RepositoryResource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource);
+
+                            /** RepositoryResource apt. */
+                            public apt?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository|null);
+
+                            /** RepositoryResource yum. */
+                            public yum?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository|null);
+
+                            /** RepositoryResource zypper. */
+                            public zypper?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository|null);
+
+                            /** RepositoryResource goo. */
+                            public goo?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository|null);
+
+                            /** RepositoryResource repository. */
+                            public repository?: ("apt"|"yum"|"zypper"|"goo");
+
+                            /**
+                             * Creates a new RepositoryResource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RepositoryResource instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource;
+
+                            /**
+                             * Encodes the specified RepositoryResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.verify|verify} messages.
+                             * @param message RepositoryResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RepositoryResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.verify|verify} messages.
+                             * @param message RepositoryResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.IRepositoryResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RepositoryResource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RepositoryResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource;
+
+                            /**
+                             * Decodes a RepositoryResource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RepositoryResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource;
+
+                            /**
+                             * Verifies a RepositoryResource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RepositoryResource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RepositoryResource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource;
+
+                            /**
+                             * Creates a plain object from a RepositoryResource message. Also converts values to other types if specified.
+                             * @param message RepositoryResource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RepositoryResource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace RepositoryResource {
+
+                            /** Properties of an AptRepository. */
+                            interface IAptRepository {
+
+                                /** AptRepository archiveType */
+                                archiveType?: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType|null);
+
+                                /** AptRepository uri */
+                                uri?: (string|null);
+
+                                /** AptRepository distribution */
+                                distribution?: (string|null);
+
+                                /** AptRepository components */
+                                components?: (string[]|null);
+
+                                /** AptRepository gpgKey */
+                                gpgKey?: (string|null);
+                            }
+
+                            /** Represents an AptRepository. */
+                            class AptRepository implements IAptRepository {
+
+                                /**
+                                 * Constructs a new AptRepository.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository);
+
+                                /** AptRepository archiveType. */
+                                public archiveType: (google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.ArchiveType);
+
+                                /** AptRepository uri. */
+                                public uri: string;
+
+                                /** AptRepository distribution. */
+                                public distribution: string;
+
+                                /** AptRepository components. */
+                                public components: string[];
+
+                                /** AptRepository gpgKey. */
+                                public gpgKey: string;
+
+                                /**
+                                 * Creates a new AptRepository instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AptRepository instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository;
+
+                                /**
+                                 * Encodes the specified AptRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.verify|verify} messages.
+                                 * @param message AptRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AptRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository.verify|verify} messages.
+                                 * @param message AptRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IAptRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AptRepository message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AptRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository;
+
+                                /**
+                                 * Decodes an AptRepository message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AptRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository;
+
+                                /**
+                                 * Verifies an AptRepository message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AptRepository message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AptRepository
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository;
+
+                                /**
+                                 * Creates a plain object from an AptRepository message. Also converts values to other types if specified.
+                                 * @param message AptRepository
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.AptRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AptRepository to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace AptRepository {
+
+                                /** ArchiveType enum. */
+                                enum ArchiveType {
+                                    ARCHIVE_TYPE_UNSPECIFIED = 0,
+                                    DEB = 1,
+                                    DEB_SRC = 2
+                                }
+                            }
+
+                            /** Properties of a YumRepository. */
+                            interface IYumRepository {
+
+                                /** YumRepository id */
+                                id?: (string|null);
+
+                                /** YumRepository displayName */
+                                displayName?: (string|null);
+
+                                /** YumRepository baseUrl */
+                                baseUrl?: (string|null);
+
+                                /** YumRepository gpgKeys */
+                                gpgKeys?: (string[]|null);
+                            }
+
+                            /** Represents a YumRepository. */
+                            class YumRepository implements IYumRepository {
+
+                                /**
+                                 * Constructs a new YumRepository.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository);
+
+                                /** YumRepository id. */
+                                public id: string;
+
+                                /** YumRepository displayName. */
+                                public displayName: string;
+
+                                /** YumRepository baseUrl. */
+                                public baseUrl: string;
+
+                                /** YumRepository gpgKeys. */
+                                public gpgKeys: string[];
+
+                                /**
+                                 * Creates a new YumRepository instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns YumRepository instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository;
+
+                                /**
+                                 * Encodes the specified YumRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.verify|verify} messages.
+                                 * @param message YumRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified YumRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository.verify|verify} messages.
+                                 * @param message YumRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IYumRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a YumRepository message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns YumRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository;
+
+                                /**
+                                 * Decodes a YumRepository message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns YumRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository;
+
+                                /**
+                                 * Verifies a YumRepository message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a YumRepository message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns YumRepository
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository;
+
+                                /**
+                                 * Creates a plain object from a YumRepository message. Also converts values to other types if specified.
+                                 * @param message YumRepository
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.YumRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this YumRepository to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a ZypperRepository. */
+                            interface IZypperRepository {
+
+                                /** ZypperRepository id */
+                                id?: (string|null);
+
+                                /** ZypperRepository displayName */
+                                displayName?: (string|null);
+
+                                /** ZypperRepository baseUrl */
+                                baseUrl?: (string|null);
+
+                                /** ZypperRepository gpgKeys */
+                                gpgKeys?: (string[]|null);
+                            }
+
+                            /** Represents a ZypperRepository. */
+                            class ZypperRepository implements IZypperRepository {
+
+                                /**
+                                 * Constructs a new ZypperRepository.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository);
+
+                                /** ZypperRepository id. */
+                                public id: string;
+
+                                /** ZypperRepository displayName. */
+                                public displayName: string;
+
+                                /** ZypperRepository baseUrl. */
+                                public baseUrl: string;
+
+                                /** ZypperRepository gpgKeys. */
+                                public gpgKeys: string[];
+
+                                /**
+                                 * Creates a new ZypperRepository instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ZypperRepository instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository;
+
+                                /**
+                                 * Encodes the specified ZypperRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.verify|verify} messages.
+                                 * @param message ZypperRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ZypperRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository.verify|verify} messages.
+                                 * @param message ZypperRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IZypperRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ZypperRepository message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ZypperRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository;
+
+                                /**
+                                 * Decodes a ZypperRepository message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ZypperRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository;
+
+                                /**
+                                 * Verifies a ZypperRepository message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ZypperRepository message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ZypperRepository
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository;
+
+                                /**
+                                 * Creates a plain object from a ZypperRepository message. Also converts values to other types if specified.
+                                 * @param message ZypperRepository
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.ZypperRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ZypperRepository to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** Properties of a GooRepository. */
+                            interface IGooRepository {
+
+                                /** GooRepository name */
+                                name?: (string|null);
+
+                                /** GooRepository url */
+                                url?: (string|null);
+                            }
+
+                            /** Represents a GooRepository. */
+                            class GooRepository implements IGooRepository {
+
+                                /**
+                                 * Constructs a new GooRepository.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository);
+
+                                /** GooRepository name. */
+                                public name: string;
+
+                                /** GooRepository url. */
+                                public url: string;
+
+                                /**
+                                 * Creates a new GooRepository instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GooRepository instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository;
+
+                                /**
+                                 * Encodes the specified GooRepository message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.verify|verify} messages.
+                                 * @param message GooRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GooRepository message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository.verify|verify} messages.
+                                 * @param message GooRepository message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.IGooRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GooRepository message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GooRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository;
+
+                                /**
+                                 * Decodes a GooRepository message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GooRepository
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository;
+
+                                /**
+                                 * Verifies a GooRepository message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GooRepository message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GooRepository
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository;
+
+                                /**
+                                 * Creates a plain object from a GooRepository message. Also converts values to other types if specified.
+                                 * @param message GooRepository
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.RepositoryResource.GooRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GooRepository to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+                        }
+
+                        /** Properties of an ExecResource. */
+                        interface IExecResource {
+
+                            /** ExecResource validate */
+                            validate?: (google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null);
+
+                            /** ExecResource enforce */
+                            enforce?: (google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null);
+                        }
+
+                        /** Represents an ExecResource. */
+                        class ExecResource implements IExecResource {
+
+                            /**
+                             * Constructs a new ExecResource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource);
+
+                            /** ExecResource validate. */
+                            public validate?: (google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null);
+
+                            /** ExecResource enforce. */
+                            public enforce?: (google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec|null);
+
+                            /**
+                             * Creates a new ExecResource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ExecResource instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource;
+
+                            /**
+                             * Encodes the specified ExecResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.verify|verify} messages.
+                             * @param message ExecResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ExecResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.verify|verify} messages.
+                             * @param message ExecResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.IExecResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ExecResource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ExecResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource;
+
+                            /**
+                             * Decodes an ExecResource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ExecResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource;
+
+                            /**
+                             * Verifies an ExecResource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ExecResource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ExecResource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource;
+
+                            /**
+                             * Creates a plain object from an ExecResource message. Also converts values to other types if specified.
+                             * @param message ExecResource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ExecResource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace ExecResource {
+
+                            /** Properties of an Exec. */
+                            interface IExec {
+
+                                /** Exec file */
+                                file?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** Exec script */
+                                script?: (string|null);
+
+                                /** Exec args */
+                                args?: (string[]|null);
+
+                                /** Exec interpreter */
+                                interpreter?: (google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter|null);
+
+                                /** Exec outputFilePath */
+                                outputFilePath?: (string|null);
+                            }
+
+                            /** Represents an Exec. */
+                            class Exec implements IExec {
+
+                                /**
+                                 * Constructs a new Exec.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec);
+
+                                /** Exec file. */
+                                public file?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                                /** Exec script. */
+                                public script?: (string|null);
+
+                                /** Exec args. */
+                                public args: string[];
+
+                                /** Exec interpreter. */
+                                public interpreter: (google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.Interpreter);
+
+                                /** Exec outputFilePath. */
+                                public outputFilePath: string;
+
+                                /** Exec source. */
+                                public source?: ("file"|"script");
+
+                                /**
+                                 * Creates a new Exec instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Exec instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec;
+
+                                /**
+                                 * Encodes the specified Exec message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.verify|verify} messages.
+                                 * @param message Exec message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Exec message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec.verify|verify} messages.
+                                 * @param message Exec message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.IExec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an Exec message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Exec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec;
+
+                                /**
+                                 * Decodes an Exec message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Exec
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec;
+
+                                /**
+                                 * Verifies an Exec message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an Exec message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Exec
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec;
+
+                                /**
+                                 * Creates a plain object from an Exec message. Also converts values to other types if specified.
+                                 * @param message Exec
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.ExecResource.Exec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Exec to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace Exec {
+
+                                /** Interpreter enum. */
+                                enum Interpreter {
+                                    INTERPRETER_UNSPECIFIED = 0,
+                                    NONE = 1,
+                                    SHELL = 2,
+                                    POWERSHELL = 3
+                                }
+                            }
+                        }
+
+                        /** Properties of a FileResource. */
+                        interface IFileResource {
+
+                            /** FileResource file */
+                            file?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                            /** FileResource content */
+                            content?: (string|null);
+
+                            /** FileResource path */
+                            path?: (string|null);
+
+                            /** FileResource state */
+                            state?: (google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState|null);
+
+                            /** FileResource permissions */
+                            permissions?: (string|null);
+                        }
+
+                        /** Represents a FileResource. */
+                        class FileResource implements IFileResource {
+
+                            /**
+                             * Constructs a new FileResource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource);
+
+                            /** FileResource file. */
+                            public file?: (google.cloud.osconfig.v1.OSPolicy.Resource.IFile|null);
+
+                            /** FileResource content. */
+                            public content?: (string|null);
+
+                            /** FileResource path. */
+                            public path: string;
+
+                            /** FileResource state. */
+                            public state: (google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState|keyof typeof google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState);
+
+                            /** FileResource permissions. */
+                            public permissions: string;
+
+                            /** FileResource source. */
+                            public source?: ("file"|"content");
+
+                            /**
+                             * Creates a new FileResource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FileResource instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource): google.cloud.osconfig.v1.OSPolicy.Resource.FileResource;
+
+                            /**
+                             * Encodes the specified FileResource message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.verify|verify} messages.
+                             * @param message FileResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FileResource message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.verify|verify} messages.
+                             * @param message FileResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.Resource.IFileResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FileResource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FileResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.Resource.FileResource;
+
+                            /**
+                             * Decodes a FileResource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FileResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.Resource.FileResource;
+
+                            /**
+                             * Verifies a FileResource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FileResource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FileResource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.Resource.FileResource;
+
+                            /**
+                             * Creates a plain object from a FileResource message. Also converts values to other types if specified.
+                             * @param message FileResource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicy.Resource.FileResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FileResource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace FileResource {
+
+                            /** DesiredState enum. */
+                            enum DesiredState {
+                                DESIRED_STATE_UNSPECIFIED = 0,
+                                PRESENT = 1,
+                                ABSENT = 2,
+                                CONTENTS_MATCH = 3
+                            }
+                        }
+                    }
+
+                    /** Properties of a ResourceGroup. */
+                    interface IResourceGroup {
+
+                        /** ResourceGroup inventoryFilters */
+                        inventoryFilters?: (google.cloud.osconfig.v1.OSPolicy.IInventoryFilter[]|null);
+
+                        /** ResourceGroup resources */
+                        resources?: (google.cloud.osconfig.v1.OSPolicy.IResource[]|null);
+                    }
+
+                    /** Represents a ResourceGroup. */
+                    class ResourceGroup implements IResourceGroup {
+
+                        /**
+                         * Constructs a new ResourceGroup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicy.IResourceGroup);
+
+                        /** ResourceGroup inventoryFilters. */
+                        public inventoryFilters: google.cloud.osconfig.v1.OSPolicy.IInventoryFilter[];
+
+                        /** ResourceGroup resources. */
+                        public resources: google.cloud.osconfig.v1.OSPolicy.IResource[];
+
+                        /**
+                         * Creates a new ResourceGroup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceGroup instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicy.IResourceGroup): google.cloud.osconfig.v1.OSPolicy.ResourceGroup;
+
+                        /**
+                         * Encodes the specified ResourceGroup message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.ResourceGroup.verify|verify} messages.
+                         * @param message ResourceGroup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicy.IResourceGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceGroup message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicy.ResourceGroup.verify|verify} messages.
+                         * @param message ResourceGroup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicy.IResourceGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceGroup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicy.ResourceGroup;
+
+                        /**
+                         * Decodes a ResourceGroup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicy.ResourceGroup;
+
+                        /**
+                         * Verifies a ResourceGroup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceGroup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceGroup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicy.ResourceGroup;
+
+                        /**
+                         * Creates a plain object from a ResourceGroup message. Also converts values to other types if specified.
+                         * @param message ResourceGroup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicy.ResourceGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceGroup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        VALIDATION = 1,
+                        ENFORCEMENT = 2
+                    }
+                }
+
+                /** Properties of a GetOSPolicyAssignmentReportRequest. */
+                interface IGetOSPolicyAssignmentReportRequest {
+
+                    /** GetOSPolicyAssignmentReportRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOSPolicyAssignmentReportRequest. */
+                class GetOSPolicyAssignmentReportRequest implements IGetOSPolicyAssignmentReportRequest {
+
+                    /**
+                     * Constructs a new GetOSPolicyAssignmentReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest);
+
+                    /** GetOSPolicyAssignmentReportRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOSPolicyAssignmentReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOSPolicyAssignmentReportRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest): google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest;
+
+                    /**
+                     * Encodes the specified GetOSPolicyAssignmentReportRequest message. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest.verify|verify} messages.
+                     * @param message GetOSPolicyAssignmentReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOSPolicyAssignmentReportRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest.verify|verify} messages.
+                     * @param message GetOSPolicyAssignmentReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOSPolicyAssignmentReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOSPolicyAssignmentReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest;
+
+                    /**
+                     * Decodes a GetOSPolicyAssignmentReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOSPolicyAssignmentReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest;
+
+                    /**
+                     * Verifies a GetOSPolicyAssignmentReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOSPolicyAssignmentReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOSPolicyAssignmentReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest;
+
+                    /**
+                     * Creates a plain object from a GetOSPolicyAssignmentReportRequest message. Also converts values to other types if specified.
+                     * @param message GetOSPolicyAssignmentReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOSPolicyAssignmentReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOSPolicyAssignmentReportsRequest. */
+                interface IListOSPolicyAssignmentReportsRequest {
+
+                    /** ListOSPolicyAssignmentReportsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOSPolicyAssignmentReportsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOSPolicyAssignmentReportsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListOSPolicyAssignmentReportsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOSPolicyAssignmentReportsRequest. */
+                class ListOSPolicyAssignmentReportsRequest implements IListOSPolicyAssignmentReportsRequest {
+
+                    /**
+                     * Constructs a new ListOSPolicyAssignmentReportsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest);
+
+                    /** ListOSPolicyAssignmentReportsRequest parent. */
+                    public parent: string;
+
+                    /** ListOSPolicyAssignmentReportsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOSPolicyAssignmentReportsRequest filter. */
+                    public filter: string;
+
+                    /** ListOSPolicyAssignmentReportsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOSPolicyAssignmentReportsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSPolicyAssignmentReportsRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentReportsRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentReportsRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentReportsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentReportsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSPolicyAssignmentReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentReportsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSPolicyAssignmentReportsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest;
+
+                    /**
+                     * Verifies a ListOSPolicyAssignmentReportsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSPolicyAssignmentReportsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSPolicyAssignmentReportsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOSPolicyAssignmentReportsRequest message. Also converts values to other types if specified.
+                     * @param message ListOSPolicyAssignmentReportsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSPolicyAssignmentReportsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOSPolicyAssignmentReportsResponse. */
+                interface IListOSPolicyAssignmentReportsResponse {
+
+                    /** ListOSPolicyAssignmentReportsResponse osPolicyAssignmentReports */
+                    osPolicyAssignmentReports?: (google.cloud.osconfig.v1.IOSPolicyAssignmentReport[]|null);
+
+                    /** ListOSPolicyAssignmentReportsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOSPolicyAssignmentReportsResponse. */
+                class ListOSPolicyAssignmentReportsResponse implements IListOSPolicyAssignmentReportsResponse {
+
+                    /**
+                     * Constructs a new ListOSPolicyAssignmentReportsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse);
+
+                    /** ListOSPolicyAssignmentReportsResponse osPolicyAssignmentReports. */
+                    public osPolicyAssignmentReports: google.cloud.osconfig.v1.IOSPolicyAssignmentReport[];
+
+                    /** ListOSPolicyAssignmentReportsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOSPolicyAssignmentReportsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSPolicyAssignmentReportsResponse instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentReportsResponse message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentReportsResponse message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentReportsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentReportsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSPolicyAssignmentReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentReportsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSPolicyAssignmentReportsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse;
+
+                    /**
+                     * Verifies a ListOSPolicyAssignmentReportsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSPolicyAssignmentReportsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSPolicyAssignmentReportsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOSPolicyAssignmentReportsResponse message. Also converts values to other types if specified.
+                     * @param message ListOSPolicyAssignmentReportsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSPolicyAssignmentReportsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a OSPolicyAssignmentReport. */
+                interface IOSPolicyAssignmentReport {
+
+                    /** OSPolicyAssignmentReport name */
+                    name?: (string|null);
+
+                    /** OSPolicyAssignmentReport instance */
+                    instance?: (string|null);
+
+                    /** OSPolicyAssignmentReport osPolicyAssignment */
+                    osPolicyAssignment?: (string|null);
+
+                    /** OSPolicyAssignmentReport osPolicyCompliances */
+                    osPolicyCompliances?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance[]|null);
+
+                    /** OSPolicyAssignmentReport updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OSPolicyAssignmentReport lastRunId */
+                    lastRunId?: (string|null);
+                }
+
+                /** Represents a OSPolicyAssignmentReport. */
+                class OSPolicyAssignmentReport implements IOSPolicyAssignmentReport {
+
+                    /**
+                     * Constructs a new OSPolicyAssignmentReport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IOSPolicyAssignmentReport);
+
+                    /** OSPolicyAssignmentReport name. */
+                    public name: string;
+
+                    /** OSPolicyAssignmentReport instance. */
+                    public instance: string;
+
+                    /** OSPolicyAssignmentReport osPolicyAssignment. */
+                    public osPolicyAssignment: string;
+
+                    /** OSPolicyAssignmentReport osPolicyCompliances. */
+                    public osPolicyCompliances: google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance[];
+
+                    /** OSPolicyAssignmentReport updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OSPolicyAssignmentReport lastRunId. */
+                    public lastRunId: string;
+
+                    /**
+                     * Creates a new OSPolicyAssignmentReport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OSPolicyAssignmentReport instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IOSPolicyAssignmentReport): google.cloud.osconfig.v1.OSPolicyAssignmentReport;
+
+                    /**
+                     * Encodes the specified OSPolicyAssignmentReport message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.verify|verify} messages.
+                     * @param message OSPolicyAssignmentReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IOSPolicyAssignmentReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OSPolicyAssignmentReport message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.verify|verify} messages.
+                     * @param message OSPolicyAssignmentReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IOSPolicyAssignmentReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OSPolicyAssignmentReport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OSPolicyAssignmentReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignmentReport;
+
+                    /**
+                     * Decodes a OSPolicyAssignmentReport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OSPolicyAssignmentReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignmentReport;
+
+                    /**
+                     * Verifies a OSPolicyAssignmentReport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OSPolicyAssignmentReport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OSPolicyAssignmentReport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignmentReport;
+
+                    /**
+                     * Creates a plain object from a OSPolicyAssignmentReport message. Also converts values to other types if specified.
+                     * @param message OSPolicyAssignmentReport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OSPolicyAssignmentReport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace OSPolicyAssignmentReport {
+
+                    /** Properties of a OSPolicyCompliance. */
+                    interface IOSPolicyCompliance {
+
+                        /** OSPolicyCompliance osPolicyId */
+                        osPolicyId?: (string|null);
+
+                        /** OSPolicyCompliance complianceState */
+                        complianceState?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState|null);
+
+                        /** OSPolicyCompliance complianceStateReason */
+                        complianceStateReason?: (string|null);
+
+                        /** OSPolicyCompliance osPolicyResourceCompliances */
+                        osPolicyResourceCompliances?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance[]|null);
+                    }
+
+                    /** Represents a OSPolicyCompliance. */
+                    class OSPolicyCompliance implements IOSPolicyCompliance {
+
+                        /**
+                         * Constructs a new OSPolicyCompliance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance);
+
+                        /** OSPolicyCompliance osPolicyId. */
+                        public osPolicyId: string;
+
+                        /** OSPolicyCompliance complianceState. */
+                        public complianceState: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.ComplianceState);
+
+                        /** OSPolicyCompliance complianceStateReason. */
+                        public complianceStateReason: string;
+
+                        /** OSPolicyCompliance osPolicyResourceCompliances. */
+                        public osPolicyResourceCompliances: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance[];
+
+                        /**
+                         * Creates a new OSPolicyCompliance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OSPolicyCompliance instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance;
+
+                        /**
+                         * Encodes the specified OSPolicyCompliance message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.verify|verify} messages.
+                         * @param message OSPolicyCompliance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OSPolicyCompliance message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.verify|verify} messages.
+                         * @param message OSPolicyCompliance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.IOSPolicyCompliance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a OSPolicyCompliance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OSPolicyCompliance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance;
+
+                        /**
+                         * Decodes a OSPolicyCompliance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OSPolicyCompliance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance;
+
+                        /**
+                         * Verifies a OSPolicyCompliance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a OSPolicyCompliance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OSPolicyCompliance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance;
+
+                        /**
+                         * Creates a plain object from a OSPolicyCompliance message. Also converts values to other types if specified.
+                         * @param message OSPolicyCompliance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OSPolicyCompliance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace OSPolicyCompliance {
+
+                        /** Properties of a OSPolicyResourceCompliance. */
+                        interface IOSPolicyResourceCompliance {
+
+                            /** OSPolicyResourceCompliance osPolicyResourceId */
+                            osPolicyResourceId?: (string|null);
+
+                            /** OSPolicyResourceCompliance configSteps */
+                            configSteps?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep[]|null);
+
+                            /** OSPolicyResourceCompliance complianceState */
+                            complianceState?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState|null);
+
+                            /** OSPolicyResourceCompliance complianceStateReason */
+                            complianceStateReason?: (string|null);
+
+                            /** OSPolicyResourceCompliance execResourceOutput */
+                            execResourceOutput?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput|null);
+                        }
+
+                        /** Represents a OSPolicyResourceCompliance. */
+                        class OSPolicyResourceCompliance implements IOSPolicyResourceCompliance {
+
+                            /**
+                             * Constructs a new OSPolicyResourceCompliance.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance);
+
+                            /** OSPolicyResourceCompliance osPolicyResourceId. */
+                            public osPolicyResourceId: string;
+
+                            /** OSPolicyResourceCompliance configSteps. */
+                            public configSteps: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep[];
+
+                            /** OSPolicyResourceCompliance complianceState. */
+                            public complianceState: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ComplianceState);
+
+                            /** OSPolicyResourceCompliance complianceStateReason. */
+                            public complianceStateReason: string;
+
+                            /** OSPolicyResourceCompliance execResourceOutput. */
+                            public execResourceOutput?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput|null);
+
+                            /** OSPolicyResourceCompliance output. */
+                            public output?: "execResourceOutput";
+
+                            /**
+                             * Creates a new OSPolicyResourceCompliance instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OSPolicyResourceCompliance instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance;
+
+                            /**
+                             * Encodes the specified OSPolicyResourceCompliance message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.verify|verify} messages.
+                             * @param message OSPolicyResourceCompliance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OSPolicyResourceCompliance message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.verify|verify} messages.
+                             * @param message OSPolicyResourceCompliance message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.IOSPolicyResourceCompliance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a OSPolicyResourceCompliance message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OSPolicyResourceCompliance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance;
+
+                            /**
+                             * Decodes a OSPolicyResourceCompliance message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OSPolicyResourceCompliance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance;
+
+                            /**
+                             * Verifies a OSPolicyResourceCompliance message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a OSPolicyResourceCompliance message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OSPolicyResourceCompliance
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance;
+
+                            /**
+                             * Creates a plain object from a OSPolicyResourceCompliance message. Also converts values to other types if specified.
+                             * @param message OSPolicyResourceCompliance
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OSPolicyResourceCompliance to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        namespace OSPolicyResourceCompliance {
+
+                            /** Properties of a OSPolicyResourceConfigStep. */
+                            interface IOSPolicyResourceConfigStep {
+
+                                /** OSPolicyResourceConfigStep type */
+                                type?: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type|null);
+
+                                /** OSPolicyResourceConfigStep errorMessage */
+                                errorMessage?: (string|null);
+                            }
+
+                            /** Represents a OSPolicyResourceConfigStep. */
+                            class OSPolicyResourceConfigStep implements IOSPolicyResourceConfigStep {
+
+                                /**
+                                 * Constructs a new OSPolicyResourceConfigStep.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep);
+
+                                /** OSPolicyResourceConfigStep type. */
+                                public type: (google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.Type);
+
+                                /** OSPolicyResourceConfigStep errorMessage. */
+                                public errorMessage: string;
+
+                                /**
+                                 * Creates a new OSPolicyResourceConfigStep instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns OSPolicyResourceConfigStep instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep;
+
+                                /**
+                                 * Encodes the specified OSPolicyResourceConfigStep message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.verify|verify} messages.
+                                 * @param message OSPolicyResourceConfigStep message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified OSPolicyResourceConfigStep message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep.verify|verify} messages.
+                                 * @param message OSPolicyResourceConfigStep message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IOSPolicyResourceConfigStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a OSPolicyResourceConfigStep message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns OSPolicyResourceConfigStep
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep;
+
+                                /**
+                                 * Decodes a OSPolicyResourceConfigStep message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns OSPolicyResourceConfigStep
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep;
+
+                                /**
+                                 * Verifies a OSPolicyResourceConfigStep message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a OSPolicyResourceConfigStep message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns OSPolicyResourceConfigStep
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep;
+
+                                /**
+                                 * Creates a plain object from a OSPolicyResourceConfigStep message. Also converts values to other types if specified.
+                                 * @param message OSPolicyResourceConfigStep
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.OSPolicyResourceConfigStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this OSPolicyResourceConfigStep to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            namespace OSPolicyResourceConfigStep {
+
+                                /** Type enum. */
+                                enum Type {
+                                    TYPE_UNSPECIFIED = 0,
+                                    VALIDATION = 1,
+                                    DESIRED_STATE_CHECK = 2,
+                                    DESIRED_STATE_ENFORCEMENT = 3,
+                                    DESIRED_STATE_CHECK_POST_ENFORCEMENT = 4
+                                }
+                            }
+
+                            /** Properties of an ExecResourceOutput. */
+                            interface IExecResourceOutput {
+
+                                /** ExecResourceOutput enforcementOutput */
+                                enforcementOutput?: (Uint8Array|string|null);
+                            }
+
+                            /** Represents an ExecResourceOutput. */
+                            class ExecResourceOutput implements IExecResourceOutput {
+
+                                /**
+                                 * Constructs a new ExecResourceOutput.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput);
+
+                                /** ExecResourceOutput enforcementOutput. */
+                                public enforcementOutput: (Uint8Array|string);
+
+                                /**
+                                 * Creates a new ExecResourceOutput instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ExecResourceOutput instance
+                                 */
+                                public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                                /**
+                                 * Encodes the specified ExecResourceOutput message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                                 * @param message ExecResourceOutput message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ExecResourceOutput message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                                 * @param message ExecResourceOutput message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.IExecResourceOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ExecResourceOutput message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ExecResourceOutput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                                /**
+                                 * Decodes an ExecResourceOutput message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ExecResourceOutput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                                /**
+                                 * Verifies an ExecResourceOutput message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ExecResourceOutput message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ExecResourceOutput
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                                /**
+                                 * Creates a plain object from an ExecResourceOutput message. Also converts values to other types if specified.
+                                 * @param message ExecResourceOutput
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignmentReport.OSPolicyCompliance.OSPolicyResourceCompliance.ExecResourceOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ExecResourceOutput to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+                            }
+
+                            /** ComplianceState enum. */
+                            enum ComplianceState {
+                                UNKNOWN = 0,
+                                COMPLIANT = 1,
+                                NON_COMPLIANT = 2
+                            }
+                        }
+
+                        /** ComplianceState enum. */
+                        enum ComplianceState {
+                            UNKNOWN = 0,
+                            COMPLIANT = 1,
+                            NON_COMPLIANT = 2
+                        }
+                    }
+                }
+
+                /** Properties of a OSPolicyAssignment. */
+                interface IOSPolicyAssignment {
+
+                    /** OSPolicyAssignment name */
+                    name?: (string|null);
+
+                    /** OSPolicyAssignment description */
+                    description?: (string|null);
+
+                    /** OSPolicyAssignment osPolicies */
+                    osPolicies?: (google.cloud.osconfig.v1.IOSPolicy[]|null);
+
+                    /** OSPolicyAssignment instanceFilter */
+                    instanceFilter?: (google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter|null);
+
+                    /** OSPolicyAssignment rollout */
+                    rollout?: (google.cloud.osconfig.v1.OSPolicyAssignment.IRollout|null);
+
+                    /** OSPolicyAssignment revisionId */
+                    revisionId?: (string|null);
+
+                    /** OSPolicyAssignment revisionCreateTime */
+                    revisionCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OSPolicyAssignment etag */
+                    etag?: (string|null);
+
+                    /** OSPolicyAssignment rolloutState */
+                    rolloutState?: (google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState|null);
+
+                    /** OSPolicyAssignment baseline */
+                    baseline?: (boolean|null);
+
+                    /** OSPolicyAssignment deleted */
+                    deleted?: (boolean|null);
+
+                    /** OSPolicyAssignment reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** OSPolicyAssignment uid */
+                    uid?: (string|null);
+                }
+
+                /** Represents a OSPolicyAssignment. */
+                class OSPolicyAssignment implements IOSPolicyAssignment {
+
+                    /**
+                     * Constructs a new OSPolicyAssignment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IOSPolicyAssignment);
+
+                    /** OSPolicyAssignment name. */
+                    public name: string;
+
+                    /** OSPolicyAssignment description. */
+                    public description: string;
+
+                    /** OSPolicyAssignment osPolicies. */
+                    public osPolicies: google.cloud.osconfig.v1.IOSPolicy[];
+
+                    /** OSPolicyAssignment instanceFilter. */
+                    public instanceFilter?: (google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter|null);
+
+                    /** OSPolicyAssignment rollout. */
+                    public rollout?: (google.cloud.osconfig.v1.OSPolicyAssignment.IRollout|null);
+
+                    /** OSPolicyAssignment revisionId. */
+                    public revisionId: string;
+
+                    /** OSPolicyAssignment revisionCreateTime. */
+                    public revisionCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OSPolicyAssignment etag. */
+                    public etag: string;
+
+                    /** OSPolicyAssignment rolloutState. */
+                    public rolloutState: (google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState);
+
+                    /** OSPolicyAssignment baseline. */
+                    public baseline: boolean;
+
+                    /** OSPolicyAssignment deleted. */
+                    public deleted: boolean;
+
+                    /** OSPolicyAssignment reconciling. */
+                    public reconciling: boolean;
+
+                    /** OSPolicyAssignment uid. */
+                    public uid: string;
+
+                    /**
+                     * Creates a new OSPolicyAssignment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OSPolicyAssignment instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IOSPolicyAssignment): google.cloud.osconfig.v1.OSPolicyAssignment;
+
+                    /**
+                     * Encodes the specified OSPolicyAssignment message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.verify|verify} messages.
+                     * @param message OSPolicyAssignment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IOSPolicyAssignment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OSPolicyAssignment message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.verify|verify} messages.
+                     * @param message OSPolicyAssignment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IOSPolicyAssignment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OSPolicyAssignment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OSPolicyAssignment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignment;
+
+                    /**
+                     * Decodes a OSPolicyAssignment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OSPolicyAssignment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignment;
+
+                    /**
+                     * Verifies a OSPolicyAssignment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OSPolicyAssignment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OSPolicyAssignment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignment;
+
+                    /**
+                     * Creates a plain object from a OSPolicyAssignment message. Also converts values to other types if specified.
+                     * @param message OSPolicyAssignment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OSPolicyAssignment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace OSPolicyAssignment {
+
+                    /** Properties of a LabelSet. */
+                    interface ILabelSet {
+
+                        /** LabelSet labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a LabelSet. */
+                    class LabelSet implements ILabelSet {
+
+                        /**
+                         * Constructs a new LabelSet.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet);
+
+                        /** LabelSet labels. */
+                        public labels: { [k: string]: string };
+
+                        /**
+                         * Creates a new LabelSet instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LabelSet instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet): google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet;
+
+                        /**
+                         * Encodes the specified LabelSet message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.verify|verify} messages.
+                         * @param message LabelSet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LabelSet message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet.verify|verify} messages.
+                         * @param message LabelSet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LabelSet message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LabelSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet;
+
+                        /**
+                         * Decodes a LabelSet message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LabelSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet;
+
+                        /**
+                         * Verifies a LabelSet message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LabelSet message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LabelSet
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet;
+
+                        /**
+                         * Creates a plain object from a LabelSet message. Also converts values to other types if specified.
+                         * @param message LabelSet
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LabelSet to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an InstanceFilter. */
+                    interface IInstanceFilter {
+
+                        /** InstanceFilter all */
+                        all?: (boolean|null);
+
+                        /** InstanceFilter inclusionLabels */
+                        inclusionLabels?: (google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet[]|null);
+
+                        /** InstanceFilter exclusionLabels */
+                        exclusionLabels?: (google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet[]|null);
+
+                        /** InstanceFilter inventories */
+                        inventories?: (google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory[]|null);
+                    }
+
+                    /** Represents an InstanceFilter. */
+                    class InstanceFilter implements IInstanceFilter {
+
+                        /**
+                         * Constructs a new InstanceFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter);
+
+                        /** InstanceFilter all. */
+                        public all: boolean;
+
+                        /** InstanceFilter inclusionLabels. */
+                        public inclusionLabels: google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet[];
+
+                        /** InstanceFilter exclusionLabels. */
+                        public exclusionLabels: google.cloud.osconfig.v1.OSPolicyAssignment.ILabelSet[];
+
+                        /** InstanceFilter inventories. */
+                        public inventories: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory[];
+
+                        /**
+                         * Creates a new InstanceFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstanceFilter instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter;
+
+                        /**
+                         * Encodes the specified InstanceFilter message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.verify|verify} messages.
+                         * @param message InstanceFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstanceFilter message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.verify|verify} messages.
+                         * @param message InstanceFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignment.IInstanceFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstanceFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstanceFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter;
+
+                        /**
+                         * Decodes an InstanceFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstanceFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter;
+
+                        /**
+                         * Verifies an InstanceFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstanceFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstanceFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter;
+
+                        /**
+                         * Creates a plain object from an InstanceFilter message. Also converts values to other types if specified.
+                         * @param message InstanceFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstanceFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace InstanceFilter {
+
+                        /** Properties of an Inventory. */
+                        interface IInventory {
+
+                            /** Inventory osShortName */
+                            osShortName?: (string|null);
+
+                            /** Inventory osVersion */
+                            osVersion?: (string|null);
+                        }
+
+                        /** Represents an Inventory. */
+                        class Inventory implements IInventory {
+
+                            /**
+                             * Constructs a new Inventory.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory);
+
+                            /** Inventory osShortName. */
+                            public osShortName: string;
+
+                            /** Inventory osVersion. */
+                            public osVersion: string;
+
+                            /**
+                             * Creates a new Inventory instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Inventory instance
+                             */
+                            public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory;
+
+                            /**
+                             * Encodes the specified Inventory message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.verify|verify} messages.
+                             * @param message Inventory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Inventory message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory.verify|verify} messages.
+                             * @param message Inventory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.IInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Inventory message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Inventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory;
+
+                            /**
+                             * Decodes an Inventory message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Inventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory;
+
+                            /**
+                             * Verifies an Inventory message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Inventory message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Inventory
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory;
+
+                            /**
+                             * Creates a plain object from an Inventory message. Also converts values to other types if specified.
+                             * @param message Inventory
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Inventory to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a Rollout. */
+                    interface IRollout {
+
+                        /** Rollout disruptionBudget */
+                        disruptionBudget?: (google.cloud.osconfig.v1.IFixedOrPercent|null);
+
+                        /** Rollout minWaitDuration */
+                        minWaitDuration?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a Rollout. */
+                    class Rollout implements IRollout {
+
+                        /**
+                         * Constructs a new Rollout.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.IRollout);
+
+                        /** Rollout disruptionBudget. */
+                        public disruptionBudget?: (google.cloud.osconfig.v1.IFixedOrPercent|null);
+
+                        /** Rollout minWaitDuration. */
+                        public minWaitDuration?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new Rollout instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Rollout instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.OSPolicyAssignment.IRollout): google.cloud.osconfig.v1.OSPolicyAssignment.Rollout;
+
+                        /**
+                         * Encodes the specified Rollout message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.verify|verify} messages.
+                         * @param message Rollout message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.OSPolicyAssignment.IRollout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Rollout message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignment.Rollout.verify|verify} messages.
+                         * @param message Rollout message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.OSPolicyAssignment.IRollout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Rollout message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Rollout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignment.Rollout;
+
+                        /**
+                         * Decodes a Rollout message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Rollout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignment.Rollout;
+
+                        /**
+                         * Verifies a Rollout message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Rollout message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Rollout
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignment.Rollout;
+
+                        /**
+                         * Creates a plain object from a Rollout message. Also converts values to other types if specified.
+                         * @param message Rollout
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignment.Rollout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Rollout to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** RolloutState enum. */
+                    enum RolloutState {
+                        ROLLOUT_STATE_UNSPECIFIED = 0,
+                        IN_PROGRESS = 1,
+                        CANCELLING = 2,
+                        CANCELLED = 3,
+                        SUCCEEDED = 4
+                    }
+                }
+
+                /** Properties of a OSPolicyAssignmentOperationMetadata. */
+                interface IOSPolicyAssignmentOperationMetadata {
+
+                    /** OSPolicyAssignmentOperationMetadata osPolicyAssignment */
+                    osPolicyAssignment?: (string|null);
+
+                    /** OSPolicyAssignmentOperationMetadata apiMethod */
+                    apiMethod?: (google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod|null);
+
+                    /** OSPolicyAssignmentOperationMetadata rolloutState */
+                    rolloutState?: (google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState|null);
+
+                    /** OSPolicyAssignmentOperationMetadata rolloutStartTime */
+                    rolloutStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OSPolicyAssignmentOperationMetadata rolloutUpdateTime */
+                    rolloutUpdateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a OSPolicyAssignmentOperationMetadata. */
+                class OSPolicyAssignmentOperationMetadata implements IOSPolicyAssignmentOperationMetadata {
+
+                    /**
+                     * Constructs a new OSPolicyAssignmentOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata);
+
+                    /** OSPolicyAssignmentOperationMetadata osPolicyAssignment. */
+                    public osPolicyAssignment: string;
+
+                    /** OSPolicyAssignmentOperationMetadata apiMethod. */
+                    public apiMethod: (google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod);
+
+                    /** OSPolicyAssignmentOperationMetadata rolloutState. */
+                    public rolloutState: (google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState|keyof typeof google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState);
+
+                    /** OSPolicyAssignmentOperationMetadata rolloutStartTime. */
+                    public rolloutStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OSPolicyAssignmentOperationMetadata rolloutUpdateTime. */
+                    public rolloutUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new OSPolicyAssignmentOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OSPolicyAssignmentOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata): google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata;
+
+                    /**
+                     * Encodes the specified OSPolicyAssignmentOperationMetadata message. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.verify|verify} messages.
+                     * @param message OSPolicyAssignmentOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OSPolicyAssignmentOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.verify|verify} messages.
+                     * @param message OSPolicyAssignmentOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OSPolicyAssignmentOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OSPolicyAssignmentOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata;
+
+                    /**
+                     * Decodes a OSPolicyAssignmentOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OSPolicyAssignmentOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata;
+
+                    /**
+                     * Verifies a OSPolicyAssignmentOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OSPolicyAssignmentOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OSPolicyAssignmentOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a OSPolicyAssignmentOperationMetadata message. Also converts values to other types if specified.
+                     * @param message OSPolicyAssignmentOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OSPolicyAssignmentOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace OSPolicyAssignmentOperationMetadata {
+
+                    /** APIMethod enum. */
+                    enum APIMethod {
+                        API_METHOD_UNSPECIFIED = 0,
+                        CREATE = 1,
+                        UPDATE = 2,
+                        DELETE = 3
+                    }
+
+                    /** RolloutState enum. */
+                    enum RolloutState {
+                        ROLLOUT_STATE_UNSPECIFIED = 0,
+                        IN_PROGRESS = 1,
+                        CANCELLING = 2,
+                        CANCELLED = 3,
+                        SUCCEEDED = 4
+                    }
+                }
+
+                /** Properties of a CreateOSPolicyAssignmentRequest. */
+                interface ICreateOSPolicyAssignmentRequest {
+
+                    /** CreateOSPolicyAssignmentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateOSPolicyAssignmentRequest osPolicyAssignment */
+                    osPolicyAssignment?: (google.cloud.osconfig.v1.IOSPolicyAssignment|null);
+
+                    /** CreateOSPolicyAssignmentRequest osPolicyAssignmentId */
+                    osPolicyAssignmentId?: (string|null);
+                }
+
+                /** Represents a CreateOSPolicyAssignmentRequest. */
+                class CreateOSPolicyAssignmentRequest implements ICreateOSPolicyAssignmentRequest {
+
+                    /**
+                     * Constructs a new CreateOSPolicyAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest);
+
+                    /** CreateOSPolicyAssignmentRequest parent. */
+                    public parent: string;
+
+                    /** CreateOSPolicyAssignmentRequest osPolicyAssignment. */
+                    public osPolicyAssignment?: (google.cloud.osconfig.v1.IOSPolicyAssignment|null);
+
+                    /** CreateOSPolicyAssignmentRequest osPolicyAssignmentId. */
+                    public osPolicyAssignmentId: string;
+
+                    /**
+                     * Creates a new CreateOSPolicyAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOSPolicyAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest): google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Encodes the specified CreateOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message CreateOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message CreateOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOSPolicyAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Decodes a CreateOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Verifies a CreateOSPolicyAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOSPolicyAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message CreateOSPolicyAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOSPolicyAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateOSPolicyAssignmentRequest. */
+                interface IUpdateOSPolicyAssignmentRequest {
+
+                    /** UpdateOSPolicyAssignmentRequest osPolicyAssignment */
+                    osPolicyAssignment?: (google.cloud.osconfig.v1.IOSPolicyAssignment|null);
+
+                    /** UpdateOSPolicyAssignmentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateOSPolicyAssignmentRequest. */
+                class UpdateOSPolicyAssignmentRequest implements IUpdateOSPolicyAssignmentRequest {
+
+                    /**
+                     * Constructs a new UpdateOSPolicyAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest);
+
+                    /** UpdateOSPolicyAssignmentRequest osPolicyAssignment. */
+                    public osPolicyAssignment?: (google.cloud.osconfig.v1.IOSPolicyAssignment|null);
+
+                    /** UpdateOSPolicyAssignmentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateOSPolicyAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateOSPolicyAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest): google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Encodes the specified UpdateOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message UpdateOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message UpdateOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateOSPolicyAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Decodes an UpdateOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Verifies an UpdateOSPolicyAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateOSPolicyAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateOSPolicyAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateOSPolicyAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetOSPolicyAssignmentRequest. */
+                interface IGetOSPolicyAssignmentRequest {
+
+                    /** GetOSPolicyAssignmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOSPolicyAssignmentRequest. */
+                class GetOSPolicyAssignmentRequest implements IGetOSPolicyAssignmentRequest {
+
+                    /**
+                     * Constructs a new GetOSPolicyAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest);
+
+                    /** GetOSPolicyAssignmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOSPolicyAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOSPolicyAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest): google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest;
+
+                    /**
+                     * Encodes the specified GetOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message GetOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message GetOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOSPolicyAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest;
+
+                    /**
+                     * Decodes a GetOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest;
+
+                    /**
+                     * Verifies a GetOSPolicyAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOSPolicyAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a GetOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message GetOSPolicyAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOSPolicyAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOSPolicyAssignmentsRequest. */
+                interface IListOSPolicyAssignmentsRequest {
+
+                    /** ListOSPolicyAssignmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOSPolicyAssignmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOSPolicyAssignmentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOSPolicyAssignmentsRequest. */
+                class ListOSPolicyAssignmentsRequest implements IListOSPolicyAssignmentsRequest {
+
+                    /**
+                     * Constructs a new ListOSPolicyAssignmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest);
+
+                    /** ListOSPolicyAssignmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListOSPolicyAssignmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOSPolicyAssignmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOSPolicyAssignmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSPolicyAssignmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest): google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentsRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentsRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSPolicyAssignmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSPolicyAssignmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest;
+
+                    /**
+                     * Verifies a ListOSPolicyAssignmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSPolicyAssignmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSPolicyAssignmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOSPolicyAssignmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListOSPolicyAssignmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSPolicyAssignmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOSPolicyAssignmentsResponse. */
+                interface IListOSPolicyAssignmentsResponse {
+
+                    /** ListOSPolicyAssignmentsResponse osPolicyAssignments */
+                    osPolicyAssignments?: (google.cloud.osconfig.v1.IOSPolicyAssignment[]|null);
+
+                    /** ListOSPolicyAssignmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOSPolicyAssignmentsResponse. */
+                class ListOSPolicyAssignmentsResponse implements IListOSPolicyAssignmentsResponse {
+
+                    /**
+                     * Constructs a new ListOSPolicyAssignmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse);
+
+                    /** ListOSPolicyAssignmentsResponse osPolicyAssignments. */
+                    public osPolicyAssignments: google.cloud.osconfig.v1.IOSPolicyAssignment[];
+
+                    /** ListOSPolicyAssignmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOSPolicyAssignmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSPolicyAssignmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse): google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentsResponse message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentsResponse message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSPolicyAssignmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSPolicyAssignmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse;
+
+                    /**
+                     * Verifies a ListOSPolicyAssignmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSPolicyAssignmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSPolicyAssignmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOSPolicyAssignmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListOSPolicyAssignmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSPolicyAssignmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOSPolicyAssignmentRevisionsRequest. */
+                interface IListOSPolicyAssignmentRevisionsRequest {
+
+                    /** ListOSPolicyAssignmentRevisionsRequest name */
+                    name?: (string|null);
+
+                    /** ListOSPolicyAssignmentRevisionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOSPolicyAssignmentRevisionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOSPolicyAssignmentRevisionsRequest. */
+                class ListOSPolicyAssignmentRevisionsRequest implements IListOSPolicyAssignmentRevisionsRequest {
+
+                    /**
+                     * Constructs a new ListOSPolicyAssignmentRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest);
+
+                    /** ListOSPolicyAssignmentRevisionsRequest name. */
+                    public name: string;
+
+                    /** ListOSPolicyAssignmentRevisionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOSPolicyAssignmentRevisionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOSPolicyAssignmentRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSPolicyAssignmentRevisionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentRevisionsRequest message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSPolicyAssignmentRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSPolicyAssignmentRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest;
+
+                    /**
+                     * Verifies a ListOSPolicyAssignmentRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSPolicyAssignmentRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSPolicyAssignmentRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOSPolicyAssignmentRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message ListOSPolicyAssignmentRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSPolicyAssignmentRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListOSPolicyAssignmentRevisionsResponse. */
+                interface IListOSPolicyAssignmentRevisionsResponse {
+
+                    /** ListOSPolicyAssignmentRevisionsResponse osPolicyAssignments */
+                    osPolicyAssignments?: (google.cloud.osconfig.v1.IOSPolicyAssignment[]|null);
+
+                    /** ListOSPolicyAssignmentRevisionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOSPolicyAssignmentRevisionsResponse. */
+                class ListOSPolicyAssignmentRevisionsResponse implements IListOSPolicyAssignmentRevisionsResponse {
+
+                    /**
+                     * Constructs a new ListOSPolicyAssignmentRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse);
+
+                    /** ListOSPolicyAssignmentRevisionsResponse osPolicyAssignments. */
+                    public osPolicyAssignments: google.cloud.osconfig.v1.IOSPolicyAssignment[];
+
+                    /** ListOSPolicyAssignmentRevisionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOSPolicyAssignmentRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOSPolicyAssignmentRevisionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentRevisionsResponse message. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOSPolicyAssignmentRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse.verify|verify} messages.
+                     * @param message ListOSPolicyAssignmentRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOSPolicyAssignmentRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse;
+
+                    /**
+                     * Decodes a ListOSPolicyAssignmentRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOSPolicyAssignmentRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse;
+
+                    /**
+                     * Verifies a ListOSPolicyAssignmentRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOSPolicyAssignmentRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOSPolicyAssignmentRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOSPolicyAssignmentRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message ListOSPolicyAssignmentRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOSPolicyAssignmentRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteOSPolicyAssignmentRequest. */
+                interface IDeleteOSPolicyAssignmentRequest {
+
+                    /** DeleteOSPolicyAssignmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteOSPolicyAssignmentRequest. */
+                class DeleteOSPolicyAssignmentRequest implements IDeleteOSPolicyAssignmentRequest {
+
+                    /**
+                     * Constructs a new DeleteOSPolicyAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest);
+
+                    /** DeleteOSPolicyAssignmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteOSPolicyAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteOSPolicyAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest): google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest;
+
+                    /**
+                     * Encodes the specified DeleteOSPolicyAssignmentRequest message. Does not implicitly {@link google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message DeleteOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteOSPolicyAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest.verify|verify} messages.
+                     * @param message DeleteOSPolicyAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteOSPolicyAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest;
+
+                    /**
+                     * Decodes a DeleteOSPolicyAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteOSPolicyAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest;
+
+                    /**
+                     * Verifies a DeleteOSPolicyAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteOSPolicyAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteOSPolicyAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteOSPolicyAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteOSPolicyAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteOSPolicyAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a FixedOrPercent. */
                 interface IFixedOrPercent {
 
@@ -5652,6 +10433,118 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OsConfigZonalService;
 
                     /**
+                     * Calls CreateOSPolicyAssignment.
+                     * @param request CreateOSPolicyAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createOSPolicyAssignment(request: google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.CreateOSPolicyAssignmentCallback): void;
+
+                    /**
+                     * Calls CreateOSPolicyAssignment.
+                     * @param request CreateOSPolicyAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createOSPolicyAssignment(request: google.cloud.osconfig.v1.ICreateOSPolicyAssignmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateOSPolicyAssignment.
+                     * @param request UpdateOSPolicyAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateOSPolicyAssignment(request: google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.UpdateOSPolicyAssignmentCallback): void;
+
+                    /**
+                     * Calls UpdateOSPolicyAssignment.
+                     * @param request UpdateOSPolicyAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateOSPolicyAssignment(request: google.cloud.osconfig.v1.IUpdateOSPolicyAssignmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetOSPolicyAssignment.
+                     * @param request GetOSPolicyAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OSPolicyAssignment
+                     */
+                    public getOSPolicyAssignment(request: google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.GetOSPolicyAssignmentCallback): void;
+
+                    /**
+                     * Calls GetOSPolicyAssignment.
+                     * @param request GetOSPolicyAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOSPolicyAssignment(request: google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest): Promise<google.cloud.osconfig.v1.OSPolicyAssignment>;
+
+                    /**
+                     * Calls ListOSPolicyAssignments.
+                     * @param request ListOSPolicyAssignmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOSPolicyAssignmentsResponse
+                     */
+                    public listOSPolicyAssignments(request: google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.ListOSPolicyAssignmentsCallback): void;
+
+                    /**
+                     * Calls ListOSPolicyAssignments.
+                     * @param request ListOSPolicyAssignmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOSPolicyAssignments(request: google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest): Promise<google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse>;
+
+                    /**
+                     * Calls ListOSPolicyAssignmentRevisions.
+                     * @param request ListOSPolicyAssignmentRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOSPolicyAssignmentRevisionsResponse
+                     */
+                    public listOSPolicyAssignmentRevisions(request: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.ListOSPolicyAssignmentRevisionsCallback): void;
+
+                    /**
+                     * Calls ListOSPolicyAssignmentRevisions.
+                     * @param request ListOSPolicyAssignmentRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOSPolicyAssignmentRevisions(request: google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest): Promise<google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse>;
+
+                    /**
+                     * Calls DeleteOSPolicyAssignment.
+                     * @param request DeleteOSPolicyAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteOSPolicyAssignment(request: google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.DeleteOSPolicyAssignmentCallback): void;
+
+                    /**
+                     * Calls DeleteOSPolicyAssignment.
+                     * @param request DeleteOSPolicyAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteOSPolicyAssignment(request: google.cloud.osconfig.v1.IDeleteOSPolicyAssignmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetOSPolicyAssignmentReport.
+                     * @param request GetOSPolicyAssignmentReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OSPolicyAssignmentReport
+                     */
+                    public getOSPolicyAssignmentReport(request: google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.GetOSPolicyAssignmentReportCallback): void;
+
+                    /**
+                     * Calls GetOSPolicyAssignmentReport.
+                     * @param request GetOSPolicyAssignmentReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOSPolicyAssignmentReport(request: google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest): Promise<google.cloud.osconfig.v1.OSPolicyAssignmentReport>;
+
+                    /**
+                     * Calls ListOSPolicyAssignmentReports.
+                     * @param request ListOSPolicyAssignmentReportsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOSPolicyAssignmentReportsResponse
+                     */
+                    public listOSPolicyAssignmentReports(request: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest, callback: google.cloud.osconfig.v1.OsConfigZonalService.ListOSPolicyAssignmentReportsCallback): void;
+
+                    /**
+                     * Calls ListOSPolicyAssignmentReports.
+                     * @param request ListOSPolicyAssignmentReportsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOSPolicyAssignmentReports(request: google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest): Promise<google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse>;
+
+                    /**
                      * Calls GetInventory.
                      * @param request GetInventoryRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Inventory
@@ -5709,6 +10602,62 @@ export namespace google {
                 }
 
                 namespace OsConfigZonalService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#createOSPolicyAssignment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateOSPolicyAssignmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#updateOSPolicyAssignment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateOSPolicyAssignmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#getOSPolicyAssignment}.
+                     * @param error Error, if any
+                     * @param [response] OSPolicyAssignment
+                     */
+                    type GetOSPolicyAssignmentCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.OSPolicyAssignment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#listOSPolicyAssignments}.
+                     * @param error Error, if any
+                     * @param [response] ListOSPolicyAssignmentsResponse
+                     */
+                    type ListOSPolicyAssignmentsCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.ListOSPolicyAssignmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#listOSPolicyAssignmentRevisions}.
+                     * @param error Error, if any
+                     * @param [response] ListOSPolicyAssignmentRevisionsResponse
+                     */
+                    type ListOSPolicyAssignmentRevisionsCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#deleteOSPolicyAssignment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteOSPolicyAssignmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#getOSPolicyAssignmentReport}.
+                     * @param error Error, if any
+                     * @param [response] OSPolicyAssignmentReport
+                     */
+                    type GetOSPolicyAssignmentReportCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.OSPolicyAssignmentReport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#listOSPolicyAssignmentReports}.
+                     * @param error Error, if any
+                     * @param [response] ListOSPolicyAssignmentReportsResponse
+                     */
+                    type ListOSPolicyAssignmentReportsCallback = (error: (Error|null), response?: google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.osconfig.v1.OsConfigZonalService#getInventory}.
@@ -18098,90 +23047,6 @@ export namespace google {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -18267,6 +23132,90 @@ export namespace google {
 
             /**
              * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
