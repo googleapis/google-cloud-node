@@ -26,13 +26,13 @@ function main(feed, updateMask) {
    *  folders/folder_number/feeds/feed_id or
    *  organizations/organization_number/feeds/feed_id.
    */
-  // const feed = ''
+  // const feed = {}
   /**
    *  Required. Only updates the `feed` fields indicated by this mask.
    *  The field mask must not be empty, and it must not contain fields that
    *  are immutable or only set by the server.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1p2beta1;
@@ -40,7 +40,7 @@ function main(feed, updateMask) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function updateFeed() {
+  async function callUpdateFeed() {
     // Construct request
     const request = {
       feed,
@@ -52,7 +52,7 @@ function main(feed, updateMask) {
     console.log(response);
   }
 
-  updateFeed();
+  callUpdateFeed();
   // [END cloudasset_v1p2beta1_generated_AssetService_UpdateFeed_async]
 }
 

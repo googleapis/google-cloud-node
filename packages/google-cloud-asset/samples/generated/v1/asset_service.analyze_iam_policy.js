@@ -22,10 +22,10 @@ function main(analysisQuery) {
   /**
    *  Required. The request query.
    */
-  // const analysisQuery = ''
+  // const analysisQuery = {}
   /**
    *  Optional. Amount of time executable has to complete.  See JSON representation of
-   *  [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
+   *  Duration (https://developers.google.com/protocol-buffers/docs/proto3#json).
    *  If this field is set with a value less than the RPC deadline, and the
    *  execution of your query hasn't finished in the specified
    *  execution timeout,  you will get a response with partial result.
@@ -33,7 +33,7 @@ function main(analysisQuery) {
    *  If it's not finished until then, you will get a  DEADLINE_EXCEEDED error.
    *  Default is empty.
    */
-  // const executionTimeout = ''
+  // const executionTimeout = {}
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1;
@@ -41,7 +41,7 @@ function main(analysisQuery) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function analyzeIamPolicy() {
+  async function callAnalyzeIamPolicy() {
     // Construct request
     const request = {
       analysisQuery,
@@ -52,7 +52,7 @@ function main(analysisQuery) {
     console.log(response);
   }
 
-  analyzeIamPolicy();
+  callAnalyzeIamPolicy();
   // [END cloudasset_v1_generated_AssetService_AnalyzeIamPolicy_async]
 }
 

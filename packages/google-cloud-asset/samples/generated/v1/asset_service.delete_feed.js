@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function deleteFeed() {
+  async function callDeleteFeed() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteFeed();
+  callDeleteFeed();
   // [END cloudasset_v1_generated_AssetService_DeleteFeed_async]
 }
 

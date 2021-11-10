@@ -33,7 +33,7 @@ function main(parent) {
    *  data collection and indexing, there is a volatile window during which
    *  running the same query may get different results.
    */
-  // const readTime = ''
+  // const readTime = {}
   /**
    *  A list of asset types to take a snapshot for. For example:
    *  "compute.googleapis.com/Disk".
@@ -42,12 +42,12 @@ function main(parent) {
    *  with "compute.googleapis.com".
    *  * ".*Instance" snapshots resources whose asset type ends with "Instance".
    *  * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *  See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *  See RE2 (https://github.com/google/re2/wiki/Syntax) for all supported
    *  regular expression syntax. If the regular expression does not match any
    *  supported asset type, an INVALID_ARGUMENT error will be returned.
    *  If specified, only matching assets will be returned, otherwise, it will
-   *  snapshot all asset types. See [Introduction to Cloud Asset
-   *  Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *  snapshot all asset types. See Introduction to Cloud Asset
+   *  Inventory (https://cloud.google.com/asset-inventory/docs/overview)
    *  for all supported asset types.
    */
   // const assetTypes = 'abc123'
@@ -55,7 +55,7 @@ function main(parent) {
    *  Asset content type. If not specified, no content but the asset name will
    *  be returned.
    */
-  // const contentType = ''
+  // const contentType = {}
   /**
    *  The maximum number of assets to be returned in a single response. Default
    *  is 100, minimum is 1, and maximum is 1000.
@@ -73,15 +73,15 @@ function main(parent) {
    *  content_type=RELATIONSHIP.
    *  * If specified:
    *  it snapshots specified relationships. It returns an error if
-   *  any of the [relationship_types] doesn't belong to the supported
-   *  relationship types of the [asset_types] or if any of the [asset_types]
-   *  doesn't belong to the source types of the [relationship_types].
+   *  any of the relationship_types  doesn't belong to the supported
+   *  relationship types of the asset_types  or if any of the asset_types
+   *  doesn't belong to the source types of the relationship_types.
    *  * Otherwise:
-   *  it snapshots the supported relationships for all [asset_types] or returns
-   *  an error if any of the [asset_types] has no relationship support.
+   *  it snapshots the supported relationships for all asset_types  or returns
+   *  an error if any of the asset_types  has no relationship support.
    *  An unspecified asset types field means all supported asset_types.
-   *  See [Introduction to Cloud Asset
-   *  Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *  See Introduction to Cloud Asset
+   *  Inventory (https://cloud.google.com/asset-inventory/docs/overview)
    *  for all supported asset types and relationship types.
    */
   // const relationshipTypes = 'abc123'
@@ -92,7 +92,7 @@ function main(parent) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function listAssets() {
+  async function callListAssets() {
     // Construct request
     const request = {
       parent,
@@ -105,7 +105,7 @@ function main(parent) {
     }
   }
 
-  listAssets();
+  callListAssets();
   // [END cloudasset_v1_generated_AssetService_ListAssets_async]
 }
 
