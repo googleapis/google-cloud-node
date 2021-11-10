@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.3.1...v2.4.0) (2021-11-10)
+
+
+### Features
+
+* [Cloud Memorystore for Redis] Support Multiple Read Replicas when creating Instance ([#526](https://www.github.com/googleapis/nodejs-redis/issues/526)) ([ea43df2](https://www.github.com/googleapis/nodejs-redis/commit/ea43df28f39b1943f0c9aea97df51252f4cc2a9f))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-redis/compare/v2.3.0...v2.3.1) (2021-09-09)
 
 
