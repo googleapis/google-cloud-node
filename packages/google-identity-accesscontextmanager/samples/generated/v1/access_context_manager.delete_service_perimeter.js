@@ -20,8 +20,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the [Service Perimeter]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter].
+   *  Required. Resource name for the Service Perimeter
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter.
    *  Format:
    *  `accessPolicies/{policy_id}/servicePerimeters/{service_perimeter_id}`
    */
@@ -34,7 +34,7 @@ function main(name) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function deleteServicePerimeter() {
+  async function callDeleteServicePerimeter() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteServicePerimeter();
+  callDeleteServicePerimeter();
   // [END accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async]
 }
 

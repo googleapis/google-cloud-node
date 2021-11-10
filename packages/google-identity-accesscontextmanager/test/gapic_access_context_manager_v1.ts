@@ -710,7 +710,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -736,7 +736,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -783,7 +783,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createAccessPolicy = stubLongRunningCall(
         undefined,
@@ -807,7 +807,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createAccessPolicy = stubLongRunningCall(
         undefined,
@@ -3723,7 +3723,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
@@ -3756,7 +3756,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
@@ -3806,7 +3806,7 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccessPolicies = stubSimpleCall(
         undefined,

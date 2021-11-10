@@ -20,19 +20,19 @@ function main(parent, servicePerimeter) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the access policy which owns this [Service
-   *  Perimeter] [google.identity.accesscontextmanager.v1.ServicePerimeter].
+   *  Required. Resource name for the access policy which owns this Service
+   *  Perimeter google.identity.accesscontextmanager.v1.ServicePerimeter.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The [Service Perimeter]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter] to create.
-   *  Syntactic correctness of the [Service Perimeter]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter] is a
+   *  Required. The Service Perimeter
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter  to create.
+   *  Syntactic correctness of the Service Perimeter
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter  is a
    *  precondition for creation.
    */
-  // const servicePerimeter = ''
+  // const servicePerimeter = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
@@ -41,7 +41,7 @@ function main(parent, servicePerimeter) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function createServicePerimeter() {
+  async function callCreateServicePerimeter() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, servicePerimeter) {
     console.log(response);
   }
 
-  createServicePerimeter();
+  callCreateServicePerimeter();
   // [END accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async]
 }
 

@@ -30,8 +30,8 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  Optional. If left blank, returns the first page. To enumerate all items, use the
-   *  [next_page_token]
-   *  [google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token]
+   *  next_page_token
+   *  google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsResponse.next_page_token
    *  from your previous list operation.
    */
   // const pageToken = 'abc123'
@@ -43,7 +43,7 @@ function main(parent) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function listGcpUserAccessBindings() {
+  async function callListGcpUserAccessBindings() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent) {
     }
   }
 
-  listGcpUserAccessBindings();
+  callListGcpUserAccessBindings();
   // [END accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_async]
 }
 

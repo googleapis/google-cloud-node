@@ -37,11 +37,11 @@ function main() {
   /**
    *  Output only. Time the `AccessPolicy` was created in UTC.
    */
-  // const createTime = ''
+  // const createTime = {}
   /**
    *  Output only. Time the `AccessPolicy` was updated in UTC.
    */
-  // const updateTime = ''
+  // const updateTime = {}
   /**
    *  Output only. An opaque identifier for the current version of the
    *  `AccessPolicy`. This will always be a strongly validated etag, meaning that
@@ -57,7 +57,7 @@ function main() {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function createAccessPolicy() {
+  async function callCreateAccessPolicy() {
     // Construct request
     const request = {};
 
@@ -69,7 +69,7 @@ function main() {
     console.log(response);
   }
 
-  createAccessPolicy();
+  callCreateAccessPolicy();
   // [END accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async]
 }
 

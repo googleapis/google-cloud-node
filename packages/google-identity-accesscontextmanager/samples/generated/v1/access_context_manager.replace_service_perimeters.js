@@ -21,23 +21,23 @@ function main(parent, servicePerimeters) {
    */
   /**
    *  Required. Resource name for the access policy which owns these
-   *  [Service Perimeters]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter].
+   *  Service Perimeters
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The desired [Service Perimeters]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter] that should
-   *  replace all existing [Service Perimeters]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter] in the
-   *  [Access Policy]
-   *  [google.identity.accesscontextmanager.v1.AccessPolicy].
+   *  Required. The desired Service Perimeters
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter  that should
+   *  replace all existing Service Perimeters
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter  in the
+   *  Access Policy
+   *  google.identity.accesscontextmanager.v1.AccessPolicy.
    */
   // const servicePerimeters = 1234
   /**
-   *  Optional. The etag for the version of the [Access Policy]
-   *  [google.identity.accesscontextmanager.v1.AccessPolicy] that this
+   *  Optional. The etag for the version of the Access Policy
+   *  google.identity.accesscontextmanager.v1.AccessPolicy  that this
    *  replace operation is to be performed on. If, at the time of replace, the
    *  etag for the Access Policy stored in Access Context Manager is different
    *  from the specified etag, then the replace operation will not be performed
@@ -53,7 +53,7 @@ function main(parent, servicePerimeters) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function replaceServicePerimeters() {
+  async function callReplaceServicePerimeters() {
     // Construct request
     const request = {
       parent,
@@ -67,7 +67,7 @@ function main(parent, servicePerimeters) {
     console.log(response);
   }
 
-  replaceServicePerimeters();
+  callReplaceServicePerimeters();
   // [END accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async]
 }
 

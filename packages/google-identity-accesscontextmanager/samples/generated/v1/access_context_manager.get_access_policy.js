@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function getAccessPolicy() {
+  async function callGetAccessPolicy() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getAccessPolicy();
+  callGetAccessPolicy();
   // [END accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_async]
 }
 

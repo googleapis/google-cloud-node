@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function deleteGcpUserAccessBinding() {
+  async function callDeleteGcpUserAccessBinding() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteGcpUserAccessBinding();
+  callDeleteGcpUserAccessBinding();
   // [END accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async]
 }
 

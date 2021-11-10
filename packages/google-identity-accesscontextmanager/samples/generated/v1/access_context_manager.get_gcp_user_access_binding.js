@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function getGcpUserAccessBinding() {
+  async function callGetGcpUserAccessBinding() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getGcpUserAccessBinding();
+  callGetGcpUserAccessBinding();
   // [END accesscontextmanager_v1_generated_AccessContextManager_GetGcpUserAccessBinding_async]
 }
 

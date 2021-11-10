@@ -20,8 +20,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the [Access Level]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel].
+   *  Required. Resource name for the Access Level
+   *  google.identity.accesscontextmanager.v1.AccessLevel.
    *  Format:
    *  `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
    */
@@ -29,14 +29,14 @@ function main(name) {
   /**
    *  Whether to return `BasicLevels` in the Cloud Common Expression
    *  Language rather than as `BasicLevels`. Defaults to AS_DEFINED, where
-   *  [Access Levels] [google.identity.accesscontextmanager.v1.AccessLevel]
+   *  Access Levels  google.identity.accesscontextmanager.v1.AccessLevel
    *  are returned as `BasicLevels` or `CustomLevels` based on how they were
-   *  created. If set to CEL, all [Access Levels]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel] are returned as
+   *  created. If set to CEL, all Access Levels
+   *  google.identity.accesscontextmanager.v1.AccessLevel  are returned as
    *  `CustomLevels`. In the CEL case, `BasicLevels` are translated to equivalent
    *  `CustomLevels`.
    */
-  // const accessLevelFormat = ''
+  // const accessLevelFormat = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
@@ -45,7 +45,7 @@ function main(name) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function getAccessLevel() {
+  async function callGetAccessLevel() {
     // Construct request
     const request = {
       name,
@@ -56,7 +56,7 @@ function main(name) {
     console.log(response);
   }
 
-  getAccessLevel();
+  callGetAccessLevel();
   // [END accesscontextmanager_v1_generated_AccessContextManager_GetAccessLevel_async]
 }
 

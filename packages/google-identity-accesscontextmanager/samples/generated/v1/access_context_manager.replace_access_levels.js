@@ -21,23 +21,23 @@ function main(parent, accessLevels) {
    */
   /**
    *  Required. Resource name for the access policy which owns these
-   *  [Access Levels]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel].
+   *  Access Levels
+   *  google.identity.accesscontextmanager.v1.AccessLevel.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The desired [Access Levels]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel] that should
-   *  replace all existing [Access Levels]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel] in the
-   *  [Access Policy]
-   *  [google.identity.accesscontextmanager.v1.AccessPolicy].
+   *  Required. The desired Access Levels
+   *  google.identity.accesscontextmanager.v1.AccessLevel  that should
+   *  replace all existing Access Levels
+   *  google.identity.accesscontextmanager.v1.AccessLevel  in the
+   *  Access Policy
+   *  google.identity.accesscontextmanager.v1.AccessPolicy.
    */
   // const accessLevels = 1234
   /**
-   *  Optional. The etag for the version of the [Access Policy]
-   *  [google.identity.accesscontextmanager.v1.AccessPolicy] that this
+   *  Optional. The etag for the version of the Access Policy
+   *  google.identity.accesscontextmanager.v1.AccessPolicy  that this
    *  replace operation is to be performed on. If, at the time of replace, the
    *  etag for the Access Policy stored in Access Context Manager is different
    *  from the specified etag, then the replace operation will not be performed
@@ -53,7 +53,7 @@ function main(parent, accessLevels) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function replaceAccessLevels() {
+  async function callReplaceAccessLevels() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent, accessLevels) {
     console.log(response);
   }
 
-  replaceAccessLevels();
+  callReplaceAccessLevels();
   // [END accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async]
 }
 

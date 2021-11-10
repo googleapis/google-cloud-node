@@ -22,11 +22,11 @@ function main(policy, updateMask) {
   /**
    *  Required. The updated AccessPolicy.
    */
-  // const policy = ''
+  // const policy = {}
   /**
    *  Required. Mask to control which fields get updated. Must be non-empty.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
@@ -35,7 +35,7 @@ function main(policy, updateMask) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function updateAccessPolicy() {
+  async function callUpdateAccessPolicy() {
     // Construct request
     const request = {
       policy,
@@ -50,7 +50,7 @@ function main(policy, updateMask) {
     console.log(response);
   }
 
-  updateAccessPolicy();
+  callUpdateAccessPolicy();
   // [END accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async]
 }
 

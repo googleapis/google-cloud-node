@@ -20,17 +20,17 @@ function main(accessLevel, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The updated [Access Level]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel]. Syntactic
-   *  correctness of the [Access Level]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel] is a
+   *  Required. The updated Access Level
+   *  google.identity.accesscontextmanager.v1.AccessLevel. Syntactic
+   *  correctness of the Access Level
+   *  google.identity.accesscontextmanager.v1.AccessLevel  is a
    *  precondition for creation.
    */
-  // const accessLevel = ''
+  // const accessLevel = {}
   /**
    *  Required. Mask to control which fields get updated. Must be non-empty.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
@@ -39,7 +39,7 @@ function main(accessLevel, updateMask) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function updateAccessLevel() {
+  async function callUpdateAccessLevel() {
     // Construct request
     const request = {
       accessLevel,
@@ -54,7 +54,7 @@ function main(accessLevel, updateMask) {
     console.log(response);
   }
 
-  updateAccessLevel();
+  callUpdateAccessLevel();
   // [END accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async]
 }
 

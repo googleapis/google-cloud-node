@@ -20,8 +20,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the [Access Level]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel].
+   *  Required. Resource name for the Access Level
+   *  google.identity.accesscontextmanager.v1.AccessLevel.
    *  Format:
    *  `accessPolicies/{policy_id}/accessLevels/{access_level_id}`
    */
@@ -34,7 +34,7 @@ function main(name) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function deleteAccessLevel() {
+  async function callDeleteAccessLevel() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteAccessLevel();
+  callDeleteAccessLevel();
   // [END accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async]
 }
 

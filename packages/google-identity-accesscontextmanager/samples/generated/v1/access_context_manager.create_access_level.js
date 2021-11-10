@@ -20,19 +20,19 @@ function main(parent, accessLevel) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the access policy which owns this [Access
-   *  Level] [google.identity.accesscontextmanager.v1.AccessLevel].
+   *  Required. Resource name for the access policy which owns this Access
+   *  Level google.identity.accesscontextmanager.v1.AccessLevel.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The [Access Level]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel] to create.
-   *  Syntactic correctness of the [Access Level]
-   *  [google.identity.accesscontextmanager.v1.AccessLevel] is a
+   *  Required. The Access Level
+   *  google.identity.accesscontextmanager.v1.AccessLevel  to create.
+   *  Syntactic correctness of the Access Level
+   *  google.identity.accesscontextmanager.v1.AccessLevel  is a
    *  precondition for creation.
    */
-  // const accessLevel = ''
+  // const accessLevel = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
@@ -41,7 +41,7 @@ function main(parent, accessLevel) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function createAccessLevel() {
+  async function callCreateAccessLevel() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, accessLevel) {
     console.log(response);
   }
 
-  createAccessLevel();
+  callCreateAccessLevel();
   // [END accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async]
 }
 

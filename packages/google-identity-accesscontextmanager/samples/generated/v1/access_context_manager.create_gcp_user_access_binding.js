@@ -24,10 +24,10 @@ function main(parent, gcpUserAccessBinding) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. [GcpUserAccessBinding]
-   *  [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]
+   *  Required. GcpUserAccessBinding
+   *  google.identity.accesscontextmanager.v1.GcpUserAccessBinding
    */
-  // const gcpUserAccessBinding = ''
+  // const gcpUserAccessBinding = {}
 
   // Imports the Accesscontextmanager library
   const {AccessContextManagerClient} =
@@ -36,7 +36,7 @@ function main(parent, gcpUserAccessBinding) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function createGcpUserAccessBinding() {
+  async function callCreateGcpUserAccessBinding() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent, gcpUserAccessBinding) {
     console.log(response);
   }
 
-  createGcpUserAccessBinding();
+  callCreateGcpUserAccessBinding();
   // [END accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async]
 }
 

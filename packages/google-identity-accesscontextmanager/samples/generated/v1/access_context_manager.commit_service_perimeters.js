@@ -20,17 +20,17 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name for the parent [Access Policy]
-   *  [google.identity.accesscontextmanager.v1.AccessPolicy] which owns all
-   *  [Service Perimeters]
-   *  [google.identity.accesscontextmanager.v1.ServicePerimeter] in scope for
+   *  Required. Resource name for the parent Access Policy
+   *  google.identity.accesscontextmanager.v1.AccessPolicy  which owns all
+   *  Service Perimeters
+   *  google.identity.accesscontextmanager.v1.ServicePerimeter  in scope for
    *  the commit operation.
    *  Format: `accessPolicies/{policy_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The etag for the version of the [Access Policy]
-   *  [google.identity.accesscontextmanager.v1alpha.AccessPolicy] that this
+   *  Optional. The etag for the version of the Access Policy
+   *  google.identity.accesscontextmanager.v1alpha.AccessPolicy  that this
    *  commit operation is to be performed on. If, at the time of commit, the
    *  etag for the Access Policy stored in Access Context Manager is different
    *  from the specified etag, then the commit operation will not be performed
@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const accesscontextmanagerClient = new AccessContextManagerClient();
 
-  async function commitServicePerimeters() {
+  async function callCommitServicePerimeters() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     console.log(response);
   }
 
-  commitServicePerimeters();
+  callCommitServicePerimeters();
   // [END accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async]
 }
 
