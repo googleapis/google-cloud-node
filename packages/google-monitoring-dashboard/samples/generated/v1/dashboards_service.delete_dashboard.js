@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
 
-  async function deleteDashboard() {
+  async function callDeleteDashboard() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteDashboard();
+  callDeleteDashboard();
   // [END monitoring_v1_generated_DashboardsService_DeleteDashboard_async]
 }
 

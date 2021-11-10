@@ -28,7 +28,7 @@ function main(parent, dashboard) {
   /**
    *  Required. The initial dashboard specification.
    */
-  // const dashboard = ''
+  // const dashboard = {}
   /**
    *  If set, validate the request and preview the review, but do not actually
    *  save it.
@@ -42,7 +42,7 @@ function main(parent, dashboard) {
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
 
-  async function createDashboard() {
+  async function callCreateDashboard() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent, dashboard) {
     console.log(response);
   }
 
-  createDashboard();
+  callCreateDashboard();
   // [END monitoring_v1_generated_DashboardsService_CreateDashboard_async]
 }
 

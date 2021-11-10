@@ -43,7 +43,7 @@ function main(parent) {
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
 
-  async function listDashboards() {
+  async function callListDashboards() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent) {
     }
   }
 
-  listDashboards();
+  callListDashboards();
   // [END monitoring_v1_generated_DashboardsService_ListDashboards_async]
 }
 

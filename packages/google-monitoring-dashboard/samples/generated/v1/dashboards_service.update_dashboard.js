@@ -22,7 +22,7 @@ function main(dashboard) {
   /**
    *  Required. The dashboard that will replace the existing dashboard.
    */
-  // const dashboard = ''
+  // const dashboard = {}
   /**
    *  If set, validate the request and preview the review, but do not actually
    *  save it.
@@ -36,7 +36,7 @@ function main(dashboard) {
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
 
-  async function updateDashboard() {
+  async function callUpdateDashboard() {
     // Construct request
     const request = {
       dashboard,
@@ -47,7 +47,7 @@ function main(dashboard) {
     console.log(response);
   }
 
-  updateDashboard();
+  callUpdateDashboard();
   // [END monitoring_v1_generated_DashboardsService_UpdateDashboard_async]
 }
 

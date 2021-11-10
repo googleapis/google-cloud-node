@@ -34,7 +34,7 @@ function main(name) {
   // Instantiates a client
   const dashboardClient = new DashboardsServiceClient();
 
-  async function getDashboard() {
+  async function callGetDashboard() {
     // Construct request
     const request = {
       name,
@@ -45,7 +45,7 @@ function main(name) {
     console.log(response);
   }
 
-  getDashboard();
+  callGetDashboard();
   // [END monitoring_v1_generated_DashboardsService_GetDashboard_async]
 }
 
