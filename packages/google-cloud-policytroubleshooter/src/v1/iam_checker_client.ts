@@ -283,6 +283,25 @@ export class IamCheckerClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Checks whether a member has a specific permission for a specific resource,
+   * and explains why the member does or does not have that permission.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.policytroubleshooter.v1.AccessTuple} request.accessTuple
+   *   The information to use for checking whether a member has a permission for a
+   *   resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TroubleshootIamPolicyResponse]{@link google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/iam_checker.troubleshoot_iam_policy.js</caption>
+   * region_tag:policytroubleshooter_v1_generated_IamChecker_TroubleshootIamPolicy_async
+   */
   troubleshootIamPolicy(
     request?: protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest,
     options?: CallOptions
@@ -317,25 +336,6 @@ export class IamCheckerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Checks whether a member has a specific permission for a specific resource,
-   * and explains why the member does or does not have that permission.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.policytroubleshooter.v1.AccessTuple} request.accessTuple
-   *   The information to use for checking whether a member has a permission for a
-   *   resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TroubleshootIamPolicyResponse]{@link google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.troubleshootIamPolicy(request);
-   */
   troubleshootIamPolicy(
     request?: protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest,
     optionsOrCallback?:
@@ -373,6 +373,8 @@ export class IamCheckerClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.troubleshootIamPolicy(request, options, callback);
   }

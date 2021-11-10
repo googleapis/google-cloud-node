@@ -140,7 +140,7 @@ describe('v1.IamCheckerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse()
       );
@@ -164,7 +164,7 @@ describe('v1.IamCheckerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse()
       );
@@ -203,7 +203,7 @@ describe('v1.IamCheckerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.troubleshootIamPolicy = stubSimpleCall(
         undefined,
