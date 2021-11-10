@@ -28,11 +28,11 @@ function main(name) {
   /**
    *  New InspectTemplate value.
    */
-  // const inspectTemplate = ''
+  // const inspectTemplate = {}
   /**
    *  Mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -40,7 +40,7 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function updateInspectTemplate() {
+  async function callUpdateInspectTemplate() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name) {
     console.log(response);
   }
 
-  updateInspectTemplate();
+  callUpdateInspectTemplate();
   // [END dlp_v2_generated_DlpService_UpdateInspectTemplate_async]
 }
 

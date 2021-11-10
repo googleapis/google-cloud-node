@@ -21,9 +21,9 @@ function main() {
    */
   /**
    *  Parent resource name.
-   *  The format of this value varies depending on whether you have [specified a
+   *  The format of this value varies depending on whether you have specified a
    *  processing
-   *  location](https://cloud.google.com/dlp/docs/specifying-location):
+   *  location (https://cloud.google.com/dlp/docs/specifying-location):
    *  + Projects scope, location specified:<br/>
    *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
    *  + Projects scope, no location specified (defaults to global):<br/>
@@ -38,11 +38,11 @@ function main() {
    *  Configuration for the inspector. What specified here will override
    *  the template referenced by the inspect_template_name argument.
    */
-  // const inspectConfig = ''
+  // const inspectConfig = {}
   /**
    *  The item to inspect.
    */
-  // const item = ''
+  // const item = {}
   /**
    *  Template to use. Any configuration directly specified in
    *  inspect_config will override those set in the template. Singular fields
@@ -51,10 +51,6 @@ function main() {
    *  are recursively merged.
    */
   // const inspectTemplateName = 'abc123'
-  /**
-   *  Deprecated. This field has no effect.
-   */
-  // const locationId = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -62,7 +58,7 @@ function main() {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function inspectContent() {
+  async function callInspectContent() {
     // Construct request
     const request = {};
 
@@ -71,7 +67,7 @@ function main() {
     console.log(response);
   }
 
-  inspectContent();
+  callInspectContent();
   // [END dlp_v2_generated_DlpService_InspectContent_async]
 }
 

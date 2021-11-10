@@ -27,7 +27,7 @@ function main(name) {
   /**
    *  The item to inspect.
    */
-  // const hybridItem = ''
+  // const hybridItem = {}
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -35,7 +35,7 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function hybridInspectDlpJob() {
+  async function callHybridInspectDlpJob() {
     // Construct request
     const request = {
       name,
@@ -46,7 +46,7 @@ function main(name) {
     console.log(response);
   }
 
-  hybridInspectDlpJob();
+  callHybridInspectDlpJob();
   // [END dlp_v2_generated_DlpService_HybridInspectDlpJob_async]
 }
 

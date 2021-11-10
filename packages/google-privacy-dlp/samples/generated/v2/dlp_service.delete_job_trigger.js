@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function deleteJobTrigger() {
+  async function callDeleteJobTrigger() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteJobTrigger();
+  callDeleteJobTrigger();
   // [END dlp_v2_generated_DlpService_DeleteJobTrigger_async]
 }
 

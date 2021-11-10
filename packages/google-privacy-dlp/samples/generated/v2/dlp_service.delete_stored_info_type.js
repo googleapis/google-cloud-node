@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function deleteStoredInfoType() {
+  async function callDeleteStoredInfoType() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteStoredInfoType();
+  callDeleteStoredInfoType();
   // [END dlp_v2_generated_DlpService_DeleteStoredInfoType_async]
 }
 

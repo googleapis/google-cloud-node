@@ -21,9 +21,9 @@ function main(parent, jobTrigger) {
    */
   /**
    *  Required. Parent resource name.
-   *  The format of this value varies depending on whether you have [specified a
+   *  The format of this value varies depending on whether you have specified a
    *  processing
-   *  location](https://cloud.google.com/dlp/docs/specifying-location):
+   *  location (https://cloud.google.com/dlp/docs/specifying-location):
    *  + Projects scope, location specified:<br/>
    *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
    *  + Projects scope, no location specified (defaults to global):<br/>
@@ -37,7 +37,7 @@ function main(parent, jobTrigger) {
   /**
    *  Required. The JobTrigger to create.
    */
-  // const jobTrigger = ''
+  // const jobTrigger = {}
   /**
    *  The trigger id can contain uppercase and lowercase letters,
    *  numbers, and hyphens; that is, it must match the regular
@@ -45,10 +45,6 @@ function main(parent, jobTrigger) {
    *  characters. Can be empty to allow the system to generate one.
    */
   // const triggerId = 'abc123'
-  /**
-   *  Deprecated. This field has no effect.
-   */
-  // const locationId = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -56,7 +52,7 @@ function main(parent, jobTrigger) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function createJobTrigger() {
+  async function callCreateJobTrigger() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +64,7 @@ function main(parent, jobTrigger) {
     console.log(response);
   }
 
-  createJobTrigger();
+  callCreateJobTrigger();
   // [END dlp_v2_generated_DlpService_CreateJobTrigger_async]
 }
 

@@ -22,8 +22,8 @@ function main(parent, deidentifyTemplate) {
   /**
    *  Required. Parent resource name.
    *  The format of this value varies depending on the scope of the request
-   *  (project or organization) and whether you have [specified a processing
-   *  location](https://cloud.google.com/dlp/docs/specifying-location):
+   *  (project or organization) and whether you have specified a processing
+   *  location (https://cloud.google.com/dlp/docs/specifying-location):
    *  + Projects scope, location specified:<br/>
    *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
    *  + Projects scope, no location specified (defaults to global):<br/>
@@ -41,7 +41,7 @@ function main(parent, deidentifyTemplate) {
   /**
    *  Required. The DeidentifyTemplate to create.
    */
-  // const deidentifyTemplate = ''
+  // const deidentifyTemplate = {}
   /**
    *  The template id can contain uppercase and lowercase letters,
    *  numbers, and hyphens; that is, it must match the regular
@@ -49,10 +49,6 @@ function main(parent, deidentifyTemplate) {
    *  characters. Can be empty to allow the system to generate one.
    */
   // const templateId = 'abc123'
-  /**
-   *  Deprecated. This field has no effect.
-   */
-  // const locationId = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -60,7 +56,7 @@ function main(parent, deidentifyTemplate) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function createDeidentifyTemplate() {
+  async function callCreateDeidentifyTemplate() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +68,7 @@ function main(parent, deidentifyTemplate) {
     console.log(response);
   }
 
-  createDeidentifyTemplate();
+  callCreateDeidentifyTemplate();
   // [END dlp_v2_generated_DlpService_CreateDeidentifyTemplate_async]
 }
 

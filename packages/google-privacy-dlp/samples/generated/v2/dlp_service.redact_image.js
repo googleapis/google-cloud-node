@@ -21,9 +21,9 @@ function main() {
    */
   /**
    *  Parent resource name.
-   *  The format of this value varies depending on whether you have [specified a
+   *  The format of this value varies depending on whether you have specified a
    *  processing
-   *  location](https://cloud.google.com/dlp/docs/specifying-location):
+   *  location (https://cloud.google.com/dlp/docs/specifying-location):
    *  + Projects scope, location specified:<br/>
    *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
    *  + Projects scope, no location specified (defaults to global):<br/>
@@ -35,13 +35,9 @@ function main() {
    */
   // const parent = 'abc123'
   /**
-   *  Deprecated. This field has no effect.
-   */
-  // const locationId = 'abc123'
-  /**
    *  Configuration for the inspector.
    */
-  // const inspectConfig = ''
+  // const inspectConfig = {}
   /**
    *  The configuration for specifying what content to redact from images.
    */
@@ -54,7 +50,7 @@ function main() {
   /**
    *  The content must be PNG, JPEG, SVG or BMP.
    */
-  // const byteItem = ''
+  // const byteItem = {}
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -62,7 +58,7 @@ function main() {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function redactImage() {
+  async function callRedactImage() {
     // Construct request
     const request = {};
 
@@ -71,7 +67,7 @@ function main() {
     console.log(response);
   }
 
-  redactImage();
+  callRedactImage();
   // [END dlp_v2_generated_DlpService_RedactImage_async]
 }
 

@@ -28,11 +28,11 @@ function main(name) {
   /**
    *  New DeidentifyTemplate value.
    */
-  // const deidentifyTemplate = ''
+  // const deidentifyTemplate = {}
   /**
    *  Mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
@@ -40,7 +40,7 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function updateDeidentifyTemplate() {
+  async function callUpdateDeidentifyTemplate() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name) {
     console.log(response);
   }
 
-  updateDeidentifyTemplate();
+  callUpdateDeidentifyTemplate();
   // [END dlp_v2_generated_DlpService_UpdateDeidentifyTemplate_async]
 }
 

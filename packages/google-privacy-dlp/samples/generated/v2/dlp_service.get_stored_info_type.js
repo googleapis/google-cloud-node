@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const dlpClient = new DlpServiceClient();
 
-  async function getStoredInfoType() {
+  async function callGetStoredInfoType() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getStoredInfoType();
+  callGetStoredInfoType();
   // [END dlp_v2_generated_DlpService_GetStoredInfoType_async]
 }
 
