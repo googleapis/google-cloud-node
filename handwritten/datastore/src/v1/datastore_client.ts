@@ -298,6 +298,27 @@ export class DatastoreClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Looks up entities by key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the project against which to make the request.
+   * @param {google.datastore.v1.ReadOptions} request.readOptions
+   *   The options for this lookup request.
+   * @param {number[]} request.keys
+   *   Required. Keys of entities to look up.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [LookupResponse]{@link google.datastore.v1.LookupResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastore.lookup.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_Lookup_async
+   */
   lookup(
     request?: protos.google.datastore.v1.ILookupRequest,
     options?: CallOptions
@@ -325,29 +346,6 @@ export class DatastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Looks up entities by key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the project against which to make the request.
-   * @param {google.datastore.v1.ReadOptions} request.readOptions
-   *   The options for this lookup request.
-   * @param {number[]} request.keys
-   *   Required. Keys of entities to look up.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LookupResponse]{@link google.datastore.v1.LookupResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.lookup(request);
-   * ```
-   */
   lookup(
     request?: protos.google.datastore.v1.ILookupRequest,
     optionsOrCallback?:
@@ -387,6 +385,34 @@ export class DatastoreClient {
     this.initialize();
     return this.innerApiCalls.lookup(request, options, callback);
   }
+  /**
+   * Queries for entities.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the project against which to make the request.
+   * @param {google.datastore.v1.PartitionId} request.partitionId
+   *   Entities are partitioned into subsets, identified by a partition ID.
+   *   Queries are scoped to a single partition.
+   *   This partition ID is normalized with the standard default context
+   *   partition ID.
+   * @param {google.datastore.v1.ReadOptions} request.readOptions
+   *   The options for this query.
+   * @param {google.datastore.v1.Query} request.query
+   *   The query to run.
+   * @param {google.datastore.v1.GqlQuery} request.gqlQuery
+   *   The GQL query to run.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RunQueryResponse]{@link google.datastore.v1.RunQueryResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastore.run_query.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_RunQuery_async
+   */
   runQuery(
     request?: protos.google.datastore.v1.IRunQueryRequest,
     options?: CallOptions
@@ -414,36 +440,6 @@ export class DatastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Queries for entities.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the project against which to make the request.
-   * @param {google.datastore.v1.PartitionId} request.partitionId
-   *   Entities are partitioned into subsets, identified by a partition ID.
-   *   Queries are scoped to a single partition.
-   *   This partition ID is normalized with the standard default context
-   *   partition ID.
-   * @param {google.datastore.v1.ReadOptions} request.readOptions
-   *   The options for this query.
-   * @param {google.datastore.v1.Query} request.query
-   *   The query to run.
-   * @param {google.datastore.v1.GqlQuery} request.gqlQuery
-   *   The GQL query to run.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RunQueryResponse]{@link google.datastore.v1.RunQueryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.runQuery(request);
-   * ```
-   */
   runQuery(
     request?: protos.google.datastore.v1.IRunQueryRequest,
     optionsOrCallback?:
@@ -483,6 +479,25 @@ export class DatastoreClient {
     this.initialize();
     return this.innerApiCalls.runQuery(request, options, callback);
   }
+  /**
+   * Begins a new transaction.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the project against which to make the request.
+   * @param {google.datastore.v1.TransactionOptions} request.transactionOptions
+   *   Options for a new transaction.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BeginTransactionResponse]{@link google.datastore.v1.BeginTransactionResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastore.begin_transaction.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_BeginTransaction_async
+   */
   beginTransaction(
     request?: protos.google.datastore.v1.IBeginTransactionRequest,
     options?: CallOptions
@@ -510,27 +525,6 @@ export class DatastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Begins a new transaction.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the project against which to make the request.
-   * @param {google.datastore.v1.TransactionOptions} request.transactionOptions
-   *   Options for a new transaction.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BeginTransactionResponse]{@link google.datastore.v1.BeginTransactionResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.beginTransaction(request);
-   * ```
-   */
   beginTransaction(
     request?: protos.google.datastore.v1.IBeginTransactionRequest,
     optionsOrCallback?:
@@ -572,33 +566,6 @@ export class DatastoreClient {
     this.initialize();
     return this.innerApiCalls.beginTransaction(request, options, callback);
   }
-  commit(
-    request?: protos.google.datastore.v1.ICommitRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.datastore.v1.ICommitResponse,
-      protos.google.datastore.v1.ICommitRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  commit(
-    request: protos.google.datastore.v1.ICommitRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.datastore.v1.ICommitResponse,
-      protos.google.datastore.v1.ICommitRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  commit(
-    request: protos.google.datastore.v1.ICommitRequest,
-    callback: Callback<
-      protos.google.datastore.v1.ICommitResponse,
-      protos.google.datastore.v1.ICommitRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Commits a transaction, optionally creating, deleting or modifying some
    * entities.
@@ -634,11 +601,36 @@ export class DatastoreClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.commit(request);
-   * ```
+   * @example <caption>include:samples/generated/v1/datastore.commit.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_Commit_async
    */
+  commit(
+    request?: protos.google.datastore.v1.ICommitRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.datastore.v1.ICommitResponse,
+      protos.google.datastore.v1.ICommitRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  commit(
+    request: protos.google.datastore.v1.ICommitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.datastore.v1.ICommitResponse,
+      protos.google.datastore.v1.ICommitRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  commit(
+    request: protos.google.datastore.v1.ICommitRequest,
+    callback: Callback<
+      protos.google.datastore.v1.ICommitResponse,
+      protos.google.datastore.v1.ICommitRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   commit(
     request?: protos.google.datastore.v1.ICommitRequest,
     optionsOrCallback?:
@@ -678,6 +670,26 @@ export class DatastoreClient {
     this.initialize();
     return this.innerApiCalls.commit(request, options, callback);
   }
+  /**
+   * Rolls back a transaction.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the project against which to make the request.
+   * @param {Buffer} request.transaction
+   *   Required. The transaction identifier, returned by a call to
+   *   {@link google.datastore.v1.Datastore.BeginTransaction|Datastore.BeginTransaction}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RollbackResponse]{@link google.datastore.v1.RollbackResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastore.rollback.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_Rollback_async
+   */
   rollback(
     request?: protos.google.datastore.v1.IRollbackRequest,
     options?: CallOptions
@@ -705,28 +717,6 @@ export class DatastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Rolls back a transaction.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the project against which to make the request.
-   * @param {Buffer} request.transaction
-   *   Required. The transaction identifier, returned by a call to
-   *   {@link google.datastore.v1.Datastore.BeginTransaction|Datastore.BeginTransaction}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RollbackResponse]{@link google.datastore.v1.RollbackResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.rollback(request);
-   * ```
-   */
   rollback(
     request?: protos.google.datastore.v1.IRollbackRequest,
     optionsOrCallback?:
@@ -766,6 +756,27 @@ export class DatastoreClient {
     this.initialize();
     return this.innerApiCalls.rollback(request, options, callback);
   }
+  /**
+   * Allocates IDs for the given keys, which is useful for referencing an entity
+   * before it is inserted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the project against which to make the request.
+   * @param {number[]} request.keys
+   *   Required. A list of keys with incomplete key paths for which to allocate IDs.
+   *   No key may be reserved/read-only.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AllocateIdsResponse]{@link google.datastore.v1.AllocateIdsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastore.allocate_ids.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_AllocateIds_async
+   */
   allocateIds(
     request?: protos.google.datastore.v1.IAllocateIdsRequest,
     options?: CallOptions
@@ -793,29 +804,6 @@ export class DatastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Allocates IDs for the given keys, which is useful for referencing an entity
-   * before it is inserted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the project against which to make the request.
-   * @param {number[]} request.keys
-   *   Required. A list of keys with incomplete key paths for which to allocate IDs.
-   *   No key may be reserved/read-only.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AllocateIdsResponse]{@link google.datastore.v1.AllocateIdsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.allocateIds(request);
-   * ```
-   */
   allocateIds(
     request?: protos.google.datastore.v1.IAllocateIdsRequest,
     optionsOrCallback?:
@@ -855,6 +843,29 @@ export class DatastoreClient {
     this.initialize();
     return this.innerApiCalls.allocateIds(request, options, callback);
   }
+  /**
+   * Prevents the supplied keys' IDs from being auto-allocated by Cloud
+   * Datastore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the project against which to make the request.
+   * @param {string} request.databaseId
+   *   If not empty, the ID of the database against which to make the request.
+   * @param {number[]} request.keys
+   *   Required. A list of keys with complete key paths whose numeric IDs should not be
+   *   auto-allocated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ReserveIdsResponse]{@link google.datastore.v1.ReserveIdsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastore.reserve_ids.js</caption>
+   * region_tag:datastore_v1_generated_Datastore_ReserveIds_async
+   */
   reserveIds(
     request?: protos.google.datastore.v1.IReserveIdsRequest,
     options?: CallOptions
@@ -882,31 +893,6 @@ export class DatastoreClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Prevents the supplied keys' IDs from being auto-allocated by Cloud
-   * Datastore.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the project against which to make the request.
-   * @param {string} request.databaseId
-   *   If not empty, the ID of the database against which to make the request.
-   * @param {number[]} request.keys
-   *   Required. A list of keys with complete key paths whose numeric IDs should not be
-   *   auto-allocated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReserveIdsResponse]{@link google.datastore.v1.ReserveIdsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.reserveIds(request);
-   * ```
-   */
   reserveIds(
     request?: protos.google.datastore.v1.IReserveIdsRequest,
     optionsOrCallback?:
