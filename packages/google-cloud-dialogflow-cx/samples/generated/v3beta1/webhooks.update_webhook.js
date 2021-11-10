@@ -22,12 +22,12 @@ function main(webhook) {
   /**
    *  Required. The webhook to update.
    */
-  // const webhook = ''
+  // const webhook = {}
   /**
    *  The mask to control which fields get updated. If the mask is not present,
    *  all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Cx library
   const {WebhooksClient} = require('@google-cloud/dialogflow-cx').v3beta1;
@@ -35,7 +35,7 @@ function main(webhook) {
   // Instantiates a client
   const cxClient = new WebhooksClient();
 
-  async function updateWebhook() {
+  async function callUpdateWebhook() {
     // Construct request
     const request = {
       webhook,
@@ -46,7 +46,7 @@ function main(webhook) {
     console.log(response);
   }
 
-  updateWebhook();
+  callUpdateWebhook();
   // [END dialogflow_v3beta1_generated_Webhooks_UpdateWebhook_async]
 }
 

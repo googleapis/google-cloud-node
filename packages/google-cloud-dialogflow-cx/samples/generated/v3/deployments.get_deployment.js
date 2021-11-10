@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [Deployment][google.cloud.dialogflow.cx.v3.Deployment].
+   *  Required. The name of the Deployment google.cloud.dialogflow.cx.v3.Deployment.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
    */
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new DeploymentsClient();
 
-  async function getDeployment() {
+  async function callGetDeployment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getDeployment();
+  callGetDeployment();
   // [END dialogflow_v3_generated_Deployments_GetDeployment_async]
 }
 

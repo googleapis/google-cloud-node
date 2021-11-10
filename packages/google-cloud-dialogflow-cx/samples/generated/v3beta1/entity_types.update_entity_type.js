@@ -22,15 +22,15 @@ function main(entityType) {
   /**
    *  Required. The entity type to update.
    */
-  // const entityType = ''
+  // const entityType = {}
   /**
    *  The language of the following fields in `entity_type`:
    *  *   `EntityType.entities.value`
    *  *   `EntityType.entities.synonyms`
    *  *   `EntityType.excluded_phrases.value`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -38,7 +38,7 @@ function main(entityType) {
   /**
    *  The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Cx library
   const {EntityTypesClient} = require('@google-cloud/dialogflow-cx').v3beta1;
@@ -46,7 +46,7 @@ function main(entityType) {
   // Instantiates a client
   const cxClient = new EntityTypesClient();
 
-  async function updateEntityType() {
+  async function callUpdateEntityType() {
     // Construct request
     const request = {
       entityType,
@@ -57,7 +57,7 @@ function main(entityType) {
     console.log(response);
   }
 
-  updateEntityType();
+  callUpdateEntityType();
   // [END dialogflow_v3beta1_generated_EntityTypes_UpdateEntityType_async]
 }
 

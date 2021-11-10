@@ -22,12 +22,12 @@ function main(version, updateMask) {
   /**
    *  Required. The version to update.
    */
-  // const version = ''
+  // const version = {}
   /**
    *  Required. The mask to control which fields get updated. Currently only `description`
    *  and `display_name` can be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Cx library
   const {VersionsClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -35,7 +35,7 @@ function main(version, updateMask) {
   // Instantiates a client
   const cxClient = new VersionsClient();
 
-  async function updateVersion() {
+  async function callUpdateVersion() {
     // Construct request
     const request = {
       version,
@@ -47,7 +47,7 @@ function main(version, updateMask) {
     console.log(response);
   }
 
-  updateVersion();
+  callUpdateVersion();
   // [END dialogflow_v3_generated_Versions_UpdateVersion_async]
 }
 

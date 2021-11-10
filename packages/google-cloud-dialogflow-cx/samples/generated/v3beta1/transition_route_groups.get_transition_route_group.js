@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [TransitionRouteGroup][google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup].
+   *  Required. The name of the TransitionRouteGroup google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
    */
@@ -32,8 +32,8 @@ function main(name) {
    *  *
    *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -46,7 +46,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new TransitionRouteGroupsClient();
 
-  async function getTransitionRouteGroup() {
+  async function callGetTransitionRouteGroup() {
     // Construct request
     const request = {
       name,
@@ -57,7 +57,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTransitionRouteGroup();
+  callGetTransitionRouteGroup();
   // [END dialogflow_v3beta1_generated_TransitionRouteGroups_GetTransitionRouteGroup_async]
 }
 

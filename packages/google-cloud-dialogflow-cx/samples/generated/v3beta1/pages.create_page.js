@@ -28,7 +28,7 @@ function main(parent, page) {
   /**
    *  Required. The page to create.
    */
-  // const page = ''
+  // const page = {}
   /**
    *  The language of the following fields in `page`:
    *  *  `Page.entry_fulfillment.messages`
@@ -44,8 +44,8 @@ function main(parent, page) {
    *  *  `Page.transition_routes.trigger_fulfillment.messages`
    *  *  `Page.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -57,7 +57,7 @@ function main(parent, page) {
   // Instantiates a client
   const cxClient = new PagesClient();
 
-  async function createPage() {
+  async function callCreatePage() {
     // Construct request
     const request = {
       parent,
@@ -69,7 +69,7 @@ function main(parent, page) {
     console.log(response);
   }
 
-  createPage();
+  callCreatePage();
   // [END dialogflow_v3beta1_generated_Pages_CreatePage_async]
 }
 

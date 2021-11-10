@@ -31,7 +31,7 @@ function main(environment) {
   // Instantiates a client
   const cxClient = new EnvironmentsClient();
 
-  async function runContinuousTest() {
+  async function callRunContinuousTest() {
     // Construct request
     const request = {
       environment,
@@ -43,7 +43,7 @@ function main(environment) {
     console.log(response);
   }
 
-  runContinuousTest();
+  callRunContinuousTest();
   // [END dialogflow_v3_generated_Environments_RunContinuousTest_async]
 }
 

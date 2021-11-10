@@ -42,7 +42,7 @@ function main(parent, testCases) {
   // Instantiates a client
   const cxClient = new TestCasesClient();
 
-  async function batchRunTestCases() {
+  async function callBatchRunTestCases() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent, testCases) {
     console.log(response);
   }
 
-  batchRunTestCases();
+  callBatchRunTestCases();
   // [END dialogflow_v3beta1_generated_TestCases_BatchRunTestCases_async]
 }
 

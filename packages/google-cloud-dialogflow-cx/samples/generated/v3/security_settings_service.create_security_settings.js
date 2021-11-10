@@ -20,14 +20,14 @@ function main(parent, securitySettings) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location to create an [SecuritySettings][google.cloud.dialogflow.cx.v3.SecuritySettings] for.
+   *  Required. The location to create an SecuritySettings google.cloud.dialogflow.cx.v3.SecuritySettings  for.
    *  Format: `projects/<Project ID>/locations/<Location ID>`.
    */
   // const parent = 'abc123'
   /**
    *  Required. The security settings to create.
    */
-  // const securitySettings = ''
+  // const securitySettings = {}
 
   // Imports the Cx library
   const {SecuritySettingsServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, securitySettings) {
   // Instantiates a client
   const cxClient = new SecuritySettingsServiceClient();
 
-  async function createSecuritySettings() {
+  async function callCreateSecuritySettings() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, securitySettings) {
     console.log(response);
   }
 
-  createSecuritySettings();
+  callCreateSecuritySettings();
   // [END dialogflow_v3_generated_SecuritySettingsService_CreateSecuritySettings_async]
 }
 

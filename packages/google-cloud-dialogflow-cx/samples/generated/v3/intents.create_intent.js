@@ -27,13 +27,13 @@ function main(parent, intent) {
   /**
    *  Required. The intent to create.
    */
-  // const intent = ''
+  // const intent = {}
   /**
    *  The language of the following fields in `intent`:
    *  *   `Intent.training_phrases.parts.text`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -45,7 +45,7 @@ function main(parent, intent) {
   // Instantiates a client
   const cxClient = new IntentsClient();
 
-  async function createIntent() {
+  async function callCreateIntent() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent, intent) {
     console.log(response);
   }
 
-  createIntent();
+  callCreateIntent();
   // [END dialogflow_v3_generated_Intents_CreateIntent_async]
 }
 

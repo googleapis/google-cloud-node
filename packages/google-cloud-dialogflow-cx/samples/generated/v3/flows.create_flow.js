@@ -27,7 +27,7 @@ function main(parent, flow) {
   /**
    *  Required. The flow to create.
    */
-  // const flow = ''
+  // const flow = {}
   /**
    *  The language of the following fields in `flow`:
    *  *  `Flow.event_handlers.trigger_fulfillment.messages`
@@ -35,8 +35,8 @@ function main(parent, flow) {
    *  *  `Flow.transition_routes.trigger_fulfillment.messages`
    *  *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -48,7 +48,7 @@ function main(parent, flow) {
   // Instantiates a client
   const cxClient = new FlowsClient();
 
-  async function createFlow() {
+  async function callCreateFlow() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent, flow) {
     console.log(response);
   }
 
-  createFlow();
+  callCreateFlow();
   // [END dialogflow_v3_generated_Flows_CreateFlow_async]
 }
 

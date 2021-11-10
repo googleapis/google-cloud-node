@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new ExperimentsClient();
 
-  async function stopExperiment() {
+  async function callStopExperiment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  stopExperiment();
+  callStopExperiment();
   // [END dialogflow_v3_generated_Experiments_StopExperiment_async]
 }
 

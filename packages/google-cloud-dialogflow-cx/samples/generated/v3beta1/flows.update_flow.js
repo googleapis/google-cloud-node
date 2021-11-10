@@ -22,12 +22,12 @@ function main(flow) {
   /**
    *  Required. The flow to update.
    */
-  // const flow = ''
+  // const flow = {}
   /**
    *  The mask to control which fields get updated. If the mask is not present,
    *  all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  The language of the following fields in `flow`:
    *  *  `Flow.event_handlers.trigger_fulfillment.messages`
@@ -35,8 +35,8 @@ function main(flow) {
    *  *  `Flow.transition_routes.trigger_fulfillment.messages`
    *  *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -48,7 +48,7 @@ function main(flow) {
   // Instantiates a client
   const cxClient = new FlowsClient();
 
-  async function updateFlow() {
+  async function callUpdateFlow() {
     // Construct request
     const request = {
       flow,
@@ -59,7 +59,7 @@ function main(flow) {
     console.log(response);
   }
 
-  updateFlow();
+  callUpdateFlow();
   // [END dialogflow_v3beta1_generated_Flows_UpdateFlow_async]
 }
 

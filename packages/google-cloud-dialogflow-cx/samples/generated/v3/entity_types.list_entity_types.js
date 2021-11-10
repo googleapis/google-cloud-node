@@ -31,8 +31,8 @@ function main(parent) {
    *  *   `EntityType.entities.synonyms`
    *  *   `EntityType.excluded_phrases.value`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -53,7 +53,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new EntityTypesClient();
 
-  async function listEntityTypes() {
+  async function callListEntityTypes() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent) {
     }
   }
 
-  listEntityTypes();
+  callListEntityTypes();
   // [END dialogflow_v3_generated_EntityTypes_ListEntityTypes_async]
 }
 

@@ -44,7 +44,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new SessionEntityTypesClient();
 
-  async function listSessionEntityTypes() {
+  async function callListSessionEntityTypes() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent) {
     }
   }
 
-  listSessionEntityTypes();
+  callListSessionEntityTypes();
   // [END dialogflow_v3_generated_SessionEntityTypes_ListSessionEntityTypes_async]
 }
 

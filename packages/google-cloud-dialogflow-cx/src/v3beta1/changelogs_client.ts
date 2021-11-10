@@ -379,6 +379,25 @@ export class ChangelogsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified Changelog.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the changelog to get.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/changelogs/<Changelog ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Changelog]{@link google.cloud.dialogflow.cx.v3beta1.Changelog}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/changelogs.get_changelog.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Changelogs_GetChangelog_async
+   */
   getChangelog(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetChangelogRequest,
     options?: CallOptions
@@ -413,25 +432,6 @@ export class ChangelogsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified Changelog.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the changelog to get.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/changelogs/<Changelog ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Changelog]{@link google.cloud.dialogflow.cx.v3beta1.Changelog}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getChangelog(request);
-   */
   getChangelog(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetChangelogRequest,
     optionsOrCallback?:
@@ -479,37 +479,6 @@ export class ChangelogsClient {
     return this.innerApiCalls.getChangelog(request, options, callback);
   }
 
-  listChangelogs(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.IChangelog[],
-      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse
-    ]
-  >;
-  listChangelogs(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IChangelog
-    >
-  ): void;
-  listChangelogs(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IChangelog
-    >
-  ): void;
   /**
    * Returns the list of Changelogs.
    *
@@ -557,6 +526,37 @@ export class ChangelogsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listChangelogs(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IChangelog[],
+      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse
+    ]
+  >;
+  listChangelogs(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IChangelog
+    >
+  ): void;
+  listChangelogs(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IChangelog
+    >
+  ): void;
   listChangelogs(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
     optionsOrCallback?:
@@ -713,11 +713,8 @@ export class ChangelogsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listChangelogsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3beta1/changelogs.list_changelogs.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Changelogs_ListChangelogs_async
    */
   listChangelogsAsync(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
@@ -731,7 +728,6 @@ export class ChangelogsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -31,7 +31,7 @@ function main(parent, sessionEntityType) {
   /**
    *  Required. The session entity type to create.
    */
-  // const sessionEntityType = ''
+  // const sessionEntityType = {}
 
   // Imports the Cx library
   const {SessionEntityTypesClient} =
@@ -40,7 +40,7 @@ function main(parent, sessionEntityType) {
   // Instantiates a client
   const cxClient = new SessionEntityTypesClient();
 
-  async function createSessionEntityType() {
+  async function callCreateSessionEntityType() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent, sessionEntityType) {
     console.log(response);
   }
 
-  createSessionEntityType();
+  callCreateSessionEntityType();
   // [END dialogflow_v3beta1_generated_SessionEntityTypes_CreateSessionEntityType_async]
 }
 

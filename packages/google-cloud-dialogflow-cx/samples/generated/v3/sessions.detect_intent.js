@@ -29,25 +29,25 @@ function main(session, queryInput) {
    *  It's up to the API caller to choose an appropriate `Session ID`. It can be
    *  a random number or some type of session identifiers (preferably hashed).
    *  The length of the `Session ID` must not exceed 36 characters.
-   *  For more information, see the [sessions
-   *  guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *  For more information, see the sessions
+   *  guide (https://cloud.google.com/dialogflow/cx/docs/concept/session).
    *  Note: Always use agent versions for production traffic.
-   *  See [Versions and
-   *  environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   *  See Versions and
+   *  environments (https://cloud.google.com/dialogflow/cx/docs/concept/version).
    */
   // const session = 'abc123'
   /**
    *  The parameters of this query.
    */
-  // const queryParams = ''
+  // const queryParams = {}
   /**
    *  Required. The input specification.
    */
-  // const queryInput = ''
+  // const queryInput = {}
   /**
    *  Instructs the speech synthesizer how to generate the output audio.
    */
-  // const outputAudioConfig = ''
+  // const outputAudioConfig = {}
 
   // Imports the Cx library
   const {SessionsClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -55,7 +55,7 @@ function main(session, queryInput) {
   // Instantiates a client
   const cxClient = new SessionsClient();
 
-  async function detectIntent() {
+  async function callDetectIntent() {
     // Construct request
     const request = {
       session,
@@ -67,7 +67,7 @@ function main(session, queryInput) {
     console.log(response);
   }
 
-  detectIntent();
+  callDetectIntent();
   // [END dialogflow_v3_generated_Sessions_DetectIntent_async]
 }
 

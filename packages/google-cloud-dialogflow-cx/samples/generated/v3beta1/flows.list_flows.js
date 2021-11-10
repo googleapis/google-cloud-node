@@ -41,8 +41,8 @@ function main(parent) {
    *  *  `Flow.transition_routes.trigger_fulfillment.messages`
    *  *  `Flow.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -54,7 +54,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new FlowsClient();
 
-  async function listFlows() {
+  async function callListFlows() {
     // Construct request
     const request = {
       parent,
@@ -67,7 +67,7 @@ function main(parent) {
     }
   }
 
-  listFlows();
+  callListFlows();
   // [END dialogflow_v3beta1_generated_Flows_ListFlows_async]
 }
 

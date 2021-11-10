@@ -25,7 +25,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+   *  The Google Cloud Storage (https://cloud.google.com/storage/docs/) URI
    *  to restore agent from. The format of this URI must be
    *  `gs://<bucket-name>/<object-name>`.
    */
@@ -37,7 +37,7 @@ function main(name) {
   /**
    *  Agent restore mode. If not specified, `KEEP` is assumed.
    */
-  // const restoreOption = ''
+  // const restoreOption = {}
 
   // Imports the Cx library
   const {AgentsClient} = require('@google-cloud/dialogflow-cx').v3beta1;
@@ -45,7 +45,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new AgentsClient();
 
-  async function restoreAgent() {
+  async function callRestoreAgent() {
     // Construct request
     const request = {
       name,
@@ -57,7 +57,7 @@ function main(name) {
     console.log(response);
   }
 
-  restoreAgent();
+  callRestoreAgent();
   // [END dialogflow_v3beta1_generated_Agents_RestoreAgent_async]
 }
 

@@ -27,7 +27,7 @@ function main(parent, testCase) {
   /**
    *  Required. The test case to create.
    */
-  // const testCase = ''
+  // const testCase = {}
 
   // Imports the Cx library
   const {TestCasesClient} = require('@google-cloud/dialogflow-cx').v3beta1;
@@ -35,7 +35,7 @@ function main(parent, testCase) {
   // Instantiates a client
   const cxClient = new TestCasesClient();
 
-  async function createTestCase() {
+  async function callCreateTestCase() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, testCase) {
     console.log(response);
   }
 
-  createTestCase();
+  callCreateTestCase();
   // [END dialogflow_v3beta1_generated_TestCases_CreateTestCase_async]
 }
 

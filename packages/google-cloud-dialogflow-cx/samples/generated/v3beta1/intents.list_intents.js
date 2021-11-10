@@ -29,8 +29,8 @@ function main(parent) {
    *  dependent:
    *  *   `Intent.training_phrases.parts.text`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -38,7 +38,7 @@ function main(parent) {
   /**
    *  The resource view to apply to the returned intent.
    */
-  // const intentView = ''
+  // const intentView = {}
   /**
    *  The maximum number of items to return in a single page. By default 100 and
    *  at most 1000.
@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new IntentsClient();
 
-  async function listIntents() {
+  async function callListIntents() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent) {
     }
   }
 
-  listIntents();
+  callListIntents();
   // [END dialogflow_v3beta1_generated_Intents_ListIntents_async]
 }
 

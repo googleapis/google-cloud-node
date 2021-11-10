@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new FlowsClient();
 
-  async function validateFlow() {
+  async function callValidateFlow() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  validateFlow();
+  callValidateFlow();
   // [END dialogflow_v3_generated_Flows_ValidateFlow_async]
 }
 

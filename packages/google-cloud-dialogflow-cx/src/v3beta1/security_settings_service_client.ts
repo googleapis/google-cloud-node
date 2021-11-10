@@ -403,6 +403,26 @@ export class SecuritySettingsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Create security settings in the specified location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The location to create an {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   * @param {google.cloud.dialogflow.cx.v3beta1.SecuritySettings} request.securitySettings
+   *   Required. The security settings to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/security_settings_service.create_security_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_CreateSecuritySettings_async
+   */
   createSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest,
     options?: CallOptions
@@ -437,26 +457,6 @@ export class SecuritySettingsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Create security settings in the specified location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The location to create an {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
-   * @param {google.cloud.dialogflow.cx.v3beta1.SecuritySettings} request.securitySettings
-   *   Required. The security settings to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createSecuritySettings(request);
-   */
   createSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest,
     optionsOrCallback?:
@@ -507,6 +507,26 @@ export class SecuritySettingsServiceClient {
       callback
     );
   }
+  /**
+   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   * The returned settings may be stale by up to 1 minute.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the settings.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/securitySettings/<security settings ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/security_settings_service.get_security_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_GetSecuritySettings_async
+   */
   getSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest,
     options?: CallOptions
@@ -541,26 +561,6 @@ export class SecuritySettingsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
-   * The returned settings may be stale by up to 1 minute.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the settings.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/securitySettings/<security settings ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSecuritySettings(request);
-   */
   getSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest,
     optionsOrCallback?:
@@ -607,6 +607,27 @@ export class SecuritySettingsServiceClient {
     this.initialize();
     return this.innerApiCalls.getSecuritySettings(request, options, callback);
   }
+  /**
+   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.cx.v3beta1.SecuritySettings} request.securitySettings
+   *   Required. [SecuritySettings] object that contains values for each of the
+   *   fields to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The mask to control which fields get updated. If the mask is not present,
+   *   all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/security_settings_service.update_security_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_UpdateSecuritySettings_async
+   */
   updateSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest,
     options?: CallOptions
@@ -641,27 +662,6 @@ export class SecuritySettingsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.cx.v3beta1.SecuritySettings} request.securitySettings
-   *   Required. [SecuritySettings] object that contains values for each of the
-   *   fields to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The mask to control which fields get updated. If the mask is not present,
-   *   all fields will be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateSecuritySettings(request);
-   */
   updateSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest,
     optionsOrCallback?:
@@ -712,6 +712,25 @@ export class SecuritySettingsServiceClient {
       callback
     );
   }
+  /**
+   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} to delete.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/securitySettings/<Security Settings ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/security_settings_service.delete_security_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_DeleteSecuritySettings_async
+   */
   deleteSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest,
     options?: CallOptions
@@ -746,25 +765,6 @@ export class SecuritySettingsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} to delete.
-   *   Format: `projects/<Project ID>/locations/<Location
-   *   ID>/securitySettings/<Security Settings ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteSecuritySettings(request);
-   */
   deleteSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest,
     optionsOrCallback?:
@@ -816,6 +816,32 @@ export class SecuritySettingsServiceClient {
     );
   }
 
+  /**
+   * Returns the list of all security settings in the specified location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The location to list all security settings for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 20 and
+   *   at most 100.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSecuritySettingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest,
     options?: CallOptions
@@ -847,32 +873,6 @@ export class SecuritySettingsServiceClient {
       protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings
     >
   ): void;
-  /**
-   * Returns the list of all security settings in the specified location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The location to list all security settings for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 20 and
-   *   at most 100.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [SecuritySettings]{@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSecuritySettingsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listSecuritySettings(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest,
     optionsOrCallback?:
@@ -987,11 +987,8 @@ export class SecuritySettingsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSecuritySettingsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3beta1/security_settings_service.list_security_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_ListSecuritySettings_async
    */
   listSecuritySettingsAsync(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest,
@@ -1005,7 +1002,6 @@ export class SecuritySettingsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listSecuritySettings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new SecuritySettingsServiceClient();
 
-  async function getSecuritySettings() {
+  async function callGetSecuritySettings() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getSecuritySettings();
+  callGetSecuritySettings();
   // [END dialogflow_v3_generated_SecuritySettingsService_GetSecuritySettings_async]
 }
 

@@ -29,18 +29,18 @@ function main(session, queryInput) {
    *  It's up to the API caller to choose an appropriate `Session ID`. It can be
    *  a random number or some type of session identifiers (preferably hashed).
    *  The length of the `Session ID` must not exceed 36 characters.
-   *  For more information, see the [sessions
-   *  guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *  For more information, see the sessions
+   *  guide (https://cloud.google.com/dialogflow/cx/docs/concept/session).
    */
   // const session = 'abc123'
   /**
    *  The parameters of this query.
    */
-  // const queryParams = ''
+  // const queryParams = {}
   /**
    *  Required. The input specification.
    */
-  // const queryInput = ''
+  // const queryInput = {}
 
   // Imports the Cx library
   const {SessionsClient} = require('@google-cloud/dialogflow-cx').v3beta1;
@@ -48,7 +48,7 @@ function main(session, queryInput) {
   // Instantiates a client
   const cxClient = new SessionsClient();
 
-  async function matchIntent() {
+  async function callMatchIntent() {
     // Construct request
     const request = {
       session,
@@ -60,7 +60,7 @@ function main(session, queryInput) {
     console.log(response);
   }
 
-  matchIntent();
+  callMatchIntent();
   // [END dialogflow_v3beta1_generated_Sessions_MatchIntent_async]
 }
 

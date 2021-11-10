@@ -375,37 +375,6 @@ export class SessionsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  detectIntent(
-    request?: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
-      protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  detectIntent(
-    request: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
-      | protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  detectIntent(
-    request: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
-      | protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Processes a natural language query and returns structured, actionable data
    * as a result. This method is not idempotent, because it may cause session
@@ -448,9 +417,40 @@ export class SessionsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.detectIntent(request);
+   * @example <caption>include:samples/generated/v3/sessions.detect_intent.js</caption>
+   * region_tag:dialogflow_v3_generated_Sessions_DetectIntent_async
    */
+  detectIntent(
+    request?: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
+      protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  detectIntent(
+    request: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
+      | protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  detectIntent(
+    request: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
+      | protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   detectIntent(
     request?: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
     optionsOrCallback?:
@@ -494,6 +494,39 @@ export class SessionsClient {
     this.initialize();
     return this.innerApiCalls.detectIntent(request, options, callback);
   }
+  /**
+   * Returns preliminary intent match results, doesn't change the session
+   * status.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.session
+   *   Required. The name of the session this query is sent to.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment.
+   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
+   *   a random number or some type of session identifiers (preferably hashed).
+   *   The length of the `Session ID` must not exceed 36 characters.
+   *
+   *   For more information, see the [sessions
+   *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   * @param {google.cloud.dialogflow.cx.v3.QueryParameters} request.queryParams
+   *   The parameters of this query.
+   * @param {google.cloud.dialogflow.cx.v3.QueryInput} request.queryInput
+   *   Required. The input specification.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MatchIntentResponse]{@link google.cloud.dialogflow.cx.v3.MatchIntentResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/sessions.match_intent.js</caption>
+   * region_tag:dialogflow_v3_generated_Sessions_MatchIntent_async
+   */
   matchIntent(
     request?: protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest,
     options?: CallOptions
@@ -525,39 +558,6 @@ export class SessionsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns preliminary intent match results, doesn't change the session
-   * status.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.session
-   *   Required. The name of the session this query is sent to.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
-   *   If `Environment ID` is not specified, we assume default 'draft'
-   *   environment.
-   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
-   *   a random number or some type of session identifiers (preferably hashed).
-   *   The length of the `Session ID` must not exceed 36 characters.
-   *
-   *   For more information, see the [sessions
-   *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
-   * @param {google.cloud.dialogflow.cx.v3.QueryParameters} request.queryParams
-   *   The parameters of this query.
-   * @param {google.cloud.dialogflow.cx.v3.QueryInput} request.queryInput
-   *   Required. The input specification.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [MatchIntentResponse]{@link google.cloud.dialogflow.cx.v3.MatchIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.matchIntent(request);
-   */
   matchIntent(
     request?: protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest,
     optionsOrCallback?:
@@ -601,6 +601,30 @@ export class SessionsClient {
     this.initialize();
     return this.innerApiCalls.matchIntent(request, options, callback);
   }
+  /**
+   * Fulfills a matched intent returned by {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}.
+   * Must be called after {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with input from
+   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}. Otherwise, the behavior is undefined.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.cx.v3.MatchIntentRequest} request.matchIntentRequest
+   *   Must be same as the corresponding MatchIntent request, otherwise the
+   *   behavior is undefined.
+   * @param {google.cloud.dialogflow.cx.v3.Match} request.match
+   *   The matched intent/event to fulfill.
+   * @param {google.cloud.dialogflow.cx.v3.OutputAudioConfig} request.outputAudioConfig
+   *   Instructs the speech synthesizer how to generate output audio.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FulfillIntentResponse]{@link google.cloud.dialogflow.cx.v3.FulfillIntentResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/sessions.fulfill_intent.js</caption>
+   * region_tag:dialogflow_v3_generated_Sessions_FulfillIntent_async
+   */
   fulfillIntent(
     request?: protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest,
     options?: CallOptions
@@ -632,30 +656,6 @@ export class SessionsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Fulfills a matched intent returned by {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}.
-   * Must be called after {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with input from
-   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}. Otherwise, the behavior is undefined.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.cx.v3.MatchIntentRequest} request.matchIntentRequest
-   *   Must be same as the corresponding MatchIntent request, otherwise the
-   *   behavior is undefined.
-   * @param {google.cloud.dialogflow.cx.v3.Match} request.match
-   *   The matched intent/event to fulfill.
-   * @param {google.cloud.dialogflow.cx.v3.OutputAudioConfig} request.outputAudioConfig
-   *   Instructs the speech synthesizer how to generate output audio.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [FulfillIntentResponse]{@link google.cloud.dialogflow.cx.v3.FulfillIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.fulfillIntent(request);
-   */
   fulfillIntent(
     request?: protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest,
     optionsOrCallback?:
@@ -719,12 +719,8 @@ export class SessionsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.streamingDetectIntent();
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
-   * stream.write(request);
-   * stream.end();
+   * @example <caption>include:samples/generated/v3/sessions.streaming_detect_intent.js</caption>
+   * region_tag:dialogflow_v3_generated_Sessions_StreamingDetectIntent_async
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
     this.initialize();

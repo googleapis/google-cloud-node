@@ -27,15 +27,15 @@ function main(parent, entityType) {
   /**
    *  Required. The entity type to create.
    */
-  // const entityType = ''
+  // const entityType = {}
   /**
    *  The language of the following fields in `entity_type`:
    *  *   `EntityType.entities.value`
    *  *   `EntityType.entities.synonyms`
    *  *   `EntityType.excluded_phrases.value`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -47,7 +47,7 @@ function main(parent, entityType) {
   // Instantiates a client
   const cxClient = new EntityTypesClient();
 
-  async function createEntityType() {
+  async function callCreateEntityType() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent, entityType) {
     console.log(response);
   }
 
-  createEntityType();
+  callCreateEntityType();
   // [END dialogflow_v3beta1_generated_EntityTypes_CreateEntityType_async]
 }
 

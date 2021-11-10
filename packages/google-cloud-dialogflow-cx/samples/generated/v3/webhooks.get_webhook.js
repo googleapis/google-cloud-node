@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new WebhooksClient();
 
-  async function getWebhook() {
+  async function callGetWebhook() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getWebhook();
+  callGetWebhook();
   // [END dialogflow_v3_generated_Webhooks_GetWebhook_async]
 }
 

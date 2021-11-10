@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [Environment][google.cloud.dialogflow.cx.v3.Environment].
+   *  Required. The name of the Environment google.cloud.dialogflow.cx.v3.Environment.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
    */
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new ExperimentsClient();
 
-  async function getExperiment() {
+  async function callGetExperiment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getExperiment();
+  callGetExperiment();
   // [END dialogflow_v3_generated_Experiments_GetExperiment_async]
 }
 

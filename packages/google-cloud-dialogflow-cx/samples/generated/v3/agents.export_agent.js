@@ -25,7 +25,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
+   *  Optional. The Google Cloud Storage (https://cloud.google.com/storage/docs/) URI to
    *  export the agent to. The format of this URI must be
    *  `gs://<bucket-name>/<object-name>`.
    *  If left unspecified, the serialized agent is returned inline.
@@ -44,7 +44,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new AgentsClient();
 
-  async function exportAgent() {
+  async function callExportAgent() {
     // Construct request
     const request = {
       name,
@@ -56,7 +56,7 @@ function main(name) {
     console.log(response);
   }
 
-  exportAgent();
+  callExportAgent();
   // [END dialogflow_v3_generated_Agents_ExportAgent_async]
 }
 

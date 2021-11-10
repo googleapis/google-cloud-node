@@ -379,6 +379,25 @@ export class DeploymentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3.Deployment|Deployment}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.Deployment|Deployment}.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Deployment]{@link google.cloud.dialogflow.cx.v3.Deployment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/deployments.get_deployment.js</caption>
+   * region_tag:dialogflow_v3_generated_Deployments_GetDeployment_async
+   */
   getDeployment(
     request?: protos.google.cloud.dialogflow.cx.v3.IGetDeploymentRequest,
     options?: CallOptions
@@ -410,25 +429,6 @@ export class DeploymentsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3.Deployment|Deployment}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3.Deployment|Deployment}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Deployment]{@link google.cloud.dialogflow.cx.v3.Deployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDeployment(request);
-   */
   getDeployment(
     request?: protos.google.cloud.dialogflow.cx.v3.IGetDeploymentRequest,
     optionsOrCallback?:
@@ -473,6 +473,33 @@ export class DeploymentsClient {
     return this.innerApiCalls.getDeployment(request, options, callback);
   }
 
+  /**
+   * Returns the list of all deployments in the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to list all environments for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 20 and
+   *   at most 100.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Deployment]{@link google.cloud.dialogflow.cx.v3.Deployment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listDeployments(
     request?: protos.google.cloud.dialogflow.cx.v3.IListDeploymentsRequest,
     options?: CallOptions
@@ -504,33 +531,6 @@ export class DeploymentsClient {
       protos.google.cloud.dialogflow.cx.v3.IDeployment
     >
   ): void;
-  /**
-   * Returns the list of all deployments in the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link google.cloud.dialogflow.cx.v3.Environment|Environment} to list all environments for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/environments/<Environment ID>`.
-   * @param {number} request.pageSize
-   *   The maximum number of items to return in a single page. By default 20 and
-   *   at most 100.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Deployment]{@link google.cloud.dialogflow.cx.v3.Deployment}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeploymentsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listDeployments(
     request?: protos.google.cloud.dialogflow.cx.v3.IListDeploymentsRequest,
     optionsOrCallback?:
@@ -647,11 +647,8 @@ export class DeploymentsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listDeploymentsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3/deployments.list_deployments.js</caption>
+   * region_tag:dialogflow_v3_generated_Deployments_ListDeployments_async
    */
   listDeploymentsAsync(
     request?: protos.google.cloud.dialogflow.cx.v3.IListDeploymentsRequest,
@@ -665,7 +662,6 @@ export class DeploymentsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

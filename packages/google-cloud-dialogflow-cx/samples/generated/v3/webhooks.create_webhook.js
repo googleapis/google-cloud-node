@@ -27,7 +27,7 @@ function main(parent, webhook) {
   /**
    *  Required. The webhook to create.
    */
-  // const webhook = ''
+  // const webhook = {}
 
   // Imports the Cx library
   const {WebhooksClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -35,7 +35,7 @@ function main(parent, webhook) {
   // Instantiates a client
   const cxClient = new WebhooksClient();
 
-  async function createWebhook() {
+  async function callCreateWebhook() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, webhook) {
     console.log(response);
   }
 
-  createWebhook();
+  callCreateWebhook();
   // [END dialogflow_v3_generated_Webhooks_CreateWebhook_async]
 }
 

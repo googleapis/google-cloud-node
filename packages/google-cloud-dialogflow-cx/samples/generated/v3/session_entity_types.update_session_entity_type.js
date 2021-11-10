@@ -28,11 +28,11 @@ function main(sessionEntityType) {
    *  Type ID>`. If `Environment ID` is not specified, we assume default 'draft'
    *  environment.
    */
-  // const sessionEntityType = ''
+  // const sessionEntityType = {}
   /**
    *  The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Cx library
   const {SessionEntityTypesClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -40,7 +40,7 @@ function main(sessionEntityType) {
   // Instantiates a client
   const cxClient = new SessionEntityTypesClient();
 
-  async function updateSessionEntityType() {
+  async function callUpdateSessionEntityType() {
     // Construct request
     const request = {
       sessionEntityType,
@@ -51,7 +51,7 @@ function main(sessionEntityType) {
     console.log(response);
   }
 
-  updateSessionEntityType();
+  callUpdateSessionEntityType();
   // [END dialogflow_v3_generated_SessionEntityTypes_UpdateSessionEntityType_async]
 }
 

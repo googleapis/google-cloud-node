@@ -22,19 +22,19 @@ function main(transitionRouteGroup) {
   /**
    *  Required. The transition route group to update.
    */
-  // const transitionRouteGroup = ''
+  // const transitionRouteGroup = {}
   /**
    *  The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  The language of the following fields in `TransitionRouteGroup`:
    *  *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.messages`
    *  *
    *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -47,7 +47,7 @@ function main(transitionRouteGroup) {
   // Instantiates a client
   const cxClient = new TransitionRouteGroupsClient();
 
-  async function updateTransitionRouteGroup() {
+  async function callUpdateTransitionRouteGroup() {
     // Construct request
     const request = {
       transitionRouteGroup,
@@ -58,7 +58,7 @@ function main(transitionRouteGroup) {
     console.log(response);
   }
 
-  updateTransitionRouteGroup();
+  callUpdateTransitionRouteGroup();
   // [END dialogflow_v3beta1_generated_TransitionRouteGroups_UpdateTransitionRouteGroup_async]
 }
 

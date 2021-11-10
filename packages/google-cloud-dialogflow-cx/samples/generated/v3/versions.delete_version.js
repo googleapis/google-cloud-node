@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [Version][google.cloud.dialogflow.cx.v3.Version] to delete.
+   *  Required. The name of the Version google.cloud.dialogflow.cx.v3.Version  to delete.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/versions/<Version ID>`.
    */
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new VersionsClient();
 
-  async function deleteVersion() {
+  async function callDeleteVersion() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteVersion();
+  callDeleteVersion();
   // [END dialogflow_v3_generated_Versions_DeleteVersion_async]
 }
 

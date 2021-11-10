@@ -30,25 +30,25 @@ function main(queryInput) {
    *  a random number or some type of session identifiers (preferably hashed).
    *  The length of the `Session ID` must not exceed 36 characters.
    *  Note: session must be set in the first request.
-   *  For more information, see the [sessions
-   *  guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *  For more information, see the sessions
+   *  guide (https://cloud.google.com/dialogflow/cx/docs/concept/session).
    *  Note: Always use agent versions for production traffic.
-   *  See [Versions and
-   *  environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   *  See Versions and
+   *  environments (https://cloud.google.com/dialogflow/cx/docs/concept/version).
    */
   // const session = 'abc123'
   /**
    *  The parameters of this query.
    */
-  // const queryParams = ''
+  // const queryParams = {}
   /**
    *  Required. The input specification.
    */
-  // const queryInput = ''
+  // const queryInput = {}
   /**
    *  Instructs the speech synthesizer how to generate the output audio.
    */
-  // const outputAudioConfig = ''
+  // const outputAudioConfig = {}
   /**
    *  Enable partial detect intent response. If this flag is not enabled,
    *  response stream still contains only one final `DetectIntentResponse` even
@@ -63,7 +63,7 @@ function main(queryInput) {
   // Instantiates a client
   const cxClient = new SessionsClient();
 
-  async function streamingDetectIntent() {
+  async function callStreamingDetectIntent() {
     // Construct request
     const request = {
       queryInput,
@@ -84,7 +84,7 @@ function main(queryInput) {
     stream.end();
   }
 
-  streamingDetectIntent();
+  callStreamingDetectIntent();
   // [END dialogflow_v3_generated_Sessions_StreamingDetectIntent_async]
 }
 

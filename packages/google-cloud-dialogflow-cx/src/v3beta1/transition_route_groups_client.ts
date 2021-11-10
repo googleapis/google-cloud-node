@@ -387,6 +387,38 @@ export class TransitionRouteGroupsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   * @param {string} request.languageCode
+   *   The language to retrieve the transition route group for. The following
+   *   fields are language dependent:
+   *
+   *   *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.messages`
+   *   *
+   *   `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
+   *
+   *   If not specified, the agent's default language is used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *   are supported.
+   *   Note: languages must be enabled in the agent before they can be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TransitionRouteGroup]{@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/transition_route_groups.get_transition_route_group.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_TransitionRouteGroups_GetTransitionRouteGroup_async
+   */
   getTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetTransitionRouteGroupRequest,
     options?: CallOptions
@@ -421,38 +453,6 @@ export class TransitionRouteGroupsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
-   * @param {string} request.languageCode
-   *   The language to retrieve the transition route group for. The following
-   *   fields are language dependent:
-   *
-   *   *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.messages`
-   *   *
-   *   `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TransitionRouteGroup]{@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTransitionRouteGroup(request);
-   */
   getTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetTransitionRouteGroupRequest,
     optionsOrCallback?:
@@ -503,40 +503,6 @@ export class TransitionRouteGroupsClient {
       callback
     );
   }
-  createTransitionRouteGroup(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup,
-      (
-        | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  createTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup,
-      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
-    callback: Callback<
-      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup,
-      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates an {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} in the specified flow.
    *
@@ -571,9 +537,43 @@ export class TransitionRouteGroupsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createTransitionRouteGroup(request);
+   * @example <caption>include:samples/generated/v3beta1/transition_route_groups.create_transition_route_group.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_TransitionRouteGroups_CreateTransitionRouteGroup_async
    */
+  createTransitionRouteGroup(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createTransitionRouteGroup(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createTransitionRouteGroup(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup,
+      | protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateTransitionRouteGroupRequest,
     optionsOrCallback?:
@@ -624,6 +624,41 @@ export class TransitionRouteGroupsClient {
       callback
     );
   }
+  /**
+   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup} request.transitionRouteGroup
+   *   Required. The transition route group to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The mask to control which fields get updated.
+   * @param {string} request.languageCode
+   *   The language of the following fields in `TransitionRouteGroup`:
+   *
+   *   *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.messages`
+   *   *
+   *   `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
+   *
+   *   If not specified, the agent's default language is used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *   are supported.
+   *   Note: languages must be enabled in the agent before they can be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TransitionRouteGroup]{@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/transition_route_groups.update_transition_route_group.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_TransitionRouteGroups_UpdateTransitionRouteGroup_async
+   */
   updateTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateTransitionRouteGroupRequest,
     options?: CallOptions
@@ -658,41 +693,6 @@ export class TransitionRouteGroupsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
-   *
-   * Note: You should always train a flow prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup} request.transitionRouteGroup
-   *   Required. The transition route group to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The mask to control which fields get updated.
-   * @param {string} request.languageCode
-   *   The language of the following fields in `TransitionRouteGroup`:
-   *
-   *   *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.messages`
-   *   *
-   *   `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
-   *
-   *   If not specified, the agent's default language is used.
-   *   [Many
-   *   languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
-   *   are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TransitionRouteGroup]{@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTransitionRouteGroup(request);
-   */
   updateTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateTransitionRouteGroupRequest,
     optionsOrCallback?:
@@ -743,6 +743,37 @@ export class TransitionRouteGroupsClient {
       callback
     );
   }
+  /**
+   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} to delete.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   * @param {boolean} request.force
+   *   This field has no effect for transition route group that no page is using.
+   *   If the transition route group is referenced by any page:
+   *
+   *   *  If `force` is set to false, an error will be returned with message
+   *      indicating pages that reference the transition route group.
+   *   *  If `force` is set to true, Dialogflow will remove the transition route
+   *      group, as well as any reference to it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/transition_route_groups.delete_transition_route_group.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_TransitionRouteGroups_DeleteTransitionRouteGroup_async
+   */
   deleteTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteTransitionRouteGroupRequest,
     options?: CallOptions
@@ -777,37 +808,6 @@ export class TransitionRouteGroupsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
-   *
-   * Note: You should always train a flow prior to sending it queries. See the
-   * [training
-   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
-   * @param {boolean} request.force
-   *   This field has no effect for transition route group that no page is using.
-   *   If the transition route group is referenced by any page:
-   *
-   *   *  If `force` is set to false, an error will be returned with message
-   *      indicating pages that reference the transition route group.
-   *   *  If `force` is set to true, Dialogflow will remove the transition route
-   *      group, as well as any reference to it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteTransitionRouteGroup(request);
-   */
   deleteTransitionRouteGroup(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteTransitionRouteGroupRequest,
     optionsOrCallback?:
@@ -859,37 +859,6 @@ export class TransitionRouteGroupsClient {
     );
   }
 
-  listTransitionRouteGroups(
-    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup[],
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsResponse
-    ]
-  >;
-  listTransitionRouteGroups(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup
-    >
-  ): void;
-  listTransitionRouteGroups(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
-      | protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup
-    >
-  ): void;
   /**
    * Returns the list of all transition route groups in the specified flow.
    *
@@ -930,6 +899,37 @@ export class TransitionRouteGroupsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTransitionRouteGroups(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup[],
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsResponse
+    ]
+  >;
+  listTransitionRouteGroups(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup
+    >
+  ): void;
+  listTransitionRouteGroups(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup
+    >
+  ): void;
   listTransitionRouteGroups(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
     optionsOrCallback?:
@@ -1076,11 +1076,8 @@ export class TransitionRouteGroupsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTransitionRouteGroupsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v3beta1/transition_route_groups.list_transition_route_groups.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_TransitionRouteGroups_ListTransitionRouteGroups_async
    */
   listTransitionRouteGroupsAsync(
     request?: protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
@@ -1094,7 +1091,6 @@ export class TransitionRouteGroupsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

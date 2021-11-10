@@ -20,7 +20,7 @@ function main(parent, experiment) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [Agent][google.cloud.dialogflow.cx.v3.Agent] to create an [Environment][google.cloud.dialogflow.cx.v3.Environment] for.
+   *  Required. The Agent google.cloud.dialogflow.cx.v3.Agent  to create an Environment google.cloud.dialogflow.cx.v3.Environment  for.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/environments/<Environment ID>`.
    */
@@ -28,7 +28,7 @@ function main(parent, experiment) {
   /**
    *  Required. The experiment to create.
    */
-  // const experiment = ''
+  // const experiment = {}
 
   // Imports the Cx library
   const {ExperimentsClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -36,7 +36,7 @@ function main(parent, experiment) {
   // Instantiates a client
   const cxClient = new ExperimentsClient();
 
-  async function createExperiment() {
+  async function callCreateExperiment() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, experiment) {
     console.log(response);
   }
 
-  createExperiment();
+  callCreateExperiment();
   // [END dialogflow_v3_generated_Experiments_CreateExperiment_async]
 }
 

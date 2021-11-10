@@ -26,7 +26,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to
+   *  Optional. The Google Cloud Storage (https://cloud.google.com/storage/docs/) URI to
    *  export the flow to. The format of this URI must be
    *  `gs://<bucket-name>/<object-name>`.
    *  If left unspecified, the serialized flow is returned inline.
@@ -43,7 +43,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new FlowsClient();
 
-  async function exportFlow() {
+  async function callExportFlow() {
     // Construct request
     const request = {
       name,
@@ -55,7 +55,7 @@ function main(name) {
     console.log(response);
   }
 
-  exportFlow();
+  callExportFlow();
   // [END dialogflow_v3_generated_Flows_ExportFlow_async]
 }
 

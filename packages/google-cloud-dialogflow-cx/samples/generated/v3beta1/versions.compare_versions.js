@@ -36,8 +36,8 @@ function main(baseVersion, targetVersion) {
   /**
    *  The language to compare the flow versions for.
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/docs/reference/language) are
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/docs/reference/language) are
    *  supported. Note: languages must be enabled in the agent before they can be
    *  used.
    */
@@ -49,7 +49,7 @@ function main(baseVersion, targetVersion) {
   // Instantiates a client
   const cxClient = new VersionsClient();
 
-  async function compareVersions() {
+  async function callCompareVersions() {
     // Construct request
     const request = {
       baseVersion,
@@ -61,7 +61,7 @@ function main(baseVersion, targetVersion) {
     console.log(response);
   }
 
-  compareVersions();
+  callCompareVersions();
   // [END dialogflow_v3beta1_generated_Versions_CompareVersions_async]
 }
 

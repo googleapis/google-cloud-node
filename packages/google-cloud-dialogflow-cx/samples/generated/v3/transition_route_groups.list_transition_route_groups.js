@@ -41,8 +41,8 @@ function main(parent) {
    *  *
    *  `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -55,7 +55,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new TransitionRouteGroupsClient();
 
-  async function listTransitionRouteGroups() {
+  async function callListTransitionRouteGroups() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent) {
     }
   }
 
-  listTransitionRouteGroups();
+  callListTransitionRouteGroups();
   // [END dialogflow_v3_generated_TransitionRouteGroups_ListTransitionRouteGroups_async]
 }
 

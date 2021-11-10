@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new SessionEntityTypesClient();
 
-  async function getSessionEntityType() {
+  async function callGetSessionEntityType() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  getSessionEntityType();
+  callGetSessionEntityType();
   // [END dialogflow_v3beta1_generated_SessionEntityTypes_GetSessionEntityType_async]
 }
 

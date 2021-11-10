@@ -30,8 +30,8 @@ function main(name) {
    *  dependent:
    *  *   `Intent.training_phrases.parts.text`
    *  If not specified, the agent's default language is used.
-   *  [Many
-   *  languages](https://cloud.google.com/dialogflow/cx/docs/reference/language)
+   *  Many
+   *  languages (https://cloud.google.com/dialogflow/cx/docs/reference/language)
    *  are supported.
    *  Note: languages must be enabled in the agent before they can be used.
    */
@@ -43,7 +43,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new IntentsClient();
 
-  async function getIntent() {
+  async function callGetIntent() {
     // Construct request
     const request = {
       name,
@@ -54,7 +54,7 @@ function main(name) {
     console.log(response);
   }
 
-  getIntent();
+  callGetIntent();
   // [END dialogflow_v3beta1_generated_Intents_GetIntent_async]
 }
 

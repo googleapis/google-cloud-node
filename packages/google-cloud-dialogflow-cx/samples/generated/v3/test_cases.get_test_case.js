@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new TestCasesClient();
 
-  async function getTestCase() {
+  async function callGetTestCase() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTestCase();
+  callGetTestCase();
   // [END dialogflow_v3_generated_TestCases_GetTestCase_async]
 }
 

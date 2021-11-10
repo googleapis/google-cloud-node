@@ -20,7 +20,7 @@ function main(parent, version) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [Flow][google.cloud.dialogflow.cx.v3.Flow] to create an [Version][google.cloud.dialogflow.cx.v3.Version] for.
+   *  Required. The Flow google.cloud.dialogflow.cx.v3.Flow  to create an Version google.cloud.dialogflow.cx.v3.Version  for.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>`.
    */
@@ -28,7 +28,7 @@ function main(parent, version) {
   /**
    *  Required. The version to create.
    */
-  // const version = ''
+  // const version = {}
 
   // Imports the Cx library
   const {VersionsClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -36,7 +36,7 @@ function main(parent, version) {
   // Instantiates a client
   const cxClient = new VersionsClient();
 
-  async function createVersion() {
+  async function callCreateVersion() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, version) {
     console.log(response);
   }
 
-  createVersion();
+  callCreateVersion();
   // [END dialogflow_v3_generated_Versions_CreateVersion_async]
 }
 

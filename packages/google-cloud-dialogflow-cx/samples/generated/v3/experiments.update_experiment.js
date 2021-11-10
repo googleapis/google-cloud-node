@@ -22,11 +22,11 @@ function main(experiment, updateMask) {
   /**
    *  Required. The experiment to update.
    */
-  // const experiment = ''
+  // const experiment = {}
   /**
    *  Required. The mask to control which fields get updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Cx library
   const {ExperimentsClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -34,7 +34,7 @@ function main(experiment, updateMask) {
   // Instantiates a client
   const cxClient = new ExperimentsClient();
 
-  async function updateExperiment() {
+  async function callUpdateExperiment() {
     // Construct request
     const request = {
       experiment,
@@ -46,7 +46,7 @@ function main(experiment, updateMask) {
     console.log(response);
   }
 
-  updateExperiment();
+  callUpdateExperiment();
   // [END dialogflow_v3_generated_Experiments_UpdateExperiment_async]
 }
 

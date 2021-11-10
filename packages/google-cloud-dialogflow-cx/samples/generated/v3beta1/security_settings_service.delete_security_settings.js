@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [SecuritySettings][google.cloud.dialogflow.cx.v3beta1.SecuritySettings] to delete.
+   *  Required. The name of the SecuritySettings google.cloud.dialogflow.cx.v3beta1.SecuritySettings  to delete.
    *  Format: `projects/<Project ID>/locations/<Location
    *  ID>/securitySettings/<Security Settings ID>`.
    */
@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new SecuritySettingsServiceClient();
 
-  async function deleteSecuritySettings() {
+  async function callDeleteSecuritySettings() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteSecuritySettings();
+  callDeleteSecuritySettings();
   // [END dialogflow_v3beta1_generated_SecuritySettingsService_DeleteSecuritySettings_async]
 }
 

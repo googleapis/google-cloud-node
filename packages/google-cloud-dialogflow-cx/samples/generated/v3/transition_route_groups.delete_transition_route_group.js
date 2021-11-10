@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [TransitionRouteGroup][google.cloud.dialogflow.cx.v3.TransitionRouteGroup] to delete.
+   *  Required. The name of the TransitionRouteGroup google.cloud.dialogflow.cx.v3.TransitionRouteGroup  to delete.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
    */
@@ -42,7 +42,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new TransitionRouteGroupsClient();
 
-  async function deleteTransitionRouteGroup() {
+  async function callDeleteTransitionRouteGroup() {
     // Construct request
     const request = {
       name,
@@ -53,7 +53,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteTransitionRouteGroup();
+  callDeleteTransitionRouteGroup();
   // [END dialogflow_v3_generated_TransitionRouteGroups_DeleteTransitionRouteGroup_async]
 }
 

@@ -37,7 +37,7 @@ function main(parent) {
   /**
    *  Specifies whether response should include all fields or just the metadata.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Cx library
   const {TestCasesClient} = require('@google-cloud/dialogflow-cx').v3;
@@ -45,7 +45,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new TestCasesClient();
 
-  async function listTestCases() {
+  async function callListTestCases() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent) {
     }
   }
 
-  listTestCases();
+  callListTestCases();
   // [END dialogflow_v3_generated_TestCases_ListTestCases_async]
 }
 

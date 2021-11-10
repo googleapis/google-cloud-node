@@ -31,9 +31,9 @@ function main(name) {
    *  *  If `force` is set to false, an error will be returned with message
    *     indicating the incoming transitions.
    *  *  If `force` is set to true, Dialogflow will remove the flow, as well as
-   *     any transitions to the flow (i.e. [Target
-   *     flow][EventHandler.target_flow] in event handlers or [Target
-   *     flow][TransitionRoute.target_flow] in transition routes that point to
+   *     any transitions to the flow (i.e. Target
+   *     flow EventHandler.target_flow  in event handlers or Target
+   *     flow TransitionRoute.target_flow  in transition routes that point to
    *     this flow will be cleared).
    */
   // const force = true
@@ -44,7 +44,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new FlowsClient();
 
-  async function deleteFlow() {
+  async function callDeleteFlow() {
     // Construct request
     const request = {
       name,
@@ -55,7 +55,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteFlow();
+  callDeleteFlow();
   // [END dialogflow_v3beta1_generated_Flows_DeleteFlow_async]
 }
 

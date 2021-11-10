@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [Version][google.cloud.dialogflow.cx.v3.Version].
+   *  Required. The name of the Version google.cloud.dialogflow.cx.v3.Version.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/versions/<Version ID>`.
    */
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new VersionsClient();
 
-  async function getVersion() {
+  async function callGetVersion() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getVersion();
+  callGetVersion();
   // [END dialogflow_v3_generated_Versions_GetVersion_async]
 }
 

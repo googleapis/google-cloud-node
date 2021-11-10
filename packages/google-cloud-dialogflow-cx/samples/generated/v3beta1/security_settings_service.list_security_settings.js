@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new SecuritySettingsServiceClient();
 
-  async function listSecuritySettings() {
+  async function callListSecuritySettings() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  listSecuritySettings();
+  callListSecuritySettings();
   // [END dialogflow_v3beta1_generated_SecuritySettingsService_ListSecuritySettings_async]
 }
 

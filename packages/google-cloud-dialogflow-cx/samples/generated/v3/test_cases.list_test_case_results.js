@@ -37,11 +37,11 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  The filter expression used to filter test case results. See
-   *  [API Filtering](https://aip.dev/160).
+   *  API Filtering (https://aip.dev/160).
    *  The expression is case insensitive. Only 'AND' is supported for logical
    *  operators. The supported syntax is listed below in detail:
-   *    <field> <operator> <value> [AND <field> <operator> <value>] ...
-   *    [AND latest]
+   *    <field> <operator> <value> AND <field> <operator> <value>  ...
+   *    AND latest
    *  The supported fields and operators are:
    *  field                 operator
    *  `environment`         `=`, `IN`  (Use value `draft` for draft environment)
@@ -64,7 +64,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new TestCasesClient();
 
-  async function listTestCaseResults() {
+  async function callListTestCaseResults() {
     // Construct request
     const request = {
       parent,
@@ -77,7 +77,7 @@ function main(parent) {
     }
   }
 
-  listTestCaseResults();
+  callListTestCaseResults();
   // [END dialogflow_v3_generated_TestCases_ListTestCaseResults_async]
 }
 

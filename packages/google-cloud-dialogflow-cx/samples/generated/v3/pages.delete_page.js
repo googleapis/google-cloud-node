@@ -31,9 +31,9 @@ function main(name) {
    *  *  If `force` is set to false, an error will be returned with message
    *     indicating the incoming transitions.
    *  *  If `force` is set to true, Dialogflow will remove the page, as well as
-   *     any transitions to the page (i.e. [Target
-   *     page][EventHandler.target_page] in event handlers or [Target
-   *     page][TransitionRoute.target_page] in transition routes that point to
+   *     any transitions to the page (i.e. Target
+   *     page EventHandler.target_page  in event handlers or Target
+   *     page TransitionRoute.target_page  in transition routes that point to
    *     this page will be cleared).
    */
   // const force = true
@@ -44,7 +44,7 @@ function main(name) {
   // Instantiates a client
   const cxClient = new PagesClient();
 
-  async function deletePage() {
+  async function callDeletePage() {
     // Construct request
     const request = {
       name,
@@ -55,7 +55,7 @@ function main(name) {
     console.log(response);
   }
 
-  deletePage();
+  callDeletePage();
   // [END dialogflow_v3_generated_Pages_DeletePage_async]
 }
 

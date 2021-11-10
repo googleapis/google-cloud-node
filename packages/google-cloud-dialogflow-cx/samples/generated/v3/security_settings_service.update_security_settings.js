@@ -20,15 +20,15 @@ function main(securitySettings, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. [SecuritySettings] object that contains values for each of the
+   *  Required. SecuritySettings  object that contains values for each of the
    *  fields to update.
    */
-  // const securitySettings = ''
+  // const securitySettings = {}
   /**
    *  Required. The mask to control which fields get updated. If the mask is not present,
    *  all fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Cx library
   const {SecuritySettingsServiceClient} =
@@ -37,7 +37,7 @@ function main(securitySettings, updateMask) {
   // Instantiates a client
   const cxClient = new SecuritySettingsServiceClient();
 
-  async function updateSecuritySettings() {
+  async function callUpdateSecuritySettings() {
     // Construct request
     const request = {
       securitySettings,
@@ -49,7 +49,7 @@ function main(securitySettings, updateMask) {
     console.log(response);
   }
 
-  updateSecuritySettings();
+  callUpdateSecuritySettings();
   // [END dialogflow_v3_generated_SecuritySettingsService_UpdateSecuritySettings_async]
 }
 

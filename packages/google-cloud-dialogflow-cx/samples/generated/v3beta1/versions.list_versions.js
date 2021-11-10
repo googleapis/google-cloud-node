@@ -20,7 +20,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The [Flow][google.cloud.dialogflow.cx.v3beta1.Flow] to list all versions for.
+   *  Required. The Flow google.cloud.dialogflow.cx.v3beta1.Flow  to list all versions for.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>`.
    */
@@ -41,7 +41,7 @@ function main(parent) {
   // Instantiates a client
   const cxClient = new VersionsClient();
 
-  async function listVersions() {
+  async function callListVersions() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  listVersions();
+  callListVersions();
   // [END dialogflow_v3beta1_generated_Versions_ListVersions_async]
 }
 
