@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const osloginClient = new OsLoginServiceClient();
 
-  async function deleteSshPublicKey() {
+  async function callDeleteSshPublicKey() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteSshPublicKey();
+  callDeleteSshPublicKey();
   // [END oslogin_v1beta_generated_OsLoginService_DeleteSshPublicKey_async]
 }
 

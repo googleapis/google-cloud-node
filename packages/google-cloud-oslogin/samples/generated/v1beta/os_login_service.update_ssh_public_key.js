@@ -28,11 +28,11 @@ function main(name, sshPublicKey) {
   /**
    *  Required. The SSH public key and expiration time.
    */
-  // const sshPublicKey = ''
+  // const sshPublicKey = {}
   /**
    *  Mask to control which fields get updated. Updates all if not present.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Oslogin library
   const {OsLoginServiceClient} = require('@google-cloud/os-login').v1beta;
@@ -40,7 +40,7 @@ function main(name, sshPublicKey) {
   // Instantiates a client
   const osloginClient = new OsLoginServiceClient();
 
-  async function updateSshPublicKey() {
+  async function callUpdateSshPublicKey() {
     // Construct request
     const request = {
       name,
@@ -52,7 +52,7 @@ function main(name, sshPublicKey) {
     console.log(response);
   }
 
-  updateSshPublicKey();
+  callUpdateSshPublicKey();
   // [END oslogin_v1beta_generated_OsLoginService_UpdateSshPublicKey_async]
 }
 
