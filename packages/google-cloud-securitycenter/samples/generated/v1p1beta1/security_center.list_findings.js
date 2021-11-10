@@ -95,7 +95,7 @@ function main(parent) {
    *  those at that specific time. Absence of this field will default to the
    *  API's version of NOW.
    */
-  // const readTime = ''
+  // const readTime = {}
   /**
    *  When compare_duration is set, the ListFindingsResult's "state_change"
    *  attribute is updated to indicate whether the finding had its state changed,
@@ -124,12 +124,12 @@ function main(parent) {
    *  is "UNUSED", which will be the state_change set for all findings present at
    *  read_time.
    */
-  // const compareDuration = ''
+  // const compareDuration = {}
   /**
    *  A field mask to specify the Finding fields to be listed in the response.
    *  An empty field mask will list all fields.
    */
-  // const fieldMask = ''
+  // const fieldMask = {}
   /**
    *  The value returned by the last `ListFindingsResponse`; indicates
    *  that this is a continuation of a prior `ListFindings` call, and
@@ -149,7 +149,7 @@ function main(parent) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function listFindings() {
+  async function callListFindings() {
     // Construct request
     const request = {
       parent,
@@ -162,7 +162,7 @@ function main(parent) {
     }
   }
 
-  listFindings();
+  callListFindings();
   // [END securitycenter_v1p1beta1_generated_SecurityCenter_ListFindings_async]
 }
 

@@ -31,7 +31,7 @@ function main(parent) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function runAssetDiscovery() {
+  async function callRunAssetDiscovery() {
     // Construct request
     const request = {
       parent,
@@ -43,7 +43,7 @@ function main(parent) {
     console.log(response);
   }
 
-  runAssetDiscovery();
+  callRunAssetDiscovery();
   // [END securitycenter_v1_generated_SecurityCenter_RunAssetDiscovery_async]
 }
 

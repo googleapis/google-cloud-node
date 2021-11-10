@@ -97,7 +97,7 @@ function main(parent, groupBy) {
    *  those at that specific time. Absence of this field will default to the
    *  API's version of NOW.
    */
-  // const readTime = ''
+  // const readTime = {}
   /**
    *  When compare_duration is set, the GroupResult's "state_change" attribute is
    *  updated to indicate whether the finding had its state changed, the
@@ -127,7 +127,7 @@ function main(parent, groupBy) {
    *  If this field is set then `state_change` must be a specified field in
    *  `group_by`.
    */
-  // const compareDuration = ''
+  // const compareDuration = {}
   /**
    *  The value returned by the last `GroupFindingsResponse`; indicates
    *  that this is a continuation of a prior `GroupFindings` call, and
@@ -146,7 +146,7 @@ function main(parent, groupBy) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function groupFindings() {
+  async function callGroupFindings() {
     // Construct request
     const request = {
       parent,
@@ -160,7 +160,7 @@ function main(parent, groupBy) {
     }
   }
 
-  groupFindings();
+  callGroupFindings();
   // [END securitycenter_v1_generated_SecurityCenter_GroupFindings_async]
 }
 

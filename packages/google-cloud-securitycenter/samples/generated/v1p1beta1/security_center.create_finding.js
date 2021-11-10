@@ -32,7 +32,7 @@ function main(parent, findingId, finding) {
    *  Required. The Finding being created. The name and security_marks will be ignored as
    *  they are both output only fields on this resource.
    */
-  // const finding = ''
+  // const finding = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} =
@@ -41,7 +41,7 @@ function main(parent, findingId, finding) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function createFinding() {
+  async function callCreateFinding() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent, findingId, finding) {
     console.log(response);
   }
 
-  createFinding();
+  callCreateFinding();
   // [END securitycenter_v1p1beta1_generated_SecurityCenter_CreateFinding_async]
 }
 

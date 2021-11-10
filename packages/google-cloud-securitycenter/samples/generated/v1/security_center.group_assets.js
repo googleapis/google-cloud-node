@@ -116,14 +116,14 @@ function main(parent, groupBy) {
    *  If this field is set then `state_change` must be a specified field in
    *  `group_by`.
    */
-  // const compareDuration = ''
+  // const compareDuration = {}
   /**
    *  Time used as a reference point when filtering assets. The filter is limited
    *  to assets existing at the supplied time and their values are those at that
    *  specific time. Absence of this field will default to the API's version of
    *  NOW.
    */
-  // const readTime = ''
+  // const readTime = {}
   /**
    *  The value returned by the last `GroupAssetsResponse`; indicates
    *  that this is a continuation of a prior `GroupAssets` call, and that the
@@ -142,7 +142,7 @@ function main(parent, groupBy) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function groupAssets() {
+  async function callGroupAssets() {
     // Construct request
     const request = {
       parent,
@@ -156,7 +156,7 @@ function main(parent, groupBy) {
     }
   }
 
-  groupAssets();
+  callGroupAssets();
   // [END securitycenter_v1_generated_SecurityCenter_GroupAssets_async]
 }
 

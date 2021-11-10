@@ -4546,6 +4546,7 @@
                          * @property {string|null} [parentDisplayName] Resource parentDisplayName
                          * @property {string|null} [type] Resource type
                          * @property {Array.<google.cloud.securitycenter.v1.IFolder>|null} [folders] Resource folders
+                         * @property {string|null} [displayName] Resource displayName
                          */
     
                         /**
@@ -4621,6 +4622,14 @@
                         Resource.prototype.folders = $util.emptyArray;
     
                         /**
+                         * Resource displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.securitycenter.v1.Resource
+                         * @instance
+                         */
+                        Resource.prototype.displayName = "";
+    
+                        /**
                          * Creates a new Resource instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Resource
@@ -4659,6 +4668,8 @@
                             if (message.folders != null && message.folders.length)
                                 for (var i = 0; i < message.folders.length; ++i)
                                     $root.google.cloud.securitycenter.v1.Folder.encode(message.folders[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
                             return writer;
                         };
     
@@ -4715,6 +4726,9 @@
                                     if (!(message.folders && message.folders.length))
                                         message.folders = [];
                                     message.folders.push($root.google.cloud.securitycenter.v1.Folder.decode(reader, reader.uint32()));
+                                    break;
+                                case 8:
+                                    message.displayName = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4778,6 +4792,9 @@
                                         return "folders." + error;
                                 }
                             }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
                             return null;
                         };
     
@@ -4815,6 +4832,8 @@
                                     message.folders[i] = $root.google.cloud.securitycenter.v1.Folder.fromObject(object.folders[i]);
                                 }
                             }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
                             return message;
                         };
     
@@ -4840,6 +4859,7 @@
                                 object.parent = "";
                                 object.parentDisplayName = "";
                                 object.type = "";
+                                object.displayName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4858,6 +4878,8 @@
                                 for (var j = 0; j < message.folders.length; ++j)
                                     object.folders[j] = $root.google.cloud.securitycenter.v1.Folder.toObject(message.folders[j], options);
                             }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
                             return object;
                         };
     
@@ -12119,7 +12141,9 @@
                                  * @property {string|null} [projectDisplayName] Resource projectDisplayName
                                  * @property {string|null} [parentName] Resource parentName
                                  * @property {string|null} [parentDisplayName] Resource parentDisplayName
+                                 * @property {string|null} [type] Resource type
                                  * @property {Array.<google.cloud.securitycenter.v1.IFolder>|null} [folders] Resource folders
+                                 * @property {string|null} [displayName] Resource displayName
                                  */
     
                                 /**
@@ -12179,12 +12203,28 @@
                                 Resource.prototype.parentDisplayName = "";
     
                                 /**
+                                 * Resource type.
+                                 * @member {string} type
+                                 * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.type = "";
+    
+                                /**
                                  * Resource folders.
                                  * @member {Array.<google.cloud.securitycenter.v1.IFolder>} folders
                                  * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
                                  * @instance
                                  */
                                 Resource.prototype.folders = $util.emptyArray;
+    
+                                /**
+                                 * Resource displayName.
+                                 * @member {string} displayName
+                                 * @memberof google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.displayName = "";
     
                                 /**
                                  * Creates a new Resource instance using the specified properties.
@@ -12220,9 +12260,13 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.parentName);
                                     if (message.parentDisplayName != null && Object.hasOwnProperty.call(message, "parentDisplayName"))
                                         writer.uint32(/* id 5, wireType 2 =*/42).string(message.parentDisplayName);
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.type);
                                     if (message.folders != null && message.folders.length)
                                         for (var i = 0; i < message.folders.length; ++i)
                                             $root.google.cloud.securitycenter.v1.Folder.encode(message.folders[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.displayName);
                                     return writer;
                                 };
     
@@ -12272,10 +12316,16 @@
                                         case 5:
                                             message.parentDisplayName = reader.string();
                                             break;
+                                        case 6:
+                                            message.type = reader.string();
+                                            break;
                                         case 7:
                                             if (!(message.folders && message.folders.length))
                                                 message.folders = [];
                                             message.folders.push($root.google.cloud.securitycenter.v1.Folder.decode(reader, reader.uint32()));
+                                            break;
+                                        case 8:
+                                            message.displayName = reader.string();
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -12327,6 +12377,9 @@
                                     if (message.parentDisplayName != null && message.hasOwnProperty("parentDisplayName"))
                                         if (!$util.isString(message.parentDisplayName))
                                             return "parentDisplayName: string expected";
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        if (!$util.isString(message.type))
+                                            return "type: string expected";
                                     if (message.folders != null && message.hasOwnProperty("folders")) {
                                         if (!Array.isArray(message.folders))
                                             return "folders: array expected";
@@ -12336,6 +12389,9 @@
                                                 return "folders." + error;
                                         }
                                     }
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        if (!$util.isString(message.displayName))
+                                            return "displayName: string expected";
                                     return null;
                                 };
     
@@ -12361,6 +12417,8 @@
                                         message.parentName = String(object.parentName);
                                     if (object.parentDisplayName != null)
                                         message.parentDisplayName = String(object.parentDisplayName);
+                                    if (object.type != null)
+                                        message.type = String(object.type);
                                     if (object.folders) {
                                         if (!Array.isArray(object.folders))
                                             throw TypeError(".google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource.folders: array expected");
@@ -12371,6 +12429,8 @@
                                             message.folders[i] = $root.google.cloud.securitycenter.v1.Folder.fromObject(object.folders[i]);
                                         }
                                     }
+                                    if (object.displayName != null)
+                                        message.displayName = String(object.displayName);
                                     return message;
                                 };
     
@@ -12395,6 +12455,8 @@
                                         object.projectDisplayName = "";
                                         object.parentName = "";
                                         object.parentDisplayName = "";
+                                        object.type = "";
+                                        object.displayName = "";
                                     }
                                     if (message.name != null && message.hasOwnProperty("name"))
                                         object.name = message.name;
@@ -12406,11 +12468,15 @@
                                         object.parentName = message.parentName;
                                     if (message.parentDisplayName != null && message.hasOwnProperty("parentDisplayName"))
                                         object.parentDisplayName = message.parentDisplayName;
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = message.type;
                                     if (message.folders && message.folders.length) {
                                         object.folders = [];
                                         for (var j = 0; j < message.folders.length; ++j)
                                             object.folders[j] = $root.google.cloud.securitycenter.v1.Folder.toObject(message.folders[j], options);
                                     }
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        object.displayName = message.displayName;
                                     return object;
                                 };
     

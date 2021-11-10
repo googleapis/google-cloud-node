@@ -64,12 +64,12 @@ function main(parent) {
    *  those at that specific time. Absence of this field will default to the
    *  API's version of NOW.
    */
-  // const readTime = ''
+  // const readTime = {}
   /**
    *  Optional. A field mask to specify the Finding fields to be listed in the response.
    *  An empty field mask will list all fields.
    */
-  // const fieldMask = ''
+  // const fieldMask = {}
   /**
    *  The value returned by the last `ListFindingsResponse`; indicates
    *  that this is a continuation of a prior `ListFindings` call, and
@@ -89,7 +89,7 @@ function main(parent) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function listFindings() {
+  async function callListFindings() {
     // Construct request
     const request = {
       parent,
@@ -102,7 +102,7 @@ function main(parent) {
     }
   }
 
-  listFindings();
+  callListFindings();
   // [END securitycenter_v1beta1_generated_SecurityCenter_ListFindings_async]
 }
 

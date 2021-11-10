@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function deleteNotificationConfig() {
+  async function callDeleteNotificationConfig() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteNotificationConfig();
+  callDeleteNotificationConfig();
   // [END securitycenter_v1_generated_SecurityCenter_DeleteNotificationConfig_async]
 }
 

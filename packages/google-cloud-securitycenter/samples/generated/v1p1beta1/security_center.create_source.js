@@ -28,7 +28,7 @@ function main(parent, source) {
    *  Required. The Source being created, only the display_name and description will be
    *  used. All other fields will be ignored.
    */
-  // const source = ''
+  // const source = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} =
@@ -37,7 +37,7 @@ function main(parent, source) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function createSource() {
+  async function callCreateSource() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, source) {
     console.log(response);
   }
 
-  createSource();
+  callCreateSource();
   // [END securitycenter_v1p1beta1_generated_SecurityCenter_CreateSource_async]
 }
 

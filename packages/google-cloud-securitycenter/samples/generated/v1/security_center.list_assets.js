@@ -104,7 +104,7 @@ function main(parent) {
    *  specific time. Absence of this field will default to the API's version of
    *  NOW.
    */
-  // const readTime = ''
+  // const readTime = {}
   /**
    *  When compare_duration is set, the ListAssetsResult's "state_change"
    *  attribute is updated to indicate whether the asset was added, removed, or
@@ -127,13 +127,13 @@ function main(parent) {
    *  is "UNUSED",  which will be the state_change set for all assets present at
    *  read_time.
    */
-  // const compareDuration = ''
+  // const compareDuration = {}
   /**
    *  A field mask to specify the ListAssetsResult fields to be listed in the
    *  response.
    *  An empty field mask will list all fields.
    */
-  // const fieldMask = ''
+  // const fieldMask = {}
   /**
    *  The value returned by the last `ListAssetsResponse`; indicates
    *  that this is a continuation of a prior `ListAssets` call, and
@@ -152,7 +152,7 @@ function main(parent) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function listAssets() {
+  async function callListAssets() {
     // Construct request
     const request = {
       parent,
@@ -165,7 +165,7 @@ function main(parent) {
     }
   }
 
-  listAssets();
+  callListAssets();
   // [END securitycenter_v1_generated_SecurityCenter_ListAssets_async]
 }
 

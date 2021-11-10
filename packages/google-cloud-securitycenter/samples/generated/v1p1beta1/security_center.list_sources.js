@@ -44,7 +44,7 @@ function main(parent) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function listSources() {
+  async function callListSources() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent) {
     }
   }
 
-  listSources();
+  callListSources();
   // [END securitycenter_v1p1beta1_generated_SecurityCenter_ListSources_async]
 }
 

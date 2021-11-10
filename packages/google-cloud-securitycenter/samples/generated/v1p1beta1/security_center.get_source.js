@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function getSource() {
+  async function callGetSource() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getSource();
+  callGetSource();
   // [END securitycenter_v1p1beta1_generated_SecurityCenter_GetSource_async]
 }
 

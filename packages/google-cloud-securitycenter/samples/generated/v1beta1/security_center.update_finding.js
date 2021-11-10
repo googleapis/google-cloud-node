@@ -26,12 +26,12 @@ function main(finding) {
    *  alphanumeric and less than or equal to 32 characters and greater than 0
    *  characters in length.
    */
-  // const finding = ''
+  // const finding = {}
   /**
    *  The FieldMask to use when updating the finding resource. This field should
    *  not be specified when creating a finding.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} =
@@ -40,7 +40,7 @@ function main(finding) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function updateFinding() {
+  async function callUpdateFinding() {
     // Construct request
     const request = {
       finding,
@@ -51,7 +51,7 @@ function main(finding) {
     console.log(response);
   }
 
-  updateFinding();
+  callUpdateFinding();
   // [END securitycenter_v1beta1_generated_SecurityCenter_UpdateFinding_async]
 }
 

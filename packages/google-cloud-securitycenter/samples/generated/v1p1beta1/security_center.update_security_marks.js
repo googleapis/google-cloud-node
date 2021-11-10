@@ -22,20 +22,20 @@ function main(securityMarks) {
   /**
    *  Required. The security marks resource to update.
    */
-  // const securityMarks = ''
+  // const securityMarks = {}
   /**
    *  The FieldMask to use when updating the security marks resource.
    *  The field mask must not contain duplicate fields.
    *  If empty or set to "marks", all marks will be replaced.  Individual
    *  marks can be updated using "marks.<mark_key>".
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  The time at which the updated SecurityMarks take effect.
    *  If not set uses current server time.  Updates will be applied to the
    *  SecurityMarks that are active immediately preceding this time.
    */
-  // const startTime = ''
+  // const startTime = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} =
@@ -44,7 +44,7 @@ function main(securityMarks) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function updateSecurityMarks() {
+  async function callUpdateSecurityMarks() {
     // Construct request
     const request = {
       securityMarks,
@@ -55,7 +55,7 @@ function main(securityMarks) {
     console.log(response);
   }
 
-  updateSecurityMarks();
+  callUpdateSecurityMarks();
   // [END securitycenter_v1p1beta1_generated_SecurityCenter_UpdateSecurityMarks_async]
 }
 

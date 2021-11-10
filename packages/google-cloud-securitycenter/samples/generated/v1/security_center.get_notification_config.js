@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function getNotificationConfig() {
+  async function callGetNotificationConfig() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getNotificationConfig();
+  callGetNotificationConfig();
   // [END securitycenter_v1_generated_SecurityCenter_GetNotificationConfig_async]
 }
 

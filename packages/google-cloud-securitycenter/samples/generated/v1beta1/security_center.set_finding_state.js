@@ -29,11 +29,11 @@ function main(name, state, startTime) {
   /**
    *  Required. The desired State of the finding.
    */
-  // const state = ''
+  // const state = {}
   /**
    *  Required. The time at which the updated state takes effect.
    */
-  // const startTime = ''
+  // const startTime = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} =
@@ -42,7 +42,7 @@ function main(name, state, startTime) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function setFindingState() {
+  async function callSetFindingState() {
     // Construct request
     const request = {
       name,
@@ -55,7 +55,7 @@ function main(name, state, startTime) {
     console.log(response);
   }
 
-  setFindingState();
+  callSetFindingState();
   // [END securitycenter_v1beta1_generated_SecurityCenter_SetFindingState_async]
 }
 

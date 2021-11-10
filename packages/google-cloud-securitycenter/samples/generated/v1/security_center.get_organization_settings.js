@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function getOrganizationSettings() {
+  async function callGetOrganizationSettings() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getOrganizationSettings();
+  callGetOrganizationSettings();
   // [END securitycenter_v1_generated_SecurityCenter_GetOrganizationSettings_async]
 }
 

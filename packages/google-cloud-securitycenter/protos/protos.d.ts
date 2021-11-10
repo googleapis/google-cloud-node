@@ -1698,6 +1698,9 @@ export namespace google {
 
                     /** Resource folders */
                     folders?: (google.cloud.securitycenter.v1.IFolder[]|null);
+
+                    /** Resource displayName */
+                    displayName?: (string|null);
                 }
 
                 /** Represents a Resource. */
@@ -1729,6 +1732,9 @@ export namespace google {
 
                     /** Resource folders. */
                     public folders: google.cloud.securitycenter.v1.IFolder[];
+
+                    /** Resource displayName. */
+                    public displayName: string;
 
                     /**
                      * Creates a new Resource instance using the specified properties.
@@ -4966,8 +4972,14 @@ export namespace google {
                             /** Resource parentDisplayName */
                             parentDisplayName?: (string|null);
 
+                            /** Resource type */
+                            type?: (string|null);
+
                             /** Resource folders */
                             folders?: (google.cloud.securitycenter.v1.IFolder[]|null);
+
+                            /** Resource displayName */
+                            displayName?: (string|null);
                         }
 
                         /** Represents a Resource. */
@@ -4994,8 +5006,14 @@ export namespace google {
                             /** Resource parentDisplayName. */
                             public parentDisplayName: string;
 
+                            /** Resource type. */
+                            public type: string;
+
                             /** Resource folders. */
                             public folders: google.cloud.securitycenter.v1.IFolder[];
+
+                            /** Resource displayName. */
+                            public displayName: string;
 
                             /**
                              * Creates a new Resource instance using the specified properties.

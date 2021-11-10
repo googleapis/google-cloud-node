@@ -22,12 +22,12 @@ function main(source) {
   /**
    *  Required. The source resource to update.
    */
-  // const source = ''
+  // const source = {}
   /**
    *  The FieldMask to use when updating the source resource.
    *  If empty all mutable fields will be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} = require('@google-cloud/security-center').v1;
@@ -35,7 +35,7 @@ function main(source) {
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();
 
-  async function updateSource() {
+  async function callUpdateSource() {
     // Construct request
     const request = {
       source,
@@ -46,7 +46,7 @@ function main(source) {
     console.log(response);
   }
 
-  updateSource();
+  callUpdateSource();
   // [END securitycenter_v1_generated_SecurityCenter_UpdateSource_async]
 }
 

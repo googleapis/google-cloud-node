@@ -490,6 +490,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8
                         }
                       }
                     },
@@ -1622,10 +1626,18 @@
                                   "type": "string",
                                   "id": 5
                                 },
+                                "type": {
+                                  "type": "string",
+                                  "id": 6
+                                },
                                 "folders": {
                                   "rule": "repeated",
                                   "type": "Folder",
                                   "id": 7
+                                },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 8
                                 }
                               }
                             },
