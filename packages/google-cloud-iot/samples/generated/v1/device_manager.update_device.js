@@ -25,14 +25,14 @@ function main(device, updateMask) {
    *  `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
    *  `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
    */
-  // const device = ''
+  // const device = {}
   /**
    *  Required. Only updates the `device` fields indicated by this mask.
    *  The field mask must not be empty, and it must not contain fields that
    *  are immutable or only set by the server.
    *  Mutable top-level fields: `credentials`, `blocked`, and `metadata`
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Iot library
   const {DeviceManagerClient} = require('@google-cloud/iot').v1;
@@ -40,7 +40,7 @@ function main(device, updateMask) {
   // Instantiates a client
   const iotClient = new DeviceManagerClient();
 
-  async function updateDevice() {
+  async function callUpdateDevice() {
     // Construct request
     const request = {
       device,
@@ -52,7 +52,7 @@ function main(device, updateMask) {
     console.log(response);
   }
 
-  updateDevice();
+  callUpdateDevice();
   // [END cloudiot_v1_generated_DeviceManager_UpdateDevice_async]
 }
 

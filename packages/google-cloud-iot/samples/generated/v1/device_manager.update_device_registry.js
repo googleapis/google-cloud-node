@@ -24,7 +24,7 @@ function main(deviceRegistry, updateMask) {
    *  the `name` field must indicate the path of the resource. For example,
    *  `projects/example-project/locations/us-central1/registries/my-registry`.
    */
-  // const deviceRegistry = ''
+  // const deviceRegistry = {}
   /**
    *  Required. Only updates the `device_registry` fields indicated by this mask.
    *  The field mask must not be empty, and it must not contain fields that
@@ -32,7 +32,7 @@ function main(deviceRegistry, updateMask) {
    *  Mutable top-level fields: `event_notification_config`, `http_config`,
    *  `mqtt_config`, and `state_notification_config`.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Iot library
   const {DeviceManagerClient} = require('@google-cloud/iot').v1;
@@ -40,7 +40,7 @@ function main(deviceRegistry, updateMask) {
   // Instantiates a client
   const iotClient = new DeviceManagerClient();
 
-  async function updateDeviceRegistry() {
+  async function callUpdateDeviceRegistry() {
     // Construct request
     const request = {
       deviceRegistry,
@@ -52,7 +52,7 @@ function main(deviceRegistry, updateMask) {
     console.log(response);
   }
 
-  updateDeviceRegistry();
+  callUpdateDeviceRegistry();
   // [END cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_async]
 }
 

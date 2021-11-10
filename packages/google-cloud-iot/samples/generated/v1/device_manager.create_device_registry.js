@@ -29,7 +29,7 @@ function main(parent, deviceRegistry) {
    *  generate that field from the device registry `id` provided and the
    *  `parent` field.
    */
-  // const deviceRegistry = ''
+  // const deviceRegistry = {}
 
   // Imports the Iot library
   const {DeviceManagerClient} = require('@google-cloud/iot').v1;
@@ -37,7 +37,7 @@ function main(parent, deviceRegistry) {
   // Instantiates a client
   const iotClient = new DeviceManagerClient();
 
-  async function createDeviceRegistry() {
+  async function callCreateDeviceRegistry() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, deviceRegistry) {
     console.log(response);
   }
 
-  createDeviceRegistry();
+  callCreateDeviceRegistry();
   // [END cloudiot_v1_generated_DeviceManager_CreateDeviceRegistry_async]
 }
 

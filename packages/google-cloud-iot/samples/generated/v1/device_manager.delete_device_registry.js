@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const iotClient = new DeviceManagerClient();
 
-  async function deleteDeviceRegistry() {
+  async function callDeleteDeviceRegistry() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteDeviceRegistry();
+  callDeleteDeviceRegistry();
   // [END cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_async]
 }
 

@@ -44,7 +44,7 @@ function main(name, binaryData) {
   // Instantiates a client
   const iotClient = new DeviceManagerClient();
 
-  async function sendCommandToDevice() {
+  async function callSendCommandToDevice() {
     // Construct request
     const request = {
       name,
@@ -56,7 +56,7 @@ function main(name, binaryData) {
     console.log(response);
   }
 
-  sendCommandToDevice();
+  callSendCommandToDevice();
   // [END cloudiot_v1_generated_DeviceManager_SendCommandToDevice_async]
 }
 

@@ -30,7 +30,7 @@ function main(name) {
    *  field mask is unset or empty, all fields are returned. Fields have to be
    *  provided in snake_case format, for example: `last_heartbeat_time`.
    */
-  // const fieldMask = ''
+  // const fieldMask = {}
 
   // Imports the Iot library
   const {DeviceManagerClient} = require('@google-cloud/iot').v1;
@@ -38,7 +38,7 @@ function main(name) {
   // Instantiates a client
   const iotClient = new DeviceManagerClient();
 
-  async function getDevice() {
+  async function callGetDevice() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name) {
     console.log(response);
   }
 
-  getDevice();
+  callGetDevice();
   // [END cloudiot_v1_generated_DeviceManager_GetDevice_async]
 }
 

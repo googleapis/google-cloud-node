@@ -345,6 +345,28 @@ export class DeviceManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a device registry that contains devices.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and cloud region where this device registry must be created.
+   *   For example, `projects/example-project/locations/us-central1`.
+   * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
+   *   Required. The device registry. The field `name` must be empty. The server will
+   *   generate that field from the device registry `id` provided and the
+   *   `parent` field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.create_device_registry.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_CreateDeviceRegistry_async
+   */
   createDeviceRegistry(
     request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
     options?: CallOptions
@@ -376,28 +398,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a device registry that contains devices.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and cloud region where this device registry must be created.
-   *   For example, `projects/example-project/locations/us-central1`.
-   * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
-   *   Required. The device registry. The field `name` must be empty. The server will
-   *   generate that field from the device registry `id` provided and the
-   *   `parent` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createDeviceRegistry(request);
-   */
   createDeviceRegistry(
     request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
     optionsOrCallback?:
@@ -441,6 +441,24 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.createDeviceRegistry(request, options, callback);
   }
+  /**
+   * Gets a device registry configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device registry. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.get_device_registry.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_GetDeviceRegistry_async
+   */
   getDeviceRegistry(
     request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
     options?: CallOptions
@@ -468,24 +486,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a device registry configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDeviceRegistry(request);
-   */
   getDeviceRegistry(
     request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
     optionsOrCallback?:
@@ -527,6 +527,31 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.getDeviceRegistry(request, options, callback);
   }
+  /**
+   * Updates a device registry configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
+   *   Required. The new values for the device registry. The `id` field must be empty, and
+   *   the `name` field must indicate the path of the resource. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Only updates the `device_registry` fields indicated by this mask.
+   *   The field mask must not be empty, and it must not contain fields that
+   *   are immutable or only set by the server.
+   *   Mutable top-level fields: `event_notification_config`, `http_config`,
+   *   `mqtt_config`, and `state_notification_config`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.update_device_registry.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_async
+   */
   updateDeviceRegistry(
     request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
     options?: CallOptions
@@ -558,31 +583,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a device registry configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iot.v1.DeviceRegistry} request.deviceRegistry
-   *   Required. The new values for the device registry. The `id` field must be empty, and
-   *   the `name` field must indicate the path of the resource. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Only updates the `device_registry` fields indicated by this mask.
-   *   The field mask must not be empty, and it must not contain fields that
-   *   are immutable or only set by the server.
-   *   Mutable top-level fields: `event_notification_config`, `http_config`,
-   *   `mqtt_config`, and `state_notification_config`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateDeviceRegistry(request);
-   */
   updateDeviceRegistry(
     request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
     optionsOrCallback?:
@@ -626,6 +626,24 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.updateDeviceRegistry(request, options, callback);
   }
+  /**
+   * Deletes a device registry configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device registry. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.delete_device_registry.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_async
+   */
   deleteDeviceRegistry(
     request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
     options?: CallOptions
@@ -657,24 +675,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a device registry configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteDeviceRegistry(request);
-   */
   deleteDeviceRegistry(
     request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
     optionsOrCallback?:
@@ -718,6 +718,29 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.deleteDeviceRegistry(request, options, callback);
   }
+  /**
+   * Creates a device in a device registry.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the device registry where this device should be created.
+   *   For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {google.cloud.iot.v1.Device} request.device
+   *   Required. The device registration details. The field `name` must be empty. The server
+   *   generates `name` from the device registry `id` and the
+   *   `parent` field.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Device]{@link google.cloud.iot.v1.Device}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.create_device.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_CreateDevice_async
+   */
   createDevice(
     request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
     options?: CallOptions
@@ -745,29 +768,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a device in a device registry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the device registry where this device should be created.
-   *   For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {google.cloud.iot.v1.Device} request.device
-   *   Required. The device registration details. The field `name` must be empty. The server
-   *   generates `name` from the device registry `id` and the
-   *   `parent` field.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Device]{@link google.cloud.iot.v1.Device}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createDevice(request);
-   */
   createDevice(
     request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
     optionsOrCallback?:
@@ -807,6 +807,29 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.createDevice(request, options, callback);
   }
+  /**
+   * Gets details about a device.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {google.protobuf.FieldMask} request.fieldMask
+   *   The fields of the `Device` resource to be returned in the response. If the
+   *   field mask is unset or empty, all fields are returned. Fields have to be
+   *   provided in snake_case format, for example: `last_heartbeat_time`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Device]{@link google.cloud.iot.v1.Device}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.get_device.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_GetDevice_async
+   */
   getDevice(
     request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
     options?: CallOptions
@@ -834,29 +857,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details about a device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {google.protobuf.FieldMask} request.fieldMask
-   *   The fields of the `Device` resource to be returned in the response. If the
-   *   field mask is unset or empty, all fields are returned. Fields have to be
-   *   provided in snake_case format, for example: `last_heartbeat_time`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Device]{@link google.cloud.iot.v1.Device}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDevice(request);
-   */
   getDevice(
     request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
     optionsOrCallback?:
@@ -896,6 +896,31 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.getDevice(request, options, callback);
   }
+  /**
+   * Updates a device.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.iot.v1.Device} request.device
+   *   Required. The new values for the device. The `id` and `num_id` fields must
+   *   be empty, and the field `name` must specify the name path. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Only updates the `device` fields indicated by this mask.
+   *   The field mask must not be empty, and it must not contain fields that
+   *   are immutable or only set by the server.
+   *   Mutable top-level fields: `credentials`, `blocked`, and `metadata`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Device]{@link google.cloud.iot.v1.Device}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.update_device.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_UpdateDevice_async
+   */
   updateDevice(
     request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
     options?: CallOptions
@@ -923,31 +948,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iot.v1.Device} request.device
-   *   Required. The new values for the device. The `id` and `num_id` fields must
-   *   be empty, and the field `name` must specify the name path. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Only updates the `device` fields indicated by this mask.
-   *   The field mask must not be empty, and it must not contain fields that
-   *   are immutable or only set by the server.
-   *   Mutable top-level fields: `credentials`, `blocked`, and `metadata`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Device]{@link google.cloud.iot.v1.Device}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateDevice(request);
-   */
   updateDevice(
     request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
     optionsOrCallback?:
@@ -987,6 +987,25 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.updateDevice(request, options, callback);
   }
+  /**
+   * Deletes a device.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.delete_device.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_DeleteDevice_async
+   */
   deleteDevice(
     request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
     options?: CallOptions
@@ -1014,25 +1033,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a device.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteDevice(request);
-   */
   deleteDevice(
     request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
     optionsOrCallback?:
@@ -1072,6 +1072,35 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.deleteDevice(request, options, callback);
   }
+  /**
+   * Modifies the configuration for the device, which is eventually sent from
+   * the Cloud IoT Core servers. Returns the modified configuration version and
+   * its metadata.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {number} request.versionToUpdate
+   *   The version number to update. If this value is zero, it will not check the
+   *   version number of the server and will always update the current version;
+   *   otherwise, this update will fail if the version number found on the server
+   *   does not match this version number. This is used to support multiple
+   *   simultaneous updates without losing data.
+   * @param {Buffer} request.binaryData
+   *   Required. The configuration data for the device.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DeviceConfig]{@link google.cloud.iot.v1.DeviceConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.modify_cloud_to_device_config.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_async
+   */
   modifyCloudToDeviceConfig(
     request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
     options?: CallOptions
@@ -1103,35 +1132,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Modifies the configuration for the device, which is eventually sent from
-   * the Cloud IoT Core servers. Returns the modified configuration version and
-   * its metadata.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {number} request.versionToUpdate
-   *   The version number to update. If this value is zero, it will not check the
-   *   version number of the server and will always update the current version;
-   *   otherwise, this update will fail if the version number found on the server
-   *   does not match this version number. This is used to support multiple
-   *   simultaneous updates without losing data.
-   * @param {Buffer} request.binaryData
-   *   Required. The configuration data for the device.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DeviceConfig]{@link google.cloud.iot.v1.DeviceConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.modifyCloudToDeviceConfig(request);
-   */
   modifyCloudToDeviceConfig(
     request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
     optionsOrCallback?:
@@ -1179,6 +1179,30 @@ export class DeviceManagerClient {
       callback
     );
   }
+  /**
+   * Lists the last few versions of the device configuration in descending
+   * order (i.e.: newest first).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {number} request.numVersions
+   *   The number of versions to list. Versions are listed in decreasing order of
+   *   the version number. The maximum number of versions retained is 10. If this
+   *   value is zero, it will return all the versions available.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListDeviceConfigVersionsResponse]{@link google.cloud.iot.v1.ListDeviceConfigVersionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.list_device_config_versions.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceConfigVersions_async
+   */
   listDeviceConfigVersions(
     request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
     options?: CallOptions
@@ -1210,30 +1234,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Lists the last few versions of the device configuration in descending
-   * order (i.e.: newest first).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {number} request.numVersions
-   *   The number of versions to list. Versions are listed in decreasing order of
-   *   the version number. The maximum number of versions retained is 10. If this
-   *   value is zero, it will return all the versions available.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListDeviceConfigVersionsResponse]{@link google.cloud.iot.v1.ListDeviceConfigVersionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listDeviceConfigVersions(request);
-   */
   listDeviceConfigVersions(
     request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
     optionsOrCallback?:
@@ -1281,6 +1281,30 @@ export class DeviceManagerClient {
       callback
     );
   }
+  /**
+   * Lists the last few versions of the device state in descending order (i.e.:
+   * newest first).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the device. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {number} request.numStates
+   *   The number of states to list. States are listed in descending order of
+   *   update time. The maximum number of states retained is 10. If this
+   *   value is zero, it will return all the states available.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListDeviceStatesResponse]{@link google.cloud.iot.v1.ListDeviceStatesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.list_device_states.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceStates_async
+   */
   listDeviceStates(
     request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
     options?: CallOptions
@@ -1308,30 +1332,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Lists the last few versions of the device state in descending order (i.e.:
-   * newest first).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the device. For example,
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {number} request.numStates
-   *   The number of states to list. States are listed in descending order of
-   *   update time. The maximum number of states retained is 10. If this
-   *   value is zero, it will return all the states available.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListDeviceStatesResponse]{@link google.cloud.iot.v1.ListDeviceStatesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listDeviceStates(request);
-   */
   listDeviceStates(
     request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
     optionsOrCallback?:
@@ -1373,6 +1373,30 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.listDeviceStates(request, options, callback);
   }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any
+   * existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.set_iam_policy.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -1400,30 +1424,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy on the specified resource. Replaces any
-   * existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -1463,6 +1463,29 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a resource.
+   * Returns an empty policy if the resource exists and does not have a policy
+   * set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.get_iam_policy.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -1490,29 +1513,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a resource.
-   * Returns an empty policy if the resource exists and does not have a policy
-   * set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -1552,6 +1552,31 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on the specified resource.
+   * If the resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.test_iam_permissions.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -1579,31 +1604,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   * If the resource does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -1643,33 +1643,6 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
-  sendCommandToDevice(
-    request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  sendCommandToDevice(
-    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendCommandToDevice(
-    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
-    callback: Callback<
-      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
-      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sends a command to the specified device. In order for a device to be able
    * to receive commands, it must:
@@ -1706,9 +1679,36 @@ export class DeviceManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.sendCommandToDevice(request);
+   * @example <caption>include:samples/generated/v1/device_manager.send_command_to_device.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_SendCommandToDevice_async
    */
+  sendCommandToDevice(
+    request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  sendCommandToDevice(
+    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  sendCommandToDevice(
+    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+    callback: Callback<
+      protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+      protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   sendCommandToDevice(
     request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
     optionsOrCallback?:
@@ -1750,6 +1750,31 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.sendCommandToDevice(request, options, callback);
   }
+  /**
+   * Associates the device with the gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the registry. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {string} request.gatewayId
+   *   Required. The value of `gateway_id` can be either the device numeric ID or the
+   *   user-defined device identifier.
+   * @param {string} request.deviceId
+   *   Required. The device to associate with the specified gateway. The value of
+   *   `device_id` can be either the device numeric ID or the user-defined device
+   *   identifier.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BindDeviceToGatewayResponse]{@link google.cloud.iot.v1.BindDeviceToGatewayResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.bind_device_to_gateway.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_async
+   */
   bindDeviceToGateway(
     request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
     options?: CallOptions
@@ -1777,31 +1802,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Associates the device with the gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {string} request.gatewayId
-   *   Required. The value of `gateway_id` can be either the device numeric ID or the
-   *   user-defined device identifier.
-   * @param {string} request.deviceId
-   *   Required. The device to associate with the specified gateway. The value of
-   *   `device_id` can be either the device numeric ID or the user-defined device
-   *   identifier.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BindDeviceToGatewayResponse]{@link google.cloud.iot.v1.BindDeviceToGatewayResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.bindDeviceToGateway(request);
-   */
   bindDeviceToGateway(
     request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
     optionsOrCallback?:
@@ -1843,6 +1843,31 @@ export class DeviceManagerClient {
     this.initialize();
     return this.innerApiCalls.bindDeviceToGateway(request, options, callback);
   }
+  /**
+   * Deletes the association between the device and the gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the registry. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {string} request.gatewayId
+   *   Required. The value of `gateway_id` can be either the device numeric ID or the
+   *   user-defined device identifier.
+   * @param {string} request.deviceId
+   *   Required. The device to disassociate from the specified gateway. The value of
+   *   `device_id` can be either the device numeric ID or the user-defined device
+   *   identifier.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UnbindDeviceFromGatewayResponse]{@link google.cloud.iot.v1.UnbindDeviceFromGatewayResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/device_manager.unbind_device_from_gateway.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_async
+   */
   unbindDeviceFromGateway(
     request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
     options?: CallOptions
@@ -1874,31 +1899,6 @@ export class DeviceManagerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the association between the device and the gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The name of the registry. For example,
-   *   `projects/example-project/locations/us-central1/registries/my-registry`.
-   * @param {string} request.gatewayId
-   *   Required. The value of `gateway_id` can be either the device numeric ID or the
-   *   user-defined device identifier.
-   * @param {string} request.deviceId
-   *   Required. The device to disassociate from the specified gateway. The value of
-   *   `device_id` can be either the device numeric ID or the user-defined device
-   *   identifier.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [UnbindDeviceFromGatewayResponse]{@link google.cloud.iot.v1.UnbindDeviceFromGatewayResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.unbindDeviceFromGateway(request);
-   */
   unbindDeviceFromGateway(
     request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
     optionsOrCallback?:
@@ -1947,6 +1947,36 @@ export class DeviceManagerClient {
     );
   }
 
+  /**
+   * Lists device registries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and cloud region path. For example,
+   *   `projects/example-project/locations/us-central1`.
+   * @param {number} request.pageSize
+   *   The maximum number of registries to return in the response. If this value
+   *   is zero, the service will select a default size. A call may return fewer
+   *   objects than requested. A non-empty `next_page_token` in the response
+   *   indicates that more data is available.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
+   *   that this is a continuation of a prior `ListDeviceRegistries` call and
+   *   the system should return the next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDeviceRegistriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listDeviceRegistries(
     request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
     options?: CallOptions
@@ -1978,36 +2008,6 @@ export class DeviceManagerClient {
       protos.google.cloud.iot.v1.IDeviceRegistry
     >
   ): void;
-  /**
-   * Lists device registries.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and cloud region path. For example,
-   *   `projects/example-project/locations/us-central1`.
-   * @param {number} request.pageSize
-   *   The maximum number of registries to return in the response. If this value
-   *   is zero, the service will select a default size. A call may return fewer
-   *   objects than requested. A non-empty `next_page_token` in the response
-   *   indicates that more data is available.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
-   *   that this is a continuation of a prior `ListDeviceRegistries` call and
-   *   the system should return the next page of data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [DeviceRegistry]{@link google.cloud.iot.v1.DeviceRegistry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listDeviceRegistriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listDeviceRegistries(
     request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
     optionsOrCallback?:
@@ -2130,11 +2130,8 @@ export class DeviceManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listDeviceRegistriesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/device_manager.list_device_registries.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_ListDeviceRegistries_async
    */
   listDeviceRegistriesAsync(
     request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
@@ -2148,7 +2145,6 @@ export class DeviceManagerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2158,33 +2154,6 @@ export class DeviceManagerClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry>;
   }
-  listDevices(
-    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.iot.v1.IDevice[],
-      protos.google.cloud.iot.v1.IListDevicesRequest | null,
-      protos.google.cloud.iot.v1.IListDevicesResponse
-    ]
-  >;
-  listDevices(
-    request: protos.google.cloud.iot.v1.IListDevicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDevicesRequest,
-      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-      protos.google.cloud.iot.v1.IDevice
-    >
-  ): void;
-  listDevices(
-    request: protos.google.cloud.iot.v1.IListDevicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.iot.v1.IListDevicesRequest,
-      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
-      protos.google.cloud.iot.v1.IDevice
-    >
-  ): void;
   /**
    * List devices in a device registry.
    *
@@ -2228,6 +2197,33 @@ export class DeviceManagerClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listDevices(
+    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.iot.v1.IDevice[],
+      protos.google.cloud.iot.v1.IListDevicesRequest | null,
+      protos.google.cloud.iot.v1.IListDevicesResponse
+    ]
+  >;
+  listDevices(
+    request: protos.google.cloud.iot.v1.IListDevicesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.iot.v1.IListDevicesRequest,
+      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
+      protos.google.cloud.iot.v1.IDevice
+    >
+  ): void;
+  listDevices(
+    request: protos.google.cloud.iot.v1.IListDevicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.iot.v1.IListDevicesRequest,
+      protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
+      protos.google.cloud.iot.v1.IDevice
+    >
+  ): void;
   listDevices(
     request?: protos.google.cloud.iot.v1.IListDevicesRequest,
     optionsOrCallback?:
@@ -2372,11 +2368,8 @@ export class DeviceManagerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listDevicesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/device_manager.list_devices.js</caption>
+   * region_tag:cloudiot_v1_generated_DeviceManager_ListDevices_async
    */
   listDevicesAsync(
     request?: protos.google.cloud.iot.v1.IListDevicesRequest,
@@ -2390,7 +2383,6 @@ export class DeviceManagerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
