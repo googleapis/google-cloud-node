@@ -308,12 +308,8 @@ export class StreamingVideoIntelligenceServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.streamingAnnotateVideo();
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
-   * stream.write(request);
-   * stream.end();
+   * @example <caption>include:samples/generated/v1p3beta1/streaming_video_intelligence_service.streaming_annotate_video.js</caption>
+   * region_tag:videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_async
    */
   streamingAnnotateVideo(options?: CallOptions): gax.CancellableStream {
     this.initialize();

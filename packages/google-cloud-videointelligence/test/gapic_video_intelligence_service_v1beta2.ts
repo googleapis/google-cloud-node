@@ -188,7 +188,7 @@ describe('v1beta2.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1beta2.AnnotateVideoRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -216,7 +216,7 @@ describe('v1beta2.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1beta2.AnnotateVideoRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -265,7 +265,7 @@ describe('v1beta2.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1beta2.AnnotateVideoRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateVideo = stubLongRunningCall(
         undefined,
@@ -291,7 +291,7 @@ describe('v1beta2.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1beta2.AnnotateVideoRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateVideo = stubLongRunningCall(
         undefined,

@@ -318,42 +318,6 @@ export class VideoIntelligenceServiceClient {
   // -- Service calls --
   // -------------------
 
-  annotateVideo(
-    request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  annotateVideo(
-    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  annotateVideo(
-    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
-        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Performs asynchronous video annotation. Progress and results can be
    * retrieved through the `google.longrunning.Operations` interface.
@@ -403,10 +367,45 @@ export class VideoIntelligenceServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.annotateVideo(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1beta2/video_intelligence_service.annotate_video.js</caption>
+   * region_tag:videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async
    */
+  annotateVideo(
+    request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
+        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  annotateVideo(
+    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
+        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  annotateVideo(
+    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoResponse,
+        protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoProgress
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   annotateVideo(
     request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
     optionsOrCallback?:
@@ -446,6 +445,8 @@ export class VideoIntelligenceServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.annotateVideo(request, options, callback);
   }
@@ -458,11 +459,8 @@ export class VideoIntelligenceServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkAnnotateVideoProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta2/video_intelligence_service.annotate_video.js</caption>
+   * region_tag:videointelligence_v1beta2_generated_VideoIntelligenceService_AnnotateVideo_async
    */
   async checkAnnotateVideoProgress(
     name: string

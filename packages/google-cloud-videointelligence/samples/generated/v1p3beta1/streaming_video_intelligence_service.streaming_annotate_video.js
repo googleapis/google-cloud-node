@@ -24,7 +24,7 @@ function main() {
    *  request. The first `AnnotateStreamingVideoRequest` message must only
    *  contain a `video_config` message.
    */
-  // const videoConfig = ''
+  // const videoConfig = {}
   /**
    *  The video data to be annotated. Chunks of video data are sequentially
    *  sent in `StreamingAnnotateVideoRequest` messages. Except the initial
@@ -43,7 +43,7 @@ function main() {
   // Instantiates a client
   const videointelligenceClient = new StreamingVideoIntelligenceServiceClient();
 
-  async function streamingAnnotateVideo() {
+  async function callStreamingAnnotateVideo() {
     // Construct request
     const request = {};
 
@@ -62,7 +62,7 @@ function main() {
     stream.end();
   }
 
-  streamingAnnotateVideo();
+  callStreamingAnnotateVideo();
   // [END videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_async]
 }
 
