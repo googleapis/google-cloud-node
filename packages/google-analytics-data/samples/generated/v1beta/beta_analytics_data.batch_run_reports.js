@@ -21,9 +21,9 @@ function main() {
    */
   /**
    *  A Google Analytics GA4 property identifier whose events are tracked.
-   *  Specified in the URL path and not the body. To learn more, see [where to
+   *  Specified in the URL path and not the body. To learn more, see where to
    *  find your Property
-   *  ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *  ID (https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *  This property must be specified for the batch. The property within
    *  RunReportRequest may either be unspecified or consistent with this
    *  property.
@@ -42,7 +42,7 @@ function main() {
   // Instantiates a client
   const dataClient = new BetaAnalyticsDataClient();
 
-  async function batchRunReports() {
+  async function callBatchRunReports() {
     // Construct request
     const request = {};
 
@@ -51,7 +51,7 @@ function main() {
     console.log(response);
   }
 
-  batchRunReports();
+  callBatchRunReports();
   // [END analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async]
 }
 

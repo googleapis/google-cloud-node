@@ -21,9 +21,9 @@ function main() {
    */
   /**
    *  A Google Analytics GA4 property identifier whose events are tracked.
-   *  Specified in the URL path and not the body. To learn more, see [where to
+   *  Specified in the URL path and not the body. To learn more, see where to
    *  find your Property
-   *  ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *  ID (https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *  Within a batch request, this property should either be unspecified or
    *  consistent with the batch-level property.
    *  Example: properties/1234
@@ -59,13 +59,13 @@ function main() {
    *  The filter clause of dimensions. Dimensions must be requested to be used in
    *  this filter. Metrics cannot be used in this filter.
    */
-  // const dimensionFilter = ''
+  // const dimensionFilter = {}
   /**
    *  The filter clause of metrics. Applied at post aggregation phase, similar to
    *  SQL having-clause. Metrics must be requested to be used in this filter.
    *  Dimensions cannot be used in this filter.
    */
-  // const metricFilter = ''
+  // const metricFilter = {}
   /**
    *  A currency code in ISO4217 format, such as "AED", "USD", "JPY".
    *  If the field is empty, the report uses the property's default currency.
@@ -75,7 +75,7 @@ function main() {
    *  Cohort group associated with this request. If there is a cohort group
    *  in the request the 'cohort' dimension must be present.
    */
-  // const cohortSpec = ''
+  // const cohortSpec = {}
   /**
    *  If false or unspecified, each row with all metrics equal to 0 will not be
    *  returned. If true, these rows will be returned if they are not separately
@@ -84,7 +84,7 @@ function main() {
   // const keepEmptyRows = true
   /**
    *  Toggles whether to return the current state of this Analytics Property's
-   *  quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   *  quota. Quota is returned in PropertyQuota (#PropertyQuota).
    */
   // const returnPropertyQuota = true
 
@@ -94,7 +94,7 @@ function main() {
   // Instantiates a client
   const dataClient = new BetaAnalyticsDataClient();
 
-  async function runPivotReport() {
+  async function callRunPivotReport() {
     // Construct request
     const request = {};
 
@@ -103,7 +103,7 @@ function main() {
     console.log(response);
   }
 
-  runPivotReport();
+  callRunPivotReport();
   // [END analyticsdata_v1beta_generated_BetaAnalyticsData_RunPivotReport_async]
 }
 

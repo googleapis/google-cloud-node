@@ -21,8 +21,8 @@ function main() {
    */
   /**
    *  A Google Analytics GA4 property identifier whose events are tracked. To
-   *  learn more, see [where to find your Property
-   *  ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *  learn more, see where to find your Property
+   *  ID (https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *  `property` should be the same value as in your `runReport` request.
    *  Example: properties/1234
    *  Set the Property ID to 0 for compatibility checking on dimensions and
@@ -44,18 +44,18 @@ function main() {
    *  The filter clause of dimensions. `dimensionFilter` should be the same value
    *  as in your `runReport` request.
    */
-  // const dimensionFilter = ''
+  // const dimensionFilter = {}
   /**
    *  The filter clause of metrics. `metricFilter` should be the same value as in
    *  your `runReport` request
    */
-  // const metricFilter = ''
+  // const metricFilter = {}
   /**
    *  Filters the dimensions and metrics in the response to just this
    *  compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”`
    *  to only return compatible dimensions & metrics.
    */
-  // const compatibilityFilter = ''
+  // const compatibilityFilter = {}
 
   // Imports the Data library
   const {BetaAnalyticsDataClient} = require('@google-analytics/data').v1beta;
@@ -63,7 +63,7 @@ function main() {
   // Instantiates a client
   const dataClient = new BetaAnalyticsDataClient();
 
-  async function checkCompatibility() {
+  async function callCheckCompatibility() {
     // Construct request
     const request = {};
 
@@ -72,7 +72,7 @@ function main() {
     console.log(response);
   }
 
-  checkCompatibility();
+  callCheckCompatibility();
   // [END analyticsdata_v1beta_generated_BetaAnalyticsData_CheckCompatibility_async]
 }
 
