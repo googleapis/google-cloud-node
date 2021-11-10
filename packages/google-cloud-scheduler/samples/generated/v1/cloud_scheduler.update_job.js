@@ -20,15 +20,15 @@ function main(job, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new job properties. [name][google.cloud.scheduler.v1.Job.name] must be specified.
+   *  Required. The new job properties. name google.cloud.scheduler.v1.Job.name  must be specified.
    *  Output only fields cannot be modified using UpdateJob.
    *  Any value specified for an output only field will be ignored.
    */
-  // const job = ''
+  // const job = {}
   /**
    *  A  mask used to specify which fields of the job are being updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Scheduler library
   const {CloudSchedulerClient} = require('@google-cloud/scheduler').v1;
@@ -36,7 +36,7 @@ function main(job, updateMask) {
   // Instantiates a client
   const schedulerClient = new CloudSchedulerClient();
 
-  async function updateJob() {
+  async function callUpdateJob() {
     // Construct request
     const request = {
       job,
@@ -48,7 +48,7 @@ function main(job, updateMask) {
     console.log(response);
   }
 
-  updateJob();
+  callUpdateJob();
   // [END cloudscheduler_v1_generated_CloudScheduler_UpdateJob_async]
 }
 

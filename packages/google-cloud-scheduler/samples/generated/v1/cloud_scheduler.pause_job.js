@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const schedulerClient = new CloudSchedulerClient();
 
-  async function pauseJob() {
+  async function callPauseJob() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  pauseJob();
+  callPauseJob();
   // [END cloudscheduler_v1_generated_CloudScheduler_PauseJob_async]
 }
 
