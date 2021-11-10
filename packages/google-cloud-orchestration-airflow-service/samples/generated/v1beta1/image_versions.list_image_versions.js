@@ -44,7 +44,7 @@ function main() {
   // Instantiates a client
   const serviceClient = new ImageVersionsClient();
 
-  async function listImageVersions() {
+  async function callListImageVersions() {
     // Construct request
     const request = {};
 
@@ -55,7 +55,7 @@ function main() {
     }
   }
 
-  listImageVersions();
+  callListImageVersions();
   // [END composer_v1beta1_generated_ImageVersions_ListImageVersions_async]
 }
 

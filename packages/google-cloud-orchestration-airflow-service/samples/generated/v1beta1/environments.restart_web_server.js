@@ -33,7 +33,7 @@ function main() {
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
-  async function restartWebServer() {
+  async function callRestartWebServer() {
     // Construct request
     const request = {};
 
@@ -43,7 +43,7 @@ function main() {
     console.log(response);
   }
 
-  restartWebServer();
+  callRestartWebServer();
   // [END composer_v1beta1_generated_Environments_RestartWebServer_async]
 }
 

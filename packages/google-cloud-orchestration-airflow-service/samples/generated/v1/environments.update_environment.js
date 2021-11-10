@@ -28,7 +28,7 @@ function main() {
    *  A patch environment. Fields specified by the `updateMask` will be copied
    *  from the patch environment into the environment under update.
    */
-  // const environment = ''
+  // const environment = {}
   /**
    *  Required. A comma-separated list of paths, relative to `Environment`, of
    *  fields to update.
@@ -135,7 +135,7 @@ function main() {
    *        It is an error to provide both this mask and a mask specifying one or
    *        more individual environment variables.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Service library
   const {EnvironmentsClient} =
@@ -144,7 +144,7 @@ function main() {
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
-  async function updateEnvironment() {
+  async function callUpdateEnvironment() {
     // Construct request
     const request = {};
 
@@ -154,7 +154,7 @@ function main() {
     console.log(response);
   }
 
-  updateEnvironment();
+  callUpdateEnvironment();
   // [END composer_v1_generated_Environments_UpdateEnvironment_async]
 }
 

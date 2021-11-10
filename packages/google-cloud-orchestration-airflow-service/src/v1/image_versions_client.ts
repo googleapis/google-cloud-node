@@ -313,6 +313,33 @@ export class ImageVersionsClient {
   // -- Service calls --
   // -------------------
 
+  /**
+   * List ImageVersions for provided location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   List ImageVersions in the given project and location, in the form:
+   *   "projects/{projectId}/locations/{locationId}"
+   * @param {number} request.pageSize
+   *   The maximum number of image_versions to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {boolean} request.includePastReleases
+   *   Whether or not image versions from old releases should be included.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ImageVersion]{@link google.cloud.orchestration.airflow.service.v1.ImageVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listImageVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listImageVersions(
     request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
     options?: CallOptions
@@ -344,33 +371,6 @@ export class ImageVersionsClient {
       protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
     >
   ): void;
-  /**
-   * List ImageVersions for provided location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   List ImageVersions in the given project and location, in the form:
-   *   "projects/{projectId}/locations/{locationId}"
-   * @param {number} request.pageSize
-   *   The maximum number of image_versions to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
-   * @param {boolean} request.includePastReleases
-   *   Whether or not image versions from old releases should be included.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ImageVersion]{@link google.cloud.orchestration.airflow.service.v1.ImageVersion}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listImageVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listImageVersions(
     request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
     optionsOrCallback?:
@@ -487,11 +487,8 @@ export class ImageVersionsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listImageVersionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/image_versions.list_image_versions.js</caption>
+   * region_tag:composer_v1_generated_ImageVersions_ListImageVersions_async
    */
   listImageVersionsAsync(
     request?: protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
@@ -505,7 +502,6 @@ export class ImageVersionsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

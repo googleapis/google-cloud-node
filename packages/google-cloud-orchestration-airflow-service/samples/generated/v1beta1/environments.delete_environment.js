@@ -32,7 +32,7 @@ function main() {
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
-  async function deleteEnvironment() {
+  async function callDeleteEnvironment() {
     // Construct request
     const request = {};
 
@@ -42,7 +42,7 @@ function main() {
     console.log(response);
   }
 
-  deleteEnvironment();
+  callDeleteEnvironment();
   // [END composer_v1beta1_generated_Environments_DeleteEnvironment_async]
 }
 

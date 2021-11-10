@@ -33,15 +33,15 @@ function main() {
    *  When used as input, the server also checks if the provided version is
    *  supported and denies the request for an unsupported version.
    *  The Cloud Composer portion of the version is a
-   *  [semantic version](https://semver.org) or `latest`. When the patch version
+   *  semantic version (https://semver.org) or `latest`. When the patch version
    *  is omitted, the current Cloud Composer patch version is selected.
    *  When `latest` is provided instead of an explicit version number,
    *  the server replaces `latest` with the current Cloud Composer version
    *  and stores that version number in the same field.
    *  The portion of the image version that follows `airflow-` is an
    *  official Apache Airflow repository
-   *  [release name](https://github.com/apache/incubator-airflow/releases).
-   *  See also [Version List]
+   *  release name (https://github.com/apache/incubator-airflow/releases).
+   *  See also Version List
    *  (/composer/docs/concepts/versioning/composer-versions).
    */
   // const imageVersion = 'abc123'
@@ -53,7 +53,7 @@ function main() {
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
-  async function checkUpgrade() {
+  async function callCheckUpgrade() {
     // Construct request
     const request = {};
 
@@ -63,7 +63,7 @@ function main() {
     console.log(response);
   }
 
-  checkUpgrade();
+  callCheckUpgrade();
   // [END composer_v1beta1_generated_Environments_CheckUpgrade_async]
 }
 

@@ -28,7 +28,7 @@ function main(updateMask) {
    *  A patch environment. Fields specified by the `updateMask` will be copied
    *  from the patch environment into the environment under update.
    */
-  // const environment = ''
+  // const environment = {}
   /**
    *  Required. A comma-separated list of paths, relative to `Environment`, of
    *  fields to update.
@@ -135,8 +135,8 @@ function main(updateMask) {
    *        new image version. Additionally, the new image version cannot effect
    *        a version downgrade and must match the current image version's
    *        Composer major version and Airflow major and minor versions. Consult
-   *        the [Cloud Composer Version
-   *        List](https://cloud.google.com/composer/docs/concepts/versioning/composer-versions)
+   *        the Cloud Composer Version
+   *        List (https://cloud.google.com/composer/docs/concepts/versioning/composer-versions)
    *        for valid values.
    *  * `config.softwareConfig.schedulerCount`
    *      * Horizontally scale the number of schedulers in Airflow. A positive
@@ -151,7 +151,7 @@ function main(updateMask) {
    *      * Maintenance window during which Cloud Composer components may be
    *        under maintenance.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Service library
   const {EnvironmentsClient} =
@@ -160,7 +160,7 @@ function main(updateMask) {
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
-  async function updateEnvironment() {
+  async function callUpdateEnvironment() {
     // Construct request
     const request = {
       updateMask,
@@ -172,7 +172,7 @@ function main(updateMask) {
     console.log(response);
   }
 
-  updateEnvironment();
+  callUpdateEnvironment();
   // [END composer_v1beta1_generated_Environments_UpdateEnvironment_async]
 }
 

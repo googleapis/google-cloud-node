@@ -32,7 +32,7 @@ function main() {
   // Instantiates a client
   const serviceClient = new EnvironmentsClient();
 
-  async function getEnvironment() {
+  async function callGetEnvironment() {
     // Construct request
     const request = {};
 
@@ -41,7 +41,7 @@ function main() {
     console.log(response);
   }
 
-  getEnvironment();
+  callGetEnvironment();
   // [END composer_v1_generated_Environments_GetEnvironment_async]
 }
 
