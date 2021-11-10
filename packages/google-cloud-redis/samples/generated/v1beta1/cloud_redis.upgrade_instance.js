@@ -36,7 +36,7 @@ function main(name, redisVersion) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function upgradeInstance() {
+  async function callUpgradeInstance() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name, redisVersion) {
     console.log(response);
   }
 
-  upgradeInstance();
+  callUpgradeInstance();
   // [END redis_v1beta1_generated_CloudRedis_UpgradeInstance_async]
 }
 

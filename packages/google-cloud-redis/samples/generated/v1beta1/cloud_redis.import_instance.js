@@ -28,7 +28,7 @@ function main(name, inputConfig) {
   /**
    *  Required. Specify data to be imported.
    */
-  // const inputConfig = ''
+  // const inputConfig = {}
 
   // Imports the Redis library
   const {CloudRedisClient} = require('@google-cloud/redis').v1beta1;
@@ -36,7 +36,7 @@ function main(name, inputConfig) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function importInstance() {
+  async function callImportInstance() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name, inputConfig) {
     console.log(response);
   }
 
-  importInstance();
+  callImportInstance();
   // [END redis_v1beta1_generated_CloudRedis_ImportInstance_async]
 }
 

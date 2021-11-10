@@ -36,9 +36,9 @@ function main(parent, instanceId, instance) {
    */
   // const instanceId = 'abc123'
   /**
-   *  Required. A Redis [Instance] resource
+   *  Required. A Redis Instance  resource
    */
-  // const instance = ''
+  // const instance = {}
 
   // Imports the Redis library
   const {CloudRedisClient} = require('@google-cloud/redis').v1;
@@ -46,7 +46,7 @@ function main(parent, instanceId, instance) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function createInstance() {
+  async function callCreateInstance() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent, instanceId, instance) {
     console.log(response);
   }
 
-  createInstance();
+  callCreateInstance();
   // [END redis_v1_generated_CloudRedis_CreateInstance_async]
 }
 

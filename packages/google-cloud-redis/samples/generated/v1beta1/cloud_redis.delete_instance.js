@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function deleteInstance() {
+  async function callDeleteInstance() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteInstance();
+  callDeleteInstance();
   // [END redis_v1beta1_generated_CloudRedis_DeleteInstance_async]
 }
 

@@ -22,19 +22,19 @@ function main(updateMask, instance) {
   /**
    *  Required. Mask of fields to update. At least one path must be supplied in
    *  this field. The elements of the repeated paths field may only include these
-   *  fields from [Instance][google.cloud.redis.v1.Instance]:
+   *  fields from Instance google.cloud.redis.v1.Instance:
    *   *   `displayName`
    *   *   `labels`
    *   *   `memorySizeGb`
    *   *   `redisConfig`
    *   *   `replica_count`
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. Update description.
    *  Only fields specified in update_mask are updated.
    */
-  // const instance = ''
+  // const instance = {}
 
   // Imports the Redis library
   const {CloudRedisClient} = require('@google-cloud/redis').v1;
@@ -42,7 +42,7 @@ function main(updateMask, instance) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function updateInstance() {
+  async function callUpdateInstance() {
     // Construct request
     const request = {
       updateMask,
@@ -55,7 +55,7 @@ function main(updateMask, instance) {
     console.log(response);
   }
 
-  updateInstance();
+  callUpdateInstance();
   // [END redis_v1_generated_CloudRedis_UpdateInstance_async]
 }
 

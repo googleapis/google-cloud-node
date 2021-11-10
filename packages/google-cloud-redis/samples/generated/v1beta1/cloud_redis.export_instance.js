@@ -28,7 +28,7 @@ function main(name, outputConfig) {
   /**
    *  Required. Specify data to be exported.
    */
-  // const outputConfig = ''
+  // const outputConfig = {}
 
   // Imports the Redis library
   const {CloudRedisClient} = require('@google-cloud/redis').v1beta1;
@@ -36,7 +36,7 @@ function main(name, outputConfig) {
   // Instantiates a client
   const redisClient = new CloudRedisClient();
 
-  async function exportInstance() {
+  async function callExportInstance() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name, outputConfig) {
     console.log(response);
   }
 
-  exportInstance();
+  callExportInstance();
   // [END redis_v1beta1_generated_CloudRedis_ExportInstance_async]
 }
 
