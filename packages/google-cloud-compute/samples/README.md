@@ -13,6 +13,8 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create Instance](#create-instance)
+  * [Create Instance From Template](#create-instance-from-template)
+  * [Create Instance From Template With Overrides](#create-instance-from-template-with-overrides)
   * [Delete Instance](#delete-instance)
   * [Disable Usage Export](#disable-usage-export)
   * [Get Usage Export Bucket](#get-usage-export-bucket)
@@ -54,6 +56,40 @@ __Usage:__
 
 
 `node samples/createInstance.js`
+
+
+-----
+
+
+
+
+### Create Instance From Template
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/createInstanceFromTemplate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstanceFromTemplate.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createInstanceFromTemplate.js`
+
+
+-----
+
+
+
+
+### Create Instance From Template With Overrides
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/createInstanceFromTemplateWithOverrides.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstanceFromTemplateWithOverrides.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createInstanceFromTemplateWithOverrides.js`
 
 
 -----
