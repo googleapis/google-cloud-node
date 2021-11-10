@@ -319,42 +319,6 @@ export class WorkflowsServiceV2BetaClient {
   // -- Service calls --
   // -------------------
 
-  runPipeline(
-    request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  runPipeline(
-    request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  runPipeline(
-    request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
-        protos.google.cloud.lifesciences.v2beta.IMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Runs a pipeline.  The returned Operation's [metadata]
    * [google.longrunning.Operation.metadata] field will contain a
@@ -401,10 +365,45 @@ export class WorkflowsServiceV2BetaClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.runPipeline(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
+   * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
    */
+  runPipeline(
+    request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
+        protos.google.cloud.lifesciences.v2beta.IMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  runPipeline(
+    request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
+        protos.google.cloud.lifesciences.v2beta.IMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runPipeline(
+    request: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lifesciences.v2beta.IRunPipelineResponse,
+        protos.google.cloud.lifesciences.v2beta.IMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   runPipeline(
     request?: protos.google.cloud.lifesciences.v2beta.IRunPipelineRequest,
     optionsOrCallback?:
@@ -462,11 +461,8 @@ export class WorkflowsServiceV2BetaClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRunPipelineProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
+   * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
    */
   async checkRunPipelineProgress(
     name: string
