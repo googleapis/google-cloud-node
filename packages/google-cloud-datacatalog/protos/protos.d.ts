@@ -5336,6 +5336,12 @@ export namespace google {
 
                     /** SearchCatalogResult fullyQualifiedName */
                     fullyQualifiedName?: (string|null);
+
+                    /** SearchCatalogResult displayName */
+                    displayName?: (string|null);
+
+                    /** SearchCatalogResult description */
+                    description?: (string|null);
                 }
 
                 /** Represents a SearchCatalogResult. */
@@ -5370,6 +5376,12 @@ export namespace google {
 
                     /** SearchCatalogResult fullyQualifiedName. */
                     public fullyQualifiedName: string;
+
+                    /** SearchCatalogResult displayName. */
+                    public displayName: string;
+
+                    /** SearchCatalogResult description. */
+                    public description: string;
 
                     /** SearchCatalogResult system. */
                     public system?: ("integratedSystem"|"userSpecifiedSystem");
@@ -5757,6 +5769,9 @@ export namespace google {
 
                     /** BigQueryDateShardedSpec shardCount */
                     shardCount?: (number|Long|string|null);
+
+                    /** BigQueryDateShardedSpec latestShardResource */
+                    latestShardResource?: (string|null);
                 }
 
                 /** Represents a BigQueryDateShardedSpec. */
@@ -5776,6 +5791,9 @@ export namespace google {
 
                     /** BigQueryDateShardedSpec shardCount. */
                     public shardCount: (number|Long|string);
+
+                    /** BigQueryDateShardedSpec latestShardResource. */
+                    public latestShardResource: string;
 
                     /**
                      * Creates a new BigQueryDateShardedSpec instance using the specified properties.

@@ -1727,6 +1727,14 @@
                         "fullyQualifiedName": {
                           "type": "string",
                           "id": 10
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 13
                         }
                       }
                     },
@@ -1816,6 +1824,13 @@
                         "shardCount": {
                           "type": "int64",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "latestShardResource": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }

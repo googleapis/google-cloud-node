@@ -321,6 +321,30 @@ export class PolicyTagManagerSerializationClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Imports all taxonomies and their policy tags to a project as new
+   * taxonomies.
+   *
+   * This method provides a bulk taxonomy / policy tag creation using nested
+   * proto structure.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of project that the newly created taxonomies will
+   *   belong to.
+   * @param {google.cloud.datacatalog.v1beta1.InlineSource} request.inlineSource
+   *   Inline source used for taxonomies import
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ImportTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/policy_tag_manager_serialization.import_taxonomies.js</caption>
+   * region_tag:datacatalog_v1beta1_generated_PolicyTagManagerSerialization_ImportTaxonomies_async
+   */
   importTaxonomies(
     request?: protos.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest,
     options?: CallOptions
@@ -355,30 +379,6 @@ export class PolicyTagManagerSerializationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Imports all taxonomies and their policy tags to a project as new
-   * taxonomies.
-   *
-   * This method provides a bulk taxonomy / policy tag creation using nested
-   * proto structure.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of project that the newly created taxonomies will
-   *   belong to.
-   * @param {google.cloud.datacatalog.v1beta1.InlineSource} request.inlineSource
-   *   Inline source used for taxonomies import
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ImportTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ImportTaxonomiesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.importTaxonomies(request);
-   */
   importTaxonomies(
     request?: protos.google.cloud.datacatalog.v1beta1.IImportTaxonomiesRequest,
     optionsOrCallback?:
@@ -425,6 +425,31 @@ export class PolicyTagManagerSerializationClient {
     this.initialize();
     return this.innerApiCalls.importTaxonomies(request, options, callback);
   }
+  /**
+   * Exports all taxonomies and their policy tags in a project.
+   *
+   * This method generates SerializedTaxonomy protos with nested policy tags
+   * that can be used as an input for future ImportTaxonomies calls.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the project that taxonomies to be exported
+   *   will share.
+   * @param {string[]} request.taxonomies
+   *   Required. Resource names of the taxonomies to be exported.
+   * @param {boolean} request.serializedTaxonomies
+   *   Export taxonomies as serialized taxonomies.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ExportTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/policy_tag_manager_serialization.export_taxonomies.js</caption>
+   * region_tag:datacatalog_v1beta1_generated_PolicyTagManagerSerialization_ExportTaxonomies_async
+   */
   exportTaxonomies(
     request?: protos.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest,
     options?: CallOptions
@@ -459,31 +484,6 @@ export class PolicyTagManagerSerializationClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Exports all taxonomies and their policy tags in a project.
-   *
-   * This method generates SerializedTaxonomy protos with nested policy tags
-   * that can be used as an input for future ImportTaxonomies calls.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Resource name of the project that taxonomies to be exported
-   *   will share.
-   * @param {string[]} request.taxonomies
-   *   Required. Resource names of the taxonomies to be exported.
-   * @param {boolean} request.serializedTaxonomies
-   *   Export taxonomies as serialized taxonomies.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ExportTaxonomiesResponse]{@link google.cloud.datacatalog.v1beta1.ExportTaxonomiesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.exportTaxonomies(request);
-   */
   exportTaxonomies(
     request?: protos.google.cloud.datacatalog.v1beta1.IExportTaxonomiesRequest,
     optionsOrCallback?:

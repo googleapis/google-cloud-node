@@ -1094,7 +1094,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
@@ -1117,7 +1117,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
@@ -1156,7 +1156,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupEntry = stubSimpleCall(
         undefined,
@@ -2749,7 +2749,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
@@ -2780,7 +2780,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
@@ -2829,7 +2829,7 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchCatalog = stubSimpleCall(
         undefined,

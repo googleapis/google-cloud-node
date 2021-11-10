@@ -12385,6 +12385,8 @@
                          * @property {google.cloud.datacatalog.v1.IntegratedSystem|null} [integratedSystem] SearchCatalogResult integratedSystem
                          * @property {string|null} [userSpecifiedSystem] SearchCatalogResult userSpecifiedSystem
                          * @property {string|null} [fullyQualifiedName] SearchCatalogResult fullyQualifiedName
+                         * @property {string|null} [displayName] SearchCatalogResult displayName
+                         * @property {string|null} [description] SearchCatalogResult description
                          */
     
                         /**
@@ -12466,6 +12468,22 @@
                          */
                         SearchCatalogResult.prototype.fullyQualifiedName = "";
     
+                        /**
+                         * SearchCatalogResult displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1.SearchCatalogResult
+                         * @instance
+                         */
+                        SearchCatalogResult.prototype.displayName = "";
+    
+                        /**
+                         * SearchCatalogResult description.
+                         * @member {string} description
+                         * @memberof google.cloud.datacatalog.v1.SearchCatalogResult
+                         * @instance
+                         */
+                        SearchCatalogResult.prototype.description = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -12520,6 +12538,10 @@
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.userSpecifiedSystem);
                             if (message.fullyQualifiedName != null && Object.hasOwnProperty.call(message, "fullyQualifiedName"))
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.fullyQualifiedName);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.description);
                             return writer;
                         };
     
@@ -12577,6 +12599,12 @@
                                     break;
                                 case 10:
                                     message.fullyQualifiedName = reader.string();
+                                    break;
+                                case 12:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 13:
+                                    message.description = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -12660,6 +12688,12 @@
                             if (message.fullyQualifiedName != null && message.hasOwnProperty("fullyQualifiedName"))
                                 if (!$util.isString(message.fullyQualifiedName))
                                     return "fullyQualifiedName: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
                             return null;
                         };
     
@@ -12726,6 +12760,10 @@
                                 message.userSpecifiedSystem = String(object.userSpecifiedSystem);
                             if (object.fullyQualifiedName != null)
                                 message.fullyQualifiedName = String(object.fullyQualifiedName);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
                             return message;
                         };
     
@@ -12749,6 +12787,8 @@
                                 object.linkedResource = "";
                                 object.modifyTime = null;
                                 object.fullyQualifiedName = "";
+                                object.displayName = "";
+                                object.description = "";
                             }
                             if (message.searchResultType != null && message.hasOwnProperty("searchResultType"))
                                 object.searchResultType = options.enums === String ? $root.google.cloud.datacatalog.v1.SearchResultType[message.searchResultType] : message.searchResultType;
@@ -12772,6 +12812,10 @@
                             }
                             if (message.fullyQualifiedName != null && message.hasOwnProperty("fullyQualifiedName"))
                                 object.fullyQualifiedName = message.fullyQualifiedName;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
                             return object;
                         };
     
@@ -13499,6 +13543,7 @@
                          * @property {string|null} [dataset] BigQueryDateShardedSpec dataset
                          * @property {string|null} [tablePrefix] BigQueryDateShardedSpec tablePrefix
                          * @property {number|Long|null} [shardCount] BigQueryDateShardedSpec shardCount
+                         * @property {string|null} [latestShardResource] BigQueryDateShardedSpec latestShardResource
                          */
     
                         /**
@@ -13541,6 +13586,14 @@
                         BigQueryDateShardedSpec.prototype.shardCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * BigQueryDateShardedSpec latestShardResource.
+                         * @member {string} latestShardResource
+                         * @memberof google.cloud.datacatalog.v1.BigQueryDateShardedSpec
+                         * @instance
+                         */
+                        BigQueryDateShardedSpec.prototype.latestShardResource = "";
+    
+                        /**
                          * Creates a new BigQueryDateShardedSpec instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datacatalog.v1.BigQueryDateShardedSpec
@@ -13570,6 +13623,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.tablePrefix);
                             if (message.shardCount != null && Object.hasOwnProperty.call(message, "shardCount"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.shardCount);
+                            if (message.latestShardResource != null && Object.hasOwnProperty.call(message, "latestShardResource"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.latestShardResource);
                             return writer;
                         };
     
@@ -13612,6 +13667,9 @@
                                     break;
                                 case 3:
                                     message.shardCount = reader.int64();
+                                    break;
+                                case 4:
+                                    message.latestShardResource = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -13657,6 +13715,9 @@
                             if (message.shardCount != null && message.hasOwnProperty("shardCount"))
                                 if (!$util.isInteger(message.shardCount) && !(message.shardCount && $util.isInteger(message.shardCount.low) && $util.isInteger(message.shardCount.high)))
                                     return "shardCount: integer|Long expected";
+                            if (message.latestShardResource != null && message.hasOwnProperty("latestShardResource"))
+                                if (!$util.isString(message.latestShardResource))
+                                    return "latestShardResource: string expected";
                             return null;
                         };
     
@@ -13685,6 +13746,8 @@
                                     message.shardCount = object.shardCount;
                                 else if (typeof object.shardCount === "object")
                                     message.shardCount = new $util.LongBits(object.shardCount.low >>> 0, object.shardCount.high >>> 0).toNumber();
+                            if (object.latestShardResource != null)
+                                message.latestShardResource = String(object.latestShardResource);
                             return message;
                         };
     
@@ -13709,6 +13772,7 @@
                                     object.shardCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.shardCount = options.longs === String ? "0" : 0;
+                                object.latestShardResource = "";
                             }
                             if (message.dataset != null && message.hasOwnProperty("dataset"))
                                 object.dataset = message.dataset;
@@ -13719,6 +13783,8 @@
                                     object.shardCount = options.longs === String ? String(message.shardCount) : message.shardCount;
                                 else
                                     object.shardCount = options.longs === String ? $util.Long.prototype.toString.call(message.shardCount) : options.longs === Number ? new $util.LongBits(message.shardCount.low >>> 0, message.shardCount.high >>> 0).toNumber() : message.shardCount;
+                            if (message.latestShardResource != null && message.hasOwnProperty("latestShardResource"))
+                                object.latestShardResource = message.latestShardResource;
                             return object;
                         };
     
