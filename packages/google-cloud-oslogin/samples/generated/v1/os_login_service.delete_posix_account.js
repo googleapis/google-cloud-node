@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const osloginClient = new OsLoginServiceClient();
 
-  async function deletePosixAccount() {
+  async function callDeletePosixAccount() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deletePosixAccount();
+  callDeletePosixAccount();
   // [END oslogin_v1_generated_OsLoginService_DeletePosixAccount_async]
 }
 

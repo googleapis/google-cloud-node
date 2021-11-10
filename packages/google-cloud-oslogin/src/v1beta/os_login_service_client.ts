@@ -310,6 +310,25 @@ export class OsLoginServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Deletes a POSIX account.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A reference to the POSIX account to update. POSIX accounts are identified
+   *   by the project ID they are associated with. A reference to the POSIX
+   *   account is in format `users/{user}/projects/{project}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.delete_posix_account.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_DeletePosixAccount_async
+   */
   deletePosixAccount(
     request?: protos.google.cloud.oslogin.v1beta.IDeletePosixAccountRequest,
     options?: CallOptions
@@ -341,25 +360,6 @@ export class OsLoginServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a POSIX account.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. A reference to the POSIX account to update. POSIX accounts are identified
-   *   by the project ID they are associated with. A reference to the POSIX
-   *   account is in format `users/{user}/projects/{project}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deletePosixAccount(request);
-   */
   deletePosixAccount(
     request?: protos.google.cloud.oslogin.v1beta.IDeletePosixAccountRequest,
     optionsOrCallback?:
@@ -403,6 +403,25 @@ export class OsLoginServiceClient {
     this.initialize();
     return this.innerApiCalls.deletePosixAccount(request, options, callback);
   }
+  /**
+   * Deletes an SSH public key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The fingerprint of the public key to update. Public keys are identified by
+   *   their SHA-256 fingerprint. The fingerprint of the public key is in format
+   *   `users/{user}/sshPublicKeys/{fingerprint}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.delete_ssh_public_key.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_DeleteSshPublicKey_async
+   */
   deleteSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest,
     options?: CallOptions
@@ -434,25 +453,6 @@ export class OsLoginServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes an SSH public key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The fingerprint of the public key to update. Public keys are identified by
-   *   their SHA-256 fingerprint. The fingerprint of the public key is in format
-   *   `users/{user}/sshPublicKeys/{fingerprint}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteSshPublicKey(request);
-   */
   deleteSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IDeleteSshPublicKeyRequest,
     optionsOrCallback?:
@@ -496,6 +496,28 @@ export class OsLoginServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteSshPublicKey(request, options, callback);
   }
+  /**
+   * Retrieves the profile information used for logging in to a virtual machine
+   * on Google Compute Engine.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The unique ID for the user in format `users/{user}`.
+   * @param {string} request.projectId
+   *   The project ID of the Google Cloud Platform project.
+   * @param {string} request.systemId
+   *   A system ID for filtering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [LoginProfile]{@link google.cloud.oslogin.v1beta.LoginProfile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.get_login_profile.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_GetLoginProfile_async
+   */
   getLoginProfile(
     request?: protos.google.cloud.oslogin.v1beta.IGetLoginProfileRequest,
     options?: CallOptions
@@ -527,28 +549,6 @@ export class OsLoginServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves the profile information used for logging in to a virtual machine
-   * on Google Compute Engine.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The unique ID for the user in format `users/{user}`.
-   * @param {string} request.projectId
-   *   The project ID of the Google Cloud Platform project.
-   * @param {string} request.systemId
-   *   A system ID for filtering the results of the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LoginProfile]{@link google.cloud.oslogin.v1beta.LoginProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getLoginProfile(request);
-   */
   getLoginProfile(
     request?: protos.google.cloud.oslogin.v1beta.IGetLoginProfileRequest,
     optionsOrCallback?:
@@ -592,6 +592,25 @@ export class OsLoginServiceClient {
     this.initialize();
     return this.innerApiCalls.getLoginProfile(request, options, callback);
   }
+  /**
+   * Retrieves an SSH public key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The fingerprint of the public key to retrieve. Public keys are identified
+   *   by their SHA-256 fingerprint. The fingerprint of the public key is in
+   *   format `users/{user}/sshPublicKeys/{fingerprint}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.get_ssh_public_key.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_GetSshPublicKey_async
+   */
   getSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest,
     options?: CallOptions
@@ -623,25 +642,6 @@ export class OsLoginServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves an SSH public key.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The fingerprint of the public key to retrieve. Public keys are identified
-   *   by their SHA-256 fingerprint. The fingerprint of the public key is in
-   *   format `users/{user}/sshPublicKeys/{fingerprint}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSshPublicKey(request);
-   */
   getSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IGetSshPublicKeyRequest,
     optionsOrCallback?:
@@ -685,6 +685,29 @@ export class OsLoginServiceClient {
     this.initialize();
     return this.innerApiCalls.getSshPublicKey(request, options, callback);
   }
+  /**
+   * Adds an SSH public key and returns the profile information. Default POSIX
+   * account information is set when no username and UID exist as part of the
+   * login profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The unique ID for the user in format `users/{user}`.
+   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
+   *   Required. The SSH public key and expiration time.
+   * @param {string} request.projectId
+   *   The project ID of the Google Cloud Platform project.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ImportSshPublicKeyResponse]{@link google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.import_ssh_public_key.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_ImportSshPublicKey_async
+   */
   importSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest,
     options?: CallOptions
@@ -716,29 +739,6 @@ export class OsLoginServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Adds an SSH public key and returns the profile information. Default POSIX
-   * account information is set when no username and UID exist as part of the
-   * login profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The unique ID for the user in format `users/{user}`.
-   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
-   *   Required. The SSH public key and expiration time.
-   * @param {string} request.projectId
-   *   The project ID of the Google Cloud Platform project.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ImportSshPublicKeyResponse]{@link google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.importSshPublicKey(request);
-   */
   importSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IImportSshPublicKeyRequest,
     optionsOrCallback?:
@@ -782,6 +782,30 @@ export class OsLoginServiceClient {
     this.initialize();
     return this.innerApiCalls.importSshPublicKey(request, options, callback);
   }
+  /**
+   * Updates an SSH public key and returns the profile information. This method
+   * supports patch semantics.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The fingerprint of the public key to update. Public keys are identified by
+   *   their SHA-256 fingerprint. The fingerprint of the public key is in format
+   *   `users/{user}/sshPublicKeys/{fingerprint}`.
+   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
+   *   Required. The SSH public key and expiration time.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Mask to control which fields get updated. Updates all if not present.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.update_ssh_public_key.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_UpdateSshPublicKey_async
+   */
   updateSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest,
     options?: CallOptions
@@ -813,30 +837,6 @@ export class OsLoginServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates an SSH public key and returns the profile information. This method
-   * supports patch semantics.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The fingerprint of the public key to update. Public keys are identified by
-   *   their SHA-256 fingerprint. The fingerprint of the public key is in format
-   *   `users/{user}/sshPublicKeys/{fingerprint}`.
-   * @param {google.cloud.oslogin.common.SshPublicKey} request.sshPublicKey
-   *   Required. The SSH public key and expiration time.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Mask to control which fields get updated. Updates all if not present.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SshPublicKey]{@link google.cloud.oslogin.common.SshPublicKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateSshPublicKey(request);
-   */
   updateSshPublicKey(
     request?: protos.google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest,
     optionsOrCallback?:

@@ -26,7 +26,7 @@ function main(sshPublicKey) {
   /**
    *  Required. The SSH public key and expiration time.
    */
-  // const sshPublicKey = ''
+  // const sshPublicKey = {}
   /**
    *  The project ID of the Google Cloud Platform project.
    */
@@ -38,7 +38,7 @@ function main(sshPublicKey) {
   // Instantiates a client
   const osloginClient = new OsLoginServiceClient();
 
-  async function importSshPublicKey() {
+  async function callImportSshPublicKey() {
     // Construct request
     const request = {
       sshPublicKey,
@@ -49,7 +49,7 @@ function main(sshPublicKey) {
     console.log(response);
   }
 
-  importSshPublicKey();
+  callImportSshPublicKey();
   // [END oslogin_v1beta_generated_OsLoginService_ImportSshPublicKey_async]
 }
 
