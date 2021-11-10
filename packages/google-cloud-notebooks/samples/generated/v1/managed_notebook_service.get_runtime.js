@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new ManagedNotebookServiceClient();
 
-  async function getRuntime() {
+  async function callGetRuntime() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getRuntime();
+  callGetRuntime();
   // [END notebooks_v1_generated_ManagedNotebookService_GetRuntime_async]
 }
 

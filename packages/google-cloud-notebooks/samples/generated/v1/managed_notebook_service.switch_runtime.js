@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  accelerator config.
    */
-  // const acceleratorConfig = ''
+  // const acceleratorConfig = {}
 
   // Imports the Notebooks library
   const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;
@@ -39,7 +39,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new ManagedNotebookServiceClient();
 
-  async function switchRuntime() {
+  async function callSwitchRuntime() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name) {
     console.log(response);
   }
 
-  switchRuntime();
+  callSwitchRuntime();
   // [END notebooks_v1_generated_ManagedNotebookService_SwitchRuntime_async]
 }
 

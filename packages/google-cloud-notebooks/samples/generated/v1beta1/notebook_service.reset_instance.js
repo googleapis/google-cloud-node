@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function resetInstance() {
+  async function callResetInstance() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  resetInstance();
+  callResetInstance();
   // [END notebooks_v1beta1_generated_NotebookService_ResetInstance_async]
 }
 

@@ -33,7 +33,7 @@ function main(parent, environmentId, environment) {
   /**
    *  Required. The environment to be created.
    */
-  // const environment = ''
+  // const environment = {}
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1beta1;
@@ -41,7 +41,7 @@ function main(parent, environmentId, environment) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function createEnvironment() {
+  async function callCreateEnvironment() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent, environmentId, environment) {
     console.log(response);
   }
 
-  createEnvironment();
+  callCreateEnvironment();
   // [END notebooks_v1beta1_generated_NotebookService_CreateEnvironment_async]
 }
 

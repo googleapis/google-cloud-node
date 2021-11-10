@@ -41,7 +41,7 @@ function main(name, vmId) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function reportInstanceInfo() {
+  async function callReportInstanceInfo() {
     // Construct request
     const request = {
       name,
@@ -54,7 +54,7 @@ function main(name, vmId) {
     console.log(response);
   }
 
-  reportInstanceInfo();
+  callReportInstanceInfo();
   // [END notebooks_v1beta1_generated_NotebookService_ReportInstanceInfo_async]
 }
 

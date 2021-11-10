@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function getExecution() {
+  async function callGetExecution() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getExecution();
+  callGetExecution();
   // [END notebooks_v1_generated_NotebookService_GetExecution_async]
 }
 

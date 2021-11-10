@@ -31,7 +31,7 @@ function main(parent, runtimeId, runtime) {
   /**
    *  Required. The Runtime to be created.
    */
-  // const runtime = ''
+  // const runtime = {}
 
   // Imports the Notebooks library
   const {ManagedNotebookServiceClient} = require('@google-cloud/notebooks').v1;
@@ -39,7 +39,7 @@ function main(parent, runtimeId, runtime) {
   // Instantiates a client
   const notebooksClient = new ManagedNotebookServiceClient();
 
-  async function createRuntime() {
+  async function callCreateRuntime() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent, runtimeId, runtime) {
     console.log(response);
   }
 
-  createRuntime();
+  callCreateRuntime();
   // [END notebooks_v1_generated_ManagedNotebookService_CreateRuntime_async]
 }
 

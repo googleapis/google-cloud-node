@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function deleteEnvironment() {
+  async function callDeleteEnvironment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteEnvironment();
+  callDeleteEnvironment();
   // [END notebooks_v1beta1_generated_NotebookService_DeleteEnvironment_async]
 }
 

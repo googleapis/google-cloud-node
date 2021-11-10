@@ -31,7 +31,7 @@ function main(parent, instanceId, instance) {
   /**
    *  Required. The instance to be created.
    */
-  // const instance = ''
+  // const instance = {}
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v1beta1;
@@ -39,7 +39,7 @@ function main(parent, instanceId, instance) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function createInstance() {
+  async function callCreateInstance() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent, instanceId, instance) {
     console.log(response);
   }
 
-  createInstance();
+  callCreateInstance();
   // [END notebooks_v1beta1_generated_NotebookService_CreateInstance_async]
 }
 

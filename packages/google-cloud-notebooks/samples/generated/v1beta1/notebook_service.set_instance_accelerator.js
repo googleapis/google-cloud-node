@@ -27,11 +27,11 @@ function main(name, type, coreCount) {
   /**
    *  Required. Type of this accelerator.
    */
-  // const type = ''
+  // const type = {}
   /**
    *  Required. Count of cores of this accelerator. Note that not all
-   *  combinations of `type` and `core_count` are valid. Check [GPUs on Compute
-   *  Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
+   *  combinations of `type` and `core_count` are valid. Check GPUs on Compute
+   *  Engine (https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
    *  valid combination. TPUs are not supported.
    */
   // const coreCount = 1234
@@ -42,7 +42,7 @@ function main(name, type, coreCount) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function setInstanceAccelerator() {
+  async function callSetInstanceAccelerator() {
     // Construct request
     const request = {
       name,
@@ -56,7 +56,7 @@ function main(name, type, coreCount) {
     console.log(response);
   }
 
-  setInstanceAccelerator();
+  callSetInstanceAccelerator();
   // [END notebooks_v1beta1_generated_NotebookService_SetInstanceAccelerator_async]
 }
 

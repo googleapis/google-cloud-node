@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function deleteSchedule() {
+  async function callDeleteSchedule() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteSchedule();
+  callDeleteSchedule();
   // [END notebooks_v1_generated_NotebookService_DeleteSchedule_async]
 }
 

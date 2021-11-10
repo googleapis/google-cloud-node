@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function getSchedule() {
+  async function callGetSchedule() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getSchedule();
+  callGetSchedule();
   // [END notebooks_v1_generated_NotebookService_GetSchedule_async]
 }
 

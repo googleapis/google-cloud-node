@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function getEnvironment() {
+  async function callGetEnvironment() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getEnvironment();
+  callGetEnvironment();
   // [END notebooks_v1_generated_NotebookService_GetEnvironment_async]
 }
 

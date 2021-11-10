@@ -40,7 +40,7 @@ function main(parent) {
   // Instantiates a client
   const notebooksClient = new NotebookServiceClient();
 
-  async function listInstances() {
+  async function callListInstances() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent) {
     }
   }
 
-  listInstances();
+  callListInstances();
   // [END notebooks_v1beta1_generated_NotebookService_ListInstances_async]
 }
 
