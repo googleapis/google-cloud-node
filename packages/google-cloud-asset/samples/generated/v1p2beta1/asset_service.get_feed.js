@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function getFeed() {
+  async function callGetFeed() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getFeed();
+  callGetFeed();
   // [END cloudasset_v1p2beta1_generated_AssetService_GetFeed_async]
 }
 

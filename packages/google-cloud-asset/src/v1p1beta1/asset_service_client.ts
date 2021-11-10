@@ -310,37 +310,6 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
 
-  searchAllResources(
-    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
-      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
-      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
-    ]
-  >;
-  searchAllResources(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
-      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
-    >
-  ): void;
-  searchAllResources(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
-      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
-    >
-  ): void;
   /**
    * Searches all the resources under a given accessible CRM scope
    * (project/folder/organization). This RPC gives callers
@@ -391,6 +360,37 @@ export class AssetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  searchAllResources(
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata[],
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest | null,
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+    ]
+  >;
+  searchAllResources(
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
+    >
+  ): void;
+  searchAllResources(
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata
+    >
+  ): void;
   searchAllResources(
     request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     optionsOrCallback?:
@@ -543,11 +543,8 @@ export class AssetServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.searchAllResourcesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1p1beta1/asset_service.search_all_resources.js</caption>
+   * region_tag:cloudasset_v1p1beta1_generated_AssetService_SearchAllResources_async
    */
   searchAllResourcesAsync(
     request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
@@ -561,7 +558,6 @@ export class AssetServiceClient {
       gax.routingHeader.fromParams({
         scope: request.scope || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -571,37 +567,6 @@ export class AssetServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata>;
   }
-  searchAllIamPolicies(
-    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
-      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
-      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
-    ]
-  >;
-  searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
-      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
-    >
-  ): void;
-  searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
-      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
-    >
-  ): void;
   /**
    * Searches all the IAM policies under a given accessible CRM scope
    * (project/folder/organization). This RPC gives callers
@@ -647,6 +612,37 @@ export class AssetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  searchAllIamPolicies(
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult[],
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest | null,
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+    ]
+  >;
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
+    >
+  ): void;
+  searchAllIamPolicies(
+    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+      | protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.asset.v1p1beta1.IIamPolicySearchResult
+    >
+  ): void;
   searchAllIamPolicies(
     request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     optionsOrCallback?:
@@ -789,11 +785,8 @@ export class AssetServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.searchAllIamPoliciesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1p1beta1/asset_service.search_all_iam_policies.js</caption>
+   * region_tag:cloudasset_v1p1beta1_generated_AssetService_SearchAllIamPolicies_async
    */
   searchAllIamPoliciesAsync(
     request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
@@ -807,7 +800,6 @@ export class AssetServiceClient {
       gax.routingHeader.fromParams({
         scope: request.scope || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

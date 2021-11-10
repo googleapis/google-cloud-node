@@ -22,11 +22,11 @@ function main(analysisQuery) {
   /**
    *  Required. The request query.
    */
-  // const analysisQuery = ''
+  // const analysisQuery = {}
   /**
    *  Optional. The request options.
    */
-  // const options = ''
+  // const options = {}
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1p4beta1;
@@ -34,7 +34,7 @@ function main(analysisQuery) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function analyzeIamPolicy() {
+  async function callAnalyzeIamPolicy() {
     // Construct request
     const request = {
       analysisQuery,
@@ -45,7 +45,7 @@ function main(analysisQuery) {
     console.log(response);
   }
 
-  analyzeIamPolicy();
+  callAnalyzeIamPolicy();
   // [END cloudasset_v1p4beta1_generated_AssetService_AnalyzeIamPolicy_async]
 }
 

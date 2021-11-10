@@ -22,7 +22,7 @@ function main(scope) {
   /**
    *  Required. A scope can be a project, a folder, or an organization. The search is
    *  limited to the resources within the `scope`. The caller must be granted the
-   *  [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *  `cloudasset.assets.searchAllResources` (https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *  permission on the desired scope.
    *  The allowed values are:
    *  * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
@@ -32,8 +32,8 @@ function main(scope) {
    */
   // const scope = 'abc123'
   /**
-   *  Optional. The query statement. See [how to construct a
-   *  query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *  Optional. The query statement. See how to construct a
+   *  query (https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
    *  for more information. If not specified or empty, it will search all the
    *  resources within the specified `scope`.
    *  Examples:
@@ -74,14 +74,14 @@ function main(scope) {
   // const query = 'abc123'
   /**
    *  Optional. A list of asset types that this request searches for. If empty, it will
-   *  search all the [searchable asset
-   *  types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *  search all the searchable asset
+   *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
    *  Regular expressions are also supported. For example:
    *  * "compute.googleapis.com.*" snapshots resources whose asset type starts
    *  with "compute.googleapis.com".
    *  * ".*Instance" snapshots resources whose asset type ends with "Instance".
    *  * ".*Instance.*" snapshots resources whose asset type contains "Instance".
-   *  See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *  See RE2 (https://github.com/google/re2/wiki/Syntax) for all supported
    *  regular expression syntax. If the regular expression does not match any
    *  supported asset type, an INVALID_ARGUMENT error will be returned.
    */
@@ -150,7 +150,7 @@ function main(scope) {
    *  returned.
    *  Any invalid field path will trigger INVALID_ARGUMENT error.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Asset library
   const {AssetServiceClient} = require('@google-cloud/asset').v1;
@@ -158,7 +158,7 @@ function main(scope) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function searchAllResources() {
+  async function callSearchAllResources() {
     // Construct request
     const request = {
       scope,
@@ -171,7 +171,7 @@ function main(scope) {
     }
   }
 
-  searchAllResources();
+  callSearchAllResources();
   // [END cloudasset_v1_generated_AssetService_SearchAllResources_async]
 }
 

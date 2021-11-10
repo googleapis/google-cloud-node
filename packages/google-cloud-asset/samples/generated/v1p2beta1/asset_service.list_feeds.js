@@ -32,7 +32,7 @@ function main(parent) {
   // Instantiates a client
   const assetClient = new AssetServiceClient();
 
-  async function listFeeds() {
+  async function callListFeeds() {
     // Construct request
     const request = {
       parent,
@@ -43,7 +43,7 @@ function main(parent) {
     console.log(response);
   }
 
-  listFeeds();
+  callListFeeds();
   // [END cloudasset_v1p2beta1_generated_AssetService_ListFeeds_async]
 }
 
