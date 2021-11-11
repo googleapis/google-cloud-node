@@ -28,11 +28,11 @@ function main(parent, migrationJobId, migrationJob) {
    */
   // const migrationJobId = 'abc123'
   /**
-   *  Required. Represents a [migration
-   *  job](https://cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.migrationJobs)
+   *  Required. Represents a migration
+   *  job (https://cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.migrationJobs)
    *  object.
    */
-  // const migrationJob = ''
+  // const migrationJob = {}
   /**
    *  A unique id used to identify the request. If the server receives two
    *  requests with the same id, then the second request will be ignored.
@@ -48,7 +48,7 @@ function main(parent, migrationJobId, migrationJob) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function createMigrationJob() {
+  async function callCreateMigrationJob() {
     // Construct request
     const request = {
       parent,
@@ -62,7 +62,7 @@ function main(parent, migrationJobId, migrationJob) {
     console.log(response);
   }
 
-  createMigrationJob();
+  callCreateMigrationJob();
   // [END datamigration_v1_generated_DataMigrationService_CreateMigrationJob_async]
 }
 

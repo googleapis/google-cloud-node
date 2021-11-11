@@ -43,7 +43,7 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function deleteConnectionProfile() {
+  async function callDeleteConnectionProfile() {
     // Construct request
     const request = {
       name,
@@ -55,7 +55,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteConnectionProfile();
+  callDeleteConnectionProfile();
   // [END datamigration_v1_generated_DataMigrationService_DeleteConnectionProfile_async]
 }
 

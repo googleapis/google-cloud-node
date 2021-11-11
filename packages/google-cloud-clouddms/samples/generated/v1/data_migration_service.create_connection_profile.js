@@ -30,7 +30,7 @@ function main(parent, connectionProfileId, connectionProfile) {
   /**
    *  Required. The create request body including the connection profile data
    */
-  // const connectionProfile = ''
+  // const connectionProfile = {}
   /**
    *  A unique id used to identify the request. If the server receives two
    *  requests with the same id, then the second request will be ignored.
@@ -46,7 +46,7 @@ function main(parent, connectionProfileId, connectionProfile) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function createConnectionProfile() {
+  async function callCreateConnectionProfile() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent, connectionProfileId, connectionProfile) {
     console.log(response);
   }
 
-  createConnectionProfile();
+  callCreateConnectionProfile();
   // [END datamigration_v1_generated_DataMigrationService_CreateConnectionProfile_async]
 }
 

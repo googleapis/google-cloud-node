@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function getConnectionProfile() {
+  async function callGetConnectionProfile() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getConnectionProfile();
+  callGetConnectionProfile();
   // [END datamigration_v1_generated_DataMigrationService_GetConnectionProfile_async]
 }
 

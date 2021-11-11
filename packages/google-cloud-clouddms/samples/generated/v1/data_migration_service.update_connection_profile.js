@@ -23,11 +23,11 @@ function main(updateMask, connectionProfile) {
    *  Required. Field mask is used to specify the fields to be overwritten in the
    *  connection profile resource by the update.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. The connection profile parameters to update.
    */
-  // const connectionProfile = ''
+  // const connectionProfile = {}
   /**
    *  A unique id used to identify the request. If the server receives two
    *  requests with the same id, then the second request will be ignored.
@@ -43,7 +43,7 @@ function main(updateMask, connectionProfile) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function updateConnectionProfile() {
+  async function callUpdateConnectionProfile() {
     // Construct request
     const request = {
       updateMask,
@@ -56,7 +56,7 @@ function main(updateMask, connectionProfile) {
     console.log(response);
   }
 
-  updateConnectionProfile();
+  callUpdateConnectionProfile();
   // [END datamigration_v1_generated_DataMigrationService_UpdateConnectionProfile_async]
 }
 

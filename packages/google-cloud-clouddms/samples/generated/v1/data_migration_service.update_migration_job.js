@@ -23,11 +23,11 @@ function main(updateMask, migrationJob) {
    *  Required. Field mask is used to specify the fields to be overwritten in the
    *  migration job resource by the update.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. The migration job parameters to update.
    */
-  // const migrationJob = ''
+  // const migrationJob = {}
   /**
    *  A unique id used to identify the request. If the server receives two
    *  requests with the same id, then the second request will be ignored.
@@ -43,7 +43,7 @@ function main(updateMask, migrationJob) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function updateMigrationJob() {
+  async function callUpdateMigrationJob() {
     // Construct request
     const request = {
       updateMask,
@@ -56,7 +56,7 @@ function main(updateMask, migrationJob) {
     console.log(response);
   }
 
-  updateMigrationJob();
+  callUpdateMigrationJob();
   // [END datamigration_v1_generated_DataMigrationService_UpdateMigrationJob_async]
 }
 

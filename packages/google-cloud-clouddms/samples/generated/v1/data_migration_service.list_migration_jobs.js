@@ -62,7 +62,7 @@ function main(parent) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function listMigrationJobs() {
+  async function callListMigrationJobs() {
     // Construct request
     const request = {
       parent,
@@ -75,7 +75,7 @@ function main(parent) {
     }
   }
 
-  listMigrationJobs();
+  callListMigrationJobs();
   // [END datamigration_v1_generated_DataMigrationService_ListMigrationJobs_async]
 }
 

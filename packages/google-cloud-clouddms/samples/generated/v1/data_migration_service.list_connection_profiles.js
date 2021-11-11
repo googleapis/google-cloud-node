@@ -60,7 +60,7 @@ function main(parent) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function listConnectionProfiles() {
+  async function callListConnectionProfiles() {
     // Construct request
     const request = {
       parent,
@@ -73,7 +73,7 @@ function main(parent) {
     }
   }
 
-  listConnectionProfiles();
+  callListConnectionProfiles();
   // [END datamigration_v1_generated_DataMigrationService_ListConnectionProfiles_async]
 }
 

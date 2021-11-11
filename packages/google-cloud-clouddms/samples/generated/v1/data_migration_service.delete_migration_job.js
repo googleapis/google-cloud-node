@@ -44,7 +44,7 @@ function main(name) {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function deleteMigrationJob() {
+  async function callDeleteMigrationJob() {
     // Construct request
     const request = {
       name,
@@ -56,7 +56,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteMigrationJob();
+  callDeleteMigrationJob();
   // [END datamigration_v1_generated_DataMigrationService_DeleteMigrationJob_async]
 }
 
