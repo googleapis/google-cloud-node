@@ -426,7 +426,7 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -450,7 +450,7 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.billing.v1.BillingAccount()
       );
@@ -489,7 +489,7 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createBillingAccount = stubSimpleCall(
         undefined,
@@ -1078,7 +1078,7 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.BillingAccount()
@@ -1110,7 +1110,7 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.billing.v1.BillingAccount()
@@ -1157,7 +1157,7 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listBillingAccounts = stubSimpleCall(
         undefined,

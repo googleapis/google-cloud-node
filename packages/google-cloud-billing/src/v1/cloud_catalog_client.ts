@@ -322,6 +322,30 @@ export class CloudCatalogClient {
   // -- Service calls --
   // -------------------
 
+  /**
+   * Lists all public cloud services.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListServices`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Service]{@link google.cloud.billing.v1.Service}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listServices(
     request?: protos.google.cloud.billing.v1.IListServicesRequest,
     options?: CallOptions
@@ -349,30 +373,6 @@ export class CloudCatalogClient {
       protos.google.cloud.billing.v1.IService
     >
   ): void;
-  /**
-   * Lists all public cloud services.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   Requested page size. Defaults to 5000.
-   * @param {string} request.pageToken
-   *   A token identifying a page of results to return. This should be a
-   *   `next_page_token` value returned from a previous `ListServices`
-   *   call. If unspecified, the first page of results is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Service]{@link google.cloud.billing.v1.Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listServices(
     request?: protos.google.cloud.billing.v1.IListServicesRequest,
     optionsOrCallback?:
@@ -405,6 +405,8 @@ export class CloudCatalogClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listServices(request, options, callback);
   }
@@ -437,6 +439,8 @@ export class CloudCatalogClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -469,11 +473,8 @@ export class CloudCatalogClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listServicesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_catalog.list_services.js</caption>
+   * region_tag:cloudbilling_v1_generated_CloudCatalog_ListServices_async
    */
   listServicesAsync(
     request?: protos.google.cloud.billing.v1.IListServicesRequest,
@@ -481,7 +482,8 @@ export class CloudCatalogClient {
   ): AsyncIterable<protos.google.cloud.billing.v1.IService> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -491,33 +493,6 @@ export class CloudCatalogClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.billing.v1.IService>;
   }
-  listSkus(
-    request?: protos.google.cloud.billing.v1.IListSkusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.billing.v1.ISku[],
-      protos.google.cloud.billing.v1.IListSkusRequest | null,
-      protos.google.cloud.billing.v1.IListSkusResponse
-    ]
-  >;
-  listSkus(
-    request: protos.google.cloud.billing.v1.IListSkusRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.billing.v1.IListSkusRequest,
-      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
-      protos.google.cloud.billing.v1.ISku
-    >
-  ): void;
-  listSkus(
-    request: protos.google.cloud.billing.v1.IListSkusRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.billing.v1.IListSkusRequest,
-      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
-      protos.google.cloud.billing.v1.ISku
-    >
-  ): void;
   /**
    * Lists all publicly available SKUs for a given cloud service.
    *
@@ -563,6 +538,33 @@ export class CloudCatalogClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listSkus(
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.ISku[],
+      protos.google.cloud.billing.v1.IListSkusRequest | null,
+      protos.google.cloud.billing.v1.IListSkusResponse
+    ]
+  >;
+  listSkus(
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
+    >
+  ): void;
+  listSkus(
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
+    >
+  ): void;
   listSkus(
     request?: protos.google.cloud.billing.v1.IListSkusRequest,
     optionsOrCallback?:
@@ -711,11 +713,8 @@ export class CloudCatalogClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSkusAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_catalog.list_skus.js</caption>
+   * region_tag:cloudbilling_v1_generated_CloudCatalog_ListSkus_async
    */
   listSkusAsync(
     request?: protos.google.cloud.billing.v1.IListSkusRequest,
@@ -729,7 +728,6 @@ export class CloudCatalogClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

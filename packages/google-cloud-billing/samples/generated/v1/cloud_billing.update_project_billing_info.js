@@ -28,7 +28,7 @@ function main(name) {
    *  The new billing information for the project. Read-only fields are ignored;
    *  thus, you can leave empty all fields except `billing_account_name`.
    */
-  // const projectBillingInfo = ''
+  // const projectBillingInfo = {}
 
   // Imports the Billing library
   const {CloudBillingClient} = require('@google-cloud/billing').v1;
@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const billingClient = new CloudBillingClient();
 
-  async function updateProjectBillingInfo() {
+  async function callUpdateProjectBillingInfo() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  updateProjectBillingInfo();
+  callUpdateProjectBillingInfo();
   // [END cloudbilling_v1_generated_CloudBilling_UpdateProjectBillingInfo_async]
 }
 

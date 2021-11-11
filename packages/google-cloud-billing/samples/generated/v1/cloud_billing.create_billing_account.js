@@ -25,7 +25,7 @@ function main(billingAccount) {
    *  any created billing accounts must be under a provided master billing
    *  account.
    */
-  // const billingAccount = ''
+  // const billingAccount = {}
 
   // Imports the Billing library
   const {CloudBillingClient} = require('@google-cloud/billing').v1;
@@ -33,7 +33,7 @@ function main(billingAccount) {
   // Instantiates a client
   const billingClient = new CloudBillingClient();
 
-  async function createBillingAccount() {
+  async function callCreateBillingAccount() {
     // Construct request
     const request = {
       billingAccount,
@@ -44,7 +44,7 @@ function main(billingAccount) {
     console.log(response);
   }
 
-  createBillingAccount();
+  callCreateBillingAccount();
   // [END cloudbilling_v1_generated_CloudBilling_CreateBillingAccount_async]
 }
 

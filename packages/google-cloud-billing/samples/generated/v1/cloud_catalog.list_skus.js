@@ -32,7 +32,7 @@ function main(parent) {
    *  specified, the latest pricing will be returned (up to 12 hours old at
    *  most).
    */
-  // const startTime = ''
+  // const startTime = {}
   /**
    *  Optional exclusive end time of the time range for which the pricing
    *  versions will be returned. Timestamps in the future are not allowed.
@@ -41,7 +41,7 @@ function main(parent) {
    *  specified, the latest pricing will be returned (up to 12 hours old at
    *  most).
    */
-  // const endTime = ''
+  // const endTime = {}
   /**
    *  The ISO 4217 currency code for the pricing info in the response proto.
    *  Will use the conversion rate as of start_time.
@@ -65,7 +65,7 @@ function main(parent) {
   // Instantiates a client
   const billingClient = new CloudCatalogClient();
 
-  async function listSkus() {
+  async function callListSkus() {
     // Construct request
     const request = {
       parent,
@@ -78,7 +78,7 @@ function main(parent) {
     }
   }
 
-  listSkus();
+  callListSkus();
   // [END cloudbilling_v1_generated_CloudCatalog_ListSkus_async]
 }
 

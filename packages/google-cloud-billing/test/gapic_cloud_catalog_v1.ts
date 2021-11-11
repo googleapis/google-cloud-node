@@ -203,7 +203,7 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
@@ -228,7 +228,7 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
         generateSampleMessage(new protos.google.cloud.billing.v1.Service()),
@@ -269,7 +269,7 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listServices = stubSimpleCall(
         undefined,

@@ -26,12 +26,12 @@ function main(name, account) {
   /**
    *  Required. The billing account resource to replace the resource on the server.
    */
-  // const account = ''
+  // const account = {}
   /**
    *  The update mask applied to the resource.
    *  Only "display_name" is currently supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Billing library
   const {CloudBillingClient} = require('@google-cloud/billing').v1;
@@ -39,7 +39,7 @@ function main(name, account) {
   // Instantiates a client
   const billingClient = new CloudBillingClient();
 
-  async function updateBillingAccount() {
+  async function callUpdateBillingAccount() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name, account) {
     console.log(response);
   }
 
-  updateBillingAccount();
+  callUpdateBillingAccount();
   // [END cloudbilling_v1_generated_CloudBilling_UpdateBillingAccount_async]
 }
 
