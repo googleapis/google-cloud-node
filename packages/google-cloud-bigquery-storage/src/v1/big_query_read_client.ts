@@ -321,40 +321,6 @@ export class BigQueryReadClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  createReadSession(
-    request?: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
-      (
-        | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  createReadSession(
-    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
-      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReadSession(
-    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
-    callback: Callback<
-      protos.google.cloud.bigquery.storage.v1.IReadSession,
-      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a new read session. A read session divides the contents of a
    * BigQuery table into one or more streams, which can then be used to read
@@ -399,9 +365,43 @@ export class BigQueryReadClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createReadSession(request);
+   * @example <caption>include:samples/generated/v1/big_query_read.create_read_session.js</caption>
+   * region_tag:bigquerystorage_v1_generated_BigQueryRead_CreateReadSession_async
    */
+  createReadSession(
+    request?: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      (
+        | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createReadSession(
+    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createReadSession(
+    request: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.storage.v1.IReadSession,
+      | protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createReadSession(
     request?: protos.google.cloud.bigquery.storage.v1.ICreateReadSessionRequest,
     optionsOrCallback?:
@@ -448,6 +448,42 @@ export class BigQueryReadClient {
     this.initialize();
     return this.innerApiCalls.createReadSession(request, options, callback);
   }
+  /**
+   * Splits a given `ReadStream` into two `ReadStream` objects. These
+   * `ReadStream` objects are referred to as the primary and the residual
+   * streams of the split. The original `ReadStream` can still be read from in
+   * the same manner as before. Both of the returned `ReadStream` objects can
+   * also be read from, and the rows returned by both child streams will be
+   * the same as the rows read from the original stream.
+   *
+   * Moreover, the two child streams will be allocated back-to-back in the
+   * original `ReadStream`. Concretely, it is guaranteed that for streams
+   * original, primary, and residual, that original[0-j] = primary[0-j] and
+   * original[j-n] = residual[0-m] once the streams have been read to
+   * completion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the stream to split.
+   * @param {number} request.fraction
+   *   A value in the range (0.0, 1.0) that specifies the fractional point at
+   *   which the original stream should be split. The actual split point is
+   *   evaluated on pre-filtered rows, so if a filter is provided, then there is
+   *   no guarantee that the division of the rows between the new child streams
+   *   will be proportional to this fractional value. Additionally, because the
+   *   server-side unit for assigning data is collections of rows, this fraction
+   *   will always map to a data storage boundary on the server side.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SplitReadStreamResponse]{@link google.cloud.bigquery.storage.v1.SplitReadStreamResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/big_query_read.split_read_stream.js</caption>
+   * region_tag:bigquerystorage_v1_generated_BigQueryRead_SplitReadStream_async
+   */
   splitReadStream(
     request?: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
     options?: CallOptions
@@ -482,42 +518,6 @@ export class BigQueryReadClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Splits a given `ReadStream` into two `ReadStream` objects. These
-   * `ReadStream` objects are referred to as the primary and the residual
-   * streams of the split. The original `ReadStream` can still be read from in
-   * the same manner as before. Both of the returned `ReadStream` objects can
-   * also be read from, and the rows returned by both child streams will be
-   * the same as the rows read from the original stream.
-   *
-   * Moreover, the two child streams will be allocated back-to-back in the
-   * original `ReadStream`. Concretely, it is guaranteed that for streams
-   * original, primary, and residual, that original[0-j] = primary[0-j] and
-   * original[j-n] = residual[0-m] once the streams have been read to
-   * completion.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the stream to split.
-   * @param {number} request.fraction
-   *   A value in the range (0.0, 1.0) that specifies the fractional point at
-   *   which the original stream should be split. The actual split point is
-   *   evaluated on pre-filtered rows, so if a filter is provided, then there is
-   *   no guarantee that the division of the rows between the new child streams
-   *   will be proportional to this fractional value. Additionally, because the
-   *   server-side unit for assigning data is collections of rows, this fraction
-   *   will always map to a data storage boundary on the server side.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SplitReadStreamResponse]{@link google.cloud.bigquery.storage.v1.SplitReadStreamResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.splitReadStream(request);
-   */
   splitReadStream(
     request?: protos.google.cloud.bigquery.storage.v1.ISplitReadStreamRequest,
     optionsOrCallback?:
@@ -589,10 +589,8 @@ export class BigQueryReadClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.readRows(request);
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
+   * @example <caption>include:samples/generated/v1/big_query_read.read_rows.js</caption>
+   * region_tag:bigquerystorage_v1_generated_BigQueryRead_ReadRows_async
    */
   readRows(
     request?: protos.google.cloud.bigquery.storage.v1.IReadRowsRequest,

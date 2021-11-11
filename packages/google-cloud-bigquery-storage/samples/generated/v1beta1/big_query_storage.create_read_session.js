@@ -22,7 +22,7 @@ function main(tableReference, parent) {
   /**
    *  Required. Reference to the table to read.
    */
-  // const tableReference = ''
+  // const tableReference = {}
   /**
    *  Required. String of the form `projects/{project_id}` indicating the
    *  project this ReadSession is associated with. This is the project that will
@@ -32,7 +32,7 @@ function main(tableReference, parent) {
   /**
    *  Any modifiers to the Table (e.g. snapshot timestamp).
    */
-  // const tableModifiers = ''
+  // const tableModifiers = {}
   /**
    *  Initial number of streams. If unset or 0, we will
    *  provide a value of streams so as to produce reasonable throughput. Must be
@@ -45,16 +45,16 @@ function main(tableReference, parent) {
   /**
    *  Read options for this session (e.g. column selection, filters).
    */
-  // const readOptions = ''
+  // const readOptions = {}
   /**
    *  Data output format. Currently default to Avro.
    */
-  // const format = ''
+  // const format = {}
   /**
    *  The strategy to use for distributing data among multiple streams. Currently
    *  defaults to liquid sharding.
    */
-  // const shardingStrategy = ''
+  // const shardingStrategy = {}
 
   // Imports the Storage library
   const {BigQueryStorageClient} =
@@ -63,7 +63,7 @@ function main(tableReference, parent) {
   // Instantiates a client
   const storageClient = new BigQueryStorageClient();
 
-  async function createReadSession() {
+  async function callCreateReadSession() {
     // Construct request
     const request = {
       tableReference,
@@ -75,7 +75,7 @@ function main(tableReference, parent) {
     console.log(response);
   }
 
-  createReadSession();
+  callCreateReadSession();
   // [END bigquerystorage_v1beta1_generated_BigQueryStorage_CreateReadSession_async]
 }
 

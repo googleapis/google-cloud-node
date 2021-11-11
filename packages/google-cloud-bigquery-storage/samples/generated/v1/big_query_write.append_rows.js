@@ -36,11 +36,11 @@ function main(writeStream) {
    *  current end of stream. Specifying a value for this field is not allowed
    *  when calling AppendRows for the '_default' stream.
    */
-  // const offset = ''
+  // const offset = {}
   /**
    *  Rows in proto format.
    */
-  // const protoRows = ''
+  // const protoRows = {}
   /**
    *  Id set by client to annotate its identity. Only initial request setting is
    *  respected.
@@ -53,7 +53,7 @@ function main(writeStream) {
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();
 
-  async function appendRows() {
+  async function callAppendRows() {
     // Construct request
     const request = {
       writeStream,
@@ -74,7 +74,7 @@ function main(writeStream) {
     stream.end();
   }
 
-  appendRows();
+  callAppendRows();
   // [END bigquerystorage_v1_generated_BigQueryWrite_AppendRows_async]
 }
 

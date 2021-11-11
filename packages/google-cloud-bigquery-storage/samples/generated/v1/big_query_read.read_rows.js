@@ -36,7 +36,7 @@ function main(readStream) {
   // Instantiates a client
   const storageClient = new BigQueryReadClient();
 
-  async function readRows() {
+  async function callReadRows() {
     // Construct request
     const request = {
       readStream,
@@ -55,7 +55,7 @@ function main(readStream) {
     });
   }
 
-  readRows();
+  callReadRows();
   // [END bigquerystorage_v1_generated_BigQueryRead_ReadRows_async]
 }
 

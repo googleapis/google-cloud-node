@@ -27,7 +27,7 @@ function main(parent, writeStream) {
   /**
    *  Required. Stream to be created.
    */
-  // const writeStream = ''
+  // const writeStream = {}
 
   // Imports the Storage library
   const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage').v1;
@@ -35,7 +35,7 @@ function main(parent, writeStream) {
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();
 
-  async function createWriteStream() {
+  async function callCreateWriteStream() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, writeStream) {
     console.log(response);
   }
 
-  createWriteStream();
+  callCreateWriteStream();
   // [END bigquerystorage_v1_generated_BigQueryWrite_CreateWriteStream_async]
 }
 

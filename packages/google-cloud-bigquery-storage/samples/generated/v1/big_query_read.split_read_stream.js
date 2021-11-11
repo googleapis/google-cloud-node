@@ -40,7 +40,7 @@ function main(name) {
   // Instantiates a client
   const storageClient = new BigQueryReadClient();
 
-  async function splitReadStream() {
+  async function callSplitReadStream() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name) {
     console.log(response);
   }
 
-  splitReadStream();
+  callSplitReadStream();
   // [END bigquerystorage_v1_generated_BigQueryRead_SplitReadStream_async]
 }
 

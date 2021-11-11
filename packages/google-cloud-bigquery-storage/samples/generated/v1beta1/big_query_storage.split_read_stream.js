@@ -22,7 +22,7 @@ function main(originalStream) {
   /**
    *  Required. Stream to split.
    */
-  // const originalStream = ''
+  // const originalStream = {}
   /**
    *  A value in the range (0.0, 1.0) that specifies the fractional point at
    *  which the original stream should be split. The actual split point is
@@ -41,7 +41,7 @@ function main(originalStream) {
   // Instantiates a client
   const storageClient = new BigQueryStorageClient();
 
-  async function splitReadStream() {
+  async function callSplitReadStream() {
     // Construct request
     const request = {
       originalStream,
@@ -52,7 +52,7 @@ function main(originalStream) {
     console.log(response);
   }
 
-  splitReadStream();
+  callSplitReadStream();
   // [END bigquerystorage_v1beta1_generated_BigQueryStorage_SplitReadStream_async]
 }
 

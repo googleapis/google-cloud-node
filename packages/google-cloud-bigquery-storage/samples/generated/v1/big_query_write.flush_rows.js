@@ -27,7 +27,7 @@ function main(writeStream) {
    *  Ending offset of the flush operation. Rows before this offset(including
    *  this offset) will be flushed.
    */
-  // const offset = ''
+  // const offset = {}
 
   // Imports the Storage library
   const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage').v1;
@@ -35,7 +35,7 @@ function main(writeStream) {
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();
 
-  async function flushRows() {
+  async function callFlushRows() {
     // Construct request
     const request = {
       writeStream,
@@ -46,7 +46,7 @@ function main(writeStream) {
     console.log(response);
   }
 
-  flushRows();
+  callFlushRows();
   // [END bigquerystorage_v1_generated_BigQueryWrite_FlushRows_async]
 }
 

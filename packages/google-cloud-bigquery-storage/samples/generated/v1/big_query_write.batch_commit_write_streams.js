@@ -35,7 +35,7 @@ function main(parent, writeStreams) {
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();
 
-  async function batchCommitWriteStreams() {
+  async function callBatchCommitWriteStreams() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, writeStreams) {
     console.log(response);
   }
 
-  batchCommitWriteStreams();
+  callBatchCommitWriteStreams();
   // [END bigquerystorage_v1_generated_BigQueryWrite_BatchCommitWriteStreams_async]
 }
 

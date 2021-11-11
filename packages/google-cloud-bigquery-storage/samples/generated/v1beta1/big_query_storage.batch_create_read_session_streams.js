@@ -23,7 +23,7 @@ function main(session, requestedStreams) {
    *  Required. Must be a non-expired session obtained from a call to
    *  CreateReadSession. Only the name field needs to be set.
    */
-  // const session = ''
+  // const session = {}
   /**
    *  Required. Number of new streams requested. Must be positive.
    *  Number of added streams may be less than this, see CreateReadSessionRequest
@@ -38,7 +38,7 @@ function main(session, requestedStreams) {
   // Instantiates a client
   const storageClient = new BigQueryStorageClient();
 
-  async function batchCreateReadSessionStreams() {
+  async function callBatchCreateReadSessionStreams() {
     // Construct request
     const request = {
       session,
@@ -50,7 +50,7 @@ function main(session, requestedStreams) {
     console.log(response);
   }
 
-  batchCreateReadSessionStreams();
+  callBatchCreateReadSessionStreams();
   // [END bigquerystorage_v1beta1_generated_BigQueryStorage_BatchCreateReadSessionStreams_async]
 }
 

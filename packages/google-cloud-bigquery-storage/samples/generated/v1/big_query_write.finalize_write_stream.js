@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();
 
-  async function finalizeWriteStream() {
+  async function callFinalizeWriteStream() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  finalizeWriteStream();
+  callFinalizeWriteStream();
   // [END bigquerystorage_v1_generated_BigQueryWrite_FinalizeWriteStream_async]
 }
 

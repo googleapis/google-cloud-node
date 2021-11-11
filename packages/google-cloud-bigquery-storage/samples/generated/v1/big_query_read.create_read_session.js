@@ -27,7 +27,7 @@ function main(parent, readSession) {
   /**
    *  Required. Session to be created.
    */
-  // const readSession = ''
+  // const readSession = {}
   /**
    *  Max initial number of streams. If unset or zero, the server will
    *  provide a value of streams so as to produce reasonable throughput. Must be
@@ -45,7 +45,7 @@ function main(parent, readSession) {
   // Instantiates a client
   const storageClient = new BigQueryReadClient();
 
-  async function createReadSession() {
+  async function callCreateReadSession() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent, readSession) {
     console.log(response);
   }
 
-  createReadSession();
+  callCreateReadSession();
   // [END bigquerystorage_v1_generated_BigQueryRead_CreateReadSession_async]
 }
 
