@@ -22,7 +22,7 @@ function main(transferConfig, updateMask) {
   /**
    *  Required. Data transfer configuration to create.
    */
-  // const transferConfig = ''
+  // const transferConfig = {}
   /**
    *  Optional OAuth2 authorization code to use with this transfer configuration.
    *  If it is provided, the transfer configuration will be associated with the
@@ -44,7 +44,7 @@ function main(transferConfig, updateMask) {
   /**
    *  Required. Required list of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional version info. If users want to find a very recent access token,
    *  that is, immediately after approving access, users have to set the
@@ -70,7 +70,7 @@ function main(transferConfig, updateMask) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function updateTransferConfig() {
+  async function callUpdateTransferConfig() {
     // Construct request
     const request = {
       transferConfig,
@@ -82,7 +82,7 @@ function main(transferConfig, updateMask) {
     console.log(response);
   }
 
-  updateTransferConfig();
+  callUpdateTransferConfig();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_UpdateTransferConfig_async]
 }
 

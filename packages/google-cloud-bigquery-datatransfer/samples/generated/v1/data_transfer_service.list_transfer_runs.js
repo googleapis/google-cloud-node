@@ -45,7 +45,7 @@ function main(parent) {
   /**
    *  Indicates how run attempts are to be pulled.
    */
-  // const runAttempt = ''
+  // const runAttempt = {}
 
   // Imports the Datatransfer library
   const {DataTransferServiceClient} =
@@ -54,7 +54,7 @@ function main(parent) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function listTransferRuns() {
+  async function callListTransferRuns() {
     // Construct request
     const request = {
       parent,
@@ -67,7 +67,7 @@ function main(parent) {
     }
   }
 
-  listTransferRuns();
+  callListTransferRuns();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_ListTransferRuns_async]
 }
 

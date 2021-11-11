@@ -45,7 +45,7 @@ function main(parent) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function listDataSources() {
+  async function callListDataSources() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent) {
     }
   }
 
-  listDataSources();
+  callListDataSources();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_ListDataSources_async]
 }
 

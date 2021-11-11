@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function getTransferRun() {
+  async function callGetTransferRun() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTransferRun();
+  callGetTransferRun();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_GetTransferRun_async]
 }
 

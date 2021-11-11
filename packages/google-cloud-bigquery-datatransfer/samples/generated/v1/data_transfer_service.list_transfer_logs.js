@@ -50,7 +50,7 @@ function main(parent) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function listTransferLogs() {
+  async function callListTransferLogs() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent) {
     }
   }
 
-  listTransferLogs();
+  callListTransferLogs();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_ListTransferLogs_async]
 }
 
