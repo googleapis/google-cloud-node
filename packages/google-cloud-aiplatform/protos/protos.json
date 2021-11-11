@@ -26117,7 +26117,10 @@
                             "parameters": {
                               "keyType": "string",
                               "type": "Value",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "gcsOutputDirectory": {
                               "type": "string",
@@ -26125,6 +26128,11 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "parameterValues": {
+                              "keyType": "string",
+                              "type": "google.protobuf.Value",
+                              "id": 3
                             }
                           }
                         }
