@@ -27,7 +27,7 @@ function main(parent, indexEndpoint) {
   /**
    *  Required. The IndexEndpoint to create.
    */
-  // const indexEndpoint = ''
+  // const indexEndpoint = {}
 
   // Imports the Aiplatform library
   const {IndexEndpointServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, indexEndpoint) {
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function createIndexEndpoint() {
+  async function callCreateIndexEndpoint() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, indexEndpoint) {
     console.log(response);
   }
 
-  createIndexEndpoint();
+  callCreateIndexEndpoint();
   // [END aiplatform_v1beta1_generated_IndexEndpointService_CreateIndexEndpoint_async]
 }
 

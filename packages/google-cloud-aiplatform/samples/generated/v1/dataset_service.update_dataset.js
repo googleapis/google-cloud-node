@@ -22,16 +22,16 @@ function main(dataset, updateMask) {
   /**
    *  Required. The Dataset which replaces the resource on the server.
    */
-  // const dataset = ''
+  // const dataset = {}
   /**
    *  Required. The update mask applies to the resource.
-   *  For the `FieldMask` definition, see [google.protobuf.FieldMask][google.protobuf.FieldMask].
+   *  For the `FieldMask` definition, see google.protobuf.FieldMask google.protobuf.FieldMask.
    *  Updatable fields:
    *    * `display_name`
    *    * `description`
    *    * `labels`
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Aiplatform library
   const {DatasetServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -39,7 +39,7 @@ function main(dataset, updateMask) {
   // Instantiates a client
   const aiplatformClient = new DatasetServiceClient();
 
-  async function updateDataset() {
+  async function callUpdateDataset() {
     // Construct request
     const request = {
       dataset,
@@ -51,7 +51,7 @@ function main(dataset, updateMask) {
     console.log(response);
   }
 
-  updateDataset();
+  callUpdateDataset();
   // [END aiplatform_v1_generated_DatasetService_UpdateDataset_async]
 }
 

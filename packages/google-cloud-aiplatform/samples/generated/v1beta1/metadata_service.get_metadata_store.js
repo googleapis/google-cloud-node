@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function getMetadataStore() {
+  async function callGetMetadataStore() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getMetadataStore();
+  callGetMetadataStore();
   // [END aiplatform_v1beta1_generated_MetadataService_GetMetadataStore_async]
 }
 

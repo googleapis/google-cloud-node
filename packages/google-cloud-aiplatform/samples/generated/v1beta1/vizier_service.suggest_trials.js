@@ -42,7 +42,7 @@ function main(parent, suggestionCount, clientId) {
   // Instantiates a client
   const aiplatformClient = new VizierServiceClient();
 
-  async function suggestTrials() {
+  async function callSuggestTrials() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, suggestionCount, clientId) {
     console.log(response);
   }
 
-  suggestTrials();
+  callSuggestTrials();
   // [END aiplatform_v1beta1_generated_VizierService_SuggestTrials_async]
 }
 

@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function getModelDeploymentMonitoringJob() {
+  async function callGetModelDeploymentMonitoringJob() {
     // Construct request
     const request = {
       name,
@@ -45,7 +45,7 @@ function main(name) {
     console.log(response);
   }
 
-  getModelDeploymentMonitoringJob();
+  callGetModelDeploymentMonitoringJob();
   // [END aiplatform_v1beta1_generated_JobService_GetModelDeploymentMonitoringJob_async]
 }
 

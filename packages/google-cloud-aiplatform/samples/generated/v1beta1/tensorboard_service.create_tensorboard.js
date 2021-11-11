@@ -27,7 +27,7 @@ function main(parent, tensorboard) {
   /**
    *  Required. The Tensorboard to create.
    */
-  // const tensorboard = ''
+  // const tensorboard = {}
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, tensorboard) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function createTensorboard() {
+  async function callCreateTensorboard() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, tensorboard) {
     console.log(response);
   }
 
-  createTensorboard();
+  callCreateTensorboard();
   // [END aiplatform_v1beta1_generated_TensorboardService_CreateTensorboard_async]
 }
 

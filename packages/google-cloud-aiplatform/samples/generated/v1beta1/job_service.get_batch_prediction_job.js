@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function getBatchPredictionJob() {
+  async function callGetBatchPredictionJob() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getBatchPredictionJob();
+  callGetBatchPredictionJob();
   // [END aiplatform_v1beta1_generated_JobService_GetBatchPredictionJob_async]
 }
 

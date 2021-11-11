@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function getFeature() {
+  async function callGetFeature() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getFeature();
+  callGetFeature();
   // [END aiplatform_v1beta1_generated_FeaturestoreService_GetFeature_async]
 }
 

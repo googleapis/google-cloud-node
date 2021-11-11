@@ -27,7 +27,7 @@ function main(parent, pipelineJob) {
   /**
    *  Required. The PipelineJob to create.
    */
-  // const pipelineJob = ''
+  // const pipelineJob = {}
   /**
    *  The ID to use for the PipelineJob, which will become the final component of
    *  the PipelineJob name. If not provided, an ID will be automatically
@@ -43,7 +43,7 @@ function main(parent, pipelineJob) {
   // Instantiates a client
   const aiplatformClient = new PipelineServiceClient();
 
-  async function createPipelineJob() {
+  async function callCreatePipelineJob() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent, pipelineJob) {
     console.log(response);
   }
 
-  createPipelineJob();
+  callCreatePipelineJob();
   // [END aiplatform_v1beta1_generated_PipelineService_CreatePipelineJob_async]
 }
 

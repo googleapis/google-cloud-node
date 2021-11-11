@@ -27,7 +27,7 @@ function main(parent, study) {
   /**
    *  Required. The Study configuration used to create the Study.
    */
-  // const study = ''
+  // const study = {}
 
   // Imports the Aiplatform library
   const {VizierServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -35,7 +35,7 @@ function main(parent, study) {
   // Instantiates a client
   const aiplatformClient = new VizierServiceClient();
 
-  async function createStudy() {
+  async function callCreateStudy() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, study) {
     console.log(response);
   }
 
-  createStudy();
+  callCreateStudy();
   // [END aiplatform_v1_generated_VizierService_CreateStudy_async]
 }
 

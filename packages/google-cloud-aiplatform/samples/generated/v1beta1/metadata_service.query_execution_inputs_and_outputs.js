@@ -33,7 +33,7 @@ function main(execution) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function queryExecutionInputsAndOutputs() {
+  async function callQueryExecutionInputsAndOutputs() {
     // Construct request
     const request = {
       execution,
@@ -46,7 +46,7 @@ function main(execution) {
     console.log(response);
   }
 
-  queryExecutionInputsAndOutputs();
+  callQueryExecutionInputsAndOutputs();
   // [END aiplatform_v1beta1_generated_MetadataService_QueryExecutionInputsAndOutputs_async]
 }
 

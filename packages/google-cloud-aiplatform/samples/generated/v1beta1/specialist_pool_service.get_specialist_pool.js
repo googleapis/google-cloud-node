@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new SpecialistPoolServiceClient();
 
-  async function getSpecialistPool() {
+  async function callGetSpecialistPool() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getSpecialistPool();
+  callGetSpecialistPool();
   // [END aiplatform_v1beta1_generated_SpecialistPoolService_GetSpecialistPool_async]
 }
 

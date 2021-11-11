@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new ModelServiceClient();
 
-  async function deleteModel() {
+  async function callDeleteModel() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteModel();
+  callDeleteModel();
   // [END aiplatform_v1beta1_generated_ModelService_DeleteModel_async]
 }
 

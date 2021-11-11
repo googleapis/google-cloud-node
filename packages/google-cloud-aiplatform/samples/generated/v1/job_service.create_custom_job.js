@@ -27,7 +27,7 @@ function main(parent, customJob) {
   /**
    *  Required. The CustomJob to create.
    */
-  // const customJob = ''
+  // const customJob = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -35,7 +35,7 @@ function main(parent, customJob) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function createCustomJob() {
+  async function callCreateCustomJob() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, customJob) {
     console.log(response);
   }
 
-  createCustomJob();
+  callCreateCustomJob();
   // [END aiplatform_v1_generated_JobService_CreateCustomJob_async]
 }
 

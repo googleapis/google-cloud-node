@@ -565,6 +565,25 @@ export class TensorboardServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a Tensorboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Tensorboard resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Tensorboard]{@link google.cloud.aiplatform.v1beta1.Tensorboard}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.get_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_GetTensorboard_async
+   */
   getTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
     options?: CallOptions
@@ -596,25 +615,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a Tensorboard.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Tensorboard resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tensorboard]{@link google.cloud.aiplatform.v1beta1.Tensorboard}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTensorboard(request);
-   */
   getTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
     optionsOrCallback?:
@@ -658,6 +658,33 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.innerApiCalls.getTensorboard(request, options, callback);
   }
+  /**
+   * Creates a TensorboardExperiment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Tensorboard to create the TensorboardExperiment
+   *   in. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+   * @param {google.cloud.aiplatform.v1beta1.TensorboardExperiment} request.tensorboardExperiment
+   *   The TensorboardExperiment to create.
+   * @param {string} request.tensorboardExperimentId
+   *   Required. The ID to use for the Tensorboard experiment, which will become the final
+   *   component of the Tensorboard experiment's resource name.
+   *
+   *   This value should be 1-128 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1beta1.TensorboardExperiment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.create_tensorboard_experiment.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardExperiment_async
+   */
   createTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
     options?: CallOptions
@@ -692,33 +719,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a TensorboardExperiment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Tensorboard to create the TensorboardExperiment
-   *   in. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
-   * @param {google.cloud.aiplatform.v1beta1.TensorboardExperiment} request.tensorboardExperiment
-   *   The TensorboardExperiment to create.
-   * @param {string} request.tensorboardExperimentId
-   *   Required. The ID to use for the Tensorboard experiment, which will become the final
-   *   component of the Tensorboard experiment's resource name.
-   *
-   *   This value should be 1-128 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1beta1.TensorboardExperiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createTensorboardExperiment(request);
-   */
   createTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
     optionsOrCallback?:
@@ -769,6 +769,25 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Gets a TensorboardExperiment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TensorboardExperiment resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1beta1.TensorboardExperiment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.get_tensorboard_experiment.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_GetTensorboardExperiment_async
+   */
   getTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
     options?: CallOptions
@@ -803,25 +822,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a TensorboardExperiment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TensorboardExperiment resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1beta1.TensorboardExperiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTensorboardExperiment(request);
-   */
   getTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
     optionsOrCallback?:
@@ -872,6 +872,32 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Updates a TensorboardExperiment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   TensorboardExperiment resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten if new
+   *   values are specified.
+   * @param {google.cloud.aiplatform.v1beta1.TensorboardExperiment} request.tensorboardExperiment
+   *   Required. The TensorboardExperiment's `name` field is used to identify the
+   *   TensorboardExperiment to be updated. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1beta1.TensorboardExperiment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.update_tensorboard_experiment.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboardExperiment_async
+   */
   updateTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
     options?: CallOptions
@@ -906,32 +932,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a TensorboardExperiment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   TensorboardExperiment resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten if new
-   *   values are specified.
-   * @param {google.cloud.aiplatform.v1beta1.TensorboardExperiment} request.tensorboardExperiment
-   *   Required. The TensorboardExperiment's `name` field is used to identify the
-   *   TensorboardExperiment to be updated. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardExperiment]{@link google.cloud.aiplatform.v1beta1.TensorboardExperiment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTensorboardExperiment(request);
-   */
   updateTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
     optionsOrCallback?:
@@ -983,6 +983,33 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Creates a TensorboardRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TensorboardExperiment to create the TensorboardRun
+   *   in. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   * @param {google.cloud.aiplatform.v1beta1.TensorboardRun} request.tensorboardRun
+   *   Required. The TensorboardRun to create.
+   * @param {string} request.tensorboardRunId
+   *   Required. The ID to use for the Tensorboard run, which will become the final
+   *   component of the Tensorboard run's resource name.
+   *
+   *   This value should be 1-128 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1beta1.TensorboardRun}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.create_tensorboard_run.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardRun_async
+   */
   createTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
     options?: CallOptions
@@ -1017,33 +1044,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a TensorboardRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TensorboardExperiment to create the TensorboardRun
-   *   in. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   * @param {google.cloud.aiplatform.v1beta1.TensorboardRun} request.tensorboardRun
-   *   Required. The TensorboardRun to create.
-   * @param {string} request.tensorboardRunId
-   *   Required. The ID to use for the Tensorboard run, which will become the final
-   *   component of the Tensorboard run's resource name.
-   *
-   *   This value should be 1-128 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1beta1.TensorboardRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createTensorboardRun(request);
-   */
   createTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
     optionsOrCallback?:
@@ -1090,6 +1090,30 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.innerApiCalls.createTensorboardRun(request, options, callback);
   }
+  /**
+   * Batch create TensorboardRuns.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TensorboardExperiment to create the
+   *   TensorboardRuns in. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   *   The parent field in the CreateTensorboardRunRequest messages must match
+   *   this field.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the TensorboardRuns to create.
+   *   A maximum of 1000 TensorboardRuns can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchCreateTensorboardRunsResponse]{@link google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_runs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_BatchCreateTensorboardRuns_async
+   */
   batchCreateTensorboardRuns(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
     options?: CallOptions
@@ -1124,30 +1148,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Batch create TensorboardRuns.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TensorboardExperiment to create the
-   *   TensorboardRuns in. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   *   The parent field in the CreateTensorboardRunRequest messages must match
-   *   this field.
-   * @param {number[]} request.requests
-   *   Required. The request message specifying the TensorboardRuns to create.
-   *   A maximum of 1000 TensorboardRuns can be created in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchCreateTensorboardRunsResponse]{@link google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchCreateTensorboardRuns(request);
-   */
   batchCreateTensorboardRuns(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
     optionsOrCallback?:
@@ -1198,6 +1198,25 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Gets a TensorboardRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TensorboardRun resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1beta1.TensorboardRun}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.get_tensorboard_run.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_GetTensorboardRun_async
+   */
   getTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
     options?: CallOptions
@@ -1232,25 +1251,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a TensorboardRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TensorboardRun resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1beta1.TensorboardRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTensorboardRun(request);
-   */
   getTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
     optionsOrCallback?:
@@ -1297,6 +1297,32 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.innerApiCalls.getTensorboardRun(request, options, callback);
   }
+  /**
+   * Updates a TensorboardRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   TensorboardRun resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten if new
+   *   values are specified.
+   * @param {google.cloud.aiplatform.v1beta1.TensorboardRun} request.tensorboardRun
+   *   Required. The TensorboardRun's `name` field is used to identify the TensorboardRun to
+   *   be updated. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1beta1.TensorboardRun}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.update_tensorboard_run.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboardRun_async
+   */
   updateTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
     options?: CallOptions
@@ -1331,32 +1357,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a TensorboardRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   TensorboardRun resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten if new
-   *   values are specified.
-   * @param {google.cloud.aiplatform.v1beta1.TensorboardRun} request.tensorboardRun
-   *   Required. The TensorboardRun's `name` field is used to identify the TensorboardRun to
-   *   be updated. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardRun]{@link google.cloud.aiplatform.v1beta1.TensorboardRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTensorboardRun(request);
-   */
   updateTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
     optionsOrCallback?:
@@ -1403,6 +1403,32 @@ export class TensorboardServiceClient {
     this.initialize();
     return this.innerApiCalls.updateTensorboardRun(request, options, callback);
   }
+  /**
+   * Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TensorboardExperiment to create the
+   *   TensorboardTimeSeries in.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   *   The TensorboardRuns referenced by the parent fields in the
+   *   CreateTensorboardTimeSeriesRequest messages must be sub resources of this
+   *   TensorboardExperiment.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the TensorboardTimeSeries to create.
+   *   A maximum of 1000 TensorboardTimeSeries can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchCreateTensorboardTimeSeriesResponse]{@link google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.batch_create_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_BatchCreateTensorboardTimeSeries_async
+   */
   batchCreateTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
     options?: CallOptions
@@ -1437,32 +1463,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TensorboardExperiment to create the
-   *   TensorboardTimeSeries in.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   *   The TensorboardRuns referenced by the parent fields in the
-   *   CreateTensorboardTimeSeriesRequest messages must be sub resources of this
-   *   TensorboardExperiment.
-   * @param {number[]} request.requests
-   *   Required. The request message specifying the TensorboardTimeSeries to create.
-   *   A maximum of 1000 TensorboardTimeSeries can be created in a batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchCreateTensorboardTimeSeriesResponse]{@link google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchCreateTensorboardTimeSeries(request);
-   */
   batchCreateTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
     optionsOrCallback?:
@@ -1513,6 +1513,33 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Creates a TensorboardTimeSeries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TensorboardRun to create the
+   *   TensorboardTimeSeries in.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
+   * @param {string} [request.tensorboardTimeSeriesId]
+   *   Optional. The user specified unique ID to use for the TensorboardTimeSeries, which
+   *   will become the final component of the TensorboardTimeSeries's resource
+   *   name.
+   *   This value should match "{@link a-z0-9-|a-z0-9}{0, 127}"
+   * @param {google.cloud.aiplatform.v1beta1.TensorboardTimeSeries} request.tensorboardTimeSeries
+   *   Required. The TensorboardTimeSeries to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1beta1.TensorboardTimeSeries}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.create_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardTimeSeries_async
+   */
   createTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
     options?: CallOptions
@@ -1547,33 +1574,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a TensorboardTimeSeries.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the TensorboardRun to create the
-   *   TensorboardTimeSeries in.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
-   * @param {string} [request.tensorboardTimeSeriesId]
-   *   Optional. The user specified unique ID to use for the TensorboardTimeSeries, which
-   *   will become the final component of the TensorboardTimeSeries's resource
-   *   name.
-   *   This value should match "{@link a-z0-9-|a-z0-9}{0, 127}"
-   * @param {google.cloud.aiplatform.v1beta1.TensorboardTimeSeries} request.tensorboardTimeSeries
-   *   Required. The TensorboardTimeSeries to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1beta1.TensorboardTimeSeries}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createTensorboardTimeSeries(request);
-   */
   createTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
     optionsOrCallback?:
@@ -1624,6 +1624,25 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Gets a TensorboardTimeSeries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TensorboardTimeSeries resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1beta1.TensorboardTimeSeries}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.get_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_GetTensorboardTimeSeries_async
+   */
   getTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
     options?: CallOptions
@@ -1658,25 +1677,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a TensorboardTimeSeries.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TensorboardTimeSeries resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1beta1.TensorboardTimeSeries}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTensorboardTimeSeries(request);
-   */
   getTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
     optionsOrCallback?:
@@ -1727,6 +1727,33 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Updates a TensorboardTimeSeries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   TensorboardTimeSeries resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten if new
+   *   values are specified.
+   * @param {google.cloud.aiplatform.v1beta1.TensorboardTimeSeries} request.tensorboardTimeSeries
+   *   Required. The TensorboardTimeSeries' `name` field is used to identify the
+   *   TensorboardTimeSeries to be updated.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1beta1.TensorboardTimeSeries}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.update_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboardTimeSeries_async
+   */
   updateTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
     options?: CallOptions
@@ -1761,33 +1788,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a TensorboardTimeSeries.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   TensorboardTimeSeries resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten if new
-   *   values are specified.
-   * @param {google.cloud.aiplatform.v1beta1.TensorboardTimeSeries} request.tensorboardTimeSeries
-   *   Required. The TensorboardTimeSeries' `name` field is used to identify the
-   *   TensorboardTimeSeries to be updated.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TensorboardTimeSeries]{@link google.cloud.aiplatform.v1beta1.TensorboardTimeSeries}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTensorboardTimeSeries(request);
-   */
   updateTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
     optionsOrCallback?:
@@ -1839,6 +1839,34 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Reads multiple TensorboardTimeSeries' data. The data point number limit is
+   * 1000 for scalars, 100 for tensors and blob references. If the number of
+   * data points stored is less than the limit, all data will be returned.
+   * Otherwise, that limit number of data points will be randomly selected from
+   * this time series and returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboard
+   *   Required. The resource name of the Tensorboard containing TensorboardTimeSeries to
+   *   read data from. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
+   *   The TensorboardTimeSeries referenced by {@link google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest.time_series|time_series} must be sub
+   *   resources of this Tensorboard.
+   * @param {string[]} request.timeSeries
+   *   Required. The resource names of the TensorboardTimeSeries to read data from. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.batch_read_tensorboard_time_series_data.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_BatchReadTensorboardTimeSeriesData_async
+   */
   batchReadTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
     options?: CallOptions
@@ -1873,34 +1901,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Reads multiple TensorboardTimeSeries' data. The data point number limit is
-   * 1000 for scalars, 100 for tensors and blob references. If the number of
-   * data points stored is less than the limit, all data will be returned.
-   * Otherwise, that limit number of data points will be randomly selected from
-   * this time series and returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.tensorboard
-   *   Required. The resource name of the Tensorboard containing TensorboardTimeSeries to
-   *   read data from. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
-   *   The TensorboardTimeSeries referenced by {@link google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest.time_series|time_series} must be sub
-   *   resources of this Tensorboard.
-   * @param {string[]} request.timeSeries
-   *   Required. The resource names of the TensorboardTimeSeries to read data from. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchReadTensorboardTimeSeriesData(request);
-   */
   batchReadTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
     optionsOrCallback?:
@@ -1951,6 +1951,36 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Reads a TensorboardTimeSeries' data. By default, if the number of data
+   * points stored is less than 1000, all data will be returned. Otherwise, 1000
+   * data points will be randomly selected from this time series and returned.
+   * This value can be changed by changing max_data_points, which can't be
+   * greater than 10k.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboardTimeSeries
+   *   Required. The resource name of the TensorboardTimeSeries to read data from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
+   * @param {number} request.maxDataPoints
+   *   The maximum number of TensorboardTimeSeries' data to return.
+   *
+   *   This value should be a positive integer.
+   *   This value can be set to -1 to return all data.
+   * @param {string} request.filter
+   *   Reads the TensorboardTimeSeries' data that match the filter expression.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.read_tensorboard_time_series_data.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardTimeSeriesData_async
+   */
   readTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
     options?: CallOptions
@@ -1985,36 +2015,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Reads a TensorboardTimeSeries' data. By default, if the number of data
-   * points stored is less than 1000, all data will be returned. Otherwise, 1000
-   * data points will be randomly selected from this time series and returned.
-   * This value can be changed by changing max_data_points, which can't be
-   * greater than 10k.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.tensorboardTimeSeries
-   *   Required. The resource name of the TensorboardTimeSeries to read data from.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
-   * @param {number} request.maxDataPoints
-   *   The maximum number of TensorboardTimeSeries' data to return.
-   *
-   *   This value should be a positive integer.
-   *   This value can be set to -1 to return all data.
-   * @param {string} request.filter
-   *   Reads the TensorboardTimeSeries' data that match the filter expression.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReadTensorboardTimeSeriesDataResponse]{@link google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.readTensorboardTimeSeriesData(request);
-   */
   readTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
     optionsOrCallback?:
@@ -2065,6 +2065,29 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Write time series data points of multiple TensorboardTimeSeries in multiple
+   * TensorboardRun's. If any data fail to be ingested, an error will be
+   * returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboardExperiment
+   *   Required. The resource name of the TensorboardExperiment to write data to.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   * @param {number[]} request.writeRunDataRequests
+   *   Required. Requests containing per-run TensorboardTimeSeries data to write.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WriteTensorboardExperimentDataResponse]{@link google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.write_tensorboard_experiment_data.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_WriteTensorboardExperimentData_async
+   */
   writeTensorboardExperimentData(
     request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
     options?: CallOptions
@@ -2099,29 +2122,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Write time series data points of multiple TensorboardTimeSeries in multiple
-   * TensorboardRun's. If any data fail to be ingested, an error will be
-   * returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.tensorboardExperiment
-   *   Required. The resource name of the TensorboardExperiment to write data to.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   * @param {number[]} request.writeRunDataRequests
-   *   Required. Requests containing per-run TensorboardTimeSeries data to write.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WriteTensorboardExperimentDataResponse]{@link google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.writeTensorboardExperimentData(request);
-   */
   writeTensorboardExperimentData(
     request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
     optionsOrCallback?:
@@ -2172,6 +2172,33 @@ export class TensorboardServiceClient {
       callback
     );
   }
+  /**
+   * Write time series data points into multiple TensorboardTimeSeries under
+   * a TensorboardRun. If any data fail to be ingested, an error will be
+   * returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboardRun
+   *   Required. The resource name of the TensorboardRun to write data to.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
+   * @param {number[]} request.timeSeriesData
+   *   Required. The TensorboardTimeSeries data to write.
+   *   Values with in a time series are indexed by their step value.
+   *   Repeated writes to the same step will overwrite the existing value for that
+   *   step.
+   *   The upper limit of data points per write request is 5000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WriteTensorboardRunDataResponse]{@link google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.write_tensorboard_run_data.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_WriteTensorboardRunData_async
+   */
   writeTensorboardRunData(
     request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
     options?: CallOptions
@@ -2206,33 +2233,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Write time series data points into multiple TensorboardTimeSeries under
-   * a TensorboardRun. If any data fail to be ingested, an error will be
-   * returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.tensorboardRun
-   *   Required. The resource name of the TensorboardRun to write data to.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
-   * @param {number[]} request.timeSeriesData
-   *   Required. The TensorboardTimeSeries data to write.
-   *   Values with in a time series are indexed by their step value.
-   *   Repeated writes to the same step will overwrite the existing value for that
-   *   step.
-   *   The upper limit of data points per write request is 5000.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WriteTensorboardRunDataResponse]{@link google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.writeTensorboardRunData(request);
-   */
   writeTensorboardRunData(
     request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
     optionsOrCallback?:
@@ -2305,10 +2305,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.readTensorboardBlobData(request);
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.read_tensorboard_blob_data.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ReadTensorboardBlobData_async
    */
   readTensorboardBlobData(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardBlobDataRequest,
@@ -2326,6 +2324,28 @@ export class TensorboardServiceClient {
     return this.innerApiCalls.readTensorboardBlobData(request, options);
   }
 
+  /**
+   * Creates a Tensorboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the Tensorboard in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.Tensorboard} request.tensorboard
+   *   Required. The Tensorboard to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.create_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_CreateTensorboard_async
+   */
   createTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
     options?: CallOptions
@@ -2362,29 +2382,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a Tensorboard.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the Tensorboard in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.Tensorboard} request.tensorboard
-   *   Required. The Tensorboard to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createTensorboard(request);
-   * const [response] = await operation.promise();
-   */
   createTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
     optionsOrCallback?:
@@ -2442,11 +2439,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateTensorboardProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.create_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_CreateTensorboard_async
    */
   async checkCreateTensorboardProgress(
     name: string
@@ -2470,6 +2464,34 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1beta1.CreateTensorboardOperationMetadata
     >;
   }
+  /**
+   * Updates a Tensorboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   Tensorboard resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten if new
+   *   values are specified.
+   * @param {google.cloud.aiplatform.v1beta1.Tensorboard} request.tensorboard
+   *   Required. The Tensorboard's `name` field is used to identify the
+   *   Tensorboard to be updated. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.update_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboard_async
+   */
   updateTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
     options?: CallOptions
@@ -2506,35 +2528,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a Tensorboard.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Tensorboard resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten if new
-   *   values are specified.
-   * @param {google.cloud.aiplatform.v1beta1.Tensorboard} request.tensorboard
-   *   Required. The Tensorboard's `name` field is used to identify the
-   *   Tensorboard to be updated. Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateTensorboard(request);
-   * const [response] = await operation.promise();
-   */
   updateTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
     optionsOrCallback?:
@@ -2592,11 +2585,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateTensorboardProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.update_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboard_async
    */
   async checkUpdateTensorboardProgress(
     name: string
@@ -2620,6 +2610,27 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardOperationMetadata
     >;
   }
+  /**
+   * Deletes a Tensorboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Tensorboard to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboard_async
+   */
   deleteTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
     options?: CallOptions
@@ -2656,28 +2667,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a Tensorboard.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Tensorboard to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteTensorboard(request);
-   * const [response] = await operation.promise();
-   */
   deleteTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
     optionsOrCallback?:
@@ -2735,11 +2724,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteTensorboardProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboard_async
    */
   async checkDeleteTensorboardProgress(
     name: string
@@ -2763,6 +2749,27 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
+  /**
+   * Deletes a TensorboardExperiment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TensorboardExperiment to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard_experiment.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardExperiment_async
+   */
   deleteTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
     options?: CallOptions
@@ -2799,28 +2806,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a TensorboardExperiment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TensorboardExperiment to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteTensorboardExperiment(request);
-   * const [response] = await operation.promise();
-   */
   deleteTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
     optionsOrCallback?:
@@ -2882,11 +2867,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteTensorboardExperimentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard_experiment.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardExperiment_async
    */
   async checkDeleteTensorboardExperimentProgress(
     name: string
@@ -2910,6 +2892,27 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
+  /**
+   * Deletes a TensorboardRun.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TensorboardRun to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard_run.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardRun_async
+   */
   deleteTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
     options?: CallOptions
@@ -2946,28 +2949,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a TensorboardRun.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TensorboardRun to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteTensorboardRun(request);
-   * const [response] = await operation.promise();
-   */
   deleteTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
     optionsOrCallback?:
@@ -3025,11 +3006,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteTensorboardRunProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard_run.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardRun_async
    */
   async checkDeleteTensorboardRunProgress(
     name: string
@@ -3053,6 +3031,27 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
+  /**
+   * Deletes a TensorboardTimeSeries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the TensorboardTimeSeries to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardTimeSeries_async
+   */
   deleteTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
     options?: CallOptions
@@ -3089,28 +3088,6 @@ export class TensorboardServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a TensorboardTimeSeries.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the TensorboardTimeSeries to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteTensorboardTimeSeries(request);
-   * const [response] = await operation.promise();
-   */
   deleteTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
     optionsOrCallback?:
@@ -3172,11 +3149,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteTensorboardTimeSeriesProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.delete_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_DeleteTensorboardTimeSeries_async
    */
   async checkDeleteTensorboardTimeSeriesProgress(
     name: string
@@ -3200,37 +3174,6 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
-  listTensorboards(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITensorboard[],
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
-    ]
-  >;
-  listTensorboards(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboard
-    >
-  ): void;
-  listTensorboards(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboard
-    >
-  ): void;
   /**
    * Lists Tensorboards in a Location.
    *
@@ -3272,6 +3215,37 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTensorboards(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ITensorboard[],
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
+    ]
+  >;
+  listTensorboards(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboard
+    >
+  ): void;
+  listTensorboards(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboard
+    >
+  ): void;
   listTensorboards(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
     optionsOrCallback?:
@@ -3416,11 +3390,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTensorboardsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.list_tensorboards.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ListTensorboards_async
    */
   listTensorboardsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
@@ -3434,7 +3405,6 @@ export class TensorboardServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3444,37 +3414,6 @@ export class TensorboardServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboard>;
   }
-  listTensorboardExperiments(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[],
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
-    ]
-  >;
-  listTensorboardExperiments(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment
-    >
-  ): void;
-  listTensorboardExperiments(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment
-    >
-  ): void;
   /**
    * Lists TensorboardExperiments in a Location.
    *
@@ -3516,6 +3455,37 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTensorboardExperiments(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[],
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
+    ]
+  >;
+  listTensorboardExperiments(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment
+    >
+  ): void;
+  listTensorboardExperiments(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment
+    >
+  ): void;
   listTensorboardExperiments(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
     optionsOrCallback?:
@@ -3664,11 +3634,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTensorboardExperimentsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.list_tensorboard_experiments.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ListTensorboardExperiments_async
    */
   listTensorboardExperimentsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
@@ -3682,7 +3649,6 @@ export class TensorboardServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3692,37 +3658,6 @@ export class TensorboardServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment>;
   }
-  listTensorboardRuns(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[],
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
-    ]
-  >;
-  listTensorboardRuns(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardRun
-    >
-  ): void;
-  listTensorboardRuns(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardRun
-    >
-  ): void;
   /**
    * Lists TensorboardRuns in a Location.
    *
@@ -3764,6 +3699,37 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTensorboardRuns(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[],
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
+    ]
+  >;
+  listTensorboardRuns(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardRun
+    >
+  ): void;
+  listTensorboardRuns(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardRun
+    >
+  ): void;
   listTensorboardRuns(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
     optionsOrCallback?:
@@ -3908,11 +3874,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTensorboardRunsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.list_tensorboard_runs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ListTensorboardRuns_async
    */
   listTensorboardRunsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
@@ -3926,7 +3889,6 @@ export class TensorboardServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3936,37 +3898,6 @@ export class TensorboardServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardRun>;
   }
-  listTensorboardTimeSeries(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[],
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
-    ]
-  >;
-  listTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries
-    >
-  ): void;
-  listTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries
-    >
-  ): void;
   /**
    * Lists TensorboardTimeSeries in a Location.
    *
@@ -4008,6 +3939,37 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTensorboardTimeSeries(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[],
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
+    ]
+  >;
+  listTensorboardTimeSeries(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries
+    >
+  ): void;
+  listTensorboardTimeSeries(
+    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries
+    >
+  ): void;
   listTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
     optionsOrCallback?:
@@ -4156,11 +4118,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTensorboardTimeSeriesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.list_tensorboard_time_series.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ListTensorboardTimeSeries_async
    */
   listTensorboardTimeSeriesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
@@ -4174,7 +4133,6 @@ export class TensorboardServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -4184,37 +4142,6 @@ export class TensorboardServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries>;
   }
-  exportTensorboardTimeSeriesData(
-    request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[],
-      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
-    ]
-  >;
-  exportTensorboardTimeSeriesData(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint
-    >
-  ): void;
-  exportTensorboardTimeSeriesData(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint
-    >
-  ): void;
   /**
    * Exports a TensorboardTimeSeries' data. Data is returned in paginated
    * responses.
@@ -4256,6 +4183,37 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  exportTensorboardTimeSeriesData(
+    request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[],
+      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
+    ]
+  >;
+  exportTensorboardTimeSeriesData(
+    request: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint
+    >
+  ): void;
+  exportTensorboardTimeSeriesData(
+    request: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint
+    >
+  ): void;
   exportTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
     optionsOrCallback?:
@@ -4403,11 +4361,8 @@ export class TensorboardServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.exportTensorboardTimeSeriesDataAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/tensorboard_service.export_tensorboard_time_series_data.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_TensorboardService_ExportTensorboardTimeSeriesData_async
    */
   exportTensorboardTimeSeriesDataAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
@@ -4421,7 +4376,6 @@ export class TensorboardServiceClient {
       gax.routingHeader.fromParams({
         tensorboard_time_series: request.tensorboardTimeSeries || '',
       });
-    options = options || {};
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];
     const callSettings = defaultCallSettings.merge(options);

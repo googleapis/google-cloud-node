@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new EndpointServiceClient();
 
-  async function deleteEndpoint() {
+  async function callDeleteEndpoint() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteEndpoint();
+  callDeleteEndpoint();
   // [END aiplatform_v1beta1_generated_EndpointService_DeleteEndpoint_async]
 }
 

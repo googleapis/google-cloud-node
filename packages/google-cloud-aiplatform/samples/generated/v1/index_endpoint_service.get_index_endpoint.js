@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function getIndexEndpoint() {
+  async function callGetIndexEndpoint() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getIndexEndpoint();
+  callGetIndexEndpoint();
   // [END aiplatform_v1_generated_IndexEndpointService_GetIndexEndpoint_async]
 }
 

@@ -27,7 +27,7 @@ function main(parent, hyperparameterTuningJob) {
   /**
    *  Required. The HyperparameterTuningJob to create.
    */
-  // const hyperparameterTuningJob = ''
+  // const hyperparameterTuningJob = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -35,7 +35,7 @@ function main(parent, hyperparameterTuningJob) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function createHyperparameterTuningJob() {
+  async function callCreateHyperparameterTuningJob() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, hyperparameterTuningJob) {
     console.log(response);
   }
 
-  createHyperparameterTuningJob();
+  callCreateHyperparameterTuningJob();
   // [END aiplatform_v1_generated_JobService_CreateHyperparameterTuningJob_async]
 }
 

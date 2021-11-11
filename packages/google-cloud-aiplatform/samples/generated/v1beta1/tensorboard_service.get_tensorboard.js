@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function getTensorboard() {
+  async function callGetTensorboard() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTensorboard();
+  callGetTensorboard();
   // [END aiplatform_v1beta1_generated_TensorboardService_GetTensorboard_async]
 }
 

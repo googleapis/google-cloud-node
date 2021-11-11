@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new VizierServiceClient();
 
-  async function getTrial() {
+  async function callGetTrial() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTrial();
+  callGetTrial();
   // [END aiplatform_v1beta1_generated_VizierService_GetTrial_async]
 }
 

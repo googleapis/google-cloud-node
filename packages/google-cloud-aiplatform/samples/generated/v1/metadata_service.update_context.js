@@ -21,19 +21,19 @@ function main(context, updateMask) {
    */
   /**
    *  Required. The Context containing updates.
-   *  The Context's [Context.name][google.cloud.aiplatform.v1.Context.name] field is used to identify the Context to be
+   *  The Context's Context.name google.cloud.aiplatform.v1.Context.name  field is used to identify the Context to be
    *  updated.
    *  Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    */
-  // const context = ''
+  // const context = {}
   /**
    *  Required. A FieldMask indicating which fields should be updated.
    *  Functionality of this field is not yet supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
-   *  If set to true, and the [Context][google.cloud.aiplatform.v1.Context] is not found, a new [Context][google.cloud.aiplatform.v1.Context] is
+   *  If set to true, and the Context google.cloud.aiplatform.v1.Context  is not found, a new Context google.cloud.aiplatform.v1.Context  is
    *  created.
    */
   // const allowMissing = true
@@ -44,7 +44,7 @@ function main(context, updateMask) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function updateContext() {
+  async function callUpdateContext() {
     // Construct request
     const request = {
       context,
@@ -56,7 +56,7 @@ function main(context, updateMask) {
     console.log(response);
   }
 
-  updateContext();
+  callUpdateContext();
   // [END aiplatform_v1_generated_MetadataService_UpdateContext_async]
 }
 

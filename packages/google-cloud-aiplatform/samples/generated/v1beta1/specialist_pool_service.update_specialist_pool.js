@@ -22,11 +22,11 @@ function main(specialistPool, updateMask) {
   /**
    *  Required. The SpecialistPool which replaces the resource on the server.
    */
-  // const specialistPool = ''
+  // const specialistPool = {}
   /**
    *  Required. The update mask applies to the resource.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Aiplatform library
   const {SpecialistPoolServiceClient} =
@@ -35,7 +35,7 @@ function main(specialistPool, updateMask) {
   // Instantiates a client
   const aiplatformClient = new SpecialistPoolServiceClient();
 
-  async function updateSpecialistPool() {
+  async function callUpdateSpecialistPool() {
     // Construct request
     const request = {
       specialistPool,
@@ -48,7 +48,7 @@ function main(specialistPool, updateMask) {
     console.log(response);
   }
 
-  updateSpecialistPool();
+  callUpdateSpecialistPool();
   // [END aiplatform_v1beta1_generated_SpecialistPoolService_UpdateSpecialistPool_async]
 }
 

@@ -28,7 +28,7 @@ function main(parent, metadataStore) {
   /**
    *  Required. The MetadataStore to create.
    */
-  // const metadataStore = ''
+  // const metadataStore = {}
   /**
    *  The {metadatastore} portion of the resource name with the format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
@@ -47,7 +47,7 @@ function main(parent, metadataStore) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function createMetadataStore() {
+  async function callCreateMetadataStore() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent, metadataStore) {
     console.log(response);
   }
 
-  createMetadataStore();
+  callCreateMetadataStore();
   // [END aiplatform_v1beta1_generated_MetadataService_CreateMetadataStore_async]
 }
 

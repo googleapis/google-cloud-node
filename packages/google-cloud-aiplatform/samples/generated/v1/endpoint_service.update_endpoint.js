@@ -22,11 +22,11 @@ function main(endpoint, updateMask) {
   /**
    *  Required. The Endpoint which replaces the resource on the server.
    */
-  // const endpoint = ''
+  // const endpoint = {}
   /**
-   *  Required. The update mask applies to the resource. See [google.protobuf.FieldMask][google.protobuf.FieldMask].
+   *  Required. The update mask applies to the resource. See google.protobuf.FieldMask google.protobuf.FieldMask.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Aiplatform library
   const {EndpointServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -34,7 +34,7 @@ function main(endpoint, updateMask) {
   // Instantiates a client
   const aiplatformClient = new EndpointServiceClient();
 
-  async function updateEndpoint() {
+  async function callUpdateEndpoint() {
     // Construct request
     const request = {
       endpoint,
@@ -46,7 +46,7 @@ function main(endpoint, updateMask) {
     console.log(response);
   }
 
-  updateEndpoint();
+  callUpdateEndpoint();
   // [END aiplatform_v1_generated_EndpointService_UpdateEndpoint_async]
 }
 

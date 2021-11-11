@@ -32,21 +32,21 @@ function main(endpoint, instances) {
    *  in case of AutoML Models, or, in case of customer created Models, the
    *  behaviour is as documented by that Model.
    *  The schema of any single instance may be specified via Endpoint's
-   *  DeployedModels' [Model's][google.cloud.aiplatform.v1.DeployedModel.model]
-   *  [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
-   *  [instance_schema_uri][google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri].
+   *  DeployedModels' Model's google.cloud.aiplatform.v1.DeployedModel.model
+   *  PredictSchemata's google.cloud.aiplatform.v1.Model.predict_schemata
+   *  instance_schema_uri google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri.
    */
   // const instances = 1234
   /**
    *  The parameters that govern the prediction. The schema of the parameters may
-   *  be specified via Endpoint's DeployedModels' [Model's ][google.cloud.aiplatform.v1.DeployedModel.model]
-   *  [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
-   *  [parameters_schema_uri][google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri].
+   *  be specified via Endpoint's DeployedModels' Model's  google.cloud.aiplatform.v1.DeployedModel.model
+   *  PredictSchemata's google.cloud.aiplatform.v1.Model.predict_schemata
+   *  parameters_schema_uri google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri.
    */
-  // const parameters = ''
+  // const parameters = {}
   /**
    *  If specified, overrides the
-   *  [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] of the DeployedModel.
+   *  explanation_spec google.cloud.aiplatform.v1.DeployedModel.explanation_spec  of the DeployedModel.
    *  Can be used for explaining prediction results with different
    *  configurations, such as:
    *   - Explaining top-5 predictions results as opposed to top-1;
@@ -54,10 +54,10 @@ function main(endpoint, instances) {
    *     approximate errors;
    *   - Using different baselines for explaining the prediction results.
    */
-  // const explanationSpecOverride = ''
+  // const explanationSpecOverride = {}
   /**
    *  If specified, this ExplainRequest will be served by the chosen
-   *  DeployedModel, overriding [Endpoint.traffic_split][google.cloud.aiplatform.v1.Endpoint.traffic_split].
+   *  DeployedModel, overriding Endpoint.traffic_split google.cloud.aiplatform.v1.Endpoint.traffic_split.
    */
   // const deployedModelId = 'abc123'
 
@@ -67,7 +67,7 @@ function main(endpoint, instances) {
   // Instantiates a client
   const aiplatformClient = new PredictionServiceClient();
 
-  async function explain() {
+  async function callExplain() {
     // Construct request
     const request = {
       endpoint,
@@ -79,7 +79,7 @@ function main(endpoint, instances) {
     console.log(response);
   }
 
-  explain();
+  callExplain();
   // [END aiplatform_v1_generated_PredictionService_Explain_async]
 }
 

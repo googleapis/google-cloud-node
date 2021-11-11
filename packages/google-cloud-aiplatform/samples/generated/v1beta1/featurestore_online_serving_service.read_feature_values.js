@@ -36,7 +36,7 @@ function main(entityType, entityId, featureSelector) {
   /**
    *  Required. Selector choosing Features of the target EntityType.
    */
-  // const featureSelector = ''
+  // const featureSelector = {}
 
   // Imports the Aiplatform library
   const {FeaturestoreOnlineServingServiceClient} =
@@ -45,7 +45,7 @@ function main(entityType, entityId, featureSelector) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreOnlineServingServiceClient();
 
-  async function readFeatureValues() {
+  async function callReadFeatureValues() {
     // Construct request
     const request = {
       entityType,
@@ -58,7 +58,7 @@ function main(entityType, entityId, featureSelector) {
     console.log(response);
   }
 
-  readFeatureValues();
+  callReadFeatureValues();
   // [END aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_async]
 }
 

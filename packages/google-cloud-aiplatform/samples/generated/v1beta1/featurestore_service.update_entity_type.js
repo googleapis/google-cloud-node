@@ -25,7 +25,7 @@ function main(entityType) {
    *  Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    */
-  // const entityType = ''
+  // const entityType = {}
   /**
    *  Field mask is used to specify the fields to be overwritten in the
    *  EntityType resource by the update.
@@ -40,7 +40,7 @@ function main(entityType) {
    *    * `monitoring_config.snapshot_analysis.disabled`
    *    * `monitoring_config.snapshot_analysis.monitoring_interval`
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Aiplatform library
   const {FeaturestoreServiceClient} =
@@ -49,7 +49,7 @@ function main(entityType) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function updateEntityType() {
+  async function callUpdateEntityType() {
     // Construct request
     const request = {
       entityType,
@@ -60,7 +60,7 @@ function main(entityType) {
     console.log(response);
   }
 
-  updateEntityType();
+  callUpdateEntityType();
   // [END aiplatform_v1beta1_generated_FeaturestoreService_UpdateEntityType_async]
 }
 

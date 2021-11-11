@@ -54,10 +54,10 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  [FeaturestoreService.ListFeatures][google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures] call.
+   *  FeaturestoreService.ListFeatures google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures  call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  [FeaturestoreService.ListFeatures][google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures] must
+   *  FeaturestoreService.ListFeatures google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures  must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -74,11 +74,11 @@ function main(parent) {
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
   /**
-   *  If set, return the most recent [ListFeaturesRequest.latest_stats_count][google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count]
-   *  of stats for each Feature in response. Valid value is [0, 10]. If number of
-   *  stats exists < [ListFeaturesRequest.latest_stats_count][google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count], return all
+   *  If set, return the most recent ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count
+   *  of stats for each Feature in response. Valid value is 0, 10. If number of
+   *  stats exists < ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count, return all
    *  existing stats.
    */
   // const latestStatsCount = 1234
@@ -89,7 +89,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function listFeatures() {
+  async function callListFeatures() {
     // Construct request
     const request = {
       parent,
@@ -102,7 +102,7 @@ function main(parent) {
     }
   }
 
-  listFeatures();
+  callListFeatures();
   // [END aiplatform_v1_generated_FeaturestoreService_ListFeatures_async]
 }
 

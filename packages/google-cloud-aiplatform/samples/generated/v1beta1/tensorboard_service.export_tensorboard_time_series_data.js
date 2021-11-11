@@ -37,10 +37,10 @@ function main(tensorboardTimeSeries) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  [TensorboardService.ExportTensorboardTimeSeries][] call.
+   *  TensorboardService.ExportTensorboardTimeSeries   call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  [TensorboardService.ExportTensorboardTimeSeries][] must
+   *  TensorboardService.ExportTensorboardTimeSeries   must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -58,7 +58,7 @@ function main(tensorboardTimeSeries) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function exportTensorboardTimeSeriesData() {
+  async function callExportTensorboardTimeSeriesData() {
     // Construct request
     const request = {
       tensorboardTimeSeries,
@@ -72,7 +72,7 @@ function main(tensorboardTimeSeries) {
     }
   }
 
-  exportTensorboardTimeSeriesData();
+  callExportTensorboardTimeSeriesData();
   // [END aiplatform_v1beta1_generated_TensorboardService_ExportTensorboardTimeSeriesData_async]
 }
 

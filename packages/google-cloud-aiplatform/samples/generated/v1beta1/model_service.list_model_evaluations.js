@@ -35,14 +35,14 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  [ListModelEvaluationsResponse.next_page_token][google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token] of the previous
-   *  [ModelService.ListModelEvaluations][google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations] call.
+   *  ListModelEvaluationsResponse.next_page_token google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token  of the previous
+   *  ModelService.ListModelEvaluations google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -50,7 +50,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new ModelServiceClient();
 
-  async function listModelEvaluations() {
+  async function callListModelEvaluations() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent) {
     }
   }
 
-  listModelEvaluations();
+  callListModelEvaluations();
   // [END aiplatform_v1beta1_generated_ModelService_ListModelEvaluations_async]
 }
 

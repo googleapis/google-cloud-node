@@ -28,7 +28,7 @@ function main(parent, featurestore, featurestoreId) {
   /**
    *  Required. The Featurestore to create.
    */
-  // const featurestore = ''
+  // const featurestore = {}
   /**
    *  Required. The ID to use for this Featurestore, which will become the final component
    *  of the Featurestore's resource name.
@@ -44,7 +44,7 @@ function main(parent, featurestore, featurestoreId) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function createFeaturestore() {
+  async function callCreateFeaturestore() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, featurestore, featurestoreId) {
     console.log(response);
   }
 
-  createFeaturestore();
+  callCreateFeaturestore();
   // [END aiplatform_v1_generated_FeaturestoreService_CreateFeaturestore_async]
 }
 

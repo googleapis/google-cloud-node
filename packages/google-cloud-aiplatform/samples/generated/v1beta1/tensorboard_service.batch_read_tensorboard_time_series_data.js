@@ -23,7 +23,7 @@ function main(tensorboard, timeSeries) {
    *  Required. The resource name of the Tensorboard containing TensorboardTimeSeries to
    *  read data from. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
-   *  The TensorboardTimeSeries referenced by [time_series][google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest.time_series] must be sub
+   *  The TensorboardTimeSeries referenced by time_series google.cloud.aiplatform.v1beta1.BatchReadTensorboardTimeSeriesDataRequest.time_series  must be sub
    *  resources of this Tensorboard.
    */
   // const tensorboard = 'abc123'
@@ -40,7 +40,7 @@ function main(tensorboard, timeSeries) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function batchReadTensorboardTimeSeriesData() {
+  async function callBatchReadTensorboardTimeSeriesData() {
     // Construct request
     const request = {
       tensorboard,
@@ -54,7 +54,7 @@ function main(tensorboard, timeSeries) {
     console.log(response);
   }
 
-  batchReadTensorboardTimeSeriesData();
+  callBatchReadTensorboardTimeSeriesData();
   // [END aiplatform_v1beta1_generated_TensorboardService_BatchReadTensorboardTimeSeriesData_async]
 }
 

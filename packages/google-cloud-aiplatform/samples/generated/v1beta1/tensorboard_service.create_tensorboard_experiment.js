@@ -28,7 +28,7 @@ function main(parent, tensorboardExperimentId) {
   /**
    *  The TensorboardExperiment to create.
    */
-  // const tensorboardExperiment = ''
+  // const tensorboardExperiment = {}
   /**
    *  Required. The ID to use for the Tensorboard experiment, which will become the final
    *  component of the Tensorboard experiment's resource name.
@@ -44,7 +44,7 @@ function main(parent, tensorboardExperimentId) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function createTensorboardExperiment() {
+  async function callCreateTensorboardExperiment() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, tensorboardExperimentId) {
     console.log(response);
   }
 
-  createTensorboardExperiment();
+  callCreateTensorboardExperiment();
   // [END aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardExperiment_async]
 }
 

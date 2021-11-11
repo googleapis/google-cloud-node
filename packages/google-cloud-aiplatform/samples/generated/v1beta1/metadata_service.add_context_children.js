@@ -36,7 +36,7 @@ function main(context) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function addContextChildren() {
+  async function callAddContextChildren() {
     // Construct request
     const request = {
       context,
@@ -47,7 +47,7 @@ function main(context) {
     console.log(response);
   }
 
-  addContextChildren();
+  callAddContextChildren();
   // [END aiplatform_v1beta1_generated_MetadataService_AddContextChildren_async]
 }
 

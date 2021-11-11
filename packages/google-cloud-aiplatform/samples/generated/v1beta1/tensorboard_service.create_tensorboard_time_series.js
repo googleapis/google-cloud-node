@@ -36,7 +36,7 @@ function main(parent, tensorboardTimeSeries) {
   /**
    *  Required. The TensorboardTimeSeries to create.
    */
-  // const tensorboardTimeSeries = ''
+  // const tensorboardTimeSeries = {}
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} =
@@ -45,7 +45,7 @@ function main(parent, tensorboardTimeSeries) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function createTensorboardTimeSeries() {
+  async function callCreateTensorboardTimeSeries() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent, tensorboardTimeSeries) {
     console.log(response);
   }
 
-  createTensorboardTimeSeries();
+  callCreateTensorboardTimeSeries();
   // [END aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardTimeSeries_async]
 }
 

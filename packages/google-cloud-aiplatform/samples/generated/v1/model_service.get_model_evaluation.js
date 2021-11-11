@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new ModelServiceClient();
 
-  async function getModelEvaluation() {
+  async function callGetModelEvaluation() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getModelEvaluation();
+  callGetModelEvaluation();
   // [END aiplatform_v1_generated_ModelService_GetModelEvaluation_async]
 }
 

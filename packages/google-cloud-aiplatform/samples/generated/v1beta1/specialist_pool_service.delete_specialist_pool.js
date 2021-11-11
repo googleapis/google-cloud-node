@@ -38,7 +38,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new SpecialistPoolServiceClient();
 
-  async function deleteSpecialistPool() {
+  async function callDeleteSpecialistPool() {
     // Construct request
     const request = {
       name,
@@ -50,7 +50,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteSpecialistPool();
+  callDeleteSpecialistPool();
   // [END aiplatform_v1beta1_generated_SpecialistPoolService_DeleteSpecialistPool_async]
 }
 

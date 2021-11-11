@@ -27,7 +27,7 @@ function main(parent, endpoint) {
   /**
    *  Required. The Endpoint to create.
    */
-  // const endpoint = ''
+  // const endpoint = {}
 
   // Imports the Aiplatform library
   const {EndpointServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -35,7 +35,7 @@ function main(parent, endpoint) {
   // Instantiates a client
   const aiplatformClient = new EndpointServiceClient();
 
-  async function createEndpoint() {
+  async function callCreateEndpoint() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, endpoint) {
     console.log(response);
   }
 
-  createEndpoint();
+  callCreateEndpoint();
   // [END aiplatform_v1beta1_generated_EndpointService_CreateEndpoint_async]
 }
 

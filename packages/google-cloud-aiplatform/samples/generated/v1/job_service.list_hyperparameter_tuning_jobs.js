@@ -43,14 +43,14 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  [ListHyperparameterTuningJobsResponse.next_page_token][google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token] of the previous
-   *  [JobService.ListHyperparameterTuningJobs][google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs] call.
+   *  ListHyperparameterTuningJobsResponse.next_page_token google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse.next_page_token  of the previous
+   *  JobService.ListHyperparameterTuningJobs google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -58,7 +58,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function listHyperparameterTuningJobs() {
+  async function callListHyperparameterTuningJobs() {
     // Construct request
     const request = {
       parent,
@@ -73,7 +73,7 @@ function main(parent) {
     }
   }
 
-  listHyperparameterTuningJobs();
+  callListHyperparameterTuningJobs();
   // [END aiplatform_v1_generated_JobService_ListHyperparameterTuningJobs_async]
 }
 

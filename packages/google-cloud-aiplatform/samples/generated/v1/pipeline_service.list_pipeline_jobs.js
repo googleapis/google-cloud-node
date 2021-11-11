@@ -59,8 +59,8 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  [ListPipelineJobsResponse.next_page_token][google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token] of the previous
-   *  [PipelineService.ListPipelineJobs][google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs] call.
+   *  ListPipelineJobsResponse.next_page_token google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token  of the previous
+   *  PipelineService.ListPipelineJobs google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs  call.
    */
   // const pageToken = 'abc123'
   /**
@@ -85,7 +85,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new PipelineServiceClient();
 
-  async function listPipelineJobs() {
+  async function callListPipelineJobs() {
     // Construct request
     const request = {
       parent,
@@ -98,7 +98,7 @@ function main(parent) {
     }
   }
 
-  listPipelineJobs();
+  callListPipelineJobs();
   // [END aiplatform_v1_generated_PipelineService_ListPipelineJobs_async]
 }
 

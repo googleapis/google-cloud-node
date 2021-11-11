@@ -28,7 +28,7 @@ function main(name) {
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {DatasetServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new DatasetServiceClient();
 
-  async function getAnnotationSpec() {
+  async function callGetAnnotationSpec() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  getAnnotationSpec();
+  callGetAnnotationSpec();
   // [END aiplatform_v1_generated_DatasetService_GetAnnotationSpec_async]
 }
 

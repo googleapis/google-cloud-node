@@ -27,7 +27,7 @@ function main(parent, specialistPool) {
   /**
    *  Required. The SpecialistPool to create.
    */
-  // const specialistPool = ''
+  // const specialistPool = {}
 
   // Imports the Aiplatform library
   const {SpecialistPoolServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, specialistPool) {
   // Instantiates a client
   const aiplatformClient = new SpecialistPoolServiceClient();
 
-  async function createSpecialistPool() {
+  async function callCreateSpecialistPool() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, specialistPool) {
     console.log(response);
   }
 
-  createSpecialistPool();
+  callCreateSpecialistPool();
   // [END aiplatform_v1beta1_generated_SpecialistPoolService_CreateSpecialistPool_async]
 }
 

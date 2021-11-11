@@ -38,7 +38,7 @@ function main(entityType, entityIds, featureSelector) {
    *  Required. Selector choosing Features of the target EntityType. Feature IDs will be
    *  deduplicated.
    */
-  // const featureSelector = ''
+  // const featureSelector = {}
 
   // Imports the Aiplatform library
   const {FeaturestoreOnlineServingServiceClient} =
@@ -47,7 +47,7 @@ function main(entityType, entityIds, featureSelector) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreOnlineServingServiceClient();
 
-  async function streamingReadFeatureValues() {
+  async function callStreamingReadFeatureValues() {
     // Construct request
     const request = {
       entityType,
@@ -68,7 +68,7 @@ function main(entityType, entityIds, featureSelector) {
     });
   }
 
-  streamingReadFeatureValues();
+  callStreamingReadFeatureValues();
   // [END aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_StreamingReadFeatureValues_async]
 }
 

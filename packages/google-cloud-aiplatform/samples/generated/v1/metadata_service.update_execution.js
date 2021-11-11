@@ -21,19 +21,19 @@ function main(execution, updateMask) {
    */
   /**
    *  Required. The Execution containing updates.
-   *  The Execution's [Execution.name][google.cloud.aiplatform.v1.Execution.name] field is used to identify the Execution
+   *  The Execution's Execution.name google.cloud.aiplatform.v1.Execution.name  field is used to identify the Execution
    *  to be updated.
    *  Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    */
-  // const execution = ''
+  // const execution = {}
   /**
    *  Required. A FieldMask indicating which fields should be updated.
    *  Functionality of this field is not yet supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
-   *  If set to true, and the [Execution][google.cloud.aiplatform.v1.Execution] is not found, a new [Execution][google.cloud.aiplatform.v1.Execution]
+   *  If set to true, and the Execution google.cloud.aiplatform.v1.Execution  is not found, a new Execution google.cloud.aiplatform.v1.Execution
    *  is created.
    */
   // const allowMissing = true
@@ -44,7 +44,7 @@ function main(execution, updateMask) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function updateExecution() {
+  async function callUpdateExecution() {
     // Construct request
     const request = {
       execution,
@@ -56,7 +56,7 @@ function main(execution, updateMask) {
     console.log(response);
   }
 
-  updateExecution();
+  callUpdateExecution();
   // [END aiplatform_v1_generated_MetadataService_UpdateExecution_async]
 }
 

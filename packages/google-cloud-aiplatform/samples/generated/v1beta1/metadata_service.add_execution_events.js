@@ -37,7 +37,7 @@ function main(execution) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function addExecutionEvents() {
+  async function callAddExecutionEvents() {
     // Construct request
     const request = {
       execution,
@@ -48,7 +48,7 @@ function main(execution) {
     console.log(response);
   }
 
-  addExecutionEvents();
+  callAddExecutionEvents();
   // [END aiplatform_v1beta1_generated_MetadataService_AddExecutionEvents_async]
 }
 

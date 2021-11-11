@@ -28,7 +28,7 @@ function main(parent, tensorboardRun, tensorboardRunId) {
   /**
    *  Required. The TensorboardRun to create.
    */
-  // const tensorboardRun = ''
+  // const tensorboardRun = {}
   /**
    *  Required. The ID to use for the Tensorboard run, which will become the final
    *  component of the Tensorboard run's resource name.
@@ -44,7 +44,7 @@ function main(parent, tensorboardRun, tensorboardRunId) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function createTensorboardRun() {
+  async function callCreateTensorboardRun() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent, tensorboardRun, tensorboardRunId) {
     console.log(response);
   }
 
-  createTensorboardRun();
+  callCreateTensorboardRun();
   // [END aiplatform_v1beta1_generated_TensorboardService_CreateTensorboardRun_async]
 }
 

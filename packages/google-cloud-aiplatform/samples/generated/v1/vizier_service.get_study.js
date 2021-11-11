@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new VizierServiceClient();
 
-  async function getStudy() {
+  async function callGetStudy() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getStudy();
+  callGetStudy();
   // [END aiplatform_v1_generated_VizierService_GetStudy_async]
 }
 

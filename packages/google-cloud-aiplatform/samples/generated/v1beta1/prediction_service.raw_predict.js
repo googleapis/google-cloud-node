@@ -27,18 +27,18 @@ function main(endpoint) {
   // const endpoint = 'abc123'
   /**
    *  The prediction input. Supports HTTP headers and arbitrary data payload.
-   *  A [DeployedModel][google.cloud.aiplatform.v1beta1.DeployedModel] may have an upper limit on the number of instances it
+   *  A DeployedModel google.cloud.aiplatform.v1beta1.DeployedModel  may have an upper limit on the number of instances it
    *  supports per request. When this limit it is exceeded for an AutoML model,
-   *  the [RawPredict][google.cloud.aiplatform.v1beta1.PredictionService.RawPredict] method returns an error.
+   *  the RawPredict google.cloud.aiplatform.v1beta1.PredictionService.RawPredict  method returns an error.
    *  When this limit is exceeded for a custom-trained model, the behavior varies
    *  depending on the model.
    *  You can specify the schema for each instance in the
-   *  [predict_schemata.instance_schema_uri][google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri]
-   *  field when you create a [Model][google.cloud.aiplatform.v1beta1.Model]. This schema applies when you deploy the
-   *  `Model` as a `DeployedModel` to an [Endpoint][google.cloud.aiplatform.v1beta1.Endpoint] and use the `RawPredict`
+   *  predict_schemata.instance_schema_uri google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri
+   *  field when you create a Model google.cloud.aiplatform.v1beta1.Model. This schema applies when you deploy the
+   *  `Model` as a `DeployedModel` to an Endpoint google.cloud.aiplatform.v1beta1.Endpoint  and use the `RawPredict`
    *  method.
    */
-  // const httpBody = ''
+  // const httpBody = {}
 
   // Imports the Aiplatform library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -46,7 +46,7 @@ function main(endpoint) {
   // Instantiates a client
   const aiplatformClient = new PredictionServiceClient();
 
-  async function rawPredict() {
+  async function callRawPredict() {
     // Construct request
     const request = {
       endpoint,
@@ -57,7 +57,7 @@ function main(endpoint) {
     console.log(response);
   }
 
-  rawPredict();
+  callRawPredict();
   // [END aiplatform_v1beta1_generated_PredictionService_RawPredict_async]
 }
 

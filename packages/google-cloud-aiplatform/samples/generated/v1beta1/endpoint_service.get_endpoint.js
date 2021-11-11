@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new EndpointServiceClient();
 
-  async function getEndpoint() {
+  async function callGetEndpoint() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getEndpoint();
+  callGetEndpoint();
   // [END aiplatform_v1beta1_generated_EndpointService_GetEndpoint_async]
 }
 

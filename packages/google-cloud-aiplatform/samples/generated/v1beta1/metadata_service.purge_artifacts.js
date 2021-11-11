@@ -43,7 +43,7 @@ function main(parent, filter) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function purgeArtifacts() {
+  async function callPurgeArtifacts() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, filter) {
     console.log(response);
   }
 
-  purgeArtifacts();
+  callPurgeArtifacts();
   // [END aiplatform_v1beta1_generated_MetadataService_PurgeArtifacts_async]
 }
 

@@ -22,11 +22,11 @@ function main(indexEndpoint, updateMask) {
   /**
    *  Required. The IndexEndpoint which replaces the resource on the server.
    */
-  // const indexEndpoint = ''
+  // const indexEndpoint = {}
   /**
-   *  Required. The update mask applies to the resource. See [google.protobuf.FieldMask][google.protobuf.FieldMask].
+   *  Required. The update mask applies to the resource. See google.protobuf.FieldMask google.protobuf.FieldMask.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Aiplatform library
   const {IndexEndpointServiceClient} =
@@ -35,7 +35,7 @@ function main(indexEndpoint, updateMask) {
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function updateIndexEndpoint() {
+  async function callUpdateIndexEndpoint() {
     // Construct request
     const request = {
       indexEndpoint,
@@ -47,7 +47,7 @@ function main(indexEndpoint, updateMask) {
     console.log(response);
   }
 
-  updateIndexEndpoint();
+  callUpdateIndexEndpoint();
   // [END aiplatform_v1beta1_generated_IndexEndpointService_UpdateIndexEndpoint_async]
 }
 

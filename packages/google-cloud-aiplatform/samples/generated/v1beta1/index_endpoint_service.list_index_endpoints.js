@@ -29,9 +29,9 @@ function main(parent) {
    *  both snake_case and camelCase are supported.
    *    * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *       IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *       [resourcename][google.cloud.aiplatform.v1beta1.IndexEndpoint.name].
+   *       resourcename google.cloud.aiplatform.v1beta1.IndexEndpoint.name.
    *    * `display_name` supports =, != and regex()
-   *              (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
+   *              (uses re2 (https://github.com/google/re2/wiki/Syntax) syntax)
    *    * `labels` supports general map functions that is:
    *              `labels.key=value` - key:value equality
    *              `labels.key:* or labels:key - key existence
@@ -50,14 +50,14 @@ function main(parent) {
   /**
    *  Optional. The standard list page token.
    *  Typically obtained via
-   *  [ListIndexEndpointsResponse.next_page_token][google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token] of the previous
-   *  [IndexEndpointService.ListIndexEndpoints][google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints] call.
+   *  ListIndexEndpointsResponse.next_page_token google.cloud.aiplatform.v1beta1.ListIndexEndpointsResponse.next_page_token  of the previous
+   *  IndexEndpointService.ListIndexEndpoints google.cloud.aiplatform.v1beta1.IndexEndpointService.ListIndexEndpoints  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Optional. Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {IndexEndpointServiceClient} =
@@ -66,7 +66,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function listIndexEndpoints() {
+  async function callListIndexEndpoints() {
     // Construct request
     const request = {
       parent,
@@ -79,7 +79,7 @@ function main(parent) {
     }
   }
 
-  listIndexEndpoints();
+  callListIndexEndpoints();
   // [END aiplatform_v1beta1_generated_IndexEndpointService_ListIndexEndpoints_async]
 }
 

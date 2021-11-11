@@ -28,7 +28,7 @@ function main(parent) {
    *  Optional. An expression for filtering the results of the request. For field names
    *  both snake_case and camelCase are supported.
    *    * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *      i.e. the last segment of the Endpoint's [resource name][google.cloud.aiplatform.v1.Endpoint.name].
+   *      i.e. the last segment of the Endpoint's resource name google.cloud.aiplatform.v1.Endpoint.name.
    *    * `display_name` supports = and, !=
    *    * `labels` supports general map functions that is:
    *      * `labels.key=value` - key:value equality
@@ -47,14 +47,14 @@ function main(parent) {
   /**
    *  Optional. The standard list page token.
    *  Typically obtained via
-   *  [ListEndpointsResponse.next_page_token][google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token] of the previous
-   *  [EndpointService.ListEndpoints][google.cloud.aiplatform.v1.EndpointService.ListEndpoints] call.
+   *  ListEndpointsResponse.next_page_token google.cloud.aiplatform.v1.ListEndpointsResponse.next_page_token  of the previous
+   *  EndpointService.ListEndpoints google.cloud.aiplatform.v1.EndpointService.ListEndpoints  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Optional. Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
   /**
    *  A comma-separated list of fields to order by, sorted in ascending order.
    *  Use "desc" after a field name for descending.
@@ -72,7 +72,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new EndpointServiceClient();
 
-  async function listEndpoints() {
+  async function callListEndpoints() {
     // Construct request
     const request = {
       parent,
@@ -85,7 +85,7 @@ function main(parent) {
     }
   }
 
-  listEndpoints();
+  callListEndpoints();
   // [END aiplatform_v1_generated_EndpointService_ListEndpoints_async]
 }
 

@@ -27,13 +27,13 @@ function main(updateMask, tensorboard) {
    *  user does not provide a mask then all fields will be overwritten if new
    *  values are specified.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. The Tensorboard's `name` field is used to identify the
    *  Tensorboard to be updated. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
    */
-  // const tensorboard = ''
+  // const tensorboard = {}
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} =
@@ -42,7 +42,7 @@ function main(updateMask, tensorboard) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function updateTensorboard() {
+  async function callUpdateTensorboard() {
     // Construct request
     const request = {
       updateMask,
@@ -55,7 +55,7 @@ function main(updateMask, tensorboard) {
     console.log(response);
   }
 
-  updateTensorboard();
+  callUpdateTensorboard();
   // [END aiplatform_v1beta1_generated_TensorboardService_UpdateTensorboard_async]
 }
 

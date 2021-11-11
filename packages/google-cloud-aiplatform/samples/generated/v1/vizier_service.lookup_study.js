@@ -35,7 +35,7 @@ function main(parent, displayName) {
   // Instantiates a client
   const aiplatformClient = new VizierServiceClient();
 
-  async function lookupStudy() {
+  async function callLookupStudy() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, displayName) {
     console.log(response);
   }
 
-  lookupStudy();
+  callLookupStudy();
   // [END aiplatform_v1_generated_VizierService_LookupStudy_async]
 }
 

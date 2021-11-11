@@ -23,7 +23,7 @@ function main(entityType, destination, featureSelector) {
    *  Exports Feature values of all entities of the EntityType as of a snapshot
    *  time.
    */
-  // const snapshotExport = ''
+  // const snapshotExport = {}
   /**
    *  Required. The resource name of the EntityType from which to export Feature values.
    *  Format:
@@ -33,11 +33,11 @@ function main(entityType, destination, featureSelector) {
   /**
    *  Required. Specifies destination location and format.
    */
-  // const destination = ''
+  // const destination = {}
   /**
    *  Required. Selects Features to export values of.
    */
-  // const featureSelector = ''
+  // const featureSelector = {}
   /**
    *  Per-Feature export settings.
    */
@@ -49,7 +49,7 @@ function main(entityType, destination, featureSelector) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function exportFeatureValues() {
+  async function callExportFeatureValues() {
     // Construct request
     const request = {
       entityType,
@@ -63,7 +63,7 @@ function main(entityType, destination, featureSelector) {
     console.log(response);
   }
 
-  exportFeatureValues();
+  callExportFeatureValues();
   // [END aiplatform_v1_generated_FeaturestoreService_ExportFeatureValues_async]
 }
 

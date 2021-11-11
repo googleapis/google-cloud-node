@@ -21,13 +21,13 @@ function main(entityType, featureSpecs) {
    */
   /**
    */
-  // const avroSource = ''
+  // const avroSource = {}
   /**
    */
-  // const bigquerySource = ''
+  // const bigquerySource = {}
   /**
    */
-  // const csvSource = ''
+  // const csvSource = {}
   /**
    *  Source column that holds the Feature timestamp for all Feature
    *  values in each entity.
@@ -37,7 +37,7 @@ function main(entityType, featureSpecs) {
    *  Single Feature timestamp for all entities being imported. The
    *  timestamp must not have higher than millisecond precision.
    */
-  // const featureTime = ''
+  // const featureTime = {}
   /**
    *  Required. The resource name of the EntityType grouping the Features for which values
    *  are being imported. Format:
@@ -77,7 +77,7 @@ function main(entityType, featureSpecs) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function importFeatureValues() {
+  async function callImportFeatureValues() {
     // Construct request
     const request = {
       entityType,
@@ -90,7 +90,7 @@ function main(entityType, featureSpecs) {
     console.log(response);
   }
 
-  importFeatureValues();
+  callImportFeatureValues();
   // [END aiplatform_v1_generated_FeaturestoreService_ImportFeatureValues_async]
 }
 

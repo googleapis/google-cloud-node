@@ -468,6 +468,25 @@ export class IndexServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Index resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Index]{@link google.cloud.aiplatform.v1beta1.Index}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_service.get_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_GetIndex_async
+   */
   getIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetIndexRequest,
     options?: CallOptions
@@ -499,25 +518,6 @@ export class IndexServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets an Index.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Index resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/indexes/{index}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Index]{@link google.cloud.aiplatform.v1beta1.Index}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIndex(request);
-   */
   getIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetIndexRequest,
     optionsOrCallback?:
@@ -562,6 +562,28 @@ export class IndexServiceClient {
     return this.innerApiCalls.getIndex(request, options, callback);
   }
 
+  /**
+   * Creates an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the Index in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.Index} request.index
+   *   Required. The Index to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_service.create_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_CreateIndex_async
+   */
   createIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateIndexRequest,
     options?: CallOptions
@@ -598,29 +620,6 @@ export class IndexServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates an Index.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the Index in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.Index} request.index
-   *   Required. The Index to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createIndex(request);
-   * const [response] = await operation.promise();
-   */
   createIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateIndexRequest,
     optionsOrCallback?:
@@ -678,11 +677,8 @@ export class IndexServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateIndexProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/index_service.create_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_CreateIndex_async
    */
   async checkCreateIndexProgress(
     name: string
@@ -706,6 +702,28 @@ export class IndexServiceClient {
       protos.google.cloud.aiplatform.v1beta1.CreateIndexOperationMetadata
     >;
   }
+  /**
+   * Updates an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.Index} request.index
+   *   Required. The Index which updates the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource.
+   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_service.update_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_UpdateIndex_async
+   */
   updateIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexRequest,
     options?: CallOptions
@@ -742,29 +760,6 @@ export class IndexServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates an Index.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.Index} request.index
-   *   Required. The Index which updates the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource.
-   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateIndex(request);
-   * const [response] = await operation.promise();
-   */
   updateIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexRequest,
     optionsOrCallback?:
@@ -822,11 +817,8 @@ export class IndexServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateIndexProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/index_service.update_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_UpdateIndex_async
    */
   async checkUpdateIndexProgress(
     name: string
@@ -850,6 +842,29 @@ export class IndexServiceClient {
       protos.google.cloud.aiplatform.v1beta1.UpdateIndexOperationMetadata
     >;
   }
+  /**
+   * Deletes an Index.
+   * An Index can only be deleted when all its
+   * {@link google.cloud.aiplatform.v1beta1.Index.deployed_indexes|DeployedIndexes} had been undeployed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Index resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_service.delete_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_DeleteIndex_async
+   */
   deleteIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexRequest,
     options?: CallOptions
@@ -886,30 +901,6 @@ export class IndexServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes an Index.
-   * An Index can only be deleted when all its
-   * {@link google.cloud.aiplatform.v1beta1.Index.deployed_indexes|DeployedIndexes} had been undeployed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Index resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/indexes/{index}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteIndex(request);
-   * const [response] = await operation.promise();
-   */
   deleteIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexRequest,
     optionsOrCallback?:
@@ -967,11 +958,8 @@ export class IndexServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteIndexProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/index_service.delete_index.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_DeleteIndex_async
    */
   async checkDeleteIndexProgress(
     name: string
@@ -995,37 +983,6 @@ export class IndexServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
-  listIndexes(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IIndex[],
-      protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse
-    ]
-  >;
-  listIndexes(
-    request: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IIndex
-    >
-  ): void;
-  listIndexes(
-    request: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IIndex
-    >
-  ): void;
   /**
    * Lists Indexes in a Location.
    *
@@ -1058,6 +1015,37 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listIndexes(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IIndex[],
+      protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse
+    ]
+  >;
+  listIndexes(
+    request: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IIndex
+    >
+  ): void;
+  listIndexes(
+    request: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListIndexesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IIndex
+    >
+  ): void;
   listIndexes(
     request?: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
     optionsOrCallback?:
@@ -1184,11 +1172,8 @@ export class IndexServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listIndexesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/index_service.list_indexes.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_ListIndexes_async
    */
   listIndexesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,
@@ -1202,7 +1187,6 @@ export class IndexServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

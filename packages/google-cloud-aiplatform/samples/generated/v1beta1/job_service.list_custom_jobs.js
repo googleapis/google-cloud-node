@@ -43,14 +43,14 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  [ListCustomJobsResponse.next_page_token][google.cloud.aiplatform.v1beta1.ListCustomJobsResponse.next_page_token] of the previous
-   *  [JobService.ListCustomJobs][google.cloud.aiplatform.v1beta1.JobService.ListCustomJobs] call.
+   *  ListCustomJobsResponse.next_page_token google.cloud.aiplatform.v1beta1.ListCustomJobsResponse.next_page_token  of the previous
+   *  JobService.ListCustomJobs google.cloud.aiplatform.v1beta1.JobService.ListCustomJobs  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -58,7 +58,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function listCustomJobs() {
+  async function callListCustomJobs() {
     // Construct request
     const request = {
       parent,
@@ -71,7 +71,7 @@ function main(parent) {
     }
   }
 
-  listCustomJobs();
+  callListCustomJobs();
   // [END aiplatform_v1beta1_generated_JobService_ListCustomJobs_async]
 }
 

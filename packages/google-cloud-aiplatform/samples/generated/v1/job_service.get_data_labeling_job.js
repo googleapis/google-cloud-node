@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function getDataLabelingJob() {
+  async function callGetDataLabelingJob() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getDataLabelingJob();
+  callGetDataLabelingJob();
   // [END aiplatform_v1_generated_JobService_GetDataLabelingJob_async]
 }
 

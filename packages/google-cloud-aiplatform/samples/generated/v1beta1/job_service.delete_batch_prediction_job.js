@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function deleteBatchPredictionJob() {
+  async function callDeleteBatchPredictionJob() {
     // Construct request
     const request = {
       name,
@@ -46,7 +46,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteBatchPredictionJob();
+  callDeleteBatchPredictionJob();
   // [END aiplatform_v1beta1_generated_JobService_DeleteBatchPredictionJob_async]
 }
 

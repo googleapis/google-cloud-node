@@ -85,10 +85,10 @@ function main(location) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  [FeaturestoreService.SearchFeatures][google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures] call.
+   *  FeaturestoreService.SearchFeatures google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures  call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  [FeaturestoreService.SearchFeatures][google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures], except `page_size`, must
+   *  FeaturestoreService.SearchFeatures google.cloud.aiplatform.v1beta1.FeaturestoreService.SearchFeatures, except `page_size`, must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -100,7 +100,7 @@ function main(location) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function searchFeatures() {
+  async function callSearchFeatures() {
     // Construct request
     const request = {
       location,
@@ -113,7 +113,7 @@ function main(location) {
     }
   }
 
-  searchFeatures();
+  callSearchFeatures();
   // [END aiplatform_v1beta1_generated_FeaturestoreService_SearchFeatures_async]
 }
 

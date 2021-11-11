@@ -31,7 +31,7 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous [MetadataService.ListArtifacts][google.cloud.aiplatform.v1.MetadataService.ListArtifacts]
+   *  A page token, received from a previous MetadataService.ListArtifacts google.cloud.aiplatform.v1.MetadataService.ListArtifacts
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other provided parameters must match the call that
    *  provided the page token. (Otherwise the request will fail with
@@ -72,7 +72,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function listArtifacts() {
+  async function callListArtifacts() {
     // Construct request
     const request = {
       parent,
@@ -85,7 +85,7 @@ function main(parent) {
     }
   }
 
-  listArtifacts();
+  callListArtifacts();
   // [END aiplatform_v1_generated_MetadataService_ListArtifacts_async]
 }
 

@@ -42,7 +42,7 @@ function main(parent, requests) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function batchCreateTensorboardTimeSeries() {
+  async function callBatchCreateTensorboardTimeSeries() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, requests) {
     console.log(response);
   }
 
-  batchCreateTensorboardTimeSeries();
+  callBatchCreateTensorboardTimeSeries();
   // [END aiplatform_v1beta1_generated_TensorboardService_BatchCreateTensorboardTimeSeries_async]
 }
 

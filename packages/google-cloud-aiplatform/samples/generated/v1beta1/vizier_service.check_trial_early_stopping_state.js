@@ -32,7 +32,7 @@ function main(trialName) {
   // Instantiates a client
   const aiplatformClient = new VizierServiceClient();
 
-  async function checkTrialEarlyStoppingState() {
+  async function callCheckTrialEarlyStoppingState() {
     // Construct request
     const request = {
       trialName,
@@ -46,7 +46,7 @@ function main(trialName) {
     console.log(response);
   }
 
-  checkTrialEarlyStoppingState();
+  callCheckTrialEarlyStoppingState();
   // [END aiplatform_v1beta1_generated_VizierService_CheckTrialEarlyStoppingState_async]
 }
 

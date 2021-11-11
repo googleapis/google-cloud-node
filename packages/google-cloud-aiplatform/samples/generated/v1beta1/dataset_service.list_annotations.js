@@ -40,7 +40,7 @@ function main(parent) {
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
   /**
    *  A comma-separated list of fields to order by, sorted in ascending order.
    *  Use "desc" after a field name for descending.
@@ -53,7 +53,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new DatasetServiceClient();
 
-  async function listAnnotations() {
+  async function callListAnnotations() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent) {
     }
   }
 
-  listAnnotations();
+  callListAnnotations();
   // [END aiplatform_v1beta1_generated_DatasetService_ListAnnotations_async]
 }
 

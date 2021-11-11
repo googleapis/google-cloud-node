@@ -53,10 +53,10 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  [FeaturestoreService.ListFeaturestores][google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores] call.
+   *  FeaturestoreService.ListFeaturestores google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores  call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  [FeaturestoreService.ListFeaturestores][google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores] must
+   *  FeaturestoreService.ListFeaturestores google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores  must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -72,7 +72,7 @@ function main(parent) {
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -80,7 +80,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function listFeaturestores() {
+  async function callListFeaturestores() {
     // Construct request
     const request = {
       parent,
@@ -93,7 +93,7 @@ function main(parent) {
     }
   }
 
-  listFeaturestores();
+  callListFeaturestores();
   // [END aiplatform_v1_generated_FeaturestoreService_ListFeaturestores_async]
 }
 

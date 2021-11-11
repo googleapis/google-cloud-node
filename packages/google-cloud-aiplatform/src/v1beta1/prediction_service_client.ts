@@ -386,33 +386,6 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  predict(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  predict(
-    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  predict(
-    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Perform an online prediction.
    *
@@ -444,9 +417,36 @@ export class PredictionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.predict(request);
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.predict.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_Predict_async
    */
+  predict(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  predict(
+    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  predict(
+    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   predict(
     request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
     optionsOrCallback?:
@@ -488,6 +488,39 @@ export class PredictionServiceClient {
     this.initialize();
     return this.innerApiCalls.predict(request, options, callback);
   }
+  /**
+   * Perform an online prediction with arbitrary http payload.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {google.api.HttpBody} request.httpBody
+   *   The prediction input. Supports HTTP headers and arbitrary data payload.
+   *
+   *   A {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel} may have an upper limit on the number of instances it
+   *   supports per request. When this limit it is exceeded for an AutoML model,
+   *   the {@link google.cloud.aiplatform.v1beta1.PredictionService.RawPredict|RawPredict} method returns an error.
+   *   When this limit is exceeded for a custom-trained model, the behavior varies
+   *   depending on the model.
+   *
+   *   You can specify the schema for each instance in the
+   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
+   *   field when you create a {@link google.cloud.aiplatform.v1beta1.Model|Model}. This schema applies when you deploy the
+   *   `Model` as a `DeployedModel` to an {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} and use the `RawPredict`
+   *   method.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HttpBody]{@link google.api.HttpBody}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.raw_predict.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_RawPredict_async
+   */
   rawPredict(
     request?: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
     options?: CallOptions
@@ -519,39 +552,6 @@ export class PredictionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Perform an online prediction with arbitrary http payload.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint requested to serve the prediction.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {google.api.HttpBody} request.httpBody
-   *   The prediction input. Supports HTTP headers and arbitrary data payload.
-   *
-   *   A {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel} may have an upper limit on the number of instances it
-   *   supports per request. When this limit it is exceeded for an AutoML model,
-   *   the {@link google.cloud.aiplatform.v1beta1.PredictionService.RawPredict|RawPredict} method returns an error.
-   *   When this limit is exceeded for a custom-trained model, the behavior varies
-   *   depending on the model.
-   *
-   *   You can specify the schema for each instance in the
-   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
-   *   field when you create a {@link google.cloud.aiplatform.v1beta1.Model|Model}. This schema applies when you deploy the
-   *   `Model` as a `DeployedModel` to an {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} and use the `RawPredict`
-   *   method.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [HttpBody]{@link google.api.HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.rawPredict(request);
-   */
   rawPredict(
     request?: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
     optionsOrCallback?:
@@ -595,33 +595,6 @@ export class PredictionServiceClient {
     this.initialize();
     return this.innerApiCalls.rawPredict(request, options, callback);
   }
-  explain(
-    request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  explain(
-    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  explain(
-    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Perform an online explanation.
    *
@@ -674,9 +647,36 @@ export class PredictionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.explain(request);
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.explain.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_Explain_async
    */
+  explain(
+    request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  explain(
+    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  explain(
+    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   explain(
     request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
     optionsOrCallback?:

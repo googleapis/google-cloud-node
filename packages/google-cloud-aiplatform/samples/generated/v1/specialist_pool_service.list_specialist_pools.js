@@ -30,15 +30,15 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  The standard list page token.
-   *  Typically obtained by [ListSpecialistPoolsResponse.next_page_token][google.cloud.aiplatform.v1.ListSpecialistPoolsResponse.next_page_token] of
-   *  the previous [SpecialistPoolService.ListSpecialistPools][google.cloud.aiplatform.v1.SpecialistPoolService.ListSpecialistPools] call. Return
+   *  Typically obtained by ListSpecialistPoolsResponse.next_page_token google.cloud.aiplatform.v1.ListSpecialistPoolsResponse.next_page_token  of
+   *  the previous SpecialistPoolService.ListSpecialistPools google.cloud.aiplatform.v1.SpecialistPoolService.ListSpecialistPools  call. Return
    *  first page if empty.
    */
   // const pageToken = 'abc123'
   /**
    *  Mask specifying which fields to read. FieldMask represents a set of
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {SpecialistPoolServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new SpecialistPoolServiceClient();
 
-  async function listSpecialistPools() {
+  async function callListSpecialistPools() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     }
   }
 
-  listSpecialistPools();
+  callListSpecialistPools();
   // [END aiplatform_v1_generated_SpecialistPoolService_ListSpecialistPools_async]
 }
 

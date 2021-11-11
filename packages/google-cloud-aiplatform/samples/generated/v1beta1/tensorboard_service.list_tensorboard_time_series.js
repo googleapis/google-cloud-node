@@ -38,10 +38,10 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  [TensorboardService.ListTensorboardTimeSeries][google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboardTimeSeries] call.
+   *  TensorboardService.ListTensorboardTimeSeries google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboardTimeSeries  call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  [TensorboardService.ListTensorboardTimeSeries][google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboardTimeSeries] must
+   *  TensorboardService.ListTensorboardTimeSeries google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboardTimeSeries  must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
@@ -52,7 +52,7 @@ function main(parent) {
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} =
@@ -61,7 +61,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
 
-  async function listTensorboardTimeSeries() {
+  async function callListTensorboardTimeSeries() {
     // Construct request
     const request = {
       parent,
@@ -76,7 +76,7 @@ function main(parent) {
     }
   }
 
-  listTensorboardTimeSeries();
+  callListTensorboardTimeSeries();
   // [END aiplatform_v1beta1_generated_TensorboardService_ListTensorboardTimeSeries_async]
 }
 

@@ -32,18 +32,18 @@ function main(endpoint, instances) {
    *  in case of AutoML Models, or, in case of customer created Models, the
    *  behaviour is as documented by that Model.
    *  The schema of any single instance may be specified via Endpoint's
-   *  DeployedModels' [Model's][google.cloud.aiplatform.v1.DeployedModel.model]
-   *  [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
-   *  [instance_schema_uri][google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri].
+   *  DeployedModels' Model's google.cloud.aiplatform.v1.DeployedModel.model
+   *  PredictSchemata's google.cloud.aiplatform.v1.Model.predict_schemata
+   *  instance_schema_uri google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri.
    */
   // const instances = 1234
   /**
    *  The parameters that govern the prediction. The schema of the parameters may
-   *  be specified via Endpoint's DeployedModels' [Model's ][google.cloud.aiplatform.v1.DeployedModel.model]
-   *  [PredictSchemata's][google.cloud.aiplatform.v1.Model.predict_schemata]
-   *  [parameters_schema_uri][google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri].
+   *  be specified via Endpoint's DeployedModels' Model's  google.cloud.aiplatform.v1.DeployedModel.model
+   *  PredictSchemata's google.cloud.aiplatform.v1.Model.predict_schemata
+   *  parameters_schema_uri google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri.
    */
-  // const parameters = ''
+  // const parameters = {}
 
   // Imports the Aiplatform library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -51,7 +51,7 @@ function main(endpoint, instances) {
   // Instantiates a client
   const aiplatformClient = new PredictionServiceClient();
 
-  async function predict() {
+  async function callPredict() {
     // Construct request
     const request = {
       endpoint,
@@ -63,7 +63,7 @@ function main(endpoint, instances) {
     console.log(response);
   }
 
-  predict();
+  callPredict();
   // [END aiplatform_v1_generated_PredictionService_Predict_async]
 }
 

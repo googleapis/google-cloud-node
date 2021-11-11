@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function deleteFeature() {
+  async function callDeleteFeature() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteFeature();
+  callDeleteFeature();
   // [END aiplatform_v1_generated_FeaturestoreService_DeleteFeature_async]
 }
 

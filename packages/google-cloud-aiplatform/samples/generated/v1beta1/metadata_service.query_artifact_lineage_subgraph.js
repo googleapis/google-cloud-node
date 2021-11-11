@@ -65,7 +65,7 @@ function main(artifact) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function queryArtifactLineageSubgraph() {
+  async function callQueryArtifactLineageSubgraph() {
     // Construct request
     const request = {
       artifact,
@@ -78,7 +78,7 @@ function main(artifact) {
     console.log(response);
   }
 
-  queryArtifactLineageSubgraph();
+  callQueryArtifactLineageSubgraph();
   // [END aiplatform_v1beta1_generated_MetadataService_QueryArtifactLineageSubgraph_async]
 }
 

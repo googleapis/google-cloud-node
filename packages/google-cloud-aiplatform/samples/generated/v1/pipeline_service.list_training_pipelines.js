@@ -43,14 +43,14 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  [ListTrainingPipelinesResponse.next_page_token][google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token] of the previous
-   *  [PipelineService.ListTrainingPipelines][google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines] call.
+   *  ListTrainingPipelinesResponse.next_page_token google.cloud.aiplatform.v1.ListTrainingPipelinesResponse.next_page_token  of the previous
+   *  PipelineService.ListTrainingPipelines google.cloud.aiplatform.v1.PipelineService.ListTrainingPipelines  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -58,7 +58,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new PipelineServiceClient();
 
-  async function listTrainingPipelines() {
+  async function callListTrainingPipelines() {
     // Construct request
     const request = {
       parent,
@@ -71,7 +71,7 @@ function main(parent) {
     }
   }
 
-  listTrainingPipelines();
+  callListTrainingPipelines();
   // [END aiplatform_v1_generated_PipelineService_ListTrainingPipelines_async]
 }
 

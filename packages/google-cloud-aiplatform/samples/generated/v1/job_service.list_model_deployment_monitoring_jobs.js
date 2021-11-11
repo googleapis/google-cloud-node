@@ -39,7 +39,7 @@ function main(parent) {
   /**
    *  Mask specifying which fields to read
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -47,7 +47,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function listModelDeploymentMonitoringJobs() {
+  async function callListModelDeploymentMonitoringJobs() {
     // Construct request
     const request = {
       parent,
@@ -61,7 +61,7 @@ function main(parent) {
     }
   }
 
-  listModelDeploymentMonitoringJobs();
+  callListModelDeploymentMonitoringJobs();
   // [END aiplatform_v1_generated_JobService_ListModelDeploymentMonitoringJobs_async]
 }
 

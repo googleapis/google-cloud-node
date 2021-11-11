@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function deleteModelDeploymentMonitoringJob() {
+  async function callDeleteModelDeploymentMonitoringJob() {
     // Construct request
     const request = {
       name,
@@ -45,7 +45,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteModelDeploymentMonitoringJob();
+  callDeleteModelDeploymentMonitoringJob();
   // [END aiplatform_v1beta1_generated_JobService_DeleteModelDeploymentMonitoringJob_async]
 }
 

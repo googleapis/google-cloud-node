@@ -44,14 +44,14 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  [ListBatchPredictionJobsResponse.next_page_token][google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token] of the previous
-   *  [JobService.ListBatchPredictionJobs][google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs] call.
+   *  ListBatchPredictionJobsResponse.next_page_token google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token  of the previous
+   *  JobService.ListBatchPredictionJobs google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs  call.
    */
   // const pageToken = 'abc123'
   /**
    *  Mask specifying which fields to read.
    */
-  // const readMask = ''
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -59,7 +59,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function listBatchPredictionJobs() {
+  async function callListBatchPredictionJobs() {
     // Construct request
     const request = {
       parent,
@@ -74,7 +74,7 @@ function main(parent) {
     }
   }
 
-  listBatchPredictionJobs();
+  callListBatchPredictionJobs();
   // [END aiplatform_v1_generated_JobService_ListBatchPredictionJobs_async]
 }
 

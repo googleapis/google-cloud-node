@@ -33,16 +33,16 @@ function main(featurestore, destination, entityTypeSpecs) {
    *  Timestamp in each read instance must be millisecond-aligned.
    *  `csv_read_instances` are read instances stored in a plain-text CSV file.
    *  The header should be:
-   *      [ENTITY_TYPE_ID1], [ENTITY_TYPE_ID2], ..., timestamp
+   *      ENTITY_TYPE_ID1, ENTITY_TYPE_ID2, ..., timestamp
    *  The columns can be in any order.
    *  Values in the timestamp column must use the RFC 3339 format, e.g.
    *  `2012-07-30T10:43:17.123Z`.
    */
-  // const csvReadInstances = ''
+  // const csvReadInstances = {}
   /**
    *  Similar to csv_read_instances, but from BigQuery source.
    */
-  // const bigqueryReadInstances = ''
+  // const bigqueryReadInstances = {}
   /**
    *  Required. The resource name of the Featurestore from which to query Feature values.
    *  Format:
@@ -52,7 +52,7 @@ function main(featurestore, destination, entityTypeSpecs) {
   /**
    *  Required. Specifies output location and format.
    */
-  // const destination = ''
+  // const destination = {}
   /**
    *  When not empty, the specified fields in the *_read_instances source will be
    *  joined as-is in the output, in addition to those fields from the
@@ -65,9 +65,9 @@ function main(featurestore, destination, entityTypeSpecs) {
   /**
    *  Required. Specifies EntityType grouping Features to read values of and settings.
    *  Each EntityType referenced in
-   *  [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
+   *  BatchReadFeatureValuesRequest.entity_type_specs  must have a column
    *  specifying entity IDs in the EntityType in
-   *  [BatchReadFeatureValuesRequest.request][] .
+   *  BatchReadFeatureValuesRequest.request   .
    */
   // const entityTypeSpecs = 1234
 
@@ -78,7 +78,7 @@ function main(featurestore, destination, entityTypeSpecs) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function batchReadFeatureValues() {
+  async function callBatchReadFeatureValues() {
     // Construct request
     const request = {
       featurestore,
@@ -92,7 +92,7 @@ function main(featurestore, destination, entityTypeSpecs) {
     console.log(response);
   }
 
-  batchReadFeatureValues();
+  callBatchReadFeatureValues();
   // [END aiplatform_v1beta1_generated_FeaturestoreService_BatchReadFeatureValues_async]
 }
 

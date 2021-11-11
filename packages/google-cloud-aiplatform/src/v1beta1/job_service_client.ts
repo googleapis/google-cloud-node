@@ -570,6 +570,27 @@ export class JobServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a CustomJob. A created CustomJob right away
+   * will be attempted to be run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the CustomJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.CustomJob} request.customJob
+   *   Required. The CustomJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomJob]{@link google.cloud.aiplatform.v1beta1.CustomJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.create_custom_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CreateCustomJob_async
+   */
   createCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest,
     options?: CallOptions
@@ -604,27 +625,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a CustomJob. A created CustomJob right away
-   * will be attempted to be run.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the CustomJob in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.CustomJob} request.customJob
-   *   Required. The CustomJob to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CustomJob]{@link google.cloud.aiplatform.v1beta1.CustomJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createCustomJob(request);
-   */
   createCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateCustomJobRequest,
     optionsOrCallback?:
@@ -671,6 +671,25 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.createCustomJob(request, options, callback);
   }
+  /**
+   * Gets a CustomJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomJob]{@link google.cloud.aiplatform.v1beta1.CustomJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.get_custom_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_GetCustomJob_async
+   */
   getCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest,
     options?: CallOptions
@@ -702,25 +721,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a CustomJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the CustomJob resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CustomJob]{@link google.cloud.aiplatform.v1beta1.CustomJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getCustomJob(request);
-   */
   getCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetCustomJobRequest,
     optionsOrCallback?:
@@ -764,6 +764,34 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.getCustomJob(request, options, callback);
   }
+  /**
+   * Cancels a CustomJob.
+   * Starts asynchronous cancellation on the CustomJob. The server
+   * makes a best effort to cancel the job, but success is not
+   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1beta1.JobService.GetCustomJob|JobService.GetCustomJob} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On successful cancellation,
+   * the CustomJob is not deleted; instead it becomes a job with
+   * a {@link google.cloud.aiplatform.v1beta1.CustomJob.error|CustomJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * corresponding to `Code.CANCELLED`, and {@link google.cloud.aiplatform.v1beta1.CustomJob.state|CustomJob.state} is set to
+   * `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.cancel_custom_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CancelCustomJob_async
+   */
   cancelCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest,
     options?: CallOptions
@@ -798,34 +826,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Cancels a CustomJob.
-   * Starts asynchronous cancellation on the CustomJob. The server
-   * makes a best effort to cancel the job, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1beta1.JobService.GetCustomJob|JobService.GetCustomJob} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * job completed despite cancellation. On successful cancellation,
-   * the CustomJob is not deleted; instead it becomes a job with
-   * a {@link google.cloud.aiplatform.v1beta1.CustomJob.error|CustomJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
-   * corresponding to `Code.CANCELLED`, and {@link google.cloud.aiplatform.v1beta1.CustomJob.state|CustomJob.state} is set to
-   * `CANCELLED`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the CustomJob to cancel.
-   *   Format:
-   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.cancelCustomJob(request);
-   */
   cancelCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelCustomJobRequest,
     optionsOrCallback?:
@@ -872,6 +872,26 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.cancelCustomJob(request, options, callback);
   }
+  /**
+   * Creates a DataLabelingJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the DataLabelingJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.DataLabelingJob} request.dataLabelingJob
+   *   Required. The DataLabelingJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DataLabelingJob]{@link google.cloud.aiplatform.v1beta1.DataLabelingJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.create_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CreateDataLabelingJob_async
+   */
   createDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest,
     options?: CallOptions
@@ -906,26 +926,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a DataLabelingJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the DataLabelingJob.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.DataLabelingJob} request.dataLabelingJob
-   *   Required. The DataLabelingJob to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DataLabelingJob]{@link google.cloud.aiplatform.v1beta1.DataLabelingJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createDataLabelingJob(request);
-   */
   createDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateDataLabelingJobRequest,
     optionsOrCallback?:
@@ -972,6 +972,25 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.createDataLabelingJob(request, options, callback);
   }
+  /**
+   * Gets a DataLabelingJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DataLabelingJob]{@link google.cloud.aiplatform.v1beta1.DataLabelingJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.get_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_GetDataLabelingJob_async
+   */
   getDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest,
     options?: CallOptions
@@ -1006,25 +1025,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a DataLabelingJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DataLabelingJob.
-   *   Format:
-   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DataLabelingJob]{@link google.cloud.aiplatform.v1beta1.DataLabelingJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getDataLabelingJob(request);
-   */
   getDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetDataLabelingJobRequest,
     optionsOrCallback?:
@@ -1071,6 +1071,25 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.getDataLabelingJob(request, options, callback);
   }
+  /**
+   * Cancels a DataLabelingJob. Success of cancellation is not guaranteed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.cancel_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CancelDataLabelingJob_async
+   */
   cancelDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest,
     options?: CallOptions
@@ -1105,25 +1124,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Cancels a DataLabelingJob. Success of cancellation is not guaranteed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DataLabelingJob.
-   *   Format:
-   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.cancelDataLabelingJob(request);
-   */
   cancelDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelDataLabelingJobRequest,
     optionsOrCallback?:
@@ -1170,6 +1170,26 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.cancelDataLabelingJob(request, options, callback);
   }
+  /**
+   * Creates a HyperparameterTuningJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the HyperparameterTuningJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.HyperparameterTuningJob} request.hyperparameterTuningJob
+   *   Required. The HyperparameterTuningJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HyperparameterTuningJob]{@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.create_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CreateHyperparameterTuningJob_async
+   */
   createHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest,
     options?: CallOptions
@@ -1204,26 +1224,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a HyperparameterTuningJob
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the HyperparameterTuningJob in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.HyperparameterTuningJob} request.hyperparameterTuningJob
-   *   Required. The HyperparameterTuningJob to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [HyperparameterTuningJob]{@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createHyperparameterTuningJob(request);
-   */
   createHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateHyperparameterTuningJobRequest,
     optionsOrCallback?:
@@ -1274,6 +1274,25 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Gets a HyperparameterTuningJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the HyperparameterTuningJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HyperparameterTuningJob]{@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.get_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_GetHyperparameterTuningJob_async
+   */
   getHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest,
     options?: CallOptions
@@ -1308,25 +1327,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a HyperparameterTuningJob
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the HyperparameterTuningJob resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [HyperparameterTuningJob]{@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getHyperparameterTuningJob(request);
-   */
   getHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetHyperparameterTuningJobRequest,
     optionsOrCallback?:
@@ -1377,6 +1377,34 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Cancels a HyperparameterTuningJob.
+   * Starts asynchronous cancellation on the HyperparameterTuningJob. The server
+   * makes a best effort to cancel the job, but success is not
+   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1beta1.JobService.GetHyperparameterTuningJob|JobService.GetHyperparameterTuningJob} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On successful cancellation,
+   * the HyperparameterTuningJob is not deleted; instead it becomes a job with
+   * a {@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob.error|HyperparameterTuningJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code}
+   * of 1, corresponding to `Code.CANCELLED`, and
+   * {@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob.state|HyperparameterTuningJob.state} is set to `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the HyperparameterTuningJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.cancel_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CancelHyperparameterTuningJob_async
+   */
   cancelHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest,
     options?: CallOptions
@@ -1411,34 +1439,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Cancels a HyperparameterTuningJob.
-   * Starts asynchronous cancellation on the HyperparameterTuningJob. The server
-   * makes a best effort to cancel the job, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1beta1.JobService.GetHyperparameterTuningJob|JobService.GetHyperparameterTuningJob} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * job completed despite cancellation. On successful cancellation,
-   * the HyperparameterTuningJob is not deleted; instead it becomes a job with
-   * a {@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob.error|HyperparameterTuningJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code}
-   * of 1, corresponding to `Code.CANCELLED`, and
-   * {@link google.cloud.aiplatform.v1beta1.HyperparameterTuningJob.state|HyperparameterTuningJob.state} is set to `CANCELLED`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the HyperparameterTuningJob to cancel.
-   *   Format:
-   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.cancelHyperparameterTuningJob(request);
-   */
   cancelHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelHyperparameterTuningJobRequest,
     optionsOrCallback?:
@@ -1489,6 +1489,27 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Creates a BatchPredictionJob. A BatchPredictionJob once created will
+   * right away be attempted to start.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the BatchPredictionJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.BatchPredictionJob} request.batchPredictionJob
+   *   Required. The BatchPredictionJob to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchPredictionJob]{@link google.cloud.aiplatform.v1beta1.BatchPredictionJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.create_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CreateBatchPredictionJob_async
+   */
   createBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest,
     options?: CallOptions
@@ -1523,27 +1544,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a BatchPredictionJob. A BatchPredictionJob once created will
-   * right away be attempted to start.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the BatchPredictionJob in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.BatchPredictionJob} request.batchPredictionJob
-   *   Required. The BatchPredictionJob to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchPredictionJob]{@link google.cloud.aiplatform.v1beta1.BatchPredictionJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createBatchPredictionJob(request);
-   */
   createBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateBatchPredictionJobRequest,
     optionsOrCallback?:
@@ -1594,6 +1594,25 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Gets a BatchPredictionJob
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BatchPredictionJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchPredictionJob]{@link google.cloud.aiplatform.v1beta1.BatchPredictionJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.get_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_GetBatchPredictionJob_async
+   */
   getBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest,
     options?: CallOptions
@@ -1628,25 +1647,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a BatchPredictionJob
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the BatchPredictionJob resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchPredictionJob]{@link google.cloud.aiplatform.v1beta1.BatchPredictionJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getBatchPredictionJob(request);
-   */
   getBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetBatchPredictionJobRequest,
     optionsOrCallback?:
@@ -1693,6 +1693,34 @@ export class JobServiceClient {
     this.initialize();
     return this.innerApiCalls.getBatchPredictionJob(request, options, callback);
   }
+  /**
+   * Cancels a BatchPredictionJob.
+   *
+   * Starts asynchronous cancellation on the BatchPredictionJob. The server
+   * makes the best effort to cancel the job, but success is not
+   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1beta1.JobService.GetBatchPredictionJob|JobService.GetBatchPredictionJob} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * job completed despite cancellation. On a successful cancellation,
+   * the BatchPredictionJob is not deleted;instead its
+   * {@link google.cloud.aiplatform.v1beta1.BatchPredictionJob.state|BatchPredictionJob.state} is set to `CANCELLED`. Any files already
+   * outputted by the job are not deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BatchPredictionJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.cancel_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CancelBatchPredictionJob_async
+   */
   cancelBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest,
     options?: CallOptions
@@ -1727,34 +1755,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Cancels a BatchPredictionJob.
-   *
-   * Starts asynchronous cancellation on the BatchPredictionJob. The server
-   * makes the best effort to cancel the job, but success is not
-   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1beta1.JobService.GetBatchPredictionJob|JobService.GetBatchPredictionJob} or
-   * other methods to check whether the cancellation succeeded or whether the
-   * job completed despite cancellation. On a successful cancellation,
-   * the BatchPredictionJob is not deleted;instead its
-   * {@link google.cloud.aiplatform.v1beta1.BatchPredictionJob.state|BatchPredictionJob.state} is set to `CANCELLED`. Any files already
-   * outputted by the job are not deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the BatchPredictionJob to cancel.
-   *   Format:
-   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.cancelBatchPredictionJob(request);
-   */
   cancelBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICancelBatchPredictionJobRequest,
     optionsOrCallback?:
@@ -1805,6 +1805,27 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
+   * configured interval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The ModelDeploymentMonitoringJob to create
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.create_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_CreateModelDeploymentMonitoringJob_async
+   */
   createModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest,
     options?: CallOptions
@@ -1839,27 +1860,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
-   * configured interval.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the ModelDeploymentMonitoringJob.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
-   *   Required. The ModelDeploymentMonitoringJob to create
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createModelDeploymentMonitoringJob(request);
-   */
   createModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateModelDeploymentMonitoringJobRequest,
     optionsOrCallback?:
@@ -1910,6 +1910,25 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Gets a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.get_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_GetModelDeploymentMonitoringJob_async
+   */
   getModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest,
     options?: CallOptions
@@ -1944,25 +1963,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a ModelDeploymentMonitoringJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ModelDeploymentMonitoringJob.
-   *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getModelDeploymentMonitoringJob(request);
-   */
   getModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetModelDeploymentMonitoringJobRequest,
     optionsOrCallback?:
@@ -2013,6 +2013,27 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
+   * makes a best effort to cancel the job. Will mark
+   * {@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state} to 'PAUSED'.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to pause.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.pause_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_PauseModelDeploymentMonitoringJob_async
+   */
   pauseModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest,
     options?: CallOptions
@@ -2047,27 +2068,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
-   * makes a best effort to cancel the job. Will mark
-   * {@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state} to 'PAUSED'.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ModelDeploymentMonitoringJob to pause.
-   *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.pauseModelDeploymentMonitoringJob(request);
-   */
   pauseModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IPauseModelDeploymentMonitoringJobRequest,
     optionsOrCallback?:
@@ -2118,6 +2118,27 @@ export class JobServiceClient {
       callback
     );
   }
+  /**
+   * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
+   * next scheduled time. A deleted ModelDeploymentMonitoringJob can't be
+   * resumed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to resume.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.resume_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_ResumeModelDeploymentMonitoringJob_async
+   */
   resumeModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest,
     options?: CallOptions
@@ -2152,27 +2173,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
-   * next scheduled time. A deleted ModelDeploymentMonitoringJob can't be
-   * resumed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the ModelDeploymentMonitoringJob to resume.
-   *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.resumeModelDeploymentMonitoringJob(request);
-   */
   resumeModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IResumeModelDeploymentMonitoringJobRequest,
     optionsOrCallback?:
@@ -2224,6 +2224,27 @@ export class JobServiceClient {
     );
   }
 
+  /**
+   * Deletes a CustomJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_custom_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteCustomJob_async
+   */
   deleteCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteCustomJobRequest,
     options?: CallOptions
@@ -2260,28 +2281,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a CustomJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the CustomJob resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/customJobs/{custom_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteCustomJob(request);
-   * const [response] = await operation.promise();
-   */
   deleteCustomJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteCustomJobRequest,
     optionsOrCallback?:
@@ -2339,11 +2338,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteCustomJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_custom_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteCustomJob_async
    */
   async checkDeleteCustomJobProgress(
     name: string
@@ -2367,6 +2363,27 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
+  /**
+   * Deletes a DataLabelingJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataLabelingJob to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteDataLabelingJob_async
+   */
   deleteDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteDataLabelingJobRequest,
     options?: CallOptions
@@ -2403,28 +2420,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a DataLabelingJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the DataLabelingJob to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteDataLabelingJob(request);
-   * const [response] = await operation.promise();
-   */
   deleteDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteDataLabelingJobRequest,
     optionsOrCallback?:
@@ -2482,11 +2477,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteDataLabelingJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_data_labeling_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteDataLabelingJob_async
    */
   async checkDeleteDataLabelingJobProgress(
     name: string
@@ -2510,6 +2502,27 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
+  /**
+   * Deletes a HyperparameterTuningJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the HyperparameterTuningJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteHyperparameterTuningJob_async
+   */
   deleteHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteHyperparameterTuningJobRequest,
     options?: CallOptions
@@ -2546,28 +2559,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a HyperparameterTuningJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the HyperparameterTuningJob resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteHyperparameterTuningJob(request);
-   * const [response] = await operation.promise();
-   */
   deleteHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteHyperparameterTuningJobRequest,
     optionsOrCallback?:
@@ -2629,11 +2620,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteHyperparameterTuningJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_hyperparameter_tuning_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteHyperparameterTuningJob_async
    */
   async checkDeleteHyperparameterTuningJobProgress(
     name: string
@@ -2657,6 +2645,28 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
+  /**
+   * Deletes a BatchPredictionJob. Can only be called on jobs that already
+   * finished.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the BatchPredictionJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteBatchPredictionJob_async
+   */
   deleteBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteBatchPredictionJobRequest,
     options?: CallOptions
@@ -2693,29 +2703,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a BatchPredictionJob. Can only be called on jobs that already
-   * finished.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the BatchPredictionJob resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteBatchPredictionJob(request);
-   * const [response] = await operation.promise();
-   */
   deleteBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteBatchPredictionJobRequest,
     optionsOrCallback?:
@@ -2777,11 +2764,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteBatchPredictionJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_batch_prediction_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteBatchPredictionJob_async
    */
   async checkDeleteBatchPredictionJobProgress(
     name: string
@@ -2805,42 +2789,6 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
-  updateModelDeploymentMonitoringJob(
-    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateModelDeploymentMonitoringJob(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateModelDeploymentMonitoringJob(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
-        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates a ModelDeploymentMonitoringJob.
    *
@@ -2886,10 +2834,45 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateModelDeploymentMonitoringJob(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1beta1/job_service.update_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_UpdateModelDeploymentMonitoringJob_async
    */
+  updateModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateModelDeploymentMonitoringJobRequest,
     optionsOrCallback?:
@@ -2952,11 +2935,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateModelDeploymentMonitoringJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/job_service.update_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_UpdateModelDeploymentMonitoringJob_async
    */
   async checkUpdateModelDeploymentMonitoringJobProgress(
     name: string
@@ -2980,6 +2960,27 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobOperationMetadata
     >;
   }
+  /**
+   * Deletes a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model monitoring job to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteModelDeploymentMonitoringJob_async
+   */
   deleteModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteModelDeploymentMonitoringJobRequest,
     options?: CallOptions
@@ -3016,28 +3017,6 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a ModelDeploymentMonitoringJob.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the model monitoring job to delete.
-   *   Format:
-   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteModelDeploymentMonitoringJob(request);
-   * const [response] = await operation.promise();
-   */
   deleteModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteModelDeploymentMonitoringJobRequest,
     optionsOrCallback?:
@@ -3099,11 +3078,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteModelDeploymentMonitoringJobProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/job_service.delete_model_deployment_monitoring_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_DeleteModelDeploymentMonitoringJob_async
    */
   async checkDeleteModelDeploymentMonitoringJobProgress(
     name: string
@@ -3127,37 +3103,6 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >;
   }
-  listCustomJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.ICustomJob[],
-      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
-    ]
-  >;
-  listCustomJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ICustomJob
-    >
-  ): void;
-  listCustomJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.ICustomJob
-    >
-  ): void;
   /**
    * Lists CustomJobs in a Location.
    *
@@ -3206,6 +3151,37 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listCustomJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.ICustomJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
+    ]
+  >;
+  listCustomJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ICustomJob
+    >
+  ): void;
+  listCustomJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListCustomJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.ICustomJob
+    >
+  ): void;
   listCustomJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
     optionsOrCallback?:
@@ -3364,11 +3340,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listCustomJobsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/job_service.list_custom_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_ListCustomJobs_async
    */
   listCustomJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListCustomJobsRequest,
@@ -3382,7 +3355,6 @@ export class JobServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3392,37 +3364,6 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ICustomJob>;
   }
-  listDataLabelingJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[],
-      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
-    ]
-  >;
-  listDataLabelingJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob
-    >
-  ): void;
-  listDataLabelingJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob
-    >
-  ): void;
   /**
    * Lists DataLabelingJobs in a Location.
    *
@@ -3475,6 +3416,37 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listDataLabelingJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
+    ]
+  >;
+  listDataLabelingJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob
+    >
+  ): void;
+  listDataLabelingJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob
+    >
+  ): void;
   listDataLabelingJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
     optionsOrCallback?:
@@ -3641,11 +3613,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listDataLabelingJobsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/job_service.list_data_labeling_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_ListDataLabelingJobs_async
    */
   listDataLabelingJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListDataLabelingJobsRequest,
@@ -3659,7 +3628,6 @@ export class JobServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3669,37 +3637,6 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob>;
   }
-  listHyperparameterTuningJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob[],
-      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
-    ]
-  >;
-  listHyperparameterTuningJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
-    >
-  ): void;
-  listHyperparameterTuningJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
-    >
-  ): void;
   /**
    * Lists HyperparameterTuningJobs in a Location.
    *
@@ -3748,6 +3685,37 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listHyperparameterTuningJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
+    ]
+  >;
+  listHyperparameterTuningJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
+    >
+  ): void;
+  listHyperparameterTuningJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
+    >
+  ): void;
   listHyperparameterTuningJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
     optionsOrCallback?:
@@ -3910,11 +3878,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listHyperparameterTuningJobsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/job_service.list_hyperparameter_tuning_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_ListHyperparameterTuningJobs_async
    */
   listHyperparameterTuningJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
@@ -3928,7 +3893,6 @@ export class JobServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3938,37 +3902,6 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob>;
   }
-  listBatchPredictionJobs(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob[],
-      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
-    ]
-  >;
-  listBatchPredictionJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob
-    >
-  ): void;
-  listBatchPredictionJobs(
-    request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob
-    >
-  ): void;
   /**
    * Lists BatchPredictionJobs in a Location.
    *
@@ -4019,6 +3952,37 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listBatchPredictionJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob[],
+      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
+    ]
+  >;
+  listBatchPredictionJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob
+    >
+  ): void;
+  listBatchPredictionJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob
+    >
+  ): void;
   listBatchPredictionJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
     optionsOrCallback?:
@@ -4185,11 +4149,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listBatchPredictionJobsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/job_service.list_batch_prediction_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_ListBatchPredictionJobs_async
    */
   listBatchPredictionJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
@@ -4203,7 +4164,6 @@ export class JobServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -4213,37 +4173,6 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob>;
   }
-  searchModelDeploymentMonitoringStatsAnomalies(
-    request?: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies[],
-      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
-    ]
-  >;
-  searchModelDeploymentMonitoringStatsAnomalies(
-    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
-    >
-  ): void;
-  searchModelDeploymentMonitoringStatsAnomalies(
-    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
-    >
-  ): void;
   /**
    * Searches Model Monitoring Statistics generated within a given time window.
    *
@@ -4288,6 +4217,37 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+    ]
+  >;
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
   searchModelDeploymentMonitoringStatsAnomalies(
     request?: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
     optionsOrCallback?:
@@ -4446,11 +4406,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/job_service.search_model_deployment_monitoring_stats_anomalies.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_SearchModelDeploymentMonitoringStatsAnomalies_async
    */
   searchModelDeploymentMonitoringStatsAnomaliesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
@@ -4465,7 +4422,6 @@ export class JobServiceClient {
         model_deployment_monitoring_job:
           request.modelDeploymentMonitoringJob || '',
       });
-    options = options || {};
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4478,6 +4434,35 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies>;
   }
+  /**
+   * Lists ModelDeploymentMonitoringJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listModelDeploymentMonitoringJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
     options?: CallOptions
@@ -4509,35 +4494,6 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob
     >
   ): void;
-  /**
-   * Lists ModelDeploymentMonitoringJobs in a Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent of the ModelDeploymentMonitoringJob.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listModelDeploymentMonitoringJobs(
     request?: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
     optionsOrCallback?:
@@ -4663,11 +4619,8 @@ export class JobServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listModelDeploymentMonitoringJobsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/job_service.list_model_deployment_monitoring_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_JobService_ListModelDeploymentMonitoringJobs_async
    */
   listModelDeploymentMonitoringJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListModelDeploymentMonitoringJobsRequest,
@@ -4681,7 +4634,6 @@ export class JobServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);

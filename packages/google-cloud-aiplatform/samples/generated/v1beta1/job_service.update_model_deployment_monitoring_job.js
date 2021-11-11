@@ -23,7 +23,7 @@ function main(modelDeploymentMonitoringJob, updateMask) {
    *  Required. The model monitoring configuration which replaces the resource on the
    *  server.
    */
-  // const modelDeploymentMonitoringJob = ''
+  // const modelDeploymentMonitoringJob = {}
   /**
    *  Required. The update mask is used to specify the fields to be overwritten in the
    *  ModelDeploymentMonitoringJob resource by the update.
@@ -51,7 +51,7 @@ function main(modelDeploymentMonitoringJob, updateMask) {
    *    * `model_deployment_monitoring_objective_configs.objective_config.training_prediction_skew_detection_config`
    *    * `model_deployment_monitoring_objective_configs.objective_config.prediction_drift_detection_config`
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -59,7 +59,7 @@ function main(modelDeploymentMonitoringJob, updateMask) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function updateModelDeploymentMonitoringJob() {
+  async function callUpdateModelDeploymentMonitoringJob() {
     // Construct request
     const request = {
       modelDeploymentMonitoringJob,
@@ -73,7 +73,7 @@ function main(modelDeploymentMonitoringJob, updateMask) {
     console.log(response);
   }
 
-  updateModelDeploymentMonitoringJob();
+  callUpdateModelDeploymentMonitoringJob();
   // [END aiplatform_v1beta1_generated_JobService_UpdateModelDeploymentMonitoringJob_async]
 }
 

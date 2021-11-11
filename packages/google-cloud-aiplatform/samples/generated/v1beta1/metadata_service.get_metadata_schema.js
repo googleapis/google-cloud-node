@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function getMetadataSchema() {
+  async function callGetMetadataSchema() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getMetadataSchema();
+  callGetMetadataSchema();
   // [END aiplatform_v1beta1_generated_MetadataService_GetMetadataSchema_async]
 }
 

@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new PipelineServiceClient();
 
-  async function deletePipelineJob() {
+  async function callDeletePipelineJob() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deletePipelineJob();
+  callDeletePipelineJob();
   // [END aiplatform_v1_generated_PipelineService_DeletePipelineJob_async]
 }
 

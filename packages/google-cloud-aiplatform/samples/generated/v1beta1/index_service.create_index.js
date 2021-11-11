@@ -27,7 +27,7 @@ function main(parent, index) {
   /**
    *  Required. The Index to create.
    */
-  // const index = ''
+  // const index = {}
 
   // Imports the Aiplatform library
   const {IndexServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -35,7 +35,7 @@ function main(parent, index) {
   // Instantiates a client
   const aiplatformClient = new IndexServiceClient();
 
-  async function createIndex() {
+  async function callCreateIndex() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, index) {
     console.log(response);
   }
 
-  createIndex();
+  callCreateIndex();
   // [END aiplatform_v1beta1_generated_IndexService_CreateIndex_async]
 }
 

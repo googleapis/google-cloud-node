@@ -39,7 +39,7 @@ function main(parent, requests) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function batchCreateFeatures() {
+  async function callBatchCreateFeatures() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent, requests) {
     console.log(response);
   }
 
-  batchCreateFeatures();
+  callBatchCreateFeatures();
   // [END aiplatform_v1_generated_FeaturestoreService_BatchCreateFeatures_async]
 }
 

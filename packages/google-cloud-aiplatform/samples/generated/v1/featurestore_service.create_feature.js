@@ -28,7 +28,7 @@ function main(parent, feature, featureId) {
   /**
    *  Required. The Feature to create.
    */
-  // const feature = ''
+  // const feature = {}
   /**
    *  Required. The ID to use for the Feature, which will become the final component of
    *  the Feature's resource name.
@@ -44,7 +44,7 @@ function main(parent, feature, featureId) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function createFeature() {
+  async function callCreateFeature() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, feature, featureId) {
     console.log(response);
   }
 
-  createFeature();
+  callCreateFeature();
   // [END aiplatform_v1_generated_FeaturestoreService_CreateFeature_async]
 }
 

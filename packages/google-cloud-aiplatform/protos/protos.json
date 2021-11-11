@@ -11614,7 +11614,10 @@
                             "parameters": {
                               "keyType": "string",
                               "type": "Value",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "gcsOutputDirectory": {
                               "type": "string",
@@ -11622,6 +11625,11 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "parameterValues": {
+                              "keyType": "string",
+                              "type": "google.protobuf.Value",
+                              "id": 3
                             }
                           }
                         }
@@ -11725,6 +11733,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "pipelineTaskStatus": {
+                          "rule": "repeated",
+                          "type": "PipelineTaskStatus",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "inputs": {
                           "keyType": "string",
                           "type": "ArtifactList",
@@ -11743,6 +11759,31 @@
                         }
                       },
                       "nested": {
+                        "PipelineTaskStatus": {
+                          "fields": {
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "ArtifactList": {
                           "fields": {
                             "artifacts": {

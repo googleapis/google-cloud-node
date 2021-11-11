@@ -39,7 +39,7 @@ function main(parent) {
   /**
    *  A filter for your search. You can use the following types of filters:
    *  *   Resource type filters. The following strings filter for a specific type
-   *      of [MigratableResource][google.cloud.aiplatform.v1beta1.MigratableResource]:
+   *      of MigratableResource google.cloud.aiplatform.v1beta1.MigratableResource:
    *      *   `ml_engine_model_version:*`
    *      *   `automl_model:*`
    *      *   `automl_dataset:*`
@@ -57,7 +57,7 @@ function main(parent) {
   // Instantiates a client
   const aiplatformClient = new MigrationServiceClient();
 
-  async function searchMigratableResources() {
+  async function callSearchMigratableResources() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +72,7 @@ function main(parent) {
     }
   }
 
-  searchMigratableResources();
+  callSearchMigratableResources();
   // [END aiplatform_v1beta1_generated_MigrationService_SearchMigratableResources_async]
 }
 

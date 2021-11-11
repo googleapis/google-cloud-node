@@ -21,19 +21,19 @@ function main(artifact, updateMask) {
    */
   /**
    *  Required. The Artifact containing updates.
-   *  The Artifact's [Artifact.name][google.cloud.aiplatform.v1beta1.Artifact.name] field is used to identify the Artifact to
+   *  The Artifact's Artifact.name google.cloud.aiplatform.v1beta1.Artifact.name  field is used to identify the Artifact to
    *  be updated.
    *  Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    */
-  // const artifact = ''
+  // const artifact = {}
   /**
    *  Required. A FieldMask indicating which fields should be updated.
    *  Functionality of this field is not yet supported.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
-   *  If set to true, and the [Artifact][google.cloud.aiplatform.v1beta1.Artifact] is not found, a new [Artifact][google.cloud.aiplatform.v1beta1.Artifact] is
+   *  If set to true, and the Artifact google.cloud.aiplatform.v1beta1.Artifact  is not found, a new Artifact google.cloud.aiplatform.v1beta1.Artifact  is
    *  created.
    */
   // const allowMissing = true
@@ -44,7 +44,7 @@ function main(artifact, updateMask) {
   // Instantiates a client
   const aiplatformClient = new MetadataServiceClient();
 
-  async function updateArtifact() {
+  async function callUpdateArtifact() {
     // Construct request
     const request = {
       artifact,
@@ -56,7 +56,7 @@ function main(artifact, updateMask) {
     console.log(response);
   }
 
-  updateArtifact();
+  callUpdateArtifact();
   // [END aiplatform_v1beta1_generated_MetadataService_UpdateArtifact_async]
 }
 

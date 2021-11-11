@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function deleteEntityType() {
+  async function callDeleteEntityType() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteEntityType();
+  callDeleteEntityType();
   // [END aiplatform_v1_generated_FeaturestoreService_DeleteEntityType_async]
 }
 

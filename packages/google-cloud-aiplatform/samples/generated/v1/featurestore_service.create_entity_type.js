@@ -28,7 +28,7 @@ function main(parent, entityTypeId) {
   /**
    *  The EntityType to create.
    */
-  // const entityType = ''
+  // const entityType = {}
   /**
    *  Required. The ID to use for the EntityType, which will become the final component of
    *  the EntityType's resource name.
@@ -44,7 +44,7 @@ function main(parent, entityTypeId) {
   // Instantiates a client
   const aiplatformClient = new FeaturestoreServiceClient();
 
-  async function createEntityType() {
+  async function callCreateEntityType() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent, entityTypeId) {
     console.log(response);
   }
 
-  createEntityType();
+  callCreateEntityType();
   // [END aiplatform_v1_generated_FeaturestoreService_CreateEntityType_async]
 }
 

@@ -27,13 +27,13 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   // const modelDeploymentMonitoringJob = 'abc123'
   /**
    *  Required. The DeployedModel ID of the
-   *  [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   *  google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id.
    */
   // const deployedModelId = 'abc123'
   /**
    *  The feature display name. If specified, only return the stats belonging to
    *  this feature. Format:
-   *  [ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name][google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name],
+   *  ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name,
    *  example: "user_destination".
    */
   // const featureDisplayName = 'abc123'
@@ -47,7 +47,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   // const pageSize = 1234
   /**
    *  A page token received from a previous
-   *  [JobService.SearchModelDeploymentMonitoringStatsAnomalies][google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies]
+   *  JobService.SearchModelDeploymentMonitoringStatsAnomalies google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies
    *  call.
    */
   // const pageToken = 'abc123'
@@ -55,12 +55,12 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
    *  The earliest timestamp of stats being generated.
    *  If not set, indicates fetching stats till the earliest possible one.
    */
-  // const startTime = ''
+  // const startTime = {}
   /**
    *  The latest timestamp of stats being generated.
    *  If not set, indicates feching stats till the latest possible one.
    */
-  // const endTime = ''
+  // const endTime = {}
 
   // Imports the Aiplatform library
   const {JobServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -68,7 +68,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   // Instantiates a client
   const aiplatformClient = new JobServiceClient();
 
-  async function searchModelDeploymentMonitoringStatsAnomalies() {
+  async function callSearchModelDeploymentMonitoringStatsAnomalies() {
     // Construct request
     const request = {
       modelDeploymentMonitoringJob,
@@ -86,7 +86,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
     }
   }
 
-  searchModelDeploymentMonitoringStatsAnomalies();
+  callSearchModelDeploymentMonitoringStatsAnomalies();
   // [END aiplatform_v1_generated_JobService_SearchModelDeploymentMonitoringStatsAnomalies_async]
 }
 

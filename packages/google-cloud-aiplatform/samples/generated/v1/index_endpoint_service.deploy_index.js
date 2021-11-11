@@ -28,7 +28,7 @@ function main(indexEndpoint, deployedIndex) {
   /**
    *  Required. The DeployedIndex to be created within the IndexEndpoint.
    */
-  // const deployedIndex = ''
+  // const deployedIndex = {}
 
   // Imports the Aiplatform library
   const {IndexEndpointServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -36,7 +36,7 @@ function main(indexEndpoint, deployedIndex) {
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function deployIndex() {
+  async function callDeployIndex() {
     // Construct request
     const request = {
       indexEndpoint,
@@ -49,7 +49,7 @@ function main(indexEndpoint, deployedIndex) {
     console.log(response);
   }
 
-  deployIndex();
+  callDeployIndex();
   // [END aiplatform_v1_generated_IndexEndpointService_DeployIndex_async]
 }
 

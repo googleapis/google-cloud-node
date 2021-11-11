@@ -27,7 +27,7 @@ function main(parent, trainingPipeline) {
   /**
    *  Required. The TrainingPipeline to create.
    */
-  // const trainingPipeline = ''
+  // const trainingPipeline = {}
 
   // Imports the Aiplatform library
   const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -35,7 +35,7 @@ function main(parent, trainingPipeline) {
   // Instantiates a client
   const aiplatformClient = new PipelineServiceClient();
 
-  async function createTrainingPipeline() {
+  async function callCreateTrainingPipeline() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, trainingPipeline) {
     console.log(response);
   }
 
-  createTrainingPipeline();
+  callCreateTrainingPipeline();
   // [END aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async]
 }
 

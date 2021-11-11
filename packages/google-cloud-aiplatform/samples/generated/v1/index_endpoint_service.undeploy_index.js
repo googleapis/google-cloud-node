@@ -36,7 +36,7 @@ function main(indexEndpoint, deployedIndexId) {
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function undeployIndex() {
+  async function callUndeployIndex() {
     // Construct request
     const request = {
       indexEndpoint,
@@ -49,7 +49,7 @@ function main(indexEndpoint, deployedIndexId) {
     console.log(response);
   }
 
-  undeployIndex();
+  callUndeployIndex();
   // [END aiplatform_v1_generated_IndexEndpointService_UndeployIndex_async]
 }
 
