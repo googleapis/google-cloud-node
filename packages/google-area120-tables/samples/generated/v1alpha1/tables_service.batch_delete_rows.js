@@ -38,7 +38,7 @@ function main(parent, names) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function batchDeleteRows() {
+  async function callBatchDeleteRows() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent, names) {
     console.log(response);
   }
 
-  batchDeleteRows();
+  callBatchDeleteRows();
   // [END area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_async]
 }
 

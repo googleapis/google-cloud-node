@@ -36,7 +36,7 @@ function main(parent, requests) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function batchCreateRows() {
+  async function callBatchCreateRows() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, requests) {
     console.log(response);
   }
 
-  batchCreateRows();
+  callBatchCreateRows();
   // [END area120tables_v1alpha1_generated_TablesService_BatchCreateRows_async]
 }
 

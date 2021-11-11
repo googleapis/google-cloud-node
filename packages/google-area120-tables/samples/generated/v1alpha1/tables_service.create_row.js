@@ -27,12 +27,12 @@ function main(parent, row) {
   /**
    *  Required. The row to create.
    */
-  // const row = ''
+  // const row = {}
   /**
    *  Optional. Column key to use for values in the row.
    *  Defaults to user entered name.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Tables library
   const {TablesServiceClient} = require('@google/area120-tables').v1alpha1;
@@ -40,7 +40,7 @@ function main(parent, row) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function createRow() {
+  async function callCreateRow() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent, row) {
     console.log(response);
   }
 
-  createRow();
+  callCreateRow();
   // [END area120tables_v1alpha1_generated_TablesService_CreateRow_async]
 }
 

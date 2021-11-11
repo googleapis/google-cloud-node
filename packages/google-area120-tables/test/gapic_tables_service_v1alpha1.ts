@@ -1192,7 +1192,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.area120.tables.v1alpha1.Table()
@@ -1223,7 +1223,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.area120.tables.v1alpha1.Table()
@@ -1270,7 +1270,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listTables = stubSimpleCall(
         undefined,
@@ -1445,7 +1445,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.area120.tables.v1alpha1.Workspace()
@@ -1476,7 +1476,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.area120.tables.v1alpha1.Workspace()
@@ -1523,7 +1523,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkspaces = stubSimpleCall(
         undefined,

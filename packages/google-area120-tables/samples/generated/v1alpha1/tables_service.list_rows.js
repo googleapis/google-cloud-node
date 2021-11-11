@@ -42,7 +42,7 @@ function main(parent) {
    *  Optional. Column key to use for values in the row.
    *  Defaults to user entered name.
    */
-  // const view = ''
+  // const view = {}
   /**
    *  Optional. Raw text query to search for in rows of the table.
    *  Special characters must be escaped. Logical operators and field specific
@@ -56,7 +56,7 @@ function main(parent) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function listRows() {
+  async function callListRows() {
     // Construct request
     const request = {
       parent,
@@ -69,7 +69,7 @@ function main(parent) {
     }
   }
 
-  listRows();
+  callListRows();
   // [END area120tables_v1alpha1_generated_TablesService_ListRows_async]
 }
 

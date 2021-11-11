@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function getTable() {
+  async function callGetTable() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTable();
+  callGetTable();
   // [END area120tables_v1alpha1_generated_TablesService_GetTable_async]
 }
 

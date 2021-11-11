@@ -22,16 +22,16 @@ function main(row) {
   /**
    *  Required. The row to update.
    */
-  // const row = ''
+  // const row = {}
   /**
    *  The list of fields to update.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. Column key to use for values in the row.
    *  Defaults to user entered name.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Tables library
   const {TablesServiceClient} = require('@google/area120-tables').v1alpha1;
@@ -39,7 +39,7 @@ function main(row) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function updateRow() {
+  async function callUpdateRow() {
     // Construct request
     const request = {
       row,
@@ -50,7 +50,7 @@ function main(row) {
     console.log(response);
   }
 
-  updateRow();
+  callUpdateRow();
   // [END area120tables_v1alpha1_generated_TablesService_UpdateRow_async]
 }
 

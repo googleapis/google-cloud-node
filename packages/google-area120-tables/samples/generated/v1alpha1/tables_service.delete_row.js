@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function deleteRow() {
+  async function callDeleteRow() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteRow();
+  callDeleteRow();
   // [END area120tables_v1alpha1_generated_TablesService_DeleteRow_async]
 }
 

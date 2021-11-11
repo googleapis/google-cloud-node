@@ -356,6 +356,24 @@ export class TablesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a table. Returns NOT_FOUND if the table does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the table to retrieve.
+   *   Format: tables/{table}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Table]{@link google.area120.tables.v1alpha1.Table}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.get_table.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_GetTable_async
+   */
   getTable(
     request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
     options?: CallOptions
@@ -383,24 +401,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a table. Returns NOT_FOUND if the table does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the table to retrieve.
-   *   Format: tables/{table}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Table]{@link google.area120.tables.v1alpha1.Table}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTable(request);
-   */
   getTable(
     request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
     optionsOrCallback?:
@@ -442,6 +442,24 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.getTable(request, options, callback);
   }
+  /**
+   * Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the workspace to retrieve.
+   *   Format: workspaces/{workspace}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Workspace]{@link google.area120.tables.v1alpha1.Workspace}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.get_workspace.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_GetWorkspace_async
+   */
   getWorkspace(
     request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
     options?: CallOptions
@@ -473,24 +491,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a workspace. Returns NOT_FOUND if the workspace does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the workspace to retrieve.
-   *   Format: workspaces/{workspace}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Workspace]{@link google.area120.tables.v1alpha1.Workspace}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getWorkspace(request);
-   */
   getWorkspace(
     request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
     optionsOrCallback?:
@@ -534,6 +534,27 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.getWorkspace(request, options, callback);
   }
+  /**
+   * Gets a row. Returns NOT_FOUND if the row does not exist in the table.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the row to retrieve.
+   *   Format: tables/{table}/rows/{row}
+   * @param {google.area120.tables.v1alpha1.View} [request.view]
+   *   Optional. Column key to use for values in the row.
+   *   Defaults to user entered name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Row]{@link google.area120.tables.v1alpha1.Row}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.get_row.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_GetRow_async
+   */
   getRow(
     request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
     options?: CallOptions
@@ -561,27 +582,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a row. Returns NOT_FOUND if the row does not exist in the table.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the row to retrieve.
-   *   Format: tables/{table}/rows/{row}
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Row]{@link google.area120.tables.v1alpha1.Row}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getRow(request);
-   */
   getRow(
     request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
     optionsOrCallback?:
@@ -623,6 +623,29 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.getRow(request, options, callback);
   }
+  /**
+   * Creates a row.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent table where this row will be created.
+   *   Format: tables/{table}
+   * @param {google.area120.tables.v1alpha1.Row} request.row
+   *   Required. The row to create.
+   * @param {google.area120.tables.v1alpha1.View} [request.view]
+   *   Optional. Column key to use for values in the row.
+   *   Defaults to user entered name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Row]{@link google.area120.tables.v1alpha1.Row}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.create_row.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_CreateRow_async
+   */
   createRow(
     request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
     options?: CallOptions
@@ -654,29 +677,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a row.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table where this row will be created.
-   *   Format: tables/{table}
-   * @param {google.area120.tables.v1alpha1.Row} request.row
-   *   Required. The row to create.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Row]{@link google.area120.tables.v1alpha1.Row}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createRow(request);
-   */
   createRow(
     request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
     optionsOrCallback?:
@@ -720,6 +720,28 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.createRow(request, options, callback);
   }
+  /**
+   * Creates multiple rows.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent table where the rows will be created.
+   *   Format: tables/{table}
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the rows to create.
+   *
+   *   A maximum of 500 rows can be created in a single batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchCreateRowsResponse]{@link google.area120.tables.v1alpha1.BatchCreateRowsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_create_rows.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_BatchCreateRows_async
+   */
   batchCreateRows(
     request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
     options?: CallOptions
@@ -751,28 +773,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates multiple rows.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table where the rows will be created.
-   *   Format: tables/{table}
-   * @param {number[]} request.requests
-   *   Required. The request message specifying the rows to create.
-   *
-   *   A maximum of 500 rows can be created in a single batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchCreateRowsResponse]{@link google.area120.tables.v1alpha1.BatchCreateRowsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchCreateRows(request);
-   */
   batchCreateRows(
     request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
     optionsOrCallback?:
@@ -816,6 +816,28 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.batchCreateRows(request, options, callback);
   }
+  /**
+   * Updates a row.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.area120.tables.v1alpha1.Row} request.row
+   *   Required. The row to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to update.
+   * @param {google.area120.tables.v1alpha1.View} [request.view]
+   *   Optional. Column key to use for values in the row.
+   *   Defaults to user entered name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Row]{@link google.area120.tables.v1alpha1.Row}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.update_row.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_UpdateRow_async
+   */
   updateRow(
     request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
     options?: CallOptions
@@ -847,28 +869,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a row.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.area120.tables.v1alpha1.Row} request.row
-   *   Required. The row to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to update.
-   * @param {google.area120.tables.v1alpha1.View} [request.view]
-   *   Optional. Column key to use for values in the row.
-   *   Defaults to user entered name.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Row]{@link google.area120.tables.v1alpha1.Row}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateRow(request);
-   */
   updateRow(
     request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
     optionsOrCallback?:
@@ -912,6 +912,28 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.updateRow(request, options, callback);
   }
+  /**
+   * Updates multiple rows.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent table shared by all rows being updated.
+   *   Format: tables/{table}
+   * @param {number[]} request.requests
+   *   Required. The request messages specifying the rows to update.
+   *
+   *   A maximum of 500 rows can be modified in a single batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchUpdateRowsResponse]{@link google.area120.tables.v1alpha1.BatchUpdateRowsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_update_rows.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_BatchUpdateRows_async
+   */
   batchUpdateRows(
     request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
     options?: CallOptions
@@ -943,28 +965,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates multiple rows.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table shared by all rows being updated.
-   *   Format: tables/{table}
-   * @param {number[]} request.requests
-   *   Required. The request messages specifying the rows to update.
-   *
-   *   A maximum of 500 rows can be modified in a single batch.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BatchUpdateRowsResponse]{@link google.area120.tables.v1alpha1.BatchUpdateRowsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchUpdateRows(request);
-   */
   batchUpdateRows(
     request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
     optionsOrCallback?:
@@ -1008,6 +1008,24 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.batchUpdateRows(request, options, callback);
   }
+  /**
+   * Deletes a row.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the row to delete.
+   *   Format: tables/{table}/rows/{row}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.delete_row.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_DeleteRow_async
+   */
   deleteRow(
     request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
     options?: CallOptions
@@ -1039,24 +1057,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a row.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the row to delete.
-   *   Format: tables/{table}/rows/{row}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteRow(request);
-   */
   deleteRow(
     request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
     optionsOrCallback?:
@@ -1100,6 +1100,29 @@ export class TablesServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteRow(request, options, callback);
   }
+  /**
+   * Deletes multiple rows.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent table shared by all rows being deleted.
+   *   Format: tables/{table}
+   * @param {string[]} request.names
+   *   Required. The names of the rows to delete. All rows must belong to the parent table
+   *   or else the entire batch will fail. A maximum of 500 rows can be deleted
+   *   in a batch.
+   *   Format: tables/{table}/rows/{row}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.batch_delete_rows.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_async
+   */
   batchDeleteRows(
     request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
     options?: CallOptions
@@ -1131,29 +1154,6 @@ export class TablesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes multiple rows.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent table shared by all rows being deleted.
-   *   Format: tables/{table}
-   * @param {string[]} request.names
-   *   Required. The names of the rows to delete. All rows must belong to the parent table
-   *   or else the entire batch will fail. A maximum of 500 rows can be deleted
-   *   in a batch.
-   *   Format: tables/{table}/rows/{row}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.batchDeleteRows(request);
-   */
   batchDeleteRows(
     request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
     optionsOrCallback?:
@@ -1198,6 +1198,36 @@ export class TablesServiceClient {
     return this.innerApiCalls.batchDeleteRows(request, options, callback);
   }
 
+  /**
+   * Lists tables for the user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of tables to return. The service may return fewer than
+   *   this value.
+   *
+   *   If unspecified, at most 20 tables are returned. The maximum value is 100;
+   *   values above 100 are coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListTables` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTables` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Table]{@link google.area120.tables.v1alpha1.Table}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTablesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listTables(
     request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
     options?: CallOptions
@@ -1229,36 +1259,6 @@ export class TablesServiceClient {
       protos.google.area120.tables.v1alpha1.ITable
     >
   ): void;
-  /**
-   * Lists tables for the user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of tables to return. The service may return fewer than
-   *   this value.
-   *
-   *   If unspecified, at most 20 tables are returned. The maximum value is 100;
-   *   values above 100 are coerced to 100.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListTables` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListTables` must match
-   *   the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Table]{@link google.area120.tables.v1alpha1.Table}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listTablesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listTables(
     request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
     optionsOrCallback?:
@@ -1293,6 +1293,8 @@ export class TablesServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listTables(request, options, callback);
   }
@@ -1331,6 +1333,8 @@ export class TablesServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1369,11 +1373,8 @@ export class TablesServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTablesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.list_tables.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_ListTables_async
    */
   listTablesAsync(
     request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
@@ -1381,7 +1382,8 @@ export class TablesServiceClient {
   ): AsyncIterable<protos.google.area120.tables.v1alpha1.ITable> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1391,6 +1393,36 @@ export class TablesServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.ITable>;
   }
+  /**
+   * Lists workspaces for the user.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of workspaces to return. The service may return fewer
+   *   than this value.
+   *
+   *   If unspecified, at most 10 workspaces are returned. The maximum value is
+   *   25; values above 25 are coerced to 25.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkspaces` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkspaces` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Workspace]{@link google.area120.tables.v1alpha1.Workspace}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkspacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listWorkspaces(
     request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
     options?: CallOptions
@@ -1422,36 +1454,6 @@ export class TablesServiceClient {
       protos.google.area120.tables.v1alpha1.IWorkspace
     >
   ): void;
-  /**
-   * Lists workspaces for the user.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.pageSize
-   *   The maximum number of workspaces to return. The service may return fewer
-   *   than this value.
-   *
-   *   If unspecified, at most 10 workspaces are returned. The maximum value is
-   *   25; values above 25 are coerced to 25.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListWorkspaces` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListWorkspaces` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Workspace]{@link google.area120.tables.v1alpha1.Workspace}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkspacesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listWorkspaces(
     request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
     optionsOrCallback?:
@@ -1486,6 +1488,8 @@ export class TablesServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listWorkspaces(request, options, callback);
   }
@@ -1524,6 +1528,8 @@ export class TablesServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1562,11 +1568,8 @@ export class TablesServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listWorkspacesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.list_workspaces.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_ListWorkspaces_async
    */
   listWorkspacesAsync(
     request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
@@ -1574,7 +1577,8 @@ export class TablesServiceClient {
   ): AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -1584,37 +1588,6 @@ export class TablesServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace>;
   }
-  listRows(
-    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.area120.tables.v1alpha1.IRow[],
-      protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
-      protos.google.area120.tables.v1alpha1.IListRowsResponse
-    ]
-  >;
-  listRows(
-    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListRowsRequest,
-      | protos.google.area120.tables.v1alpha1.IListRowsResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IRow
-    >
-  ): void;
-  listRows(
-    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
-    callback: PaginationCallback<
-      protos.google.area120.tables.v1alpha1.IListRowsRequest,
-      | protos.google.area120.tables.v1alpha1.IListRowsResponse
-      | null
-      | undefined,
-      protos.google.area120.tables.v1alpha1.IRow
-    >
-  ): void;
   /**
    * Lists rows in a table. Returns NOT_FOUND if the table does not exist.
    *
@@ -1655,6 +1628,37 @@ export class TablesServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listRows(
+    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.area120.tables.v1alpha1.IRow[],
+      protos.google.area120.tables.v1alpha1.IListRowsRequest | null,
+      protos.google.area120.tables.v1alpha1.IListRowsResponse
+    ]
+  >;
+  listRows(
+    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      | protos.google.area120.tables.v1alpha1.IListRowsResponse
+      | null
+      | undefined,
+      protos.google.area120.tables.v1alpha1.IRow
+    >
+  ): void;
+  listRows(
+    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+    callback: PaginationCallback<
+      protos.google.area120.tables.v1alpha1.IListRowsRequest,
+      | protos.google.area120.tables.v1alpha1.IListRowsResponse
+      | null
+      | undefined,
+      protos.google.area120.tables.v1alpha1.IRow
+    >
+  ): void;
   listRows(
     request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
     optionsOrCallback?:
@@ -1797,11 +1801,8 @@ export class TablesServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listRowsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/tables_service.list_rows.js</caption>
+   * region_tag:area120tables_v1alpha1_generated_TablesService_ListRows_async
    */
   listRowsAsync(
     request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
@@ -1815,7 +1816,6 @@ export class TablesServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

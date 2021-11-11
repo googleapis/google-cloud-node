@@ -28,7 +28,7 @@ function main(name) {
    *  Optional. Column key to use for values in the row.
    *  Defaults to user entered name.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Tables library
   const {TablesServiceClient} = require('@google/area120-tables').v1alpha1;
@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function getRow() {
+  async function callGetRow() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  getRow();
+  callGetRow();
   // [END area120tables_v1alpha1_generated_TablesService_GetRow_async]
 }
 

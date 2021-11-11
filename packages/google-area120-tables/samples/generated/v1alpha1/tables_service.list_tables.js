@@ -40,7 +40,7 @@ function main() {
   // Instantiates a client
   const tablesClient = new TablesServiceClient();
 
-  async function listTables() {
+  async function callListTables() {
     // Construct request
     const request = {};
 
@@ -51,7 +51,7 @@ function main() {
     }
   }
 
-  listTables();
+  callListTables();
   // [END area120tables_v1alpha1_generated_TablesService_ListTables_async]
 }
 
