@@ -463,6 +463,24 @@ export class ApiGatewayServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single Gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the form:
+   *   `projects/* /locations/* /gateways/*`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Gateway]{@link google.cloud.apigateway.v1.Gateway}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.get_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_GetGateway_async
+   */
   getGateway(
     request?: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
     options?: CallOptions
@@ -490,24 +508,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/* /gateways/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Gateway]{@link google.cloud.apigateway.v1.Gateway}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getGateway(request);
-   */
   getGateway(
     request?: protos.google.cloud.apigateway.v1.IGetGatewayRequest,
     optionsOrCallback?:
@@ -549,6 +549,24 @@ export class ApiGatewayServiceClient {
     this.initialize();
     return this.innerApiCalls.getGateway(request, options, callback);
   }
+  /**
+   * Gets details of a single Api.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the form:
+   *   `projects/* /locations/global/apis/*`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Api]{@link google.cloud.apigateway.v1.Api}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.get_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_GetApi_async
+   */
   getApi(
     request?: protos.google.cloud.apigateway.v1.IGetApiRequest,
     options?: CallOptions
@@ -576,24 +594,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single Api.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Api]{@link google.cloud.apigateway.v1.Api}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getApi(request);
-   */
   getApi(
     request?: protos.google.cloud.apigateway.v1.IGetApiRequest,
     optionsOrCallback?:
@@ -633,6 +633,27 @@ export class ApiGatewayServiceClient {
     this.initialize();
     return this.innerApiCalls.getApi(request, options, callback);
   }
+  /**
+   * Gets details of a single ApiConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the form:
+   *   `projects/* /locations/global/apis/* /configs/*`
+   * @param {google.cloud.apigateway.v1.GetApiConfigRequest.ConfigView} request.view
+   *   Specifies which fields of the API Config are returned in the response.
+   *   Defaults to `BASIC` view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.get_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_GetApiConfig_async
+   */
   getApiConfig(
     request?: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
     options?: CallOptions
@@ -660,27 +681,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single ApiConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/* /configs/*`
-   * @param {google.cloud.apigateway.v1.GetApiConfigRequest.ConfigView} request.view
-   *   Specifies which fields of the API Config are returned in the response.
-   *   Defaults to `BASIC` view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getApiConfig(request);
-   */
   getApiConfig(
     request?: protos.google.cloud.apigateway.v1.IGetApiConfigRequest,
     optionsOrCallback?:
@@ -723,6 +723,31 @@ export class ApiGatewayServiceClient {
     return this.innerApiCalls.getApiConfig(request, options, callback);
   }
 
+  /**
+   * Creates a new Gateway in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource of the Gateway, of the form:
+   *   `projects/* /locations/*`
+   * @param {string} request.gatewayId
+   *   Required. Identifier to assign to the Gateway. Must be unique within scope of
+   *   the parent resource.
+   * @param {google.cloud.apigateway.v1.Gateway} request.gateway
+   *   Required. Gateway resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.create_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateGateway_async
+   */
   createGateway(
     request?: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
     options?: CallOptions
@@ -759,32 +784,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new Gateway in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Gateway, of the form:
-   *   `projects/* /locations/*`
-   * @param {string} request.gatewayId
-   *   Required. Identifier to assign to the Gateway. Must be unique within scope of
-   *   the parent resource.
-   * @param {google.cloud.apigateway.v1.Gateway} request.gateway
-   *   Required. Gateway resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createGateway(request);
-   * const [response] = await operation.promise();
-   */
   createGateway(
     request?: protos.google.cloud.apigateway.v1.ICreateGatewayRequest,
     optionsOrCallback?:
@@ -842,11 +841,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateGatewayProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.create_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateGateway_async
    */
   async checkCreateGatewayProgress(
     name: string
@@ -870,6 +866,31 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Updates the parameters of a single Gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Gateway resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.apigateway.v1.Gateway} request.gateway
+   *   Required. Gateway resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.update_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateGateway_async
+   */
   updateGateway(
     request?: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
     options?: CallOptions
@@ -906,32 +927,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the parameters of a single Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask is used to specify the fields to be overwritten in the
-   *   Gateway resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.apigateway.v1.Gateway} request.gateway
-   *   Required. Gateway resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateGateway(request);
-   * const [response] = await operation.promise();
-   */
   updateGateway(
     request?: protos.google.cloud.apigateway.v1.IUpdateGatewayRequest,
     optionsOrCallback?:
@@ -989,11 +984,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateGatewayProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.update_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateGateway_async
    */
   async checkUpdateGatewayProgress(
     name: string
@@ -1017,6 +1009,26 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single Gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the form:
+   *   `projects/* /locations/* /gateways/*`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteGateway_async
+   */
   deleteGateway(
     request?: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
     options?: CallOptions
@@ -1053,27 +1065,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single Gateway.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/* /gateways/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteGateway(request);
-   * const [response] = await operation.promise();
-   */
   deleteGateway(
     request?: protos.google.cloud.apigateway.v1.IDeleteGatewayRequest,
     optionsOrCallback?:
@@ -1131,11 +1122,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteGatewayProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_gateway.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteGateway_async
    */
   async checkDeleteGatewayProgress(
     name: string
@@ -1159,6 +1147,31 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Creates a new Api in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource of the API, of the form:
+   *   `projects/* /locations/global`
+   * @param {string} request.apiId
+   *   Required. Identifier to assign to the API. Must be unique within scope of
+   *   the parent resource.
+   * @param {google.cloud.apigateway.v1.Api} request.api
+   *   Required. API resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApi_async
+   */
   createApi(
     request?: protos.google.cloud.apigateway.v1.ICreateApiRequest,
     options?: CallOptions
@@ -1195,32 +1208,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new Api in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API, of the form:
-   *   `projects/* /locations/global`
-   * @param {string} request.apiId
-   *   Required. Identifier to assign to the API. Must be unique within scope of
-   *   the parent resource.
-   * @param {google.cloud.apigateway.v1.Api} request.api
-   *   Required. API resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createApi(request);
-   * const [response] = await operation.promise();
-   */
   createApi(
     request?: protos.google.cloud.apigateway.v1.ICreateApiRequest,
     optionsOrCallback?:
@@ -1278,11 +1265,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateApiProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApi_async
    */
   async checkCreateApiProgress(
     name: string
@@ -1306,6 +1290,31 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Updates the parameters of a single Api.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Api resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.apigateway.v1.Api} request.api
+   *   Required. API resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApi_async
+   */
   updateApi(
     request?: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
     options?: CallOptions
@@ -1342,32 +1351,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the parameters of a single Api.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask is used to specify the fields to be overwritten in the
-   *   Api resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.apigateway.v1.Api} request.api
-   *   Required. API resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateApi(request);
-   * const [response] = await operation.promise();
-   */
   updateApi(
     request?: protos.google.cloud.apigateway.v1.IUpdateApiRequest,
     optionsOrCallback?:
@@ -1425,11 +1408,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateApiProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApi_async
    */
   async checkUpdateApiProgress(
     name: string
@@ -1453,6 +1433,26 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single Api.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the form:
+   *   `projects/* /locations/global/apis/*`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApi_async
+   */
   deleteApi(
     request?: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
     options?: CallOptions
@@ -1489,27 +1489,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single Api.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteApi(request);
-   * const [response] = await operation.promise();
-   */
   deleteApi(
     request?: protos.google.cloud.apigateway.v1.IDeleteApiRequest,
     optionsOrCallback?:
@@ -1567,11 +1546,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteApiProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApi_async
    */
   async checkDeleteApiProgress(
     name: string
@@ -1595,6 +1571,31 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Creates a new ApiConfig in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource of the API Config, of the form:
+   *   `projects/* /locations/global/apis/*`
+   * @param {string} request.apiConfigId
+   *   Required. Identifier to assign to the API Config. Must be unique within scope of
+   *   the parent resource.
+   * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
+   *   Required. API resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApiConfig_async
+   */
   createApiConfig(
     request?: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
     options?: CallOptions
@@ -1631,32 +1632,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new ApiConfig in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API Config, of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {string} request.apiConfigId
-   *   Required. Identifier to assign to the API Config. Must be unique within scope of
-   *   the parent resource.
-   * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
-   *   Required. API resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createApiConfig(request);
-   * const [response] = await operation.promise();
-   */
   createApiConfig(
     request?: protos.google.cloud.apigateway.v1.ICreateApiConfigRequest,
     optionsOrCallback?:
@@ -1714,11 +1689,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateApiConfigProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.create_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_CreateApiConfig_async
    */
   async checkCreateApiConfigProgress(
     name: string
@@ -1742,6 +1714,31 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Updates the parameters of a single ApiConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   ApiConfig resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
+   *   Required. API Config resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_async
+   */
   updateApiConfig(
     request?: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
     options?: CallOptions
@@ -1778,32 +1775,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the parameters of a single ApiConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Field mask is used to specify the fields to be overwritten in the
-   *   ApiConfig resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. If the
-   *   user does not provide a mask then all fields will be overwritten.
-   * @param {google.cloud.apigateway.v1.ApiConfig} request.apiConfig
-   *   Required. API Config resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateApiConfig(request);
-   * const [response] = await operation.promise();
-   */
   updateApiConfig(
     request?: protos.google.cloud.apigateway.v1.IUpdateApiConfigRequest,
     optionsOrCallback?:
@@ -1861,11 +1832,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateApiConfigProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.update_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_UpdateApiConfig_async
    */
   async checkUpdateApiConfigProgress(
     name: string
@@ -1889,6 +1857,26 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single ApiConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the form:
+   *   `projects/* /locations/global/apis/* /configs/*`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_async
+   */
   deleteApiConfig(
     request?: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
     options?: CallOptions
@@ -1925,27 +1913,6 @@ export class ApiGatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single ApiConfig.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the form:
-   *   `projects/* /locations/global/apis/* /configs/*`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteApiConfig(request);
-   * const [response] = await operation.promise();
-   */
   deleteApiConfig(
     request?: protos.google.cloud.apigateway.v1.IDeleteApiConfigRequest,
     optionsOrCallback?:
@@ -2003,11 +1970,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteApiConfigProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/api_gateway_service.delete_api_config.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_DeleteApiConfig_async
    */
   async checkDeleteApiConfigProgress(
     name: string
@@ -2031,6 +1995,35 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.OperationMetadata
     >;
   }
+  /**
+   * Lists Gateways in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource of the Gateway, of the form:
+   *   `projects/* /locations/*`
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
+   * @param {string} request.filter
+   *   Filter.
+   * @param {string} request.orderBy
+   *   Order by parameters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Gateway]{@link google.cloud.apigateway.v1.Gateway}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGatewaysAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listGateways(
     request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
     options?: CallOptions
@@ -2062,35 +2055,6 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.IGateway
     >
   ): void;
-  /**
-   * Lists Gateways in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the Gateway, of the form:
-   *   `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Gateway]{@link google.cloud.apigateway.v1.Gateway}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGatewaysAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listGateways(
     request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
     optionsOrCallback?:
@@ -2174,7 +2138,8 @@ export class ApiGatewayServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listGateways'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGateways.createStream(
       this.innerApiCalls.listGateways as gax.GaxCall,
@@ -2210,11 +2175,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listGatewaysAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/api_gateway_service.list_gateways.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_ListGateways_async
    */
   listGatewaysAsync(
     request?: protos.google.cloud.apigateway.v1.IListGatewaysRequest,
@@ -2228,8 +2190,8 @@ export class ApiGatewayServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listGateways'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listGateways.asyncIterate(
       this.innerApiCalls['listGateways'] as GaxCall,
@@ -2237,33 +2199,6 @@ export class ApiGatewayServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IGateway>;
   }
-  listApis(
-    request?: protos.google.cloud.apigateway.v1.IListApisRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apigateway.v1.IApi[],
-      protos.google.cloud.apigateway.v1.IListApisRequest | null,
-      protos.google.cloud.apigateway.v1.IListApisResponse
-    ]
-  >;
-  listApis(
-    request: protos.google.cloud.apigateway.v1.IListApisRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApisRequest,
-      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
-      protos.google.cloud.apigateway.v1.IApi
-    >
-  ): void;
-  listApis(
-    request: protos.google.cloud.apigateway.v1.IListApisRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.apigateway.v1.IListApisRequest,
-      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
-      protos.google.cloud.apigateway.v1.IApi
-    >
-  ): void;
   /**
    * Lists Apis in a given project and location.
    *
@@ -2293,6 +2228,33 @@ export class ApiGatewayServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listApis(
+    request?: protos.google.cloud.apigateway.v1.IListApisRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.apigateway.v1.IApi[],
+      protos.google.cloud.apigateway.v1.IListApisRequest | null,
+      protos.google.cloud.apigateway.v1.IListApisResponse
+    ]
+  >;
+  listApis(
+    request: protos.google.cloud.apigateway.v1.IListApisRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apigateway.v1.IListApisRequest,
+      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
+      protos.google.cloud.apigateway.v1.IApi
+    >
+  ): void;
+  listApis(
+    request: protos.google.cloud.apigateway.v1.IListApisRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apigateway.v1.IListApisRequest,
+      protos.google.cloud.apigateway.v1.IListApisResponse | null | undefined,
+      protos.google.cloud.apigateway.v1.IApi
+    >
+  ): void;
   listApis(
     request?: protos.google.cloud.apigateway.v1.IListApisRequest,
     optionsOrCallback?:
@@ -2374,7 +2336,8 @@ export class ApiGatewayServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listApis'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as gax.GaxCall,
@@ -2410,11 +2373,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listApisAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/api_gateway_service.list_apis.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_ListApis_async
    */
   listApisAsync(
     request?: protos.google.cloud.apigateway.v1.IListApisRequest,
@@ -2428,8 +2388,8 @@ export class ApiGatewayServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listApis'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
@@ -2437,6 +2397,35 @@ export class ApiGatewayServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.apigateway.v1.IApi>;
   }
+  /**
+   * Lists ApiConfigs in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource of the API Config, of the form:
+   *   `projects/* /locations/global/apis/*`
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token.
+   * @param {string} request.filter
+   *   Filter.
+   * @param {string} request.orderBy
+   *   Order by parameters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listApiConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listApiConfigs(
     request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
     options?: CallOptions
@@ -2468,35 +2457,6 @@ export class ApiGatewayServiceClient {
       protos.google.cloud.apigateway.v1.IApiConfig
     >
   ): void;
-  /**
-   * Lists ApiConfigs in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource of the API Config, of the form:
-   *   `projects/* /locations/global/apis/*`
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {string} request.filter
-   *   Filter.
-   * @param {string} request.orderBy
-   *   Order by parameters.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ApiConfig]{@link google.cloud.apigateway.v1.ApiConfig}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listApiConfigsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listApiConfigs(
     request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
     optionsOrCallback?:
@@ -2580,7 +2540,8 @@ export class ApiGatewayServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listApiConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApiConfigs.createStream(
       this.innerApiCalls.listApiConfigs as gax.GaxCall,
@@ -2616,11 +2577,8 @@ export class ApiGatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listApiConfigsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/api_gateway_service.list_api_configs.js</caption>
+   * region_tag:apigateway_v1_generated_ApiGatewayService_ListApiConfigs_async
    */
   listApiConfigsAsync(
     request?: protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
@@ -2634,8 +2592,8 @@ export class ApiGatewayServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listApiConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listApiConfigs.asyncIterate(
       this.innerApiCalls['listApiConfigs'] as GaxCall,
