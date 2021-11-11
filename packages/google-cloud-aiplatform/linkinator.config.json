@@ -5,6 +5,10 @@
     "www.googleapis.com",
     "img.shields.io"
   ],
+  "retry": true,
+  "retryErrors": true,
+  "retryErrorsCount": 5,
+  "retryErrorsJitter": 3000,
   "silent": true,
-  "concurrency": 10
+  "concurrency": 5
 }
