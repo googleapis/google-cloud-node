@@ -27,7 +27,7 @@ function main(parent, jobTemplate, jobTemplateId) {
   /**
    *  Required. Parameters for creating job template.
    */
-  // const jobTemplate = ''
+  // const jobTemplate = {}
   /**
    *  Required. The ID to use for the job template, which will become the final component
    *  of the job template's resource name.
@@ -43,7 +43,7 @@ function main(parent, jobTemplate, jobTemplateId) {
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();
 
-  async function createJobTemplate() {
+  async function callCreateJobTemplate() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, jobTemplate, jobTemplateId) {
     console.log(response);
   }
 
-  createJobTemplate();
+  callCreateJobTemplate();
   // [END transcoder_v1_generated_TranscoderService_CreateJobTemplate_async]
 }
 

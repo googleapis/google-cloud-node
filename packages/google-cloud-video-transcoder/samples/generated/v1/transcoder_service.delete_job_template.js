@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();
 
-  async function deleteJobTemplate() {
+  async function callDeleteJobTemplate() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteJobTemplate();
+  callDeleteJobTemplate();
   // [END transcoder_v1_generated_TranscoderService_DeleteJobTemplate_async]
 }
 

@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();
 
-  async function getJobTemplate() {
+  async function callGetJobTemplate() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getJobTemplate();
+  callGetJobTemplate();
   // [END transcoder_v1beta1_generated_TranscoderService_GetJobTemplate_async]
 }
 

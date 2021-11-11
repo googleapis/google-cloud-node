@@ -50,7 +50,7 @@ function main(parent) {
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();
 
-  async function listJobs() {
+  async function callListJobs() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent) {
     }
   }
 
-  listJobs();
+  callListJobs();
   // [END transcoder_v1_generated_TranscoderService_ListJobs_async]
 }
 

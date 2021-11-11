@@ -27,7 +27,7 @@ function main(parent, job) {
   /**
    *  Required. Parameters for creating transcoding job.
    */
-  // const job = ''
+  // const job = {}
 
   // Imports the Transcoder library
   const {TranscoderServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, job) {
   // Instantiates a client
   const transcoderClient = new TranscoderServiceClient();
 
-  async function createJob() {
+  async function callCreateJob() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, job) {
     console.log(response);
   }
 
-  createJob();
+  callCreateJob();
   // [END transcoder_v1beta1_generated_TranscoderService_CreateJob_async]
 }
 
