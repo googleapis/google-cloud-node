@@ -31,7 +31,7 @@ function main(parent, noteId, note) {
   /**
    *  The note to create.
    */
-  // const note = ''
+  // const note = {}
 
   // Imports the Grafeas library
   const {GrafeasClient} = require('@google-cloud/grafeas').v1;
@@ -39,7 +39,7 @@ function main(parent, noteId, note) {
   // Instantiates a client
   const grafeasClient = new GrafeasClient();
 
-  async function createNote() {
+  async function callCreateNote() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent, noteId, note) {
     console.log(response);
   }
 
-  createNote();
+  callCreateNote();
   // [END containeranalysis_v1_generated_Grafeas_CreateNote_async]
 }
 

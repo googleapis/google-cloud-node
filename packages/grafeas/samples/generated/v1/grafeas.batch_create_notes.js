@@ -35,7 +35,7 @@ function main(parent, notes) {
   // Instantiates a client
   const grafeasClient = new GrafeasClient();
 
-  async function batchCreateNotes() {
+  async function callBatchCreateNotes() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, notes) {
     console.log(response);
   }
 
-  batchCreateNotes();
+  callBatchCreateNotes();
   // [END containeranalysis_v1_generated_Grafeas_BatchCreateNotes_async]
 }
 

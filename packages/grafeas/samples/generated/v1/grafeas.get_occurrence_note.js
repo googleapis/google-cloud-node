@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const grafeasClient = new GrafeasClient();
 
-  async function getOccurrenceNote() {
+  async function callGetOccurrenceNote() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getOccurrenceNote();
+  callGetOccurrenceNote();
   // [END containeranalysis_v1_generated_Grafeas_GetOccurrenceNote_async]
 }
 
