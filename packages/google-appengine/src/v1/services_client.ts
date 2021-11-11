@@ -363,6 +363,23 @@ export class ServicesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the current configuration of the specified service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource requested. Example: `apps/myapp/services/default`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Service]{@link google.appengine.v1.Service}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/services.get_service.js</caption>
+   * region_tag:appengine_v1_generated_Services_GetService_async
+   */
   getService(
     request?: protos.google.appengine.v1.IGetServiceRequest,
     options?: CallOptions
@@ -390,23 +407,6 @@ export class ServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the current configuration of the specified service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example: `apps/myapp/services/default`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Service]{@link google.appengine.v1.Service}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getService(request);
-   */
   getService(
     request?: protos.google.appengine.v1.IGetServiceRequest,
     optionsOrCallback?:
@@ -447,6 +447,43 @@ export class ServicesClient {
     return this.innerApiCalls.getService(request, options, callback);
   }
 
+  /**
+   * Updates the configuration of the specified service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource to update. Example: `apps/myapp/services/default`.
+   * @param {google.appengine.v1.Service} request.service
+   *   A Service resource containing the updated service. Only fields set in the
+   *   field mask will be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Standard field mask for the set of fields to be updated.
+   * @param {boolean} request.migrateTraffic
+   *   Set to `true` to gradually shift traffic to one or more versions that you
+   *   specify. By default, traffic is shifted immediately.
+   *   For gradual traffic migration, the target versions
+   *   must be located within instances that are configured for both
+   *   [warmup requests](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#InboundServiceType)
+   *   and
+   *   [automatic scaling](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#AutomaticScaling).
+   *   You must specify the
+   *   [`shardBy`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#ShardBy)
+   *   field in the Service resource. Gradual traffic migration is not
+   *   supported in the App Engine flexible environment. For examples, see
+   *   [Migrating and Splitting Traffic](https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/services.update_service.js</caption>
+   * region_tag:appengine_v1_generated_Services_UpdateService_async
+   */
   updateService(
     request?: protos.google.appengine.v1.IUpdateServiceRequest,
     options?: CallOptions
@@ -483,44 +520,6 @@ export class ServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the configuration of the specified service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to update. Example: `apps/myapp/services/default`.
-   * @param {google.appengine.v1.Service} request.service
-   *   A Service resource containing the updated service. Only fields set in the
-   *   field mask will be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
-   * @param {boolean} request.migrateTraffic
-   *   Set to `true` to gradually shift traffic to one or more versions that you
-   *   specify. By default, traffic is shifted immediately.
-   *   For gradual traffic migration, the target versions
-   *   must be located within instances that are configured for both
-   *   [warmup requests](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#InboundServiceType)
-   *   and
-   *   [automatic scaling](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#AutomaticScaling).
-   *   You must specify the
-   *   [`shardBy`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services#ShardBy)
-   *   field in the Service resource. Gradual traffic migration is not
-   *   supported in the App Engine flexible environment. For examples, see
-   *   [Migrating and Splitting Traffic](https://cloud.google.com/appengine/docs/admin-api/migrating-splitting-traffic).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateService(request);
-   * const [response] = await operation.promise();
-   */
   updateService(
     request?: protos.google.appengine.v1.IUpdateServiceRequest,
     optionsOrCallback?:
@@ -578,11 +577,8 @@ export class ServicesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/services.update_service.js</caption>
+   * region_tag:appengine_v1_generated_Services_UpdateService_async
    */
   async checkUpdateServiceProgress(
     name: string
@@ -606,6 +602,25 @@ export class ServicesClient {
       protos.google.appengine.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Deletes the specified service and all enclosed versions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource requested. Example: `apps/myapp/services/default`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/services.delete_service.js</caption>
+   * region_tag:appengine_v1_generated_Services_DeleteService_async
+   */
   deleteService(
     request?: protos.google.appengine.v1.IDeleteServiceRequest,
     options?: CallOptions
@@ -642,26 +657,6 @@ export class ServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified service and all enclosed versions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example: `apps/myapp/services/default`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteService(request);
-   * const [response] = await operation.promise();
-   */
   deleteService(
     request?: protos.google.appengine.v1.IDeleteServiceRequest,
     optionsOrCallback?:
@@ -719,11 +714,8 @@ export class ServicesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/services.delete_service.js</caption>
+   * region_tag:appengine_v1_generated_Services_DeleteService_async
    */
   async checkDeleteServiceProgress(
     name: string
@@ -747,6 +739,30 @@ export class ServicesClient {
       protos.google.appengine.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Lists all the services in the application.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Name of the parent Application resource. Example: `apps/myapp`.
+   * @param {number} request.pageSize
+   *   Maximum results to return per page.
+   * @param {string} request.pageToken
+   *   Continuation token for fetching the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Service]{@link google.appengine.v1.Service}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listServices(
     request?: protos.google.appengine.v1.IListServicesRequest,
     options?: CallOptions
@@ -774,30 +790,6 @@ export class ServicesClient {
       protos.google.appengine.v1.IService
     >
   ): void;
-  /**
-   * Lists all the services in the application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent Application resource. Example: `apps/myapp`.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Service]{@link google.appengine.v1.Service}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listServicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listServices(
     request?: protos.google.appengine.v1.IListServicesRequest,
     optionsOrCallback?:
@@ -872,7 +864,8 @@ export class ServicesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as gax.GaxCall,
@@ -903,11 +896,8 @@ export class ServicesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listServicesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/services.list_services.js</caption>
+   * region_tag:appengine_v1_generated_Services_ListServices_async
    */
   listServicesAsync(
     request?: protos.google.appengine.v1.IListServicesRequest,
@@ -921,8 +911,8 @@ export class ServicesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listServices'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,

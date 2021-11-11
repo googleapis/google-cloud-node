@@ -323,6 +323,26 @@ export class AuthorizedCertificatesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the specified SSL certificate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource requested. Example:
+   *   `apps/myapp/authorizedCertificates/12345`.
+   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
+   *   Controls the set of fields returned in the `GET` response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/authorized_certificates.get_authorized_certificate.js</caption>
+   * region_tag:appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_async
+   */
   getAuthorizedCertificate(
     request?: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
     options?: CallOptions
@@ -354,26 +374,6 @@ export class AuthorizedCertificatesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the specified SSL certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/authorizedCertificates/12345`.
-   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
-   *   Controls the set of fields returned in the `GET` response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getAuthorizedCertificate(request);
-   */
   getAuthorizedCertificate(
     request?: protos.google.appengine.v1.IGetAuthorizedCertificateRequest,
     optionsOrCallback?:
@@ -421,6 +421,25 @@ export class AuthorizedCertificatesClient {
       callback
     );
   }
+  /**
+   * Uploads the specified SSL certificate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Name of the parent `Application` resource. Example: `apps/myapp`.
+   * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
+   *   SSL certificate data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/authorized_certificates.create_authorized_certificate.js</caption>
+   * region_tag:appengine_v1_generated_AuthorizedCertificates_CreateAuthorizedCertificate_async
+   */
   createAuthorizedCertificate(
     request?: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
     options?: CallOptions
@@ -455,25 +474,6 @@ export class AuthorizedCertificatesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Uploads the specified SSL certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent `Application` resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
-   *   SSL certificate data.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createAuthorizedCertificate(request);
-   */
   createAuthorizedCertificate(
     request?: protos.google.appengine.v1.ICreateAuthorizedCertificateRequest,
     optionsOrCallback?:
@@ -524,6 +524,34 @@ export class AuthorizedCertificatesClient {
       callback
     );
   }
+  /**
+   * Updates the specified SSL certificate. To renew a certificate and maintain
+   * its existing domain mappings, update `certificate_data` with a new
+   * certificate. The new certificate must be applicable to the same domains as
+   * the original certificate. The certificate `display_name` may also be
+   * updated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource to update. Example:
+   *   `apps/myapp/authorizedCertificates/12345`.
+   * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
+   *   An `AuthorizedCertificate` containing the updated resource. Only fields set
+   *   in the field mask will be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Standard field mask for the set of fields to be updated. Updates are only
+   *   supported on the `certificate_raw_data` and `display_name` fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/authorized_certificates.update_authorized_certificate.js</caption>
+   * region_tag:appengine_v1_generated_AuthorizedCertificates_UpdateAuthorizedCertificate_async
+   */
   updateAuthorizedCertificate(
     request?: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
     options?: CallOptions
@@ -558,34 +586,6 @@ export class AuthorizedCertificatesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified SSL certificate. To renew a certificate and maintain
-   * its existing domain mappings, update `certificate_data` with a new
-   * certificate. The new certificate must be applicable to the same domains as
-   * the original certificate. The certificate `display_name` may also be
-   * updated.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to update. Example:
-   *   `apps/myapp/authorizedCertificates/12345`.
-   * @param {google.appengine.v1.AuthorizedCertificate} request.certificate
-   *   An `AuthorizedCertificate` containing the updated resource. Only fields set
-   *   in the field mask will be updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated. Updates are only
-   *   supported on the `certificate_raw_data` and `display_name` fields.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateAuthorizedCertificate(request);
-   */
   updateAuthorizedCertificate(
     request?: protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest,
     optionsOrCallback?:
@@ -636,6 +636,24 @@ export class AuthorizedCertificatesClient {
       callback
     );
   }
+  /**
+   * Deletes the specified SSL certificate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource to delete. Example:
+   *   `apps/myapp/authorizedCertificates/12345`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/authorized_certificates.delete_authorized_certificate.js</caption>
+   * region_tag:appengine_v1_generated_AuthorizedCertificates_DeleteAuthorizedCertificate_async
+   */
   deleteAuthorizedCertificate(
     request?: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
     options?: CallOptions
@@ -670,24 +688,6 @@ export class AuthorizedCertificatesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified SSL certificate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource to delete. Example:
-   *   `apps/myapp/authorizedCertificates/12345`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteAuthorizedCertificate(request);
-   */
   deleteAuthorizedCertificate(
     request?: protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest,
     optionsOrCallback?:
@@ -739,6 +739,32 @@ export class AuthorizedCertificatesClient {
     );
   }
 
+  /**
+   * Lists all SSL certificates the user is authorized to administer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Name of the parent `Application` resource. Example: `apps/myapp`.
+   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
+   *   Controls the set of fields returned in the `LIST` response.
+   * @param {number} request.pageSize
+   *   Maximum results to return per page.
+   * @param {string} request.pageToken
+   *   Continuation token for fetching the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAuthorizedCertificatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listAuthorizedCertificates(
     request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
     options?: CallOptions
@@ -770,32 +796,6 @@ export class AuthorizedCertificatesClient {
       protos.google.appengine.v1.IAuthorizedCertificate
     >
   ): void;
-  /**
-   * Lists all SSL certificates the user is authorized to administer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Name of the parent `Application` resource. Example: `apps/myapp`.
-   * @param {google.appengine.v1.AuthorizedCertificateView} request.view
-   *   Controls the set of fields returned in the `LIST` response.
-   * @param {number} request.pageSize
-   *   Maximum results to return per page.
-   * @param {string} request.pageToken
-   *   Continuation token for fetching the next page of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [AuthorizedCertificate]{@link google.appengine.v1.AuthorizedCertificate}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAuthorizedCertificatesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listAuthorizedCertificates(
     request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
     optionsOrCallback?:
@@ -880,7 +880,8 @@ export class AuthorizedCertificatesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAuthorizedCertificates.createStream(
       this.innerApiCalls.listAuthorizedCertificates as gax.GaxCall,
@@ -913,11 +914,8 @@ export class AuthorizedCertificatesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listAuthorizedCertificatesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/authorized_certificates.list_authorized_certificates.js</caption>
+   * region_tag:appengine_v1_generated_AuthorizedCertificates_ListAuthorizedCertificates_async
    */
   listAuthorizedCertificatesAsync(
     request?: protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
@@ -931,8 +929,8 @@ export class AuthorizedCertificatesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAuthorizedCertificates.asyncIterate(
       this.innerApiCalls['listAuthorizedCertificates'] as GaxCall,

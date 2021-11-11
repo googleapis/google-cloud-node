@@ -283,7 +283,7 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateApplicationRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -308,7 +308,7 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateApplicationRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -354,7 +354,7 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateApplicationRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createApplication = stubLongRunningCall(
         undefined,
@@ -377,7 +377,7 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateApplicationRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createApplication = stubLongRunningCall(
         undefined,

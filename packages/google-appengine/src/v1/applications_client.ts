@@ -356,6 +356,23 @@ export class ApplicationsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets information about an application.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the Application resource to get. Example: `apps/myapp`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Application]{@link google.appengine.v1.Application}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/applications.get_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_GetApplication_async
+   */
   getApplication(
     request?: protos.google.appengine.v1.IGetApplicationRequest,
     options?: CallOptions
@@ -383,23 +400,6 @@ export class ApplicationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets information about an application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the Application resource to get. Example: `apps/myapp`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Application]{@link google.appengine.v1.Application}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getApplication(request);
-   */
   getApplication(
     request?: protos.google.appengine.v1.IGetApplicationRequest,
     optionsOrCallback?:
@@ -440,6 +440,31 @@ export class ApplicationsClient {
     return this.innerApiCalls.getApplication(request, options, callback);
   }
 
+  /**
+   * Creates an App Engine application for a Google Cloud Platform project.
+   * Required fields:
+   *
+   * * `id` - The ID of the target Cloud Platform project.
+   * * *location* - The [region](https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.
+   *
+   * For more information about App Engine applications, see [Managing Projects, Applications, and Billing](https://cloud.google.com/appengine/docs/standard/python/console/).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.appengine.v1.Application} request.application
+   *   Application configuration.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/applications.create_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_CreateApplication_async
+   */
   createApplication(
     request?: protos.google.appengine.v1.ICreateApplicationRequest,
     options?: CallOptions
@@ -476,32 +501,6 @@ export class ApplicationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates an App Engine application for a Google Cloud Platform project.
-   * Required fields:
-   *
-   * * `id` - The ID of the target Cloud Platform project.
-   * * *location* - The [region](https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.
-   *
-   * For more information about App Engine applications, see [Managing Projects, Applications, and Billing](https://cloud.google.com/appengine/docs/standard/python/console/).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.appengine.v1.Application} request.application
-   *   Application configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createApplication(request);
-   * const [response] = await operation.promise();
-   */
   createApplication(
     request?: protos.google.appengine.v1.ICreateApplicationRequest,
     optionsOrCallback?:
@@ -541,6 +540,8 @@ export class ApplicationsClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.createApplication(request, options, callback);
   }
@@ -553,11 +554,8 @@ export class ApplicationsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateApplicationProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/applications.create_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_CreateApplication_async
    */
   async checkCreateApplicationProgress(
     name: string
@@ -581,6 +579,33 @@ export class ApplicationsClient {
       protos.google.appengine.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Updates the specified Application resource.
+   * You can update the following fields:
+   *
+   * * `auth_domain` - Google authentication domain for controlling user access to the application.
+   * * `default_cookie_expiration` - Cookie expiration policy for the application.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the Application resource to update. Example: `apps/myapp`.
+   * @param {google.appengine.v1.Application} request.application
+   *   An Application containing the updated resource.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Standard field mask for the set of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/applications.update_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_UpdateApplication_async
+   */
   updateApplication(
     request?: protos.google.appengine.v1.IUpdateApplicationRequest,
     options?: CallOptions
@@ -617,34 +642,6 @@ export class ApplicationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified Application resource.
-   * You can update the following fields:
-   *
-   * * `auth_domain` - Google authentication domain for controlling user access to the application.
-   * * `default_cookie_expiration` - Cookie expiration policy for the application.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the Application resource to update. Example: `apps/myapp`.
-   * @param {google.appengine.v1.Application} request.application
-   *   An Application containing the updated resource.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Standard field mask for the set of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateApplication(request);
-   * const [response] = await operation.promise();
-   */
   updateApplication(
     request?: protos.google.appengine.v1.IUpdateApplicationRequest,
     optionsOrCallback?:
@@ -702,11 +699,8 @@ export class ApplicationsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateApplicationProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/applications.update_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_UpdateApplication_async
    */
   async checkUpdateApplicationProgress(
     name: string
@@ -730,6 +724,34 @@ export class ApplicationsClient {
       protos.google.appengine.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Recreates the required App Engine features for the specified App Engine
+   * application, for example a Cloud Storage bucket or App Engine service
+   * account.
+   * Use this method if you receive an error message about a missing feature,
+   * for example, *Error retrieving the App Engine service account*.
+   * If you have deleted your App Engine service account, this will
+   * not be able to recreate it. Instead, you should attempt to use the
+   * IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D .
+   * If the deletion was recent, the numeric ID can be found in the Cloud
+   * Console Activity Log.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the application to repair. Example: `apps/myapp`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/applications.repair_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_RepairApplication_async
+   */
   repairApplication(
     request?: protos.google.appengine.v1.IRepairApplicationRequest,
     options?: CallOptions
@@ -766,35 +788,6 @@ export class ApplicationsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Recreates the required App Engine features for the specified App Engine
-   * application, for example a Cloud Storage bucket or App Engine service
-   * account.
-   * Use this method if you receive an error message about a missing feature,
-   * for example, *Error retrieving the App Engine service account*.
-   * If you have deleted your App Engine service account, this will
-   * not be able to recreate it. Instead, you should attempt to use the
-   * IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D .
-   * If the deletion was recent, the numeric ID can be found in the Cloud
-   * Console Activity Log.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the application to repair. Example: `apps/myapp`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.repairApplication(request);
-   * const [response] = await operation.promise();
-   */
   repairApplication(
     request?: protos.google.appengine.v1.IRepairApplicationRequest,
     optionsOrCallback?:
@@ -852,11 +845,8 @@ export class ApplicationsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRepairApplicationProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/applications.repair_application.js</caption>
+   * region_tag:appengine_v1_generated_Applications_RepairApplication_async
    */
   async checkRepairApplicationProgress(
     name: string

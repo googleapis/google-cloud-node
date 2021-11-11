@@ -363,6 +363,24 @@ export class InstancesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets instance information.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource requested. Example:
+   *   `apps/myapp/services/default/versions/v1/instances/instance-1`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Instance]{@link google.appengine.v1.Instance}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/instances.get_instance.js</caption>
+   * region_tag:appengine_v1_generated_Instances_GetInstance_async
+   */
   getInstance(
     request?: protos.google.appengine.v1.IGetInstanceRequest,
     options?: CallOptions
@@ -390,24 +408,6 @@ export class InstancesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets instance information.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/services/default/versions/v1/instances/instance-1`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Instance]{@link google.appengine.v1.Instance}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getInstance(request);
-   */
   getInstance(
     request?: protos.google.appengine.v1.IGetInstanceRequest,
     optionsOrCallback?:
@@ -448,6 +448,37 @@ export class InstancesClient {
     return this.innerApiCalls.getInstance(request, options, callback);
   }
 
+  /**
+   * Stops a running instance.
+   *
+   * The instance might be automatically recreated based on the scaling settings
+   * of the version. For more information, see "How Instances are Managed"
+   * ([standard environment](https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) |
+   * [flexible environment](https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).
+   *
+   * To ensure that instances are not re-created and avoid getting billed, you
+   * can stop all instances within the target version by changing the serving
+   * status of the version to `STOPPED` with the
+   * [`apps.services.versions.patch`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch)
+   * method.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource requested. Example:
+   *   `apps/myapp/services/default/versions/v1/instances/instance-1`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/instances.delete_instance.js</caption>
+   * region_tag:appengine_v1_generated_Instances_DeleteInstance_async
+   */
   deleteInstance(
     request?: protos.google.appengine.v1.IDeleteInstanceRequest,
     options?: CallOptions
@@ -484,38 +515,6 @@ export class InstancesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Stops a running instance.
-   *
-   * The instance might be automatically recreated based on the scaling settings
-   * of the version. For more information, see "How Instances are Managed"
-   * ([standard environment](https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) |
-   * [flexible environment](https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).
-   *
-   * To ensure that instances are not re-created and avoid getting billed, you
-   * can stop all instances within the target version by changing the serving
-   * status of the version to `STOPPED` with the
-   * [`apps.services.versions.patch`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch)
-   * method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/services/default/versions/v1/instances/instance-1`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteInstance(request);
-   * const [response] = await operation.promise();
-   */
   deleteInstance(
     request?: protos.google.appengine.v1.IDeleteInstanceRequest,
     optionsOrCallback?:
@@ -573,11 +572,8 @@ export class InstancesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteInstanceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/instances.delete_instance.js</caption>
+   * region_tag:appengine_v1_generated_Instances_DeleteInstance_async
    */
   async checkDeleteInstanceProgress(
     name: string
@@ -601,6 +597,41 @@ export class InstancesClient {
       protos.google.appengine.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Enables debugging on a VM instance. This allows you to use the SSH
+   * command to connect to the virtual machine where the instance lives.
+   * While in "debug mode", the instance continues to serve live traffic.
+   * You should delete the instance when you are done debugging and then
+   * allow the system to take over and determine if another instance
+   * should be started.
+   *
+   * Only applicable for instances in App Engine flexible environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource requested. Example:
+   *   `apps/myapp/services/default/versions/v1/instances/instance-1`.
+   * @param {string} request.sshKey
+   *   Public SSH key to add to the instance. Examples:
+   *
+   *   * `[USERNAME]:ssh-rsa [KEY_VALUE] [USERNAME]`
+   *   * `[USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {"userName":"[USERNAME]","expireOn":"[EXPIRE_TIME]"}`
+   *
+   *   For more information, see
+   *   [Adding and Removing SSH Keys](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/instances.debug_instance.js</caption>
+   * region_tag:appengine_v1_generated_Instances_DebugInstance_async
+   */
   debugInstance(
     request?: protos.google.appengine.v1.IDebugInstanceRequest,
     options?: CallOptions
@@ -637,42 +668,6 @@ export class InstancesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Enables debugging on a VM instance. This allows you to use the SSH
-   * command to connect to the virtual machine where the instance lives.
-   * While in "debug mode", the instance continues to serve live traffic.
-   * You should delete the instance when you are done debugging and then
-   * allow the system to take over and determine if another instance
-   * should be started.
-   *
-   * Only applicable for instances in App Engine flexible environment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Name of the resource requested. Example:
-   *   `apps/myapp/services/default/versions/v1/instances/instance-1`.
-   * @param {string} request.sshKey
-   *   Public SSH key to add to the instance. Examples:
-   *
-   *   * `[USERNAME]:ssh-rsa [KEY_VALUE] [USERNAME]`
-   *   * `[USERNAME]:ssh-rsa [KEY_VALUE] google-ssh {"userName":"[USERNAME]","expireOn":"[EXPIRE_TIME]"}`
-   *
-   *   For more information, see
-   *   [Adding and Removing SSH Keys](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.debugInstance(request);
-   * const [response] = await operation.promise();
-   */
   debugInstance(
     request?: protos.google.appengine.v1.IDebugInstanceRequest,
     optionsOrCallback?:
@@ -730,11 +725,8 @@ export class InstancesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDebugInstanceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/instances.debug_instance.js</caption>
+   * region_tag:appengine_v1_generated_Instances_DebugInstance_async
    */
   async checkDebugInstanceProgress(
     name: string
@@ -758,33 +750,6 @@ export class InstancesClient {
       protos.google.appengine.v1.OperationMetadataV1
     >;
   }
-  listInstances(
-    request?: protos.google.appengine.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.appengine.v1.IInstance[],
-      protos.google.appengine.v1.IListInstancesRequest | null,
-      protos.google.appengine.v1.IListInstancesResponse
-    ]
-  >;
-  listInstances(
-    request: protos.google.appengine.v1.IListInstancesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListInstancesRequest,
-      protos.google.appengine.v1.IListInstancesResponse | null | undefined,
-      protos.google.appengine.v1.IInstance
-    >
-  ): void;
-  listInstances(
-    request: protos.google.appengine.v1.IListInstancesRequest,
-    callback: PaginationCallback<
-      protos.google.appengine.v1.IListInstancesRequest,
-      protos.google.appengine.v1.IListInstancesResponse | null | undefined,
-      protos.google.appengine.v1.IInstance
-    >
-  ): void;
   /**
    * Lists the instances of a version.
    *
@@ -813,6 +778,33 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listInstances(
+    request?: protos.google.appengine.v1.IListInstancesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.appengine.v1.IInstance[],
+      protos.google.appengine.v1.IListInstancesRequest | null,
+      protos.google.appengine.v1.IListInstancesResponse
+    ]
+  >;
+  listInstances(
+    request: protos.google.appengine.v1.IListInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.appengine.v1.IListInstancesRequest,
+      protos.google.appengine.v1.IListInstancesResponse | null | undefined,
+      protos.google.appengine.v1.IInstance
+    >
+  ): void;
+  listInstances(
+    request: protos.google.appengine.v1.IListInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.appengine.v1.IListInstancesRequest,
+      protos.google.appengine.v1.IListInstancesResponse | null | undefined,
+      protos.google.appengine.v1.IInstance
+    >
+  ): void;
   listInstances(
     request?: protos.google.appengine.v1.IListInstancesRequest,
     optionsOrCallback?:
@@ -888,7 +880,8 @@ export class InstancesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInstances'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as gax.GaxCall,
@@ -920,11 +913,8 @@ export class InstancesClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listInstancesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/instances.list_instances.js</caption>
+   * region_tag:appengine_v1_generated_Instances_ListInstances_async
    */
   listInstancesAsync(
     request?: protos.google.appengine.v1.IListInstancesRequest,
@@ -938,8 +928,8 @@ export class InstancesClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listInstances'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
