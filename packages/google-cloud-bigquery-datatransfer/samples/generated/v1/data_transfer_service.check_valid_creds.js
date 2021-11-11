@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function checkValidCreds() {
+  async function callCheckValidCreds() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  checkValidCreds();
+  callCheckValidCreds();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_CheckValidCreds_async]
 }
 

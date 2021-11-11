@@ -28,12 +28,12 @@ function main() {
   /**
    *  Time range for the transfer runs that should be started.
    */
-  // const requestedTimeRange = ''
+  // const requestedTimeRange = {}
   /**
    *  Specific run_time for a transfer run to be started. The
    *  requested_run_time must not be in the future.
    */
-  // const requestedRunTime = ''
+  // const requestedRunTime = {}
 
   // Imports the Datatransfer library
   const {DataTransferServiceClient} =
@@ -42,7 +42,7 @@ function main() {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function startManualTransferRuns() {
+  async function callStartManualTransferRuns() {
     // Construct request
     const request = {};
 
@@ -51,7 +51,7 @@ function main() {
     console.log(response);
   }
 
-  startManualTransferRuns();
+  callStartManualTransferRuns();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_StartManualTransferRuns_async]
 }
 

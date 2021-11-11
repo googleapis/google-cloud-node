@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function getDataSource() {
+  async function callGetDataSource() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getDataSource();
+  callGetDataSource();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_GetDataSource_async]
 }
 

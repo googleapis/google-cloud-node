@@ -29,7 +29,7 @@ function main(parent, transferConfig) {
   /**
    *  Required. Data transfer configuration to create.
    */
-  // const transferConfig = ''
+  // const transferConfig = {}
   /**
    *  Optional OAuth2 authorization code to use with this transfer configuration.
    *  This is required if new credentials are needed, as indicated by
@@ -72,7 +72,7 @@ function main(parent, transferConfig) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function createTransferConfig() {
+  async function callCreateTransferConfig() {
     // Construct request
     const request = {
       parent,
@@ -84,7 +84,7 @@ function main(parent, transferConfig) {
     console.log(response);
   }
 
-  createTransferConfig();
+  callCreateTransferConfig();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_CreateTransferConfig_async]
 }
 

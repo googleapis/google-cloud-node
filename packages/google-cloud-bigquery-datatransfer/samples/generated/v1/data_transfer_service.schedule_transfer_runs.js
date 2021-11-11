@@ -29,12 +29,12 @@ function main(parent, startTime, endTime) {
    *  Required. Start time of the range of transfer runs. For example,
    *  `"2017-05-25T00:00:00+00:00"`.
    */
-  // const startTime = ''
+  // const startTime = {}
   /**
    *  Required. End time of the range of transfer runs. For example,
    *  `"2017-05-30T00:00:00+00:00"`.
    */
-  // const endTime = ''
+  // const endTime = {}
 
   // Imports the Datatransfer library
   const {DataTransferServiceClient} =
@@ -43,7 +43,7 @@ function main(parent, startTime, endTime) {
   // Instantiates a client
   const datatransferClient = new DataTransferServiceClient();
 
-  async function scheduleTransferRuns() {
+  async function callScheduleTransferRuns() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, startTime, endTime) {
     console.log(response);
   }
 
-  scheduleTransferRuns();
+  callScheduleTransferRuns();
   // [END bigquerydatatransfer_v1_generated_DataTransferService_ScheduleTransferRuns_async]
 }
 
