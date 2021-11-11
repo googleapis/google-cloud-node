@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.12.0...v1.13.0) (2021-11-11)
+
+
+### Features
+
+* Adds support for `google.protobuf.Value` pipeline parameters in the `parameter_values` field ([#218](https://www.github.com/googleapis/nodejs-ai-platform/issues/218)) ([d05a598](https://www.github.com/googleapis/nodejs-ai-platform/commit/d05a598d095ea89cb6a0f385c2f82e9a8224b21f))
+
 ## [1.12.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.11.0...v1.12.0) (2021-10-27)
 
 
