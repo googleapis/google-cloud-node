@@ -335,11 +335,17 @@ export namespace google {
                     /** CloudFunction environmentVariables */
                     environmentVariables?: ({ [k: string]: string }|null);
 
+                    /** CloudFunction buildEnvironmentVariables */
+                    buildEnvironmentVariables?: ({ [k: string]: string }|null);
+
                     /** CloudFunction network */
                     network?: (string|null);
 
                     /** CloudFunction maxInstances */
                     maxInstances?: (number|null);
+
+                    /** CloudFunction minInstances */
+                    minInstances?: (number|null);
 
                     /** CloudFunction vpcConnector */
                     vpcConnector?: (string|null);
@@ -350,8 +356,29 @@ export namespace google {
                     /** CloudFunction ingressSettings */
                     ingressSettings?: (google.cloud.functions.v1.CloudFunction.IngressSettings|keyof typeof google.cloud.functions.v1.CloudFunction.IngressSettings|null);
 
+                    /** CloudFunction kmsKeyName */
+                    kmsKeyName?: (string|null);
+
+                    /** CloudFunction buildWorkerPool */
+                    buildWorkerPool?: (string|null);
+
                     /** CloudFunction buildId */
                     buildId?: (string|null);
+
+                    /** CloudFunction buildName */
+                    buildName?: (string|null);
+
+                    /** CloudFunction secretEnvironmentVariables */
+                    secretEnvironmentVariables?: (google.cloud.functions.v1.ISecretEnvVar[]|null);
+
+                    /** CloudFunction secretVolumes */
+                    secretVolumes?: (google.cloud.functions.v1.ISecretVolume[]|null);
+
+                    /** CloudFunction sourceToken */
+                    sourceToken?: (string|null);
+
+                    /** CloudFunction dockerRepository */
+                    dockerRepository?: (string|null);
                 }
 
                 /** Represents a CloudFunction. */
@@ -414,11 +441,17 @@ export namespace google {
                     /** CloudFunction environmentVariables. */
                     public environmentVariables: { [k: string]: string };
 
+                    /** CloudFunction buildEnvironmentVariables. */
+                    public buildEnvironmentVariables: { [k: string]: string };
+
                     /** CloudFunction network. */
                     public network: string;
 
                     /** CloudFunction maxInstances. */
                     public maxInstances: number;
+
+                    /** CloudFunction minInstances. */
+                    public minInstances: number;
 
                     /** CloudFunction vpcConnector. */
                     public vpcConnector: string;
@@ -429,8 +462,29 @@ export namespace google {
                     /** CloudFunction ingressSettings. */
                     public ingressSettings: (google.cloud.functions.v1.CloudFunction.IngressSettings|keyof typeof google.cloud.functions.v1.CloudFunction.IngressSettings);
 
+                    /** CloudFunction kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /** CloudFunction buildWorkerPool. */
+                    public buildWorkerPool: string;
+
                     /** CloudFunction buildId. */
                     public buildId: string;
+
+                    /** CloudFunction buildName. */
+                    public buildName: string;
+
+                    /** CloudFunction secretEnvironmentVariables. */
+                    public secretEnvironmentVariables: google.cloud.functions.v1.ISecretEnvVar[];
+
+                    /** CloudFunction secretVolumes. */
+                    public secretVolumes: google.cloud.functions.v1.ISecretVolume[];
+
+                    /** CloudFunction sourceToken. */
+                    public sourceToken: string;
+
+                    /** CloudFunction dockerRepository. */
+                    public dockerRepository: string;
 
                     /** CloudFunction sourceCode. */
                     public sourceCode?: ("sourceArchiveUrl"|"sourceRepository"|"sourceUploadUrl");
@@ -1017,6 +1071,321 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a SecretEnvVar. */
+                interface ISecretEnvVar {
+
+                    /** SecretEnvVar key */
+                    key?: (string|null);
+
+                    /** SecretEnvVar projectId */
+                    projectId?: (string|null);
+
+                    /** SecretEnvVar secret */
+                    secret?: (string|null);
+
+                    /** SecretEnvVar version */
+                    version?: (string|null);
+                }
+
+                /** Represents a SecretEnvVar. */
+                class SecretEnvVar implements ISecretEnvVar {
+
+                    /**
+                     * Constructs a new SecretEnvVar.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v1.ISecretEnvVar);
+
+                    /** SecretEnvVar key. */
+                    public key: string;
+
+                    /** SecretEnvVar projectId. */
+                    public projectId: string;
+
+                    /** SecretEnvVar secret. */
+                    public secret: string;
+
+                    /** SecretEnvVar version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new SecretEnvVar instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretEnvVar instance
+                     */
+                    public static create(properties?: google.cloud.functions.v1.ISecretEnvVar): google.cloud.functions.v1.SecretEnvVar;
+
+                    /**
+                     * Encodes the specified SecretEnvVar message. Does not implicitly {@link google.cloud.functions.v1.SecretEnvVar.verify|verify} messages.
+                     * @param message SecretEnvVar message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v1.ISecretEnvVar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretEnvVar message, length delimited. Does not implicitly {@link google.cloud.functions.v1.SecretEnvVar.verify|verify} messages.
+                     * @param message SecretEnvVar message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v1.ISecretEnvVar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretEnvVar message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretEnvVar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v1.SecretEnvVar;
+
+                    /**
+                     * Decodes a SecretEnvVar message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretEnvVar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v1.SecretEnvVar;
+
+                    /**
+                     * Verifies a SecretEnvVar message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretEnvVar message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretEnvVar
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v1.SecretEnvVar;
+
+                    /**
+                     * Creates a plain object from a SecretEnvVar message. Also converts values to other types if specified.
+                     * @param message SecretEnvVar
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v1.SecretEnvVar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretEnvVar to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SecretVolume. */
+                interface ISecretVolume {
+
+                    /** SecretVolume mountPath */
+                    mountPath?: (string|null);
+
+                    /** SecretVolume projectId */
+                    projectId?: (string|null);
+
+                    /** SecretVolume secret */
+                    secret?: (string|null);
+
+                    /** SecretVolume versions */
+                    versions?: (google.cloud.functions.v1.SecretVolume.ISecretVersion[]|null);
+                }
+
+                /** Represents a SecretVolume. */
+                class SecretVolume implements ISecretVolume {
+
+                    /**
+                     * Constructs a new SecretVolume.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.functions.v1.ISecretVolume);
+
+                    /** SecretVolume mountPath. */
+                    public mountPath: string;
+
+                    /** SecretVolume projectId. */
+                    public projectId: string;
+
+                    /** SecretVolume secret. */
+                    public secret: string;
+
+                    /** SecretVolume versions. */
+                    public versions: google.cloud.functions.v1.SecretVolume.ISecretVersion[];
+
+                    /**
+                     * Creates a new SecretVolume instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretVolume instance
+                     */
+                    public static create(properties?: google.cloud.functions.v1.ISecretVolume): google.cloud.functions.v1.SecretVolume;
+
+                    /**
+                     * Encodes the specified SecretVolume message. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.verify|verify} messages.
+                     * @param message SecretVolume message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.functions.v1.ISecretVolume, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretVolume message, length delimited. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.verify|verify} messages.
+                     * @param message SecretVolume message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.functions.v1.ISecretVolume, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretVolume message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretVolume
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v1.SecretVolume;
+
+                    /**
+                     * Decodes a SecretVolume message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretVolume
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v1.SecretVolume;
+
+                    /**
+                     * Verifies a SecretVolume message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretVolume message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretVolume
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.functions.v1.SecretVolume;
+
+                    /**
+                     * Creates a plain object from a SecretVolume message. Also converts values to other types if specified.
+                     * @param message SecretVolume
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.functions.v1.SecretVolume, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretVolume to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace SecretVolume {
+
+                    /** Properties of a SecretVersion. */
+                    interface ISecretVersion {
+
+                        /** SecretVersion version */
+                        version?: (string|null);
+
+                        /** SecretVersion path */
+                        path?: (string|null);
+                    }
+
+                    /** Represents a SecretVersion. */
+                    class SecretVersion implements ISecretVersion {
+
+                        /**
+                         * Constructs a new SecretVersion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.functions.v1.SecretVolume.ISecretVersion);
+
+                        /** SecretVersion version. */
+                        public version: string;
+
+                        /** SecretVersion path. */
+                        public path: string;
+
+                        /**
+                         * Creates a new SecretVersion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SecretVersion instance
+                         */
+                        public static create(properties?: google.cloud.functions.v1.SecretVolume.ISecretVersion): google.cloud.functions.v1.SecretVolume.SecretVersion;
+
+                        /**
+                         * Encodes the specified SecretVersion message. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.SecretVersion.verify|verify} messages.
+                         * @param message SecretVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.functions.v1.SecretVolume.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SecretVersion message, length delimited. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.SecretVersion.verify|verify} messages.
+                         * @param message SecretVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.functions.v1.SecretVolume.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.functions.v1.SecretVolume.SecretVersion;
+
+                        /**
+                         * Decodes a SecretVersion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SecretVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.functions.v1.SecretVolume.SecretVersion;
+
+                        /**
+                         * Verifies a SecretVersion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SecretVersion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SecretVersion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.functions.v1.SecretVolume.SecretVersion;
+
+                        /**
+                         * Creates a plain object from a SecretVersion message. Also converts values to other types if specified.
+                         * @param message SecretVersion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.functions.v1.SecretVolume.SecretVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SecretVersion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
                 /** Properties of a CreateFunctionRequest. */
                 interface ICreateFunctionRequest {
 
@@ -1209,6 +1578,16 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** CloudFunctionStatus enum. */
+                enum CloudFunctionStatus {
+                    CLOUD_FUNCTION_STATUS_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    OFFLINE = 2,
+                    DEPLOY_IN_PROGRESS = 3,
+                    DELETE_IN_PROGRESS = 4,
+                    UNKNOWN = 5
+                }
+
                 /** Properties of a GetFunctionRequest. */
                 interface IGetFunctionRequest {
 
@@ -1297,16 +1676,6 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
-                }
-
-                /** CloudFunctionStatus enum. */
-                enum CloudFunctionStatus {
-                    CLOUD_FUNCTION_STATUS_UNSPECIFIED = 0,
-                    ACTIVE = 1,
-                    OFFLINE = 2,
-                    DEPLOY_IN_PROGRESS = 3,
-                    DELETE_IN_PROGRESS = 4,
-                    UNKNOWN = 5
                 }
 
                 /** Properties of a ListFunctionsRequest. */
@@ -2195,6 +2564,12 @@ export namespace google {
 
                     /** OperationMetadataV1 buildId */
                     buildId?: (string|null);
+
+                    /** OperationMetadataV1 sourceToken */
+                    sourceToken?: (string|null);
+
+                    /** OperationMetadataV1 buildName */
+                    buildName?: (string|null);
                 }
 
                 /** Represents an OperationMetadataV1. */
@@ -2223,6 +2598,12 @@ export namespace google {
 
                     /** OperationMetadataV1 buildId. */
                     public buildId: string;
+
+                    /** OperationMetadataV1 sourceToken. */
+                    public sourceToken: string;
+
+                    /** OperationMetadataV1 buildName. */
+                    public buildName: string;
 
                     /**
                      * Creates a new OperationMetadataV1 instance using the specified properties.

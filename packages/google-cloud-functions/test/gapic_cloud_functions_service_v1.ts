@@ -2016,6 +2016,83 @@ describe('v1.CloudFunctionsServiceClient', () => {
       });
     });
 
+    describe('cryptoKey', () => {
+      const fakePath = '/rendered/path/cryptoKey';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+      };
+      const client =
+        new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyPath', () => {
+        const result = client.cryptoKeyPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromCryptoKeyName', () => {
+        const result = client.matchProjectFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromCryptoKeyName', () => {
+        const result = client.matchLocationFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyName', () => {
+        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('location', () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
@@ -2060,6 +2137,71 @@ describe('v1.CloudFunctionsServiceClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('repository', () => {
+      const fakePath = '/rendered/path/repository';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+      };
+      const client =
+        new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.repositoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.repositoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('repositoryPath', () => {
+        const result = client.repositoryPath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRepositoryName', () => {
+        const result = client.matchProjectFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromRepositoryName', () => {
+        const result = client.matchLocationFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromRepositoryName', () => {
+        const result = client.matchRepositoryFromRepositoryName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.repositoryPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

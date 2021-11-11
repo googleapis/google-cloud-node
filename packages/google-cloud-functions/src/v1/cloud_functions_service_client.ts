@@ -170,8 +170,14 @@ export class CloudFunctionsServiceClient {
       cloudFunctionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/functions/{function}'
       ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      repositoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}'
       ),
     };
 
@@ -381,6 +387,23 @@ export class CloudFunctionsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Returns a function with the given name from the requested project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the function which details should be obtained.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CloudFunction]{@link google.cloud.functions.v1.CloudFunction}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.get_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_GetFunction_async
+   */
   getFunction(
     request?: protos.google.cloud.functions.v1.IGetFunctionRequest,
     options?: CallOptions
@@ -408,23 +431,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns a function with the given name from the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the function which details should be obtained.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CloudFunction]{@link google.cloud.functions.v1.CloudFunction}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getFunction(request);
-   */
   getFunction(
     request?: protos.google.cloud.functions.v1.IGetFunctionRequest,
     optionsOrCallback?:
@@ -466,6 +472,28 @@ export class CloudFunctionsServiceClient {
     this.initialize();
     return this.innerApiCalls.getFunction(request, options, callback);
   }
+  /**
+   * Synchronously invokes a deployed Cloud Function. To be used for testing
+   * purposes as very limited traffic is allowed. For more information on
+   * the actual limits, refer to
+   * [Rate Limits](https://cloud.google.com/functions/quotas#rate_limits).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the function to be called.
+   * @param {string} request.data
+   *   Required. Input to be passed to the function.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CallFunctionResponse]{@link google.cloud.functions.v1.CallFunctionResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.call_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_CallFunction_async
+   */
   callFunction(
     request?: protos.google.cloud.functions.v1.ICallFunctionRequest,
     options?: CallOptions
@@ -493,28 +521,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Synchronously invokes a deployed Cloud Function. To be used for testing
-   * purposes as very limited traffic is allowed. For more information on
-   * the actual limits, refer to
-   * [Rate Limits](https://cloud.google.com/functions/quotas#rate_limits).
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the function to be called.
-   * @param {string} request.data
-   *   Required. Input to be passed to the function.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CallFunctionResponse]{@link google.cloud.functions.v1.CallFunctionResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.callFunction(request);
-   */
   callFunction(
     request?: protos.google.cloud.functions.v1.ICallFunctionRequest,
     optionsOrCallback?:
@@ -556,37 +562,6 @@ export class CloudFunctionsServiceClient {
     this.initialize();
     return this.innerApiCalls.callFunction(request, options, callback);
   }
-  generateUploadUrl(
-    request?: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
-      protos.google.cloud.functions.v1.IGenerateUploadUrlRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  generateUploadUrl(
-    request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
-      | protos.google.cloud.functions.v1.IGenerateUploadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateUploadUrl(
-    request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
-    callback: Callback<
-      protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
-      | protos.google.cloud.functions.v1.IGenerateUploadUrlRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Returns a signed URL for uploading a function source code.
    * For more information about the signed URL usage see:
@@ -626,9 +601,40 @@ export class CloudFunctionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.generateUploadUrl(request);
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.generate_upload_url.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_GenerateUploadUrl_async
    */
+  generateUploadUrl(
+    request?: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
+      protos.google.cloud.functions.v1.IGenerateUploadUrlRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  generateUploadUrl(
+    request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
+      | protos.google.cloud.functions.v1.IGenerateUploadUrlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateUploadUrl(
+    request: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
+    callback: Callback<
+      protos.google.cloud.functions.v1.IGenerateUploadUrlResponse,
+      | protos.google.cloud.functions.v1.IGenerateUploadUrlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   generateUploadUrl(
     request?: protos.google.cloud.functions.v1.IGenerateUploadUrlRequest,
     optionsOrCallback?:
@@ -672,6 +678,31 @@ export class CloudFunctionsServiceClient {
     this.initialize();
     return this.innerApiCalls.generateUploadUrl(request, options, callback);
   }
+  /**
+   * Returns a signed URL for downloading deployed function source code.
+   * The URL is only valid for a limited period and should be used within
+   * minutes after generation.
+   * For more information about the signed URL usage see:
+   * https://cloud.google.com/storage/docs/access-control/signed-urls
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of function for which source code Google Cloud Storage signed
+   *   URL should be generated.
+   * @param {number} request.versionId
+   *   The optional version of function. If not set, default, current version
+   *   is used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GenerateDownloadUrlResponse]{@link google.cloud.functions.v1.GenerateDownloadUrlResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.generate_download_url.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_GenerateDownloadUrl_async
+   */
   generateDownloadUrl(
     request?: protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest,
     options?: CallOptions
@@ -703,31 +734,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns a signed URL for downloading deployed function source code.
-   * The URL is only valid for a limited period and should be used within
-   * minutes after generation.
-   * For more information about the signed URL usage see:
-   * https://cloud.google.com/storage/docs/access-control/signed-urls
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of function for which source code Google Cloud Storage signed
-   *   URL should be generated.
-   * @param {number} request.versionId
-   *   The optional version of function. If not set, default, current version
-   *   is used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GenerateDownloadUrlResponse]{@link google.cloud.functions.v1.GenerateDownloadUrlResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.generateDownloadUrl(request);
-   */
   generateDownloadUrl(
     request?: protos.google.cloud.functions.v1.IGenerateDownloadUrlRequest,
     optionsOrCallback?:
@@ -771,6 +777,30 @@ export class CloudFunctionsServiceClient {
     this.initialize();
     return this.innerApiCalls.generateDownloadUrl(request, options, callback);
   }
+  /**
+   * Sets the IAM access control policy on the specified function.
+   * Replaces any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.set_iam_policy.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -798,30 +828,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the IAM access control policy on the specified function.
-   * Replaces any existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -861,6 +867,29 @@ export class CloudFunctionsServiceClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Gets the IAM access control policy for a function.
+   * Returns an empty policy if the function exists and does not have a policy
+   * set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.get_iam_policy.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -888,29 +917,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the IAM access control policy for a function.
-   * Returns an empty policy if the function exists and does not have a policy
-   * set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -950,6 +956,32 @@ export class CloudFunctionsServiceClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Tests the specified permissions against the IAM access control policy
+   * for a function.
+   * If the function does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.test_iam_permissions.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -977,32 +1009,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Tests the specified permissions against the IAM access control policy
-   * for a function.
-   * If the function does not exist, this will return an empty set of
-   * permissions, not a NOT_FOUND error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -1043,6 +1049,30 @@ export class CloudFunctionsServiceClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
+  /**
+   * Creates a new function. If a function with the given name already exists in
+   * the specified project, the long running operation will return
+   * `ALREADY_EXISTS` error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.location
+   *   Required. The project and location in which the function should be created, specified
+   *   in the format `projects/* /locations/*`
+   * @param {google.cloud.functions.v1.CloudFunction} request.function
+   *   Required. Function to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.create_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_CreateFunction_async
+   */
   createFunction(
     request?: protos.google.cloud.functions.v1.ICreateFunctionRequest,
     options?: CallOptions
@@ -1079,31 +1109,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new function. If a function with the given name already exists in
-   * the specified project, the long running operation will return
-   * `ALREADY_EXISTS` error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.location
-   *   Required. The project and location in which the function should be created, specified
-   *   in the format `projects/* /locations/*`
-   * @param {google.cloud.functions.v1.CloudFunction} request.function
-   *   Required. Function to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createFunction(request);
-   * const [response] = await operation.promise();
-   */
   createFunction(
     request?: protos.google.cloud.functions.v1.ICreateFunctionRequest,
     optionsOrCallback?:
@@ -1161,11 +1166,8 @@ export class CloudFunctionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateFunctionProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.create_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_CreateFunction_async
    */
   async checkCreateFunctionProgress(
     name: string
@@ -1189,6 +1191,27 @@ export class CloudFunctionsServiceClient {
       protos.google.cloud.functions.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Updates existing function.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.functions.v1.CloudFunction} request.function
+   *   Required. New version of the function.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required list of fields to be updated in this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.update_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_UpdateFunction_async
+   */
   updateFunction(
     request?: protos.google.cloud.functions.v1.IUpdateFunctionRequest,
     options?: CallOptions
@@ -1225,28 +1248,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates existing function.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.functions.v1.CloudFunction} request.function
-   *   Required. New version of the function.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required list of fields to be updated in this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateFunction(request);
-   * const [response] = await operation.promise();
-   */
   updateFunction(
     request?: protos.google.cloud.functions.v1.IUpdateFunctionRequest,
     optionsOrCallback?:
@@ -1304,11 +1305,8 @@ export class CloudFunctionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateFunctionProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.update_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_UpdateFunction_async
    */
   async checkUpdateFunctionProgress(
     name: string
@@ -1332,6 +1330,27 @@ export class CloudFunctionsServiceClient {
       protos.google.cloud.functions.v1.OperationMetadataV1
     >;
   }
+  /**
+   * Deletes a function with the given name from the specified project. If the
+   * given function is used by some trigger, the trigger will be updated to
+   * remove this function.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the function which should be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.delete_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_DeleteFunction_async
+   */
   deleteFunction(
     request?: protos.google.cloud.functions.v1.IDeleteFunctionRequest,
     options?: CallOptions
@@ -1368,28 +1387,6 @@ export class CloudFunctionsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a function with the given name from the specified project. If the
-   * given function is used by some trigger, the trigger will be updated to
-   * remove this function.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the function which should be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteFunction(request);
-   * const [response] = await operation.promise();
-   */
   deleteFunction(
     request?: protos.google.cloud.functions.v1.IDeleteFunctionRequest,
     optionsOrCallback?:
@@ -1447,11 +1444,8 @@ export class CloudFunctionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteFunctionProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.delete_function.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_DeleteFunction_async
    */
   async checkDeleteFunctionProgress(
     name: string
@@ -1475,37 +1469,6 @@ export class CloudFunctionsServiceClient {
       protos.google.cloud.functions.v1.OperationMetadataV1
     >;
   }
-  listFunctions(
-    request?: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.functions.v1.ICloudFunction[],
-      protos.google.cloud.functions.v1.IListFunctionsRequest | null,
-      protos.google.cloud.functions.v1.IListFunctionsResponse
-    ]
-  >;
-  listFunctions(
-    request: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.functions.v1.IListFunctionsRequest,
-      | protos.google.cloud.functions.v1.IListFunctionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.functions.v1.ICloudFunction
-    >
-  ): void;
-  listFunctions(
-    request: protos.google.cloud.functions.v1.IListFunctionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.functions.v1.IListFunctionsRequest,
-      | protos.google.cloud.functions.v1.IListFunctionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.functions.v1.ICloudFunction
-    >
-  ): void;
   /**
    * Returns a list of functions that belong to the requested project.
    *
@@ -1538,6 +1501,37 @@ export class CloudFunctionsServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listFunctions(
+    request?: protos.google.cloud.functions.v1.IListFunctionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.functions.v1.ICloudFunction[],
+      protos.google.cloud.functions.v1.IListFunctionsRequest | null,
+      protos.google.cloud.functions.v1.IListFunctionsResponse
+    ]
+  >;
+  listFunctions(
+    request: protos.google.cloud.functions.v1.IListFunctionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.functions.v1.IListFunctionsRequest,
+      | protos.google.cloud.functions.v1.IListFunctionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.functions.v1.ICloudFunction
+    >
+  ): void;
+  listFunctions(
+    request: protos.google.cloud.functions.v1.IListFunctionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.functions.v1.IListFunctionsRequest,
+      | protos.google.cloud.functions.v1.IListFunctionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.functions.v1.ICloudFunction
+    >
+  ): void;
   listFunctions(
     request?: protos.google.cloud.functions.v1.IListFunctionsRequest,
     optionsOrCallback?:
@@ -1624,7 +1618,8 @@ export class CloudFunctionsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFunctions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFunctions.createStream(
       this.innerApiCalls.listFunctions as gax.GaxCall,
@@ -1663,11 +1658,8 @@ export class CloudFunctionsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listFunctionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_functions_service.list_functions.js</caption>
+   * region_tag:cloudfunctions_v1_generated_CloudFunctionsService_ListFunctions_async
    */
   listFunctionsAsync(
     request?: protos.google.cloud.functions.v1.IListFunctionsRequest,
@@ -1681,8 +1673,8 @@ export class CloudFunctionsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    const defaultCallSettings = this._defaults['listFunctions'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listFunctions.asyncIterate(
       this.innerApiCalls['listFunctions'] as GaxCall,
@@ -1747,6 +1739,77 @@ export class CloudFunctionsServiceClient {
   }
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -1780,6 +1843,58 @@ export class CloudFunctionsServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified repository resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @returns {string} Resource name string.
+   */
+  repositoryPath(project: string, location: string, repository: string) {
+    return this.pathTemplates.repositoryPathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+    });
+  }
+
+  /**
+   * Parse the project from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from Repository resource.
+   *
+   * @param {string} repositoryName
+   *   A fully-qualified path representing Repository resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromRepositoryName(repositoryName: string) {
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .repository;
   }
 
   /**

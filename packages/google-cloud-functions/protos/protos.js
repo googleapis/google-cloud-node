@@ -487,12 +487,21 @@
                          * @property {number|Long|null} [versionId] CloudFunction versionId
                          * @property {Object.<string,string>|null} [labels] CloudFunction labels
                          * @property {Object.<string,string>|null} [environmentVariables] CloudFunction environmentVariables
+                         * @property {Object.<string,string>|null} [buildEnvironmentVariables] CloudFunction buildEnvironmentVariables
                          * @property {string|null} [network] CloudFunction network
                          * @property {number|null} [maxInstances] CloudFunction maxInstances
+                         * @property {number|null} [minInstances] CloudFunction minInstances
                          * @property {string|null} [vpcConnector] CloudFunction vpcConnector
                          * @property {google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings|null} [vpcConnectorEgressSettings] CloudFunction vpcConnectorEgressSettings
                          * @property {google.cloud.functions.v1.CloudFunction.IngressSettings|null} [ingressSettings] CloudFunction ingressSettings
+                         * @property {string|null} [kmsKeyName] CloudFunction kmsKeyName
+                         * @property {string|null} [buildWorkerPool] CloudFunction buildWorkerPool
                          * @property {string|null} [buildId] CloudFunction buildId
+                         * @property {string|null} [buildName] CloudFunction buildName
+                         * @property {Array.<google.cloud.functions.v1.ISecretEnvVar>|null} [secretEnvironmentVariables] CloudFunction secretEnvironmentVariables
+                         * @property {Array.<google.cloud.functions.v1.ISecretVolume>|null} [secretVolumes] CloudFunction secretVolumes
+                         * @property {string|null} [sourceToken] CloudFunction sourceToken
+                         * @property {string|null} [dockerRepository] CloudFunction dockerRepository
                          */
     
                         /**
@@ -506,6 +515,9 @@
                         function CloudFunction(properties) {
                             this.labels = {};
                             this.environmentVariables = {};
+                            this.buildEnvironmentVariables = {};
+                            this.secretEnvironmentVariables = [];
+                            this.secretVolumes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -649,6 +661,14 @@
                         CloudFunction.prototype.environmentVariables = $util.emptyObject;
     
                         /**
+                         * CloudFunction buildEnvironmentVariables.
+                         * @member {Object.<string,string>} buildEnvironmentVariables
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.buildEnvironmentVariables = $util.emptyObject;
+    
+                        /**
                          * CloudFunction network.
                          * @member {string} network
                          * @memberof google.cloud.functions.v1.CloudFunction
@@ -663,6 +683,14 @@
                          * @instance
                          */
                         CloudFunction.prototype.maxInstances = 0;
+    
+                        /**
+                         * CloudFunction minInstances.
+                         * @member {number} minInstances
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.minInstances = 0;
     
                         /**
                          * CloudFunction vpcConnector.
@@ -689,12 +717,68 @@
                         CloudFunction.prototype.ingressSettings = 0;
     
                         /**
+                         * CloudFunction kmsKeyName.
+                         * @member {string} kmsKeyName
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.kmsKeyName = "";
+    
+                        /**
+                         * CloudFunction buildWorkerPool.
+                         * @member {string} buildWorkerPool
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.buildWorkerPool = "";
+    
+                        /**
                          * CloudFunction buildId.
                          * @member {string} buildId
                          * @memberof google.cloud.functions.v1.CloudFunction
                          * @instance
                          */
                         CloudFunction.prototype.buildId = "";
+    
+                        /**
+                         * CloudFunction buildName.
+                         * @member {string} buildName
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.buildName = "";
+    
+                        /**
+                         * CloudFunction secretEnvironmentVariables.
+                         * @member {Array.<google.cloud.functions.v1.ISecretEnvVar>} secretEnvironmentVariables
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.secretEnvironmentVariables = $util.emptyArray;
+    
+                        /**
+                         * CloudFunction secretVolumes.
+                         * @member {Array.<google.cloud.functions.v1.ISecretVolume>} secretVolumes
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.secretVolumes = $util.emptyArray;
+    
+                        /**
+                         * CloudFunction sourceToken.
+                         * @member {string} sourceToken
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.sourceToken = "";
+    
+                        /**
+                         * CloudFunction dockerRepository.
+                         * @member {string} dockerRepository
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.dockerRepository = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -791,8 +875,29 @@
                                 writer.uint32(/* id 23, wireType 0 =*/184).int32(message.vpcConnectorEgressSettings);
                             if (message.ingressSettings != null && Object.hasOwnProperty.call(message, "ingressSettings"))
                                 writer.uint32(/* id 24, wireType 0 =*/192).int32(message.ingressSettings);
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 25, wireType 2 =*/202).string(message.kmsKeyName);
+                            if (message.buildWorkerPool != null && Object.hasOwnProperty.call(message, "buildWorkerPool"))
+                                writer.uint32(/* id 26, wireType 2 =*/210).string(message.buildWorkerPool);
                             if (message.buildId != null && Object.hasOwnProperty.call(message, "buildId"))
                                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.buildId);
+                            if (message.buildEnvironmentVariables != null && Object.hasOwnProperty.call(message, "buildEnvironmentVariables"))
+                                for (var keys = Object.keys(message.buildEnvironmentVariables), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 28, wireType 2 =*/226).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.buildEnvironmentVariables[keys[i]]).ldelim();
+                            if (message.secretEnvironmentVariables != null && message.secretEnvironmentVariables.length)
+                                for (var i = 0; i < message.secretEnvironmentVariables.length; ++i)
+                                    $root.google.cloud.functions.v1.SecretEnvVar.encode(message.secretEnvironmentVariables[i], writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                            if (message.secretVolumes != null && message.secretVolumes.length)
+                                for (var i = 0; i < message.secretVolumes.length; ++i)
+                                    $root.google.cloud.functions.v1.SecretVolume.encode(message.secretVolumes[i], writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.sourceToken != null && Object.hasOwnProperty.call(message, "sourceToken"))
+                                writer.uint32(/* id 31, wireType 2 =*/250).string(message.sourceToken);
+                            if (message.minInstances != null && Object.hasOwnProperty.call(message, "minInstances"))
+                                writer.uint32(/* id 32, wireType 0 =*/256).int32(message.minInstances);
+                            if (message.buildName != null && Object.hasOwnProperty.call(message, "buildName"))
+                                writer.uint32(/* id 33, wireType 2 =*/266).string(message.buildName);
+                            if (message.dockerRepository != null && Object.hasOwnProperty.call(message, "dockerRepository"))
+                                writer.uint32(/* id 34, wireType 2 =*/274).string(message.dockerRepository);
                             return writer;
                         };
     
@@ -916,11 +1021,36 @@
                                     }
                                     message.environmentVariables[key] = value;
                                     break;
+                                case 28:
+                                    if (message.buildEnvironmentVariables === $util.emptyObject)
+                                        message.buildEnvironmentVariables = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.buildEnvironmentVariables[key] = value;
+                                    break;
                                 case 18:
                                     message.network = reader.string();
                                     break;
                                 case 20:
                                     message.maxInstances = reader.int32();
+                                    break;
+                                case 32:
+                                    message.minInstances = reader.int32();
                                     break;
                                 case 22:
                                     message.vpcConnector = reader.string();
@@ -931,8 +1061,33 @@
                                 case 24:
                                     message.ingressSettings = reader.int32();
                                     break;
+                                case 25:
+                                    message.kmsKeyName = reader.string();
+                                    break;
+                                case 26:
+                                    message.buildWorkerPool = reader.string();
+                                    break;
                                 case 27:
                                     message.buildId = reader.string();
+                                    break;
+                                case 33:
+                                    message.buildName = reader.string();
+                                    break;
+                                case 29:
+                                    if (!(message.secretEnvironmentVariables && message.secretEnvironmentVariables.length))
+                                        message.secretEnvironmentVariables = [];
+                                    message.secretEnvironmentVariables.push($root.google.cloud.functions.v1.SecretEnvVar.decode(reader, reader.uint32()));
+                                    break;
+                                case 30:
+                                    if (!(message.secretVolumes && message.secretVolumes.length))
+                                        message.secretVolumes = [];
+                                    message.secretVolumes.push($root.google.cloud.functions.v1.SecretVolume.decode(reader, reader.uint32()));
+                                    break;
+                                case 31:
+                                    message.sourceToken = reader.string();
+                                    break;
+                                case 34:
+                                    message.dockerRepository = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1069,12 +1224,23 @@
                                     if (!$util.isString(message.environmentVariables[key[i]]))
                                         return "environmentVariables: string{k:string} expected";
                             }
+                            if (message.buildEnvironmentVariables != null && message.hasOwnProperty("buildEnvironmentVariables")) {
+                                if (!$util.isObject(message.buildEnvironmentVariables))
+                                    return "buildEnvironmentVariables: object expected";
+                                var key = Object.keys(message.buildEnvironmentVariables);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.buildEnvironmentVariables[key[i]]))
+                                        return "buildEnvironmentVariables: string{k:string} expected";
+                            }
                             if (message.network != null && message.hasOwnProperty("network"))
                                 if (!$util.isString(message.network))
                                     return "network: string expected";
                             if (message.maxInstances != null && message.hasOwnProperty("maxInstances"))
                                 if (!$util.isInteger(message.maxInstances))
                                     return "maxInstances: integer expected";
+                            if (message.minInstances != null && message.hasOwnProperty("minInstances"))
+                                if (!$util.isInteger(message.minInstances))
+                                    return "minInstances: integer expected";
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector"))
                                 if (!$util.isString(message.vpcConnector))
                                     return "vpcConnector: string expected";
@@ -1097,9 +1263,42 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            if (message.buildWorkerPool != null && message.hasOwnProperty("buildWorkerPool"))
+                                if (!$util.isString(message.buildWorkerPool))
+                                    return "buildWorkerPool: string expected";
                             if (message.buildId != null && message.hasOwnProperty("buildId"))
                                 if (!$util.isString(message.buildId))
                                     return "buildId: string expected";
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                if (!$util.isString(message.buildName))
+                                    return "buildName: string expected";
+                            if (message.secretEnvironmentVariables != null && message.hasOwnProperty("secretEnvironmentVariables")) {
+                                if (!Array.isArray(message.secretEnvironmentVariables))
+                                    return "secretEnvironmentVariables: array expected";
+                                for (var i = 0; i < message.secretEnvironmentVariables.length; ++i) {
+                                    var error = $root.google.cloud.functions.v1.SecretEnvVar.verify(message.secretEnvironmentVariables[i]);
+                                    if (error)
+                                        return "secretEnvironmentVariables." + error;
+                                }
+                            }
+                            if (message.secretVolumes != null && message.hasOwnProperty("secretVolumes")) {
+                                if (!Array.isArray(message.secretVolumes))
+                                    return "secretVolumes: array expected";
+                                for (var i = 0; i < message.secretVolumes.length; ++i) {
+                                    var error = $root.google.cloud.functions.v1.SecretVolume.verify(message.secretVolumes[i]);
+                                    if (error)
+                                        return "secretVolumes." + error;
+                                }
+                            }
+                            if (message.sourceToken != null && message.hasOwnProperty("sourceToken"))
+                                if (!$util.isString(message.sourceToken))
+                                    return "sourceToken: string expected";
+                            if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
+                                if (!$util.isString(message.dockerRepository))
+                                    return "dockerRepository: string expected";
                             return null;
                         };
     
@@ -1205,10 +1404,19 @@
                                 for (var keys = Object.keys(object.environmentVariables), i = 0; i < keys.length; ++i)
                                     message.environmentVariables[keys[i]] = String(object.environmentVariables[keys[i]]);
                             }
+                            if (object.buildEnvironmentVariables) {
+                                if (typeof object.buildEnvironmentVariables !== "object")
+                                    throw TypeError(".google.cloud.functions.v1.CloudFunction.buildEnvironmentVariables: object expected");
+                                message.buildEnvironmentVariables = {};
+                                for (var keys = Object.keys(object.buildEnvironmentVariables), i = 0; i < keys.length; ++i)
+                                    message.buildEnvironmentVariables[keys[i]] = String(object.buildEnvironmentVariables[keys[i]]);
+                            }
                             if (object.network != null)
                                 message.network = String(object.network);
                             if (object.maxInstances != null)
                                 message.maxInstances = object.maxInstances | 0;
+                            if (object.minInstances != null)
+                                message.minInstances = object.minInstances | 0;
                             if (object.vpcConnector != null)
                                 message.vpcConnector = String(object.vpcConnector);
                             switch (object.vpcConnectorEgressSettings) {
@@ -1243,8 +1451,38 @@
                                 message.ingressSettings = 3;
                                 break;
                             }
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            if (object.buildWorkerPool != null)
+                                message.buildWorkerPool = String(object.buildWorkerPool);
                             if (object.buildId != null)
                                 message.buildId = String(object.buildId);
+                            if (object.buildName != null)
+                                message.buildName = String(object.buildName);
+                            if (object.secretEnvironmentVariables) {
+                                if (!Array.isArray(object.secretEnvironmentVariables))
+                                    throw TypeError(".google.cloud.functions.v1.CloudFunction.secretEnvironmentVariables: array expected");
+                                message.secretEnvironmentVariables = [];
+                                for (var i = 0; i < object.secretEnvironmentVariables.length; ++i) {
+                                    if (typeof object.secretEnvironmentVariables[i] !== "object")
+                                        throw TypeError(".google.cloud.functions.v1.CloudFunction.secretEnvironmentVariables: object expected");
+                                    message.secretEnvironmentVariables[i] = $root.google.cloud.functions.v1.SecretEnvVar.fromObject(object.secretEnvironmentVariables[i]);
+                                }
+                            }
+                            if (object.secretVolumes) {
+                                if (!Array.isArray(object.secretVolumes))
+                                    throw TypeError(".google.cloud.functions.v1.CloudFunction.secretVolumes: array expected");
+                                message.secretVolumes = [];
+                                for (var i = 0; i < object.secretVolumes.length; ++i) {
+                                    if (typeof object.secretVolumes[i] !== "object")
+                                        throw TypeError(".google.cloud.functions.v1.CloudFunction.secretVolumes: object expected");
+                                    message.secretVolumes[i] = $root.google.cloud.functions.v1.SecretVolume.fromObject(object.secretVolumes[i]);
+                                }
+                            }
+                            if (object.sourceToken != null)
+                                message.sourceToken = String(object.sourceToken);
+                            if (object.dockerRepository != null)
+                                message.dockerRepository = String(object.dockerRepository);
                             return message;
                         };
     
@@ -1261,9 +1499,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.secretEnvironmentVariables = [];
+                                object.secretVolumes = [];
+                            }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
                                 object.environmentVariables = {};
+                                object.buildEnvironmentVariables = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -1285,7 +1528,13 @@
                                 object.vpcConnector = "";
                                 object.vpcConnectorEgressSettings = options.enums === String ? "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED" : 0;
                                 object.ingressSettings = options.enums === String ? "INGRESS_SETTINGS_UNSPECIFIED" : 0;
+                                object.kmsKeyName = "";
+                                object.buildWorkerPool = "";
                                 object.buildId = "";
+                                object.sourceToken = "";
+                                object.minInstances = 0;
+                                object.buildName = "";
+                                object.dockerRepository = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1356,8 +1605,35 @@
                                 object.vpcConnectorEgressSettings = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings[message.vpcConnectorEgressSettings] : message.vpcConnectorEgressSettings;
                             if (message.ingressSettings != null && message.hasOwnProperty("ingressSettings"))
                                 object.ingressSettings = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.IngressSettings[message.ingressSettings] : message.ingressSettings;
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
+                                object.kmsKeyName = message.kmsKeyName;
+                            if (message.buildWorkerPool != null && message.hasOwnProperty("buildWorkerPool"))
+                                object.buildWorkerPool = message.buildWorkerPool;
                             if (message.buildId != null && message.hasOwnProperty("buildId"))
                                 object.buildId = message.buildId;
+                            if (message.buildEnvironmentVariables && (keys2 = Object.keys(message.buildEnvironmentVariables)).length) {
+                                object.buildEnvironmentVariables = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.buildEnvironmentVariables[keys2[j]] = message.buildEnvironmentVariables[keys2[j]];
+                            }
+                            if (message.secretEnvironmentVariables && message.secretEnvironmentVariables.length) {
+                                object.secretEnvironmentVariables = [];
+                                for (var j = 0; j < message.secretEnvironmentVariables.length; ++j)
+                                    object.secretEnvironmentVariables[j] = $root.google.cloud.functions.v1.SecretEnvVar.toObject(message.secretEnvironmentVariables[j], options);
+                            }
+                            if (message.secretVolumes && message.secretVolumes.length) {
+                                object.secretVolumes = [];
+                                for (var j = 0; j < message.secretVolumes.length; ++j)
+                                    object.secretVolumes[j] = $root.google.cloud.functions.v1.SecretVolume.toObject(message.secretVolumes[j], options);
+                            }
+                            if (message.sourceToken != null && message.hasOwnProperty("sourceToken"))
+                                object.sourceToken = message.sourceToken;
+                            if (message.minInstances != null && message.hasOwnProperty("minInstances"))
+                                object.minInstances = message.minInstances;
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                object.buildName = message.buildName;
+                            if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
+                                object.dockerRepository = message.dockerRepository;
                             return object;
                         };
     
@@ -2493,6 +2769,746 @@
                         return FailurePolicy;
                     })();
     
+                    v1.SecretEnvVar = (function() {
+    
+                        /**
+                         * Properties of a SecretEnvVar.
+                         * @memberof google.cloud.functions.v1
+                         * @interface ISecretEnvVar
+                         * @property {string|null} [key] SecretEnvVar key
+                         * @property {string|null} [projectId] SecretEnvVar projectId
+                         * @property {string|null} [secret] SecretEnvVar secret
+                         * @property {string|null} [version] SecretEnvVar version
+                         */
+    
+                        /**
+                         * Constructs a new SecretEnvVar.
+                         * @memberof google.cloud.functions.v1
+                         * @classdesc Represents a SecretEnvVar.
+                         * @implements ISecretEnvVar
+                         * @constructor
+                         * @param {google.cloud.functions.v1.ISecretEnvVar=} [properties] Properties to set
+                         */
+                        function SecretEnvVar(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecretEnvVar key.
+                         * @member {string} key
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @instance
+                         */
+                        SecretEnvVar.prototype.key = "";
+    
+                        /**
+                         * SecretEnvVar projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @instance
+                         */
+                        SecretEnvVar.prototype.projectId = "";
+    
+                        /**
+                         * SecretEnvVar secret.
+                         * @member {string} secret
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @instance
+                         */
+                        SecretEnvVar.prototype.secret = "";
+    
+                        /**
+                         * SecretEnvVar version.
+                         * @member {string} version
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @instance
+                         */
+                        SecretEnvVar.prototype.version = "";
+    
+                        /**
+                         * Creates a new SecretEnvVar instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {google.cloud.functions.v1.ISecretEnvVar=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v1.SecretEnvVar} SecretEnvVar instance
+                         */
+                        SecretEnvVar.create = function create(properties) {
+                            return new SecretEnvVar(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecretEnvVar message. Does not implicitly {@link google.cloud.functions.v1.SecretEnvVar.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {google.cloud.functions.v1.ISecretEnvVar} message SecretEnvVar message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretEnvVar.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.secret);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.version);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecretEnvVar message, length delimited. Does not implicitly {@link google.cloud.functions.v1.SecretEnvVar.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {google.cloud.functions.v1.ISecretEnvVar} message SecretEnvVar message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretEnvVar.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecretEnvVar message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v1.SecretEnvVar} SecretEnvVar
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretEnvVar.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v1.SecretEnvVar();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.key = reader.string();
+                                    break;
+                                case 2:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.secret = reader.string();
+                                    break;
+                                case 4:
+                                    message.version = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecretEnvVar message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v1.SecretEnvVar} SecretEnvVar
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretEnvVar.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecretEnvVar message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecretEnvVar.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                if (!$util.isString(message.secret))
+                                    return "secret: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecretEnvVar message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v1.SecretEnvVar} SecretEnvVar
+                         */
+                        SecretEnvVar.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v1.SecretEnvVar)
+                                return object;
+                            var message = new $root.google.cloud.functions.v1.SecretEnvVar();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.secret != null)
+                                message.secret = String(object.secret);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecretEnvVar message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @static
+                         * @param {google.cloud.functions.v1.SecretEnvVar} message SecretEnvVar
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecretEnvVar.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.key = "";
+                                object.projectId = "";
+                                object.secret = "";
+                                object.version = "";
+                            }
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                object.secret = message.secret;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecretEnvVar to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v1.SecretEnvVar
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecretEnvVar.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SecretEnvVar;
+                    })();
+    
+                    v1.SecretVolume = (function() {
+    
+                        /**
+                         * Properties of a SecretVolume.
+                         * @memberof google.cloud.functions.v1
+                         * @interface ISecretVolume
+                         * @property {string|null} [mountPath] SecretVolume mountPath
+                         * @property {string|null} [projectId] SecretVolume projectId
+                         * @property {string|null} [secret] SecretVolume secret
+                         * @property {Array.<google.cloud.functions.v1.SecretVolume.ISecretVersion>|null} [versions] SecretVolume versions
+                         */
+    
+                        /**
+                         * Constructs a new SecretVolume.
+                         * @memberof google.cloud.functions.v1
+                         * @classdesc Represents a SecretVolume.
+                         * @implements ISecretVolume
+                         * @constructor
+                         * @param {google.cloud.functions.v1.ISecretVolume=} [properties] Properties to set
+                         */
+                        function SecretVolume(properties) {
+                            this.versions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecretVolume mountPath.
+                         * @member {string} mountPath
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @instance
+                         */
+                        SecretVolume.prototype.mountPath = "";
+    
+                        /**
+                         * SecretVolume projectId.
+                         * @member {string} projectId
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @instance
+                         */
+                        SecretVolume.prototype.projectId = "";
+    
+                        /**
+                         * SecretVolume secret.
+                         * @member {string} secret
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @instance
+                         */
+                        SecretVolume.prototype.secret = "";
+    
+                        /**
+                         * SecretVolume versions.
+                         * @member {Array.<google.cloud.functions.v1.SecretVolume.ISecretVersion>} versions
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @instance
+                         */
+                        SecretVolume.prototype.versions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SecretVolume instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {google.cloud.functions.v1.ISecretVolume=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v1.SecretVolume} SecretVolume instance
+                         */
+                        SecretVolume.create = function create(properties) {
+                            return new SecretVolume(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecretVolume message. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {google.cloud.functions.v1.ISecretVolume} message SecretVolume message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretVolume.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mountPath != null && Object.hasOwnProperty.call(message, "mountPath"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mountPath);
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.secret);
+                            if (message.versions != null && message.versions.length)
+                                for (var i = 0; i < message.versions.length; ++i)
+                                    $root.google.cloud.functions.v1.SecretVolume.SecretVersion.encode(message.versions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecretVolume message, length delimited. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {google.cloud.functions.v1.ISecretVolume} message SecretVolume message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecretVolume.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecretVolume message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v1.SecretVolume} SecretVolume
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretVolume.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v1.SecretVolume();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.mountPath = reader.string();
+                                    break;
+                                case 2:
+                                    message.projectId = reader.string();
+                                    break;
+                                case 3:
+                                    message.secret = reader.string();
+                                    break;
+                                case 4:
+                                    if (!(message.versions && message.versions.length))
+                                        message.versions = [];
+                                    message.versions.push($root.google.cloud.functions.v1.SecretVolume.SecretVersion.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecretVolume message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v1.SecretVolume} SecretVolume
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecretVolume.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecretVolume message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecretVolume.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mountPath != null && message.hasOwnProperty("mountPath"))
+                                if (!$util.isString(message.mountPath))
+                                    return "mountPath: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                if (!$util.isString(message.secret))
+                                    return "secret: string expected";
+                            if (message.versions != null && message.hasOwnProperty("versions")) {
+                                if (!Array.isArray(message.versions))
+                                    return "versions: array expected";
+                                for (var i = 0; i < message.versions.length; ++i) {
+                                    var error = $root.google.cloud.functions.v1.SecretVolume.SecretVersion.verify(message.versions[i]);
+                                    if (error)
+                                        return "versions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecretVolume message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v1.SecretVolume} SecretVolume
+                         */
+                        SecretVolume.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v1.SecretVolume)
+                                return object;
+                            var message = new $root.google.cloud.functions.v1.SecretVolume();
+                            if (object.mountPath != null)
+                                message.mountPath = String(object.mountPath);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
+                            if (object.secret != null)
+                                message.secret = String(object.secret);
+                            if (object.versions) {
+                                if (!Array.isArray(object.versions))
+                                    throw TypeError(".google.cloud.functions.v1.SecretVolume.versions: array expected");
+                                message.versions = [];
+                                for (var i = 0; i < object.versions.length; ++i) {
+                                    if (typeof object.versions[i] !== "object")
+                                        throw TypeError(".google.cloud.functions.v1.SecretVolume.versions: object expected");
+                                    message.versions[i] = $root.google.cloud.functions.v1.SecretVolume.SecretVersion.fromObject(object.versions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecretVolume message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @static
+                         * @param {google.cloud.functions.v1.SecretVolume} message SecretVolume
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecretVolume.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.versions = [];
+                            if (options.defaults) {
+                                object.mountPath = "";
+                                object.projectId = "";
+                                object.secret = "";
+                            }
+                            if (message.mountPath != null && message.hasOwnProperty("mountPath"))
+                                object.mountPath = message.mountPath;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                object.secret = message.secret;
+                            if (message.versions && message.versions.length) {
+                                object.versions = [];
+                                for (var j = 0; j < message.versions.length; ++j)
+                                    object.versions[j] = $root.google.cloud.functions.v1.SecretVolume.SecretVersion.toObject(message.versions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecretVolume to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v1.SecretVolume
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecretVolume.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        SecretVolume.SecretVersion = (function() {
+    
+                            /**
+                             * Properties of a SecretVersion.
+                             * @memberof google.cloud.functions.v1.SecretVolume
+                             * @interface ISecretVersion
+                             * @property {string|null} [version] SecretVersion version
+                             * @property {string|null} [path] SecretVersion path
+                             */
+    
+                            /**
+                             * Constructs a new SecretVersion.
+                             * @memberof google.cloud.functions.v1.SecretVolume
+                             * @classdesc Represents a SecretVersion.
+                             * @implements ISecretVersion
+                             * @constructor
+                             * @param {google.cloud.functions.v1.SecretVolume.ISecretVersion=} [properties] Properties to set
+                             */
+                            function SecretVersion(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SecretVersion version.
+                             * @member {string} version
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @instance
+                             */
+                            SecretVersion.prototype.version = "";
+    
+                            /**
+                             * SecretVersion path.
+                             * @member {string} path
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @instance
+                             */
+                            SecretVersion.prototype.path = "";
+    
+                            /**
+                             * Creates a new SecretVersion instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {google.cloud.functions.v1.SecretVolume.ISecretVersion=} [properties] Properties to set
+                             * @returns {google.cloud.functions.v1.SecretVolume.SecretVersion} SecretVersion instance
+                             */
+                            SecretVersion.create = function create(properties) {
+                                return new SecretVersion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SecretVersion message. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.SecretVersion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {google.cloud.functions.v1.SecretVolume.ISecretVersion} message SecretVersion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SecretVersion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SecretVersion message, length delimited. Does not implicitly {@link google.cloud.functions.v1.SecretVolume.SecretVersion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {google.cloud.functions.v1.SecretVolume.ISecretVersion} message SecretVersion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SecretVersion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SecretVersion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.functions.v1.SecretVolume.SecretVersion} SecretVersion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SecretVersion.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v1.SecretVolume.SecretVersion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.version = reader.string();
+                                        break;
+                                    case 2:
+                                        message.path = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SecretVersion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.functions.v1.SecretVolume.SecretVersion} SecretVersion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SecretVersion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SecretVersion message.
+                             * @function verify
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SecretVersion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SecretVersion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.functions.v1.SecretVolume.SecretVersion} SecretVersion
+                             */
+                            SecretVersion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.functions.v1.SecretVolume.SecretVersion)
+                                    return object;
+                                var message = new $root.google.cloud.functions.v1.SecretVolume.SecretVersion();
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SecretVersion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @static
+                             * @param {google.cloud.functions.v1.SecretVolume.SecretVersion} message SecretVersion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SecretVersion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.version = "";
+                                    object.path = "";
+                                }
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SecretVersion to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.functions.v1.SecretVolume.SecretVersion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SecretVersion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SecretVersion;
+                        })();
+    
+                        return SecretVolume;
+                    })();
+    
                     v1.CreateFunctionRequest = (function() {
     
                         /**
@@ -2928,6 +3944,28 @@
                         return UpdateFunctionRequest;
                     })();
     
+                    /**
+                     * CloudFunctionStatus enum.
+                     * @name google.cloud.functions.v1.CloudFunctionStatus
+                     * @enum {number}
+                     * @property {number} CLOUD_FUNCTION_STATUS_UNSPECIFIED=0 CLOUD_FUNCTION_STATUS_UNSPECIFIED value
+                     * @property {number} ACTIVE=1 ACTIVE value
+                     * @property {number} OFFLINE=2 OFFLINE value
+                     * @property {number} DEPLOY_IN_PROGRESS=3 DEPLOY_IN_PROGRESS value
+                     * @property {number} DELETE_IN_PROGRESS=4 DELETE_IN_PROGRESS value
+                     * @property {number} UNKNOWN=5 UNKNOWN value
+                     */
+                    v1.CloudFunctionStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CLOUD_FUNCTION_STATUS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ACTIVE"] = 1;
+                        values[valuesById[2] = "OFFLINE"] = 2;
+                        values[valuesById[3] = "DEPLOY_IN_PROGRESS"] = 3;
+                        values[valuesById[4] = "DELETE_IN_PROGRESS"] = 4;
+                        values[valuesById[5] = "UNKNOWN"] = 5;
+                        return values;
+                    })();
+    
                     v1.GetFunctionRequest = (function() {
     
                         /**
@@ -3113,28 +4151,6 @@
                         };
     
                         return GetFunctionRequest;
-                    })();
-    
-                    /**
-                     * CloudFunctionStatus enum.
-                     * @name google.cloud.functions.v1.CloudFunctionStatus
-                     * @enum {number}
-                     * @property {number} CLOUD_FUNCTION_STATUS_UNSPECIFIED=0 CLOUD_FUNCTION_STATUS_UNSPECIFIED value
-                     * @property {number} ACTIVE=1 ACTIVE value
-                     * @property {number} OFFLINE=2 OFFLINE value
-                     * @property {number} DEPLOY_IN_PROGRESS=3 DEPLOY_IN_PROGRESS value
-                     * @property {number} DELETE_IN_PROGRESS=4 DELETE_IN_PROGRESS value
-                     * @property {number} UNKNOWN=5 UNKNOWN value
-                     */
-                    v1.CloudFunctionStatus = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "CLOUD_FUNCTION_STATUS_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "ACTIVE"] = 1;
-                        values[valuesById[2] = "OFFLINE"] = 2;
-                        values[valuesById[3] = "DEPLOY_IN_PROGRESS"] = 3;
-                        values[valuesById[4] = "DELETE_IN_PROGRESS"] = 4;
-                        values[valuesById[5] = "UNKNOWN"] = 5;
-                        return values;
                     })();
     
                     v1.ListFunctionsRequest = (function() {
@@ -5083,6 +6099,8 @@
                          * @property {number|Long|null} [versionId] OperationMetadataV1 versionId
                          * @property {google.protobuf.ITimestamp|null} [updateTime] OperationMetadataV1 updateTime
                          * @property {string|null} [buildId] OperationMetadataV1 buildId
+                         * @property {string|null} [sourceToken] OperationMetadataV1 sourceToken
+                         * @property {string|null} [buildName] OperationMetadataV1 buildName
                          */
     
                         /**
@@ -5149,6 +6167,22 @@
                         OperationMetadataV1.prototype.buildId = "";
     
                         /**
+                         * OperationMetadataV1 sourceToken.
+                         * @member {string} sourceToken
+                         * @memberof google.cloud.functions.v1.OperationMetadataV1
+                         * @instance
+                         */
+                        OperationMetadataV1.prototype.sourceToken = "";
+    
+                        /**
+                         * OperationMetadataV1 buildName.
+                         * @member {string} buildName
+                         * @memberof google.cloud.functions.v1.OperationMetadataV1
+                         * @instance
+                         */
+                        OperationMetadataV1.prototype.buildName = "";
+    
+                        /**
                          * Creates a new OperationMetadataV1 instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v1.OperationMetadataV1
@@ -5184,6 +6218,10 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.buildId != null && Object.hasOwnProperty.call(message, "buildId"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.buildId);
+                            if (message.sourceToken != null && Object.hasOwnProperty.call(message, "sourceToken"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.sourceToken);
+                            if (message.buildName != null && Object.hasOwnProperty.call(message, "buildName"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.buildName);
                             return writer;
                         };
     
@@ -5235,6 +6273,12 @@
                                     break;
                                 case 6:
                                     message.buildId = reader.string();
+                                    break;
+                                case 7:
+                                    message.sourceToken = reader.string();
+                                    break;
+                                case 8:
+                                    message.buildName = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5300,6 +6344,12 @@
                             if (message.buildId != null && message.hasOwnProperty("buildId"))
                                 if (!$util.isString(message.buildId))
                                     return "buildId: string expected";
+                            if (message.sourceToken != null && message.hasOwnProperty("sourceToken"))
+                                if (!$util.isString(message.sourceToken))
+                                    return "sourceToken: string expected";
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                if (!$util.isString(message.buildName))
+                                    return "buildName: string expected";
                             return null;
                         };
     
@@ -5356,6 +6406,10 @@
                             }
                             if (object.buildId != null)
                                 message.buildId = String(object.buildId);
+                            if (object.sourceToken != null)
+                                message.sourceToken = String(object.sourceToken);
+                            if (object.buildName != null)
+                                message.buildName = String(object.buildName);
                             return message;
                         };
     
@@ -5383,6 +6437,8 @@
                                     object.versionId = options.longs === String ? "0" : 0;
                                 object.updateTime = null;
                                 object.buildId = "";
+                                object.sourceToken = "";
+                                object.buildName = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = message.target;
@@ -5399,6 +6455,10 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.buildId != null && message.hasOwnProperty("buildId"))
                                 object.buildId = message.buildId;
+                            if (message.sourceToken != null && message.hasOwnProperty("sourceToken"))
+                                object.sourceToken = message.sourceToken;
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                object.buildName = message.buildName;
                             return object;
                         };
     

@@ -12,7 +12,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "FunctionsOperationsProto",
                     "java_package": "com.google.cloud.functions.v1",
-                    "objc_class_prefix": "GCF"
+                    "objc_class_prefix": "GCF",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "CloudFunctionsService": {
@@ -335,6 +337,11 @@
                           "type": "string",
                           "id": 17
                         },
+                        "buildEnvironmentVariables": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 28
+                        },
                         "network": {
                           "type": "string",
                           "id": 18
@@ -342,6 +349,10 @@
                         "maxInstances": {
                           "type": "int32",
                           "id": 20
+                        },
+                        "minInstances": {
+                          "type": "int32",
+                          "id": 32
                         },
                         "vpcConnector": {
                           "type": "string",
@@ -355,11 +366,53 @@
                           "type": "IngressSettings",
                           "id": 24
                         },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "buildWorkerPool": {
+                          "type": "string",
+                          "id": 26
+                        },
                         "buildId": {
                           "type": "string",
                           "id": 27,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "buildName": {
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "secretEnvironmentVariables": {
+                          "rule": "repeated",
+                          "type": "SecretEnvVar",
+                          "id": 29
+                        },
+                        "secretVolumes": {
+                          "rule": "repeated",
+                          "type": "SecretVolume",
+                          "id": 30
+                        },
+                        "sourceToken": {
+                          "type": "string",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "dockerRepository": {
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
                           }
                         }
                       },
@@ -460,6 +513,61 @@
                         }
                       }
                     },
+                    "SecretEnvVar": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "secret": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SecretVolume": {
+                      "fields": {
+                        "mountPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "secret": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "versions": {
+                          "rule": "repeated",
+                          "type": "SecretVersion",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "SecretVersion": {
+                          "fields": {
+                            "version": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "CreateFunctionRequest": {
                       "fields": {
                         "location": {
@@ -494,6 +602,16 @@
                         }
                       }
                     },
+                    "CloudFunctionStatus": {
+                      "values": {
+                        "CLOUD_FUNCTION_STATUS_UNSPECIFIED": 0,
+                        "ACTIVE": 1,
+                        "OFFLINE": 2,
+                        "DEPLOY_IN_PROGRESS": 3,
+                        "DELETE_IN_PROGRESS": 4,
+                        "UNKNOWN": 5
+                      }
+                    },
                     "GetFunctionRequest": {
                       "fields": {
                         "name": {
@@ -504,16 +622,6 @@
                             "(google.api.resource_reference).type": "cloudfunctions.googleapis.com/CloudFunction"
                           }
                         }
-                      }
-                    },
-                    "CloudFunctionStatus": {
-                      "values": {
-                        "CLOUD_FUNCTION_STATUS_UNSPECIFIED": 0,
-                        "ACTIVE": 1,
-                        "OFFLINE": 2,
-                        "DEPLOY_IN_PROGRESS": 3,
-                        "DELETE_IN_PROGRESS": 4,
-                        "UNKNOWN": 5
                       }
                     },
                     "ListFunctionsRequest": {
@@ -669,6 +777,14 @@
                         "buildId": {
                           "type": "string",
                           "id": 6
+                        },
+                        "sourceToken": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "buildName": {
+                          "type": "string",
+                          "id": 8
                         }
                       }
                     }
