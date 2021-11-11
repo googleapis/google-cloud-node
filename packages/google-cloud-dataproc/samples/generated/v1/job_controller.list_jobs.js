@@ -47,11 +47,11 @@ function main(projectId, region) {
    *  (default = match ALL jobs).
    *  If `filter` is provided, `jobStateMatcher` will be ignored.
    */
-  // const jobStateMatcher = ''
+  // const jobStateMatcher = {}
   /**
    *  Optional. A filter constraining the jobs to list. Filters are
    *  case-sensitive and have the following syntax:
-   *  [field = value] AND [field [= value]] ...
+   *  field = value  AND field = value   ...
    *  where **field** is `status.state` or `labels.[KEY]`, and `[KEY]` is a label
    *  key. **value** can be `*` to match all values.
    *  `status.state` can be either `ACTIVE` or `NON_ACTIVE`.
@@ -68,7 +68,7 @@ function main(projectId, region) {
   // Instantiates a client
   const dataprocClient = new JobControllerClient();
 
-  async function listJobs() {
+  async function callListJobs() {
     // Construct request
     const request = {
       projectId,
@@ -82,7 +82,7 @@ function main(projectId, region) {
     }
   }
 
-  listJobs();
+  callListJobs();
   // [END dataproc_v1_generated_JobController_ListJobs_async]
 }
 

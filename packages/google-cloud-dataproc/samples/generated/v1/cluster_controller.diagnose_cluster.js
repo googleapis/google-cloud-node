@@ -39,7 +39,7 @@ function main(projectId, region, clusterName) {
   // Instantiates a client
   const dataprocClient = new ClusterControllerClient();
 
-  async function diagnoseCluster() {
+  async function callDiagnoseCluster() {
     // Construct request
     const request = {
       projectId,
@@ -53,7 +53,7 @@ function main(projectId, region, clusterName) {
     console.log(response);
   }
 
-  diagnoseCluster();
+  callDiagnoseCluster();
   // [END dataproc_v1_generated_ClusterController_DiagnoseCluster_async]
 }
 

@@ -33,7 +33,7 @@ function main(parent, template) {
   /**
    *  Required. The Dataproc workflow template to create.
    */
-  // const template = ''
+  // const template = {}
 
   // Imports the Dataproc library
   const {WorkflowTemplateServiceClient} = require('@google-cloud/dataproc').v1;
@@ -41,7 +41,7 @@ function main(parent, template) {
   // Instantiates a client
   const dataprocClient = new WorkflowTemplateServiceClient();
 
-  async function createWorkflowTemplate() {
+  async function callCreateWorkflowTemplate() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent, template) {
     console.log(response);
   }
 
-  createWorkflowTemplate();
+  callCreateWorkflowTemplate();
   // [END dataproc_v1_generated_WorkflowTemplateService_CreateWorkflowTemplate_async]
 }
 

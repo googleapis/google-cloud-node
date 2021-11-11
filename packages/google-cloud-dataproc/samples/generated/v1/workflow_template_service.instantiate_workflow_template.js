@@ -43,7 +43,7 @@ function main(name) {
    *  instances with the same tag from running. This mitigates risk of
    *  concurrent instances started due to retries.
    *  It is recommended to always set this value to a
-   *  [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The tag must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
    */
@@ -60,7 +60,7 @@ function main(name) {
   // Instantiates a client
   const dataprocClient = new WorkflowTemplateServiceClient();
 
-  async function instantiateWorkflowTemplate() {
+  async function callInstantiateWorkflowTemplate() {
     // Construct request
     const request = {
       name,
@@ -74,7 +74,7 @@ function main(name) {
     console.log(response);
   }
 
-  instantiateWorkflowTemplate();
+  callInstantiateWorkflowTemplate();
   // [END dataproc_v1_generated_WorkflowTemplateService_InstantiateWorkflowTemplate_async]
 }
 

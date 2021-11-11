@@ -39,7 +39,7 @@ function main(projectId, region, jobId) {
   // Instantiates a client
   const dataprocClient = new JobControllerClient();
 
-  async function cancelJob() {
+  async function callCancelJob() {
     // Construct request
     const request = {
       projectId,
@@ -52,7 +52,7 @@ function main(projectId, region, jobId) {
     console.log(response);
   }
 
-  cancelJob();
+  callCancelJob();
   // [END dataproc_v1_generated_JobController_CancelJob_async]
 }
 

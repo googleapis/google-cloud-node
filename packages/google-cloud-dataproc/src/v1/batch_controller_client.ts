@@ -370,6 +370,23 @@ export class BatchControllerClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the batch workload resource representation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the batch to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Batch]{@link google.cloud.dataproc.v1.Batch}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/batch_controller.get_batch.js</caption>
+   * region_tag:dataproc_v1_generated_BatchController_GetBatch_async
+   */
   getBatch(
     request?: protos.google.cloud.dataproc.v1.IGetBatchRequest,
     options?: CallOptions
@@ -397,23 +414,6 @@ export class BatchControllerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the batch workload resource representation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the batch to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Batch]{@link google.cloud.dataproc.v1.Batch}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getBatch(request);
-   */
   getBatch(
     request?: protos.google.cloud.dataproc.v1.IGetBatchRequest,
     optionsOrCallback?:
@@ -453,6 +453,24 @@ export class BatchControllerClient {
     this.initialize();
     return this.innerApiCalls.getBatch(request, options, callback);
   }
+  /**
+   * Deletes the batch workload resource. If the batch is not in terminal state,
+   * the delete fails and the response returns `FAILED_PRECONDITION`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the batch resource to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/batch_controller.delete_batch.js</caption>
+   * region_tag:dataproc_v1_generated_BatchController_DeleteBatch_async
+   */
   deleteBatch(
     request?: protos.google.cloud.dataproc.v1.IDeleteBatchRequest,
     options?: CallOptions
@@ -480,24 +498,6 @@ export class BatchControllerClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the batch workload resource. If the batch is not in terminal state,
-   * the delete fails and the response returns `FAILED_PRECONDITION`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the batch resource to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteBatch(request);
-   */
   deleteBatch(
     request?: protos.google.cloud.dataproc.v1.IDeleteBatchRequest,
     optionsOrCallback?:
@@ -540,42 +540,6 @@ export class BatchControllerClient {
     return this.innerApiCalls.deleteBatch(request, options, callback);
   }
 
-  createBatch(
-    request?: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataproc.v1.IBatch,
-        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createBatch(
-    request: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.IBatch,
-        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createBatch(
-    request: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataproc.v1.IBatch,
-        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a batch workload that executes asynchronously.
    *
@@ -612,10 +576,45 @@ export class BatchControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createBatch(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/batch_controller.create_batch.js</caption>
+   * region_tag:dataproc_v1_generated_BatchController_CreateBatch_async
    */
+  createBatch(
+    request?: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createBatch(
+    request: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBatch(
+    request: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.IBatch,
+        protos.google.cloud.dataproc.v1.IBatchOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createBatch(
     request?: protos.google.cloud.dataproc.v1.ICreateBatchRequest,
     optionsOrCallback?:
@@ -673,11 +672,8 @@ export class BatchControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateBatchProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/batch_controller.create_batch.js</caption>
+   * region_tag:dataproc_v1_generated_BatchController_CreateBatch_async
    */
   async checkCreateBatchProgress(
     name: string
@@ -701,33 +697,6 @@ export class BatchControllerClient {
       protos.google.cloud.dataproc.v1.BatchOperationMetadata
     >;
   }
-  listBatches(
-    request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IBatch[],
-      protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
-      protos.google.cloud.dataproc.v1.IListBatchesResponse
-    ]
-  >;
-  listBatches(
-    request: protos.google.cloud.dataproc.v1.IListBatchesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListBatchesRequest,
-      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
-      protos.google.cloud.dataproc.v1.IBatch
-    >
-  ): void;
-  listBatches(
-    request: protos.google.cloud.dataproc.v1.IListBatchesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListBatchesRequest,
-      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
-      protos.google.cloud.dataproc.v1.IBatch
-    >
-  ): void;
   /**
    * Lists batch workloads.
    *
@@ -755,6 +724,33 @@ export class BatchControllerClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listBatches(
+    request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.IBatch[],
+      protos.google.cloud.dataproc.v1.IListBatchesRequest | null,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse
+    ]
+  >;
+  listBatches(
+    request: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListBatchesRequest,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.IBatch
+    >
+  ): void;
+  listBatches(
+    request: protos.google.cloud.dataproc.v1.IListBatchesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListBatchesRequest,
+      protos.google.cloud.dataproc.v1.IListBatchesResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.IBatch
+    >
+  ): void;
   listBatches(
     request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
     optionsOrCallback?:
@@ -869,11 +865,8 @@ export class BatchControllerClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listBatchesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/batch_controller.list_batches.js</caption>
+   * region_tag:dataproc_v1_generated_BatchController_ListBatches_async
    */
   listBatchesAsync(
     request?: protos.google.cloud.dataproc.v1.IListBatchesRequest,
@@ -887,7 +880,6 @@ export class BatchControllerClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listBatches'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

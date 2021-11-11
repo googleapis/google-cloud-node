@@ -40,12 +40,12 @@ function main(projectId, region, clusterName) {
   /**
    *  Optional. A unique ID used to identify the request. If the server
    *  receives two
-   *  [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
+   *  DeleteClusterRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
    *  with the same id, then the second request will be ignored and the
-   *  first [google.longrunning.Operation][google.longrunning.Operation] created and stored in the
+   *  first google.longrunning.Operation google.longrunning.Operation  created and stored in the
    *  backend is returned.
    *  It is recommended to always set this value to a
-   *  [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The ID must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
    */
@@ -57,7 +57,7 @@ function main(projectId, region, clusterName) {
   // Instantiates a client
   const dataprocClient = new ClusterControllerClient();
 
-  async function deleteCluster() {
+  async function callDeleteCluster() {
     // Construct request
     const request = {
       projectId,
@@ -71,7 +71,7 @@ function main(projectId, region, clusterName) {
     console.log(response);
   }
 
-  deleteCluster();
+  callDeleteCluster();
   // [END dataproc_v1_generated_ClusterController_DeleteCluster_async]
 }
 

@@ -35,7 +35,7 @@ function main(projectId, region, jobId, job, updateMask) {
   /**
    *  Required. The changes to the job.
    */
-  // const job = ''
+  // const job = {}
   /**
    *  Required. Specifies the path, relative to <code>Job</code>, of
    *  the field to update. For example, to update the labels of a Job the
@@ -44,7 +44,7 @@ function main(projectId, region, jobId, job, updateMask) {
    *  value. <strong>Note:</strong> Currently, <code>labels</code> is the only
    *  field that can be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Dataproc library
   const {JobControllerClient} = require('@google-cloud/dataproc').v1;
@@ -52,7 +52,7 @@ function main(projectId, region, jobId, job, updateMask) {
   // Instantiates a client
   const dataprocClient = new JobControllerClient();
 
-  async function updateJob() {
+  async function callUpdateJob() {
     // Construct request
     const request = {
       projectId,
@@ -67,7 +67,7 @@ function main(projectId, region, jobId, job, updateMask) {
     console.log(response);
   }
 
-  updateJob();
+  callUpdateJob();
   // [END dataproc_v1_generated_JobController_UpdateJob_async]
 }
 

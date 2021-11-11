@@ -43,7 +43,7 @@ function main(name) {
   // Instantiates a client
   const dataprocClient = new WorkflowTemplateServiceClient();
 
-  async function getWorkflowTemplate() {
+  async function callGetWorkflowTemplate() {
     // Construct request
     const request = {
       name,
@@ -54,7 +54,7 @@ function main(name) {
     console.log(response);
   }
 
-  getWorkflowTemplate();
+  callGetWorkflowTemplate();
   // [END dataproc_v1_generated_WorkflowTemplateService_GetWorkflowTemplate_async]
 }
 

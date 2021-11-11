@@ -39,7 +39,7 @@ function main(projectId, region, jobId) {
   // Instantiates a client
   const dataprocClient = new JobControllerClient();
 
-  async function getJob() {
+  async function callGetJob() {
     // Construct request
     const request = {
       projectId,
@@ -52,7 +52,7 @@ function main(projectId, region, jobId) {
     console.log(response);
   }
 
-  getJob();
+  callGetJob();
   // [END dataproc_v1_generated_JobController_GetJob_async]
 }
 

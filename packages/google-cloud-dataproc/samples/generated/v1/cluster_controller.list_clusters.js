@@ -31,8 +31,8 @@ function main(projectId, region) {
   /**
    *  Optional. A filter constraining the clusters to list. Filters are
    *  case-sensitive and have the following syntax:
-   *  field = value [AND [field = value]] ...
-   *  where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
+   *  field = value AND field = value   ...
+   *  where **field** is one of `status.state`, `clusterName`, or `labels.KEY`,
    *  and `[KEY]` is a label key. **value** can be `*` to match all values.
    *  `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
    *  `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
@@ -61,7 +61,7 @@ function main(projectId, region) {
   // Instantiates a client
   const dataprocClient = new ClusterControllerClient();
 
-  async function listClusters() {
+  async function callListClusters() {
     // Construct request
     const request = {
       projectId,
@@ -75,7 +75,7 @@ function main(projectId, region) {
     }
   }
 
-  listClusters();
+  callListClusters();
   // [END dataproc_v1_generated_ClusterController_ListClusters_async]
 }
 

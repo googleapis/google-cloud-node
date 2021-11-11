@@ -33,13 +33,13 @@ function main(parent, template) {
   /**
    *  Required. The workflow template to instantiate.
    */
-  // const template = ''
+  // const template = {}
   /**
    *  Optional. A tag that prevents multiple concurrent workflow
    *  instances with the same tag from running. This mitigates risk of
    *  concurrent instances started due to retries.
    *  It is recommended to always set this value to a
-   *  [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The tag must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
    */
@@ -51,7 +51,7 @@ function main(parent, template) {
   // Instantiates a client
   const dataprocClient = new WorkflowTemplateServiceClient();
 
-  async function instantiateInlineWorkflowTemplate() {
+  async function callInstantiateInlineWorkflowTemplate() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent, template) {
     console.log(response);
   }
 
-  instantiateInlineWorkflowTemplate();
+  callInstantiateInlineWorkflowTemplate();
   // [END dataproc_v1_generated_WorkflowTemplateService_InstantiateInlineWorkflowTemplate_async]
 }
 

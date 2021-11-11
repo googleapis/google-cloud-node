@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const dataprocClient = new AutoscalingPolicyServiceClient();
 
-  async function getAutoscalingPolicy() {
+  async function callGetAutoscalingPolicy() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name) {
     console.log(response);
   }
 
-  getAutoscalingPolicy();
+  callGetAutoscalingPolicy();
   // [END dataproc_v1_generated_AutoscalingPolicyService_GetAutoscalingPolicy_async]
 }
 

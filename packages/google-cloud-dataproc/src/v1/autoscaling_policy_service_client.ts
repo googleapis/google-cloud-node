@@ -342,6 +342,34 @@ export class AutoscalingPolicyServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates new autoscaling policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The "resource name" of the region or location, as described
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.create`, the resource name
+   *     of the region has the following format:
+   *     `projects/{project_id}/regions/{region}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.create`, the resource name
+   *     of the location has the following format:
+   *     `projects/{project_id}/locations/{location}`
+   * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
+   *   Required. The autoscaling policy to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autoscaling_policy_service.create_autoscaling_policy.js</caption>
+   * region_tag:dataproc_v1_generated_AutoscalingPolicyService_CreateAutoscalingPolicy_async
+   */
   createAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest,
     options?: CallOptions
@@ -376,34 +404,6 @@ export class AutoscalingPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates new autoscaling policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The "resource name" of the region or location, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.create`, the resource name
-   *     of the region has the following format:
-   *     `projects/{project_id}/regions/{region}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.create`, the resource name
-   *     of the location has the following format:
-   *     `projects/{project_id}/locations/{location}`
-   * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
-   *   Required. The autoscaling policy to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createAutoscalingPolicy(request);
-   */
   createAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.ICreateAutoscalingPolicyRequest,
     optionsOrCallback?:
@@ -454,6 +454,26 @@ export class AutoscalingPolicyServiceClient {
       callback
     );
   }
+  /**
+   * Updates (replaces) autoscaling policy.
+   *
+   * Disabled check for update_mask, because all updates will be full
+   * replacements.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
+   *   Required. The updated autoscaling policy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autoscaling_policy_service.update_autoscaling_policy.js</caption>
+   * region_tag:dataproc_v1_generated_AutoscalingPolicyService_UpdateAutoscalingPolicy_async
+   */
   updateAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest,
     options?: CallOptions
@@ -488,26 +508,6 @@ export class AutoscalingPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates (replaces) autoscaling policy.
-   *
-   * Disabled check for update_mask, because all updates will be full
-   * replacements.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataproc.v1.AutoscalingPolicy} request.policy
-   *   Required. The updated autoscaling policy.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateAutoscalingPolicy(request);
-   */
   updateAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.IUpdateAutoscalingPolicyRequest,
     optionsOrCallback?:
@@ -558,6 +558,32 @@ export class AutoscalingPolicyServiceClient {
       callback
     );
   }
+  /**
+   * Retrieves autoscaling policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The "resource name" of the autoscaling policy, as described
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.get`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.get`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autoscaling_policy_service.get_autoscaling_policy.js</caption>
+   * region_tag:dataproc_v1_generated_AutoscalingPolicyService_GetAutoscalingPolicy_async
+   */
   getAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest,
     options?: CallOptions
@@ -589,32 +615,6 @@ export class AutoscalingPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves autoscaling policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The "resource name" of the autoscaling policy, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.get`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.get`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AutoscalingPolicy]{@link google.cloud.dataproc.v1.AutoscalingPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getAutoscalingPolicy(request);
-   */
   getAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.IGetAutoscalingPolicyRequest,
     optionsOrCallback?:
@@ -658,6 +658,33 @@ export class AutoscalingPolicyServiceClient {
     this.initialize();
     return this.innerApiCalls.getAutoscalingPolicy(request, options, callback);
   }
+  /**
+   * Deletes an autoscaling policy. It is an error to delete an autoscaling
+   * policy that is in use by one or more clusters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The "resource name" of the autoscaling policy, as described
+   *   in https://cloud.google.com/apis/design/resource_names.
+   *
+   *   * For `projects.regions.autoscalingPolicies.delete`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
+   *
+   *   * For `projects.locations.autoscalingPolicies.delete`, the resource name
+   *     of the policy has the following format:
+   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autoscaling_policy_service.delete_autoscaling_policy.js</caption>
+   * region_tag:dataproc_v1_generated_AutoscalingPolicyService_DeleteAutoscalingPolicy_async
+   */
   deleteAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest,
     options?: CallOptions
@@ -692,33 +719,6 @@ export class AutoscalingPolicyServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes an autoscaling policy. It is an error to delete an autoscaling
-   * policy that is in use by one or more clusters.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The "resource name" of the autoscaling policy, as described
-   *   in https://cloud.google.com/apis/design/resource_names.
-   *
-   *   * For `projects.regions.autoscalingPolicies.delete`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}`
-   *
-   *   * For `projects.locations.autoscalingPolicies.delete`, the resource name
-   *     of the policy has the following format:
-   *     `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteAutoscalingPolicy(request);
-   */
   deleteAutoscalingPolicy(
     request?: protos.google.cloud.dataproc.v1.IDeleteAutoscalingPolicyRequest,
     optionsOrCallback?:
@@ -770,37 +770,6 @@ export class AutoscalingPolicyServiceClient {
     );
   }
 
-  listAutoscalingPolicies(
-    request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-    ]
-  >;
-  listAutoscalingPolicies(
-    request: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
-    >
-  ): void;
-  listAutoscalingPolicies(
-    request: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
-      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
-    >
-  ): void;
   /**
    * Lists autoscaling policies in the project.
    *
@@ -836,6 +805,37 @@ export class AutoscalingPolicyServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listAutoscalingPolicies(
+    request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.IAutoscalingPolicy[],
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest | null,
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+    ]
+  >;
+  listAutoscalingPolicies(
+    request: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+    >
+  ): void;
+  listAutoscalingPolicies(
+    request: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
+      | protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataproc.v1.IAutoscalingPolicy
+    >
+  ): void;
   listAutoscalingPolicies(
     request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
     optionsOrCallback?:
@@ -972,11 +972,8 @@ export class AutoscalingPolicyServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listAutoscalingPoliciesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/autoscaling_policy_service.list_autoscaling_policies.js</caption>
+   * region_tag:dataproc_v1_generated_AutoscalingPolicyService_ListAutoscalingPolicies_async
    */
   listAutoscalingPoliciesAsync(
     request?: protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
@@ -990,7 +987,6 @@ export class AutoscalingPolicyServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

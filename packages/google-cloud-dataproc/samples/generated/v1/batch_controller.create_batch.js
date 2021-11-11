@@ -26,7 +26,7 @@ function main(parent, batch) {
   /**
    *  Required. The batch to create.
    */
-  // const batch = ''
+  // const batch = {}
   /**
    *  Optional. The ID to use for the batch, which will become the final component of
    *  the batch's resource name.
@@ -36,12 +36,12 @@ function main(parent, batch) {
   /**
    *  Optional. A unique ID used to identify the request. If the service
    *  receives two
-   *  [CreateBatchRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateBatchRequest)s
+   *  CreateBatchRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateBatchRequest)s
    *  with the same request_id, the second request is ignored and the
    *  Operation that corresponds to the first Batch created and stored
    *  in the backend is returned.
    *  Recommendation: Set this value to a
-   *  [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The value must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
    */
@@ -53,7 +53,7 @@ function main(parent, batch) {
   // Instantiates a client
   const dataprocClient = new BatchControllerClient();
 
-  async function createBatch() {
+  async function callCreateBatch() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent, batch) {
     console.log(response);
   }
 
-  createBatch();
+  callCreateBatch();
   // [END dataproc_v1_generated_BatchController_CreateBatch_async]
 }
 

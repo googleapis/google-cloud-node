@@ -31,16 +31,16 @@ function main(projectId, region, job) {
   /**
    *  Required. The job resource.
    */
-  // const job = ''
+  // const job = {}
   /**
    *  Optional. A unique id used to identify the request. If the server
    *  receives two
-   *  [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
+   *  SubmitJobRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
    *  with the same id, then the second request will be ignored and the
-   *  first [Job][google.cloud.dataproc.v1.Job] created and stored in the backend
+   *  first Job google.cloud.dataproc.v1.Job  created and stored in the backend
    *  is returned.
    *  It is recommended to always set this value to a
-   *  [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).
    *  The id must contain only letters (a-z, A-Z), numbers (0-9),
    *  underscores (_), and hyphens (-). The maximum length is 40 characters.
    */
@@ -52,7 +52,7 @@ function main(projectId, region, job) {
   // Instantiates a client
   const dataprocClient = new JobControllerClient();
 
-  async function submitJobAsOperation() {
+  async function callSubmitJobAsOperation() {
     // Construct request
     const request = {
       projectId,
@@ -66,7 +66,7 @@ function main(projectId, region, job) {
     console.log(response);
   }
 
-  submitJobAsOperation();
+  callSubmitJobAsOperation();
   // [END dataproc_v1_generated_JobController_SubmitJobAsOperation_async]
 }
 

@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const dataprocClient = new WorkflowTemplateServiceClient();
 
-  async function listWorkflowTemplates() {
+  async function callListWorkflowTemplates() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     }
   }
 
-  listWorkflowTemplates();
+  callListWorkflowTemplates();
   // [END dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_async]
 }
 

@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const dataprocClient = new BatchControllerClient();
 
-  async function deleteBatch() {
+  async function callDeleteBatch() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteBatch();
+  callDeleteBatch();
   // [END dataproc_v1_generated_BatchController_DeleteBatch_async]
 }
 
