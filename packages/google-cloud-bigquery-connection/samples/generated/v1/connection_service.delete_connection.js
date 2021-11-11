@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const connectionClient = new ConnectionServiceClient();
 
-  async function deleteConnection() {
+  async function callDeleteConnection() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteConnection();
+  callDeleteConnection();
   // [END bigqueryconnection_v1_generated_ConnectionService_DeleteConnection_async]
 }
 

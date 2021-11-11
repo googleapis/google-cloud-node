@@ -40,7 +40,7 @@ function main(parent, pageSize) {
   // Instantiates a client
   const connectionClient = new ConnectionServiceClient();
 
-  async function listConnections() {
+  async function callListConnections() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent, pageSize) {
     }
   }
 
-  listConnections();
+  callListConnections();
   // [END bigqueryconnection_v1_generated_ConnectionService_ListConnections_async]
 }
 

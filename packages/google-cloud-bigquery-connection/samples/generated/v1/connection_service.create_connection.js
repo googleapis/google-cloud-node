@@ -31,7 +31,7 @@ function main(parent, connection) {
   /**
    *  Required. Connection to create.
    */
-  // const connection = ''
+  // const connection = {}
 
   // Imports the Connection library
   const {ConnectionServiceClient} =
@@ -40,7 +40,7 @@ function main(parent, connection) {
   // Instantiates a client
   const connectionClient = new ConnectionServiceClient();
 
-  async function createConnection() {
+  async function callCreateConnection() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent, connection) {
     console.log(response);
   }
 
-  createConnection();
+  callCreateConnection();
   // [END bigqueryconnection_v1_generated_ConnectionService_CreateConnection_async]
 }
 

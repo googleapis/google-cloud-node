@@ -327,6 +327,28 @@ export class ConnectionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a new connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *   Must be in the format `projects/{project_id}/locations/{location_id}`
+   * @param {string} [request.connectionId]
+   *   Optional. Connection id that should be assigned to the created connection.
+   * @param {google.cloud.bigquery.connection.v1.Connection} request.connection
+   *   Required. Connection to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.create_connection.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_CreateConnection_async
+   */
   createConnection(
     request?: protos.google.cloud.bigquery.connection.v1.ICreateConnectionRequest,
     options?: CallOptions
@@ -361,28 +383,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *   Must be in the format `projects/{project_id}/locations/{location_id}`
-   * @param {string} [request.connectionId]
-   *   Optional. Connection id that should be assigned to the created connection.
-   * @param {google.cloud.bigquery.connection.v1.Connection} request.connection
-   *   Required. Connection to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createConnection(request);
-   */
   createConnection(
     request?: protos.google.cloud.bigquery.connection.v1.ICreateConnectionRequest,
     optionsOrCallback?:
@@ -429,6 +429,24 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.innerApiCalls.createConnection(request, options, callback);
   }
+  /**
+   * Returns specified connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the requested connection, for example:
+   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.get_connection.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_GetConnection_async
+   */
   getConnection(
     request?: protos.google.cloud.bigquery.connection.v1.IGetConnectionRequest,
     options?: CallOptions
@@ -463,24 +481,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns specified connection.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the requested connection, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getConnection(request);
-   */
   getConnection(
     request?: protos.google.cloud.bigquery.connection.v1.IGetConnectionRequest,
     optionsOrCallback?:
@@ -527,6 +527,29 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.innerApiCalls.getConnection(request, options, callback);
   }
+  /**
+   * Updates the specified connection. For security reasons, also resets
+   * credential if connection properties are in the update field mask.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the connection to update, for example:
+   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+   * @param {google.cloud.bigquery.connection.v1.Connection} request.connection
+   *   Required. Connection containing the updated fields.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Update mask for the connection fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.update_connection.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_UpdateConnection_async
+   */
   updateConnection(
     request?: protos.google.cloud.bigquery.connection.v1.IUpdateConnectionRequest,
     options?: CallOptions
@@ -561,29 +584,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the specified connection. For security reasons, also resets
-   * credential if connection properties are in the update field mask.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the connection to update, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
-   * @param {google.cloud.bigquery.connection.v1.Connection} request.connection
-   *   Required. Connection containing the updated fields.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Update mask for the connection fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateConnection(request);
-   */
   updateConnection(
     request?: protos.google.cloud.bigquery.connection.v1.IUpdateConnectionRequest,
     optionsOrCallback?:
@@ -630,6 +630,24 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.innerApiCalls.updateConnection(request, options, callback);
   }
+  /**
+   * Deletes connection and associated credential.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the deleted connection, for example:
+   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.delete_connection.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_DeleteConnection_async
+   */
   deleteConnection(
     request?: protos.google.cloud.bigquery.connection.v1.IDeleteConnectionRequest,
     options?: CallOptions
@@ -664,24 +682,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes connection and associated credential.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Name of the deleted connection, for example:
-   *   `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteConnection(request);
-   */
   deleteConnection(
     request?: protos.google.cloud.bigquery.connection.v1.IDeleteConnectionRequest,
     optionsOrCallback?:
@@ -728,6 +728,29 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteConnection(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a resource.
+   * Returns an empty policy if the resource exists and does not have a policy
+   * set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.get_iam_policy.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -755,29 +778,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a resource.
-   * Returns an empty policy if the resource exists and does not have a policy
-   * set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -817,6 +817,32 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any
+   * existing policy.
+   *
+   * Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.set_iam_policy.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -844,32 +870,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy on the specified resource. Replaces any
-   * existing policy.
-   *
-   * Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -909,6 +909,35 @@ export class ConnectionServiceClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on the specified resource.
+   * If the resource does not exist, this will return an empty set of
+   * permissions, not a `NOT_FOUND` error.
+   *
+   * Note: This operation is designed to be used for building permission-aware
+   * UIs and command-line tools, not for authorization checking. This operation
+   * may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/connection_service.test_iam_permissions.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -936,35 +965,6 @@ export class ConnectionServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   * If the resource does not exist, this will return an empty set of
-   * permissions, not a `NOT_FOUND` error.
-   *
-   * Note: This operation is designed to be used for building permission-aware
-   * UIs and command-line tools, not for authorization checking. This operation
-   * may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -1005,6 +1005,31 @@ export class ConnectionServiceClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
+  /**
+   * Returns a list of connections in the given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *   Must be in the form: `projects/{project_id}/locations/{location_id}`
+   * @param {number} request.pageSize
+   *   Required. Page size.
+   * @param {string} request.pageToken
+   *   Page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listConnections(
     request?: protos.google.cloud.bigquery.connection.v1.IListConnectionsRequest,
     options?: CallOptions
@@ -1036,31 +1061,6 @@ export class ConnectionServiceClient {
       protos.google.cloud.bigquery.connection.v1.IConnection
     >
   ): void;
-  /**
-   * Returns a list of connections in the given project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent resource name.
-   *   Must be in the form: `projects/{project_id}/locations/{location_id}`
-   * @param {number} request.pageSize
-   *   Required. Page size.
-   * @param {string} request.pageToken
-   *   Page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Connection]{@link google.cloud.bigquery.connection.v1.Connection}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConnectionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listConnections(
     request?: protos.google.cloud.bigquery.connection.v1.IListConnectionsRequest,
     optionsOrCallback?:
@@ -1173,11 +1173,8 @@ export class ConnectionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listConnectionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/connection_service.list_connections.js</caption>
+   * region_tag:bigqueryconnection_v1_generated_ConnectionService_ListConnections_async
    */
   listConnectionsAsync(
     request?: protos.google.cloud.bigquery.connection.v1.IListConnectionsRequest,
@@ -1191,7 +1188,6 @@ export class ConnectionServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
