@@ -30,7 +30,7 @@ function main() {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function fetchErrors() {
+  async function callFetchErrors() {
     // Construct request
     const request = {};
 
@@ -40,7 +40,7 @@ function main() {
     console.log(response);
   }
 
-  fetchErrors();
+  callFetchErrors();
   // [END datastream_v1alpha1_generated_Datastream_FetchErrors_async]
 }
 

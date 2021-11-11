@@ -530,6 +530,23 @@ export class DatastreamClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Use this method to get details about a connection profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connection profile resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConnectionProfile]{@link google.cloud.datastream.v1alpha1.ConnectionProfile}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.get_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_GetConnectionProfile_async
+   */
   getConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
     options?: CallOptions
@@ -564,23 +581,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to get details about a connection profile.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the connection profile resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ConnectionProfile]{@link google.cloud.datastream.v1alpha1.ConnectionProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getConnectionProfile(request);
-   */
   getConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest,
     optionsOrCallback?:
@@ -627,6 +627,40 @@ export class DatastreamClient {
     this.initialize();
     return this.innerApiCalls.getConnectionProfile(request, options, callback);
   }
+  /**
+   * Use this method to discover a connection profile.
+   * The discover API call exposes the data objects and metadata belonging to
+   * the profile. Typically, a request returns children data objects under a
+   * parent data object that's optionally supplied in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the ConnectionProfile type. Must be in the
+   *   format `projects/* /locations/*`.
+   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
+   *   An ad-hoc ConnectionProfile configuration.
+   * @param {string} request.connectionProfileName
+   *   A reference to an existing ConnectionProfile.
+   * @param {boolean} request.recursive
+   *   Whether to retrieve the full hierarchy of data objects (TRUE) or only the
+   *   current level (FALSE).
+   * @param {number} request.recursionDepth
+   *   The number of hierarchy levels below the current level to be retrieved.
+   * @param {google.cloud.datastream.v1alpha1.OracleRdbms} request.oracleRdbms
+   *   Oracle RDBMS to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1alpha1.MysqlRdbms} request.mysqlRdbms
+   *   MySQL RDBMS to enrich with child data objects and metadata.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DiscoverConnectionProfileResponse]{@link google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.discover_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DiscoverConnectionProfile_async
+   */
   discoverConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
     options?: CallOptions
@@ -661,40 +695,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to discover a connection profile.
-   * The discover API call exposes the data objects and metadata belonging to
-   * the profile. Typically, a request returns children data objects under a
-   * parent data object that's optionally supplied in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource of the ConnectionProfile type. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
-   *   An ad-hoc ConnectionProfile configuration.
-   * @param {string} request.connectionProfileName
-   *   A reference to an existing ConnectionProfile.
-   * @param {boolean} request.recursive
-   *   Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-   *   current level (FALSE).
-   * @param {number} request.recursionDepth
-   *   The number of hierarchy levels below the current level to be retrieved.
-   * @param {google.cloud.datastream.v1alpha1.OracleRdbms} request.oracleRdbms
-   *   Oracle RDBMS to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1alpha1.MysqlRdbms} request.mysqlRdbms
-   *   MySQL RDBMS to enrich with child data objects and metadata.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DiscoverConnectionProfileResponse]{@link google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.discoverConnectionProfile(request);
-   */
   discoverConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest,
     optionsOrCallback?:
@@ -745,6 +745,23 @@ export class DatastreamClient {
       callback
     );
   }
+  /**
+   * Use this method to get details about a stream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the stream resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Stream]{@link google.cloud.datastream.v1alpha1.Stream}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.get_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_GetStream_async
+   */
   getStream(
     request?: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
     options?: CallOptions
@@ -776,23 +793,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to get details about a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the stream resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Stream]{@link google.cloud.datastream.v1alpha1.Stream}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getStream(request);
-   */
   getStream(
     request?: protos.google.cloud.datastream.v1alpha1.IGetStreamRequest,
     optionsOrCallback?:
@@ -836,6 +836,23 @@ export class DatastreamClient {
     this.initialize();
     return this.innerApiCalls.getStream(request, options, callback);
   }
+  /**
+   * Use this method to get details about a private connectivity configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the  private connectivity configuration to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PrivateConnection]{@link google.cloud.datastream.v1alpha1.PrivateConnection}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.get_private_connection.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_GetPrivateConnection_async
+   */
   getPrivateConnection(
     request?: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
     options?: CallOptions
@@ -870,23 +887,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to get details about a private connectivity configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the  private connectivity configuration to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PrivateConnection]{@link google.cloud.datastream.v1alpha1.PrivateConnection}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getPrivateConnection(request);
-   */
   getPrivateConnection(
     request?: protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest,
     optionsOrCallback?:
@@ -933,6 +933,23 @@ export class DatastreamClient {
     this.initialize();
     return this.innerApiCalls.getPrivateConnection(request, options, callback);
   }
+  /**
+   * Use this method to get details about a route.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Route resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Route]{@link google.cloud.datastream.v1alpha1.Route}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.get_route.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_GetRoute_async
+   */
   getRoute(
     request?: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
     options?: CallOptions
@@ -964,23 +981,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to get details about a route.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Route resource to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Route]{@link google.cloud.datastream.v1alpha1.Route}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getRoute(request);
-   */
   getRoute(
     request?: protos.google.cloud.datastream.v1alpha1.IGetRouteRequest,
     optionsOrCallback?:
@@ -1025,6 +1025,43 @@ export class DatastreamClient {
     return this.innerApiCalls.getRoute(request, options, callback);
   }
 
+  /**
+   * Use this method to create a connection profile in a project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of ConnectionProfiles.
+   * @param {string} request.connectionProfileId
+   *   Required. The connection profile identifier.
+   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
+   *   Required. The connection profile resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
+   */
   createConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
     options?: CallOptions
@@ -1061,44 +1098,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to create a connection profile in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of ConnectionProfiles.
-   * @param {string} request.connectionProfileId
-   *   Required. The connection profile identifier.
-   * @param {google.cloud.datastream.v1alpha1.ConnectionProfile} request.connectionProfile
-   *   Required. The connection profile resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createConnectionProfile(request);
-   * const [response] = await operation.promise();
-   */
   createConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.ICreateConnectionProfileRequest,
     optionsOrCallback?:
@@ -1160,11 +1159,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateConnectionProfileProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
    */
   async checkCreateConnectionProfileProgress(
     name: string
@@ -1188,42 +1184,6 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
-  updateConnectionProfile(
-    request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConnectionProfile(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Use this method to update the parameters of a connection profile.
    *
@@ -1260,10 +1220,45 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateConnectionProfile(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
    */
+  updateConnectionProfile(
+    request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateConnectionProfile(
+    request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnectionProfile(
+    request: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IUpdateConnectionProfileRequest,
     optionsOrCallback?:
@@ -1325,11 +1320,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateConnectionProfileProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
    */
   async checkUpdateConnectionProfileProgress(
     name: string
@@ -1353,6 +1345,39 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to delete a connection profile..
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connection profile resource to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
+   */
   deleteConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
     options?: CallOptions
@@ -1389,40 +1414,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to delete a connection profile..
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the connection profile resource to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteConnectionProfile(request);
-   * const [response] = await operation.promise();
-   */
   deleteConnectionProfile(
     request?: protos.google.cloud.datastream.v1alpha1.IDeleteConnectionProfileRequest,
     optionsOrCallback?:
@@ -1484,11 +1475,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteConnectionProfileProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
    */
   async checkDeleteConnectionProfileProgress(
     name: string
@@ -1512,42 +1500,6 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
-  createStream(
-    request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createStream(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createStream(
-    request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Use this method to create a stream.
    *
@@ -1587,10 +1539,45 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createStream(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
    */
+  createStream(
+    request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createStream(
+    request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createStream(
+    request: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createStream(
     request?: protos.google.cloud.datastream.v1alpha1.ICreateStreamRequest,
     optionsOrCallback?:
@@ -1648,11 +1635,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateStreamProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
    */
   async checkCreateStreamProgress(
     name: string
@@ -1676,42 +1660,6 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
-  updateStream(
-    request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  updateStream(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateStream(
-    request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.datastream.v1alpha1.IStream,
-        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Use this method to update the configuration of a stream.
    *
@@ -1753,10 +1701,45 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateStream(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
    */
+  updateStream(
+    request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateStream(
+    request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateStream(
+    request: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1alpha1.IStream,
+        protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateStream(
     request?: protos.google.cloud.datastream.v1alpha1.IUpdateStreamRequest,
     optionsOrCallback?:
@@ -1814,11 +1797,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateStreamProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
    */
   async checkUpdateStreamProgress(
     name: string
@@ -1842,6 +1822,39 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to delete a stream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the stream resource to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
+   */
   deleteStream(
     request?: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
     options?: CallOptions
@@ -1878,40 +1891,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to delete a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the stream resource to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteStream(request);
-   * const [response] = await operation.promise();
-   */
   deleteStream(
     request?: protos.google.cloud.datastream.v1alpha1.IDeleteStreamRequest,
     optionsOrCallback?:
@@ -1969,11 +1948,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteStreamProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
    */
   async checkDeleteStreamProgress(
     name: string
@@ -1997,6 +1973,25 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to fetch any errors associated with a stream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.stream
+   *   Name of the Stream resource for which to fetch any errors.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
+   */
   fetchErrors(
     request?: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
     options?: CallOptions
@@ -2033,26 +2028,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to fetch any errors associated with a stream.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.stream
-   *   Name of the Stream resource for which to fetch any errors.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.fetchErrors(request);
-   * const [response] = await operation.promise();
-   */
   fetchErrors(
     request?: protos.google.cloud.datastream.v1alpha1.IFetchErrorsRequest,
     optionsOrCallback?:
@@ -2110,11 +2085,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkFetchErrorsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
    */
   async checkFetchErrorsProgress(
     name: string
@@ -2138,6 +2110,43 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to create a private connectivity configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of PrivateConnections.
+   * @param {string} request.privateConnectionId
+   *   Required. The private connectivity identifier.
+   * @param {google.cloud.datastream.v1alpha1.PrivateConnection} request.privateConnection
+   *   Required. The Private Connectivity resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
+   */
   createPrivateConnection(
     request?: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
     options?: CallOptions
@@ -2174,44 +2183,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to create a private connectivity configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of PrivateConnections.
-   * @param {string} request.privateConnectionId
-   *   Required. The private connectivity identifier.
-   * @param {google.cloud.datastream.v1alpha1.PrivateConnection} request.privateConnection
-   *   Required. The Private Connectivity resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createPrivateConnection(request);
-   * const [response] = await operation.promise();
-   */
   createPrivateConnection(
     request?: protos.google.cloud.datastream.v1alpha1.ICreatePrivateConnectionRequest,
     optionsOrCallback?:
@@ -2273,11 +2244,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreatePrivateConnectionProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
    */
   async checkCreatePrivateConnectionProgress(
     name: string
@@ -2301,6 +2269,42 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to delete a private connectivity configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the private connectivity configuration to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child routes that belong to this PrivateConnection will
+   *   also be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
+   */
   deletePrivateConnection(
     request?: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
     options?: CallOptions
@@ -2337,43 +2341,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to delete a private connectivity configuration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the private connectivity configuration to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} [request.force]
-   *   Optional. If set to true, any child routes that belong to this PrivateConnection will
-   *   also be deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deletePrivateConnection(request);
-   * const [response] = await operation.promise();
-   */
   deletePrivateConnection(
     request?: protos.google.cloud.datastream.v1alpha1.IDeletePrivateConnectionRequest,
     optionsOrCallback?:
@@ -2435,11 +2402,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeletePrivateConnectionProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
    */
   async checkDeletePrivateConnectionProgress(
     name: string
@@ -2463,6 +2427,44 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to create a route for a private connectivity in a project
+   * and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent that owns the collection of Routes.
+   * @param {string} request.routeId
+   *   Required. The Route identifier.
+   * @param {google.cloud.datastream.v1alpha1.Route} request.route
+   *   Required. The Route resource to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
+   */
   createRoute(
     request?: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
     options?: CallOptions
@@ -2499,45 +2501,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to create a route for a private connectivity in a project
-   * and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent that owns the collection of Routes.
-   * @param {string} request.routeId
-   *   Required. The Route identifier.
-   * @param {google.cloud.datastream.v1alpha1.Route} request.route
-   *   Required. The Route resource to create.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes since the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createRoute(request);
-   * const [response] = await operation.promise();
-   */
   createRoute(
     request?: protos.google.cloud.datastream.v1alpha1.ICreateRouteRequest,
     optionsOrCallback?:
@@ -2595,11 +2558,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateRouteProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
    */
   async checkCreateRouteProgress(
     name: string
@@ -2623,6 +2583,39 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
+  /**
+   * Use this method to delete a route.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Route resource to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
+   */
   deleteRoute(
     request?: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
     options?: CallOptions
@@ -2659,40 +2652,6 @@ export class DatastreamClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Use this method to delete a route.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Route resource to delete.
-   * @param {string} [request.requestId]
-   *   Optional. A request ID to identify requests. Specify a unique request ID
-   *   so that if you must retry your request, the server will know to ignore
-   *   the request if it has already been completed. The server will guarantee
-   *   that for at least 60 minutes after the first request.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID,
-   *   the server can check if original operation with the same request ID was
-   *   received, and if so, will ignore the second request. This prevents clients
-   *   from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteRoute(request);
-   * const [response] = await operation.promise();
-   */
   deleteRoute(
     request?: protos.google.cloud.datastream.v1alpha1.IDeleteRouteRequest,
     optionsOrCallback?:
@@ -2750,11 +2709,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteRouteProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
    */
   async checkDeleteRouteProgress(
     name: string
@@ -2778,37 +2734,6 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >;
   }
-  listConnectionProfiles(
-    request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-    ]
-  >;
-  listConnectionProfiles(
-    request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-    >
-  ): void;
-  listConnectionProfiles(
-    request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
-    >
-  ): void;
   /**
    * Use this method to list connection profiles created in a project and
    * location.
@@ -2844,6 +2769,37 @@ export class DatastreamClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listConnectionProfiles(
+    request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+    ]
+  >;
+  listConnectionProfiles(
+    request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
+    >
+  ): void;
+  listConnectionProfiles(
+    request: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IConnectionProfile
+    >
+  ): void;
   listConnectionProfiles(
     request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
     optionsOrCallback?:
@@ -2978,11 +2934,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listConnectionProfilesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/datastream.list_connection_profiles.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_ListConnectionProfiles_async
    */
   listConnectionProfilesAsync(
     request?: protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
@@ -2996,7 +2949,6 @@ export class DatastreamClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3006,37 +2958,6 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IConnectionProfile>;
   }
-  listStreams(
-    request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IStream[],
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-    ]
-  >;
-  listStreams(
-    request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IStream
-    >
-  ): void;
-  listStreams(
-    request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IStream
-    >
-  ): void;
   /**
    * Use this method to list streams in a project and location.
    *
@@ -3071,6 +2992,37 @@ export class DatastreamClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listStreams(
+    request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datastream.v1alpha1.IStream[],
+      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
+      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+    ]
+  >;
+  listStreams(
+    request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IStream
+    >
+  ): void;
+  listStreams(
+    request: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IStream
+    >
+  ): void;
   listStreams(
     request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
     optionsOrCallback?:
@@ -3201,11 +3153,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listStreamsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/datastream.list_streams.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_ListStreams_async
    */
   listStreamsAsync(
     request?: protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
@@ -3219,7 +3168,6 @@ export class DatastreamClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3229,6 +3177,34 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IStream>;
   }
+  /**
+   * The FetchStaticIps API call exposes the static ips used by Datastream.
+   * Typically, a request returns children data objects under
+   * a parent data object that's optionally supplied in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name resource of the Response type. Must be in the
+   *   format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   Maximum number of Ips to return, will likely not be specified.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListStaticIps` call.
+   *   will likely not be specified.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of string.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchStaticIpsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   fetchStaticIps(
     request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
     options?: CallOptions
@@ -3260,34 +3236,6 @@ export class DatastreamClient {
       string
     >
   ): void;
-  /**
-   * The FetchStaticIps API call exposes the static ips used by Datastream.
-   * Typically, a request returns children data objects under
-   * a parent data object that's optionally supplied in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name resource of the Response type. Must be in the
-   *   format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
-   *   will likely not be specified.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of string.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchStaticIpsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   fetchStaticIps(
     request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
     optionsOrCallback?:
@@ -3402,11 +3350,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.fetchStaticIpsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_static_ips.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_FetchStaticIps_async
    */
   fetchStaticIpsAsync(
     request?: protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
@@ -3420,7 +3365,6 @@ export class DatastreamClient {
       gax.routingHeader.fromParams({
         name: request.name || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3430,37 +3374,6 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<string>;
   }
-  listPrivateConnections(
-    request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-    ]
-  >;
-  listPrivateConnections(
-    request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-    >
-  ): void;
-  listPrivateConnections(
-    request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
-    >
-  ): void;
   /**
    * Use this method to list private connectivity configurations in a project
    * and location.
@@ -3498,6 +3411,37 @@ export class DatastreamClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listPrivateConnections(
+    request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+    ]
+  >;
+  listPrivateConnections(
+    request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
+    >
+  ): void;
+  listPrivateConnections(
+    request: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IPrivateConnection
+    >
+  ): void;
   listPrivateConnections(
     request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
     optionsOrCallback?:
@@ -3636,11 +3580,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listPrivateConnectionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/datastream.list_private_connections.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_ListPrivateConnections_async
    */
   listPrivateConnectionsAsync(
     request?: protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
@@ -3654,7 +3595,6 @@ export class DatastreamClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -3664,37 +3604,6 @@ export class DatastreamClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.datastream.v1alpha1.IPrivateConnection>;
   }
-  listRoutes(
-    request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.datastream.v1alpha1.IRoute[],
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-    ]
-  >;
-  listRoutes(
-    request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IRoute
-    >
-  ): void;
-  listRoutes(
-    request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
-      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
-      | null
-      | undefined,
-      protos.google.cloud.datastream.v1alpha1.IRoute
-    >
-  ): void;
   /**
    * Use this method to list routes created for a private connectivity in a
    * project and location.
@@ -3732,6 +3641,37 @@ export class DatastreamClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listRoutes(
+    request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datastream.v1alpha1.IRoute[],
+      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
+      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+    ]
+  >;
+  listRoutes(
+    request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IRoute
+    >
+  ): void;
+  listRoutes(
+    request: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+      | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.datastream.v1alpha1.IRoute
+    >
+  ): void;
   listRoutes(
     request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
     optionsOrCallback?:
@@ -3866,11 +3806,8 @@ export class DatastreamClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listRoutesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha1/datastream.list_routes.js</caption>
+   * region_tag:datastream_v1alpha1_generated_Datastream_ListRoutes_async
    */
   listRoutesAsync(
     request?: protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
@@ -3884,7 +3821,6 @@ export class DatastreamClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

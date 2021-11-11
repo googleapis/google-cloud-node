@@ -53,7 +53,7 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function listRoutes() {
+  async function callListRoutes() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent) {
     }
   }
 
-  listRoutes();
+  callListRoutes();
   // [END datastream_v1alpha1_generated_Datastream_ListRoutes_async]
 }
 

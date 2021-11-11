@@ -30,7 +30,7 @@ function main(parent, privateConnectionId, privateConnection) {
   /**
    *  Required. The Private Connectivity resource to create.
    */
-  // const privateConnection = ''
+  // const privateConnection = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -52,7 +52,7 @@ function main(parent, privateConnectionId, privateConnection) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function createPrivateConnection() {
+  async function callCreatePrivateConnection() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent, privateConnectionId, privateConnection) {
     console.log(response);
   }
 
-  createPrivateConnection();
+  callCreatePrivateConnection();
   // [END datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async]
 }
 

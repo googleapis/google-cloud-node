@@ -30,7 +30,7 @@ function main(parent, streamId, stream) {
   /**
    *  Required. The stream resource to create.
    */
-  // const stream = ''
+  // const stream = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -61,7 +61,7 @@ function main(parent, streamId, stream) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function createStream() {
+  async function callCreateStream() {
     // Construct request
     const request = {
       parent,
@@ -75,7 +75,7 @@ function main(parent, streamId, stream) {
     console.log(response);
   }
 
-  createStream();
+  callCreateStream();
   // [END datastream_v1alpha1_generated_Datastream_CreateStream_async]
 }
 

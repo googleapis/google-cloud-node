@@ -30,7 +30,7 @@ function main(parent, routeId, route) {
   /**
    *  Required. The Route resource to create.
    */
-  // const route = ''
+  // const route = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -52,7 +52,7 @@ function main(parent, routeId, route) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function createRoute() {
+  async function callCreateRoute() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent, routeId, route) {
     console.log(response);
   }
 
-  createRoute();
+  callCreateRoute();
   // [END datastream_v1alpha1_generated_Datastream_CreateRoute_async]
 }
 

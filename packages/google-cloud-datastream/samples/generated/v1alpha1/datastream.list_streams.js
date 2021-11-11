@@ -51,7 +51,7 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function listStreams() {
+  async function callListStreams() {
     // Construct request
     const request = {
       parent,
@@ -64,7 +64,7 @@ function main(parent) {
     }
   }
 
-  listStreams();
+  callListStreams();
   // [END datastream_v1alpha1_generated_Datastream_ListStreams_async]
 }
 

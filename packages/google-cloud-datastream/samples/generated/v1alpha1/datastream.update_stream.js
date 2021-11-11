@@ -26,11 +26,11 @@ function main(stream) {
    *  the full request. A field will be overwritten if it is in the mask. If the
    *  user does not provide a mask then all fields will be overwritten.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. The stream resource to update.
    */
-  // const stream = ''
+  // const stream = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -61,7 +61,7 @@ function main(stream) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function updateStream() {
+  async function callUpdateStream() {
     // Construct request
     const request = {
       stream,
@@ -73,7 +73,7 @@ function main(stream) {
     console.log(response);
   }
 
-  updateStream();
+  callUpdateStream();
   // [END datastream_v1alpha1_generated_Datastream_UpdateStream_async]
 }
 

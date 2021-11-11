@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function getPrivateConnection() {
+  async function callGetPrivateConnection() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getPrivateConnection();
+  callGetPrivateConnection();
   // [END datastream_v1alpha1_generated_Datastream_GetPrivateConnection_async]
 }
 

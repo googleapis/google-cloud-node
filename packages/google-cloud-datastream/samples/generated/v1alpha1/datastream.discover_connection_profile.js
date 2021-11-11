@@ -27,7 +27,7 @@ function main(parent) {
   /**
    *  An ad-hoc ConnectionProfile configuration.
    */
-  // const connectionProfile = ''
+  // const connectionProfile = {}
   /**
    *  A reference to an existing ConnectionProfile.
    */
@@ -44,11 +44,11 @@ function main(parent) {
   /**
    *  Oracle RDBMS to enrich with child data objects and metadata.
    */
-  // const oracleRdbms = ''
+  // const oracleRdbms = {}
   /**
    *  MySQL RDBMS to enrich with child data objects and metadata.
    */
-  // const mysqlRdbms = ''
+  // const mysqlRdbms = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1alpha1;
@@ -56,7 +56,7 @@ function main(parent) {
   // Instantiates a client
   const datastreamClient = new DatastreamClient();
 
-  async function discoverConnectionProfile() {
+  async function callDiscoverConnectionProfile() {
     // Construct request
     const request = {
       parent,
@@ -67,7 +67,7 @@ function main(parent) {
     console.log(response);
   }
 
-  discoverConnectionProfile();
+  callDiscoverConnectionProfile();
   // [END datastream_v1alpha1_generated_Datastream_DiscoverConnectionProfile_async]
 }
 
