@@ -27,13 +27,13 @@ function main(registration, updateMask) {
   /**
    *  Fields of the `ContactSettings` to update.
    */
-  // const contactSettings = ''
+  // const contactSettings = {}
   /**
    *  Required. The field mask describing which fields to update as a comma-separated list.
    *  For example, if only the registrant contact is being updated, the
    *  `update_mask` is `"registrant_contact"`.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  The list of contact notices that the caller acknowledges. The notices
    *  needed here depend on the values specified in `contact_settings`.
@@ -50,7 +50,7 @@ function main(registration, updateMask) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function configureContactSettings() {
+  async function callConfigureContactSettings() {
     // Construct request
     const request = {
       registration,
@@ -63,7 +63,7 @@ function main(registration, updateMask) {
     console.log(response);
   }
 
-  configureContactSettings();
+  callConfigureContactSettings();
   // [END domains_v1alpha2_generated_Domains_ConfigureContactSettings_async]
 }
 

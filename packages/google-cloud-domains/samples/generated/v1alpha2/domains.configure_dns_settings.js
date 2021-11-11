@@ -27,7 +27,7 @@ function main(registration, updateMask) {
   /**
    *  Fields of the `DnsSettings` to update.
    */
-  // const dnsSettings = ''
+  // const dnsSettings = {}
   /**
    *  Required. The field mask describing which fields to update as a comma-separated list.
    *  For example, if only the name servers are being updated for an existing
@@ -38,7 +38,7 @@ function main(registration, updateMask) {
    *  from a Google Domains DNS configuration to a Custom DNS configuration, the
    *  `update_mask` is `"custom_dns"`. //
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Validate the request without actually updating the DNS settings.
    */
@@ -50,7 +50,7 @@ function main(registration, updateMask) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function configureDnsSettings() {
+  async function callConfigureDnsSettings() {
     // Construct request
     const request = {
       registration,
@@ -63,7 +63,7 @@ function main(registration, updateMask) {
     console.log(response);
   }
 
-  configureDnsSettings();
+  callConfigureDnsSettings();
   // [END domains_v1alpha2_generated_Domains_ConfigureDnsSettings_async]
 }
 

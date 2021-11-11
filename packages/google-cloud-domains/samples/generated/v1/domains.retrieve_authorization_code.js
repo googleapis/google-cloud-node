@@ -31,7 +31,7 @@ function main(registration) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function retrieveAuthorizationCode() {
+  async function callRetrieveAuthorizationCode() {
     // Construct request
     const request = {
       registration,
@@ -42,7 +42,7 @@ function main(registration) {
     console.log(response);
   }
 
-  retrieveAuthorizationCode();
+  callRetrieveAuthorizationCode();
   // [END domains_v1_generated_Domains_RetrieveAuthorizationCode_async]
 }
 

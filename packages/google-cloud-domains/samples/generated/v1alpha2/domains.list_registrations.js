@@ -56,7 +56,7 @@ function main(parent) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function listRegistrations() {
+  async function callListRegistrations() {
     // Construct request
     const request = {
       parent,
@@ -69,7 +69,7 @@ function main(parent) {
     }
   }
 
-  listRegistrations();
+  callListRegistrations();
   // [END domains_v1alpha2_generated_Domains_ListRegistrations_async]
 }
 

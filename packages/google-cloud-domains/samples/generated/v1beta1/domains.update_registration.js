@@ -22,13 +22,13 @@ function main(updateMask) {
   /**
    *  Fields of the `Registration` to update.
    */
-  // const registration = ''
+  // const registration = {}
   /**
    *  Required. The field mask describing which fields to update as a comma-separated list.
    *  For example, if only the labels are being updated, the `update_mask` is
    *  `"labels"`.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Domains library
   const {DomainsClient} = require('@google-cloud/domains').v1beta1;
@@ -36,7 +36,7 @@ function main(updateMask) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function updateRegistration() {
+  async function callUpdateRegistration() {
     // Construct request
     const request = {
       updateMask,
@@ -48,7 +48,7 @@ function main(updateMask) {
     console.log(response);
   }
 
-  updateRegistration();
+  callUpdateRegistration();
   // [END domains_v1beta1_generated_Domains_UpdateRegistration_async]
 }
 

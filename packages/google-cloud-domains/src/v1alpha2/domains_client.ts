@@ -447,6 +447,29 @@ export class DomainsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Searches for available domain names similar to the provided query.
+   *
+   * Availability results from this method are approximate; call
+   * `RetrieveRegisterParameters` on a domain before registering to confirm
+   * availability.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.query
+   *   Required. String used to search for available domain names.
+   * @param {string} request.location
+   *   Required. The location. Must be in the format `projects/* /locations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SearchDomainsResponse]{@link google.cloud.domains.v1alpha2.SearchDomainsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.search_domains.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_SearchDomains_async
+   */
   searchDomains(
     request?: protos.google.cloud.domains.v1alpha2.ISearchDomainsRequest,
     options?: CallOptions
@@ -478,29 +501,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Searches for available domain names similar to the provided query.
-   *
-   * Availability results from this method are approximate; call
-   * `RetrieveRegisterParameters` on a domain before registering to confirm
-   * availability.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.query
-   *   Required. String used to search for available domain names.
-   * @param {string} request.location
-   *   Required. The location. Must be in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SearchDomainsResponse]{@link google.cloud.domains.v1alpha2.SearchDomainsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.searchDomains(request);
-   */
   searchDomains(
     request?: protos.google.cloud.domains.v1alpha2.ISearchDomainsRequest,
     optionsOrCallback?:
@@ -544,6 +544,26 @@ export class DomainsClient {
     this.initialize();
     return this.innerApiCalls.searchDomains(request, options, callback);
   }
+  /**
+   * Gets parameters needed to register a new domain name, including price and
+   * up-to-date availability. Use the returned values to call `RegisterDomain`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.domainName
+   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
+   * @param {string} request.location
+   *   Required. The location. Must be in the format `projects/* /locations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RetrieveRegisterParametersResponse]{@link google.cloud.domains.v1alpha2.RetrieveRegisterParametersResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.retrieve_register_parameters.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_RetrieveRegisterParameters_async
+   */
   retrieveRegisterParameters(
     request?: protos.google.cloud.domains.v1alpha2.IRetrieveRegisterParametersRequest,
     options?: CallOptions
@@ -578,26 +598,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets parameters needed to register a new domain name, including price and
-   * up-to-date availability. Use the returned values to call `RegisterDomain`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.domainName
-   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
-   * @param {string} request.location
-   *   Required. The location. Must be in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RetrieveRegisterParametersResponse]{@link google.cloud.domains.v1alpha2.RetrieveRegisterParametersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.retrieveRegisterParameters(request);
-   */
   retrieveRegisterParameters(
     request?: protos.google.cloud.domains.v1alpha2.IRetrieveRegisterParametersRequest,
     optionsOrCallback?:
@@ -648,6 +648,30 @@ export class DomainsClient {
       callback
     );
   }
+  /**
+   * Gets parameters needed to transfer a domain name from another registrar to
+   * Cloud Domains. For domains managed by Google Domains, transferring to Cloud
+   * Domains is not supported.
+   *
+   *
+   * Use the returned values to call `TransferDomain`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.domainName
+   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
+   * @param {string} request.location
+   *   Required. The location. Must be in the format `projects/* /locations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RetrieveTransferParametersResponse]{@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.retrieve_transfer_parameters.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_RetrieveTransferParameters_async
+   */
   retrieveTransferParameters(
     request?: protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest,
     options?: CallOptions
@@ -682,30 +706,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets parameters needed to transfer a domain name from another registrar to
-   * Cloud Domains. For domains managed by Google Domains, transferring to Cloud
-   * Domains is not supported.
-   *
-   *
-   * Use the returned values to call `TransferDomain`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.domainName
-   *   Required. The domain name. Unicode domain names must be expressed in Punycode format.
-   * @param {string} request.location
-   *   Required. The location. Must be in the format `projects/* /locations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RetrieveTransferParametersResponse]{@link google.cloud.domains.v1alpha2.RetrieveTransferParametersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.retrieveTransferParameters(request);
-   */
   retrieveTransferParameters(
     request?: protos.google.cloud.domains.v1alpha2.IRetrieveTransferParametersRequest,
     optionsOrCallback?:
@@ -756,6 +756,24 @@ export class DomainsClient {
       callback
     );
   }
+  /**
+   * Gets the details of a `Registration` resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `Registration` to get, in the format
+   *   `projects/* /locations/* /registrations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Registration]{@link google.cloud.domains.v1alpha2.Registration}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.get_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_GetRegistration_async
+   */
   getRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IGetRegistrationRequest,
     options?: CallOptions
@@ -787,24 +805,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the details of a `Registration` resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Registration` to get, in the format
-   *   `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Registration]{@link google.cloud.domains.v1alpha2.Registration}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getRegistration(request);
-   */
   getRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IGetRegistrationRequest,
     optionsOrCallback?:
@@ -848,6 +848,28 @@ export class DomainsClient {
     this.initialize();
     return this.innerApiCalls.getRegistration(request, options, callback);
   }
+  /**
+   * Gets the authorization code of the `Registration` for the purpose of
+   * transferring the domain to another registrar.
+   *
+   * You can call this method only after 60 days have elapsed since the initial
+   * domain registration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.registration
+   *   Required. The name of the `Registration` whose authorization code is being retrieved,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1alpha2.AuthorizationCode}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.retrieve_authorization_code.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_RetrieveAuthorizationCode_async
+   */
   retrieveAuthorizationCode(
     request?: protos.google.cloud.domains.v1alpha2.IRetrieveAuthorizationCodeRequest,
     options?: CallOptions
@@ -882,28 +904,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the authorization code of the `Registration` for the purpose of
-   * transferring the domain to another registrar.
-   *
-   * You can call this method only after 60 days have elapsed since the initial
-   * domain registration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose authorization code is being retrieved,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1alpha2.AuthorizationCode}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.retrieveAuthorizationCode(request);
-   */
   retrieveAuthorizationCode(
     request?: protos.google.cloud.domains.v1alpha2.IRetrieveAuthorizationCodeRequest,
     optionsOrCallback?:
@@ -954,6 +954,27 @@ export class DomainsClient {
       callback
     );
   }
+  /**
+   * Resets the authorization code of the `Registration` to a new random string.
+   *
+   * You can call this method only after 60 days have elapsed since the initial
+   * domain registration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.registration
+   *   Required. The name of the `Registration` whose authorization code is being reset,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1alpha2.AuthorizationCode}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.reset_authorization_code.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ResetAuthorizationCode_async
+   */
   resetAuthorizationCode(
     request?: protos.google.cloud.domains.v1alpha2.IResetAuthorizationCodeRequest,
     options?: CallOptions
@@ -988,27 +1009,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Resets the authorization code of the `Registration` to a new random string.
-   *
-   * You can call this method only after 60 days have elapsed since the initial
-   * domain registration.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose authorization code is being reset,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [AuthorizationCode]{@link google.cloud.domains.v1alpha2.AuthorizationCode}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.resetAuthorizationCode(request);
-   */
   resetAuthorizationCode(
     request?: protos.google.cloud.domains.v1alpha2.IResetAuthorizationCodeRequest,
     optionsOrCallback?:
@@ -1060,42 +1060,6 @@ export class DomainsClient {
     );
   }
 
-  registerDomain(
-    request?: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1alpha2.IRegistration,
-        protos.google.cloud.domains.v1alpha2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  registerDomain(
-    request: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1alpha2.IRegistration,
-        protos.google.cloud.domains.v1alpha2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  registerDomain(
-    request: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1alpha2.IRegistration,
-        protos.google.cloud.domains.v1alpha2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Registers a new domain name and creates a corresponding `Registration`
    * resource.
@@ -1142,10 +1106,45 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.registerDomain(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha2/domains.register_domain.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_RegisterDomain_async
    */
+  registerDomain(
+    request?: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  registerDomain(
+    request: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  registerDomain(
+    request: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   registerDomain(
     request?: protos.google.cloud.domains.v1alpha2.IRegisterDomainRequest,
     optionsOrCallback?:
@@ -1203,11 +1202,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkRegisterDomainProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.register_domain.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_RegisterDomain_async
    */
   async checkRegisterDomainProgress(
     name: string
@@ -1231,42 +1227,6 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
-  transferDomain(
-    request?: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.domains.v1alpha2.IRegistration,
-        protos.google.cloud.domains.v1alpha2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  transferDomain(
-    request: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1alpha2.IRegistration,
-        protos.google.cloud.domains.v1alpha2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  transferDomain(
-    request: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.domains.v1alpha2.IRegistration,
-        protos.google.cloud.domains.v1alpha2.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Transfers a domain name from another registrar to Cloud Domains.  For
    * domains managed by Google Domains, transferring to Cloud Domains is not
@@ -1325,10 +1285,45 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.transferDomain(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1alpha2/domains.transfer_domain.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_TransferDomain_async
    */
+  transferDomain(
+    request?: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  transferDomain(
+    request: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  transferDomain(
+    request: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.domains.v1alpha2.IRegistration,
+        protos.google.cloud.domains.v1alpha2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   transferDomain(
     request?: protos.google.cloud.domains.v1alpha2.ITransferDomainRequest,
     optionsOrCallback?:
@@ -1386,11 +1381,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkTransferDomainProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.transfer_domain.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_TransferDomain_async
    */
   async checkTransferDomainProgress(
     name: string
@@ -1414,6 +1406,34 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  /**
+   * Updates select fields of a `Registration` resource, notably `labels`. To
+   * update other fields, use the appropriate custom update method:
+   *
+   * * To update management settings, see `ConfigureManagementSettings`
+   * * To update DNS configuration, see `ConfigureDnsSettings`
+   * * To update contact information, see `ConfigureContactSettings`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.domains.v1alpha2.Registration} request.registration
+   *   Fields of the `Registration` to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field mask describing which fields to update as a comma-separated list.
+   *   For example, if only the labels are being updated, the `update_mask` is
+   *   `"labels"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.update_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_UpdateRegistration_async
+   */
   updateRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IUpdateRegistrationRequest,
     options?: CallOptions
@@ -1450,35 +1470,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates select fields of a `Registration` resource, notably `labels`. To
-   * update other fields, use the appropriate custom update method:
-   *
-   * * To update management settings, see `ConfigureManagementSettings`
-   * * To update DNS configuration, see `ConfigureDnsSettings`
-   * * To update contact information, see `ConfigureContactSettings`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.domains.v1alpha2.Registration} request.registration
-   *   Fields of the `Registration` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the labels are being updated, the `update_mask` is
-   *   `"labels"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateRegistration(request);
-   * const [response] = await operation.promise();
-   */
   updateRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IUpdateRegistrationRequest,
     optionsOrCallback?:
@@ -1536,11 +1527,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateRegistrationProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.update_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_UpdateRegistration_async
    */
   async checkUpdateRegistrationProgress(
     name: string
@@ -1564,6 +1552,32 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  /**
+   * Updates a `Registration`'s management settings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.registration
+   *   Required. The name of the `Registration` whose management settings are being updated,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {google.cloud.domains.v1alpha2.ManagementSettings} request.managementSettings
+   *   Fields of the `ManagementSettings` to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field mask describing which fields to update as a comma-separated list.
+   *   For example, if only the transfer lock is being updated, the `update_mask`
+   *   is `"transfer_lock_state"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.configure_management_settings.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ConfigureManagementSettings_async
+   */
   configureManagementSettings(
     request?: protos.google.cloud.domains.v1alpha2.IConfigureManagementSettingsRequest,
     options?: CallOptions
@@ -1600,33 +1614,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a `Registration`'s management settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose management settings are being updated,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1alpha2.ManagementSettings} request.managementSettings
-   *   Fields of the `ManagementSettings` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the transfer lock is being updated, the `update_mask`
-   *   is `"transfer_lock_state"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.configureManagementSettings(request);
-   * const [response] = await operation.promise();
-   */
   configureManagementSettings(
     request?: protos.google.cloud.domains.v1alpha2.IConfigureManagementSettingsRequest,
     optionsOrCallback?:
@@ -1688,11 +1675,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkConfigureManagementSettingsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.configure_management_settings.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ConfigureManagementSettings_async
    */
   async checkConfigureManagementSettingsProgress(
     name: string
@@ -1716,6 +1700,40 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  /**
+   * Updates a `Registration`'s DNS settings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.registration
+   *   Required. The name of the `Registration` whose DNS settings are being updated,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {google.cloud.domains.v1alpha2.DnsSettings} request.dnsSettings
+   *   Fields of the `DnsSettings` to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field mask describing which fields to update as a comma-separated list.
+   *   For example, if only the name servers are being updated for an existing
+   *   Custom DNS configuration, the `update_mask` is
+   *   `"custom_dns.name_servers"`.
+   *
+   *   When changing the DNS provider from one type to another, pass the new
+   *   provider's field name as part of the field mask. For example, when changing
+   *   from a Google Domains DNS configuration to a Custom DNS configuration, the
+   *   `update_mask` is `"custom_dns"`. //
+   * @param {boolean} request.validateOnly
+   *   Validate the request without actually updating the DNS settings.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.configure_dns_settings.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ConfigureDnsSettings_async
+   */
   configureDnsSettings(
     request?: protos.google.cloud.domains.v1alpha2.IConfigureDnsSettingsRequest,
     options?: CallOptions
@@ -1752,41 +1770,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a `Registration`'s DNS settings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose DNS settings are being updated,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1alpha2.DnsSettings} request.dnsSettings
-   *   Fields of the `DnsSettings` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the name servers are being updated for an existing
-   *   Custom DNS configuration, the `update_mask` is
-   *   `"custom_dns.name_servers"`.
-   *
-   *   When changing the DNS provider from one type to another, pass the new
-   *   provider's field name as part of the field mask. For example, when changing
-   *   from a Google Domains DNS configuration to a Custom DNS configuration, the
-   *   `update_mask` is `"custom_dns"`. //
-   * @param {boolean} request.validateOnly
-   *   Validate the request without actually updating the DNS settings.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.configureDnsSettings(request);
-   * const [response] = await operation.promise();
-   */
   configureDnsSettings(
     request?: protos.google.cloud.domains.v1alpha2.IConfigureDnsSettingsRequest,
     optionsOrCallback?:
@@ -1844,11 +1827,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkConfigureDnsSettingsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.configure_dns_settings.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ConfigureDnsSettings_async
    */
   async checkConfigureDnsSettingsProgress(
     name: string
@@ -1872,6 +1852,38 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  /**
+   * Updates a `Registration`'s contact settings. Some changes require
+   * confirmation by the domain's registrant contact .
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.registration
+   *   Required. The name of the `Registration` whose contact settings are being updated,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {google.cloud.domains.v1alpha2.ContactSettings} request.contactSettings
+   *   Fields of the `ContactSettings` to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The field mask describing which fields to update as a comma-separated list.
+   *   For example, if only the registrant contact is being updated, the
+   *   `update_mask` is `"registrant_contact"`.
+   * @param {number[]} request.contactNotices
+   *   The list of contact notices that the caller acknowledges. The notices
+   *   needed here depend on the values specified in `contact_settings`.
+   * @param {boolean} request.validateOnly
+   *   Validate the request without actually updating the contact settings.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.configure_contact_settings.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ConfigureContactSettings_async
+   */
   configureContactSettings(
     request?: protos.google.cloud.domains.v1alpha2.IConfigureContactSettingsRequest,
     options?: CallOptions
@@ -1908,39 +1920,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a `Registration`'s contact settings. Some changes require
-   * confirmation by the domain's registrant contact .
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.registration
-   *   Required. The name of the `Registration` whose contact settings are being updated,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {google.cloud.domains.v1alpha2.ContactSettings} request.contactSettings
-   *   Fields of the `ContactSettings` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The field mask describing which fields to update as a comma-separated list.
-   *   For example, if only the registrant contact is being updated, the
-   *   `update_mask` is `"registrant_contact"`.
-   * @param {number[]} request.contactNotices
-   *   The list of contact notices that the caller acknowledges. The notices
-   *   needed here depend on the values specified in `contact_settings`.
-   * @param {boolean} request.validateOnly
-   *   Validate the request without actually updating the contact settings.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.configureContactSettings(request);
-   * const [response] = await operation.promise();
-   */
   configureContactSettings(
     request?: protos.google.cloud.domains.v1alpha2.IConfigureContactSettingsRequest,
     optionsOrCallback?:
@@ -2002,11 +1981,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkConfigureContactSettingsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.configure_contact_settings.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ConfigureContactSettings_async
    */
   async checkConfigureContactSettingsProgress(
     name: string
@@ -2030,6 +2006,34 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  /**
+   * Exports a `Registration` resource, such that it is no longer managed by
+   * Cloud Domains.
+   *
+   * When an active domain is successfully exported, you can continue to use the
+   * domain in [Google Domains](https://domains.google/) until it expires. The
+   * calling user becomes the domain's sole owner in Google Domains, and
+   * permissions for the domain are subsequently managed there. The domain does
+   * not renew automatically unless the new owner sets up billing in Google
+   * Domains.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `Registration` to export,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.export_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ExportRegistration_async
+   */
   exportRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IExportRegistrationRequest,
     options?: CallOptions
@@ -2066,35 +2070,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Exports a `Registration` resource, such that it is no longer managed by
-   * Cloud Domains.
-   *
-   * When an active domain is successfully exported, you can continue to use the
-   * domain in [Google Domains](https://domains.google/) until it expires. The
-   * calling user becomes the domain's sole owner in Google Domains, and
-   * permissions for the domain are subsequently managed there. The domain does
-   * not renew automatically unless the new owner sets up billing in Google
-   * Domains.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Registration` to export,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportRegistration(request);
-   * const [response] = await operation.promise();
-   */
   exportRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IExportRegistrationRequest,
     optionsOrCallback?:
@@ -2152,11 +2127,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportRegistrationProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.export_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ExportRegistration_async
    */
   async checkExportRegistrationProgress(
     name: string
@@ -2180,6 +2152,44 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
+  /**
+   * Deletes a `Registration` resource.
+   *
+   * This method works on any `Registration` resource using [Subscription or
+   * Commitment billing](/domains/pricing#billing-models), provided that the
+   * resource was created at least 1 day in the past.
+   *
+   * For `Registration` resources using
+   * [Monthly billing](/domains/pricing#billing-models), this method works if:
+   *
+   * * `state` is `EXPORTED` with `expire_time` in the past
+   * * `state` is `REGISTRATION_FAILED`
+   * * `state` is `TRANSFER_FAILED`
+   *
+   * When an active registration is successfully deleted, you can continue to
+   * use the domain in [Google Domains](https://domains.google/) until it
+   * expires. The calling user becomes the domain's sole owner in Google
+   * Domains, and permissions for the domain are subsequently managed there. The
+   * domain does not renew automatically unless the new owner sets up billing in
+   * Google Domains.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `Registration` to delete,
+   *   in the format `projects/* /locations/* /registrations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha2/domains.delete_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_DeleteRegistration_async
+   */
   deleteRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IDeleteRegistrationRequest,
     options?: CallOptions
@@ -2216,45 +2226,6 @@ export class DomainsClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a `Registration` resource.
-   *
-   * This method works on any `Registration` resource using [Subscription or
-   * Commitment billing](/domains/pricing#billing-models), provided that the
-   * resource was created at least 1 day in the past.
-   *
-   * For `Registration` resources using
-   * [Monthly billing](/domains/pricing#billing-models), this method works if:
-   *
-   * * `state` is `EXPORTED` with `expire_time` in the past
-   * * `state` is `REGISTRATION_FAILED`
-   * * `state` is `TRANSFER_FAILED`
-   *
-   * When an active registration is successfully deleted, you can continue to
-   * use the domain in [Google Domains](https://domains.google/) until it
-   * expires. The calling user becomes the domain's sole owner in Google
-   * Domains, and permissions for the domain are subsequently managed there. The
-   * domain does not renew automatically unless the new owner sets up billing in
-   * Google Domains.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the `Registration` to delete,
-   *   in the format `projects/* /locations/* /registrations/*`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteRegistration(request);
-   * const [response] = await operation.promise();
-   */
   deleteRegistration(
     request?: protos.google.cloud.domains.v1alpha2.IDeleteRegistrationRequest,
     optionsOrCallback?:
@@ -2312,11 +2283,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteRegistrationProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1alpha2/domains.delete_registration.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_DeleteRegistration_async
    */
   async checkDeleteRegistrationProgress(
     name: string
@@ -2340,37 +2308,6 @@ export class DomainsClient {
       protos.google.cloud.domains.v1alpha2.OperationMetadata
     >;
   }
-  listRegistrations(
-    request?: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.domains.v1alpha2.IRegistration[],
-      protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest | null,
-      protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
-    ]
-  >;
-  listRegistrations(
-    request: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.domains.v1alpha2.IRegistration
-    >
-  ): void;
-  listRegistrations(
-    request: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
-      | protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.domains.v1alpha2.IRegistration
-    >
-  ): void;
   /**
    * Lists the `Registration` resources in a project.
    *
@@ -2414,6 +2351,37 @@ export class DomainsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listRegistrations(
+    request?: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.domains.v1alpha2.IRegistration[],
+      protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest | null,
+      protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
+    ]
+  >;
+  listRegistrations(
+    request: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
+      | protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.domains.v1alpha2.IRegistration
+    >
+  ): void;
+  listRegistrations(
+    request: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
+      | protos.google.cloud.domains.v1alpha2.IListRegistrationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.domains.v1alpha2.IRegistration
+    >
+  ): void;
   listRegistrations(
     request?: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
     optionsOrCallback?:
@@ -2562,11 +2530,8 @@ export class DomainsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listRegistrationsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1alpha2/domains.list_registrations.js</caption>
+   * region_tag:domains_v1alpha2_generated_Domains_ListRegistrations_async
    */
   listRegistrationsAsync(
     request?: protos.google.cloud.domains.v1alpha2.IListRegistrationsRequest,
@@ -2580,7 +2545,6 @@ export class DomainsClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

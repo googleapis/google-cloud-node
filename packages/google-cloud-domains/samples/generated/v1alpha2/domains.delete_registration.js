@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function deleteRegistration() {
+  async function callDeleteRegistration() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteRegistration();
+  callDeleteRegistration();
   // [END domains_v1alpha2_generated_Domains_DeleteRegistration_async]
 }
 

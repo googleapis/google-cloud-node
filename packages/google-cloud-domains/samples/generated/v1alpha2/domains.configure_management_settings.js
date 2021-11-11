@@ -27,13 +27,13 @@ function main(registration, updateMask) {
   /**
    *  Fields of the `ManagementSettings` to update.
    */
-  // const managementSettings = ''
+  // const managementSettings = {}
   /**
    *  Required. The field mask describing which fields to update as a comma-separated list.
    *  For example, if only the transfer lock is being updated, the `update_mask`
    *  is `"transfer_lock_state"`.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Domains library
   const {DomainsClient} = require('@google-cloud/domains').v1alpha2;
@@ -41,7 +41,7 @@ function main(registration, updateMask) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function configureManagementSettings() {
+  async function callConfigureManagementSettings() {
     // Construct request
     const request = {
       registration,
@@ -56,7 +56,7 @@ function main(registration, updateMask) {
     console.log(response);
   }
 
-  configureManagementSettings();
+  callConfigureManagementSettings();
   // [END domains_v1alpha2_generated_Domains_ConfigureManagementSettings_async]
 }
 

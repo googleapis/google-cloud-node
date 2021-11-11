@@ -32,7 +32,7 @@ function main(parent, registration, yearlyPrice) {
    *  does not cease upon transfer, as is often the case for DNS services
    *  provided for free by the registrar.
    */
-  // const registration = ''
+  // const registration = {}
   /**
    *  The list of contact notices that you acknowledge. The notices
    *  needed here depend on the values specified in
@@ -44,12 +44,12 @@ function main(parent, registration, yearlyPrice) {
    *  Call `RetrieveTransferParameters` to obtain the price, which you must
    *  acknowledge.
    */
-  // const yearlyPrice = ''
+  // const yearlyPrice = {}
   /**
    *  The domain's transfer authorization code. You can obtain this from the
    *  domain's current registrar.
    */
-  // const authorizationCode = ''
+  // const authorizationCode = {}
   /**
    *  Validate the request without actually transferring the domain.
    */
@@ -61,7 +61,7 @@ function main(parent, registration, yearlyPrice) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function transferDomain() {
+  async function callTransferDomain() {
     // Construct request
     const request = {
       parent,
@@ -75,7 +75,7 @@ function main(parent, registration, yearlyPrice) {
     console.log(response);
   }
 
-  transferDomain();
+  callTransferDomain();
   // [END domains_v1alpha2_generated_Domains_TransferDomain_async]
 }
 

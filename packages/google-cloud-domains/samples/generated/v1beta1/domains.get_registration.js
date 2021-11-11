@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function getRegistration() {
+  async function callGetRegistration() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getRegistration();
+  callGetRegistration();
   // [END domains_v1beta1_generated_Domains_GetRegistration_async]
 }
 

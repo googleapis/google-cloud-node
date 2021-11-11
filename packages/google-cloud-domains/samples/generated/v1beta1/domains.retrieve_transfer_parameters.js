@@ -34,7 +34,7 @@ function main(domainName, location) {
   // Instantiates a client
   const domainsClient = new DomainsClient();
 
-  async function retrieveTransferParameters() {
+  async function callRetrieveTransferParameters() {
     // Construct request
     const request = {
       domainName,
@@ -46,7 +46,7 @@ function main(domainName, location) {
     console.log(response);
   }
 
-  retrieveTransferParameters();
+  callRetrieveTransferParameters();
   // [END domains_v1beta1_generated_Domains_RetrieveTransferParameters_async]
 }
 
