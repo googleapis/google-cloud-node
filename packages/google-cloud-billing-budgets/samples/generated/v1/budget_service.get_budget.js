@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const budgetsClient = new BudgetServiceClient();
 
-  async function getBudget() {
+  async function callGetBudget() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getBudget();
+  callGetBudget();
   // [END billingbudgets_v1_generated_BudgetService_GetBudget_async]
 }
 

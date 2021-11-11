@@ -43,7 +43,7 @@ function main(parent) {
   // Instantiates a client
   const budgetsClient = new BudgetServiceClient();
 
-  async function listBudgets() {
+  async function callListBudgets() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent) {
     }
   }
 
-  listBudgets();
+  callListBudgets();
   // [END billingbudgets_v1beta1_generated_BudgetService_ListBudgets_async]
 }
 

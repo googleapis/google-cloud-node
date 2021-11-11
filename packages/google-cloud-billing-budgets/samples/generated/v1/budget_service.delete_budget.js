@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const budgetsClient = new BudgetServiceClient();
 
-  async function deleteBudget() {
+  async function callDeleteBudget() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteBudget();
+  callDeleteBudget();
   // [END billingbudgets_v1_generated_BudgetService_DeleteBudget_async]
 }
 

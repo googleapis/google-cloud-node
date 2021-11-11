@@ -27,7 +27,7 @@ function main(parent, budget) {
   /**
    *  Required. Budget to create.
    */
-  // const budget = ''
+  // const budget = {}
 
   // Imports the Budgets library
   const {BudgetServiceClient} = require('@google-cloud/billing-budgets').v1;
@@ -35,7 +35,7 @@ function main(parent, budget) {
   // Instantiates a client
   const budgetsClient = new BudgetServiceClient();
 
-  async function createBudget() {
+  async function callCreateBudget() {
     // Construct request
     const request = {
       parent,
@@ -47,7 +47,7 @@ function main(parent, budget) {
     console.log(response);
   }
 
-  createBudget();
+  callCreateBudget();
   // [END billingbudgets_v1_generated_BudgetService_CreateBudget_async]
 }
 

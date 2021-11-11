@@ -23,7 +23,7 @@ function main(budget) {
    *  Required. The updated budget object.
    *  The budget to update is specified by the budget name in the budget.
    */
-  // const budget = ''
+  // const budget = {}
   /**
    *  Optional. Indicates which fields in the provided budget to update.
    *  Read-only fields (such as `name`) cannot be changed. If this is not
@@ -32,7 +32,7 @@ function main(budget) {
    *  https://developers.google.com/protocol-buffers/docs/proto3#default for more
    *  details about default values.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Budgets library
   const {BudgetServiceClient} =
@@ -41,7 +41,7 @@ function main(budget) {
   // Instantiates a client
   const budgetsClient = new BudgetServiceClient();
 
-  async function updateBudget() {
+  async function callUpdateBudget() {
     // Construct request
     const request = {
       budget,
@@ -52,7 +52,7 @@ function main(budget) {
     console.log(response);
   }
 
-  updateBudget();
+  callUpdateBudget();
   // [END billingbudgets_v1beta1_generated_BudgetService_UpdateBudget_async]
 }
 
