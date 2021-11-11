@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const containeranalysisClient = new ContainerAnalysisV1Beta1Client();
 
-  async function getScanConfig() {
+  async function callGetScanConfig() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getScanConfig();
+  callGetScanConfig();
   // [END containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_GetScanConfig_async]
 }
 

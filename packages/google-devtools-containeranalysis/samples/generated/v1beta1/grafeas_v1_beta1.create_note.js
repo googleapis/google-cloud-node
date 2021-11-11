@@ -31,7 +31,7 @@ function main() {
   /**
    *  The note to create.
    */
-  // const note = ''
+  // const note = {}
 
   // Imports the Containeranalysis library
   const {GrafeasV1Beta1Client} =
@@ -40,7 +40,7 @@ function main() {
   // Instantiates a client
   const containeranalysisClient = new GrafeasV1Beta1Client();
 
-  async function createNote() {
+  async function callCreateNote() {
     // Construct request
     const request = {};
 
@@ -49,7 +49,7 @@ function main() {
     console.log(response);
   }
 
-  createNote();
+  callCreateNote();
   // [END containeranalysis_v1beta1_generated_GrafeasV1Beta1_CreateNote_async]
 }
 

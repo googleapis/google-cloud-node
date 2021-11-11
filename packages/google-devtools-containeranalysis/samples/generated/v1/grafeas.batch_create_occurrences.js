@@ -35,7 +35,7 @@ function main(parent, occurrences) {
   // Instantiates a client
   const containeranalysisClient = new GrafeasClient();
 
-  async function batchCreateOccurrences() {
+  async function callBatchCreateOccurrences() {
     // Construct request
     const request = {
       parent,
@@ -49,7 +49,7 @@ function main(parent, occurrences) {
     console.log(response);
   }
 
-  batchCreateOccurrences();
+  callBatchCreateOccurrences();
   // [END containeranalysis_v1_generated_Grafeas_BatchCreateOccurrences_async]
 }
 

@@ -27,7 +27,7 @@ function main(name, scanConfig) {
   /**
    *  Required. The updated scan configuration.
    */
-  // const scanConfig = ''
+  // const scanConfig = {}
 
   // Imports the Containeranalysis library
   const {ContainerAnalysisV1Beta1Client} =
@@ -36,7 +36,7 @@ function main(name, scanConfig) {
   // Instantiates a client
   const containeranalysisClient = new ContainerAnalysisV1Beta1Client();
 
-  async function updateScanConfig() {
+  async function callUpdateScanConfig() {
     // Construct request
     const request = {
       name,
@@ -48,7 +48,7 @@ function main(name, scanConfig) {
     console.log(response);
   }
 
-  updateScanConfig();
+  callUpdateScanConfig();
   // [END containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_UpdateScanConfig_async]
 }
 

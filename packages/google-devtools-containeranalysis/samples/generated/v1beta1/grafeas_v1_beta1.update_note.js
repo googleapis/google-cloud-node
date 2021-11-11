@@ -27,11 +27,11 @@ function main() {
   /**
    *  The updated note.
    */
-  // const note = ''
+  // const note = {}
   /**
    *  The fields to update.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Containeranalysis library
   const {GrafeasV1Beta1Client} =
@@ -40,7 +40,7 @@ function main() {
   // Instantiates a client
   const containeranalysisClient = new GrafeasV1Beta1Client();
 
-  async function updateNote() {
+  async function callUpdateNote() {
     // Construct request
     const request = {};
 
@@ -49,7 +49,7 @@ function main() {
     console.log(response);
   }
 
-  updateNote();
+  callUpdateNote();
   // [END containeranalysis_v1beta1_generated_GrafeasV1Beta1_UpdateNote_async]
 }
 

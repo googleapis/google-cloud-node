@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const containeranalysisClient = new GrafeasClient();
 
-  async function deleteOccurrence() {
+  async function callDeleteOccurrence() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteOccurrence();
+  callDeleteOccurrence();
   // [END containeranalysis_v1_generated_Grafeas_DeleteOccurrence_async]
 }
 

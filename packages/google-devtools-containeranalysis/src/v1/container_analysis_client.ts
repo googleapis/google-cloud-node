@@ -316,33 +316,6 @@ export class ContainerAnalysisClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Sets the access control policy on the specified note or occurrence.
    * Requires `containeranalysis.notes.setIamPolicy` or
@@ -370,9 +343,36 @@ export class ContainerAnalysisClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
+   * @example <caption>include:samples/generated/v1/container_analysis.set_iam_policy.js</caption>
+   * region_tag:containeranalysis_v1_generated_ContainerAnalysis_SetIamPolicy_async
    */
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -412,6 +412,34 @@ export class ContainerAnalysisClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a note or an occurrence resource.
+   * Requires `containeranalysis.notes.setIamPolicy` or
+   * `containeranalysis.occurrences.setIamPolicy` permission if the resource is
+   * a note or occurrence, respectively.
+   *
+   * The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
+   * notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
+   * occurrences.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/container_analysis.get_iam_policy.js</caption>
+   * region_tag:containeranalysis_v1_generated_ContainerAnalysis_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -439,34 +467,6 @@ export class ContainerAnalysisClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a note or an occurrence resource.
-   * Requires `containeranalysis.notes.setIamPolicy` or
-   * `containeranalysis.occurrences.setIamPolicy` permission if the resource is
-   * a note or occurrence, respectively.
-   *
-   * The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
-   * notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
-   * occurrences.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -506,6 +506,35 @@ export class ContainerAnalysisClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Returns the permissions that a caller has on the specified note or
+   * occurrence. Requires list permission on the project (for example,
+   * `containeranalysis.notes.list`).
+   *
+   * The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
+   * notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
+   * occurrences.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/container_analysis.test_iam_permissions.js</caption>
+   * region_tag:containeranalysis_v1_generated_ContainerAnalysis_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -533,35 +562,6 @@ export class ContainerAnalysisClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the permissions that a caller has on the specified note or
-   * occurrence. Requires list permission on the project (for example,
-   * `containeranalysis.notes.list`).
-   *
-   * The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for
-   * notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for
-   * occurrences.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -601,6 +601,26 @@ export class ContainerAnalysisClient {
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
+  /**
+   * Gets a summary of the number and severity of occurrences.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the project to get a vulnerability summary for in the form of
+   *   `projects/[PROJECT_ID]`.
+   * @param {string} request.filter
+   *   The filter expression.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [VulnerabilityOccurrencesSummary]{@link google.devtools.containeranalysis.v1.VulnerabilityOccurrencesSummary}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/container_analysis.get_vulnerability_occurrences_summary.js</caption>
+   * region_tag:containeranalysis_v1_generated_ContainerAnalysis_GetVulnerabilityOccurrencesSummary_async
+   */
   getVulnerabilityOccurrencesSummary(
     request?: protos.google.devtools.containeranalysis.v1.IGetVulnerabilityOccurrencesSummaryRequest,
     options?: CallOptions
@@ -635,26 +655,6 @@ export class ContainerAnalysisClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a summary of the number and severity of occurrences.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the project to get a vulnerability summary for in the form of
-   *   `projects/[PROJECT_ID]`.
-   * @param {string} request.filter
-   *   The filter expression.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [VulnerabilityOccurrencesSummary]{@link google.devtools.containeranalysis.v1.VulnerabilityOccurrencesSummary}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getVulnerabilityOccurrencesSummary(request);
-   */
   getVulnerabilityOccurrencesSummary(
     request?: protos.google.devtools.containeranalysis.v1.IGetVulnerabilityOccurrencesSummaryRequest,
     optionsOrCallback?:

@@ -32,7 +32,7 @@ function main() {
   // Instantiates a client
   const containeranalysisClient = new GrafeasV1Beta1Client();
 
-  async function deleteNote() {
+  async function callDeleteNote() {
     // Construct request
     const request = {};
 
@@ -41,7 +41,7 @@ function main() {
     console.log(response);
   }
 
-  deleteNote();
+  callDeleteNote();
   // [END containeranalysis_v1beta1_generated_GrafeasV1Beta1_DeleteNote_async]
 }
 

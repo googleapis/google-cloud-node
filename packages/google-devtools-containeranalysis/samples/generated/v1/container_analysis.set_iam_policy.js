@@ -30,7 +30,7 @@ function main(resource, policy) {
    *  valid policy but certain Cloud Platform services (such as Projects)
    *  might reject them.
    */
-  // const policy = ''
+  // const policy = {}
 
   // Imports the Containeranalysis library
   const {ContainerAnalysisClient} =
@@ -39,7 +39,7 @@ function main(resource, policy) {
   // Instantiates a client
   const containeranalysisClient = new ContainerAnalysisClient();
 
-  async function setIamPolicy() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -51,7 +51,7 @@ function main(resource, policy) {
     console.log(response);
   }
 
-  setIamPolicy();
+  callSetIamPolicy();
   // [END containeranalysis_v1_generated_ContainerAnalysis_SetIamPolicy_async]
 }
 

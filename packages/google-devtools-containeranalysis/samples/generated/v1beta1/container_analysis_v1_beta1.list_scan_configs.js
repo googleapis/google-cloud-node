@@ -44,7 +44,7 @@ function main(parent, filter) {
   // Instantiates a client
   const containeranalysisClient = new ContainerAnalysisV1Beta1Client();
 
-  async function listScanConfigs() {
+  async function callListScanConfigs() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent, filter) {
     }
   }
 
-  listScanConfigs();
+  callListScanConfigs();
   // [END containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_ListScanConfigs_async]
 }
 

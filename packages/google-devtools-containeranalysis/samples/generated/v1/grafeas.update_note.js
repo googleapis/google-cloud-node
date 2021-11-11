@@ -27,11 +27,11 @@ function main(name, note) {
   /**
    *  The updated note.
    */
-  // const note = ''
+  // const note = {}
   /**
    *  The fields to update.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Containeranalysis library
   const {GrafeasClient} = require('@google-cloud/containeranalysis').v1;
@@ -39,7 +39,7 @@ function main(name, note) {
   // Instantiates a client
   const containeranalysisClient = new GrafeasClient();
 
-  async function updateNote() {
+  async function callUpdateNote() {
     // Construct request
     const request = {
       name,
@@ -51,7 +51,7 @@ function main(name, note) {
     console.log(response);
   }
 
-  updateNote();
+  callUpdateNote();
   // [END containeranalysis_v1_generated_Grafeas_UpdateNote_async]
 }
 
