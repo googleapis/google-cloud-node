@@ -385,6 +385,24 @@ export class RealmsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single realm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the realm to retrieve, in the following form:
+   *   `projects/{project}/locations/{location}/realms/{realm}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Realm]{@link google.cloud.gaming.v1.Realm}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/realms_service.get_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_GetRealm_async
+   */
   getRealm(
     request?: protos.google.cloud.gaming.v1.IGetRealmRequest,
     options?: CallOptions
@@ -412,24 +430,6 @@ export class RealmsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single realm.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the realm to retrieve, in the following form:
-   *   `projects/{project}/locations/{location}/realms/{realm}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Realm]{@link google.cloud.gaming.v1.Realm}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getRealm(request);
-   */
   getRealm(
     request?: protos.google.cloud.gaming.v1.IGetRealmRequest,
     optionsOrCallback?:
@@ -469,6 +469,30 @@ export class RealmsServiceClient {
     this.initialize();
     return this.innerApiCalls.getRealm(request, options, callback);
   }
+  /**
+   * Previews patches to a single realm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1.Realm} request.realm
+   *   Required. The realm to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {google.protobuf.Timestamp} [request.previewTime]
+   *   Optional. The target timestamp to compute the preview.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PreviewRealmUpdateResponse]{@link google.cloud.gaming.v1.PreviewRealmUpdateResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/realms_service.preview_realm_update.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_PreviewRealmUpdate_async
+   */
   previewRealmUpdate(
     request?: protos.google.cloud.gaming.v1.IPreviewRealmUpdateRequest,
     options?: CallOptions
@@ -500,30 +524,6 @@ export class RealmsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Previews patches to a single realm.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gaming.v1.Realm} request.realm
-   *   Required. The realm to be updated.
-   *   Only fields specified in update_mask are updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {google.protobuf.Timestamp} [request.previewTime]
-   *   Optional. The target timestamp to compute the preview.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PreviewRealmUpdateResponse]{@link google.cloud.gaming.v1.PreviewRealmUpdateResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.previewRealmUpdate(request);
-   */
   previewRealmUpdate(
     request?: protos.google.cloud.gaming.v1.IPreviewRealmUpdateRequest,
     optionsOrCallback?:
@@ -568,6 +568,30 @@ export class RealmsServiceClient {
     return this.innerApiCalls.previewRealmUpdate(request, options, callback);
   }
 
+  /**
+   * Creates a new realm in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in the following form:
+   *   `projects/{project}/locations/{location}`.
+   * @param {string} request.realmId
+   *   Required. The ID of the realm resource to be created.
+   * @param {google.cloud.gaming.v1.Realm} request.realm
+   *   Required. The realm resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/realms_service.create_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_CreateRealm_async
+   */
   createRealm(
     request?: protos.google.cloud.gaming.v1.ICreateRealmRequest,
     options?: CallOptions
@@ -604,31 +628,6 @@ export class RealmsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new realm in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name, in the following form:
-   *   `projects/{project}/locations/{location}`.
-   * @param {string} request.realmId
-   *   Required. The ID of the realm resource to be created.
-   * @param {google.cloud.gaming.v1.Realm} request.realm
-   *   Required. The realm resource to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createRealm(request);
-   * const [response] = await operation.promise();
-   */
   createRealm(
     request?: protos.google.cloud.gaming.v1.ICreateRealmRequest,
     optionsOrCallback?:
@@ -686,11 +685,8 @@ export class RealmsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateRealmProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/realms_service.create_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_CreateRealm_async
    */
   async checkCreateRealmProgress(
     name: string
@@ -714,6 +710,26 @@ export class RealmsServiceClient {
       protos.google.cloud.gaming.v1.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single realm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the realm to delete, in the following form:
+   *   `projects/{project}/locations/{location}/realms/{realm}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/realms_service.delete_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_DeleteRealm_async
+   */
   deleteRealm(
     request?: protos.google.cloud.gaming.v1.IDeleteRealmRequest,
     options?: CallOptions
@@ -750,27 +766,6 @@ export class RealmsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single realm.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the realm to delete, in the following form:
-   *   `projects/{project}/locations/{location}/realms/{realm}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteRealm(request);
-   * const [response] = await operation.promise();
-   */
   deleteRealm(
     request?: protos.google.cloud.gaming.v1.IDeleteRealmRequest,
     optionsOrCallback?:
@@ -828,11 +823,8 @@ export class RealmsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteRealmProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/realms_service.delete_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_DeleteRealm_async
    */
   async checkDeleteRealmProgress(
     name: string
@@ -856,6 +848,30 @@ export class RealmsServiceClient {
       protos.google.cloud.gaming.v1.OperationMetadata
     >;
   }
+  /**
+   * Patches a single realm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1.Realm} request.realm
+   *   Required. The realm to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/realms_service.update_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_UpdateRealm_async
+   */
   updateRealm(
     request?: protos.google.cloud.gaming.v1.IUpdateRealmRequest,
     options?: CallOptions
@@ -892,31 +908,6 @@ export class RealmsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Patches a single realm.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gaming.v1.Realm} request.realm
-   *   Required. The realm to be updated.
-   *   Only fields specified in update_mask are updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource. For the `FieldMask`
-   *   definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateRealm(request);
-   * const [response] = await operation.promise();
-   */
   updateRealm(
     request?: protos.google.cloud.gaming.v1.IUpdateRealmRequest,
     optionsOrCallback?:
@@ -974,11 +965,8 @@ export class RealmsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateRealmProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/realms_service.update_realm.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_UpdateRealm_async
    */
   async checkUpdateRealmProgress(
     name: string
@@ -1002,33 +990,6 @@ export class RealmsServiceClient {
       protos.google.cloud.gaming.v1.OperationMetadata
     >;
   }
-  listRealms(
-    request?: protos.google.cloud.gaming.v1.IListRealmsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gaming.v1.IRealm[],
-      protos.google.cloud.gaming.v1.IListRealmsRequest | null,
-      protos.google.cloud.gaming.v1.IListRealmsResponse
-    ]
-  >;
-  listRealms(
-    request: protos.google.cloud.gaming.v1.IListRealmsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gaming.v1.IListRealmsRequest,
-      protos.google.cloud.gaming.v1.IListRealmsResponse | null | undefined,
-      protos.google.cloud.gaming.v1.IRealm
-    >
-  ): void;
-  listRealms(
-    request: protos.google.cloud.gaming.v1.IListRealmsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gaming.v1.IListRealmsRequest,
-      protos.google.cloud.gaming.v1.IListRealmsResponse | null | undefined,
-      protos.google.cloud.gaming.v1.IRealm
-    >
-  ): void;
   /**
    * Lists realms in a given project and location.
    *
@@ -1064,6 +1025,33 @@ export class RealmsServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listRealms(
+    request?: protos.google.cloud.gaming.v1.IListRealmsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gaming.v1.IRealm[],
+      protos.google.cloud.gaming.v1.IListRealmsRequest | null,
+      protos.google.cloud.gaming.v1.IListRealmsResponse
+    ]
+  >;
+  listRealms(
+    request: protos.google.cloud.gaming.v1.IListRealmsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1.IListRealmsRequest,
+      protos.google.cloud.gaming.v1.IListRealmsResponse | null | undefined,
+      protos.google.cloud.gaming.v1.IRealm
+    >
+  ): void;
+  listRealms(
+    request: protos.google.cloud.gaming.v1.IListRealmsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1.IListRealmsRequest,
+      protos.google.cloud.gaming.v1.IListRealmsResponse | null | undefined,
+      protos.google.cloud.gaming.v1.IRealm
+    >
+  ): void;
   listRealms(
     request?: protos.google.cloud.gaming.v1.IListRealmsRequest,
     optionsOrCallback?:
@@ -1192,11 +1180,8 @@ export class RealmsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listRealmsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/realms_service.list_realms.js</caption>
+   * region_tag:gameservices_v1_generated_RealmsService_ListRealms_async
    */
   listRealmsAsync(
     request?: protos.google.cloud.gaming.v1.IListRealmsRequest,
@@ -1210,7 +1195,6 @@ export class RealmsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listRealms'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

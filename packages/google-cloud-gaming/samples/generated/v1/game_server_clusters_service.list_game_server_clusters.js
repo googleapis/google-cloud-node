@@ -28,7 +28,7 @@ function main(parent) {
    *  Optional. The maximum number of items to return. If unspecified, the server
    *  will pick an appropriate default. The server may return fewer items than
    *  requested. A caller should only rely on response's
-   *  [next_page_token][google.cloud.gaming.v1.ListGameServerClustersResponse.next_page_token] to
+   *  next_page_token google.cloud.gaming.v1.ListGameServerClustersResponse.next_page_token  to
    *  determine if there are more GameServerClusters left to be queried.
    */
   // const pageSize = 1234
@@ -53,7 +53,7 @@ function main(parent) {
    *  value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
    *  not return the `cluster_state` field.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Gaming library
   const {GameServerClustersServiceClient} =
@@ -62,7 +62,7 @@ function main(parent) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function listGameServerClusters() {
+  async function callListGameServerClusters() {
     // Construct request
     const request = {
       parent,
@@ -75,7 +75,7 @@ function main(parent) {
     }
   }
 
-  listGameServerClusters();
+  callListGameServerClusters();
   // [END gameservices_v1_generated_GameServerClustersService_ListGameServerClusters_async]
 }
 

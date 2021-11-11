@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerDeploymentsServiceClient();
 
-  async function getGameServerDeploymentRollout() {
+  async function callGetGameServerDeploymentRollout() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getGameServerDeploymentRollout();
+  callGetGameServerDeploymentRollout();
   // [END gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_async]
 }
 

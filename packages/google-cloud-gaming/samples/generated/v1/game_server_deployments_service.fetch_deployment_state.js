@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerDeploymentsServiceClient();
 
-  async function fetchDeploymentState() {
+  async function callFetchDeploymentState() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  fetchDeploymentState();
+  callFetchDeploymentState();
   // [END gameservices_v1_generated_GameServerDeploymentsService_FetchDeploymentState_async]
 }
 

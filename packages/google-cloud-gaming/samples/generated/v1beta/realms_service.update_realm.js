@@ -23,7 +23,7 @@ function main(realm, updateMask) {
    *  Required. The realm to be updated.
    *  Only fields specified in update_mask are updated.
    */
-  // const realm = ''
+  // const realm = {}
   /**
    *  Required. The update mask applies to the resource. For the `FieldMask`
    *  definition, see
@@ -31,7 +31,7 @@ function main(realm, updateMask) {
    *  //developers.google.com/protocol-buffers
    *  // /docs/reference/google.protobuf#fieldmask
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Gaming library
   const {RealmsServiceClient} = require('@google-cloud/game-servers').v1beta;
@@ -39,7 +39,7 @@ function main(realm, updateMask) {
   // Instantiates a client
   const gamingClient = new RealmsServiceClient();
 
-  async function updateRealm() {
+  async function callUpdateRealm() {
     // Construct request
     const request = {
       realm,
@@ -52,7 +52,7 @@ function main(realm, updateMask) {
     console.log(response);
   }
 
-  updateRealm();
+  callUpdateRealm();
   // [END gameservices_v1beta_generated_RealmsService_UpdateRealm_async]
 }
 

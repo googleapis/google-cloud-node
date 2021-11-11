@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function getGameServerCluster() {
+  async function callGetGameServerCluster() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getGameServerCluster();
+  callGetGameServerCluster();
   // [END gameservices_v1beta_generated_GameServerClustersService_GetGameServerCluster_async]
 }
 

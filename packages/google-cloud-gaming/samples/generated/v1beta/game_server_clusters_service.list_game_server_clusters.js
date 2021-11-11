@@ -28,7 +28,7 @@ function main(parent) {
    *  Optional. The maximum number of items to return.  If unspecified, the
    *  server will pick an appropriate default. The server may return fewer items
    *  than requested. A caller should only rely on response's
-   *  [next_page_token][google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token]
+   *  next_page_token google.cloud.gaming.v1beta.ListGameServerClustersResponse.next_page_token
    *  to determine if there are more GameServerClusters left to be queried.
    */
   // const pageSize = 1234
@@ -54,7 +54,7 @@ function main(parent) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function listGameServerClusters() {
+  async function callListGameServerClusters() {
     // Construct request
     const request = {
       parent,
@@ -67,7 +67,7 @@ function main(parent) {
     }
   }
 
-  listGameServerClusters();
+  callListGameServerClusters();
   // [END gameservices_v1beta_generated_GameServerClustersService_ListGameServerClusters_async]
 }
 

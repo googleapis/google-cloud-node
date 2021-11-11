@@ -28,7 +28,7 @@ function main(parent) {
    *  Optional. The maximum number of items to return.  If unspecified, server
    *  will pick an appropriate default. Server may return fewer items than
    *  requested. A caller should only rely on response's
-   *  [next_page_token][google.cloud.gaming.v1.ListGameServerConfigsResponse.next_page_token] to
+   *  next_page_token google.cloud.gaming.v1.ListGameServerConfigsResponse.next_page_token  to
    *  determine if there are more GameServerConfigs left to be queried.
    */
   // const pageSize = 1234
@@ -53,7 +53,7 @@ function main(parent) {
   // Instantiates a client
   const gamingClient = new GameServerConfigsServiceClient();
 
-  async function listGameServerConfigs() {
+  async function callListGameServerConfigs() {
     // Construct request
     const request = {
       parent,
@@ -66,7 +66,7 @@ function main(parent) {
     }
   }
 
-  listGameServerConfigs();
+  callListGameServerConfigs();
   // [END gameservices_v1_generated_GameServerConfigsService_ListGameServerConfigs_async]
 }
 

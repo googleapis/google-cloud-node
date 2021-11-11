@@ -27,7 +27,7 @@ function main(name) {
   /**
    *  Optional. The target timestamp to compute the preview.
    */
-  // const previewTime = ''
+  // const previewTime = {}
 
   // Imports the Gaming library
   const {GameServerClustersServiceClient} =
@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function previewDeleteGameServerCluster() {
+  async function callPreviewDeleteGameServerCluster() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  previewDeleteGameServerCluster();
+  callPreviewDeleteGameServerCluster();
   // [END gameservices_v1beta_generated_GameServerClustersService_PreviewDeleteGameServerCluster_async]
 }
 

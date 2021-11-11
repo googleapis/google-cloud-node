@@ -418,6 +418,26 @@ export class GameServerDeploymentsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single game server deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the game server delpoyment to retrieve. Uses the
+   *   form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GameServerDeployment]{@link google.cloud.gaming.v1beta.GameServerDeployment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeployment_async
+   */
   getGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.IGetGameServerDeploymentRequest,
     options?: CallOptions
@@ -452,26 +472,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single game server deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the game server delpoyment to retrieve. Uses the
-   *   form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GameServerDeployment]{@link google.cloud.gaming.v1beta.GameServerDeployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getGameServerDeployment(request);
-   */
   getGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.IGetGameServerDeploymentRequest,
     optionsOrCallback?:
@@ -522,6 +522,26 @@ export class GameServerDeploymentsServiceClient {
       callback
     );
   }
+  /**
+   * Gets details a single game server deployment rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the game server delpoyment to retrieve. Uses the
+   *   form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GameServerDeploymentRollout]{@link google.cloud.gaming.v1beta.GameServerDeploymentRollout}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.get_game_server_deployment_rollout.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_async
+   */
   getGameServerDeploymentRollout(
     request?: protos.google.cloud.gaming.v1beta.IGetGameServerDeploymentRolloutRequest,
     options?: CallOptions
@@ -556,26 +576,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details a single game server deployment rollout.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the game server delpoyment to retrieve. Uses the
-   *   form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GameServerDeploymentRollout]{@link google.cloud.gaming.v1beta.GameServerDeploymentRollout}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getGameServerDeploymentRollout(request);
-   */
   getGameServerDeploymentRollout(
     request?: protos.google.cloud.gaming.v1beta.IGetGameServerDeploymentRolloutRequest,
     optionsOrCallback?:
@@ -626,6 +626,35 @@ export class GameServerDeploymentsServiceClient {
       callback
     );
   }
+  /**
+   * Previews the game server deployment rollout. This API does not mutate the
+   * rollout resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1beta.GameServerDeploymentRollout} request.rollout
+   *   Required. The game server deployment rollout to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask of fields to update. At least one path must be supplied in
+   *   this field. For the `FieldMask` definition, see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   * @param {google.protobuf.Timestamp} [request.previewTime]
+   *   Optional. The target timestamp to compute the preview. Defaults to the
+   *   immediately after the proposed rollout completes.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PreviewGameServerDeploymentRolloutResponse]{@link google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.preview_game_server_deployment_rollout.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_async
+   */
   previewGameServerDeploymentRollout(
     request?: protos.google.cloud.gaming.v1beta.IPreviewGameServerDeploymentRolloutRequest,
     options?: CallOptions
@@ -660,35 +689,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Previews the game server deployment rollout. This API does not mutate the
-   * rollout resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gaming.v1beta.GameServerDeploymentRollout} request.rollout
-   *   Required. The game server deployment rollout to be updated.
-   *   Only fields specified in update_mask are updated.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Mask of fields to update. At least one path must be supplied in
-   *   this field. For the `FieldMask` definition, see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
-   * @param {google.protobuf.Timestamp} [request.previewTime]
-   *   Optional. The target timestamp to compute the preview. Defaults to the
-   *   immediately after the proposed rollout completes.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PreviewGameServerDeploymentRolloutResponse]{@link google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.previewGameServerDeploymentRollout(request);
-   */
   previewGameServerDeploymentRollout(
     request?: protos.google.cloud.gaming.v1beta.IPreviewGameServerDeploymentRolloutRequest,
     optionsOrCallback?:
@@ -739,6 +739,27 @@ export class GameServerDeploymentsServiceClient {
       callback
     );
   }
+  /**
+   * Retrieves information about the current state of the game server
+   * deployment. Gathers all the Agones fleets and Agones autoscalers,
+   * including fleets running an older version of the game server deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the game server delpoyment. Uses the form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FetchDeploymentStateResponse]{@link google.cloud.gaming.v1beta.FetchDeploymentStateResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.fetch_deployment_state.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_FetchDeploymentState_async
+   */
   fetchDeploymentState(
     request?: protos.google.cloud.gaming.v1beta.IFetchDeploymentStateRequest,
     options?: CallOptions
@@ -773,27 +794,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Retrieves information about the current state of the game server
-   * deployment. Gathers all the Agones fleets and Agones autoscalers,
-   * including fleets running an older version of the game server deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the game server delpoyment. Uses the form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [FetchDeploymentStateResponse]{@link google.cloud.gaming.v1beta.FetchDeploymentStateResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.fetchDeploymentState(request);
-   */
   fetchDeploymentState(
     request?: protos.google.cloud.gaming.v1beta.IFetchDeploymentStateRequest,
     optionsOrCallback?:
@@ -841,6 +841,30 @@ export class GameServerDeploymentsServiceClient {
     return this.innerApiCalls.fetchDeploymentState(request, options, callback);
   }
 
+  /**
+   * Creates a new game server deployment in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *   `projects/{project}/locations/{location}`.
+   * @param {string} request.deploymentId
+   *   Required. The ID of the game server delpoyment resource to be created.
+   * @param {google.cloud.gaming.v1beta.GameServerDeployment} request.gameServerDeployment
+   *   Required. The game server delpoyment resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.create_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_CreateGameServerDeployment_async
+   */
   createGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.ICreateGameServerDeploymentRequest,
     options?: CallOptions
@@ -877,31 +901,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new game server deployment in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
-   *   `projects/{project}/locations/{location}`.
-   * @param {string} request.deploymentId
-   *   Required. The ID of the game server delpoyment resource to be created.
-   * @param {google.cloud.gaming.v1beta.GameServerDeployment} request.gameServerDeployment
-   *   Required. The game server delpoyment resource to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createGameServerDeployment(request);
-   * const [response] = await operation.promise();
-   */
   createGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.ICreateGameServerDeploymentRequest,
     optionsOrCallback?:
@@ -963,11 +962,8 @@ export class GameServerDeploymentsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateGameServerDeploymentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.create_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_CreateGameServerDeployment_async
    */
   async checkCreateGameServerDeploymentProgress(
     name: string
@@ -991,6 +987,27 @@ export class GameServerDeploymentsServiceClient {
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single game server deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the game server delpoyment to delete. Uses the form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.delete_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_DeleteGameServerDeployment_async
+   */
   deleteGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.IDeleteGameServerDeploymentRequest,
     options?: CallOptions
@@ -1027,28 +1044,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single game server deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the game server delpoyment to delete. Uses the form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteGameServerDeployment(request);
-   * const [response] = await operation.promise();
-   */
   deleteGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.IDeleteGameServerDeploymentRequest,
     optionsOrCallback?:
@@ -1110,11 +1105,8 @@ export class GameServerDeploymentsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteGameServerDeploymentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.delete_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_DeleteGameServerDeployment_async
    */
   async checkDeleteGameServerDeploymentProgress(
     name: string
@@ -1138,6 +1130,33 @@ export class GameServerDeploymentsServiceClient {
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
+  /**
+   * Patches a game server deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1beta.GameServerDeployment} request.gameServerDeployment
+   *   Required. The game server delpoyment to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. For the `FieldMask` definition, see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeployment_async
+   */
   updateGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRequest,
     options?: CallOptions
@@ -1174,34 +1193,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Patches a game server deployment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gaming.v1beta.GameServerDeployment} request.gameServerDeployment
-   *   Required. The game server delpoyment to be updated.
-   *   Only fields specified in update_mask are updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in
-   *   this field. For the `FieldMask` definition, see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateGameServerDeployment(request);
-   * const [response] = await operation.promise();
-   */
   updateGameServerDeployment(
     request?: protos.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRequest,
     optionsOrCallback?:
@@ -1263,11 +1254,8 @@ export class GameServerDeploymentsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateGameServerDeploymentProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeployment_async
    */
   async checkUpdateGameServerDeploymentProgress(
     name: string
@@ -1291,6 +1279,38 @@ export class GameServerDeploymentsServiceClient {
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
+  /**
+   * Patches a single game server deployment rollout.
+   * The method will not return an error if the update does not affect any
+   * existing realms. For example - if the default_game_server_config is changed
+   * but all existing realms use the override, that is valid. Similarly, if a
+   * non existing realm is explicitly called out in game_server_config_overrides
+   * field, that will also not result in an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gaming.v1beta.GameServerDeploymentRollout} request.rollout
+   *   Required. The game server delpoyment rollout to be updated.
+   *   Only fields specified in update_mask are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. For the `FieldMask` definition, see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment_rollout.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_async
+   */
   updateGameServerDeploymentRollout(
     request?: protos.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRolloutRequest,
     options?: CallOptions
@@ -1327,39 +1347,6 @@ export class GameServerDeploymentsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Patches a single game server deployment rollout.
-   * The method will not return an error if the update does not affect any
-   * existing realms. For example - if the default_game_server_config is changed
-   * but all existing realms use the override, that is valid. Similarly, if a
-   * non existing realm is explicitly called out in game_server_config_overrides
-   * field, that will also not result in an error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.gaming.v1beta.GameServerDeploymentRollout} request.rollout
-   *   Required. The game server delpoyment rollout to be updated.
-   *   Only fields specified in update_mask are updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in
-   *   this field. For the `FieldMask` definition, see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.updateGameServerDeploymentRollout(request);
-   * const [response] = await operation.promise();
-   */
   updateGameServerDeploymentRollout(
     request?: protos.google.cloud.gaming.v1beta.IUpdateGameServerDeploymentRolloutRequest,
     optionsOrCallback?:
@@ -1421,11 +1408,8 @@ export class GameServerDeploymentsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUpdateGameServerDeploymentRolloutProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.update_game_server_deployment_rollout.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_async
    */
   async checkUpdateGameServerDeploymentRolloutProgress(
     name: string
@@ -1449,37 +1433,6 @@ export class GameServerDeploymentsServiceClient {
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
-  listGameServerDeployments(
-    request?: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gaming.v1beta.IGameServerDeployment[],
-      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest | null,
-      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsResponse
-    ]
-  >;
-  listGameServerDeployments(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
-      | protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gaming.v1beta.IGameServerDeployment
-    >
-  ): void;
-  listGameServerDeployments(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
-      | protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gaming.v1beta.IGameServerDeployment
-    >
-  ): void;
   /**
    * Lists game server deployments in a given project and location.
    *
@@ -1515,6 +1468,37 @@ export class GameServerDeploymentsServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listGameServerDeployments(
+    request?: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gaming.v1beta.IGameServerDeployment[],
+      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest | null,
+      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsResponse
+    ]
+  >;
+  listGameServerDeployments(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerDeployment
+    >
+  ): void;
+  listGameServerDeployments(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerDeployment
+    >
+  ): void;
   listGameServerDeployments(
     request?: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
     optionsOrCallback?:
@@ -1651,11 +1635,8 @@ export class GameServerDeploymentsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listGameServerDeploymentsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/game_server_deployments_service.list_game_server_deployments.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerDeploymentsService_ListGameServerDeployments_async
    */
   listGameServerDeploymentsAsync(
     request?: protos.google.cloud.gaming.v1beta.IListGameServerDeploymentsRequest,
@@ -1669,7 +1650,6 @@ export class GameServerDeploymentsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listGameServerDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

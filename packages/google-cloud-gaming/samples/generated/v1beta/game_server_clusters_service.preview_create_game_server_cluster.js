@@ -31,11 +31,11 @@ function main(parent, gameServerClusterId, gameServerCluster) {
   /**
    *  Required. The game server cluster resource to be created.
    */
-  // const gameServerCluster = ''
+  // const gameServerCluster = {}
   /**
    *  Optional. The target timestamp to compute the preview.
    */
-  // const previewTime = ''
+  // const previewTime = {}
 
   // Imports the Gaming library
   const {GameServerClustersServiceClient} =
@@ -44,7 +44,7 @@ function main(parent, gameServerClusterId, gameServerCluster) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function previewCreateGameServerCluster() {
+  async function callPreviewCreateGameServerCluster() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent, gameServerClusterId, gameServerCluster) {
     console.log(response);
   }
 
-  previewCreateGameServerCluster();
+  callPreviewCreateGameServerCluster();
   // [END gameservices_v1beta_generated_GameServerClustersService_PreviewCreateGameServerCluster_async]
 }
 

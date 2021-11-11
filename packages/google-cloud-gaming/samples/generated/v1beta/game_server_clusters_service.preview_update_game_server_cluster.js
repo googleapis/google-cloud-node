@@ -23,7 +23,7 @@ function main(gameServerCluster, updateMask) {
    *  Required. The game server cluster to be updated.
    *  Only fields specified in update_mask are updated.
    */
-  // const gameServerCluster = ''
+  // const gameServerCluster = {}
   /**
    *  Required. Mask of fields to update. At least one path must be supplied in
    *  this field. For the `FieldMask` definition, see
@@ -31,11 +31,11 @@ function main(gameServerCluster, updateMask) {
    *  //developers.google.com/protocol-buffers
    *  // /docs/reference/google.protobuf#fieldmask
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. The target timestamp to compute the preview.
    */
-  // const previewTime = ''
+  // const previewTime = {}
 
   // Imports the Gaming library
   const {GameServerClustersServiceClient} =
@@ -44,7 +44,7 @@ function main(gameServerCluster, updateMask) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function previewUpdateGameServerCluster() {
+  async function callPreviewUpdateGameServerCluster() {
     // Construct request
     const request = {
       gameServerCluster,
@@ -56,7 +56,7 @@ function main(gameServerCluster, updateMask) {
     console.log(response);
   }
 
-  previewUpdateGameServerCluster();
+  callPreviewUpdateGameServerCluster();
   // [END gameservices_v1beta_generated_GameServerClustersService_PreviewUpdateGameServerCluster_async]
 }
 

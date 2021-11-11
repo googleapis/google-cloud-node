@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new RealmsServiceClient();
 
-  async function deleteRealm() {
+  async function callDeleteRealm() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteRealm();
+  callDeleteRealm();
   // [END gameservices_v1_generated_RealmsService_DeleteRealm_async]
 }
 

@@ -23,7 +23,7 @@ function main(rollout) {
    *  Required. The game server deployment rollout to be updated.
    *  Only fields specified in update_mask are updated.
    */
-  // const rollout = ''
+  // const rollout = {}
   /**
    *  Optional. Mask of fields to update. At least one path must be supplied in
    *  this field. For the `FieldMask` definition, see
@@ -31,12 +31,12 @@ function main(rollout) {
    *  //developers.google.com/protocol-buffers
    *  // /docs/reference/google.protobuf#fieldmask
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Optional. The target timestamp to compute the preview. Defaults to the
    *  immediately after the proposed rollout completes.
    */
-  // const previewTime = ''
+  // const previewTime = {}
 
   // Imports the Gaming library
   const {GameServerDeploymentsServiceClient} =
@@ -45,7 +45,7 @@ function main(rollout) {
   // Instantiates a client
   const gamingClient = new GameServerDeploymentsServiceClient();
 
-  async function previewGameServerDeploymentRollout() {
+  async function callPreviewGameServerDeploymentRollout() {
     // Construct request
     const request = {
       rollout,
@@ -58,7 +58,7 @@ function main(rollout) {
     console.log(response);
   }
 
-  previewGameServerDeploymentRollout();
+  callPreviewGameServerDeploymentRollout();
   // [END gameservices_v1beta_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_async]
 }
 

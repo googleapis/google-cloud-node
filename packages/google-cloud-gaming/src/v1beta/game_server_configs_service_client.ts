@@ -381,6 +381,25 @@ export class GameServerConfigsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets details of a single game server config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the game server config to retrieve. Uses the form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GameServerConfig]{@link google.cloud.gaming.v1beta.GameServerConfig}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_configs_service.get_game_server_config.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerConfigsService_GetGameServerConfig_async
+   */
   getGameServerConfig(
     request?: protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
     options?: CallOptions
@@ -412,25 +431,6 @@ export class GameServerConfigsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets details of a single game server config.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the game server config to retrieve. Uses the form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GameServerConfig]{@link google.cloud.gaming.v1beta.GameServerConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getGameServerConfig(request);
-   */
   getGameServerConfig(
     request?: protos.google.cloud.gaming.v1beta.IGetGameServerConfigRequest,
     optionsOrCallback?:
@@ -475,6 +475,33 @@ export class GameServerConfigsServiceClient {
     return this.innerApiCalls.getGameServerConfig(request, options, callback);
   }
 
+  /**
+   * Creates a new game server config in a given project, location, and game
+   * server deployment. Game server configs are immutable, and are not applied
+   * until referenced in the game server deployment rollout resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name. Uses the form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.
+   * @param {string} request.configId
+   *   Required. The ID of the game server config resource to be created.
+   * @param {google.cloud.gaming.v1beta.GameServerConfig} request.gameServerConfig
+   *   Required. The game server config resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_configs_service.create_game_server_config.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerConfigsService_CreateGameServerConfig_async
+   */
   createGameServerConfig(
     request?: protos.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
     options?: CallOptions
@@ -511,34 +538,6 @@ export class GameServerConfigsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new game server config in a given project, location, and game
-   * server deployment. Game server configs are immutable, and are not applied
-   * until referenced in the game server deployment rollout resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.
-   * @param {string} request.configId
-   *   Required. The ID of the game server config resource to be created.
-   * @param {google.cloud.gaming.v1beta.GameServerConfig} request.gameServerConfig
-   *   Required. The game server config resource to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createGameServerConfig(request);
-   * const [response] = await operation.promise();
-   */
   createGameServerConfig(
     request?: protos.google.cloud.gaming.v1beta.ICreateGameServerConfigRequest,
     optionsOrCallback?:
@@ -600,11 +599,8 @@ export class GameServerConfigsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateGameServerConfigProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/game_server_configs_service.create_game_server_config.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerConfigsService_CreateGameServerConfig_async
    */
   async checkCreateGameServerConfigProgress(
     name: string
@@ -628,6 +624,28 @@ export class GameServerConfigsServiceClient {
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
+  /**
+   * Deletes a single game server config. The deletion will fail if the game
+   * server config is referenced in a game server deployment rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the game server config to delete. Uses the form:
+   *
+   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/game_server_configs_service.delete_game_server_config.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_async
+   */
   deleteGameServerConfig(
     request?: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     options?: CallOptions
@@ -664,29 +682,6 @@ export class GameServerConfigsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a single game server config. The deletion will fail if the game
-   * server config is referenced in a game server deployment rollout.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the game server config to delete. Uses the form:
-   *
-   *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteGameServerConfig(request);
-   * const [response] = await operation.promise();
-   */
   deleteGameServerConfig(
     request?: protos.google.cloud.gaming.v1beta.IDeleteGameServerConfigRequest,
     optionsOrCallback?:
@@ -748,11 +743,8 @@ export class GameServerConfigsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteGameServerConfigProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta/game_server_configs_service.delete_game_server_config.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_async
    */
   async checkDeleteGameServerConfigProgress(
     name: string
@@ -776,37 +768,6 @@ export class GameServerConfigsServiceClient {
       protos.google.cloud.gaming.v1beta.OperationMetadata
     >;
   }
-  listGameServerConfigs(
-    request?: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.gaming.v1beta.IGameServerConfig[],
-      protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest | null,
-      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse
-    ]
-  >;
-  listGameServerConfigs(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
-      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gaming.v1beta.IGameServerConfig
-    >
-  ): void;
-  listGameServerConfigs(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
-      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse
-      | null
-      | undefined,
-      protos.google.cloud.gaming.v1beta.IGameServerConfig
-    >
-  ): void;
   /**
    * Lists game server configs in a given project, location, and game server
    * deployment.
@@ -844,6 +805,37 @@ export class GameServerConfigsServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listGameServerConfigs(
+    request?: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gaming.v1beta.IGameServerConfig[],
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest | null,
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse
+    ]
+  >;
+  listGameServerConfigs(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerConfig
+    >
+  ): void;
+  listGameServerConfigs(
+    request: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
+      | protos.google.cloud.gaming.v1beta.IListGameServerConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gaming.v1beta.IGameServerConfig
+    >
+  ): void;
   listGameServerConfigs(
     request?: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
     optionsOrCallback?:
@@ -978,11 +970,8 @@ export class GameServerConfigsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listGameServerConfigsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta/game_server_configs_service.list_game_server_configs.js</caption>
+   * region_tag:gameservices_v1beta_generated_GameServerConfigsService_ListGameServerConfigs_async
    */
   listGameServerConfigsAsync(
     request?: protos.google.cloud.gaming.v1beta.IListGameServerConfigsRequest,
@@ -996,7 +985,6 @@ export class GameServerConfigsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listGameServerConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

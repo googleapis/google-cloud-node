@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerConfigsServiceClient();
 
-  async function getGameServerConfig() {
+  async function callGetGameServerConfig() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getGameServerConfig();
+  callGetGameServerConfig();
   // [END gameservices_v1_generated_GameServerConfigsService_GetGameServerConfig_async]
 }
 

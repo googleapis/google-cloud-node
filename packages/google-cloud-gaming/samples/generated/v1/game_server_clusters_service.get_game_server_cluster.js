@@ -32,7 +32,7 @@ function main(name) {
    *  value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
    *  not return the `cluster_state` field.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Gaming library
   const {GameServerClustersServiceClient} =
@@ -41,7 +41,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function getGameServerCluster() {
+  async function callGetGameServerCluster() {
     // Construct request
     const request = {
       name,
@@ -52,7 +52,7 @@ function main(name) {
     console.log(response);
   }
 
-  getGameServerCluster();
+  callGetGameServerCluster();
   // [END gameservices_v1_generated_GameServerClustersService_GetGameServerCluster_async]
 }
 

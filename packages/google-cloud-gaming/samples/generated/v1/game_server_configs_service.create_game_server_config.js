@@ -31,7 +31,7 @@ function main(parent, configId, gameServerConfig) {
   /**
    *  Required. The game server config resource to be created.
    */
-  // const gameServerConfig = ''
+  // const gameServerConfig = {}
 
   // Imports the Gaming library
   const {GameServerConfigsServiceClient} =
@@ -40,7 +40,7 @@ function main(parent, configId, gameServerConfig) {
   // Instantiates a client
   const gamingClient = new GameServerConfigsServiceClient();
 
-  async function createGameServerConfig() {
+  async function callCreateGameServerConfig() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent, configId, gameServerConfig) {
     console.log(response);
   }
 
-  createGameServerConfig();
+  callCreateGameServerConfig();
   // [END gameservices_v1_generated_GameServerConfigsService_CreateGameServerConfig_async]
 }
 

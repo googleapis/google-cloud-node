@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerDeploymentsServiceClient();
 
-  async function deleteGameServerDeployment() {
+  async function callDeleteGameServerDeployment() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteGameServerDeployment();
+  callDeleteGameServerDeployment();
   // [END gameservices_v1_generated_GameServerDeploymentsService_DeleteGameServerDeployment_async]
 }
 

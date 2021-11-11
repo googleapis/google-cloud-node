@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerClustersServiceClient();
 
-  async function deleteGameServerCluster() {
+  async function callDeleteGameServerCluster() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteGameServerCluster();
+  callDeleteGameServerCluster();
   // [END gameservices_v1_generated_GameServerClustersService_DeleteGameServerCluster_async]
 }
 

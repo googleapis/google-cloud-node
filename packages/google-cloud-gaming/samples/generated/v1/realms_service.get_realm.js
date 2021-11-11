@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new RealmsServiceClient();
 
-  async function getRealm() {
+  async function callGetRealm() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getRealm();
+  callGetRealm();
   // [END gameservices_v1_generated_RealmsService_GetRealm_async]
 }
 

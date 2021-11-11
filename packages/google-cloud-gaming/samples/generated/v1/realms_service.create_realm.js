@@ -31,7 +31,7 @@ function main(parent, realmId, realm) {
   /**
    *  Required. The realm resource to be created.
    */
-  // const realm = ''
+  // const realm = {}
 
   // Imports the Gaming library
   const {RealmsServiceClient} = require('@google-cloud/game-servers').v1;
@@ -39,7 +39,7 @@ function main(parent, realmId, realm) {
   // Instantiates a client
   const gamingClient = new RealmsServiceClient();
 
-  async function createRealm() {
+  async function callCreateRealm() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent, realmId, realm) {
     console.log(response);
   }
 
-  createRealm();
+  callCreateRealm();
   // [END gameservices_v1_generated_RealmsService_CreateRealm_async]
 }
 

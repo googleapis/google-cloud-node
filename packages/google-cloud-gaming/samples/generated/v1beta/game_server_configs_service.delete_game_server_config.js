@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const gamingClient = new GameServerConfigsServiceClient();
 
-  async function deleteGameServerConfig() {
+  async function callDeleteGameServerConfig() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteGameServerConfig();
+  callDeleteGameServerConfig();
   // [END gameservices_v1beta_generated_GameServerConfigsService_DeleteGameServerConfig_async]
 }
 
