@@ -47,7 +47,7 @@ function main(account) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function listProducts() {
+  async function callListProducts() {
     // Construct request
     const request = {
       account,
@@ -60,7 +60,7 @@ function main(account) {
     }
   }
 
-  listProducts();
+  callListProducts();
   // [END cloudchannel_v1_generated_CloudChannelService_ListProducts_async]
 }
 

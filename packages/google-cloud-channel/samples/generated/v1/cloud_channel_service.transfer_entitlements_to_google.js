@@ -36,7 +36,7 @@ function main(parent, entitlements) {
    *  make the request again with the same request ID, the server can check if
    *  it received the original operation with the same request ID. If it did, it
    *  will ignore the second request.
-   *  The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
+   *  The request ID must be a valid UUID (https://tools.ietf.org/html/rfc4122)
    *  with the exception that zero UUID is not supported
    *  (`00000000-0000-0000-0000-000000000000`).
    */
@@ -48,7 +48,7 @@ function main(parent, entitlements) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function transferEntitlementsToGoogle() {
+  async function callTransferEntitlementsToGoogle() {
     // Construct request
     const request = {
       parent,
@@ -63,7 +63,7 @@ function main(parent, entitlements) {
     console.log(response);
   }
 
-  transferEntitlementsToGoogle();
+  callTransferEntitlementsToGoogle();
   // [END cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_async]
 }
 

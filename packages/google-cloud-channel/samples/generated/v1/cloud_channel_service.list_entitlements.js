@@ -34,8 +34,8 @@ function main(parent) {
   /**
    *  Optional. A token for a page of results other than the first page.
    *  Obtained using
-   *  [ListEntitlementsResponse.next_page_token][google.cloud.channel.v1.ListEntitlementsResponse.next_page_token] of the previous
-   *  [CloudChannelService.ListEntitlements][google.cloud.channel.v1.CloudChannelService.ListEntitlements] call.
+   *  ListEntitlementsResponse.next_page_token google.cloud.channel.v1.ListEntitlementsResponse.next_page_token  of the previous
+   *  CloudChannelService.ListEntitlements google.cloud.channel.v1.CloudChannelService.ListEntitlements  call.
    */
   // const pageToken = 'abc123'
 
@@ -45,7 +45,7 @@ function main(parent) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function listEntitlements() {
+  async function callListEntitlements() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent) {
     }
   }
 
-  listEntitlements();
+  callListEntitlements();
   // [END cloudchannel_v1_generated_CloudChannelService_ListEntitlements_async]
 }
 

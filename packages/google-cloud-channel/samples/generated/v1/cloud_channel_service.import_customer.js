@@ -65,7 +65,7 @@ function main(domain, cloudIdentityId, parent, overwriteIfExists) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function importCustomer() {
+  async function callImportCustomer() {
     // Construct request
     const request = {
       domain,
@@ -79,7 +79,7 @@ function main(domain, cloudIdentityId, parent, overwriteIfExists) {
     console.log(response);
   }
 
-  importCustomer();
+  callImportCustomer();
   // [END cloudchannel_v1_generated_CloudChannelService_ImportCustomer_async]
 }
 

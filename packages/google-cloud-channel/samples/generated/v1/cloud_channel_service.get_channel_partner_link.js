@@ -28,7 +28,7 @@ function main(name) {
   /**
    *  Optional. The level of granularity the ChannelPartnerLink will display.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function getChannelPartnerLink() {
+  async function callGetChannelPartnerLink() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  getChannelPartnerLink();
+  callGetChannelPartnerLink();
   // [END cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerLink_async]
 }
 

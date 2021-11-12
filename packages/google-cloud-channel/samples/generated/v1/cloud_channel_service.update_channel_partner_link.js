@@ -29,13 +29,13 @@ function main(name, channelPartnerLink, updateMask) {
    *  Required. The channel partner link to update. Only channel_partner_link.link_state
    *  is allowed for updates.
    */
-  // const channelPartnerLink = ''
+  // const channelPartnerLink = {}
   /**
    *  Required. The update mask that applies to the resource.
    *  The only allowable value for an update mask is
    *  channel_partner_link.link_state.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
@@ -43,7 +43,7 @@ function main(name, channelPartnerLink, updateMask) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function updateChannelPartnerLink() {
+  async function callUpdateChannelPartnerLink() {
     // Construct request
     const request = {
       name,
@@ -56,7 +56,7 @@ function main(name, channelPartnerLink, updateMask) {
     console.log(response);
   }
 
-  updateChannelPartnerLink();
+  callUpdateChannelPartnerLink();
   // [END cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_async]
 }
 

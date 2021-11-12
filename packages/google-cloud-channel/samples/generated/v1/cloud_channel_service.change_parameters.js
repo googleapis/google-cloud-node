@@ -28,7 +28,7 @@ function main(name, parameters) {
   /**
    *  Required. Entitlement parameters to update. You can only change editable parameters.
    *  To view the available Parameters for a request, refer to the
-   *  [Offer.parameter_definitions][google.cloud.channel.v1.Offer.parameter_definitions] from the desired offer.
+   *  Offer.parameter_definitions google.cloud.channel.v1.Offer.parameter_definitions  from the desired offer.
    */
   // const parameters = 1234
   /**
@@ -38,7 +38,7 @@ function main(name, parameters) {
    *  make the request again with the same request ID, the server can check if
    *  it received the original operation with the same request ID. If it did, it
    *  will ignore the second request.
-   *  The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
+   *  The request ID must be a valid UUID (https://tools.ietf.org/html/rfc4122)
    *  with the exception that zero UUID is not supported
    *  (`00000000-0000-0000-0000-000000000000`).
    */
@@ -54,7 +54,7 @@ function main(name, parameters) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function changeParameters() {
+  async function callChangeParameters() {
     // Construct request
     const request = {
       name,
@@ -67,7 +67,7 @@ function main(name, parameters) {
     console.log(response);
   }
 
-  changeParameters();
+  callChangeParameters();
   // [END cloudchannel_v1_generated_CloudChannelService_ChangeParameters_async]
 }
 

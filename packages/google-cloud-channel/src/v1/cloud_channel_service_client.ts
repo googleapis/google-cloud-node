@@ -582,6 +582,35 @@ export class CloudChannelServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Returns the requested {@link google.cloud.channel.v1.Customer|Customer} resource.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The customer resource doesn't exist. Usually the result of an
+   * invalid name parameter.
+   *
+   * Return value:
+   * The {@link google.cloud.channel.v1.Customer|Customer} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the customer to retrieve.
+   *   Name uses the format: accounts/{account_id}/customers/{customer_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Customer]{@link google.cloud.channel.v1.Customer}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.get_customer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_GetCustomer_async
+   */
   getCustomer(
     request?: protos.google.cloud.channel.v1.IGetCustomerRequest,
     options?: CallOptions
@@ -609,35 +638,6 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the requested {@link google.cloud.channel.v1.Customer|Customer} resource.
-   *
-   * Possible error codes:
-   *
-   * * PERMISSION_DENIED: The reseller account making the request is different
-   * from the reseller account in the API request.
-   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * NOT_FOUND: The customer resource doesn't exist. Usually the result of an
-   * invalid name parameter.
-   *
-   * Return value:
-   * The {@link google.cloud.channel.v1.Customer|Customer} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the customer to retrieve.
-   *   Name uses the format: accounts/{account_id}/customers/{customer_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Customer]{@link google.cloud.channel.v1.Customer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getCustomer(request);
-   */
   getCustomer(
     request?: protos.google.cloud.channel.v1.IGetCustomerRequest,
     optionsOrCallback?:
@@ -677,6 +677,41 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.getCustomer(request, options, callback);
   }
+  /**
+   * Confirms the existence of Cloud Identity accounts based on the domain and
+   * if the Cloud Identity accounts are owned by the reseller.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * INVALID_VALUE: Invalid domain value in the request.
+   *
+   * Return value:
+   * A list of {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources for the domain (may be
+   * empty)
+   *
+   * Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
+   * no {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources match the domain.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The reseller account's resource name.
+   *   Parent uses the format: accounts/{account_id}
+   * @param {string} request.domain
+   *   Required. Domain to fetch for Cloud Identity account customer.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CheckCloudIdentityAccountsExistResponse]{@link google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.check_cloud_identity_accounts_exist.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CheckCloudIdentityAccountsExist_async
+   */
   checkCloudIdentityAccountsExist(
     request?: protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistRequest,
     options?: CallOptions
@@ -711,41 +746,6 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Confirms the existence of Cloud Identity accounts based on the domain and
-   * if the Cloud Identity accounts are owned by the reseller.
-   *
-   * Possible error codes:
-   *
-   * * PERMISSION_DENIED: The reseller account making the request is different
-   * from the reseller account in the API request.
-   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * INVALID_VALUE: Invalid domain value in the request.
-   *
-   * Return value:
-   * A list of {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources for the domain (may be
-   * empty)
-   *
-   * Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
-   * no {@link google.cloud.channel.v1.CloudIdentityCustomerAccount|CloudIdentityCustomerAccount} resources match the domain.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The reseller account's resource name.
-   *   Parent uses the format: accounts/{account_id}
-   * @param {string} request.domain
-   *   Required. Domain to fetch for Cloud Identity account customer.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [CheckCloudIdentityAccountsExistResponse]{@link google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.checkCloudIdentityAccountsExist(request);
-   */
   checkCloudIdentityAccountsExist(
     request?: protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistRequest,
     optionsOrCallback?:
@@ -796,33 +796,6 @@ export class CloudChannelServiceClient {
       callback
     );
   }
-  createCustomer(
-    request?: protos.google.cloud.channel.v1.ICreateCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.ICreateCustomerRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createCustomer(
-    request: protos.google.cloud.channel.v1.ICreateCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.ICreateCustomerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createCustomer(
-    request: protos.google.cloud.channel.v1.ICreateCustomerRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.ICreateCustomerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a new {@link google.cloud.channel.v1.Customer|Customer} resource under the reseller or distributor
    * account.
@@ -852,9 +825,36 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createCustomer(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.create_customer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateCustomer_async
    */
+  createCustomer(
+    request?: protos.google.cloud.channel.v1.ICreateCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.ICreateCustomerRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createCustomer(
+    request: protos.google.cloud.channel.v1.ICreateCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.ICreateCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomer(
+    request: protos.google.cloud.channel.v1.ICreateCustomerRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.ICreateCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createCustomer(
     request?: protos.google.cloud.channel.v1.ICreateCustomerRequest,
     optionsOrCallback?:
@@ -896,33 +896,6 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.createCustomer(request, options, callback);
   }
-  updateCustomer(
-    request?: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.IUpdateCustomerRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateCustomer(
-    request: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.IUpdateCustomerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateCustomer(
-    request: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.IUpdateCustomerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates an existing {@link google.cloud.channel.v1.Customer|Customer} resource for the reseller or
    * distributor.
@@ -951,9 +924,36 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateCustomer(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.update_customer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateCustomer_async
    */
+  updateCustomer(
+    request?: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IUpdateCustomerRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateCustomer(
+    request: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IUpdateCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomer(
+    request: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IUpdateCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateCustomer(
     request?: protos.google.cloud.channel.v1.IUpdateCustomerRequest,
     optionsOrCallback?:
@@ -995,6 +995,31 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.updateCustomer(request, options, callback);
   }
+  /**
+   * Deletes the given {@link google.cloud.channel.v1.Customer|Customer} permanently.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The account making the request does not own
+   * this customer.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * FAILED_PRECONDITION: The customer has existing entitlements.
+   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the customer to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.delete_customer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_DeleteCustomer_async
+   */
   deleteCustomer(
     request?: protos.google.cloud.channel.v1.IDeleteCustomerRequest,
     options?: CallOptions
@@ -1022,31 +1047,6 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the given {@link google.cloud.channel.v1.Customer|Customer} permanently.
-   *
-   * Possible error codes:
-   *
-   * * PERMISSION_DENIED: The account making the request does not own
-   * this customer.
-   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * FAILED_PRECONDITION: The customer has existing entitlements.
-   * * NOT_FOUND: No {@link google.cloud.channel.v1.Customer|Customer} resource found for the name in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the customer to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteCustomer(request);
-   */
   deleteCustomer(
     request?: protos.google.cloud.channel.v1.IDeleteCustomerRequest,
     optionsOrCallback?:
@@ -1088,33 +1088,6 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteCustomer(request, options, callback);
   }
-  importCustomer(
-    request?: protos.google.cloud.channel.v1.IImportCustomerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  importCustomer(
-    request: protos.google.cloud.channel.v1.IImportCustomerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  importCustomer(
-    request: protos.google.cloud.channel.v1.IImportCustomerRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.ICustomer,
-      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Imports a {@link google.cloud.channel.v1.Customer|Customer} from the Cloud Identity associated with the provided
    * Cloud Identity ID or domain before a TransferEntitlements call. If a
@@ -1168,9 +1141,36 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.importCustomer(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.import_customer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ImportCustomer_async
    */
+  importCustomer(
+    request?: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  importCustomer(
+    request: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importCustomer(
+    request: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   importCustomer(
     request?: protos.google.cloud.channel.v1.IImportCustomerRequest,
     optionsOrCallback?:
@@ -1212,6 +1212,34 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.importCustomer(request, options, callback);
   }
+  /**
+   * Returns the requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: The customer entitlement was not found.
+   *
+   * Return value:
+   * The requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the entitlement to retrieve.
+   *   Name uses the format:
+   *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Entitlement]{@link google.cloud.channel.v1.Entitlement}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.get_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_GetEntitlement_async
+   */
   getEntitlement(
     request?: protos.google.cloud.channel.v1.IGetEntitlementRequest,
     options?: CallOptions
@@ -1239,34 +1267,6 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
-   *
-   * Possible error codes:
-   *
-   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * NOT_FOUND: The customer entitlement was not found.
-   *
-   * Return value:
-   * The requested {@link google.cloud.channel.v1.Entitlement|Entitlement} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the entitlement to retrieve.
-   *   Name uses the format:
-   *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Entitlement]{@link google.cloud.channel.v1.Entitlement}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getEntitlement(request);
-   */
   getEntitlement(
     request?: protos.google.cloud.channel.v1.IGetEntitlementRequest,
     optionsOrCallback?:
@@ -1308,6 +1308,39 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.getEntitlement(request, options, callback);
   }
+  /**
+   * Returns the requested {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   * You must be a distributor to call this method.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: ChannelPartnerLink resource not found because of an
+   * invalid channel partner link name.
+   *
+   * Return value:
+   * The {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the channel partner link to retrieve.
+   *   Name uses the format: accounts/{account_id}/channelPartnerLinks/{id}
+   *   where {id} is the Cloud Identity ID of the partner.
+   * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
+   *   Optional. The level of granularity the ChannelPartnerLink will display.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ChannelPartnerLink]{@link google.cloud.channel.v1.ChannelPartnerLink}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.get_channel_partner_link.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_GetChannelPartnerLink_async
+   */
   getChannelPartnerLink(
     request?: protos.google.cloud.channel.v1.IGetChannelPartnerLinkRequest,
     options?: CallOptions
@@ -1339,39 +1372,6 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the requested {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
-   * You must be a distributor to call this method.
-   *
-   * Possible error codes:
-   *
-   * * PERMISSION_DENIED: The reseller account making the request is different
-   * from the reseller account in the API request.
-   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * NOT_FOUND: ChannelPartnerLink resource not found because of an
-   * invalid channel partner link name.
-   *
-   * Return value:
-   * The {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the channel partner link to retrieve.
-   *   Name uses the format: accounts/{account_id}/channelPartnerLinks/{id}
-   *   where {id} is the Cloud Identity ID of the partner.
-   * @param {google.cloud.channel.v1.ChannelPartnerLinkView} [request.view]
-   *   Optional. The level of granularity the ChannelPartnerLink will display.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ChannelPartnerLink]{@link google.cloud.channel.v1.ChannelPartnerLink}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getChannelPartnerLink(request);
-   */
   getChannelPartnerLink(
     request?: protos.google.cloud.channel.v1.IGetChannelPartnerLinkRequest,
     optionsOrCallback?:
@@ -1415,40 +1415,6 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.getChannelPartnerLink(request, options, callback);
   }
-  createChannelPartnerLink(
-    request?: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IChannelPartnerLink,
-      (
-        | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  createChannelPartnerLink(
-    request: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IChannelPartnerLink,
-      | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createChannelPartnerLink(
-    request: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IChannelPartnerLink,
-      | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Initiates a channel partner link between a distributor and a reseller, or
    * between resellers in an n-tier reseller channel.
@@ -1490,9 +1456,43 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.createChannelPartnerLink(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.create_channel_partner_link.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerLink_async
    */
+  createChannelPartnerLink(
+    request?: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerLink,
+      (
+        | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createChannelPartnerLink(
+    request: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerLink,
+      | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createChannelPartnerLink(
+    request: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerLink,
+      | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createChannelPartnerLink(
     request?: protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest,
     optionsOrCallback?:
@@ -1543,40 +1543,6 @@ export class CloudChannelServiceClient {
       callback
     );
   }
-  updateChannelPartnerLink(
-    request?: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IChannelPartnerLink,
-      (
-        | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  updateChannelPartnerLink(
-    request: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IChannelPartnerLink,
-      | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateChannelPartnerLink(
-    request: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IChannelPartnerLink,
-      | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates a channel partner link. Distributors call this method to change a
    * link's status. For example, to suspend a partner link.
@@ -1620,9 +1586,43 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.updateChannelPartnerLink(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.update_channel_partner_link.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_async
    */
+  updateChannelPartnerLink(
+    request?: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerLink,
+      (
+        | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateChannelPartnerLink(
+    request: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerLink,
+      | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateChannelPartnerLink(
+    request: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IChannelPartnerLink,
+      | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateChannelPartnerLink(
     request?: protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest,
     optionsOrCallback?:
@@ -1673,6 +1673,34 @@ export class CloudChannelServiceClient {
       callback
     );
   }
+  /**
+   * Returns the requested {@link google.cloud.channel.v1.Offer|Offer} resource.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The entitlement doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   * * NOT_FOUND: Entitlement or offer was not found.
+   *
+   * Return value:
+   * The {@link google.cloud.channel.v1.Offer|Offer} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.entitlement
+   *   Required. The resource name of the entitlement to retrieve the Offer.
+   *   Entitlement uses the format:
+   *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Offer]{@link google.cloud.channel.v1.Offer}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.lookup_offer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_LookupOffer_async
+   */
   lookupOffer(
     request?: protos.google.cloud.channel.v1.ILookupOfferRequest,
     options?: CallOptions
@@ -1700,34 +1728,6 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the requested {@link google.cloud.channel.v1.Offer|Offer} resource.
-   *
-   * Possible error codes:
-   *
-   * * PERMISSION_DENIED: The entitlement doesn't belong to the reseller.
-   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-   * * NOT_FOUND: Entitlement or offer was not found.
-   *
-   * Return value:
-   * The {@link google.cloud.channel.v1.Offer|Offer} resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.entitlement
-   *   Required. The resource name of the entitlement to retrieve the Offer.
-   *   Entitlement uses the format:
-   *   accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Offer]{@link google.cloud.channel.v1.Offer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.lookupOffer(request);
-   */
   lookupOffer(
     request?: protos.google.cloud.channel.v1.ILookupOfferRequest,
     optionsOrCallback?:
@@ -1767,37 +1767,6 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.lookupOffer(request, options, callback);
   }
-  registerSubscriber(
-    request?: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
-      protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  registerSubscriber(
-    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
-      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  registerSubscriber(
-    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
-      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Registers a service account with subscriber privileges on the Cloud Pub/Sub
    * topic for this Channel Services account. After you create a
@@ -1830,9 +1799,40 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.registerSubscriber(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.register_subscriber.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_async
    */
+  registerSubscriber(
+    request?: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  registerSubscriber(
+    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  registerSubscriber(
+    request: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   registerSubscriber(
     request?: protos.google.cloud.channel.v1.IRegisterSubscriberRequest,
     optionsOrCallback?:
@@ -1876,37 +1876,6 @@ export class CloudChannelServiceClient {
     this.initialize();
     return this.innerApiCalls.registerSubscriber(request, options, callback);
   }
-  unregisterSubscriber(
-    request?: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
-      protos.google.cloud.channel.v1.IUnregisterSubscriberRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  unregisterSubscriber(
-    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
-      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  unregisterSubscriber(
-    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
-    callback: Callback<
-      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
-      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Unregisters a service account with subscriber privileges on the Cloud
    * Pub/Sub topic created for this Channel Services account. If there are no
@@ -1943,9 +1912,40 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.unregisterSubscriber(request);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.unregister_subscriber.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_UnregisterSubscriber_async
    */
+  unregisterSubscriber(
+    request?: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      protos.google.cloud.channel.v1.IUnregisterSubscriberRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  unregisterSubscriber(
+    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unregisterSubscriber(
+    request: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+      | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   unregisterSubscriber(
     request?: protos.google.cloud.channel.v1.IUnregisterSubscriberRequest,
     optionsOrCallback?:
@@ -1990,42 +1990,6 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.unregisterSubscriber(request, options, callback);
   }
 
-  provisionCloudIdentity(
-    request?: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.ICustomer,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  provisionCloudIdentity(
-    request: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.ICustomer,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  provisionCloudIdentity(
-    request: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.ICustomer,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates a Cloud Identity for the given customer using the customer's
    * information, or the information provided here.
@@ -2069,10 +2033,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.provisionCloudIdentity(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.provision_cloud_identity.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_async
    */
+  provisionCloudIdentity(
+    request?: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.ICustomer,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  provisionCloudIdentity(
+    request: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.ICustomer,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  provisionCloudIdentity(
+    request: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.ICustomer,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   provisionCloudIdentity(
     request?: protos.google.cloud.channel.v1.IProvisionCloudIdentityRequest,
     optionsOrCallback?:
@@ -2134,11 +2133,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkProvisionCloudIdentityProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.provision_cloud_identity.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_async
    */
   async checkProvisionCloudIdentityProgress(
     name: string
@@ -2162,42 +2158,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  createEntitlement(
-    request?: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  createEntitlement(
-    request: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEntitlement(
-    request: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Creates an entitlement for a customer.
    *
@@ -2265,10 +2225,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.createEntitlement(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.create_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_async
    */
+  createEntitlement(
+    request?: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createEntitlement(
+    request: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEntitlement(
+    request: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createEntitlement(
     request?: protos.google.cloud.channel.v1.ICreateEntitlementRequest,
     optionsOrCallback?:
@@ -2326,11 +2321,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateEntitlementProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.create_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_async
    */
   async checkCreateEntitlementProgress(
     name: string
@@ -2354,42 +2346,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  changeParameters(
-    request?: protos.google.cloud.channel.v1.IChangeParametersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  changeParameters(
-    request: protos.google.cloud.channel.v1.IChangeParametersRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  changeParameters(
-    request: protos.google.cloud.channel.v1.IChangeParametersRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Change parameters of the entitlement.
    *
@@ -2449,10 +2405,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.changeParameters(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.change_parameters.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeParameters_async
    */
+  changeParameters(
+    request?: protos.google.cloud.channel.v1.IChangeParametersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  changeParameters(
+    request: protos.google.cloud.channel.v1.IChangeParametersRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  changeParameters(
+    request: protos.google.cloud.channel.v1.IChangeParametersRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   changeParameters(
     request?: protos.google.cloud.channel.v1.IChangeParametersRequest,
     optionsOrCallback?:
@@ -2510,11 +2501,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkChangeParametersProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.change_parameters.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeParameters_async
    */
   async checkChangeParametersProgress(
     name: string
@@ -2538,42 +2526,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  changeRenewalSettings(
-    request?: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  changeRenewalSettings(
-    request: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  changeRenewalSettings(
-    request: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the renewal settings for an existing customer entitlement.
    *
@@ -2628,10 +2580,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.changeRenewalSettings(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.change_renewal_settings.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_async
    */
+  changeRenewalSettings(
+    request?: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  changeRenewalSettings(
+    request: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  changeRenewalSettings(
+    request: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   changeRenewalSettings(
     request?: protos.google.cloud.channel.v1.IChangeRenewalSettingsRequest,
     optionsOrCallback?:
@@ -2689,11 +2676,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkChangeRenewalSettingsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.change_renewal_settings.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_async
    */
   async checkChangeRenewalSettingsProgress(
     name: string
@@ -2717,42 +2701,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  changeOffer(
-    request?: protos.google.cloud.channel.v1.IChangeOfferRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  changeOffer(
-    request: protos.google.cloud.channel.v1.IChangeOfferRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  changeOffer(
-    request: protos.google.cloud.channel.v1.IChangeOfferRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Updates the Offer for an existing customer entitlement.
    *
@@ -2811,10 +2759,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.changeOffer(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.change_offer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeOffer_async
    */
+  changeOffer(
+    request?: protos.google.cloud.channel.v1.IChangeOfferRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  changeOffer(
+    request: protos.google.cloud.channel.v1.IChangeOfferRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  changeOffer(
+    request: protos.google.cloud.channel.v1.IChangeOfferRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   changeOffer(
     request?: protos.google.cloud.channel.v1.IChangeOfferRequest,
     optionsOrCallback?:
@@ -2872,11 +2855,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkChangeOfferProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.change_offer.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ChangeOffer_async
    */
   async checkChangeOfferProgress(
     name: string
@@ -2900,42 +2880,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  startPaidService(
-    request?: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  startPaidService(
-    request: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  startPaidService(
-    request: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Starts paid service for a trial entitlement.
    *
@@ -2989,10 +2933,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.startPaidService(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.start_paid_service.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_StartPaidService_async
    */
+  startPaidService(
+    request?: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  startPaidService(
+    request: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  startPaidService(
+    request: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   startPaidService(
     request?: protos.google.cloud.channel.v1.IStartPaidServiceRequest,
     optionsOrCallback?:
@@ -3050,11 +3029,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkStartPaidServiceProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.start_paid_service.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_StartPaidService_async
    */
   async checkStartPaidServiceProgress(
     name: string
@@ -3078,42 +3054,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  suspendEntitlement(
-    request?: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  suspendEntitlement(
-    request: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  suspendEntitlement(
-    request: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Suspends a previously fulfilled entitlement.
    *
@@ -3164,10 +3104,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.suspendEntitlement(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.suspend_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_async
    */
+  suspendEntitlement(
+    request?: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  suspendEntitlement(
+    request: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suspendEntitlement(
+    request: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   suspendEntitlement(
     request?: protos.google.cloud.channel.v1.ISuspendEntitlementRequest,
     optionsOrCallback?:
@@ -3225,11 +3200,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkSuspendEntitlementProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.suspend_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_SuspendEntitlement_async
    */
   async checkSuspendEntitlementProgress(
     name: string
@@ -3253,42 +3225,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  cancelEntitlement(
-    request?: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  cancelEntitlement(
-    request: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelEntitlement(
-    request: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Cancels a previously fulfilled entitlement.
    *
@@ -3344,10 +3280,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.cancelEntitlement(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.cancel_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_async
    */
+  cancelEntitlement(
+    request?: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  cancelEntitlement(
+    request: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelEntitlement(
+    request: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cancelEntitlement(
     request?: protos.google.cloud.channel.v1.ICancelEntitlementRequest,
     optionsOrCallback?:
@@ -3405,11 +3376,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCancelEntitlementProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.cancel_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_CancelEntitlement_async
    */
   async checkCancelEntitlementProgress(
     name: string
@@ -3433,42 +3401,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  activateEntitlement(
-    request?: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  activateEntitlement(
-    request: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  activateEntitlement(
-    request: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.IEntitlement,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Activates a previously suspended entitlement. Entitlements suspended for
    * pending ToS acceptance can't be activated using this method.
@@ -3525,10 +3457,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.activateEntitlement(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.activate_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_async
    */
+  activateEntitlement(
+    request?: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  activateEntitlement(
+    request: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  activateEntitlement(
+    request: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.IEntitlement,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   activateEntitlement(
     request?: protos.google.cloud.channel.v1.IActivateEntitlementRequest,
     optionsOrCallback?:
@@ -3586,11 +3553,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkActivateEntitlementProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.activate_entitlement.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ActivateEntitlement_async
    */
   async checkActivateEntitlementProgress(
     name: string
@@ -3614,42 +3578,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  transferEntitlements(
-    request?: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  transferEntitlements(
-    request: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  transferEntitlements(
-    request: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Transfers customer entitlements to new reseller.
    *
@@ -3715,10 +3643,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.transferEntitlements(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_async
    */
+  transferEntitlements(
+    request?: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  transferEntitlements(
+    request: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  transferEntitlements(
+    request: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   transferEntitlements(
     request?: protos.google.cloud.channel.v1.ITransferEntitlementsRequest,
     optionsOrCallback?:
@@ -3776,11 +3739,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkTransferEntitlementsProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_async
    */
   async checkTransferEntitlementsProgress(
     name: string
@@ -3804,42 +3764,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  transferEntitlementsToGoogle(
-    request?: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  transferEntitlementsToGoogle(
-    request: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  transferEntitlementsToGoogle(
-    request: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.channel.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Transfers customer entitlements from their current reseller to Google.
    *
@@ -3900,10 +3824,45 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const [operation] = await client.transferEntitlementsToGoogle(request);
-   * const [response] = await operation.promise();
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_async
    */
+  transferEntitlementsToGoogle(
+    request?: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  transferEntitlementsToGoogle(
+    request: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  transferEntitlementsToGoogle(
+    request: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.channel.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   transferEntitlementsToGoogle(
     request?: protos.google.cloud.channel.v1.ITransferEntitlementsToGoogleRequest,
     optionsOrCallback?:
@@ -3965,11 +3924,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkTransferEntitlementsToGoogleProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_TransferEntitlementsToGoogle_async
    */
   async checkTransferEntitlementsToGoogleProgress(
     name: string
@@ -3993,33 +3949,6 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >;
   }
-  listCustomers(
-    request?: protos.google.cloud.channel.v1.IListCustomersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ICustomer[],
-      protos.google.cloud.channel.v1.IListCustomersRequest | null,
-      protos.google.cloud.channel.v1.IListCustomersResponse
-    ]
-  >;
-  listCustomers(
-    request: protos.google.cloud.channel.v1.IListCustomersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListCustomersRequest,
-      protos.google.cloud.channel.v1.IListCustomersResponse | null | undefined,
-      protos.google.cloud.channel.v1.ICustomer
-    >
-  ): void;
-  listCustomers(
-    request: protos.google.cloud.channel.v1.IListCustomersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListCustomersRequest,
-      protos.google.cloud.channel.v1.IListCustomersResponse | null | undefined,
-      protos.google.cloud.channel.v1.ICustomer
-    >
-  ): void;
   /**
    * List {@link google.cloud.channel.v1.Customer|Customer}s.
    *
@@ -4059,6 +3988,33 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listCustomers(
+    request?: protos.google.cloud.channel.v1.IListCustomersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomer[],
+      protos.google.cloud.channel.v1.IListCustomersRequest | null,
+      protos.google.cloud.channel.v1.IListCustomersResponse
+    ]
+  >;
+  listCustomers(
+    request: protos.google.cloud.channel.v1.IListCustomersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListCustomersRequest,
+      protos.google.cloud.channel.v1.IListCustomersResponse | null | undefined,
+      protos.google.cloud.channel.v1.ICustomer
+    >
+  ): void;
+  listCustomers(
+    request: protos.google.cloud.channel.v1.IListCustomersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListCustomersRequest,
+      protos.google.cloud.channel.v1.IListCustomersResponse | null | undefined,
+      protos.google.cloud.channel.v1.ICustomer
+    >
+  ): void;
   listCustomers(
     request?: protos.google.cloud.channel.v1.IListCustomersRequest,
     optionsOrCallback?:
@@ -4179,11 +4135,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listCustomersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_customers.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListCustomers_async
    */
   listCustomersAsync(
     request?: protos.google.cloud.channel.v1.IListCustomersRequest,
@@ -4197,7 +4150,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -4207,37 +4159,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ICustomer>;
   }
-  listEntitlements(
-    request?: protos.google.cloud.channel.v1.IListEntitlementsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IEntitlement[],
-      protos.google.cloud.channel.v1.IListEntitlementsRequest | null,
-      protos.google.cloud.channel.v1.IListEntitlementsResponse
-    ]
-  >;
-  listEntitlements(
-    request: protos.google.cloud.channel.v1.IListEntitlementsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListEntitlementsRequest,
-      | protos.google.cloud.channel.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IEntitlement
-    >
-  ): void;
-  listEntitlements(
-    request: protos.google.cloud.channel.v1.IListEntitlementsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListEntitlementsRequest,
-      | protos.google.cloud.channel.v1.IListEntitlementsResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IEntitlement
-    >
-  ): void;
   /**
    * Lists {@link google.cloud.channel.v1.Entitlement|Entitlement}s belonging to a customer.
    *
@@ -4277,6 +4198,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listEntitlements(
+    request?: protos.google.cloud.channel.v1.IListEntitlementsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IEntitlement[],
+      protos.google.cloud.channel.v1.IListEntitlementsRequest | null,
+      protos.google.cloud.channel.v1.IListEntitlementsResponse
+    ]
+  >;
+  listEntitlements(
+    request: protos.google.cloud.channel.v1.IListEntitlementsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListEntitlementsRequest,
+      | protos.google.cloud.channel.v1.IListEntitlementsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IEntitlement
+    >
+  ): void;
+  listEntitlements(
+    request: protos.google.cloud.channel.v1.IListEntitlementsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListEntitlementsRequest,
+      | protos.google.cloud.channel.v1.IListEntitlementsResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IEntitlement
+    >
+  ): void;
   listEntitlements(
     request?: protos.google.cloud.channel.v1.IListEntitlementsRequest,
     optionsOrCallback?:
@@ -4401,11 +4353,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listEntitlementsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_entitlements.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListEntitlements_async
    */
   listEntitlementsAsync(
     request?: protos.google.cloud.channel.v1.IListEntitlementsRequest,
@@ -4419,7 +4368,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -4429,37 +4377,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IEntitlement>;
   }
-  listTransferableSkus(
-    request?: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ITransferableSku[],
-      protos.google.cloud.channel.v1.IListTransferableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListTransferableSkusResponse
-    ]
-  >;
-  listTransferableSkus(
-    request: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListTransferableSkusRequest,
-      | protos.google.cloud.channel.v1.IListTransferableSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.ITransferableSku
-    >
-  ): void;
-  listTransferableSkus(
-    request: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListTransferableSkusRequest,
-      | protos.google.cloud.channel.v1.IListTransferableSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.ITransferableSku
-    >
-  ): void;
   /**
    * List {@link google.cloud.channel.v1.TransferableSku|TransferableSku}s of a customer based on the Cloud Identity ID or
    * Customer Name in the request.
@@ -4526,6 +4443,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTransferableSkus(
+    request?: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ITransferableSku[],
+      protos.google.cloud.channel.v1.IListTransferableSkusRequest | null,
+      protos.google.cloud.channel.v1.IListTransferableSkusResponse
+    ]
+  >;
+  listTransferableSkus(
+    request: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListTransferableSkusRequest,
+      | protos.google.cloud.channel.v1.IListTransferableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ITransferableSku
+    >
+  ): void;
+  listTransferableSkus(
+    request: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListTransferableSkusRequest,
+      | protos.google.cloud.channel.v1.IListTransferableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ITransferableSku
+    >
+  ): void;
   listTransferableSkus(
     request?: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
     optionsOrCallback?:
@@ -4686,11 +4634,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTransferableSkusAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_transferable_skus.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListTransferableSkus_async
    */
   listTransferableSkusAsync(
     request?: protos.google.cloud.channel.v1.IListTransferableSkusRequest,
@@ -4704,7 +4649,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -4714,37 +4658,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableSku>;
   }
-  listTransferableOffers(
-    request?: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ITransferableOffer[],
-      protos.google.cloud.channel.v1.IListTransferableOffersRequest | null,
-      protos.google.cloud.channel.v1.IListTransferableOffersResponse
-    ]
-  >;
-  listTransferableOffers(
-    request: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListTransferableOffersRequest,
-      | protos.google.cloud.channel.v1.IListTransferableOffersResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.ITransferableOffer
-    >
-  ): void;
-  listTransferableOffers(
-    request: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListTransferableOffersRequest,
-      | protos.google.cloud.channel.v1.IListTransferableOffersResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.ITransferableOffer
-    >
-  ): void;
   /**
    * List {@link google.cloud.channel.v1.TransferableOffer|TransferableOffer}s of a customer based on Cloud Identity ID or
    * Customer Name in the request.
@@ -4802,6 +4715,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTransferableOffers(
+    request?: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ITransferableOffer[],
+      protos.google.cloud.channel.v1.IListTransferableOffersRequest | null,
+      protos.google.cloud.channel.v1.IListTransferableOffersResponse
+    ]
+  >;
+  listTransferableOffers(
+    request: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListTransferableOffersRequest,
+      | protos.google.cloud.channel.v1.IListTransferableOffersResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ITransferableOffer
+    >
+  ): void;
+  listTransferableOffers(
+    request: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListTransferableOffersRequest,
+      | protos.google.cloud.channel.v1.IListTransferableOffersResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.ITransferableOffer
+    >
+  ): void;
   listTransferableOffers(
     request?: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
     optionsOrCallback?:
@@ -4948,11 +4892,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTransferableOffersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_transferable_offers.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_async
    */
   listTransferableOffersAsync(
     request?: protos.google.cloud.channel.v1.IListTransferableOffersRequest,
@@ -4966,7 +4907,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -4976,37 +4916,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ITransferableOffer>;
   }
-  listChannelPartnerLinks(
-    request?: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IChannelPartnerLink[],
-      protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest | null,
-      protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
-    ]
-  >;
-  listChannelPartnerLinks(
-    request: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
-      | protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IChannelPartnerLink
-    >
-  ): void;
-  listChannelPartnerLinks(
-    request: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
-      | protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IChannelPartnerLink
-    >
-  ): void;
   /**
    * List {@link google.cloud.channel.v1.ChannelPartnerLink|ChannelPartnerLink}s belonging to a distributor.
    * You must be a distributor to call this method.
@@ -5050,6 +4959,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listChannelPartnerLinks(
+    request?: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IChannelPartnerLink[],
+      protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest | null,
+      protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
+    ]
+  >;
+  listChannelPartnerLinks(
+    request: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
+      | protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IChannelPartnerLink
+    >
+  ): void;
+  listChannelPartnerLinks(
+    request: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
+      | protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IChannelPartnerLink
+    >
+  ): void;
   listChannelPartnerLinks(
     request?: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
     optionsOrCallback?:
@@ -5182,11 +5122,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listChannelPartnerLinksAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_channel_partner_links.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerLinks_async
    */
   listChannelPartnerLinksAsync(
     request?: protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
@@ -5200,7 +5137,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -5210,33 +5146,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IChannelPartnerLink>;
   }
-  listProducts(
-    request?: protos.google.cloud.channel.v1.IListProductsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IProduct[],
-      protos.google.cloud.channel.v1.IListProductsRequest | null,
-      protos.google.cloud.channel.v1.IListProductsResponse
-    ]
-  >;
-  listProducts(
-    request: protos.google.cloud.channel.v1.IListProductsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListProductsRequest,
-      protos.google.cloud.channel.v1.IListProductsResponse | null | undefined,
-      protos.google.cloud.channel.v1.IProduct
-    >
-  ): void;
-  listProducts(
-    request: protos.google.cloud.channel.v1.IListProductsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListProductsRequest,
-      protos.google.cloud.channel.v1.IListProductsResponse | null | undefined,
-      protos.google.cloud.channel.v1.IProduct
-    >
-  ): void;
   /**
    * Lists the Products the reseller is authorized to sell.
    *
@@ -5274,6 +5183,33 @@ export class CloudChannelServiceClient {
    */
   listProducts(
     request?: protos.google.cloud.channel.v1.IListProductsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IProduct[],
+      protos.google.cloud.channel.v1.IListProductsRequest | null,
+      protos.google.cloud.channel.v1.IListProductsResponse
+    ]
+  >;
+  listProducts(
+    request: protos.google.cloud.channel.v1.IListProductsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListProductsRequest,
+      protos.google.cloud.channel.v1.IListProductsResponse | null | undefined,
+      protos.google.cloud.channel.v1.IProduct
+    >
+  ): void;
+  listProducts(
+    request: protos.google.cloud.channel.v1.IListProductsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListProductsRequest,
+      protos.google.cloud.channel.v1.IListProductsResponse | null | undefined,
+      protos.google.cloud.channel.v1.IProduct
+    >
+  ): void;
+  listProducts(
+    request?: protos.google.cloud.channel.v1.IListProductsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -5304,6 +5240,8 @@ export class CloudChannelServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listProducts(request, options, callback);
   }
@@ -5343,6 +5281,8 @@ export class CloudChannelServiceClient {
   ): Transform {
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -5382,11 +5322,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listProductsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_products.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListProducts_async
    */
   listProductsAsync(
     request?: protos.google.cloud.channel.v1.IListProductsRequest,
@@ -5394,7 +5331,8 @@ export class CloudChannelServiceClient {
   ): AsyncIterable<protos.google.cloud.channel.v1.IProduct> {
     request = request || {};
     options = options || {};
-    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -5404,33 +5342,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IProduct>;
   }
-  listSkus(
-    request?: protos.google.cloud.channel.v1.IListSkusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.ISku[],
-      protos.google.cloud.channel.v1.IListSkusRequest | null,
-      protos.google.cloud.channel.v1.IListSkusResponse
-    ]
-  >;
-  listSkus(
-    request: protos.google.cloud.channel.v1.IListSkusRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListSkusRequest,
-      protos.google.cloud.channel.v1.IListSkusResponse | null | undefined,
-      protos.google.cloud.channel.v1.ISku
-    >
-  ): void;
-  listSkus(
-    request: protos.google.cloud.channel.v1.IListSkusRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListSkusRequest,
-      protos.google.cloud.channel.v1.IListSkusResponse | null | undefined,
-      protos.google.cloud.channel.v1.ISku
-    >
-  ): void;
   /**
    * Lists the SKUs for a product the reseller is authorized to sell.
    *
@@ -5471,6 +5382,33 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listSkus(
+    request?: protos.google.cloud.channel.v1.IListSkusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ISku[],
+      protos.google.cloud.channel.v1.IListSkusRequest | null,
+      protos.google.cloud.channel.v1.IListSkusResponse
+    ]
+  >;
+  listSkus(
+    request: protos.google.cloud.channel.v1.IListSkusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkusRequest,
+      protos.google.cloud.channel.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.channel.v1.ISku
+    >
+  ): void;
+  listSkus(
+    request: protos.google.cloud.channel.v1.IListSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSkusRequest,
+      protos.google.cloud.channel.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.channel.v1.ISku
+    >
+  ): void;
   listSkus(
     request?: protos.google.cloud.channel.v1.IListSkusRequest,
     optionsOrCallback?:
@@ -5601,11 +5539,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSkusAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_skus.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSkus_async
    */
   listSkusAsync(
     request?: protos.google.cloud.channel.v1.IListSkusRequest,
@@ -5619,7 +5554,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -5629,33 +5563,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.ISku>;
   }
-  listOffers(
-    request?: protos.google.cloud.channel.v1.IListOffersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IOffer[],
-      protos.google.cloud.channel.v1.IListOffersRequest | null,
-      protos.google.cloud.channel.v1.IListOffersResponse
-    ]
-  >;
-  listOffers(
-    request: protos.google.cloud.channel.v1.IListOffersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListOffersRequest,
-      protos.google.cloud.channel.v1.IListOffersResponse | null | undefined,
-      protos.google.cloud.channel.v1.IOffer
-    >
-  ): void;
-  listOffers(
-    request: protos.google.cloud.channel.v1.IListOffersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListOffersRequest,
-      protos.google.cloud.channel.v1.IListOffersResponse | null | undefined,
-      protos.google.cloud.channel.v1.IOffer
-    >
-  ): void;
   /**
    * Lists the Offers the reseller can sell.
    *
@@ -5697,6 +5604,33 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listOffers(
+    request?: protos.google.cloud.channel.v1.IListOffersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IOffer[],
+      protos.google.cloud.channel.v1.IListOffersRequest | null,
+      protos.google.cloud.channel.v1.IListOffersResponse
+    ]
+  >;
+  listOffers(
+    request: protos.google.cloud.channel.v1.IListOffersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListOffersRequest,
+      protos.google.cloud.channel.v1.IListOffersResponse | null | undefined,
+      protos.google.cloud.channel.v1.IOffer
+    >
+  ): void;
+  listOffers(
+    request: protos.google.cloud.channel.v1.IListOffersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListOffersRequest,
+      protos.google.cloud.channel.v1.IListOffersResponse | null | undefined,
+      protos.google.cloud.channel.v1.IOffer
+    >
+  ): void;
   listOffers(
     request?: protos.google.cloud.channel.v1.IListOffersRequest,
     optionsOrCallback?:
@@ -5829,11 +5763,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listOffersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_offers.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListOffers_async
    */
   listOffersAsync(
     request?: protos.google.cloud.channel.v1.IListOffersRequest,
@@ -5847,7 +5778,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -5857,37 +5787,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IOffer>;
   }
-  listPurchasableSkus(
-    request?: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IPurchasableSku[],
-      protos.google.cloud.channel.v1.IListPurchasableSkusRequest | null,
-      protos.google.cloud.channel.v1.IListPurchasableSkusResponse
-    ]
-  >;
-  listPurchasableSkus(
-    request: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
-      | protos.google.cloud.channel.v1.IListPurchasableSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IPurchasableSku
-    >
-  ): void;
-  listPurchasableSkus(
-    request: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
-      | protos.google.cloud.channel.v1.IListPurchasableSkusResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IPurchasableSku
-    >
-  ): void;
   /**
    * Lists the following:
    *
@@ -5931,6 +5830,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listPurchasableSkus(
+    request?: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IPurchasableSku[],
+      protos.google.cloud.channel.v1.IListPurchasableSkusRequest | null,
+      protos.google.cloud.channel.v1.IListPurchasableSkusResponse
+    ]
+  >;
+  listPurchasableSkus(
+    request: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
+      | protos.google.cloud.channel.v1.IListPurchasableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IPurchasableSku
+    >
+  ): void;
+  listPurchasableSkus(
+    request: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
+      | protos.google.cloud.channel.v1.IListPurchasableSkusResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IPurchasableSku
+    >
+  ): void;
   listPurchasableSkus(
     request?: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
     optionsOrCallback?:
@@ -6063,11 +5993,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listPurchasableSkusAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_purchasable_skus.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListPurchasableSkus_async
    */
   listPurchasableSkusAsync(
     request?: protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
@@ -6081,7 +6008,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         customer: request.customer || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -6091,37 +6017,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IPurchasableSku>;
   }
-  listPurchasableOffers(
-    request?: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.channel.v1.IPurchasableOffer[],
-      protos.google.cloud.channel.v1.IListPurchasableOffersRequest | null,
-      protos.google.cloud.channel.v1.IListPurchasableOffersResponse
-    ]
-  >;
-  listPurchasableOffers(
-    request: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
-      | protos.google.cloud.channel.v1.IListPurchasableOffersResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IPurchasableOffer
-    >
-  ): void;
-  listPurchasableOffers(
-    request: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
-      | protos.google.cloud.channel.v1.IListPurchasableOffersResponse
-      | null
-      | undefined,
-      protos.google.cloud.channel.v1.IPurchasableOffer
-    >
-  ): void;
   /**
    * Lists the following:
    *
@@ -6165,6 +6060,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listPurchasableOffers(
+    request?: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IPurchasableOffer[],
+      protos.google.cloud.channel.v1.IListPurchasableOffersRequest | null,
+      protos.google.cloud.channel.v1.IListPurchasableOffersResponse
+    ]
+  >;
+  listPurchasableOffers(
+    request: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
+      | protos.google.cloud.channel.v1.IListPurchasableOffersResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IPurchasableOffer
+    >
+  ): void;
+  listPurchasableOffers(
+    request: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
+      | protos.google.cloud.channel.v1.IListPurchasableOffersResponse
+      | null
+      | undefined,
+      protos.google.cloud.channel.v1.IPurchasableOffer
+    >
+  ): void;
   listPurchasableOffers(
     request?: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
     optionsOrCallback?:
@@ -6297,11 +6223,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listPurchasableOffersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_purchasable_offers.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListPurchasableOffers_async
    */
   listPurchasableOffersAsync(
     request?: protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
@@ -6315,7 +6238,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         customer: request.customer || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -6325,37 +6247,6 @@ export class CloudChannelServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.channel.v1.IPurchasableOffer>;
   }
-  listSubscribers(
-    request?: protos.google.cloud.channel.v1.IListSubscribersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      string[],
-      protos.google.cloud.channel.v1.IListSubscribersRequest | null,
-      protos.google.cloud.channel.v1.IListSubscribersResponse
-    ]
-  >;
-  listSubscribers(
-    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListSubscribersRequest,
-      | protos.google.cloud.channel.v1.IListSubscribersResponse
-      | null
-      | undefined,
-      string
-    >
-  ): void;
-  listSubscribers(
-    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.channel.v1.IListSubscribersRequest,
-      | protos.google.cloud.channel.v1.IListSubscribersResponse
-      | null
-      | undefined,
-      string
-    >
-  ): void;
   /**
    * Lists service accounts with subscriber privileges on the Cloud Pub/Sub
    * topic created for this Channel Services account.
@@ -6403,6 +6294,37 @@ export class CloudChannelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listSubscribers(
+    request?: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.channel.v1.IListSubscribersRequest | null,
+      protos.google.cloud.channel.v1.IListSubscribersResponse
+    ]
+  >;
+  listSubscribers(
+    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSubscribersRequest,
+      | protos.google.cloud.channel.v1.IListSubscribersResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  listSubscribers(
+    request: protos.google.cloud.channel.v1.IListSubscribersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.channel.v1.IListSubscribersRequest,
+      | protos.google.cloud.channel.v1.IListSubscribersResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
   listSubscribers(
     request?: protos.google.cloud.channel.v1.IListSubscribersRequest,
     optionsOrCallback?:
@@ -6527,11 +6449,8 @@ export class CloudChannelServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listSubscribersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.list_subscribers.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_ListSubscribers_async
    */
   listSubscribersAsync(
     request?: protos.google.cloud.channel.v1.IListSubscribersRequest,
@@ -6545,7 +6464,6 @@ export class CloudChannelServiceClient {
       gax.routingHeader.fromParams({
         account: request.account || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

@@ -5640,7 +5640,7 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
@@ -5667,7 +5667,7 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
@@ -5710,7 +5710,7 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listProducts = stubSimpleCall(
         undefined,

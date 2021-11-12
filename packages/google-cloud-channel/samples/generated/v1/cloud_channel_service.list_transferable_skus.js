@@ -45,8 +45,8 @@ function main(parent) {
   /**
    *  A token for a page of results other than the first page.
    *  Obtained using
-   *  [ListTransferableSkusResponse.next_page_token][google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token] of the previous
-   *  [CloudChannelService.ListTransferableSkus][google.cloud.channel.v1.CloudChannelService.ListTransferableSkus] call.
+   *  ListTransferableSkusResponse.next_page_token google.cloud.channel.v1.ListTransferableSkusResponse.next_page_token  of the previous
+   *  CloudChannelService.ListTransferableSkus google.cloud.channel.v1.CloudChannelService.ListTransferableSkus  call.
    *  Optional.
    */
   // const pageToken = 'abc123'
@@ -71,7 +71,7 @@ function main(parent) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function listTransferableSkus() {
+  async function callListTransferableSkus() {
     // Construct request
     const request = {
       parent,
@@ -84,7 +84,7 @@ function main(parent) {
     }
   }
 
-  listTransferableSkus();
+  callListTransferableSkus();
   // [END cloudchannel_v1_generated_CloudChannelService_ListTransferableSkus_async]
 }
 

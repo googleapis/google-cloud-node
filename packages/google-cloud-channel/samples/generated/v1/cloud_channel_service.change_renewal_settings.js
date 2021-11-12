@@ -28,7 +28,7 @@ function main(name, renewalSettings) {
   /**
    *  Required. New renewal settings.
    */
-  // const renewalSettings = ''
+  // const renewalSettings = {}
   /**
    *  Optional. You can specify an optional unique request ID, and if you need to retry
    *  your request, the server will know to ignore the request if it's complete.
@@ -36,7 +36,7 @@ function main(name, renewalSettings) {
    *  make the request again with the same request ID, the server can check if
    *  it received the original operation with the same request ID. If it did, it
    *  will ignore the second request.
-   *  The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
+   *  The request ID must be a valid UUID (https://tools.ietf.org/html/rfc4122)
    *  with the exception that zero UUID is not supported
    *  (`00000000-0000-0000-0000-000000000000`).
    */
@@ -48,7 +48,7 @@ function main(name, renewalSettings) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function changeRenewalSettings() {
+  async function callChangeRenewalSettings() {
     // Construct request
     const request = {
       name,
@@ -61,7 +61,7 @@ function main(name, renewalSettings) {
     console.log(response);
   }
 
-  changeRenewalSettings();
+  callChangeRenewalSettings();
   // [END cloudchannel_v1_generated_CloudChannelService_ChangeRenewalSettings_async]
 }
 

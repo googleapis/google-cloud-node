@@ -33,8 +33,8 @@ function main(parent) {
   /**
    *  Optional. A token identifying a page of results other than the first page.
    *  Obtained through
-   *  [ListCustomersResponse.next_page_token][google.cloud.channel.v1.ListCustomersResponse.next_page_token] of the previous
-   *  [CloudChannelService.ListCustomers][google.cloud.channel.v1.CloudChannelService.ListCustomers] call.
+   *  ListCustomersResponse.next_page_token google.cloud.channel.v1.ListCustomersResponse.next_page_token  of the previous
+   *  CloudChannelService.ListCustomers google.cloud.channel.v1.CloudChannelService.ListCustomers  call.
    */
   // const pageToken = 'abc123'
 
@@ -44,7 +44,7 @@ function main(parent) {
   // Instantiates a client
   const channelClient = new CloudChannelServiceClient();
 
-  async function listCustomers() {
+  async function callListCustomers() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent) {
     }
   }
 
-  listCustomers();
+  callListCustomers();
   // [END cloudchannel_v1_generated_CloudChannelService_ListCustomers_async]
 }
 
