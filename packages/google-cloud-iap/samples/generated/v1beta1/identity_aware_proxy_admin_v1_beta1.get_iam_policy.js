@@ -28,7 +28,7 @@ function main(resource) {
    *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
    *  `GetIamPolicy`. This field is only used by Cloud IAM.
    */
-  // const options = ''
+  // const options = {}
 
   // Imports the Iap library
   const {IdentityAwareProxyAdminV1Beta1Client} =
@@ -37,7 +37,7 @@ function main(resource) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyAdminV1Beta1Client();
 
-  async function getIamPolicy() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -48,7 +48,7 @@ function main(resource) {
     console.log(response);
   }
 
-  getIamPolicy();
+  callGetIamPolicy();
   // [END iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_GetIamPolicy_async]
 }
 

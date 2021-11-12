@@ -32,7 +32,7 @@ function main(parent) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyOAuthServiceClient();
 
-  async function listBrands() {
+  async function callListBrands() {
     // Construct request
     const request = {
       parent,
@@ -43,7 +43,7 @@ function main(parent) {
     console.log(response);
   }
 
-  listBrands();
+  callListBrands();
   // [END iap_v1_generated_IdentityAwareProxyOAuthService_ListBrands_async]
 }
 

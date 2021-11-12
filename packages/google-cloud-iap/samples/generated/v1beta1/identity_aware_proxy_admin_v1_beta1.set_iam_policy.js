@@ -30,7 +30,7 @@ function main(resource, policy) {
    *  valid policy but certain Cloud Platform services (such as Projects)
    *  might reject them.
    */
-  // const policy = ''
+  // const policy = {}
 
   // Imports the Iap library
   const {IdentityAwareProxyAdminV1Beta1Client} =
@@ -39,7 +39,7 @@ function main(resource, policy) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyAdminV1Beta1Client();
 
-  async function setIamPolicy() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -51,7 +51,7 @@ function main(resource, policy) {
     console.log(response);
   }
 
-  setIamPolicy();
+  callSetIamPolicy();
   // [END iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_SetIamPolicy_async]
 }
 

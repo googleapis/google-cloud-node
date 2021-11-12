@@ -27,7 +27,7 @@ function main(parent, brand) {
   /**
    *  Required. The brand to be created.
    */
-  // const brand = ''
+  // const brand = {}
 
   // Imports the Iap library
   const {IdentityAwareProxyOAuthServiceClient} =
@@ -36,7 +36,7 @@ function main(parent, brand) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyOAuthServiceClient();
 
-  async function createBrand() {
+  async function callCreateBrand() {
     // Construct request
     const request = {
       parent,
@@ -48,7 +48,7 @@ function main(parent, brand) {
     console.log(response);
   }
 
-  createBrand();
+  callCreateBrand();
   // [END iap_v1_generated_IdentityAwareProxyOAuthService_CreateBrand_async]
 }
 

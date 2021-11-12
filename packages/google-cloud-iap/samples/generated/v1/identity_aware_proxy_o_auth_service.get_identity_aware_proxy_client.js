@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyOAuthServiceClient();
 
-  async function getIdentityAwareProxyClient() {
+  async function callGetIdentityAwareProxyClient() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getIdentityAwareProxyClient();
+  callGetIdentityAwareProxyClient();
   // [END iap_v1_generated_IdentityAwareProxyOAuthService_GetIdentityAwareProxyClient_async]
 }
 

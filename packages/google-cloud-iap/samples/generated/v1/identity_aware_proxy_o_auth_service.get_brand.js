@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyOAuthServiceClient();
 
-  async function getBrand() {
+  async function callGetBrand() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getBrand();
+  callGetBrand();
   // [END iap_v1_generated_IdentityAwareProxyOAuthService_GetBrand_async]
 }
 

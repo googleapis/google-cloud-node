@@ -29,7 +29,7 @@ function main(parent, identityAwareProxyClient) {
   /**
    *  Required. Identity Aware Proxy Client to be created.
    */
-  // const identityAwareProxyClient = ''
+  // const identityAwareProxyClient = {}
 
   // Imports the Iap library
   const {IdentityAwareProxyOAuthServiceClient} =
@@ -38,7 +38,7 @@ function main(parent, identityAwareProxyClient) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyOAuthServiceClient();
 
-  async function createIdentityAwareProxyClient() {
+  async function callCreateIdentityAwareProxyClient() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent, identityAwareProxyClient) {
     console.log(response);
   }
 
-  createIdentityAwareProxyClient();
+  callCreateIdentityAwareProxyClient();
   // [END iap_v1_generated_IdentityAwareProxyOAuthService_CreateIdentityAwareProxyClient_async]
 }
 

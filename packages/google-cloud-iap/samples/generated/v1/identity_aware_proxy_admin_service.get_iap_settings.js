@@ -33,7 +33,7 @@ function main(name) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyAdminServiceClient();
 
-  async function getIapSettings() {
+  async function callGetIapSettings() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  getIapSettings();
+  callGetIapSettings();
   // [END iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_async]
 }
 

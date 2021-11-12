@@ -289,6 +289,32 @@ export class IdentityAwareProxyAdminServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Sets the access control policy for an Identity-Aware Proxy protected
+   * resource. Replaces any existing policy.
+   * More information about managing access via IAP can be found at:
+   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.set_iam_policy.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -316,32 +342,6 @@ export class IdentityAwareProxyAdminServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy for an Identity-Aware Proxy protected
-   * resource. Replaces any existing policy.
-   * More information about managing access via IAP can be found at:
-   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -381,6 +381,30 @@ export class IdentityAwareProxyAdminServiceClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Gets the access control policy for an Identity-Aware Proxy protected
+   * resource.
+   * More information about managing access via IAP can be found at:
+   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_iam_policy.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -408,30 +432,6 @@ export class IdentityAwareProxyAdminServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for an Identity-Aware Proxy protected
-   * resource.
-   * More information about managing access via IAP can be found at:
-   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -471,6 +471,32 @@ export class IdentityAwareProxyAdminServiceClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on the Identity-Aware Proxy protected
+   * resource.
+   * More information about managing access via IAP can be found at:
+   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.test_iam_permissions.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -498,32 +524,6 @@ export class IdentityAwareProxyAdminServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on the Identity-Aware Proxy protected
-   * resource.
-   * More information about managing access via IAP can be found at:
-   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -563,6 +563,25 @@ export class IdentityAwareProxyAdminServiceClient {
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
+  /**
+   * Gets the IAP settings on a particular IAP protected resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name for which to retrieve the settings.
+   *   Authorization: Requires the `getSettings` permission for the associated
+   *   resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [IapSettings]{@link google.cloud.iap.v1.IapSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.get_iap_settings.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_GetIapSettings_async
+   */
   getIapSettings(
     request?: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
     options?: CallOptions
@@ -590,25 +609,6 @@ export class IdentityAwareProxyAdminServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the IAP settings on a particular IAP protected resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name for which to retrieve the settings.
-   *   Authorization: Requires the `getSettings` permission for the associated
-   *   resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [IapSettings]{@link google.cloud.iap.v1.IapSettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIapSettings(request);
-   */
   getIapSettings(
     request?: protos.google.cloud.iap.v1.IGetIapSettingsRequest,
     optionsOrCallback?:
@@ -648,6 +648,30 @@ export class IdentityAwareProxyAdminServiceClient {
     this.initialize();
     return this.innerApiCalls.getIapSettings(request, options, callback);
   }
+  /**
+   * Updates the IAP settings on a particular IAP protected resource. It
+   * replaces all fields unless the `update_mask` is set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.iap.v1.IapSettings} request.iapSettings
+   *   Required. The new values for the IAP settings to be updated.
+   *   Authorization: Requires the `updateSettings` permission for the associated
+   *   resource.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The field mask specifying which IAP settings should be updated.
+   *   If omitted, the all of the settings are updated. See
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [IapSettings]{@link google.cloud.iap.v1.IapSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/identity_aware_proxy_admin_service.update_iap_settings.js</caption>
+   * region_tag:iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_async
+   */
   updateIapSettings(
     request?: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
     options?: CallOptions
@@ -675,30 +699,6 @@ export class IdentityAwareProxyAdminServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the IAP settings on a particular IAP protected resource. It
-   * replaces all fields unless the `update_mask` is set.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.iap.v1.IapSettings} request.iapSettings
-   *   Required. The new values for the IAP settings to be updated.
-   *   Authorization: Requires the `updateSettings` permission for the associated
-   *   resource.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The field mask specifying which IAP settings should be updated.
-   *   If omitted, the all of the settings are updated. See
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [IapSettings]{@link google.cloud.iap.v1.IapSettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateIapSettings(request);
-   */
   updateIapSettings(
     request?: protos.google.cloud.iap.v1.IUpdateIapSettingsRequest,
     optionsOrCallback?:

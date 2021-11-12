@@ -24,13 +24,13 @@ function main(iapSettings) {
    *  Authorization: Requires the `updateSettings` permission for the associated
    *  resource.
    */
-  // const iapSettings = ''
+  // const iapSettings = {}
   /**
    *  The field mask specifying which IAP settings should be updated.
    *  If omitted, the all of the settings are updated. See
    *  https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Iap library
   const {IdentityAwareProxyAdminServiceClient} =
@@ -39,7 +39,7 @@ function main(iapSettings) {
   // Instantiates a client
   const iapClient = new IdentityAwareProxyAdminServiceClient();
 
-  async function updateIapSettings() {
+  async function callUpdateIapSettings() {
     // Construct request
     const request = {
       iapSettings,
@@ -50,7 +50,7 @@ function main(iapSettings) {
     console.log(response);
   }
 
-  updateIapSettings();
+  callUpdateIapSettings();
   // [END iap_v1_generated_IdentityAwareProxyAdminService_UpdateIapSettings_async]
 }
 
