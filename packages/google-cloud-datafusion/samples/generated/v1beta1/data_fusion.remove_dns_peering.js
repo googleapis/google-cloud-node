@@ -34,7 +34,7 @@ function main(zone) {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function removeDnsPeering() {
+  async function callRemoveDnsPeering() {
     // Construct request
     const request = {
       zone,
@@ -45,7 +45,7 @@ function main(zone) {
     console.log(response);
   }
 
-  removeDnsPeering();
+  callRemoveDnsPeering();
   // [END datafusion_v1beta1_generated_DataFusion_RemoveDnsPeering_async]
 }
 

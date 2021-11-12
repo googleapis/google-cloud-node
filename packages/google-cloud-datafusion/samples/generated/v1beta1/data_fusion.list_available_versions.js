@@ -36,7 +36,7 @@ function main(parent) {
   /**
    *  Whether or not to return the latest patch of every available minor version.
    *  If true, only the latest patch will be returned. Ex. if allowed versions is
-   *  [6.1.1, 6.1.2, 6.2.0] then response will be [6.1.2, 6.2.0]
+   *  6.1.1, 6.1.2, 6.2.0  then response will be 6.1.2, 6.2.0
    */
   // const latestPatchOnly = true
 
@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function listAvailableVersions() {
+  async function callListAvailableVersions() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     }
   }
 
-  listAvailableVersions();
+  callListAvailableVersions();
   // [END datafusion_v1beta1_generated_DataFusion_ListAvailableVersions_async]
 }
 

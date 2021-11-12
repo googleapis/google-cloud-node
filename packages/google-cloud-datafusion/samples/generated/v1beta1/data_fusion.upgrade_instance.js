@@ -33,7 +33,7 @@ function main() {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function upgradeInstance() {
+  async function callUpgradeInstance() {
     // Construct request
     const request = {};
 
@@ -43,7 +43,7 @@ function main() {
     console.log(response);
   }
 
-  upgradeInstance();
+  callUpgradeInstance();
   // [END datafusion_v1beta1_generated_DataFusion_UpgradeInstance_async]
 }
 

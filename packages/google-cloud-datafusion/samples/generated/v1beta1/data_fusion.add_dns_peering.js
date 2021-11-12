@@ -26,7 +26,7 @@ function main() {
   /**
    *  Dns peering config.
    */
-  // const dnsPeering = ''
+  // const dnsPeering = {}
 
   // Imports the Datafusion library
   const {DataFusionClient} = require('@google-cloud/data-fusion').v1beta1;
@@ -34,7 +34,7 @@ function main() {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function addDnsPeering() {
+  async function callAddDnsPeering() {
     // Construct request
     const request = {};
 
@@ -43,7 +43,7 @@ function main() {
     console.log(response);
   }
 
-  addDnsPeering();
+  callAddDnsPeering();
   // [END datafusion_v1beta1_generated_DataFusion_AddDnsPeering_async]
 }
 

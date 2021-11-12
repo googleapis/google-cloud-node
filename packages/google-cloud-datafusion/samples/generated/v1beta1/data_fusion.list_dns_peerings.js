@@ -39,7 +39,7 @@ function main(parent) {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function listDnsPeerings() {
+  async function callListDnsPeerings() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent) {
     }
   }
 
-  listDnsPeerings();
+  callListDnsPeerings();
   // [END datafusion_v1beta1_generated_DataFusion_ListDnsPeerings_async]
 }
 

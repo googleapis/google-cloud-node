@@ -50,7 +50,7 @@ function main() {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function listInstances() {
+  async function callListInstances() {
     // Construct request
     const request = {};
 
@@ -61,7 +61,7 @@ function main() {
     }
   }
 
-  listInstances();
+  callListInstances();
   // [END datafusion_v1_generated_DataFusion_ListInstances_async]
 }
 

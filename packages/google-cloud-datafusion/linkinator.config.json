@@ -3,10 +3,8 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://www.npmjs.org/package/@google-cloud/data-fusion",
-    "https://github.com/googleapis/nodejs-data-fusion/blob/addSamplesAndTests/CHANGELOG.md"
+    "img.shields.io"
   ],
   "silent": true,
-  "concurrency": 10
+  "concurrency": 5
 }

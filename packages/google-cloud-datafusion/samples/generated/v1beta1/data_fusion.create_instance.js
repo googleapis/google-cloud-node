@@ -31,7 +31,7 @@ function main() {
   /**
    *  An instance resource.
    */
-  // const instance = ''
+  // const instance = {}
 
   // Imports the Datafusion library
   const {DataFusionClient} = require('@google-cloud/data-fusion').v1beta1;
@@ -39,7 +39,7 @@ function main() {
   // Instantiates a client
   const datafusionClient = new DataFusionClient();
 
-  async function createInstance() {
+  async function callCreateInstance() {
     // Construct request
     const request = {};
 
@@ -49,7 +49,7 @@ function main() {
     console.log(response);
   }
 
-  createInstance();
+  callCreateInstance();
   // [END datafusion_v1beta1_generated_DataFusion_CreateInstance_async]
 }
 
