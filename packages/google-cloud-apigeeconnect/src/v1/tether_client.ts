@@ -310,12 +310,8 @@ export class TetherClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
    *   for more details and examples.
-   * @example
-   * const stream = client.egress();
-   * stream.on('data', (response) => { ... });
-   * stream.on('end', () => { ... });
-   * stream.write(request);
-   * stream.end();
+   * @example <caption>include:samples/generated/v1/tether.egress.js</caption>
+   * region_tag:apigeeconnect_v1_generated_Tether_Egress_async
    */
   egress(options?: CallOptions): gax.CancellableStream {
     this.initialize();
