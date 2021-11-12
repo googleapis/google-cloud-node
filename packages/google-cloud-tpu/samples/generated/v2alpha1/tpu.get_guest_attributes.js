@@ -39,7 +39,7 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function getGuestAttributes() {
+  async function callGetGuestAttributes() {
     // Construct request
     const request = {
       name,
@@ -50,7 +50,7 @@ function main(name) {
     console.log(response);
   }
 
-  getGuestAttributes();
+  callGetGuestAttributes();
   // [END tpu_v2alpha1_generated_Tpu_GetGuestAttributes_async]
 }
 

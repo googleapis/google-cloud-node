@@ -30,7 +30,7 @@ function main(parent) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function generateServiceIdentity() {
+  async function callGenerateServiceIdentity() {
     // Construct request
     const request = {
       parent,
@@ -41,7 +41,7 @@ function main(parent) {
     console.log(response);
   }
 
-  generateServiceIdentity();
+  callGenerateServiceIdentity();
   // [END tpu_v2alpha1_generated_Tpu_GenerateServiceIdentity_async]
 }
 

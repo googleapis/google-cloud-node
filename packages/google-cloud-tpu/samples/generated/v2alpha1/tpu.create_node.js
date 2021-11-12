@@ -30,7 +30,7 @@ function main(parent, node) {
   /**
    *  Required. The node.
    */
-  // const node = ''
+  // const node = {}
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
@@ -38,7 +38,7 @@ function main(parent, node) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function createNode() {
+  async function callCreateNode() {
     // Construct request
     const request = {
       parent,
@@ -51,7 +51,7 @@ function main(parent, node) {
     console.log(response);
   }
 
-  createNode();
+  callCreateNode();
   // [END tpu_v2alpha1_generated_Tpu_CreateNode_async]
 }
 

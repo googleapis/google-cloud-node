@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function deleteNode() {
+  async function callDeleteNode() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteNode();
+  callDeleteNode();
   // [END tpu_v1_generated_Tpu_DeleteNode_async]
 }
 

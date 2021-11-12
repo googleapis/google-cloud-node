@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function getTensorFlowVersion() {
+  async function callGetTensorFlowVersion() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTensorFlowVersion();
+  callGetTensorFlowVersion();
   // [END tpu_v1_generated_Tpu_GetTensorFlowVersion_async]
 }
 

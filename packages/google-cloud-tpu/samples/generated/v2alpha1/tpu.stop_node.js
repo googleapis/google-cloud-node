@@ -30,7 +30,7 @@ function main() {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function stopNode() {
+  async function callStopNode() {
     // Construct request
     const request = {};
 
@@ -40,7 +40,7 @@ function main() {
     console.log(response);
   }
 
-  stopNode();
+  callStopNode();
   // [END tpu_v2alpha1_generated_Tpu_StopNode_async]
 }
 

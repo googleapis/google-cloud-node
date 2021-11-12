@@ -20,14 +20,14 @@ function main(updateMask, node) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Mask of fields from [Node][Tpu.Node] to update.
+   *  Required. Mask of fields from Node Tpu.Node  to update.
    *  Supported fields: None.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. The node. Only fields specified in update_mask are updated.
    */
-  // const node = ''
+  // const node = {}
 
   // Imports the Tpu library
   const {TpuClient} = require('@google-cloud/tpu').v2alpha1;
@@ -35,7 +35,7 @@ function main(updateMask, node) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function updateNode() {
+  async function callUpdateNode() {
     // Construct request
     const request = {
       updateMask,
@@ -48,7 +48,7 @@ function main(updateMask, node) {
     console.log(response);
   }
 
-  updateNode();
+  callUpdateNode();
   // [END tpu_v2alpha1_generated_Tpu_UpdateNode_async]
 }
 

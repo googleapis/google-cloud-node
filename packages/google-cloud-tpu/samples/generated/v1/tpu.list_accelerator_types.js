@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function listAcceleratorTypes() {
+  async function callListAcceleratorTypes() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     }
   }
 
-  listAcceleratorTypes();
+  callListAcceleratorTypes();
   // [END tpu_v1_generated_Tpu_ListAcceleratorTypes_async]
 }
 

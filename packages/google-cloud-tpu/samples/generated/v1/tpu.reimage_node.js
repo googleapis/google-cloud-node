@@ -34,7 +34,7 @@ function main() {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function reimageNode() {
+  async function callReimageNode() {
     // Construct request
     const request = {};
 
@@ -44,7 +44,7 @@ function main() {
     console.log(response);
   }
 
-  reimageNode();
+  callReimageNode();
   // [END tpu_v1_generated_Tpu_ReimageNode_async]
 }
 

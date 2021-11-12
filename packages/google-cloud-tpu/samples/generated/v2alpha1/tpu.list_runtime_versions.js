@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function listRuntimeVersions() {
+  async function callListRuntimeVersions() {
     // Construct request
     const request = {
       parent,
@@ -59,7 +59,7 @@ function main(parent) {
     }
   }
 
-  listRuntimeVersions();
+  callListRuntimeVersions();
   // [END tpu_v2alpha1_generated_Tpu_ListRuntimeVersions_async]
 }
 

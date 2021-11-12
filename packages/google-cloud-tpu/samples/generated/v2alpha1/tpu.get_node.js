@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function getNode() {
+  async function callGetNode() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getNode();
+  callGetNode();
   // [END tpu_v2alpha1_generated_Tpu_GetNode_async]
 }
 

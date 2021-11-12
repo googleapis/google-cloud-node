@@ -30,7 +30,7 @@ function main(name) {
   // Instantiates a client
   const tpuClient = new TpuClient();
 
-  async function getAcceleratorType() {
+  async function callGetAcceleratorType() {
     // Construct request
     const request = {
       name,
@@ -41,7 +41,7 @@ function main(name) {
     console.log(response);
   }
 
-  getAcceleratorType();
+  callGetAcceleratorType();
   // [END tpu_v2alpha1_generated_Tpu_GetAcceleratorType_async]
 }
 
