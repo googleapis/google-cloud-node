@@ -31,9 +31,9 @@ function main(parent, instanceId, instance) {
    */
   // const instanceId = 'abc123'
   /**
-   *  Required. An [instance resource][google.cloud.filestore.v1.Instance]
+   *  Required. An instance resource google.cloud.filestore.v1.Instance
    */
-  // const instance = ''
+  // const instance = {}
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1;
@@ -41,7 +41,7 @@ function main(parent, instanceId, instance) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function createInstance() {
+  async function callCreateInstance() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent, instanceId, instance) {
     console.log(response);
   }
 
-  createInstance();
+  callCreateInstance();
   // [END file_v1_generated_CloudFilestoreManager_CreateInstance_async]
 }
 

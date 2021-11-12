@@ -20,14 +20,14 @@ function main(backup, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A [backup resource][google.cloud.filestore.v1.Backup]
+   *  Required. A backup resource google.cloud.filestore.v1.Backup
    */
-  // const backup = ''
+  // const backup = {}
   /**
    *  Required. Mask of fields to update.  At least one path must be supplied in
    *  this field.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} = require('@google-cloud/filestore').v1;
@@ -35,7 +35,7 @@ function main(backup, updateMask) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function updateBackup() {
+  async function callUpdateBackup() {
     // Construct request
     const request = {
       backup,
@@ -48,7 +48,7 @@ function main(backup, updateMask) {
     console.log(response);
   }
 
-  updateBackup();
+  callUpdateBackup();
   // [END file_v1_generated_CloudFilestoreManager_UpdateBackup_async]
 }
 

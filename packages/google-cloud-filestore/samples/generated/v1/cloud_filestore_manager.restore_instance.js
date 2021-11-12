@@ -41,7 +41,7 @@ function main(name, fileShare) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function restoreInstance() {
+  async function callRestoreInstance() {
     // Construct request
     const request = {
       name,
@@ -54,7 +54,7 @@ function main(name, fileShare) {
     console.log(response);
   }
 
-  restoreInstance();
+  callRestoreInstance();
   // [END file_v1_generated_CloudFilestoreManager_RestoreInstance_async]
 }
 

@@ -27,11 +27,11 @@ function main(updateMask, instance) {
    *  * "file_shares"
    *  * "labels"
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. Only fields specified in update_mask are updated.
    */
-  // const instance = ''
+  // const instance = {}
 
   // Imports the Filestore library
   const {CloudFilestoreManagerClient} =
@@ -40,7 +40,7 @@ function main(updateMask, instance) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function updateInstance() {
+  async function callUpdateInstance() {
     // Construct request
     const request = {
       updateMask,
@@ -53,7 +53,7 @@ function main(updateMask, instance) {
     console.log(response);
   }
 
-  updateInstance();
+  callUpdateInstance();
   // [END file_v1beta1_generated_CloudFilestoreManager_UpdateInstance_async]
 }
 

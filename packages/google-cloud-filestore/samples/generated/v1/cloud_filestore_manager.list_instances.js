@@ -51,7 +51,7 @@ function main(parent) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function listInstances() {
+  async function callListInstances() {
     // Construct request
     const request = {
       parent,
@@ -64,7 +64,7 @@ function main(parent) {
     }
   }
 
-  listInstances();
+  callListInstances();
   // [END file_v1_generated_CloudFilestoreManager_ListInstances_async]
 }
 

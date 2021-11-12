@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function deleteBackup() {
+  async function callDeleteBackup() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteBackup();
+  callDeleteBackup();
   // [END file_v1_generated_CloudFilestoreManager_DeleteBackup_async]
 }
 

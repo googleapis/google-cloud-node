@@ -26,9 +26,9 @@ function main(parent, backup, backupId) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. A [backup resource][google.cloud.filestore.v1beta1.Backup]
+   *  Required. A backup resource google.cloud.filestore.v1beta1.Backup
    */
-  // const backup = ''
+  // const backup = {}
   /**
    *  Required. The ID to use for the backup.
    *  The ID must be unique within the specified project and location.
@@ -44,7 +44,7 @@ function main(parent, backup, backupId) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function createBackup() {
+  async function callCreateBackup() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, backup, backupId) {
     console.log(response);
   }
 
-  createBackup();
+  callCreateBackup();
   // [END file_v1beta1_generated_CloudFilestoreManager_CreateBackup_async]
 }
 

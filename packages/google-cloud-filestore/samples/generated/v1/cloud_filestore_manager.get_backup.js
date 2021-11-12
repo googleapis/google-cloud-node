@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const filestoreClient = new CloudFilestoreManagerClient();
 
-  async function getBackup() {
+  async function callGetBackup() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getBackup();
+  callGetBackup();
   // [END file_v1_generated_CloudFilestoreManager_GetBackup_async]
 }
 
