@@ -305,4 +305,70 @@ describe('v1beta1.TextToSpeechClient', () => {
       );
     });
   });
+
+  describe('Path templates', () => {
+    describe('model', () => {
+      const fakePath = '/rendered/path/model';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model: 'modelValue',
+      };
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.modelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelPath', () => {
+        const result = client.modelPath(
+          'projectValue',
+          'locationValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelName', () => {
+        const result = client.matchProjectFromModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelName', () => {
+        const result = client.matchLocationFromModelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelName', () => {
+        const result = client.matchModelFromModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

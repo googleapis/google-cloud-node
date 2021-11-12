@@ -1513,6 +1513,9 @@ export namespace google {
 
                     /** VoiceSelectionParams ssmlGender */
                     ssmlGender?: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null);
+
+                    /** VoiceSelectionParams customVoice */
+                    customVoice?: (google.cloud.texttospeech.v1beta1.ICustomVoiceParams|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -1532,6 +1535,9 @@ export namespace google {
 
                     /** VoiceSelectionParams ssmlGender. */
                     public ssmlGender: (google.cloud.texttospeech.v1beta1.SsmlVoiceGender|keyof typeof google.cloud.texttospeech.v1beta1.SsmlVoiceGender);
+
+                    /** VoiceSelectionParams customVoice. */
+                    public customVoice?: (google.cloud.texttospeech.v1beta1.ICustomVoiceParams|null);
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -1722,6 +1728,112 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CustomVoiceParams. */
+                interface ICustomVoiceParams {
+
+                    /** CustomVoiceParams model */
+                    model?: (string|null);
+
+                    /** CustomVoiceParams reportedUsage */
+                    reportedUsage?: (google.cloud.texttospeech.v1beta1.CustomVoiceParams.ReportedUsage|keyof typeof google.cloud.texttospeech.v1beta1.CustomVoiceParams.ReportedUsage|null);
+                }
+
+                /** Represents a CustomVoiceParams. */
+                class CustomVoiceParams implements ICustomVoiceParams {
+
+                    /**
+                     * Constructs a new CustomVoiceParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1beta1.ICustomVoiceParams);
+
+                    /** CustomVoiceParams model. */
+                    public model: string;
+
+                    /** CustomVoiceParams reportedUsage. */
+                    public reportedUsage: (google.cloud.texttospeech.v1beta1.CustomVoiceParams.ReportedUsage|keyof typeof google.cloud.texttospeech.v1beta1.CustomVoiceParams.ReportedUsage);
+
+                    /**
+                     * Creates a new CustomVoiceParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomVoiceParams instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1beta1.ICustomVoiceParams): google.cloud.texttospeech.v1beta1.CustomVoiceParams;
+
+                    /**
+                     * Encodes the specified CustomVoiceParams message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.CustomVoiceParams.verify|verify} messages.
+                     * @param message CustomVoiceParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1beta1.ICustomVoiceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomVoiceParams message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.CustomVoiceParams.verify|verify} messages.
+                     * @param message CustomVoiceParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1beta1.ICustomVoiceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomVoiceParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomVoiceParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1beta1.CustomVoiceParams;
+
+                    /**
+                     * Decodes a CustomVoiceParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomVoiceParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1beta1.CustomVoiceParams;
+
+                    /**
+                     * Verifies a CustomVoiceParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomVoiceParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomVoiceParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1beta1.CustomVoiceParams;
+
+                    /**
+                     * Creates a plain object from a CustomVoiceParams message. Also converts values to other types if specified.
+                     * @param message CustomVoiceParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1beta1.CustomVoiceParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomVoiceParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CustomVoiceParams {
+
+                    /** ReportedUsage enum. */
+                    enum ReportedUsage {
+                        REPORTED_USAGE_UNSPECIFIED = 0,
+                        REALTIME = 1,
+                        OFFLINE = 2
+                    }
                 }
 
                 /** Properties of a SynthesizeSpeechResponse. */
@@ -2277,6 +2389,244 @@ export namespace google {
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
         }
     }
 
@@ -3844,6 +4194,9 @@ export namespace google {
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FileOptions .google.api.resourceDefinition */
+            ".google.api.resourceDefinition"?: (google.api.IResourceDescriptor[]|null);
         }
 
         /** Represents a FileOptions. */
@@ -4016,6 +4369,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -4139,6 +4495,9 @@ export namespace google {
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
