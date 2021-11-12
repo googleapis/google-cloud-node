@@ -26,7 +26,7 @@ function main(parent, conversation) {
   /**
    *  Required. The conversation resource to create.
    */
-  // const conversation = ''
+  // const conversation = {}
   /**
    *  A unique ID for the new conversation. This ID will become the final
    *  component of the conversation's resource name. If no ID is specified, a
@@ -43,7 +43,7 @@ function main(parent, conversation) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function createConversation() {
+  async function callCreateConversation() {
     // Construct request
     const request = {
       parent,
@@ -57,7 +57,7 @@ function main(parent, conversation) {
     console.log(response);
   }
 
-  createConversation();
+  callCreateConversation();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_CreateConversation_async]
 }
 

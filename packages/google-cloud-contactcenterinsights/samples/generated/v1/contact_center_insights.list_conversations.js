@@ -44,7 +44,7 @@ function main(parent) {
   /**
    *  The level of details of the conversation. Default is `BASIC`.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -53,7 +53,7 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function listConversations() {
+  async function callListConversations() {
     // Construct request
     const request = {
       parent,
@@ -68,7 +68,7 @@ function main(parent) {
     }
   }
 
-  listConversations();
+  callListConversations();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_ListConversations_async]
 }
 

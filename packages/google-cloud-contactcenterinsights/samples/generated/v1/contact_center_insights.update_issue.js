@@ -22,11 +22,11 @@ function main(issue) {
   /**
    *  Required. The new values for the issue.
    */
-  // const issue = ''
+  // const issue = {}
   /**
    *  The list of fields to be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -35,7 +35,7 @@ function main(issue) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function updateIssue() {
+  async function callUpdateIssue() {
     // Construct request
     const request = {
       issue,
@@ -46,7 +46,7 @@ function main(issue) {
     console.log(response);
   }
 
-  updateIssue();
+  callUpdateIssue();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateIssue_async]
 }
 

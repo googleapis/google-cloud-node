@@ -22,11 +22,11 @@ function main(settings, updateMask) {
   /**
    *  Required. The new settings values.
    */
-  // const settings = ''
+  // const settings = {}
   /**
    *  Required. The list of fields to be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -35,7 +35,7 @@ function main(settings, updateMask) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function updateSettings() {
+  async function callUpdateSettings() {
     // Construct request
     const request = {
       settings,
@@ -47,7 +47,7 @@ function main(settings, updateMask) {
     console.log(response);
   }
 
-  updateSettings();
+  callUpdateSettings();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateSettings_async]
 }
 

@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function undeployIssueModel() {
+  async function callUndeployIssueModel() {
     // Construct request
     const request = {
       name,
@@ -45,7 +45,7 @@ function main(name) {
     console.log(response);
   }
 
-  undeployIssueModel();
+  callUndeployIssueModel();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_UndeployIssueModel_async]
 }
 

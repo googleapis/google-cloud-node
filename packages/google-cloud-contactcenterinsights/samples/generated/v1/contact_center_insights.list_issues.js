@@ -31,7 +31,7 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function listIssues() {
+  async function callListIssues() {
     // Construct request
     const request = {
       parent,
@@ -42,7 +42,7 @@ function main(parent) {
     console.log(response);
   }
 
-  listIssues();
+  callListIssues();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_ListIssues_async]
 }
 

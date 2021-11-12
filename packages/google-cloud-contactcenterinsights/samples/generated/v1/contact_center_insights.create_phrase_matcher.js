@@ -29,7 +29,7 @@ function main(parent, phraseMatcher) {
   /**
    *  Required. The phrase matcher resource to create.
    */
-  // const phraseMatcher = ''
+  // const phraseMatcher = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -38,7 +38,7 @@ function main(parent, phraseMatcher) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function createPhraseMatcher() {
+  async function callCreatePhraseMatcher() {
     // Construct request
     const request = {
       parent,
@@ -52,7 +52,7 @@ function main(parent, phraseMatcher) {
     console.log(response);
   }
 
-  createPhraseMatcher();
+  callCreatePhraseMatcher();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_CreatePhraseMatcher_async]
 }
 

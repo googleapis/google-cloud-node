@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function deleteIssueModel() {
+  async function callDeleteIssueModel() {
     // Construct request
     const request = {
       name,
@@ -45,7 +45,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteIssueModel();
+  callDeleteIssueModel();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssueModel_async]
 }
 

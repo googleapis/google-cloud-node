@@ -26,7 +26,7 @@ function main(parent, analysis) {
   /**
    *  Required. The analysis to create.
    */
-  // const analysis = ''
+  // const analysis = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -35,7 +35,7 @@ function main(parent, analysis) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function createAnalysis() {
+  async function callCreateAnalysis() {
     // Construct request
     const request = {
       parent,
@@ -50,7 +50,7 @@ function main(parent, analysis) {
     console.log(response);
   }
 
-  createAnalysis();
+  callCreateAnalysis();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_CreateAnalysis_async]
 }
 

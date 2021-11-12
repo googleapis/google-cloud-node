@@ -36,7 +36,7 @@ function main(location) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function calculateStats() {
+  async function callCalculateStats() {
     // Construct request
     const request = {
       location,
@@ -47,7 +47,7 @@ function main(location) {
     console.log(response);
   }
 
-  calculateStats();
+  callCalculateStats();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_CalculateStats_async]
 }
 

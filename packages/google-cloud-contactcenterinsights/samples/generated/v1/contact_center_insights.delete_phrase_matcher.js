@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function deletePhraseMatcher() {
+  async function callDeletePhraseMatcher() {
     // Construct request
     const request = {
       name,
@@ -44,7 +44,7 @@ function main(name) {
     console.log(response);
   }
 
-  deletePhraseMatcher();
+  callDeletePhraseMatcher();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_DeletePhraseMatcher_async]
 }
 

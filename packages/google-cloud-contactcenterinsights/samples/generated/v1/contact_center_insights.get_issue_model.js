@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function getIssueModel() {
+  async function callGetIssueModel() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getIssueModel();
+  callGetIssueModel();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_GetIssueModel_async]
 }
 

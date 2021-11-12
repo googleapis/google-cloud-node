@@ -22,7 +22,7 @@ function main(parent) {
   /**
    *  Specified if sink is a BigQuery table.
    */
-  // const bigQueryDestination = ''
+  // const bigQueryDestination = {}
   /**
    *  Required. The parent resource to export data from.
    */
@@ -46,7 +46,7 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function exportInsightsData() {
+  async function callExportInsightsData() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent) {
     console.log(response);
   }
 
-  exportInsightsData();
+  callExportInsightsData();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_async]
 }
 

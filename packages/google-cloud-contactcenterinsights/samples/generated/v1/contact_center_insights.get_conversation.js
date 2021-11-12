@@ -26,7 +26,7 @@ function main(name) {
   /**
    *  The level of details of the conversation. Default is `FULL`.
    */
-  // const view = ''
+  // const view = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} =
@@ -35,7 +35,7 @@ function main(name) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function getConversation() {
+  async function callGetConversation() {
     // Construct request
     const request = {
       name,
@@ -46,7 +46,7 @@ function main(name) {
     console.log(response);
   }
 
-  getConversation();
+  callGetConversation();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_GetConversation_async]
 }
 

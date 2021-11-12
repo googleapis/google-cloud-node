@@ -37,7 +37,7 @@ function main(name) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function deleteConversation() {
+  async function callDeleteConversation() {
     // Construct request
     const request = {
       name,
@@ -50,7 +50,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteConversation();
+  callDeleteConversation();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_DeleteConversation_async]
 }
 

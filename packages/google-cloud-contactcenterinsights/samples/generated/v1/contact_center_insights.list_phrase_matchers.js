@@ -49,7 +49,7 @@ function main(parent) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function listPhraseMatchers() {
+  async function callListPhraseMatchers() {
     // Construct request
     const request = {
       parent,
@@ -64,7 +64,7 @@ function main(parent) {
     }
   }
 
-  listPhraseMatchers();
+  callListPhraseMatchers();
   // [END contactcenterinsights_v1_generated_ContactCenterInsights_ListPhraseMatchers_async]
 }
 
