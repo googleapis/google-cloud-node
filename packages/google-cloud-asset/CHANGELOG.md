@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.22.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.21.0...v3.22.0) (2021-11-12)
+
+
+### Features
+
+* Update OSConfig API ([#578](https://www.github.com/googleapis/nodejs-asset/issues/578)) ([8af0ac8](https://www.github.com/googleapis/nodejs-asset/commit/8af0ac8a915b8b72d379b4e2a14c888ef98dfcf1))
+
 ## [3.21.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.20.0...v3.21.0) (2021-11-09)
 
 
