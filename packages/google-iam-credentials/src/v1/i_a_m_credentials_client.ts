@@ -294,37 +294,6 @@ export class IAMCredentialsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  generateAccessToken(
-    request?: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
-      protos.google.iam.credentials.v1.IGenerateAccessTokenRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  generateAccessToken(
-    request: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
-      | protos.google.iam.credentials.v1.IGenerateAccessTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateAccessToken(
-    request: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
-    callback: Callback<
-      protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
-      | protos.google.iam.credentials.v1.IGenerateAccessTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Generates an OAuth 2.0 access token for a service account.
    *
@@ -363,9 +332,40 @@ export class IAMCredentialsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.generateAccessToken(request);
+   * @example <caption>include:samples/generated/v1/i_a_m_credentials.generate_access_token.js</caption>
+   * region_tag:iamcredentials_v1_generated_IAMCredentials_GenerateAccessToken_async
    */
+  generateAccessToken(
+    request?: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
+      protos.google.iam.credentials.v1.IGenerateAccessTokenRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  generateAccessToken(
+    request: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
+      | protos.google.iam.credentials.v1.IGenerateAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateAccessToken(
+    request: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
+    callback: Callback<
+      protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
+      | protos.google.iam.credentials.v1.IGenerateAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   generateAccessToken(
     request?: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
     optionsOrCallback?:
@@ -409,37 +409,6 @@ export class IAMCredentialsClient {
     this.initialize();
     return this.innerApiCalls.generateAccessToken(request, options, callback);
   }
-  generateIdToken(
-    request?: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
-      protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  generateIdToken(
-    request: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
-      | protos.google.iam.credentials.v1.IGenerateIdTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateIdToken(
-    request: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
-    callback: Callback<
-      protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
-      | protos.google.iam.credentials.v1.IGenerateIdTokenRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Generates an OpenID Connect ID token for a service account.
    *
@@ -474,9 +443,40 @@ export class IAMCredentialsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.generateIdToken(request);
+   * @example <caption>include:samples/generated/v1/i_a_m_credentials.generate_id_token.js</caption>
+   * region_tag:iamcredentials_v1_generated_IAMCredentials_GenerateIdToken_async
    */
+  generateIdToken(
+    request?: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
+      protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  generateIdToken(
+    request: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
+      | protos.google.iam.credentials.v1.IGenerateIdTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateIdToken(
+    request: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
+    callback: Callback<
+      protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
+      | protos.google.iam.credentials.v1.IGenerateIdTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   generateIdToken(
     request?: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
     optionsOrCallback?:
@@ -520,33 +520,6 @@ export class IAMCredentialsClient {
     this.initialize();
     return this.innerApiCalls.generateIdToken(request, options, callback);
   }
-  signBlob(
-    request?: protos.google.iam.credentials.v1.ISignBlobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.credentials.v1.ISignBlobResponse,
-      protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  signBlob(
-    request: protos.google.iam.credentials.v1.ISignBlobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.credentials.v1.ISignBlobResponse,
-      protos.google.iam.credentials.v1.ISignBlobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  signBlob(
-    request: protos.google.iam.credentials.v1.ISignBlobRequest,
-    callback: Callback<
-      protos.google.iam.credentials.v1.ISignBlobResponse,
-      protos.google.iam.credentials.v1.ISignBlobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Signs a blob using a service account's system-managed private key.
    *
@@ -577,9 +550,36 @@ export class IAMCredentialsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.signBlob(request);
+   * @example <caption>include:samples/generated/v1/i_a_m_credentials.sign_blob.js</caption>
+   * region_tag:iamcredentials_v1_generated_IAMCredentials_SignBlob_async
    */
+  signBlob(
+    request?: protos.google.iam.credentials.v1.ISignBlobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.credentials.v1.ISignBlobResponse,
+      protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  signBlob(
+    request: protos.google.iam.credentials.v1.ISignBlobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.credentials.v1.ISignBlobResponse,
+      protos.google.iam.credentials.v1.ISignBlobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  signBlob(
+    request: protos.google.iam.credentials.v1.ISignBlobRequest,
+    callback: Callback<
+      protos.google.iam.credentials.v1.ISignBlobResponse,
+      protos.google.iam.credentials.v1.ISignBlobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   signBlob(
     request?: protos.google.iam.credentials.v1.ISignBlobRequest,
     optionsOrCallback?:
@@ -619,33 +619,6 @@ export class IAMCredentialsClient {
     this.initialize();
     return this.innerApiCalls.signBlob(request, options, callback);
   }
-  signJwt(
-    request?: protos.google.iam.credentials.v1.ISignJwtRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.credentials.v1.ISignJwtResponse,
-      protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  signJwt(
-    request: protos.google.iam.credentials.v1.ISignJwtRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.credentials.v1.ISignJwtResponse,
-      protos.google.iam.credentials.v1.ISignJwtRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  signJwt(
-    request: protos.google.iam.credentials.v1.ISignJwtRequest,
-    callback: Callback<
-      protos.google.iam.credentials.v1.ISignJwtResponse,
-      protos.google.iam.credentials.v1.ISignJwtRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Signs a JWT using a service account's system-managed private key.
    *
@@ -676,9 +649,36 @@ export class IAMCredentialsClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.signJwt(request);
+   * @example <caption>include:samples/generated/v1/i_a_m_credentials.sign_jwt.js</caption>
+   * region_tag:iamcredentials_v1_generated_IAMCredentials_SignJwt_async
    */
+  signJwt(
+    request?: protos.google.iam.credentials.v1.ISignJwtRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.iam.credentials.v1.ISignJwtResponse,
+      protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  signJwt(
+    request: protos.google.iam.credentials.v1.ISignJwtRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.credentials.v1.ISignJwtResponse,
+      protos.google.iam.credentials.v1.ISignJwtRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  signJwt(
+    request: protos.google.iam.credentials.v1.ISignJwtRequest,
+    callback: Callback<
+      protos.google.iam.credentials.v1.ISignJwtResponse,
+      protos.google.iam.credentials.v1.ISignJwtRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   signJwt(
     request?: protos.google.iam.credentials.v1.ISignJwtRequest,
     optionsOrCallback?:

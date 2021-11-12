@@ -49,7 +49,7 @@ function main(name, payload) {
   // Instantiates a client
   const credentialsClient = new IAMCredentialsClient();
 
-  async function signBlob() {
+  async function callSignBlob() {
     // Construct request
     const request = {
       name,
@@ -61,7 +61,7 @@ function main(name, payload) {
     console.log(response);
   }
 
-  signBlob();
+  callSignBlob();
   // [END iamcredentials_v1_generated_IAMCredentials_SignBlob_async]
 }
 
