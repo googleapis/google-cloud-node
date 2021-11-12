@@ -32,7 +32,7 @@ function main(parent, rolloutId, rollout) {
   /**
    *  Required. The `Rollout` to create.
    */
-  // const rollout = ''
+  // const rollout = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -59,7 +59,7 @@ function main(parent, rolloutId, rollout) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function createRollout() {
+  async function callCreateRollout() {
     // Construct request
     const request = {
       parent,
@@ -73,7 +73,7 @@ function main(parent, rolloutId, rollout) {
     console.log(response);
   }
 
-  createRollout();
+  callCreateRollout();
   // [END clouddeploy_v1_generated_CloudDeploy_CreateRollout_async]
 }
 

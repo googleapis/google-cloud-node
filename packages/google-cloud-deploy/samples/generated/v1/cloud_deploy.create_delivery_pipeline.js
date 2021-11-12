@@ -31,7 +31,7 @@ function main(parent, deliveryPipelineId, deliveryPipeline) {
   /**
    *  Required. The `DeliveryPipeline` to create.
    */
-  // const deliveryPipeline = ''
+  // const deliveryPipeline = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -58,7 +58,7 @@ function main(parent, deliveryPipelineId, deliveryPipeline) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function createDeliveryPipeline() {
+  async function callCreateDeliveryPipeline() {
     // Construct request
     const request = {
       parent,
@@ -72,7 +72,7 @@ function main(parent, deliveryPipelineId, deliveryPipeline) {
     console.log(response);
   }
 
-  createDeliveryPipeline();
+  callCreateDeliveryPipeline();
   // [END clouddeploy_v1_generated_CloudDeploy_CreateDeliveryPipeline_async]
 }
 

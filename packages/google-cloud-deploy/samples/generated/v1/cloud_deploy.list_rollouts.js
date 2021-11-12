@@ -52,7 +52,7 @@ function main(parent) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function listRollouts() {
+  async function callListRollouts() {
     // Construct request
     const request = {
       parent,
@@ -65,7 +65,7 @@ function main(parent) {
     }
   }
 
-  listRollouts();
+  callListRollouts();
   // [END clouddeploy_v1_generated_CloudDeploy_ListRollouts_async]
 }
 

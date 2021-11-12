@@ -32,7 +32,7 @@ function main(parent, releaseId, release) {
   /**
    *  Required. The `Release` to create.
    */
-  // const release = ''
+  // const release = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -59,7 +59,7 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function createRelease() {
+  async function callCreateRelease() {
     // Construct request
     const request = {
       parent,
@@ -73,7 +73,7 @@ function main(parent, releaseId, release) {
     console.log(response);
   }
 
-  createRelease();
+  callCreateRelease();
   // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
 }
 

@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function getDeliveryPipeline() {
+  async function callGetDeliveryPipeline() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getDeliveryPipeline();
+  callGetDeliveryPipeline();
   // [END clouddeploy_v1_generated_CloudDeploy_GetDeliveryPipeline_async]
 }
 

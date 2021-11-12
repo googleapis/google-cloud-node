@@ -32,7 +32,7 @@ function main(parent, targetId, target) {
   /**
    *  Required. The `Target` to create.
    */
-  // const target = ''
+  // const target = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -59,7 +59,7 @@ function main(parent, targetId, target) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function createTarget() {
+  async function callCreateTarget() {
     // Construct request
     const request = {
       parent,
@@ -73,7 +73,7 @@ function main(parent, targetId, target) {
     console.log(response);
   }
 
-  createTarget();
+  callCreateTarget();
   // [END clouddeploy_v1_generated_CloudDeploy_CreateTarget_async]
 }
 

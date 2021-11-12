@@ -61,7 +61,7 @@ function main(name) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function deleteTarget() {
+  async function callDeleteTarget() {
     // Construct request
     const request = {
       name,
@@ -73,7 +73,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteTarget();
+  callDeleteTarget();
   // [END clouddeploy_v1_generated_CloudDeploy_DeleteTarget_async]
 }
 

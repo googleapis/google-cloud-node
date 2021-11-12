@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function getTarget() {
+  async function callGetTarget() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getTarget();
+  callGetTarget();
   // [END clouddeploy_v1_generated_CloudDeploy_GetTarget_async]
 }
 

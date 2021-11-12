@@ -67,7 +67,7 @@ function main(name) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function deleteDeliveryPipeline() {
+  async function callDeleteDeliveryPipeline() {
     // Construct request
     const request = {
       name,
@@ -79,7 +79,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteDeliveryPipeline();
+  callDeleteDeliveryPipeline();
   // [END clouddeploy_v1_generated_CloudDeploy_DeleteDeliveryPipeline_async]
 }
 

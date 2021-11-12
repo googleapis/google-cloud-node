@@ -26,11 +26,11 @@ function main(updateMask, target) {
    *  the full request. A field will be overwritten if it is in the mask. If the
    *  user does not provide a mask then all fields will be overwritten.
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  Required. The `Target` to update.
    */
-  // const target = ''
+  // const target = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server will know to ignore
@@ -62,7 +62,7 @@ function main(updateMask, target) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function updateTarget() {
+  async function callUpdateTarget() {
     // Construct request
     const request = {
       updateMask,
@@ -75,7 +75,7 @@ function main(updateMask, target) {
     console.log(response);
   }
 
-  updateTarget();
+  callUpdateTarget();
   // [END clouddeploy_v1_generated_CloudDeploy_UpdateTarget_async]
 }
 
