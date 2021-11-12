@@ -140,7 +140,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -161,7 +161,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -195,7 +195,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.getResource = stubSimpleCall(
         undefined,
@@ -218,7 +218,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -239,7 +239,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -273,7 +273,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.postResource = stubSimpleCall(
         undefined,
@@ -296,7 +296,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -317,7 +317,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -351,7 +351,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteResource = stubSimpleCall(
         undefined,
@@ -374,7 +374,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -395,7 +395,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -429,7 +429,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.putResource = stubSimpleCall(
         undefined,
@@ -452,7 +452,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -473,7 +473,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -507,7 +507,7 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.patchResource = stubSimpleCall(
         undefined,

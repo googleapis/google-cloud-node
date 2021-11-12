@@ -292,33 +292,6 @@ export class GatewayServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  getResource(
-    request?: protos.google.api.IHttpBody,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | undefined,
-      {} | undefined
-    ]
-  >;
-  getResource(
-    request: protos.google.api.IHttpBody,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getResource(
-    request: protos.google.api.IHttpBody,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * GetResource performs an HTTP GET request on the Kubernetes API Server.
    *
@@ -338,9 +311,36 @@ export class GatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.getResource(request);
+   * @example <caption>include:samples/generated/v1beta1/gateway_service.get_resource.js</caption>
+   * region_tag:connectgateway_v1beta1_generated_GatewayService_GetResource_async
    */
+  getResource(
+    request?: protos.google.api.IHttpBody,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | undefined,
+      {} | undefined
+    ]
+  >;
+  getResource(
+    request: protos.google.api.IHttpBody,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getResource(
+    request: protos.google.api.IHttpBody,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getResource(
     request?: protos.google.api.IHttpBody,
     optionsOrCallback?:
@@ -371,36 +371,11 @@ export class GatewayServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.getResource(request, options, callback);
   }
-  postResource(
-    request?: protos.google.api.IHttpBody,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | undefined,
-      {} | undefined
-    ]
-  >;
-  postResource(
-    request: protos.google.api.IHttpBody,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  postResource(
-    request: protos.google.api.IHttpBody,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * PostResource performs an HTTP POST on the Kubernetes API Server.
    *
@@ -420,9 +395,36 @@ export class GatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.postResource(request);
+   * @example <caption>include:samples/generated/v1beta1/gateway_service.post_resource.js</caption>
+   * region_tag:connectgateway_v1beta1_generated_GatewayService_PostResource_async
    */
+  postResource(
+    request?: protos.google.api.IHttpBody,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | undefined,
+      {} | undefined
+    ]
+  >;
+  postResource(
+    request: protos.google.api.IHttpBody,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  postResource(
+    request: protos.google.api.IHttpBody,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   postResource(
     request?: protos.google.api.IHttpBody,
     optionsOrCallback?:
@@ -453,36 +455,11 @@ export class GatewayServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.postResource(request, options, callback);
   }
-  deleteResource(
-    request?: protos.google.api.IHttpBody,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteResource(
-    request: protos.google.api.IHttpBody,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteResource(
-    request: protos.google.api.IHttpBody,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * DeleteResource performs an HTTP DELETE on the Kubernetes API Server.
    *
@@ -502,9 +479,36 @@ export class GatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteResource(request);
+   * @example <caption>include:samples/generated/v1beta1/gateway_service.delete_resource.js</caption>
+   * region_tag:connectgateway_v1beta1_generated_GatewayService_DeleteResource_async
    */
+  deleteResource(
+    request?: protos.google.api.IHttpBody,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteResource(
+    request: protos.google.api.IHttpBody,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteResource(
+    request: protos.google.api.IHttpBody,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteResource(
     request?: protos.google.api.IHttpBody,
     optionsOrCallback?:
@@ -535,36 +539,11 @@ export class GatewayServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.deleteResource(request, options, callback);
   }
-  putResource(
-    request?: protos.google.api.IHttpBody,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | undefined,
-      {} | undefined
-    ]
-  >;
-  putResource(
-    request: protos.google.api.IHttpBody,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  putResource(
-    request: protos.google.api.IHttpBody,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      protos.google.api.IHttpBody | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * PutResource performs an HTTP PUT on the Kubernetes API Server.
    *
@@ -584,9 +563,36 @@ export class GatewayServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.putResource(request);
+   * @example <caption>include:samples/generated/v1beta1/gateway_service.put_resource.js</caption>
+   * region_tag:connectgateway_v1beta1_generated_GatewayService_PutResource_async
    */
+  putResource(
+    request?: protos.google.api.IHttpBody,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | undefined,
+      {} | undefined
+    ]
+  >;
+  putResource(
+    request: protos.google.api.IHttpBody,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  putResource(
+    request: protos.google.api.IHttpBody,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.api.IHttpBody | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   putResource(
     request?: protos.google.api.IHttpBody,
     optionsOrCallback?:
@@ -617,9 +623,33 @@ export class GatewayServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.putResource(request, options, callback);
   }
+  /**
+   * PatchResource performs an HTTP PATCH on the Kubernetes API Server.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.contentType
+   *   The HTTP Content-Type header value specifying the content type of the body.
+   * @param {Buffer} request.data
+   *   The HTTP request/response body as raw binary.
+   * @param {number[]} request.extensions
+   *   Application specific response metadata. Must be set in the first response
+   *   for streaming APIs.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HttpBody]{@link google.api.HttpBody}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/gateway_service.patch_resource.js</caption>
+   * region_tag:connectgateway_v1beta1_generated_GatewayService_PatchResource_async
+   */
   patchResource(
     request?: protos.google.api.IHttpBody,
     options?: CallOptions
@@ -647,28 +677,6 @@ export class GatewayServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * PatchResource performs an HTTP PATCH on the Kubernetes API Server.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.contentType
-   *   The HTTP Content-Type header value specifying the content type of the body.
-   * @param {Buffer} request.data
-   *   The HTTP request/response body as raw binary.
-   * @param {number[]} request.extensions
-   *   Application specific response metadata. Must be set in the first response
-   *   for streaming APIs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [HttpBody]{@link google.api.HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.patchResource(request);
-   */
   patchResource(
     request?: protos.google.api.IHttpBody,
     optionsOrCallback?:
@@ -699,6 +707,8 @@ export class GatewayServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.patchResource(request, options, callback);
   }

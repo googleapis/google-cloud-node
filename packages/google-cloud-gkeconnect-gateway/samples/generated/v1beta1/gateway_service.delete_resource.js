@@ -40,7 +40,7 @@ function main() {
   // Instantiates a client
   const gatewayClient = new GatewayServiceClient();
 
-  async function deleteResource() {
+  async function callDeleteResource() {
     // Construct request
     const request = {};
 
@@ -49,7 +49,7 @@ function main() {
     console.log(response);
   }
 
-  deleteResource();
+  callDeleteResource();
   // [END connectgateway_v1beta1_generated_GatewayService_DeleteResource_async]
 }
 
