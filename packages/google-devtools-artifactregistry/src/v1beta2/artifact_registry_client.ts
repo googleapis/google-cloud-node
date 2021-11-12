@@ -437,6 +437,23 @@ export class ArtifactRegistryClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the repository to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Repository]{@link google.devtools.artifactregistry.v1beta2.Repository}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_repository.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetRepository_async
+   */
   getRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetRepositoryRequest,
     options?: CallOptions
@@ -471,23 +488,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the repository to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Repository]{@link google.devtools.artifactregistry.v1beta2.Repository}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getRepository(request);
-   */
   getRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetRepositoryRequest,
     optionsOrCallback?:
@@ -534,6 +534,27 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.getRepository(request, options, callback);
   }
+  /**
+   * Updates a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1beta2.Repository} request.repository
+   *   The repository that replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Repository]{@link google.devtools.artifactregistry.v1beta2.Repository}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.update_repository.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_UpdateRepository_async
+   */
   updateRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.IUpdateRepositoryRequest,
     options?: CallOptions
@@ -568,27 +589,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1beta2.Repository} request.repository
-   *   The repository that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Repository]{@link google.devtools.artifactregistry.v1beta2.Repository}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateRepository(request);
-   */
   updateRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.IUpdateRepositoryRequest,
     optionsOrCallback?:
@@ -635,6 +635,23 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.updateRepository(request, options, callback);
   }
+  /**
+   * Gets a package.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the package to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Package]{@link google.devtools.artifactregistry.v1beta2.Package}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_package.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetPackage_async
+   */
   getPackage(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetPackageRequest,
     options?: CallOptions
@@ -669,23 +686,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a package.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the package to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Package]{@link google.devtools.artifactregistry.v1beta2.Package}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getPackage(request);
-   */
   getPackage(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetPackageRequest,
     optionsOrCallback?:
@@ -732,6 +732,25 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.getPackage(request, options, callback);
   }
+  /**
+   * Gets a version
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the version to retrieve.
+   * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
+   *   The view that should be returned in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Version]{@link google.devtools.artifactregistry.v1beta2.Version}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_version.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetVersion_async
+   */
   getVersion(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetVersionRequest,
     options?: CallOptions
@@ -766,25 +785,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a version
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the version to retrieve.
-   * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
-   *   The view that should be returned in the response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Version]{@link google.devtools.artifactregistry.v1beta2.Version}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getVersion(request);
-   */
   getVersion(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetVersionRequest,
     optionsOrCallback?:
@@ -831,6 +831,23 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.getVersion(request, options, callback);
   }
+  /**
+   * Gets a file.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the file to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [File]{@link google.devtools.artifactregistry.v1beta2.File}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_file.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetFile_async
+   */
   getFile(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetFileRequest,
     options?: CallOptions
@@ -865,23 +882,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a file.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the file to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [File]{@link google.devtools.artifactregistry.v1beta2.File}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getFile(request);
-   */
   getFile(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetFileRequest,
     optionsOrCallback?:
@@ -928,6 +928,23 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.getFile(request, options, callback);
   }
+  /**
+   * Gets a tag.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the tag to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Tag]{@link google.devtools.artifactregistry.v1beta2.Tag}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_tag.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetTag_async
+   */
   getTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetTagRequest,
     options?: CallOptions
@@ -962,23 +979,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the tag to retrieve.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tag]{@link google.devtools.artifactregistry.v1beta2.Tag}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTag(request);
-   */
   getTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.IGetTagRequest,
     optionsOrCallback?:
@@ -1025,6 +1025,27 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.getTag(request, options, callback);
   }
+  /**
+   * Creates a tag.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the parent resource where the tag will be created.
+   * @param {string} request.tagId
+   *   The tag id to use for this repository.
+   * @param {google.devtools.artifactregistry.v1beta2.Tag} request.tag
+   *   The tag to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Tag]{@link google.devtools.artifactregistry.v1beta2.Tag}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.create_tag.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_CreateTag_async
+   */
   createTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.ICreateTagRequest,
     options?: CallOptions
@@ -1059,27 +1080,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource where the tag will be created.
-   * @param {string} request.tagId
-   *   The tag id to use for this repository.
-   * @param {google.devtools.artifactregistry.v1beta2.Tag} request.tag
-   *   The tag to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tag]{@link google.devtools.artifactregistry.v1beta2.Tag}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createTag(request);
-   */
   createTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.ICreateTagRequest,
     optionsOrCallback?:
@@ -1126,6 +1126,27 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.createTag(request, options, callback);
   }
+  /**
+   * Updates a tag.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.artifactregistry.v1beta2.Tag} request.tag
+   *   The tag that replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Tag]{@link google.devtools.artifactregistry.v1beta2.Tag}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.update_tag.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_UpdateTag_async
+   */
   updateTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.IUpdateTagRequest,
     options?: CallOptions
@@ -1160,27 +1181,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.devtools.artifactregistry.v1beta2.Tag} request.tag
-   *   The tag that replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tag]{@link google.devtools.artifactregistry.v1beta2.Tag}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateTag(request);
-   */
   updateTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.IUpdateTagRequest,
     optionsOrCallback?:
@@ -1227,6 +1227,23 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.updateTag(request, options, callback);
   }
+  /**
+   * Deletes a tag.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the tag to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_tag.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteTag_async
+   */
   deleteTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeleteTagRequest,
     options?: CallOptions
@@ -1261,23 +1278,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a tag.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the tag to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteTag(request);
-   */
   deleteTag(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeleteTagRequest,
     optionsOrCallback?:
@@ -1324,6 +1324,29 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.deleteTag(request, options, callback);
   }
+  /**
+   * Updates the IAM policy for a given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.set_iam_policy.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
@@ -1351,29 +1374,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates the IAM policy for a given resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
@@ -1413,6 +1413,27 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Gets the IAM policy for a given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.get_iam_policy.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
@@ -1440,27 +1461,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the IAM policy for a given resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`. This field is only used by Cloud IAM.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.iam.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
@@ -1500,6 +1500,29 @@ export class ArtifactRegistryClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Tests if the caller has a list of permissions on a resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.test_iam_permissions.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
@@ -1527,29 +1550,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Tests if the caller has a list of permissions on a resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link google.iam.v1.TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
@@ -1590,6 +1590,30 @@ export class ArtifactRegistryClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
+  /**
+   * Creates a repository. The returned Operation will finish once the
+   * repository has been created. Its response will be the created Repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the parent resource where the repository will be created.
+   * @param {string} request.repositoryId
+   *   The repository id to use for this repository.
+   * @param {google.devtools.artifactregistry.v1beta2.Repository} request.repository
+   *   The repository to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.create_repository.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_CreateRepository_async
+   */
   createRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.ICreateRepositoryRequest,
     options?: CallOptions
@@ -1626,31 +1650,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a repository. The returned Operation will finish once the
-   * repository has been created. Its response will be the created Repository.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource where the repository will be created.
-   * @param {string} request.repositoryId
-   *   The repository id to use for this repository.
-   * @param {google.devtools.artifactregistry.v1beta2.Repository} request.repository
-   *   The repository to be created.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createRepository(request);
-   * const [response] = await operation.promise();
-   */
   createRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.ICreateRepositoryRequest,
     optionsOrCallback?:
@@ -1708,11 +1707,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateRepositoryProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.create_repository.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_CreateRepository_async
    */
   async checkCreateRepositoryProgress(
     name: string
@@ -1736,6 +1732,27 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.OperationMetadata
     >;
   }
+  /**
+   * Deletes a repository and all of its contents. The returned Operation will
+   * finish once the repository has been deleted. It will not have any Operation
+   * metadata and will return a google.protobuf.Empty response.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the repository to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_repository.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteRepository_async
+   */
   deleteRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeleteRepositoryRequest,
     options?: CallOptions
@@ -1772,28 +1789,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a repository and all of its contents. The returned Operation will
-   * finish once the repository has been deleted. It will not have any Operation
-   * metadata and will return a google.protobuf.Empty response.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the repository to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteRepository(request);
-   * const [response] = await operation.promise();
-   */
   deleteRepository(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeleteRepositoryRequest,
     optionsOrCallback?:
@@ -1851,11 +1846,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteRepositoryProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_repository.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteRepository_async
    */
   async checkDeleteRepositoryProgress(
     name: string
@@ -1879,6 +1871,26 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.OperationMetadata
     >;
   }
+  /**
+   * Deletes a package and all of its versions and tags. The returned operation
+   * will complete once the package has been deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the package to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_package.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeletePackage_async
+   */
   deletePackage(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeletePackageRequest,
     options?: CallOptions
@@ -1915,27 +1927,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a package and all of its versions and tags. The returned operation
-   * will complete once the package has been deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the package to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deletePackage(request);
-   * const [response] = await operation.promise();
-   */
   deletePackage(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeletePackageRequest,
     optionsOrCallback?:
@@ -1993,11 +1984,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeletePackageProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_package.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeletePackage_async
    */
   async checkDeletePackageProgress(
     name: string
@@ -2021,6 +2009,29 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.OperationMetadata
     >;
   }
+  /**
+   * Deletes a version and all of its content. The returned operation will
+   * complete once the version has been deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the version to delete.
+   * @param {boolean} request.force
+   *   By default, a version that is tagged may not be deleted. If force=true, the
+   *   version and any tags pointing to the version are deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_version.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteVersion_async
+   */
   deleteVersion(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeleteVersionRequest,
     options?: CallOptions
@@ -2057,30 +2068,6 @@ export class ArtifactRegistryClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a version and all of its content. The returned operation will
-   * complete once the version has been deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The name of the version to delete.
-   * @param {boolean} request.force
-   *   By default, a version that is tagged may not be deleted. If force=true, the
-   *   version and any tags pointing to the version are deleted.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteVersion(request);
-   * const [response] = await operation.promise();
-   */
   deleteVersion(
     request?: protos.google.devtools.artifactregistry.v1beta2.IDeleteVersionRequest,
     optionsOrCallback?:
@@ -2138,11 +2125,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteVersionProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.delete_version.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteVersion_async
    */
   async checkDeleteVersionProgress(
     name: string
@@ -2166,6 +2150,31 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.OperationMetadata
     >;
   }
+  /**
+   * Lists repositories.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the parent resource whose repositories will be listed.
+   * @param {number} request.pageSize
+   *   The maximum number of repositories to return.
+   *   Maximum page size is 10,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Repository]{@link google.devtools.artifactregistry.v1beta2.Repository}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRepositoriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listRepositories(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesRequest,
     options?: CallOptions
@@ -2197,31 +2206,6 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.IRepository
     >
   ): void;
-  /**
-   * Lists repositories.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource whose repositories will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of repositories to return.
-   *   Maximum page size is 10,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Repository]{@link google.devtools.artifactregistry.v1beta2.Repository}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listRepositoriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listRepositories(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesRequest,
     optionsOrCallback?:
@@ -2334,11 +2318,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listRepositoriesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.list_repositories.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ListRepositories_async
    */
   listRepositoriesAsync(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListRepositoriesRequest,
@@ -2352,7 +2333,6 @@ export class ArtifactRegistryClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2362,6 +2342,31 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IRepository>;
   }
+  /**
+   * Lists packages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the parent resource whose packages will be listed.
+   * @param {number} request.pageSize
+   *   The maximum number of packages to return.
+   *   Maximum page size is 10,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Package]{@link google.devtools.artifactregistry.v1beta2.Package}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPackagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listPackages(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListPackagesRequest,
     options?: CallOptions
@@ -2393,31 +2398,6 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.IPackage
     >
   ): void;
-  /**
-   * Lists packages.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource whose packages will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of packages to return.
-   *   Maximum page size is 10,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Package]{@link google.devtools.artifactregistry.v1beta2.Package}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listPackagesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listPackages(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListPackagesRequest,
     optionsOrCallback?:
@@ -2530,11 +2510,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listPackagesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.list_packages.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ListPackages_async
    */
   listPackagesAsync(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListPackagesRequest,
@@ -2548,7 +2525,6 @@ export class ArtifactRegistryClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2558,6 +2534,33 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IPackage>;
   }
+  /**
+   * Lists versions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the parent resource whose versions will be listed.
+   * @param {number} request.pageSize
+   *   The maximum number of versions to return.
+   *   Maximum page size is 10,000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request, if any.
+   * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
+   *   The view that should be returned in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Version]{@link google.devtools.artifactregistry.v1beta2.Version}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listVersions(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListVersionsRequest,
     options?: CallOptions
@@ -2589,33 +2592,6 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1beta2.IVersion
     >
   ): void;
-  /**
-   * Lists versions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The name of the parent resource whose versions will be listed.
-   * @param {number} request.pageSize
-   *   The maximum number of versions to return.
-   *   Maximum page size is 10,000.
-   * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any.
-   * @param {google.devtools.artifactregistry.v1beta2.VersionView} request.view
-   *   The view that should be returned in the response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Version]{@link google.devtools.artifactregistry.v1beta2.Version}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listVersionsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listVersions(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListVersionsRequest,
     optionsOrCallback?:
@@ -2732,11 +2708,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listVersionsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.list_versions.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ListVersions_async
    */
   listVersionsAsync(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListVersionsRequest,
@@ -2750,7 +2723,6 @@ export class ArtifactRegistryClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2760,37 +2732,6 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IVersion>;
   }
-  listFiles(
-    request?: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1beta2.IFile[],
-      protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
-    ]
-  >;
-  listFiles(
-    request: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
-      | protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1beta2.IFile
-    >
-  ): void;
-  listFiles(
-    request: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
-      | protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1beta2.IFile
-    >
-  ): void;
   /**
    * Lists files.
    *
@@ -2828,6 +2769,37 @@ export class ArtifactRegistryClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listFiles(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1beta2.IFile[],
+      protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest | null,
+      protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
+    ]
+  >;
+  listFiles(
+    request: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
+      | protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1beta2.IFile
+    >
+  ): void;
+  listFiles(
+    request: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
+      | protos.google.devtools.artifactregistry.v1beta2.IListFilesResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1beta2.IFile
+    >
+  ): void;
   listFiles(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
     optionsOrCallback?:
@@ -2964,11 +2936,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listFilesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.list_files.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ListFiles_async
    */
   listFilesAsync(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListFilesRequest,
@@ -2982,7 +2951,6 @@ export class ArtifactRegistryClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
@@ -2992,37 +2960,6 @@ export class ArtifactRegistryClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.artifactregistry.v1beta2.IFile>;
   }
-  listTags(
-    request?: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.artifactregistry.v1beta2.ITag[],
-      protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest | null,
-      protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
-    ]
-  >;
-  listTags(
-    request: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
-      | protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1beta2.ITag
-    >
-  ): void;
-  listTags(
-    request: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
-    callback: PaginationCallback<
-      protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
-      | protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
-      | null
-      | undefined,
-      protos.google.devtools.artifactregistry.v1beta2.ITag
-    >
-  ): void;
   /**
    * Lists tags.
    *
@@ -3058,6 +2995,37 @@ export class ArtifactRegistryClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    */
+  listTags(
+    request?: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.artifactregistry.v1beta2.ITag[],
+      protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest | null,
+      protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
+    ]
+  >;
+  listTags(
+    request: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
+      | protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1beta2.ITag
+    >
+  ): void;
+  listTags(
+    request: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
+      | protos.google.devtools.artifactregistry.v1beta2.IListTagsResponse
+      | null
+      | undefined,
+      protos.google.devtools.artifactregistry.v1beta2.ITag
+    >
+  ): void;
   listTags(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
     optionsOrCallback?:
@@ -3190,11 +3158,8 @@ export class ArtifactRegistryClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listTagsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta2/artifact_registry.list_tags.js</caption>
+   * region_tag:artifactregistry_v1beta2_generated_ArtifactRegistry_ListTags_async
    */
   listTagsAsync(
     request?: protos.google.devtools.artifactregistry.v1beta2.IListTagsRequest,
@@ -3208,7 +3173,6 @@ export class ArtifactRegistryClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

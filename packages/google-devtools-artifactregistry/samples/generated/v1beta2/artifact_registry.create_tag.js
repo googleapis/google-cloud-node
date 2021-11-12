@@ -30,7 +30,7 @@ function main() {
   /**
    *  The tag to be created.
    */
-  // const tag = ''
+  // const tag = {}
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} =
@@ -39,7 +39,7 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function createTag() {
+  async function callCreateTag() {
     // Construct request
     const request = {};
 
@@ -48,7 +48,7 @@ function main() {
     console.log(response);
   }
 
-  createTag();
+  callCreateTag();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_CreateTag_async]
 }
 

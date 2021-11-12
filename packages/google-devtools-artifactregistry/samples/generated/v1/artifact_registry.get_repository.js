@@ -31,7 +31,7 @@ function main(name) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function getRepository() {
+  async function callGetRepository() {
     // Construct request
     const request = {
       name,
@@ -42,7 +42,7 @@ function main(name) {
     console.log(response);
   }
 
-  getRepository();
+  callGetRepository();
   // [END artifactregistry_v1_generated_ArtifactRegistry_GetRepository_async]
 }
 

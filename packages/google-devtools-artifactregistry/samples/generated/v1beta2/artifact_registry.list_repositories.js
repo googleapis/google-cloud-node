@@ -40,7 +40,7 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function listRepositories() {
+  async function callListRepositories() {
     // Construct request
     const request = {};
 
@@ -53,7 +53,7 @@ function main() {
     }
   }
 
-  listRepositories();
+  callListRepositories();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_ListRepositories_async]
 }
 

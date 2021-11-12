@@ -28,7 +28,7 @@ function main(resource) {
    *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
    *  `GetIamPolicy`. This field is only used by Cloud IAM.
    */
-  // const options = ''
+  // const options = {}
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} =
@@ -37,7 +37,7 @@ function main(resource) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function getIamPolicy() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -48,7 +48,7 @@ function main(resource) {
     console.log(response);
   }
 
-  getIamPolicy();
+  callGetIamPolicy();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetIamPolicy_async]
 }
 
