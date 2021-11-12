@@ -35306,18 +35306,6 @@ export namespace google {
                         }
                     }
 
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                    }
-
                     /** Properties of a SpeechWordInfo. */
                     interface ISpeechWordInfo {
 
@@ -35424,6 +35412,18 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of an InputAudioConfig. */
@@ -53393,6 +53393,9 @@ export namespace google {
 
                             /** GenericWebService requestHeaders */
                             requestHeaders?: ({ [k: string]: string }|null);
+
+                            /** GenericWebService allowedCaCerts */
+                            allowedCaCerts?: (Uint8Array[]|null);
                         }
 
                         /** Represents a GenericWebService. */
@@ -53415,6 +53418,9 @@ export namespace google {
 
                             /** GenericWebService requestHeaders. */
                             public requestHeaders: { [k: string]: string };
+
+                            /** GenericWebService allowedCaCerts. */
+                            public allowedCaCerts: Uint8Array[];
 
                             /**
                              * Creates a new GenericWebService instance using the specified properties.
