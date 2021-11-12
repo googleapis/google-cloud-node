@@ -31,7 +31,7 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function getFile() {
+  async function callGetFile() {
     // Construct request
     const request = {};
 
@@ -40,7 +40,7 @@ function main() {
     console.log(response);
   }
 
-  getFile();
+  callGetFile();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetFile_async]
 }
 

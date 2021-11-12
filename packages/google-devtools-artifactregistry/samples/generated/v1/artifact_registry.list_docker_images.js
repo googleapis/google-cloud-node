@@ -39,7 +39,7 @@ function main(parent) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function listDockerImages() {
+  async function callListDockerImages() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     }
   }
 
-  listDockerImages();
+  callListDockerImages();
   // [END artifactregistry_v1_generated_ArtifactRegistry_ListDockerImages_async]
 }
 

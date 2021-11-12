@@ -49,7 +49,7 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function listTags() {
+  async function callListTags() {
     // Construct request
     const request = {};
 
@@ -60,7 +60,7 @@ function main() {
     }
   }
 
-  listTags();
+  callListTags();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_ListTags_async]
 }
 

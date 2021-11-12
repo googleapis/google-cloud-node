@@ -31,7 +31,7 @@ function main() {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function deleteRepository() {
+  async function callDeleteRepository() {
     // Construct request
     const request = {};
 
@@ -41,7 +41,7 @@ function main() {
     console.log(response);
   }
 
-  deleteRepository();
+  callDeleteRepository();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_DeleteRepository_async]
 }
 

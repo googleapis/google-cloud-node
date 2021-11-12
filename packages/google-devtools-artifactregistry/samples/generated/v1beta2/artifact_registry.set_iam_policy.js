@@ -30,7 +30,7 @@ function main(resource, policy) {
    *  valid policy but certain Cloud Platform services (such as Projects)
    *  might reject them.
    */
-  // const policy = ''
+  // const policy = {}
 
   // Imports the Artifactregistry library
   const {ArtifactRegistryClient} =
@@ -39,7 +39,7 @@ function main(resource, policy) {
   // Instantiates a client
   const artifactregistryClient = new ArtifactRegistryClient();
 
-  async function setIamPolicy() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
       resource,
@@ -51,7 +51,7 @@ function main(resource, policy) {
     console.log(response);
   }
 
-  setIamPolicy();
+  callSetIamPolicy();
   // [END artifactregistry_v1beta2_generated_ArtifactRegistry_SetIamPolicy_async]
 }
 
