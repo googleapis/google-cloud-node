@@ -22,13 +22,13 @@ function main(validateOnly) {
   /**
    *  The trigger to be updated.
    */
-  // const trigger = ''
+  // const trigger = {}
   /**
    *  The fields to be updated; only fields explicitly provided will be updated.
    *  If no field mask is provided, all provided fields in the request will be
    *  updated. To update all fields, provide a field mask of "*".
    */
-  // const updateMask = ''
+  // const updateMask = {}
   /**
    *  If set to true, and the trigger is not found, a new trigger will be
    *  created. In this situation, `update_mask` is ignored.
@@ -46,7 +46,7 @@ function main(validateOnly) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function updateTrigger() {
+  async function callUpdateTrigger() {
     // Construct request
     const request = {
       validateOnly,
@@ -58,7 +58,7 @@ function main(validateOnly) {
     console.log(response);
   }
 
-  updateTrigger();
+  callUpdateTrigger();
   // [END eventarc_v1_generated_Eventarc_UpdateTrigger_async]
 }
 

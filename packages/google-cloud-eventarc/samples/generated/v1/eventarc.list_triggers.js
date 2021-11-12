@@ -49,7 +49,7 @@ function main(parent) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function listTriggers() {
+  async function callListTriggers() {
     // Construct request
     const request = {
       parent,
@@ -62,7 +62,7 @@ function main(parent) {
     }
   }
 
-  listTriggers();
+  callListTriggers();
   // [END eventarc_v1_generated_Eventarc_ListTriggers_async]
 }
 

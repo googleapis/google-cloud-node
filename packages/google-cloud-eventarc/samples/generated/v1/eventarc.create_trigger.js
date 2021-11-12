@@ -26,7 +26,7 @@ function main(parent, trigger, triggerId, validateOnly) {
   /**
    *  Required. The trigger to create.
    */
-  // const trigger = ''
+  // const trigger = {}
   /**
    *  Required. The user-provided ID to be assigned to the trigger.
    */
@@ -43,7 +43,7 @@ function main(parent, trigger, triggerId, validateOnly) {
   // Instantiates a client
   const eventarcClient = new EventarcClient();
 
-  async function createTrigger() {
+  async function callCreateTrigger() {
     // Construct request
     const request = {
       parent,
@@ -58,7 +58,7 @@ function main(parent, trigger, triggerId, validateOnly) {
     console.log(response);
   }
 
-  createTrigger();
+  callCreateTrigger();
   // [END eventarc_v1_generated_Eventarc_CreateTrigger_async]
 }
 
