@@ -49,7 +49,7 @@ function main(parent) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function searchAssignments() {
+  async function callSearchAssignments() {
     // Construct request
     const request = {
       parent,
@@ -62,7 +62,7 @@ function main(parent) {
     }
   }
 
-  searchAssignments();
+  callSearchAssignments();
   // [END bigqueryreservation_v1_generated_ReservationService_SearchAssignments_async]
 }
 

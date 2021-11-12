@@ -40,7 +40,7 @@ function main(parent) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function listReservations() {
+  async function callListReservations() {
     // Construct request
     const request = {
       parent,
@@ -53,7 +53,7 @@ function main(parent) {
     }
   }
 
-  listReservations();
+  callListReservations();
   // [END bigqueryreservation_v1_generated_ReservationService_ListReservations_async]
 }
 

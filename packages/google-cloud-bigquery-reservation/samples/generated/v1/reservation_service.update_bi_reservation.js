@@ -22,11 +22,11 @@ function main() {
   /**
    *  A reservation to update.
    */
-  // const biReservation = ''
+  // const biReservation = {}
   /**
    *  A list of fields to be updated in this request.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Reservation library
   const {ReservationServiceClient} =
@@ -35,7 +35,7 @@ function main() {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function updateBiReservation() {
+  async function callUpdateBiReservation() {
     // Construct request
     const request = {};
 
@@ -44,7 +44,7 @@ function main() {
     console.log(response);
   }
 
-  updateBiReservation();
+  callUpdateBiReservation();
   // [END bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_async]
 }
 

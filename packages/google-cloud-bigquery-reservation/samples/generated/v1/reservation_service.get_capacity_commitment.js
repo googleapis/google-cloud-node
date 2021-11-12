@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function getCapacityCommitment() {
+  async function callGetCapacityCommitment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getCapacityCommitment();
+  callGetCapacityCommitment();
   // [END bigqueryreservation_v1_generated_ReservationService_GetCapacityCommitment_async]
 }
 

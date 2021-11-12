@@ -22,11 +22,11 @@ function main() {
   /**
    *  Content of the capacity commitment to update.
    */
-  // const capacityCommitment = ''
+  // const capacityCommitment = {}
   /**
    *  Standard field mask for the set of fields to be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Reservation library
   const {ReservationServiceClient} =
@@ -35,7 +35,7 @@ function main() {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function updateCapacityCommitment() {
+  async function callUpdateCapacityCommitment() {
     // Construct request
     const request = {};
 
@@ -44,7 +44,7 @@ function main() {
     console.log(response);
   }
 
-  updateCapacityCommitment();
+  callUpdateCapacityCommitment();
   // [END bigqueryreservation_v1_generated_ReservationService_UpdateCapacityCommitment_async]
 }
 

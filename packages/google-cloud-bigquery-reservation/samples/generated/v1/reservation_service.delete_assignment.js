@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function deleteAssignment() {
+  async function callDeleteAssignment() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteAssignment();
+  callDeleteAssignment();
   // [END bigqueryreservation_v1_generated_ReservationService_DeleteAssignment_async]
 }
 

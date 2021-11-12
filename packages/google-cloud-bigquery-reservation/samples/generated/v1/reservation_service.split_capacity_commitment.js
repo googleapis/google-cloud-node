@@ -36,7 +36,7 @@ function main(name) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function splitCapacityCommitment() {
+  async function callSplitCapacityCommitment() {
     // Construct request
     const request = {
       name,
@@ -47,7 +47,7 @@ function main(name) {
     console.log(response);
   }
 
-  splitCapacityCommitment();
+  callSplitCapacityCommitment();
   // [END bigqueryreservation_v1_generated_ReservationService_SplitCapacityCommitment_async]
 }
 

@@ -27,7 +27,7 @@ function main(parent) {
   /**
    *  Content of the capacity commitment to create.
    */
-  // const capacityCommitment = ''
+  // const capacityCommitment = {}
   /**
    *  If true, fail the request if another project in the organization has a
    *  capacity commitment.
@@ -49,7 +49,7 @@ function main(parent) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function createCapacityCommitment() {
+  async function callCreateCapacityCommitment() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent) {
     console.log(response);
   }
 
-  createCapacityCommitment();
+  callCreateCapacityCommitment();
   // [END bigqueryreservation_v1_generated_ReservationService_CreateCapacityCommitment_async]
 }
 

@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function getReservation() {
+  async function callGetReservation() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getReservation();
+  callGetReservation();
   // [END bigqueryreservation_v1_generated_ReservationService_GetReservation_async]
 }
 

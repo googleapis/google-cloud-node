@@ -22,11 +22,11 @@ function main() {
   /**
    *  Content of the reservation to update.
    */
-  // const reservation = ''
+  // const reservation = {}
   /**
    *  Standard field mask for the set of fields to be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Reservation library
   const {ReservationServiceClient} =
@@ -35,7 +35,7 @@ function main() {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function updateReservation() {
+  async function callUpdateReservation() {
     // Construct request
     const request = {};
 
@@ -44,7 +44,7 @@ function main() {
     console.log(response);
   }
 
-  updateReservation();
+  callUpdateReservation();
   // [END bigqueryreservation_v1_generated_ReservationService_UpdateReservation_async]
 }
 

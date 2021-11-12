@@ -27,7 +27,7 @@ function main(parent) {
   /**
    *  Assignment resource to create.
    */
-  // const assignment = ''
+  // const assignment = {}
   /**
    *  The optional assignment ID. Assignment name will be generated automatically
    *  if this field is empty.
@@ -43,7 +43,7 @@ function main(parent) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function createAssignment() {
+  async function callCreateAssignment() {
     // Construct request
     const request = {
       parent,
@@ -54,7 +54,7 @@ function main(parent) {
     console.log(response);
   }
 
-  createAssignment();
+  callCreateAssignment();
   // [END bigqueryreservation_v1_generated_ReservationService_CreateAssignment_async]
 }
 

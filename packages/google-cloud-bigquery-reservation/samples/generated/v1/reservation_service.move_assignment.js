@@ -38,7 +38,7 @@ function main(name) {
   // Instantiates a client
   const reservationClient = new ReservationServiceClient();
 
-  async function moveAssignment() {
+  async function callMoveAssignment() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name) {
     console.log(response);
   }
 
-  moveAssignment();
+  callMoveAssignment();
   // [END bigqueryreservation_v1_generated_ReservationService_MoveAssignment_async]
 }
 
