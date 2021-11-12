@@ -366,7 +366,9 @@ export class GlobalOperationsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteGlobalOperationRequest,
@@ -459,7 +461,9 @@ export class GlobalOperationsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetGlobalOperationRequest,
@@ -556,7 +560,9 @@ export class GlobalOperationsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.wait(request);
+   * ```
    */
   wait(
     request?: protos.google.cloud.compute.v1.IWaitGlobalOperationRequest,
@@ -643,10 +649,12 @@ export class GlobalOperationsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListGlobalOperationsRequest,
@@ -878,10 +886,12 @@ export class GlobalOperationsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListGlobalOperationsRequest,

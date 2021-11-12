@@ -386,7 +386,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addPeering(request);
+   * ```
    */
   addPeering(
     request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
@@ -506,7 +508,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
@@ -613,7 +617,9 @@ export class NetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
@@ -705,7 +711,9 @@ export class NetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getEffectiveFirewalls(request);
+   * ```
    */
   getEffectiveFirewalls(
     request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
@@ -808,7 +816,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
@@ -928,7 +938,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
@@ -1052,7 +1064,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removePeering(request);
+   * ```
    */
   removePeering(
     request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
@@ -1176,7 +1190,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.switchToCustomMode(request);
+   * ```
    */
   switchToCustomMode(
     request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
@@ -1302,7 +1318,9 @@ export class NetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updatePeering(request);
+   * ```
    */
   updatePeering(
     request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
@@ -1573,10 +1591,12 @@ export class NetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListNetworksRequest,
@@ -1836,10 +1856,12 @@ export class NetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listPeeringRoutesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listPeeringRoutesAsync(
     request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,

@@ -376,7 +376,9 @@ export class GlobalForwardingRulesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteGlobalForwardingRuleRequest,
@@ -492,7 +494,9 @@ export class GlobalForwardingRulesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetGlobalForwardingRuleRequest,
@@ -599,7 +603,9 @@ export class GlobalForwardingRulesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertGlobalForwardingRuleRequest,
@@ -725,7 +731,9 @@ export class GlobalForwardingRulesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchGlobalForwardingRuleRequest,
@@ -845,7 +853,9 @@ export class GlobalForwardingRulesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setLabels(request);
+   * ```
    */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsGlobalForwardingRuleRequest,
@@ -971,7 +981,9 @@ export class GlobalForwardingRulesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setTarget(request);
+   * ```
    */
   setTarget(
     request?: protos.google.cloud.compute.v1.ISetTargetGlobalForwardingRuleRequest,
@@ -1242,10 +1254,12 @@ export class GlobalForwardingRulesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListGlobalForwardingRulesRequest,

@@ -367,7 +367,9 @@ export class GlobalAddressesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest,
@@ -480,7 +482,9 @@ export class GlobalAddressesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetGlobalAddressRequest,
@@ -584,7 +588,9 @@ export class GlobalAddressesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertGlobalAddressRequest,
@@ -855,10 +861,12 @@ export class GlobalAddressesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,

@@ -388,7 +388,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addAssociation(request);
+   * ```
    */
   addAssociation(
     request?: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
@@ -512,7 +514,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addRule(request);
+   * ```
    */
   addRule(
     request?: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
@@ -636,7 +640,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.cloneRules(request);
+   * ```
    */
   cloneRules(
     request?: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
@@ -758,7 +764,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
@@ -869,7 +877,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
@@ -965,7 +975,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getAssociation(request);
+   * ```
    */
   getAssociation(
     request?: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
@@ -1064,7 +1076,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIamPolicy(request);
+   * ```
    */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
@@ -1160,7 +1174,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getRule(request);
+   * ```
    */
   getRule(
     request?: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
@@ -1264,7 +1280,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
@@ -1372,7 +1390,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.listAssociations(request);
+   * ```
    */
   listAssociations(
     request?: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
@@ -1473,7 +1493,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.move(request);
+   * ```
    */
   move(
     request?: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
@@ -1597,7 +1619,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
@@ -1723,7 +1747,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patchRule(request);
+   * ```
    */
   patchRule(
     request?: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
@@ -1847,7 +1873,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removeAssociation(request);
+   * ```
    */
   removeAssociation(
     request?: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
@@ -1971,7 +1999,9 @@ export class FirewallPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removeRule(request);
+   * ```
    */
   removeRule(
     request?: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
@@ -2087,7 +2117,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.setIamPolicy(request);
+   * ```
    */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
@@ -2186,7 +2218,9 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
@@ -2428,10 +2462,12 @@ export class FirewallPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,

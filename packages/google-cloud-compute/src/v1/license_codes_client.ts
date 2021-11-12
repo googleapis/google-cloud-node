@@ -332,7 +332,9 @@ export class LicenseCodesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetLicenseCodeRequest,
@@ -428,7 +430,9 @@ export class LicenseCodesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest,

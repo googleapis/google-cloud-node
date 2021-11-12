@@ -417,7 +417,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.abandonInstances(request);
+   * ```
    */
   abandonInstances(
     request?: protos.google.cloud.compute.v1.IAbandonInstancesInstanceGroupManagerRequest,
@@ -539,7 +541,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.applyUpdatesToInstances(request);
+   * ```
    */
   applyUpdatesToInstances(
     request?: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesInstanceGroupManagerRequest,
@@ -667,7 +671,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.createInstances(request);
+   * ```
    */
   createInstances(
     request?: protos.google.cloud.compute.v1.ICreateInstancesInstanceGroupManagerRequest,
@@ -793,7 +799,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteInstanceGroupManagerRequest,
@@ -925,7 +933,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.deleteInstances(request);
+   * ```
    */
   deleteInstances(
     request?: protos.google.cloud.compute.v1.IDeleteInstancesInstanceGroupManagerRequest,
@@ -1047,7 +1057,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.deletePerInstanceConfigs(request);
+   * ```
    */
   deletePerInstanceConfigs(
     request?: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsInstanceGroupManagerRequest,
@@ -1165,7 +1177,9 @@ export class InstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetInstanceGroupManagerRequest,
@@ -1276,7 +1290,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertInstanceGroupManagerRequest,
@@ -1404,7 +1420,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchInstanceGroupManagerRequest,
@@ -1532,7 +1550,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patchPerInstanceConfigs(request);
+   * ```
    */
   patchPerInstanceConfigs(
     request?: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsInstanceGroupManagerRequest,
@@ -1664,7 +1684,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.recreateInstances(request);
+   * ```
    */
   recreateInstances(
     request?: protos.google.cloud.compute.v1.IRecreateInstancesInstanceGroupManagerRequest,
@@ -1800,7 +1822,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.resize(request);
+   * ```
    */
   resize(
     request?: protos.google.cloud.compute.v1.IResizeInstanceGroupManagerRequest,
@@ -1928,7 +1952,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setInstanceTemplate(request);
+   * ```
    */
   setInstanceTemplate(
     request?: protos.google.cloud.compute.v1.ISetInstanceTemplateInstanceGroupManagerRequest,
@@ -2056,7 +2082,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setTargetPools(request);
+   * ```
    */
   setTargetPools(
     request?: protos.google.cloud.compute.v1.ISetTargetPoolsInstanceGroupManagerRequest,
@@ -2184,7 +2212,9 @@ export class InstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updatePerInstanceConfigs(request);
+   * ```
    */
   updatePerInstanceConfigs(
     request?: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsInstanceGroupManagerRequest,
@@ -2291,10 +2321,12 @@ export class InstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListInstanceGroupManagersRequest,
@@ -2540,10 +2572,12 @@ export class InstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListInstanceGroupManagersRequest,
@@ -2791,10 +2825,12 @@ export class InstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listErrorsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listErrorsAsync(
     request?: protos.google.cloud.compute.v1.IListErrorsInstanceGroupManagersRequest,
@@ -3042,10 +3078,12 @@ export class InstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listManagedInstancesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listManagedInstancesAsync(
     request?: protos.google.cloud.compute.v1.IListManagedInstancesInstanceGroupManagersRequest,
@@ -3297,10 +3335,12 @@ export class InstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listPerInstanceConfigsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listPerInstanceConfigsAsync(
     request?: protos.google.cloud.compute.v1.IListPerInstanceConfigsInstanceGroupManagersRequest,

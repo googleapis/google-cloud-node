@@ -386,7 +386,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addSignedUrlKey(request);
+   * ```
    */
   addSignedUrlKey(
     request?: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendServiceRequest,
@@ -510,7 +512,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteBackendServiceRequest,
@@ -636,7 +640,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.deleteSignedUrlKey(request);
+   * ```
    */
   deleteSignedUrlKey(
     request?: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendServiceRequest,
@@ -749,7 +755,9 @@ export class BackendServicesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetBackendServiceRequest,
@@ -850,7 +858,9 @@ export class BackendServicesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getHealth(request);
+   * ```
    */
   getHealth(
     request?: protos.google.cloud.compute.v1.IGetHealthBackendServiceRequest,
@@ -957,7 +967,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertBackendServiceRequest,
@@ -1083,7 +1095,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchBackendServiceRequest,
@@ -1209,7 +1223,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setSecurityPolicy(request);
+   * ```
    */
   setSecurityPolicy(
     request?: protos.google.cloud.compute.v1.ISetSecurityPolicyBackendServiceRequest,
@@ -1335,7 +1351,9 @@ export class BackendServicesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.update(request);
+   * ```
    */
   update(
     request?: protos.google.cloud.compute.v1.IUpdateBackendServiceRequest,
@@ -1442,10 +1460,12 @@ export class BackendServicesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListBackendServicesRequest,
@@ -1677,10 +1697,12 @@ export class BackendServicesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListBackendServicesRequest,

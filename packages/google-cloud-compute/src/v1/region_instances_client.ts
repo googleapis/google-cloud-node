@@ -354,7 +354,9 @@ export class RegionInstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.bulkInsert(request);
+   * ```
    */
   bulkInsert(
     request?: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,

@@ -384,7 +384,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.disableXpnHost(request);
+   * ```
    */
   disableXpnHost(
     request?: protos.google.cloud.compute.v1.IDisableXpnHostProjectRequest,
@@ -508,7 +510,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.disableXpnResource(request);
+   * ```
    */
   disableXpnResource(
     request?: protos.google.cloud.compute.v1.IDisableXpnResourceProjectRequest,
@@ -630,7 +634,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.enableXpnHost(request);
+   * ```
    */
   enableXpnHost(
     request?: protos.google.cloud.compute.v1.IEnableXpnHostProjectRequest,
@@ -754,7 +760,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.enableXpnResource(request);
+   * ```
    */
   enableXpnResource(
     request?: protos.google.cloud.compute.v1.IEnableXpnResourceProjectRequest,
@@ -861,7 +869,9 @@ export class ProjectsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetProjectRequest,
@@ -948,7 +958,9 @@ export class ProjectsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getXpnHost(request);
+   * ```
    */
   getXpnHost(
     request?: protos.google.cloud.compute.v1.IGetXpnHostProjectRequest,
@@ -1048,7 +1060,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.moveDisk(request);
+   * ```
    */
   moveDisk(
     request?: protos.google.cloud.compute.v1.IMoveDiskProjectRequest,
@@ -1170,7 +1184,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.moveInstance(request);
+   * ```
    */
   moveInstance(
     request?: protos.google.cloud.compute.v1.IMoveInstanceProjectRequest,
@@ -1294,7 +1310,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setCommonInstanceMetadata(request);
+   * ```
    */
   setCommonInstanceMetadata(
     request?: protos.google.cloud.compute.v1.ISetCommonInstanceMetadataProjectRequest,
@@ -1418,7 +1436,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setDefaultNetworkTier(request);
+   * ```
    */
   setDefaultNetworkTier(
     request?: protos.google.cloud.compute.v1.ISetDefaultNetworkTierProjectRequest,
@@ -1542,7 +1562,9 @@ export class ProjectsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setUsageExportBucket(request);
+   * ```
    */
   setUsageExportBucket(
     request?: protos.google.cloud.compute.v1.ISetUsageExportBucketProjectRequest,
@@ -1821,10 +1843,12 @@ export class ProjectsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.getXpnResourcesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   getXpnResourcesAsync(
     request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
@@ -2058,10 +2082,12 @@ export class ProjectsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listXpnHostsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listXpnHostsAsync(
     request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,

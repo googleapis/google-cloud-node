@@ -426,7 +426,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addAccessConfig(request);
+   * ```
    */
   addAccessConfig(
     request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
@@ -554,7 +556,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addResourcePolicies(request);
+   * ```
    */
   addResourcePolicies(
     request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
@@ -684,7 +688,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.attachDisk(request);
+   * ```
    */
   attachDisk(
     request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
@@ -810,7 +816,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.bulkInsert(request);
+   * ```
    */
   bulkInsert(
     request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
@@ -932,7 +940,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
@@ -1060,7 +1070,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.deleteAccessConfig(request);
+   * ```
    */
   deleteAccessConfig(
     request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
@@ -1188,7 +1200,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.detachDisk(request);
+   * ```
    */
   detachDisk(
     request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
@@ -1299,7 +1313,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
@@ -1395,7 +1411,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getEffectiveFirewalls(request);
+   * ```
    */
   getEffectiveFirewalls(
     request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
@@ -1500,7 +1518,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getGuestAttributes(request);
+   * ```
    */
   getGuestAttributes(
     request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
@@ -1600,7 +1620,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIamPolicy(request);
+   * ```
    */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
@@ -1695,7 +1717,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getScreenshot(request);
+   * ```
    */
   getScreenshot(
     request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
@@ -1801,7 +1825,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getSerialPortOutput(request);
+   * ```
    */
   getSerialPortOutput(
     request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
@@ -1902,7 +1928,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getShieldedInstanceIdentity(request);
+   * ```
    */
   getShieldedInstanceIdentity(
     request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
@@ -2018,7 +2046,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
@@ -2144,7 +2174,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removeResourcePolicies(request);
+   * ```
    */
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
@@ -2266,7 +2298,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.reset(request);
+   * ```
    */
   reset(
     request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
@@ -2392,7 +2426,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setDeletionProtection(request);
+   * ```
    */
   setDeletionProtection(
     request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
@@ -2522,7 +2558,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setDiskAutoDelete(request);
+   * ```
    */
   setDiskAutoDelete(
     request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
@@ -2639,7 +2677,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.setIamPolicy(request);
+   * ```
    */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
@@ -2747,7 +2787,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setLabels(request);
+   * ```
    */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
@@ -2875,7 +2917,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setMachineResources(request);
+   * ```
    */
   setMachineResources(
     request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
@@ -3003,7 +3047,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setMachineType(request);
+   * ```
    */
   setMachineType(
     request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
@@ -3131,7 +3177,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setMetadata(request);
+   * ```
    */
   setMetadata(
     request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
@@ -3259,7 +3307,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setMinCpuPlatform(request);
+   * ```
    */
   setMinCpuPlatform(
     request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
@@ -3387,7 +3437,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setScheduling(request);
+   * ```
    */
   setScheduling(
     request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
@@ -3515,7 +3567,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setServiceAccount(request);
+   * ```
    */
   setServiceAccount(
     request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
@@ -3643,7 +3697,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setShieldedInstanceIntegrityPolicy(request);
+   * ```
    */
   setShieldedInstanceIntegrityPolicy(
     request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
@@ -3767,7 +3823,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setTags(request);
+   * ```
    */
   setTags(
     request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
@@ -3885,7 +3943,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.simulateMaintenanceEvent(request);
+   * ```
    */
   simulateMaintenanceEvent(
     request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
@@ -4007,7 +4067,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.start(request);
+   * ```
    */
   start(
     request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
@@ -4133,7 +4195,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.startWithEncryptionKey(request);
+   * ```
    */
   startWithEncryptionKey(
     request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
@@ -4255,7 +4319,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.stop(request);
+   * ```
    */
   stop(
     request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
@@ -4373,7 +4439,9 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
@@ -4484,7 +4552,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.update(request);
+   * ```
    */
   update(
     request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
@@ -4612,7 +4682,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updateAccessConfig(request);
+   * ```
    */
   updateAccessConfig(
     request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
@@ -4740,7 +4812,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updateDisplayDevice(request);
+   * ```
    */
   updateDisplayDevice(
     request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
@@ -4870,7 +4944,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updateNetworkInterface(request);
+   * ```
    */
   updateNetworkInterface(
     request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
@@ -4998,7 +5074,9 @@ export class InstancesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updateShieldedInstanceConfig(request);
+   * ```
    */
   updateShieldedInstanceConfig(
     request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
@@ -5105,10 +5183,12 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
@@ -5346,10 +5426,12 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListInstancesRequest,
@@ -5591,10 +5673,12 @@ export class InstancesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listReferrersAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listReferrersAsync(
     request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,

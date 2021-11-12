@@ -383,7 +383,9 @@ export class ResourcePoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteResourcePolicyRequest,
@@ -498,7 +500,9 @@ export class ResourcePoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetResourcePolicyRequest,
@@ -598,7 +602,9 @@ export class ResourcePoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIamPolicy(request);
+   * ```
    */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicyResourcePolicyRequest,
@@ -707,7 +713,9 @@ export class ResourcePoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertResourcePolicyRequest,
@@ -827,7 +835,9 @@ export class ResourcePoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.setIamPolicy(request);
+   * ```
    */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyResourcePolicyRequest,
@@ -930,7 +940,9 @@ export class ResourcePoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsResourcePolicyRequest,
@@ -1020,10 +1032,12 @@ export class ResourcePoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListResourcePoliciesRequest,
@@ -1261,10 +1275,12 @@ export class ResourcePoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListResourcePoliciesRequest,

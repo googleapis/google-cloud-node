@@ -392,7 +392,9 @@ export class SubnetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteSubnetworkRequest,
@@ -520,7 +522,9 @@ export class SubnetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.expandIpCidrRange(request);
+   * ```
    */
   expandIpCidrRange(
     request?: protos.google.cloud.compute.v1.IExpandIpCidrRangeSubnetworkRequest,
@@ -631,7 +635,9 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetSubnetworkRequest,
@@ -726,7 +732,9 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIamPolicy(request);
+   * ```
    */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicySubnetworkRequest,
@@ -832,7 +840,9 @@ export class SubnetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertSubnetworkRequest,
@@ -958,7 +968,9 @@ export class SubnetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchSubnetworkRequest,
@@ -1073,7 +1085,9 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.setIamPolicy(request);
+   * ```
    */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicySubnetworkRequest,
@@ -1181,7 +1195,9 @@ export class SubnetworksClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setPrivateIpGoogleAccess(request);
+   * ```
    */
   setPrivateIpGoogleAccess(
     request?: protos.google.cloud.compute.v1.ISetPrivateIpGoogleAccessSubnetworkRequest,
@@ -1301,7 +1317,9 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsSubnetworkRequest,
@@ -1391,10 +1409,12 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListSubnetworksRequest,
@@ -1632,10 +1652,12 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListSubnetworksRequest,
@@ -1871,10 +1893,12 @@ export class SubnetworksClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listUsableAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listUsableAsync(
     request?: protos.google.cloud.compute.v1.IListUsableSubnetworksRequest,

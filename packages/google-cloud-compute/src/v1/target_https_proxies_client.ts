@@ -383,7 +383,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteTargetHttpsProxyRequest,
@@ -496,7 +498,9 @@ export class TargetHttpsProxiesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetTargetHttpsProxyRequest,
@@ -600,7 +604,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertTargetHttpsProxyRequest,
@@ -726,7 +732,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchTargetHttpsProxyRequest,
@@ -852,7 +860,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setQuicOverride(request);
+   * ```
    */
   setQuicOverride(
     request?: protos.google.cloud.compute.v1.ISetQuicOverrideTargetHttpsProxyRequest,
@@ -978,7 +988,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setSslCertificates(request);
+   * ```
    */
   setSslCertificates(
     request?: protos.google.cloud.compute.v1.ISetSslCertificatesTargetHttpsProxyRequest,
@@ -1104,7 +1116,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setSslPolicy(request);
+   * ```
    */
   setSslPolicy(
     request?: protos.google.cloud.compute.v1.ISetSslPolicyTargetHttpsProxyRequest,
@@ -1230,7 +1244,9 @@ export class TargetHttpsProxiesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setUrlMap(request);
+   * ```
    */
   setUrlMap(
     request?: protos.google.cloud.compute.v1.ISetUrlMapTargetHttpsProxyRequest,
@@ -1337,10 +1353,12 @@ export class TargetHttpsProxiesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListTargetHttpsProxiesRequest,
@@ -1574,10 +1592,12 @@ export class TargetHttpsProxiesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListTargetHttpsProxiesRequest,

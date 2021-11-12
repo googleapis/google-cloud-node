@@ -386,7 +386,9 @@ export class RoutersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRouterRequest,
@@ -495,7 +497,9 @@ export class RoutersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetRouterRequest,
@@ -586,7 +590,9 @@ export class RoutersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getRouterStatus(request);
+   * ```
    */
   getRouterStatus(
     request?: protos.google.cloud.compute.v1.IGetRouterStatusRouterRequest,
@@ -688,7 +694,9 @@ export class RoutersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRouterRequest,
@@ -810,7 +818,9 @@ export class RoutersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchRouterRequest,
@@ -919,7 +929,9 @@ export class RoutersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.preview(request);
+   * ```
    */
   preview(
     request?: protos.google.cloud.compute.v1.IPreviewRouterRequest,
@@ -1021,7 +1033,9 @@ export class RoutersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.update(request);
+   * ```
    */
   update(
     request?: protos.google.cloud.compute.v1.IUpdateRouterRequest,
@@ -1126,10 +1140,12 @@ export class RoutersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListRoutersRequest,
@@ -1381,10 +1397,12 @@ export class RoutersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.getNatMappingInfoAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   getNatMappingInfoAsync(
     request?: protos.google.cloud.compute.v1.IGetNatMappingInfoRoutersRequest,
@@ -1618,10 +1636,12 @@ export class RoutersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListRoutersRequest,

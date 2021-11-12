@@ -388,7 +388,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addHealthCheck(request);
+   * ```
    */
   addHealthCheck(
     request?: protos.google.cloud.compute.v1.IAddHealthCheckTargetPoolRequest,
@@ -516,7 +518,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addInstance(request);
+   * ```
    */
   addInstance(
     request?: protos.google.cloud.compute.v1.IAddInstanceTargetPoolRequest,
@@ -642,7 +646,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteTargetPoolRequest,
@@ -753,7 +759,9 @@ export class TargetPoolsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetTargetPoolRequest,
@@ -848,7 +856,9 @@ export class TargetPoolsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getHealth(request);
+   * ```
    */
   getHealth(
     request?: protos.google.cloud.compute.v1.IGetHealthTargetPoolRequest,
@@ -954,7 +964,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertTargetPoolRequest,
@@ -1082,7 +1094,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removeHealthCheck(request);
+   * ```
    */
   removeHealthCheck(
     request?: protos.google.cloud.compute.v1.IRemoveHealthCheckTargetPoolRequest,
@@ -1210,7 +1224,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removeInstance(request);
+   * ```
    */
   removeInstance(
     request?: protos.google.cloud.compute.v1.IRemoveInstanceTargetPoolRequest,
@@ -1340,7 +1356,9 @@ export class TargetPoolsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setBackup(request);
+   * ```
    */
   setBackup(
     request?: protos.google.cloud.compute.v1.ISetBackupTargetPoolRequest,
@@ -1447,10 +1465,12 @@ export class TargetPoolsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListTargetPoolsRequest,
@@ -1688,10 +1708,12 @@ export class TargetPoolsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListTargetPoolsRequest,

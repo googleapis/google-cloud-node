@@ -373,7 +373,9 @@ export class SnapshotsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteSnapshotRequest,
@@ -480,7 +482,9 @@ export class SnapshotsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetSnapshotRequest,
@@ -571,7 +575,9 @@ export class SnapshotsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIamPolicy(request);
+   * ```
    */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicySnapshotRequest,
@@ -666,7 +672,9 @@ export class SnapshotsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.setIamPolicy(request);
+   * ```
    */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicySnapshotRequest,
@@ -766,7 +774,9 @@ export class SnapshotsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setLabels(request);
+   * ```
    */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsSnapshotRequest,
@@ -884,7 +894,9 @@ export class SnapshotsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsSnapshotRequest,
@@ -1138,10 +1150,12 @@ export class SnapshotsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListSnapshotsRequest,

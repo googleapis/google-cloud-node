@@ -392,7 +392,9 @@ export class NetworkEndpointGroupsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.attachNetworkEndpoints(request);
+   * ```
    */
   attachNetworkEndpoints(
     request?: protos.google.cloud.compute.v1.IAttachNetworkEndpointsNetworkEndpointGroupRequest,
@@ -518,7 +520,9 @@ export class NetworkEndpointGroupsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteNetworkEndpointGroupRequest,
@@ -646,7 +650,9 @@ export class NetworkEndpointGroupsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.detachNetworkEndpoints(request);
+   * ```
    */
   detachNetworkEndpoints(
     request?: protos.google.cloud.compute.v1.IDetachNetworkEndpointsNetworkEndpointGroupRequest,
@@ -764,7 +770,9 @@ export class NetworkEndpointGroupsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetNetworkEndpointGroupRequest,
@@ -873,7 +881,9 @@ export class NetworkEndpointGroupsClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertNetworkEndpointGroupRequest,
@@ -993,7 +1003,9 @@ export class NetworkEndpointGroupsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.testIamPermissions(request);
+   * ```
    */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsNetworkEndpointGroupRequest,
@@ -1083,10 +1095,12 @@ export class NetworkEndpointGroupsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.aggregatedListAsync(request);
    * for await (const [key, value] of iterable) {
    *   // process response
    * }
+   * ```
    */
   aggregatedListAsync(
     request?: protos.google.cloud.compute.v1.IAggregatedListNetworkEndpointGroupsRequest,
@@ -1332,10 +1346,12 @@ export class NetworkEndpointGroupsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListNetworkEndpointGroupsRequest,
@@ -1589,10 +1605,12 @@ export class NetworkEndpointGroupsClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listNetworkEndpointsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listNetworkEndpointsAsync(
     request?: protos.google.cloud.compute.v1.IListNetworkEndpointsNetworkEndpointGroupsRequest,

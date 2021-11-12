@@ -374,7 +374,9 @@ export class SecurityPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.addRule(request);
+   * ```
    */
   addRule(
     request?: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
@@ -498,7 +500,9 @@ export class SecurityPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
@@ -611,7 +615,9 @@ export class SecurityPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
@@ -706,7 +712,9 @@ export class SecurityPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getRule(request);
+   * ```
    */
   getRule(
     request?: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
@@ -810,7 +818,9 @@ export class SecurityPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
@@ -944,7 +954,9 @@ export class SecurityPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.listPreconfiguredExpressionSets(request);
+   * ```
    */
   listPreconfiguredExpressionSets(
     request?: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
@@ -1057,7 +1069,9 @@ export class SecurityPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
@@ -1179,7 +1193,9 @@ export class SecurityPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patchRule(request);
+   * ```
    */
   patchRule(
     request?: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
@@ -1299,7 +1315,9 @@ export class SecurityPoliciesClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.removeRule(request);
+   * ```
    */
   removeRule(
     request?: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
@@ -1570,10 +1588,12 @@ export class SecurityPoliciesClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,

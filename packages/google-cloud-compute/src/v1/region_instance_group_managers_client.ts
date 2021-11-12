@@ -412,7 +412,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.abandonInstances(request);
+   * ```
    */
   abandonInstances(
     request?: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
@@ -534,7 +536,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.applyUpdatesToInstances(request);
+   * ```
    */
   applyUpdatesToInstances(
     request?: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
@@ -662,7 +666,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.createInstances(request);
+   * ```
    */
   createInstances(
     request?: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
@@ -788,7 +794,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.delete(request);
+   * ```
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
@@ -920,7 +928,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.deleteInstances(request);
+   * ```
    */
   deleteInstances(
     request?: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
@@ -1042,7 +1052,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.deletePerInstanceConfigs(request);
+   * ```
    */
   deletePerInstanceConfigs(
     request?: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
@@ -1160,7 +1172,9 @@ export class RegionInstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.get(request);
+   * ```
    */
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
@@ -1271,7 +1285,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.insert(request);
+   * ```
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
@@ -1399,7 +1415,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patch(request);
+   * ```
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
@@ -1527,7 +1545,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.patchPerInstanceConfigs(request);
+   * ```
    */
   patchPerInstanceConfigs(
     request?: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
@@ -1659,7 +1679,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.recreateInstances(request);
+   * ```
    */
   recreateInstances(
     request?: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
@@ -1791,7 +1813,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.resize(request);
+   * ```
    */
   resize(
     request?: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
@@ -1919,7 +1943,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setInstanceTemplate(request);
+   * ```
    */
   setInstanceTemplate(
     request?: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
@@ -2047,7 +2073,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.setTargetPools(request);
+   * ```
    */
   setTargetPools(
     request?: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
@@ -2175,7 +2203,9 @@ export class RegionInstanceGroupManagersClient {
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
    * @example
+   * ```
    * const [operation] = await client.updatePerInstanceConfigs(request);
+   * ```
    */
   updatePerInstanceConfigs(
     request?: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
@@ -2460,10 +2490,12 @@ export class RegionInstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAsync(
     request?: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
@@ -2711,10 +2743,12 @@ export class RegionInstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listErrorsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listErrorsAsync(
     request?: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
@@ -2962,10 +2996,12 @@ export class RegionInstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listManagedInstancesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listManagedInstancesAsync(
     request?: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
@@ -3217,10 +3253,12 @@ export class RegionInstanceGroupManagersClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listPerInstanceConfigsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listPerInstanceConfigsAsync(
     request?: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
