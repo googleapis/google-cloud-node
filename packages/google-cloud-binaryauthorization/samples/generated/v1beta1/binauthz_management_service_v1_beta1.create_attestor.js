@@ -20,19 +20,19 @@ function main(parent, attestorId, attestor) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent of this [attestor][google.cloud.binaryauthorization.v1beta1.Attestor].
+   *  Required. The parent of this attestor google.cloud.binaryauthorization.v1beta1.Attestor.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The [attestors][google.cloud.binaryauthorization.v1beta1.Attestor] ID.
+   *  Required. The attestors google.cloud.binaryauthorization.v1beta1.Attestor  ID.
    */
   // const attestorId = 'abc123'
   /**
-   *  Required. The initial [attestor][google.cloud.binaryauthorization.v1beta1.Attestor] value. The service will
-   *  overwrite the [attestor name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with the resource name,
+   *  Required. The initial attestor google.cloud.binaryauthorization.v1beta1.Attestor  value. The service will
+   *  overwrite the attestor name google.cloud.binaryauthorization.v1beta1.Attestor.name  field with the resource name,
    *  in the format `projects/* /attestors/*`.
    */
-  // const attestor = ''
+  // const attestor = {}
 
   // Imports the Binaryauthorization library
   const {BinauthzManagementServiceV1Beta1Client} =
@@ -42,7 +42,7 @@ function main(parent, attestorId, attestor) {
   const binaryauthorizationClient =
     new BinauthzManagementServiceV1Beta1Client();
 
-  async function createAttestor() {
+  async function callCreateAttestor() {
     // Construct request
     const request = {
       parent,
@@ -55,7 +55,7 @@ function main(parent, attestorId, attestor) {
     console.log(response);
   }
 
-  createAttestor();
+  callCreateAttestor();
   // [END binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_CreateAttestor_async]
 }
 

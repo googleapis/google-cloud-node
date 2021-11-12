@@ -20,26 +20,26 @@ function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the [Attestor][google.cloud.binaryauthorization.v1.Attestor] of the
-   *  [occurrence][grafeas.v1.Occurrence], in the format
+   *  Required. The resource name of the Attestor google.cloud.binaryauthorization.v1.Attestor  of the
+   *  occurrence grafeas.v1.Occurrence, in the format
    *  `projects/* /attestors/*`.
    */
   // const attestor = 'abc123'
   /**
-   *  Required. An [AttestationOccurrence][grafeas.v1.AttestationOccurrence] to
+   *  Required. An AttestationOccurrence grafeas.v1.AttestationOccurrence  to
    *  be checked that it can be verified by the Attestor. It does not have to be
    *  an existing entity in Container Analysis. It must otherwise be a valid
    *  AttestationOccurrence.
    */
-  // const attestation = ''
+  // const attestation = {}
   /**
-   *  Required. The resource name of the [Note][grafeas.v1.Note] to which the
-   *  containing [Occurrence][grafeas.v1.Occurrence] is associated.
+   *  Required. The resource name of the Note grafeas.v1.Note  to which the
+   *  containing Occurrence grafeas.v1.Occurrence  is associated.
    */
   // const occurrenceNote = 'abc123'
   /**
    *  Required. The URI of the artifact (e.g. container image) that is the
-   *  subject of the containing [Occurrence][grafeas.v1.Occurrence].
+   *  subject of the containing Occurrence grafeas.v1.Occurrence.
    */
   // const occurrenceResourceUri = 'abc123'
 
@@ -50,7 +50,7 @@ function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
   // Instantiates a client
   const binaryauthorizationClient = new ValidationHelperV1Client();
 
-  async function validateAttestationOccurrence() {
+  async function callValidateAttestationOccurrence() {
     // Construct request
     const request = {
       attestor,
@@ -65,7 +65,7 @@ function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
     console.log(response);
   }
 
-  validateAttestationOccurrence();
+  callValidateAttestationOccurrence();
   // [END binaryauthorization_v1_generated_ValidationHelperV1_ValidateAttestationOccurrence_async]
 }
 

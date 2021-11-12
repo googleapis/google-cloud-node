@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the [attestor][google.cloud.binaryauthorization.v1.Attestor] to retrieve, in the format
+   *  Required. The name of the attestor google.cloud.binaryauthorization.v1.Attestor  to retrieve, in the format
    *  `projects/* /attestors/*`.
    */
   // const name = 'abc123'
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const binaryauthorizationClient = new BinauthzManagementServiceV1Client();
 
-  async function getAttestor() {
+  async function callGetAttestor() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getAttestor();
+  callGetAttestor();
   // [END binaryauthorization_v1_generated_BinauthzManagementServiceV1_GetAttestor_async]
 }
 

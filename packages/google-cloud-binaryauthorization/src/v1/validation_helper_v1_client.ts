@@ -301,6 +301,37 @@ export class ValidationHelperV1Client {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Returns whether the given Attestation for the given image URI
+   * was signed by the given Attestor
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.attestor
+   *   Required. The resource name of the {@link google.cloud.binaryauthorization.v1.Attestor|Attestor} of the
+   *   {@link grafeas.v1.Occurrence|occurrence}, in the format
+   *   `projects/* /attestors/*`.
+   * @param {grafeas.v1.AttestationOccurrence} request.attestation
+   *   Required. An {@link grafeas.v1.AttestationOccurrence|AttestationOccurrence} to
+   *   be checked that it can be verified by the Attestor. It does not have to be
+   *   an existing entity in Container Analysis. It must otherwise be a valid
+   *   AttestationOccurrence.
+   * @param {string} request.occurrenceNote
+   *   Required. The resource name of the {@link grafeas.v1.Note|Note} to which the
+   *   containing {@link grafeas.v1.Occurrence|Occurrence} is associated.
+   * @param {string} request.occurrenceResourceUri
+   *   Required. The URI of the artifact (e.g. container image) that is the
+   *   subject of the containing {@link grafeas.v1.Occurrence|Occurrence}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ValidateAttestationOccurrenceResponse]{@link google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js</caption>
+   * region_tag:binaryauthorization_v1_generated_ValidationHelperV1_ValidateAttestationOccurrence_async
+   */
   validateAttestationOccurrence(
     request?: protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceRequest,
     options?: CallOptions
@@ -335,37 +366,6 @@ export class ValidationHelperV1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns whether the given Attestation for the given image URI
-   * was signed by the given Attestor
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.attestor
-   *   Required. The resource name of the {@link google.cloud.binaryauthorization.v1.Attestor|Attestor} of the
-   *   {@link grafeas.v1.Occurrence|occurrence}, in the format
-   *   `projects/* /attestors/*`.
-   * @param {grafeas.v1.AttestationOccurrence} request.attestation
-   *   Required. An {@link grafeas.v1.AttestationOccurrence|AttestationOccurrence} to
-   *   be checked that it can be verified by the Attestor. It does not have to be
-   *   an existing entity in Container Analysis. It must otherwise be a valid
-   *   AttestationOccurrence.
-   * @param {string} request.occurrenceNote
-   *   Required. The resource name of the {@link grafeas.v1.Note|Note} to which the
-   *   containing {@link grafeas.v1.Occurrence|Occurrence} is associated.
-   * @param {string} request.occurrenceResourceUri
-   *   Required. The URI of the artifact (e.g. container image) that is the
-   *   subject of the containing {@link grafeas.v1.Occurrence|Occurrence}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ValidateAttestationOccurrenceResponse]{@link google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.validateAttestationOccurrence(request);
-   */
   validateAttestationOccurrence(
     request?: protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceRequest,
     optionsOrCallback?:

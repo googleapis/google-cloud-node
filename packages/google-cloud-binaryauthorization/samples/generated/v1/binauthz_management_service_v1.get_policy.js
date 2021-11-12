@@ -20,7 +20,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the [policy][google.cloud.binaryauthorization.v1.Policy] to retrieve,
+   *  Required. The resource name of the policy google.cloud.binaryauthorization.v1.Policy  to retrieve,
    *  in the format `projects/* /policy`.
    */
   // const name = 'abc123'
@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const binaryauthorizationClient = new BinauthzManagementServiceV1Client();
 
-  async function getPolicy() {
+  async function callGetPolicy() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getPolicy();
+  callGetPolicy();
   // [END binaryauthorization_v1_generated_BinauthzManagementServiceV1_GetPolicy_async]
 }
 

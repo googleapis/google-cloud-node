@@ -20,11 +20,11 @@ function main(policy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. A new or updated [policy][google.cloud.binaryauthorization.v1beta1.Policy] value. The service will
-   *  overwrite the [policy name][google.cloud.binaryauthorization.v1beta1.Policy.name] field with the resource name in
+   *  Required. A new or updated policy google.cloud.binaryauthorization.v1beta1.Policy  value. The service will
+   *  overwrite the policy name google.cloud.binaryauthorization.v1beta1.Policy.name  field with the resource name in
    *  the request URL, in the format `projects/* /policy`.
    */
-  // const policy = ''
+  // const policy = {}
 
   // Imports the Binaryauthorization library
   const {BinauthzManagementServiceV1Beta1Client} =
@@ -34,7 +34,7 @@ function main(policy) {
   const binaryauthorizationClient =
     new BinauthzManagementServiceV1Beta1Client();
 
-  async function updatePolicy() {
+  async function callUpdatePolicy() {
     // Construct request
     const request = {
       policy,
@@ -45,7 +45,7 @@ function main(policy) {
     console.log(response);
   }
 
-  updatePolicy();
+  callUpdatePolicy();
   // [END binaryauthorization_v1beta1_generated_BinauthzManagementServiceV1Beta1_UpdatePolicy_async]
 }
 

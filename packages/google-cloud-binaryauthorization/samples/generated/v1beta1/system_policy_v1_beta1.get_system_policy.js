@@ -32,7 +32,7 @@ function main(name) {
   // Instantiates a client
   const binaryauthorizationClient = new SystemPolicyV1Beta1Client();
 
-  async function getSystemPolicy() {
+  async function callGetSystemPolicy() {
     // Construct request
     const request = {
       name,
@@ -43,7 +43,7 @@ function main(name) {
     console.log(response);
   }
 
-  getSystemPolicy();
+  callGetSystemPolicy();
   // [END binaryauthorization_v1beta1_generated_SystemPolicyV1Beta1_GetSystemPolicy_async]
 }
 

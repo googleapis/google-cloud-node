@@ -301,6 +301,24 @@ export class SystemPolicyV1Beta1Client {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets the current system policy in the specified location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name, in the format `locations/* /policy`.
+   *   Note that the system policy is not associated with a project.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.binaryauthorization.v1beta1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js</caption>
+   * region_tag:binaryauthorization_v1beta1_generated_SystemPolicyV1Beta1_GetSystemPolicy_async
+   */
   getSystemPolicy(
     request?: protos.google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest,
     options?: CallOptions
@@ -335,24 +353,6 @@ export class SystemPolicyV1Beta1Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the current system policy in the specified location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name, in the format `locations/* /policy`.
-   *   Note that the system policy is not associated with a project.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.binaryauthorization.v1beta1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSystemPolicy(request);
-   */
   getSystemPolicy(
     request?: protos.google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest,
     optionsOrCallback?:

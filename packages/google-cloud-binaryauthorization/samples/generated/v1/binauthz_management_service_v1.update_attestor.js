@@ -20,11 +20,11 @@ function main(attestor) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The updated [attestor][google.cloud.binaryauthorization.v1.Attestor] value. The service will
-   *  overwrite the [attestor name][google.cloud.binaryauthorization.v1.Attestor.name] field with the resource name
+   *  Required. The updated attestor google.cloud.binaryauthorization.v1.Attestor  value. The service will
+   *  overwrite the attestor name google.cloud.binaryauthorization.v1.Attestor.name  field with the resource name
    *  in the request URL, in the format `projects/* /attestors/*`.
    */
-  // const attestor = ''
+  // const attestor = {}
 
   // Imports the Binaryauthorization library
   const {BinauthzManagementServiceV1Client} =
@@ -33,7 +33,7 @@ function main(attestor) {
   // Instantiates a client
   const binaryauthorizationClient = new BinauthzManagementServiceV1Client();
 
-  async function updateAttestor() {
+  async function callUpdateAttestor() {
     // Construct request
     const request = {
       attestor,
@@ -44,7 +44,7 @@ function main(attestor) {
     console.log(response);
   }
 
-  updateAttestor();
+  callUpdateAttestor();
   // [END binaryauthorization_v1_generated_BinauthzManagementServiceV1_UpdateAttestor_async]
 }
 
