@@ -2983,12 +2983,18 @@
                             "installedInventoryItemIds": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "availableInventoryItemIds": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "createTime": {
                               "type": "google.protobuf.Timestamp",
@@ -2997,6 +3003,11 @@
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 5
+                            },
+                            "items": {
+                              "rule": "repeated",
+                              "type": "Item",
+                              "id": 6
                             }
                           },
                           "nested": {
@@ -3040,6 +3051,26 @@
                                       "id": 2
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Item": {
+                              "fields": {
+                                "installedInventoryItemId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "availableInventoryItemId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "fixedCpeUri": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "upstreamFix": {
+                                  "type": "string",
+                                  "id": 4
                                 }
                               }
                             }

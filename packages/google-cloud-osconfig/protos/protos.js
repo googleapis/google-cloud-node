@@ -27218,6 +27218,7 @@
                              * @property {Array.<string>|null} [availableInventoryItemIds] Vulnerability availableInventoryItemIds
                              * @property {google.protobuf.ITimestamp|null} [createTime] Vulnerability createTime
                              * @property {google.protobuf.ITimestamp|null} [updateTime] Vulnerability updateTime
+                             * @property {Array.<google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.IItem>|null} [items] Vulnerability items
                              */
     
                             /**
@@ -27231,6 +27232,7 @@
                             function Vulnerability(properties) {
                                 this.installedInventoryItemIds = [];
                                 this.availableInventoryItemIds = [];
+                                this.items = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -27278,6 +27280,14 @@
                             Vulnerability.prototype.updateTime = null;
     
                             /**
+                             * Vulnerability items.
+                             * @member {Array.<google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.IItem>} items
+                             * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability
+                             * @instance
+                             */
+                            Vulnerability.prototype.items = $util.emptyArray;
+    
+                            /**
                              * Creates a new Vulnerability instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability
@@ -27313,6 +27323,9 @@
                                     $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                     $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.items != null && message.items.length)
+                                    for (var i = 0; i < message.items.length; ++i)
+                                        $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.encode(message.items[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -27365,6 +27378,11 @@
                                         break;
                                     case 5:
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 6:
+                                        if (!(message.items && message.items.length))
+                                            message.items = [];
+                                        message.items.push($root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.decode(reader, reader.uint32()));
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -27430,6 +27448,15 @@
                                     if (error)
                                         return "updateTime." + error;
                                 }
+                                if (message.items != null && message.hasOwnProperty("items")) {
+                                    if (!Array.isArray(message.items))
+                                        return "items: array expected";
+                                    for (var i = 0; i < message.items.length; ++i) {
+                                        var error = $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.verify(message.items[i]);
+                                        if (error)
+                                            return "items." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -27474,6 +27501,16 @@
                                         throw TypeError(".google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.updateTime: object expected");
                                     message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                                 }
+                                if (object.items) {
+                                    if (!Array.isArray(object.items))
+                                        throw TypeError(".google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.items: array expected");
+                                    message.items = [];
+                                    for (var i = 0; i < object.items.length; ++i) {
+                                        if (typeof object.items[i] !== "object")
+                                            throw TypeError(".google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.items: object expected");
+                                        message.items[i] = $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.fromObject(object.items[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -27493,6 +27530,7 @@
                                 if (options.arrays || options.defaults) {
                                     object.installedInventoryItemIds = [];
                                     object.availableInventoryItemIds = [];
+                                    object.items = [];
                                 }
                                 if (options.defaults) {
                                     object.details = null;
@@ -27515,6 +27553,11 @@
                                     object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                                 if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                     object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                if (message.items && message.items.length) {
+                                    object.items = [];
+                                    for (var j = 0; j < message.items.length; ++j)
+                                        object.items[j] = $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.toObject(message.items[j], options);
+                                }
                                 return object;
                             };
     
@@ -28062,6 +28105,260 @@
                                 })();
     
                                 return Details;
+                            })();
+    
+                            Vulnerability.Item = (function() {
+    
+                                /**
+                                 * Properties of an Item.
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability
+                                 * @interface IItem
+                                 * @property {string|null} [installedInventoryItemId] Item installedInventoryItemId
+                                 * @property {string|null} [availableInventoryItemId] Item availableInventoryItemId
+                                 * @property {string|null} [fixedCpeUri] Item fixedCpeUri
+                                 * @property {string|null} [upstreamFix] Item upstreamFix
+                                 */
+    
+                                /**
+                                 * Constructs a new Item.
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability
+                                 * @classdesc Represents an Item.
+                                 * @implements IItem
+                                 * @constructor
+                                 * @param {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.IItem=} [properties] Properties to set
+                                 */
+                                function Item(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Item installedInventoryItemId.
+                                 * @member {string} installedInventoryItemId
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @instance
+                                 */
+                                Item.prototype.installedInventoryItemId = "";
+    
+                                /**
+                                 * Item availableInventoryItemId.
+                                 * @member {string} availableInventoryItemId
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @instance
+                                 */
+                                Item.prototype.availableInventoryItemId = "";
+    
+                                /**
+                                 * Item fixedCpeUri.
+                                 * @member {string} fixedCpeUri
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @instance
+                                 */
+                                Item.prototype.fixedCpeUri = "";
+    
+                                /**
+                                 * Item upstreamFix.
+                                 * @member {string} upstreamFix
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @instance
+                                 */
+                                Item.prototype.upstreamFix = "";
+    
+                                /**
+                                 * Creates a new Item instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.IItem=} [properties] Properties to set
+                                 * @returns {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item} Item instance
+                                 */
+                                Item.create = function create(properties) {
+                                    return new Item(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Item message. Does not implicitly {@link google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.IItem} message Item message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Item.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.installedInventoryItemId != null && Object.hasOwnProperty.call(message, "installedInventoryItemId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.installedInventoryItemId);
+                                    if (message.availableInventoryItemId != null && Object.hasOwnProperty.call(message, "availableInventoryItemId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.availableInventoryItemId);
+                                    if (message.fixedCpeUri != null && Object.hasOwnProperty.call(message, "fixedCpeUri"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.fixedCpeUri);
+                                    if (message.upstreamFix != null && Object.hasOwnProperty.call(message, "upstreamFix"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.upstreamFix);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Item message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.IItem} message Item message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Item.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Item message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item} Item
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Item.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.installedInventoryItemId = reader.string();
+                                            break;
+                                        case 2:
+                                            message.availableInventoryItemId = reader.string();
+                                            break;
+                                        case 3:
+                                            message.fixedCpeUri = reader.string();
+                                            break;
+                                        case 4:
+                                            message.upstreamFix = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Item message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item} Item
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Item.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Item message.
+                                 * @function verify
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Item.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.installedInventoryItemId != null && message.hasOwnProperty("installedInventoryItemId"))
+                                        if (!$util.isString(message.installedInventoryItemId))
+                                            return "installedInventoryItemId: string expected";
+                                    if (message.availableInventoryItemId != null && message.hasOwnProperty("availableInventoryItemId"))
+                                        if (!$util.isString(message.availableInventoryItemId))
+                                            return "availableInventoryItemId: string expected";
+                                    if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                                        if (!$util.isString(message.fixedCpeUri))
+                                            return "fixedCpeUri: string expected";
+                                    if (message.upstreamFix != null && message.hasOwnProperty("upstreamFix"))
+                                        if (!$util.isString(message.upstreamFix))
+                                            return "upstreamFix: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Item message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item} Item
+                                 */
+                                Item.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item)
+                                        return object;
+                                    var message = new $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item();
+                                    if (object.installedInventoryItemId != null)
+                                        message.installedInventoryItemId = String(object.installedInventoryItemId);
+                                    if (object.availableInventoryItemId != null)
+                                        message.availableInventoryItemId = String(object.availableInventoryItemId);
+                                    if (object.fixedCpeUri != null)
+                                        message.fixedCpeUri = String(object.fixedCpeUri);
+                                    if (object.upstreamFix != null)
+                                        message.upstreamFix = String(object.upstreamFix);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Item message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @static
+                                 * @param {google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item} message Item
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Item.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.installedInventoryItemId = "";
+                                        object.availableInventoryItemId = "";
+                                        object.fixedCpeUri = "";
+                                        object.upstreamFix = "";
+                                    }
+                                    if (message.installedInventoryItemId != null && message.hasOwnProperty("installedInventoryItemId"))
+                                        object.installedInventoryItemId = message.installedInventoryItemId;
+                                    if (message.availableInventoryItemId != null && message.hasOwnProperty("availableInventoryItemId"))
+                                        object.availableInventoryItemId = message.availableInventoryItemId;
+                                    if (message.fixedCpeUri != null && message.hasOwnProperty("fixedCpeUri"))
+                                        object.fixedCpeUri = message.fixedCpeUri;
+                                    if (message.upstreamFix != null && message.hasOwnProperty("upstreamFix"))
+                                        object.upstreamFix = message.upstreamFix;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Item to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.Item
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Item.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Item;
                             })();
     
                             return Vulnerability;
