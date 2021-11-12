@@ -1109,6 +1109,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "documentsMetadataFilters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1298,6 +1306,10 @@
                           "type": "QueryParameters",
                           "id": 9
                         },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 14
+                        },
                         "requestId": {
                           "type": "string",
                           "id": 11
@@ -1366,6 +1378,10 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 4
                         }
                       }
                     },
@@ -1406,6 +1422,10 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "assistQueryParams": {
+                          "type": "AssistQueryParameters",
+                          "id": 4
                         }
                       }
                     },
@@ -1576,16 +1596,13 @@
                         }
                       }
                     },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "AUDIO_ENCODING_LINEAR_16": 1,
-                        "AUDIO_ENCODING_FLAC": 2,
-                        "AUDIO_ENCODING_MULAW": 3,
-                        "AUDIO_ENCODING_AMR": 4,
-                        "AUDIO_ENCODING_AMR_WB": 5,
-                        "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                    "AssistQueryParameters": {
+                      "fields": {
+                        "documentsMetadataFilters": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        }
                       }
                     },
                     "SpeechContext": {
@@ -1599,6 +1616,18 @@
                           "type": "float",
                           "id": 2
                         }
+                      }
+                    },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "AUDIO_ENCODING_LINEAR_16": 1,
+                        "AUDIO_ENCODING_FLAC": 2,
+                        "AUDIO_ENCODING_MULAW": 3,
+                        "AUDIO_ENCODING_AMR": 4,
+                        "AUDIO_ENCODING_AMR_WB": 5,
+                        "AUDIO_ENCODING_OGG_OPUS": 6,
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
                       }
                     },
                     "SpeechWordInfo": {
@@ -5996,7 +6025,8 @@
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
                             "ARTICLE_SUGGESTION": 1,
-                            "FAQ": 2
+                            "FAQ": 2,
+                            "SMART_REPLY": 3
                           }
                         }
                       }

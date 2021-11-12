@@ -46,6 +46,10 @@ function main(participant) {
    */
   // const queryParams = {}
   /**
+   *  Parameters for a human assist query.
+   */
+  // const assistQueryParams = {}
+  /**
    *  A unique identifier for this request. Restricted to 36 ASCII characters.
    *  A random UUID is recommended.
    *  This request is only idempotent if a `request_id` is provided.

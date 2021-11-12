@@ -38,6 +38,10 @@ function main(parent) {
    *  suggestion. By default 20 and at most 50.
    */
   // const contextSize = 1234
+  /**
+   *  Parameters for a human assist query.
+   */
+  // const assistQueryParams = {}
 
   // Imports the Dialogflow library
   const {ParticipantsClient} = require('@google-cloud/dialogflow').v2;

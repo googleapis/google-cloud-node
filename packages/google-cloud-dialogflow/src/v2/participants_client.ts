@@ -748,6 +748,8 @@ export class ParticipantsClient {
    *   is disabled.
    * @param {google.cloud.dialogflow.v2.QueryParameters} request.queryParams
    *   Parameters for a Dialogflow virtual-agent query.
+   * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
+   *   Parameters for a human assist query.
    * @param {string} request.requestId
    *   A unique identifier for this request. Restricted to 36 ASCII characters.
    *   A random UUID is recommended.
@@ -854,8 +856,11 @@ export class ParticipantsClient {
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
    * @param {number} request.contextSize
    *   Max number of messages prior to and including
-   *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message} to use as context
-   *   when compiling the suggestion. By default 20 and at most 50.
+   *   {@link google.cloud.dialogflow.v2.SuggestArticlesRequest.latest_message|latest_message}
+   *   to use as context when compiling the suggestion. By default 20 and at
+   *   most 50.
+   * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
+   *   Parameters for a human assist query.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -960,6 +965,8 @@ export class ParticipantsClient {
    *   Max number of messages prior to and including
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 20 and at most 50.
+   * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
+   *   Parameters for a human assist query.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
