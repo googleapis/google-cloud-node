@@ -150,7 +150,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateResponse()
       );
@@ -175,7 +175,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateResponse()
       );
@@ -215,7 +215,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.launchFlexTemplate = stubSimpleCall(
         undefined,

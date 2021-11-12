@@ -308,37 +308,6 @@ export class MessagesV1Beta3Client {
   // -- Service calls --
   // -------------------
 
-  listJobMessages(
-    request?: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.IJobMessage[],
-      protos.google.dataflow.v1beta3.IListJobMessagesRequest | null,
-      protos.google.dataflow.v1beta3.IListJobMessagesResponse
-    ]
-  >;
-  listJobMessages(
-    request: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.dataflow.v1beta3.IListJobMessagesRequest,
-      | protos.google.dataflow.v1beta3.IListJobMessagesResponse
-      | null
-      | undefined,
-      protos.google.dataflow.v1beta3.IJobMessage
-    >
-  ): void;
-  listJobMessages(
-    request: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
-    callback: PaginationCallback<
-      protos.google.dataflow.v1beta3.IListJobMessagesRequest,
-      | protos.google.dataflow.v1beta3.IListJobMessagesResponse
-      | null
-      | undefined,
-      protos.google.dataflow.v1beta3.IJobMessage
-    >
-  ): void;
   /**
    * Request the job status.
    *
@@ -389,6 +358,37 @@ export class MessagesV1Beta3Client {
    */
   listJobMessages(
     request?: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.dataflow.v1beta3.IJobMessage[],
+      protos.google.dataflow.v1beta3.IListJobMessagesRequest | null,
+      protos.google.dataflow.v1beta3.IListJobMessagesResponse
+    ]
+  >;
+  listJobMessages(
+    request: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.dataflow.v1beta3.IListJobMessagesRequest,
+      | protos.google.dataflow.v1beta3.IListJobMessagesResponse
+      | null
+      | undefined,
+      protos.google.dataflow.v1beta3.IJobMessage
+    >
+  ): void;
+  listJobMessages(
+    request: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
+    callback: PaginationCallback<
+      protos.google.dataflow.v1beta3.IListJobMessagesRequest,
+      | protos.google.dataflow.v1beta3.IListJobMessagesResponse
+      | null
+      | undefined,
+      protos.google.dataflow.v1beta3.IJobMessage
+    >
+  ): void;
+  listJobMessages(
+    request?: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -421,6 +421,8 @@ export class MessagesV1Beta3Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listJobMessages(request, options, callback);
   }
@@ -471,7 +473,10 @@ export class MessagesV1Beta3Client {
   ): Transform {
     request = request || {};
     options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listJobMessages'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobMessages.createStream(
       this.innerApiCalls.listJobMessages as gax.GaxCall,
@@ -520,11 +525,8 @@ export class MessagesV1Beta3Client {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listJobMessagesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta3/messages_v1_beta3.list_job_messages.js</caption>
+   * region_tag:dataflow_v1beta3_generated_MessagesV1Beta3_ListJobMessages_async
    */
   listJobMessagesAsync(
     request?: protos.google.dataflow.v1beta3.IListJobMessagesRequest,
@@ -532,8 +534,10 @@ export class MessagesV1Beta3Client {
   ): AsyncIterable<protos.google.dataflow.v1beta3.IJobMessage> {
     request = request || {};
     options = options || {};
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const defaultCallSettings = this._defaults['listJobMessages'];
+    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobMessages.asyncIterate(
       this.innerApiCalls['listJobMessages'] as GaxCall,

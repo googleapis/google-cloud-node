@@ -142,7 +142,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -165,7 +165,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -204,7 +204,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.getSnapshot = stubSimpleCall(
         undefined,
@@ -229,7 +229,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -252,7 +252,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -291,7 +291,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSnapshot = stubSimpleCall(
         undefined,
@@ -316,7 +316,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -339,7 +339,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -378,7 +378,7 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const expectedOptions = {};
+      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listSnapshots = stubSimpleCall(
         undefined,

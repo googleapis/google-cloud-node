@@ -290,6 +290,27 @@ export class SnapshotsV1Beta3Client {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Gets information about a snapshot.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   The ID of the Cloud Platform project that the snapshot belongs to.
+   * @param {string} request.snapshotId
+   *   The ID of the snapshot.
+   * @param {string} request.location
+   *   The location that contains this snapshot.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Snapshot]{@link google.dataflow.v1beta3.Snapshot}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js</caption>
+   * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_GetSnapshot_async
+   */
   getSnapshot(
     request?: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
     options?: CallOptions
@@ -317,27 +338,6 @@ export class SnapshotsV1Beta3Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets information about a snapshot.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   The ID of the Cloud Platform project that the snapshot belongs to.
-   * @param {string} request.snapshotId
-   *   The ID of the snapshot.
-   * @param {string} request.location
-   *   The location that contains this snapshot.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Snapshot]{@link google.dataflow.v1beta3.Snapshot}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getSnapshot(request);
-   */
   getSnapshot(
     request?: protos.google.dataflow.v1beta3.IGetSnapshotRequest,
     optionsOrCallback?:
@@ -368,9 +368,32 @@ export class SnapshotsV1Beta3Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.getSnapshot(request, options, callback);
   }
+  /**
+   * Deletes a snapshot.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   The ID of the Cloud Platform project that the snapshot belongs to.
+   * @param {string} request.snapshotId
+   *   The ID of the snapshot.
+   * @param {string} request.location
+   *   The location that contains this snapshot.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DeleteSnapshotResponse]{@link google.dataflow.v1beta3.DeleteSnapshotResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js</caption>
+   * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_DeleteSnapshot_async
+   */
   deleteSnapshot(
     request?: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
     options?: CallOptions
@@ -398,27 +421,6 @@ export class SnapshotsV1Beta3Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a snapshot.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   The ID of the Cloud Platform project that the snapshot belongs to.
-   * @param {string} request.snapshotId
-   *   The ID of the snapshot.
-   * @param {string} request.location
-   *   The location that contains this snapshot.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DeleteSnapshotResponse]{@link google.dataflow.v1beta3.DeleteSnapshotResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteSnapshot(request);
-   */
   deleteSnapshot(
     request?: protos.google.dataflow.v1beta3.IDeleteSnapshotRequest,
     optionsOrCallback?:
@@ -451,9 +453,32 @@ export class SnapshotsV1Beta3Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.deleteSnapshot(request, options, callback);
   }
+  /**
+   * Lists snapshots.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   The project ID to list snapshots for.
+   * @param {string} request.jobId
+   *   If specified, list snapshots created from this job.
+   * @param {string} request.location
+   *   The location to list snapshots in.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ListSnapshotsResponse]{@link google.dataflow.v1beta3.ListSnapshotsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js</caption>
+   * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_ListSnapshots_async
+   */
   listSnapshots(
     request?: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
     options?: CallOptions
@@ -481,27 +506,6 @@ export class SnapshotsV1Beta3Client {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Lists snapshots.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   The project ID to list snapshots for.
-   * @param {string} request.jobId
-   *   If specified, list snapshots created from this job.
-   * @param {string} request.location
-   *   The location to list snapshots in.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListSnapshotsResponse]{@link google.dataflow.v1beta3.ListSnapshotsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listSnapshots(request);
-   */
   listSnapshots(
     request?: protos.google.dataflow.v1beta3.IListSnapshotsRequest,
     optionsOrCallback?:
@@ -534,6 +538,8 @@ export class SnapshotsV1Beta3Client {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.listSnapshots(request, options, callback);
   }

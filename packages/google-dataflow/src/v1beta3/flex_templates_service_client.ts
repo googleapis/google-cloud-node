@@ -286,6 +286,32 @@ export class FlexTemplatesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Launch a job with a FlexTemplate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Cloud Platform project that the job belongs to.
+   * @param {google.dataflow.v1beta3.LaunchFlexTemplateParameter} request.launchParameter
+   *   Required. Parameter to launch a job form Flex Template.
+   * @param {string} request.location
+   *   Required. The [regional endpoint]
+   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+   *   which to direct the request. E.g., us-central1, us-west1.
+   * @param {boolean} request.validateOnly
+   *   If true, the request is validated but not actually executed.
+   *   Defaults to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [LaunchFlexTemplateResponse]{@link google.dataflow.v1beta3.LaunchFlexTemplateResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/flex_templates_service.launch_flex_template.js</caption>
+   * region_tag:dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_async
+   */
   launchFlexTemplate(
     request?: protos.google.dataflow.v1beta3.ILaunchFlexTemplateRequest,
     options?: CallOptions
@@ -317,32 +343,6 @@ export class FlexTemplatesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Launch a job with a FlexTemplate.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Cloud Platform project that the job belongs to.
-   * @param {google.dataflow.v1beta3.LaunchFlexTemplateParameter} request.launchParameter
-   *   Required. Parameter to launch a job form Flex Template.
-   * @param {string} request.location
-   *   Required. The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
-   *   which to direct the request. E.g., us-central1, us-west1.
-   * @param {boolean} request.validateOnly
-   *   If true, the request is validated but not actually executed.
-   *   Defaults to false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [LaunchFlexTemplateResponse]{@link google.dataflow.v1beta3.LaunchFlexTemplateResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.launchFlexTemplate(request);
-   */
   launchFlexTemplate(
     request?: protos.google.dataflow.v1beta3.ILaunchFlexTemplateRequest,
     optionsOrCallback?:
@@ -377,6 +377,8 @@ export class FlexTemplatesServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.launchFlexTemplate(request, options, callback);
   }

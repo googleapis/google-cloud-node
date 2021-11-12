@@ -290,6 +290,37 @@ export class TemplatesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates a Cloud Dataflow job from a template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Cloud Platform project that the job belongs to.
+   * @param {string} request.jobName
+   *   Required. The job name to use for the created job.
+   * @param {string} request.gcsPath
+   *   Required. A Cloud Storage path to the template from which to
+   *   create the job.
+   *   Must be a valid Cloud Storage URL, beginning with `gs://`.
+   * @param {number[]} request.parameters
+   *   The runtime parameters to pass to the job.
+   * @param {google.dataflow.v1beta3.RuntimeEnvironment} request.environment
+   *   The runtime environment for the job.
+   * @param {string} request.location
+   *   The [regional endpoint]
+   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+   *   which to direct the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Job]{@link google.dataflow.v1beta3.Job}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/templates_service.create_job_from_template.js</caption>
+   * region_tag:dataflow_v1beta3_generated_TemplatesService_CreateJobFromTemplate_async
+   */
   createJobFromTemplate(
     request?: protos.google.dataflow.v1beta3.ICreateJobFromTemplateRequest,
     options?: CallOptions
@@ -321,37 +352,6 @@ export class TemplatesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a Cloud Dataflow job from a template.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Cloud Platform project that the job belongs to.
-   * @param {string} request.jobName
-   *   Required. The job name to use for the created job.
-   * @param {string} request.gcsPath
-   *   Required. A Cloud Storage path to the template from which to
-   *   create the job.
-   *   Must be a valid Cloud Storage URL, beginning with `gs://`.
-   * @param {number[]} request.parameters
-   *   The runtime parameters to pass to the job.
-   * @param {google.dataflow.v1beta3.RuntimeEnvironment} request.environment
-   *   The runtime environment for the job.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
-   *   which to direct the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Job]{@link google.dataflow.v1beta3.Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createJobFromTemplate(request);
-   */
   createJobFromTemplate(
     request?: protos.google.dataflow.v1beta3.ICreateJobFromTemplateRequest,
     optionsOrCallback?:
@@ -386,36 +386,11 @@ export class TemplatesServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.createJobFromTemplate(request, options, callback);
   }
-  launchTemplate(
-    request?: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
-      protos.google.dataflow.v1beta3.ILaunchTemplateRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  launchTemplate(
-    request: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
-      protos.google.dataflow.v1beta3.ILaunchTemplateRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  launchTemplate(
-    request: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
-    callback: Callback<
-      protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
-      protos.google.dataflow.v1beta3.ILaunchTemplateRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Launch a template.
    *
@@ -446,9 +421,36 @@ export class TemplatesServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.launchTemplate(request);
+   * @example <caption>include:samples/generated/v1beta3/templates_service.launch_template.js</caption>
+   * region_tag:dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_async
    */
+  launchTemplate(
+    request?: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
+      protos.google.dataflow.v1beta3.ILaunchTemplateRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  launchTemplate(
+    request: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
+      protos.google.dataflow.v1beta3.ILaunchTemplateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  launchTemplate(
+    request: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
+    callback: Callback<
+      protos.google.dataflow.v1beta3.ILaunchTemplateResponse,
+      protos.google.dataflow.v1beta3.ILaunchTemplateRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   launchTemplate(
     request?: protos.google.dataflow.v1beta3.ILaunchTemplateRequest,
     optionsOrCallback?:
@@ -481,9 +483,38 @@ export class TemplatesServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.launchTemplate(request, options, callback);
   }
+  /**
+   * Get the template associated with a template.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.projectId
+   *   Required. The ID of the Cloud Platform project that the job belongs to.
+   * @param {string} request.gcsPath
+   *   Required. A Cloud Storage path to the template from which to
+   *   create the job.
+   *   Must be valid Cloud Storage URL, beginning with 'gs://'.
+   * @param {google.dataflow.v1beta3.GetTemplateRequest.TemplateView} request.view
+   *   The view to retrieve. Defaults to METADATA_ONLY.
+   * @param {string} request.location
+   *   The [regional endpoint]
+   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+   *   which to direct the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GetTemplateResponse]{@link google.dataflow.v1beta3.GetTemplateResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/templates_service.get_template.js</caption>
+   * region_tag:dataflow_v1beta3_generated_TemplatesService_GetTemplate_async
+   */
   getTemplate(
     request?: protos.google.dataflow.v1beta3.IGetTemplateRequest,
     options?: CallOptions
@@ -511,33 +542,6 @@ export class TemplatesServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Get the template associated with a template.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. The ID of the Cloud Platform project that the job belongs to.
-   * @param {string} request.gcsPath
-   *   Required. A Cloud Storage path to the template from which to
-   *   create the job.
-   *   Must be valid Cloud Storage URL, beginning with 'gs://'.
-   * @param {google.dataflow.v1beta3.GetTemplateRequest.TemplateView} request.view
-   *   The view to retrieve. Defaults to METADATA_ONLY.
-   * @param {string} request.location
-   *   The [regional endpoint]
-   *   (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
-   *   which to direct the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GetTemplateResponse]{@link google.dataflow.v1beta3.GetTemplateResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getTemplate(request);
-   */
   getTemplate(
     request?: protos.google.dataflow.v1beta3.IGetTemplateRequest,
     optionsOrCallback?:
@@ -568,6 +572,8 @@ export class TemplatesServiceClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.getTemplate(request, options, callback);
   }
