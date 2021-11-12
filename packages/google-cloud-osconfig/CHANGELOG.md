@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.10.0...v1.11.0) (2021-11-12)
+
+
+### Features
+
+* Update OSConfig API ([#164](https://www.github.com/googleapis/nodejs-os-config/issues/164)) ([19e820a](https://www.github.com/googleapis/nodejs-os-config/commit/19e820a362341b10225562bf76dc0f34e3e3fcae))
+
 ## [1.10.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.9.1...v1.10.0) (2021-10-20)
 
 
