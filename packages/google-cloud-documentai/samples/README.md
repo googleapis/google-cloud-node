@@ -18,6 +18,11 @@
   * [Parse-form.v1beta2](#parse-form.v1beta2)
   * [Parse-table.v1beta2](#parse-table.v1beta2)
   * [Parse-with-model.v1beta2](#parse-with-model.v1beta2)
+  * [Process-document-form](#process-document-form)
+  * [Process-document-ocr](#process-document-ocr)
+  * [Process-document-quality](#process-document-quality)
+  * [Process-document-specialized](#process-document-specialized)
+  * [Process-document-splitter](#process-document-splitter)
   * [Process-document](#process-document)
   * [Quickstart](#quickstart)
   * [Set-endpoint.v1beta2](#set-endpoint.v1beta2)
@@ -132,6 +137,91 @@ __Usage:__
 
 
 `node samples/parse-with-model.v1beta2.js`
+
+
+-----
+
+
+
+
+### Process-document-form
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/process-document-form.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document-form.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/process-document-form.js`
+
+
+-----
+
+
+
+
+### Process-document-ocr
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/process-document-ocr.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document-ocr.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/process-document-ocr.js`
+
+
+-----
+
+
+
+
+### Process-document-quality
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/process-document-quality.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document-quality.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/process-document-quality.js`
+
+
+-----
+
+
+
+
+### Process-document-specialized
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/process-document-specialized.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document-specialized.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/process-document-specialized.js`
+
+
+-----
+
+
+
+
+### Process-document-splitter
+
+View the [source code](https://github.com/googleapis/nodejs-document-ai/blob/main/samples/process-document-splitter.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-document-ai&page=editor&open_in_editor=samples/process-document-splitter.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/process-document-splitter.js`
 
 
 -----
