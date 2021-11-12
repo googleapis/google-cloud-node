@@ -364,37 +364,6 @@ export class AutoSuggestionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  suggestQueries(
-    request?: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
-      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  suggestQueries(
-    request: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
-      | protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  suggestQueries(
-    request: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
-    callback: Callback<
-      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
-      | protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
   /**
    * Gets a list of suggestions based on a prefix string.
    * AutoSuggestion tolerance should be less than 1 second.
@@ -426,9 +395,40 @@ export class AutoSuggestionServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const [response] = await client.suggestQueries(request);
+   * @example <caption>include:samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js</caption>
+   * region_tag:dataqna_v1alpha_generated_AutoSuggestionService_SuggestQueries_async
    */
+  suggestQueries(
+    request?: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
+      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  suggestQueries(
+    request: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
+      | protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestQueries(
+    request: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
+    callback: Callback<
+      protos.google.cloud.dataqna.v1alpha.ISuggestQueriesResponse,
+      | protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   suggestQueries(
     request?: protos.google.cloud.dataqna.v1alpha.ISuggestQueriesRequest,
     optionsOrCallback?:
