@@ -25,11 +25,11 @@ function main(workload, updateMask) {
    *  Format:
    *  organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
    */
-  // const workload = ''
+  // const workload = {}
   /**
    *  Required. The list of fields to be updated.
    */
-  // const updateMask = ''
+  // const updateMask = {}
 
   // Imports the Assuredworkloads library
   const {AssuredWorkloadsServiceClient} =
@@ -38,7 +38,7 @@ function main(workload, updateMask) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function updateWorkload() {
+  async function callUpdateWorkload() {
     // Construct request
     const request = {
       workload,
@@ -50,7 +50,7 @@ function main(workload, updateMask) {
     console.log(response);
   }
 
-  updateWorkload();
+  callUpdateWorkload();
   // [END assuredworkloads_v1_generated_AssuredWorkloadsService_UpdateWorkload_async]
 }
 

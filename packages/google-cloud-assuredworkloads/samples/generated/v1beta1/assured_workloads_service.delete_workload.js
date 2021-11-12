@@ -38,7 +38,7 @@ function main(name) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function deleteWorkload() {
+  async function callDeleteWorkload() {
     // Construct request
     const request = {
       name,
@@ -49,7 +49,7 @@ function main(name) {
     console.log(response);
   }
 
-  deleteWorkload();
+  callDeleteWorkload();
   // [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_DeleteWorkload_async]
 }
 

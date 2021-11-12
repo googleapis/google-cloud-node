@@ -357,6 +357,31 @@ export class AssuredWorkloadsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Updates an existing workload.
+   * Currently allows updating of workload display_name and labels.
+   * For force updates don't set etag field in the Workload.
+   * Only one update operation per workload can be in progress.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.assuredworkloads.v1beta1.Workload} request.workload
+   *   Required. The workload to update.
+   *   The workload’s `name` field is used to identify the workload to be updated.
+   *   Format:
+   *   organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Workload]{@link google.cloud.assuredworkloads.v1beta1.Workload}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.update_workload.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_UpdateWorkload_async
+   */
   updateWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest,
     options?: CallOptions
@@ -391,31 +416,6 @@ export class AssuredWorkloadsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Updates an existing workload.
-   * Currently allows updating of workload display_name and labels.
-   * For force updates don't set etag field in the Workload.
-   * Only one update operation per workload can be in progress.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.assuredworkloads.v1beta1.Workload} request.workload
-   *   Required. The workload to update.
-   *   The workload’s `name` field is used to identify the workload to be updated.
-   *   Format:
-   *   organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to be updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Workload]{@link google.cloud.assuredworkloads.v1beta1.Workload}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateWorkload(request);
-   */
   updateWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IUpdateWorkloadRequest,
     optionsOrCallback?:
@@ -462,6 +462,30 @@ export class AssuredWorkloadsServiceClient {
     this.initialize();
     return this.innerApiCalls.updateWorkload(request, options, callback);
   }
+  /**
+   * Deletes the workload. Make sure that workload's direct children are already
+   * in a deleted state, otherwise the request will fail with a
+   * FAILED_PRECONDITION error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The `name` field is used to identify the workload.
+   *   Format:
+   *   organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
+   * @param {string} [request.etag]
+   *   Optional. The etag of the workload.
+   *   If this is provided, it must match the server's etag.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.delete_workload.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_DeleteWorkload_async
+   */
   deleteWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IDeleteWorkloadRequest,
     options?: CallOptions
@@ -496,30 +520,6 @@ export class AssuredWorkloadsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the workload. Make sure that workload's direct children are already
-   * in a deleted state, otherwise the request will fail with a
-   * FAILED_PRECONDITION error.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The `name` field is used to identify the workload.
-   *   Format:
-   *   organizations/{org_id}/locations/{location_id}/workloads/{workload_id}
-   * @param {string} [request.etag]
-   *   Optional. The etag of the workload.
-   *   If this is provided, it must match the server's etag.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteWorkload(request);
-   */
   deleteWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IDeleteWorkloadRequest,
     optionsOrCallback?:
@@ -566,6 +566,27 @@ export class AssuredWorkloadsServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteWorkload(request, options, callback);
   }
+  /**
+   * Gets Assured Workload associated with a CRM Node
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Workload to fetch. This is the workloads's
+   *   relative path in the API, formatted as
+   *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
+   *   For example,
+   *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Workload]{@link google.cloud.assuredworkloads.v1beta1.Workload}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.get_workload.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_async
+   */
   getWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IGetWorkloadRequest,
     options?: CallOptions
@@ -600,27 +621,6 @@ export class AssuredWorkloadsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets Assured Workload associated with a CRM Node
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Workload to fetch. This is the workloads's
-   *   relative path in the API, formatted as
-   *   "organizations/{organization_id}/locations/{location_id}/workloads/{workload_id}".
-   *   For example,
-   *   "organizations/123/locations/us-east1/workloads/assured-workload-1".
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Workload]{@link google.cloud.assuredworkloads.v1beta1.Workload}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getWorkload(request);
-   */
   getWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IGetWorkloadRequest,
     optionsOrCallback?:
@@ -668,6 +668,33 @@ export class AssuredWorkloadsServiceClient {
     return this.innerApiCalls.getWorkload(request, options, callback);
   }
 
+  /**
+   * Creates Assured Workload.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the new Workload's parent.
+   *   Must be of the form `organizations/{org_id}/locations/{location_id}`.
+   * @param {google.cloud.assuredworkloads.v1beta1.Workload} request.workload
+   *   Required. Assured Workload to create
+   * @param {string} [request.externalId]
+   *   Optional. A identifier associated with the workload and underlying projects which
+   *   allows for the break down of billing costs for a workload. The value
+   *   provided for the identifier will add a label to the workload and contained
+   *   projects with the identifier as the value.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.create_workload.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_CreateWorkload_async
+   */
   createWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.ICreateWorkloadRequest,
     options?: CallOptions
@@ -704,34 +731,6 @@ export class AssuredWorkloadsServiceClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates Assured Workload.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the new Workload's parent.
-   *   Must be of the form `organizations/{org_id}/locations/{location_id}`.
-   * @param {google.cloud.assuredworkloads.v1beta1.Workload} request.workload
-   *   Required. Assured Workload to create
-   * @param {string} [request.externalId]
-   *   Optional. A identifier associated with the workload and underlying projects which
-   *   allows for the break down of billing costs for a workload. The value
-   *   provided for the identifier will add a label to the workload and contained
-   *   projects with the identifier as the value.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createWorkload(request);
-   * const [response] = await operation.promise();
-   */
   createWorkload(
     request?: protos.google.cloud.assuredworkloads.v1beta1.ICreateWorkloadRequest,
     optionsOrCallback?:
@@ -789,11 +788,8 @@ export class AssuredWorkloadsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateWorkloadProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.create_workload.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_CreateWorkload_async
    */
   async checkCreateWorkloadProgress(
     name: string
@@ -817,6 +813,36 @@ export class AssuredWorkloadsServiceClient {
       protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata
     >;
   }
+  /**
+   * Lists Assured Workloads under a CRM Node.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent Resource to list workloads from.
+   *   Must be of the form `organizations/{org_id}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   Page size.
+   * @param {string} request.pageToken
+   *   Page token returned from previous request. Page token contains context from
+   *   previous request. Page token needs to be passed in the second and following
+   *   requests.
+   * @param {string} request.filter
+   *   A custom filter for filtering by properties of a workload. At this time,
+   *   only filtering by labels is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Workload]{@link google.cloud.assuredworkloads.v1beta1.Workload}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkloadsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
   listWorkloads(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest,
     options?: CallOptions
@@ -848,36 +874,6 @@ export class AssuredWorkloadsServiceClient {
       protos.google.cloud.assuredworkloads.v1beta1.IWorkload
     >
   ): void;
-  /**
-   * Lists Assured Workloads under a CRM Node.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Parent Resource to list workloads from.
-   *   Must be of the form `organizations/{org_id}/locations/{location}`.
-   * @param {number} request.pageSize
-   *   Page size.
-   * @param {string} request.pageToken
-   *   Page token returned from previous request. Page token contains context from
-   *   previous request. Page token needs to be passed in the second and following
-   *   requests.
-   * @param {string} request.filter
-   *   A custom filter for filtering by properties of a workload. At this time,
-   *   only filtering by labels is supported.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Workload]{@link google.cloud.assuredworkloads.v1beta1.Workload}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listWorkloadsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
   listWorkloads(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest,
     optionsOrCallback?:
@@ -1000,11 +996,8 @@ export class AssuredWorkloadsServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listWorkloadsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1beta1/assured_workloads_service.list_workloads.js</caption>
+   * region_tag:assuredworkloads_v1beta1_generated_AssuredWorkloadsService_ListWorkloads_async
    */
   listWorkloadsAsync(
     request?: protos.google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest,
@@ -1018,7 +1011,6 @@ export class AssuredWorkloadsServiceClient {
       gax.routingHeader.fromParams({
         parent: request.parent || '',
       });
-    options = options || {};
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();

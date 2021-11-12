@@ -27,7 +27,7 @@ function main(parent, workload) {
   /**
    *  Required. Assured Workload to create
    */
-  // const workload = ''
+  // const workload = {}
   /**
    *  Optional. A identifier associated with the workload and underlying projects which
    *  allows for the break down of billing costs for a workload. The value
@@ -43,7 +43,7 @@ function main(parent, workload) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function createWorkload() {
+  async function callCreateWorkload() {
     // Construct request
     const request = {
       parent,
@@ -56,7 +56,7 @@ function main(parent, workload) {
     console.log(response);
   }
 
-  createWorkload();
+  callCreateWorkload();
   // [END assuredworkloads_v1_generated_AssuredWorkloadsService_CreateWorkload_async]
 }
 

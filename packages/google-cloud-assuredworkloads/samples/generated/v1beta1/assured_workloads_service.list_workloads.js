@@ -47,7 +47,7 @@ function main(parent) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function listWorkloads() {
+  async function callListWorkloads() {
     // Construct request
     const request = {
       parent,
@@ -60,7 +60,7 @@ function main(parent) {
     }
   }
 
-  listWorkloads();
+  callListWorkloads();
   // [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_ListWorkloads_async]
 }
 

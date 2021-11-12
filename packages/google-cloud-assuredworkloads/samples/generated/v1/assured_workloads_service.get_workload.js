@@ -35,7 +35,7 @@ function main(name) {
   // Instantiates a client
   const assuredworkloadsClient = new AssuredWorkloadsServiceClient();
 
-  async function getWorkload() {
+  async function callGetWorkload() {
     // Construct request
     const request = {
       name,
@@ -46,7 +46,7 @@ function main(name) {
     console.log(response);
   }
 
-  getWorkload();
+  callGetWorkload();
   // [END assuredworkloads_v1_generated_AssuredWorkloadsService_GetWorkload_async]
 }
 
