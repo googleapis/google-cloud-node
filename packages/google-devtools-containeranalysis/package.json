@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-containeranalysis",
   "name": "@google-cloud/containeranalysis",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "author": "Google LLC",
   "description": "Container Analysis API client for Node.js",
   "main": "build/src/index.js",

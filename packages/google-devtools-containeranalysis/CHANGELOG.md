@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.2.0...v3.3.0) (2021-11-11)
+
+
+### Features
+
+* Updating the grafeas protos to include compliance and intoto attestation protos ([#352](https://www.github.com/googleapis/nodejs-containeranalysis/issues/352)) ([ea334fb](https://www.github.com/googleapis/nodejs-containeranalysis/commit/ea334fb38ba769af3e7473db9414db0850d2bbdb))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.8...v3.2.0) (2021-08-23)
 
 
