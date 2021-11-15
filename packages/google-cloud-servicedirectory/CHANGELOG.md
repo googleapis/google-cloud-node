@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.3.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.3.1...v3.3.2) (2021-11-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency json-schema to ^0.4.0 ([#192](https://www.github.com/googleapis/nodejs-service-directory/issues/192)) ([7122dbe](https://www.github.com/googleapis/nodejs-service-directory/commit/7122dbe5464d2ecc08875d5ac4c2b0fd93c9ac1d))
+
 ### [3.3.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.3.0...v3.3.1) (2021-09-10)
 
 
