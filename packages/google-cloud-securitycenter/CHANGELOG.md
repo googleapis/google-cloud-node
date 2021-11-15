@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.7.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.6.0...v5.7.0) (2021-11-15)
+
+
+### Features
+
+* Added mute related APIs, proto messages and fields ([#438](https://www.github.com/googleapis/nodejs-security-center/issues/438)) ([d432649](https://www.github.com/googleapis/nodejs-security-center/commit/d432649fed31f92a6048769b6b889666f5b9cced))
+
 ## [5.6.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.5.1...v5.6.0) (2021-10-14)
 
 
