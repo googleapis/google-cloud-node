@@ -1829,6 +1829,7 @@ export class ProjectsClient {
    *
    *   Some examples queries:
    *
+   *   ```
    *   | Query            | Description                                         |
    *   |------------------|-----------------------------------------------------|
    *   | name:how*        | The project's name starts with "how".               |
@@ -1839,6 +1840,7 @@ export class ProjectsClient {
    *   | labels.color:red | The project's label `color` has the value `red`.    |
    *   | labels.color:red&nbsp;labels.size:big | The project's label `color` has
    *   the value `red` and its label `size` has the value `big`.                |
+   *   ```
    *
    *   If no query is specified, the call will return projects for which the user
    *   has the `resourcemanager.projects.get` permission.
@@ -1963,6 +1965,7 @@ export class ProjectsClient {
    *
    *   Some examples queries:
    *
+   *   ```
    *   | Query            | Description                                         |
    *   |------------------|-----------------------------------------------------|
    *   | name:how*        | The project's name starts with "how".               |
@@ -1973,6 +1976,7 @@ export class ProjectsClient {
    *   | labels.color:red | The project's label `color` has the value `red`.    |
    *   | labels.color:red&nbsp;labels.size:big | The project's label `color` has
    *   the value `red` and its label `size` has the value `big`.                |
+   *   ```
    *
    *   If no query is specified, the call will return projects for which the user
    *   has the `resourcemanager.projects.get` permission.
@@ -2045,6 +2049,7 @@ export class ProjectsClient {
    *
    *   Some examples queries:
    *
+   *   ```
    *   | Query            | Description                                         |
    *   |------------------|-----------------------------------------------------|
    *   | name:how*        | The project's name starts with "how".               |
@@ -2055,6 +2060,7 @@ export class ProjectsClient {
    *   | labels.color:red | The project's label `color` has the value `red`.    |
    *   | labels.color:red&nbsp;labels.size:big | The project's label `color` has
    *   the value `red` and its label `size` has the value `big`.                |
+   *   ```
    *
    *   If no query is specified, the call will return projects for which the user
    *   has the `resourcemanager.projects.get` permission.
